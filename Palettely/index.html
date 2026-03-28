@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palettely — Colours that feel like you</title>
+  <meta name="description" content="Extract beautiful colour palettes from photos, build moodboards, and export stunning wallpapers. Free on iOS & Android.">
+  <meta property="og:title" content="Palettely — Colours that feel like you">
+  <meta property="og:description" content="The colour app for people who notice the light.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#F7F3EE">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F7F3EE;--ink:#111114;--text:#505058;--dim:#97979F;--faint:#CBC7C0;
+      --accent:#C0603C;--a2:#8868B8;--a3:#4D8558;
+      --peach:#EFCFBC;--rose:#E5A098;--coral:#DA7058;--terra:#BF6040;
+      --lav:#D0C0E8;--mauve:#B490D4;--plum:#8868B8;
+      --sage:#B0C8A4;--mint:#8CBC98;--forest:#5A9868;
+      --sky:#9EC4DC;--ocean:#6498C0;--gold:#D4B474;
+      --sand:#E4D8C4;--blush:#EDC0B4;--cream:#EDE4D4;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    ::selection{background:rgba(192,96,60,0.1);color:var(--accent)}
+
+    /* Grain */
+    body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+    /* ═══ MESH ═══ */
+    .mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .mo{position:absolute;border-radius:50%;filter:blur(120px);will-change:transform}
+    .mo1{width:min(55vw,640px);height:min(55vw,640px);background:var(--peach);opacity:0.35;top:-14%;right:-12%;animation:d1 28s ease-in-out infinite}
+    .mo2{width:min(42vw,500px);height:min(42vw,500px);background:var(--lav);opacity:0.25;bottom:8%;left:-10%;animation:d2 34s ease-in-out infinite}
+    .mo3{width:min(32vw,380px);height:min(32vw,380px);background:var(--sage);opacity:0.18;top:48%;left:38%;animation:d3 24s ease-in-out infinite}
+    .mo4{width:min(28vw,320px);height:min(28vw,320px);background:var(--rose);opacity:0.14;top:65%;right:8%;animation:d4 30s ease-in-out infinite}
+    @keyframes d1{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-60px,90px) scale(1.04)}80%{transform:translate(30px,-40px) scale(0.97)}}
+    @keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,-60px) scale(1.05)}}
+    @keyframes d3{0%,100%{transform:translate(0,0)}35%{transform:translate(-50px,-70px)}70%{transform:translate(40px,50px)}}
+    @keyframes d4{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,-50px) scale(1.06)}}
+
+    /* ═══ NAV ═══ */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:all 0.4s}
+    nav.s{background:rgba(247,243,238,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(0,0,0,0.04)}
+    .ni{max-width:1080px;margin:0 auto;padding:18px 36px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+    .lm{width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,var(--coral),var(--plum));display:grid;place-items:center;box-shadow:0 2px 12px rgba(218,112,88,0.3),inset 0 1px 0 rgba(255,255,255,0.2);transition:transform 0.3s}
+    .logo:hover .lm{transform:rotate(-5deg) scale(1.06)}
+    .lm span{font-family:'Instrument Serif',serif;font-size:17px;color:#fff}
+    .ln{font-size:17px;font-weight:700;letter-spacing:-0.3px}
+    .nr{display:flex;gap:28px}
+    .nr a{color:var(--text);text-decoration:none;font-size:13.5px;font-weight:500;transition:color 0.2s}
+    .nr a:hover{color:var(--accent)}
+
+    .w{max-width:1080px;margin:0 auto;padding:0 36px;position:relative;z-index:1}
+
+    /* ═══ HERO ═══ */
+    .hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:100px 0 60px;text-align:center}
+    .hero h1{
+      font-family:'Instrument Serif',Georgia,serif;
+      font-size:clamp(54px,10vw,104px);
+      font-weight:400;line-height:0.94;letter-spacing:-3.5px;
+      margin-bottom:28px;
+      opacity:0;animation:up .8s .1s ease-out forwards;
+    }
+    .hero h1 em{font-style:italic;color:var(--accent)}
+    .hero-p{font-size:clamp(16px,2.2vw,19px);color:var(--text);line-height:1.7;max-width:480px;margin:0 auto 48px;opacity:0;animation:up .8s .25s ease-out forwards}
+
+    /* ═══ HERO PALETTE — the centerpiece ═══ */
+    .hp{display:flex;justify-content:center;margin-bottom:52px;opacity:0;animation:up .9s .4s ease-out forwards}
+    .hp-track{display:flex;gap:0;border-radius:22px;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,0.1),0 2px 8px rgba(0,0,0,0.04);position:relative}
+    .hp-s{
+      width:clamp(48px,7vw,72px);height:clamp(72px,10vw,100px);
+      position:relative;cursor:pointer;
+      transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1),filter 0.3s;
+    }
+    .hp-s:hover{width:clamp(80px,12vw,130px);filter:brightness(1.06)}
+    .hp-s .hx{
+      position:absolute;bottom:10px;left:50%;transform:translateX(-50%) translateY(6px);
+      font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;
+      opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap;
+      text-shadow:0 1px 6px rgba(0,0,0,0.15);letter-spacing:0.5px;
+    }
+    .hp-s:hover .hx{opacity:1;transform:translateX(-50%) translateY(0)}
+    /* Shimmer */
+    .hp-track::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,0.25) 50%,transparent 65%);animation:shim 5s ease-in-out infinite;pointer-events:none}
+    @keyframes shim{0%,100%{transform:translateX(-120%)}50%{transform:translateX(120%)}}
+
+    .hb{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:up .8s .55s ease-out forwards}
+    .hn{font-size:12.5px;color:var(--dim);margin-top:18px;opacity:0;animation:up .8s .7s ease-out forwards}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:9px;padding:15px 30px;border-radius:14px;font-size:14.5px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s}
+    .btn:hover{transform:translateY(-3px)}
+    .btn:active{transform:scale(0.97)}
+    .btn svg{width:17px;height:17px;fill:currentColor}
+    .bd{background:var(--ink);color:#fff;box-shadow:0 4px 18px rgba(0,0,0,0.15)}
+    .bd:hover{box-shadow:0 10px 40px rgba(0,0,0,0.22)}
+    .bg{background:#fff;color:var(--ink);border:1.5px solid rgba(0,0,0,0.08);box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+    .bg:hover{border-color:var(--accent);box-shadow:0 8px 28px rgba(0,0,0,0.06)}
+
+    @keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+    /* ═══ REVEAL ═══ */
+    .rv{opacity:0;transform:translateY(44px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+    .rv.v{opacity:1;transform:none}
+
+    /* ═══ SEPARATOR ═══ */
+    .sep{height:1px;max-width:1080px;margin:0 auto;background:linear-gradient(90deg,transparent 0%,var(--faint) 30%,var(--faint) 70%,transparent 100%);opacity:0.5}
+
+    /* Shared */
+    .lab{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--accent);margin-bottom:14px}
+    .h2{font-family:'Instrument Serif',serif;font-size:clamp(30px,5vw,50px);font-weight:400;line-height:1.06;letter-spacing:-1.5px}
+
+    /* ═══ SPLIT SECTION ═══ */
+    .split{padding:120px 0;overflow:hidden}
+    .split-g{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .split-t{max-width:440px}
+    .split-t p{font-size:16px;color:var(--text);line-height:1.75;margin-top:20px}
+
+    /* Phone */
+    .ph{width:272px;margin:0 auto;background:#111;border-radius:44px;padding:10px;box-shadow:0 60px 140px rgba(0,0,0,0.14),0 10px 40px rgba(0,0,0,0.08);position:relative;transition:transform 0.6s cubic-bezier(0.22,1,0.36,1)}
+    .ph:hover{transform:translateY(-12px) scale(1.01)}
+    .ph-scr{border-radius:36px;overflow:hidden;aspect-ratio:9/17.2;background:var(--bg);position:relative}
+    .ph-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:22px;background:#111;border-radius:0 0 14px 14px;z-index:3}
+    .ph-top{padding:34px 16px 8px;display:flex;justify-content:space-between;align-items:center}
+    .ph-top-back{width:20px;height:20px;border-radius:6px;background:rgba(0,0,0,0.04)}
+    .ph-top-t{font-size:10px;font-weight:700;color:var(--ink);letter-spacing:0.3px}
+    .ph-top-share{width:20px;height:20px;border-radius:6px;background:rgba(0,0,0,0.04)}
+    .ph-img{margin:4px 12px;border-radius:18px;aspect-ratio:1.05;background:linear-gradient(140deg,#E4B498,#D09478,#C48470,#CCA0B0,#B8A0C4);position:relative;overflow:hidden}
+    .ph-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 32% 38%,rgba(255,255,255,0.2),transparent 50%)}
+    .ph-pal{margin:10px 12px 0;display:flex;gap:5px}
+    .ph-sw{flex:1;height:38px;border-radius:12px;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+    .ph:hover .ph-sw:nth-child(1){transform:translateY(-3px);transition-delay:0s}
+    .ph:hover .ph-sw:nth-child(2){transform:translateY(-5px);transition-delay:.04s}
+    .ph:hover .ph-sw:nth-child(3){transform:translateY(-7px);transition-delay:.08s}
+    .ph:hover .ph-sw:nth-child(4){transform:translateY(-5px);transition-delay:.12s}
+    .ph:hover .ph-sw:nth-child(5){transform:translateY(-3px);transition-delay:.16s}
+    .ph-hexes{margin:7px 12px 0;display:flex;gap:5px}
+    .ph-hx{flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:6.5px;color:var(--dim);letter-spacing:0.3px}
+    .ph-bar{margin:auto 12px 14px;padding-top:10px;display:flex;gap:6px}
+    .ph-bar-i{flex:1;height:30px;border-radius:10px;background:rgba(0,0,0,0.035);display:grid;place-items:center}
+    .ph-bar-i svg{width:13px;height:13px;stroke:var(--dim);fill:none;stroke-width:1.8;stroke-linecap:round}
+
+    /* ═══ BENTO ═══ */
+    .ft{padding:40px 0 120px}
+    .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:52px}
+    .bc{border-radius:28px;padding:36px 32px;overflow:hidden;position:relative;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.4s}
+    .bc:hover{transform:translateY(-5px);box-shadow:0 24px 64px rgba(0,0,0,0.07)}
+    .bc h3{font-family:'Instrument Serif',serif;font-size:22px;font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;position:relative}
+    .bc p{font-size:14px;line-height:1.65;position:relative}
+    .b1{grid-column:span 7;background:linear-gradient(150deg,#FDF0E6,#F6DCC8,#F0CEBC);color:var(--ink)}
+    .b1 p{color:#704838}
+    .b2{grid-column:span 5;background:linear-gradient(150deg,#EDE2F6,#E0D0F0,#D6C4E8);color:var(--ink)}
+    .b2 p{color:#504070}
+    .b3{grid-column:span 5;background:linear-gradient(150deg,#E2F0DC,#D4E4CC,#C8D8BE);color:var(--ink)}
+    .b3 p{color:#384E34}
+    .b4{grid-column:span 7;background:linear-gradient(150deg,#F6EDE0,#F0E2D0,#E8D6C4);color:var(--ink)}
+    .b4 p{color:#605038}
+
+    /* Card visuals */
+    .b1v{margin-top:28px;display:flex;gap:6px}
+    .b1s{flex:1;height:52px;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,0.07);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s;cursor:pointer;position:relative}
+    .b1s:hover{transform:scale(1.08) translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.12)}
+    .b1s::after{content:attr(data-c);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:500;color:rgba(112,72,56,0.5);white-space:nowrap;opacity:0;transition:opacity .2s}
+    .b1s:hover::after{opacity:1}
+
+    .b2g{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .b2c{border-radius:14px;aspect-ratio:1;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);cursor:pointer}
+    .b2c:hover{transform:scale(1.06) rotate(2deg)}
+
+    .b3p{margin-top:24px;display:flex;flex-wrap:wrap;gap:6px}
+    .b3t{padding:9px 18px;border-radius:100px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.45);color:#384E34;transition:all 0.25s;cursor:pointer;backdrop-filter:blur(4px)}
+    .b3t:hover{background:rgba(255,255,255,0.75);transform:scale(1.04)}
+
+    .b4g{margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .b4p{height:56px;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,0.06);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);cursor:pointer}
+    .b4p:hover{transform:scale(1.06) translateY(-3px)}
+
+    /* ═══ NUMBERS ═══ */
+    .nums{padding:80px 0;text-align:center}
+    .nums-g{display:flex;justify-content:center;gap:clamp(32px,6vw,80px)}
+    .num-i{display:flex;flex-direction:column;align-items:center}
+    .num-v{font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,56px);font-weight:400;letter-spacing:-1px;line-height:1}
+    .num-v .nc{display:inline-block;transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1)}
+    .nums:hover .num-i:nth-child(1) .nc{transform:scale(1.08);color:var(--accent)}
+    .nums:hover .num-i:nth-child(2) .nc{transform:scale(1.08);color:var(--a2)}
+    .nums:hover .num-i:nth-child(3) .nc{transform:scale(1.08);color:var(--a3)}
+    .num-l{font-size:13px;color:var(--dim);margin-top:6px;font-weight:500}
+
+    /* ═══ QUOTE ═══ */
+    .quote{padding:80px 0;text-align:center}
+    .qt{font-family:'Instrument Serif',serif;font-size:clamp(22px,3.8vw,36px);line-height:1.35;letter-spacing:-0.5px;max-width:600px;margin:0 auto 14px}
+    .qt em{font-style:italic;color:var(--accent)}
+    .qa{font-size:13px;color:var(--dim);font-weight:500}
+
+    /* ═══ FINAL CTA ═══ */
+    .final{padding:40px 0 140px}
+    .fc{
+      background:linear-gradient(145deg,#FEF6EE,#FCF0E6,#F8E8DC,#F6E4EC,#F2E4F2,#EEE8F0);
+      border:1px solid rgba(0,0,0,0.03);border-radius:36px;padding:80px 48px;
+      text-align:center;position:relative;overflow:hidden;
+      box-shadow:0 40px 120px rgba(0,0,0,0.05);
+    }
+    .fc h2{font-family:'Instrument Serif',serif;font-size:clamp(34px,6vw,54px);font-weight:400;letter-spacing:-2px;margin-bottom:14px;position:relative}
+    .fc .fs{font-size:17px;color:var(--text);margin-bottom:44px;position:relative}
+    .fb{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+    .fn{font-size:12.5px;color:var(--dim);margin-top:22px;position:relative}
+    /* Floating dots */
+    .fd{position:absolute;border-radius:50%;pointer-events:none;animation:fl 7s ease-in-out infinite}
+    @keyframes fl{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-14px) scale(1.05)}}
+
+    /* ═══ FOOTER ═══ */
+    footer{padding:48px 36px;position:relative;z-index:1}
+    .fi{max-width:1080px;margin:0 auto;border-top:1px solid rgba(0,0,0,0.05);padding-top:32px;display:flex;align-items:center;justify-content:space-between}
+    .fl{font-size:13px;color:var(--dim)}.fh{color:var(--accent)}
+    .fr{display:flex;gap:24px}
+    .fr a{font-size:13px;color:var(--text);text-decoration:none;font-weight:500;transition:color 0.2s}
+    .fr a:hover{color:var(--accent)}
+
+    /* ═══ RESPONSIVE ═══ */
+    @media(max-width:900px){
+      .split-g{grid-template-columns:1fr;gap:48px;text-align:center}
+      .split-t{margin:0 auto}.ph{width:240px}
+      .bento{grid-template-columns:1fr}.b1,.b2,.b3,.b4{grid-column:span 1}
+      .nums-g{gap:32px}
+    }
+    @media(max-width:560px){
+      .hb,.fb{flex-direction:column;align-items:center}
+      .btn{width:100%;max-width:280px;justify-content:center}
+      .w{padding:0 20px}.ni{padding:16px 20px}
+      .fc{padding:56px 24px;border-radius:28px}
+      .bc{padding:28px 22px;border-radius:22px}
+      .fi{flex-direction:column;gap:16px;text-align:center}
+      .hp-s{width:44px!important;height:64px!important}
+      .nums-g{flex-direction:column;gap:24px}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.mesh{display:none}body::after{display:none}}
+  </style>
+</head>
+<body>
+
+<div class="mesh"><div class="mo mo1"></div><div class="mo mo2"></div><div class="mo mo3"></div><div class="mo mo4"></div></div>
+
+<nav id="n"><div class="ni">
+  <a href="index.html" class="logo"><div class="lm"><span>P</span></div><span class="ln">Palettely</span></a>
+  <div class="nr"><a href="support.html">Support</a><a href="privacy-policy.html">Privacy</a></div>
+</div></nav>
+
+<!-- HERO -->
+<section class="hero"><div class="w">
+  <h1>Colours that<br><em>feel</em> like you</h1>
+  <p class="hero-p">Extract palettes from any photo. Build moodboards that breathe. Export art that's unmistakably yours.</p>
+
+  <div class="hp"><div class="hp-track" id="hpTrack"></div></div>
+
+  <div class="hb">
+    <a href="#" class="btn bd"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+    <a href="#" class="btn bg"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
+  </div>
+  <p class="hn">Free &middot; No account &middot; Your photos never leave your device</p>
+</div></section>
+
+<div class="sep"></div>
+
+<!-- SHOWCASE -->
+<section class="split"><div class="w"><div class="split-g rv">
+  <div class="split-t">
+    <div class="lab">How it works</div>
+    <h2 class="h2">Pick any photo.<br>Get its soul.</h2>
+    <p>Point your camera at a sunset, a latte, a vintage poster. Palettely doesn't just find colours — it finds the ones that matter. Dominant tones, hidden accents, the warmth between the shadows.</p>
+  </div>
+  <div class="ph" id="phone">
+    <div class="ph-scr">
+      <div class="ph-notch"></div>
+      <div class="ph-top"><div class="ph-top-back"></div><div class="ph-top-t">Palettely</div><div class="ph-top-share"></div></div>
+      <div class="ph-img"></div>
+      <div class="ph-pal">
+        <div class="ph-sw" style="background:#D49078"></div>
+        <div class="ph-sw" style="background:#E4BCA4"></div>
+        <div class="ph-sw" style="background:#C46840"></div>
+        <div class="ph-sw" style="background:#886854"></div>
+        <div class="ph-sw" style="background:#EEDCD0"></div>
+      </div>
+      <div class="ph-hexes"><span class="ph-hx">#D49078</span><span class="ph-hx">#E4BCA4</span><span class="ph-hx">#C46840</span><span class="ph-hx">#886854</span><span class="ph-hx">#EEDCD0</span></div>
+      <div class="ph-bar">
+        <div class="ph-bar-i"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
+        <div class="ph-bar-i"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+        <div class="ph-bar-i"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<div class="sep"></div>
+
+<!-- BENTO -->
+<section class="ft"><div class="w">
+  <div class="rv"><div class="lab">Features</div><h2 class="h2">Everything you need.<br>Nothing you don't.</h2></div>
+  <div class="bento">
+    <div class="bc b1 rv">
+      <h3>Extract colours from anything</h3>
+      <p>Camera, gallery, or screenshot. HEX, RGB, HSL codes — ready to copy.</p>
+      <div class="b1v">
+        <div class="b1s" style="background:#D49078" data-c="#D49078"></div>
+        <div class="b1s" style="background:#E4BCA4" data-c="#E4BCA4"></div>
+        <div class="b1s" style="background:#C46840" data-c="#C46840"></div>
+        <div class="b1s" style="background:#886854" data-c="#886854"></div>
+        <div class="b1s" style="background:#EEDCD0" data-c="#EEDCD0"></div>
+        <div class="b1s" style="background:#A87460" data-c="#A87460"></div>
+      </div>
+    </div>
+    <div class="bc b2 rv">
+      <h3>Build moodboards</h3>
+      <p>Photos, shapes, text on a freeform canvas. Layer your vision.</p>
+      <div class="b2g">
+        <div class="b2c" style="background:linear-gradient(135deg,var(--peach),var(--rose))"></div>
+        <div class="b2c" style="background:linear-gradient(135deg,var(--lav),var(--mauve))"></div>
+        <div class="b2c" style="background:linear-gradient(135deg,var(--sage),var(--mint))"></div>
+        <div class="b2c" style="background:linear-gradient(135deg,var(--sand),var(--gold))"></div>
+      </div>
+    </div>
+    <div class="bc b3 rv">
+      <h3>Curate your library</h3>
+      <p>Name, reorder, refine — make every colour yours.</p>
+      <div class="b3p">
+        <span class="b3t">Sunset Peach</span><span class="b3t">Dusty Rose</span><span class="b3t">Deep Sage</span>
+        <span class="b3t">Warm Latte</span><span class="b3t">Soft Plum</span><span class="b3t">Ocean Mist</span>
+      </div>
+    </div>
+    <div class="bc b4 rv">
+      <h3>Export wallpapers, Procreate swatches & overlays</h3>
+      <p>14 wallpaper patterns. Native .swatches format. Photo overlays. Share your mood everywhere.</p>
+      <div class="b4g">
+        <div class="b4p" style="background:linear-gradient(135deg,var(--peach),var(--coral))"></div>
+        <div class="b4p" style="background:linear-gradient(135deg,var(--lav),var(--plum))"></div>
+        <div class="b4p" style="background:linear-gradient(135deg,var(--sage),var(--forest))"></div>
+        <div class="b4p" style="background:linear-gradient(135deg,var(--sand),var(--terra))"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- NUMBERS -->
+<section class="nums rv"><div class="w"><div class="nums-g">
+  <div class="num-i"><div class="num-v"><span class="nc">&infin;</span></div><div class="num-l">Palettes to create</div></div>
+  <div class="num-i"><div class="num-v"><span class="nc">14</span></div><div class="num-l">Wallpaper patterns</div></div>
+  <div class="num-i"><div class="num-v"><span class="nc">0</span></div><div class="num-l">Data uploaded</div></div>
+</div></div></section>
+
+<div class="sep"></div>
+
+<!-- QUOTE -->
+<section class="quote rv"><div class="w">
+  <p class="qt">"Colour is a power which directly influences the soul."<br>We built Palettely to help you <em>capture</em> that power.</p>
+  <p class="qa">For designers, artists & anyone who notices the light</p>
+</div></section>
+
+<!-- FINAL CTA -->
+<section class="final"><div class="w">
+  <div class="fc rv">
+    <div class="fd" style="width:22px;height:22px;background:var(--peach);top:14%;left:10%;animation-delay:0s;opacity:.45"></div>
+    <div class="fd" style="width:14px;height:14px;background:var(--lav);top:18%;right:14%;animation-delay:1.2s;opacity:.35"></div>
+    <div class="fd" style="width:18px;height:18px;background:var(--sage);bottom:16%;left:16%;animation-delay:2.4s;opacity:.3"></div>
+    <div class="fd" style="width:12px;height:12px;background:var(--rose);bottom:22%;right:11%;animation-delay:.6s;opacity:.35"></div>
+    <div class="fd" style="width:16px;height:16px;background:var(--gold);top:42%;left:7%;animation-delay:1.8s;opacity:.25"></div>
+    <div class="fd" style="width:10px;height:10px;background:var(--sky);top:32%;right:8%;animation-delay:3s;opacity:.25"></div>
+    <div class="fd" style="width:8px;height:8px;background:var(--coral);bottom:35%;left:22%;animation-delay:3.6s;opacity:.3"></div>
+    <div class="fd" style="width:14px;height:14px;background:var(--mint);top:55%;right:18%;animation-delay:4.2s;opacity:.2"></div>
+    <h2>Your colours are<br>waiting</h2>
+    <p class="fs">Download Palettely and start seeing differently.</p>
+    <div class="fb">
+      <a href="#" class="btn bd"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+      <a href="#" class="btn bg"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
+    </div>
+    <p class="fn">Free &middot; No sign-up &middot; Your photos stay private</p>
+  </div>
+</div></section>
+
+<footer><div class="fi">
+  <span class="fl">Made with <span class="fh">&hearts;</span> colour by PlayPal Apps</span>
+  <div class="fr"><a href="privacy-policy.html">Privacy Policy</a><a href="support.html">Support</a></div>
+</div></footer>
+
+<script>
+// Nav
+window.addEventListener('scroll',()=>document.getElementById('n').classList.toggle('s',scrollY>50),{passive:!0});
+
+// Scroll reveal
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('v');io.unobserve(x.target)}})},{threshold:.08,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// Hero palette — generate a beautiful warm-to-cool gradient
+const colors=[
+  {bg:'#EFCFBC',hex:'#EFCFBC',tc:'#6B4A38'},
+  {bg:'#E5A098',hex:'#E5A098',tc:'#fff'},
+  {bg:'#DA7058',hex:'#DA7058',tc:'#fff'},
+  {bg:'#BF6040',hex:'#BF6040',tc:'#fff'},
+  {bg:'#B490D4',hex:'#B490D4',tc:'#fff'},
+  {bg:'#8868B8',hex:'#8868B8',tc:'#fff'},
+  {bg:'#8CBC98',hex:'#8CBC98',tc:'#2A4030'},
+  {bg:'#9EC4DC',hex:'#9EC4DC',tc:'#2A3A48'},
+  {bg:'#D4B474',hex:'#D4B474',tc:'#4A3820'},
+  {bg:'#E4D8C4',hex:'#E4D8C4',tc:'#5A4A38'},
+];
+const track=document.getElementById('hpTrack');
+colors.forEach(c=>{
+  const s=document.createElement('div');
+  s.className='hp-s';
+  s.style.background=c.bg;
+  s.innerHTML=`<span class="hx" style="color:${c.tc}">${c.hex}</span>`;
+  track.appendChild(s);
+});
+
+// Phone parallax
+const phone=document.getElementById('phone');
+if(phone&&matchMedia('(min-width:901px)').matches){
+  const sec=phone.closest('.split');
+  sec.addEventListener('mousemove',e=>{
+    const r=sec.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-.5)*12;
+    const y=((e.clientY-r.top)/r.height-.5)*8;
+    phone.style.transform=`perspective(800px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-4px)`;
+  });
+  sec.addEventListener('mouseleave',()=>{phone.style.transform=''});
+}
+</script>
+</body>
+</html>

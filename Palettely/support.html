@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support - Palettely</title>
+  <meta name="description" content="Get help with Palettely. FAQs, contact, and app information.">
+  <meta name="theme-color" content="#FDF9F5">
+  <style>
+    :root { --bg: #FDF9F5; --surface: #FFFFFF; --border: #F0ECE6; --accent: #CC7755; --accent2: #B8A0D0; --ink: #1A1A1E; --text2: #5A5A5E; --muted: #A0A0A4; --peach: #F5E6D8; --lavender: #E8E0F0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.75; }
+
+    nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); background: rgba(253,249,245,0.75); border-bottom: 1px solid rgba(240,236,230,0.6); }
+    .nav-inner { max-width: 800px; margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px rgba(204,119,85,0.25); }
+    .logo-mark span { font-size: 16px; font-weight: 900; color: white; font-family: Georgia, serif; }
+    .logo-text { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 48px 28px 100px; }
+    .hero { text-align: center; margin-bottom: 48px; }
+    .hero h1 { font-family: Georgia, serif; font-size: 36px; font-weight: 400; letter-spacing: -1px; margin-bottom: 8px; }
+    .hero p { font-size: 15px; color: var(--text2); max-width: 460px; margin: 0 auto; }
+
+    .contact-card {
+      background: linear-gradient(135deg, var(--peach), var(--lavender));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 44px 36px;
+      text-align: center;
+      margin-bottom: 56px;
+      box-shadow: 0 4px 30px rgba(204,119,85,0.08);
+    }
+    .contact-card h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .contact-card h2::before { display: none; }
+    .contact-card p { color: var(--text2); font-size: 15px; margin-bottom: 24px; }
+    .email-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--ink); color: white;
+      padding: 16px 36px; border-radius: 16px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(26,26,30,0.15);
+    }
+    .email-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(26,26,30,0.25); text-decoration: none; }
+    .email-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    h2 { font-size: 18px; font-weight: 800; margin-top: 40px; margin-bottom: 16px; color: var(--ink); letter-spacing: -0.3px; display: flex; align-items: center; gap: 10px; }
+    h2::before { content: ''; display: inline-block; width: 3px; height: 18px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+
+    .faq { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 26px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+    .faq-item:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.05); transform: translateY(-2px); }
+    .faq-item h3 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .faq-item p { font-size: 14px; color: var(--text2); margin: 0; line-height: 1.65; }
+
+    .app-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-top: 48px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.03);
+    }
+    .app-info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .app-info-row:last-child { border-bottom: none; }
+    .app-info-row span:first-child { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .app-info-row span:last-child { color: var(--ink); font-size: 14px; font-weight: 700; }
+
+    p { font-size: 15px; color: var(--text2); margin-bottom: 10px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 28px; text-align: center; }
+    footer p { color: var(--muted); font-size: 13px; }
+    footer a { color: var(--text2); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) { .hero h1 { font-size: 28px; } .contact-card { padding: 32px 24px; } .nav-links { gap: 16px; } .nav-links a { font-size: 13px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"><span>P</span></div>
+        <div class="logo-text">Palettely</div>
+      </a>
+      <div class="nav-links">
+        <a href="support.html" class="active">Support</a>
+        <a href="privacy-policy.html">Privacy</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>How can we help?</h1>
+      <p>Palettely is designed to be intuitive. If you need a hand, check below or reach out.</p>
+    </div>
+
+    <div class="contact-card">
+      <h2>Get in Touch</h2>
+      <p>Have a question, found a bug, or want to suggest a feature?</p>
+      <a href="mailto:playpalapps2024@gmail.com?subject=Palettely%20Support" class="email-btn">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email Support
+      </a>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>How do I extract colours from a photo?</h3>
+        <p>Tap the camera or gallery icon on the home screen. Pick a photo and Palettely will instantly extract a palette of dominant colours. Tap any colour to copy its hex code.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I create a moodboard?</h3>
+        <p>Go to the Moodboards tab and tap "New". Choose a template or start blank. Add images, colour shapes, and text. Drag, resize, and rotate to arrange your board.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I export my palette as a wallpaper?</h3>
+        <p>Yes! After extracting colours, tap the share icon and choose "Colour Wallpaper". Pick from 14 pattern styles and save or share the generated wallpaper.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does Palettely support Procreate?</h3>
+        <p>Yes. Tap share and choose "Procreate Swatches" to export your palette in the native .swatches format that Procreate can import directly.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are my photos uploaded anywhere?</h3>
+        <p>No. All photo processing happens entirely on your device. Your images are never uploaded, stored, or shared with anyone.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I save my moodboard?</h3>
+        <p>Moodboards are auto-saved as you work. Tap the back arrow to return to your boards list. To export as an image, tap the share icon in the top right.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is Palettely available on both iOS and Android?</h3>
+        <p>Yes! Palettely is free on both the App Store and Google Play.</p>
+      </div>
+    </div>
+
+    <div class="app-info">
+      <div class="app-info-row"><span>App</span><span>Palettely</span></div>
+      <div class="app-info-row"><span>Version</span><span>1.0.0</span></div>
+      <div class="app-info-row"><span>Platforms</span><span>iOS & Android</span></div>
+      <div class="app-info-row"><span>Developer</span><span>PlayPal Apps</span></div>
+      <div class="app-info-row"><span>Contact</span><span>playpalapps2024@gmail.com</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Palettely by PlayPal Apps &mdash; <a href="privacy-policy.html">Privacy</a> &middot; <a href="support.html">Support</a></p>
+  </footer>
+</body>
+</html>
