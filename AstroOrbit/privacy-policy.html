@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — ASTRO ORBIT</title>
+  <meta name="description" content="Privacy Policy for Astro Orbit by PlayPal Apps.">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #050510; --bg2: #0a0a1a;
+      --cyan: #50a0ff; --cyan-glow: rgba(80,160,255,0.6);
+      --purple: #a855f7; --purple-glow: rgba(168,85,247,0.4);
+      --text: #e0e8f0; --text-dim: #8090a8;
+      --glass: rgba(255,255,255,0.04); --glass-border: rgba(255,255,255,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Exo 2', 'Inter', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    ::selection { background: rgba(80,160,255,0.25); color: #fff; }
+
+    canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 clamp(20px, 4vw, 60px); height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(5,5,16,0.85); backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+    .nav-brand img { width: 38px; height: 38px; border-radius: 10px; }
+    .nav-brand span {
+      font-family: 'Orbitron', monospace; font-weight: 700; font-size: 1.1rem; letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-back {
+      color: var(--text-dim); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;
+      transition: color 0.3s;
+    }
+    .nav-back:hover { color: #fff; }
+
+    /* CONTENT */
+    .page { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 140px 24px 80px; }
+
+    .page-header { text-align: center; margin-bottom: 64px; }
+    .page-header .label {
+      font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px;
+    }
+    .page-header h1 {
+      font-family: 'Orbitron', monospace; font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; letter-spacing: 2px; margin-bottom: 16px;
+    }
+    .page-header p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; font-weight: 300; }
+
+    /* POLICY CONTENT */
+    .policy {
+      padding: 48px; border-radius: 24px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+    .policy h2 {
+      font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700;
+      letter-spacing: 1.5px; color: var(--cyan); margin: 40px 0 16px;
+    }
+    .policy h2:first-child { margin-top: 0; }
+    .policy p {
+      color: var(--text-dim); font-size: 0.9rem; line-height: 1.8; font-weight: 300;
+      margin-bottom: 12px;
+    }
+    .policy ul {
+      color: var(--text-dim); font-size: 0.9rem; line-height: 1.8; font-weight: 300;
+      margin: 0 0 12px 20px;
+    }
+    .policy li { margin-bottom: 6px; }
+    .policy a { color: var(--cyan); text-decoration: none; transition: opacity 0.3s; }
+    .policy a:hover { opacity: 0.7; }
+    .policy strong { color: var(--text); font-weight: 500; }
+
+    .effective-date {
+      display: inline-block; padding: 8px 20px; border-radius: 50px;
+      background: rgba(80,160,255,0.08); border: 1px solid rgba(80,160,255,0.12);
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 1.5px; color: var(--cyan);
+      margin-bottom: 40px;
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1;
+      padding: 40px 24px; text-align: center;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 80px;
+    }
+    .footer-links { display: flex; gap: 32px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-copy { color: var(--text-dim); font-size: 0.75rem; opacity: 0.5; }
+
+    @media (max-width: 600px) {
+      .policy { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo.png" alt="Astro Orbit">
+    <span>ASTRO ORBIT</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <div class="label">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p>Your privacy matters to us. This policy explains how Astro Orbit handles your information.</p>
+  </div>
+
+  <div class="effective-date">Effective Date: April 1, 2025</div>
+
+  <div class="policy">
+
+    <h2>Introduction</h2>
+    <p>PlayPal Apps ("we", "our", or "us") built Astro Orbit as a free, ad-supported application. This Privacy Policy is intended to inform you regarding our policies about the collection, use, and disclosure of personal information when you use our app.</p>
+
+    <h2>Information We Collect</h2>
+    <p>Astro Orbit itself does <strong>not</strong> collect, store, or transmit any personal information. All game data — including high scores, unlocked skins, achievements, and gem balances — is stored <strong>locally on your device</strong> and is never sent to our servers.</p>
+    <p>We do not require you to create an account, provide your name, email address, or any other personal details to use the app.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>Our app uses the following third-party services that may collect information:</p>
+    <ul>
+      <li><strong>Google AdMob</strong> — We use AdMob to display advertisements, including banner ads, interstitial ads, and rewarded video ads. AdMob may collect device identifiers, IP addresses, and usage data to serve personalized or contextual ads. Please refer to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> for details on how Google handles your data.</li>
+      <li><strong>Apple App Store / Google Play Store</strong> — The platform through which you download the app may collect data as outlined in their respective privacy policies.</li>
+    </ul>
+
+    <h2>Ad Personalization</h2>
+    <p>You may opt out of personalized advertising through your device settings:</p>
+    <ul>
+      <li><strong>iOS:</strong> Settings &gt; Privacy &amp; Security &gt; Tracking &gt; Disable "Allow Apps to Request to Track"</li>
+      <li><strong>Android:</strong> Settings &gt; Google &gt; Ads &gt; Opt out of Ads Personalization</li>
+    </ul>
+
+    <h2>Children's Privacy</h2>
+    <p>Astro Orbit is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided personal information through a third-party service, please contact us so we can take appropriate action.</p>
+
+    <h2>Data Security</h2>
+    <p>Since we do not collect or transmit personal data, there is minimal security risk from our end. All game progress and settings are stored locally on your device using standard local storage mechanisms provided by the operating system.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated effective date. We encourage you to review this page periodically for any updates.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have questions or concerns about this Privacy Policy, please contact us at:</p>
+    <p><a href="mailto:playpalapps@gmail.com">playpalapps@gmail.com</a></p>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="support.html">Support</a>
+  </div>
+  <div class="footer-copy">&copy; 2025 PlayPal Apps. All rights reserved.</div>
+</footer>
+
+<script>
+(function() {
+  const c = document.getElementById('starfield'), ctx = c.getContext('2d');
+  let w, h, stars = [];
+  function resize() { w = c.width = window.innerWidth; h = c.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+  for (let i = 0; i < 150; i++) stars.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.2+0.3, a: Math.random(), s: Math.random()*0.005+0.002 });
+  function draw() {
+    ctx.clearRect(0,0,w,h);
+    stars.forEach(s => { s.a += s.s; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=`rgba(180,200,255,${0.3+Math.abs(Math.sin(s.a))*0.7})`; ctx.fill(); });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

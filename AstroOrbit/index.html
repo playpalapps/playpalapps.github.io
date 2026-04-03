@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTRO ORBIT — Defy Gravity. Master the Cosmos.</title>
+  <meta name="description" content="A gravity-defying arcade experience. Tap to hop between orbital rings, dodge obstacles, and chase your highest score across the cosmos.">
+  <meta property="og:title" content="ASTRO ORBIT — Defy Gravity. Master the Cosmos.">
+  <meta property="og:description" content="The gravity-hopping arcade game that puts the cosmos in your hands.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #050510;
+      --bg2: #0a0a1a;
+      --cyan: #50a0ff;
+      --cyan-glow: rgba(80,160,255,0.6);
+      --gold: #ffc832;
+      --gold-glow: rgba(255,200,50,0.5);
+      --neon-pink: #ff5064;
+      --neon-pink-glow: rgba(255,80,100,0.5);
+      --purple: #a855f7;
+      --purple-glow: rgba(168,85,247,0.4);
+      --text: #e0e8f0;
+      --text-dim: #8090a8;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+      --section-gap: clamp(80px, 12vw, 160px);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Exo 2', 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(80,160,255,0.25); color: #fff; }
+
+    /* ── CANVAS BG ── */
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 clamp(20px, 4vw, 60px);
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(5,5,16,0.7);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--glass-border);
+      transition: background 0.3s;
+    }
+    nav.scrolled { background: rgba(5,5,16,0.92); }
+    .nav-brand {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: #fff;
+    }
+    .nav-brand img { width: 38px; height: 38px; border-radius: 10px; }
+    .nav-brand span {
+      font-family: 'Orbitron', monospace; font-weight: 700;
+      font-size: 1.1rem; letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--text-dim); text-decoration: none; font-size: 0.88rem;
+      font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+      transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+      background: var(--cyan); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      padding: 8px 20px !important; border-radius: 50px !important;
+      background: linear-gradient(135deg, var(--cyan), var(--purple)) !important;
+      color: #fff !important; font-weight: 600 !important;
+      letter-spacing: 1px !important; font-size: 0.82rem !important;
+      transition: transform 0.3s, box-shadow 0.3s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 30px var(--cyan-glow) !important; }
+
+    .mobile-menu-btn {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 32px; height: 24px; position: relative; z-index: 101;
+    }
+    .mobile-menu-btn span {
+      display: block; width: 100%; height: 2px; background: #fff;
+      position: absolute; left: 0; transition: all 0.3s;
+    }
+    .mobile-menu-btn span:nth-child(1) { top: 0; }
+    .mobile-menu-btn span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .mobile-menu-btn span:nth-child(3) { bottom: 0; }
+    .mobile-menu-btn.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(5,5,16,0.97); backdrop-filter: blur(30px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+    }
+    .mobile-nav.active { display: flex; }
+    .mobile-nav a {
+      color: #fff; text-decoration: none; font-family: 'Orbitron', monospace;
+      font-size: 1.4rem; letter-spacing: 4px; font-weight: 500;
+      opacity: 0.7; transition: opacity 0.3s;
+    }
+    .mobile-nav a:hover { opacity: 1; }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 800px; height: 800px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(80,160,255,0.08) 0%, rgba(168,85,247,0.04) 40%, transparent 70%);
+      pointer-events: none; animation: heroGlowPulse 6s ease-in-out infinite;
+    }
+    @keyframes heroGlowPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+    .hero-orbit-ring {
+      position: absolute; top: 50%; left: 50%; border-radius: 50%;
+      border: 1px solid rgba(80,160,255,0.08);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-orbit-ring:nth-child(2) { width: 500px; height: 500px; animation: spinSlow 40s linear infinite; }
+    .hero-orbit-ring:nth-child(3) { width: 700px; height: 700px; animation: spinSlow 60s linear infinite reverse; border-color: rgba(168,85,247,0.06); }
+    .hero-orbit-ring:nth-child(4) { width: 900px; height: 900px; animation: spinSlow 80s linear infinite; border-color: rgba(255,200,50,0.04); }
+    @keyframes spinSlow { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    .hero-dot {
+      position: absolute; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 12px var(--cyan-glow);
+    }
+    .hero-orbit-ring:nth-child(2) .hero-dot { top: -3px; left: 50%; }
+    .hero-orbit-ring:nth-child(3) .hero-dot { bottom: -3px; right: 20%; background: var(--purple); box-shadow: 0 0 12px var(--purple-glow); }
+    .hero-orbit-ring:nth-child(4) .hero-dot { top: 30%; left: -3px; background: var(--gold); box-shadow: 0 0 12px var(--gold-glow); }
+
+    .hero-content { position: relative; z-index: 2; max-width: 900px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 18px; border-radius: 50px; margin-bottom: 32px;
+      background: rgba(80,160,255,0.08); border: 1px solid rgba(80,160,255,0.15);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: clamp(2px, 0.5vw, 8px);
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 60px rgba(80,160,255,0.3));
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--text-dim); line-height: 1.7;
+      max-width: 600px; margin: 0 auto 48px;
+      font-weight: 300;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; border-radius: 60px; border: none; cursor: pointer;
+      font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none;
+      background: linear-gradient(135deg, var(--cyan), #7c3aed);
+      color: #fff; position: relative; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer { 50% { transform: translateX(100%); } }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(80,160,255,0.4); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; border-radius: 60px; cursor: pointer;
+      font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none;
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--cyan); background: rgba(80,160,255,0.06);
+      box-shadow: 0 0 30px rgba(80,160,255,0.15);
+    }
+
+    .hero-stats {
+      display: flex; gap: 48px; justify-content: center; margin-top: 64px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat .num {
+      font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-stat .label { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-indicator {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--text-dim); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+      animation: float 3s ease-in-out infinite;
+    }
+    .scroll-indicator .chevron {
+      width: 24px; height: 24px; border-right: 2px solid var(--cyan); border-bottom: 2px solid var(--cyan);
+      transform: rotate(45deg); opacity: 0.5;
+    }
+    @keyframes float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+
+    /* ── SHOWCASE / PHONE MOCKUP ── */
+    .showcase {
+      padding: var(--section-gap) 24px;
+      display: flex; align-items: center; justify-content: center;
+      gap: clamp(40px, 8vw, 120px); flex-wrap: wrap;
+      max-width: 1300px; margin: 0 auto;
+    }
+    .showcase-visual {
+      position: relative; flex-shrink: 0;
+    }
+    .phone-frame {
+      width: 280px; height: 570px; border-radius: 40px;
+      border: 3px solid rgba(255,255,255,0.1);
+      background: radial-gradient(ellipse at center, #0d1030 0%, #060612 100%);
+      overflow: hidden; position: relative;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 80px rgba(80,160,255,0.1), inset 0 0 60px rgba(80,160,255,0.03);
+    }
+    .phone-screen {
+      width: 100%; height: 100%; position: relative;
+    }
+    .phone-screen canvas { width: 100%; height: 100%; }
+    .phone-notch {
+      position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 28px; border-radius: 0 0 16px 16px;
+      background: #000;
+    }
+    .phone-glow {
+      position: absolute; top: -60px; left: -60px; right: -60px; bottom: -60px;
+      border-radius: 80px; pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(80,160,255,0.1) 0%, transparent 60%);
+      animation: phoneGlow 4s ease-in-out infinite;
+    }
+    @keyframes phoneGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+    .showcase-text { max-width: 500px; }
+    .section-label {
+      font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px;
+    }
+    .showcase-text h2 {
+      font-family: 'Orbitron', monospace; font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; line-height: 1.2; margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    .showcase-text p {
+      color: var(--text-dim); font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px;
+      font-weight: 300;
+    }
+    .feature-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+    .chip {
+      padding: 8px 18px; border-radius: 50px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      font-size: 0.82rem; font-weight: 500; color: var(--text-dim);
+      backdrop-filter: blur(10px);
+    }
+
+    /* ── FEATURES GRID ── */
+    .features {
+      padding: var(--section-gap) 24px;
+      max-width: 1200px; margin: 0 auto;
+      text-align: center;
+    }
+    .features h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .features > p {
+      color: var(--text-dim); font-size: 1.05rem; max-width: 600px;
+      margin: 0 auto clamp(48px, 6vw, 80px); font-weight: 300; line-height: 1.7;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      padding: 40px 32px; border-radius: 24px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      text-align: left; position: relative; overflow: hidden;
+      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(80,160,255,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(80,160,255,0.05);
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 56px; height: 56px; border-radius: 16px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, rgba(80,160,255,0.1), rgba(168,85,247,0.1));
+      border: 1px solid rgba(80,160,255,0.1);
+    }
+    .feature-card h3 {
+      font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700;
+      letter-spacing: 1px; margin-bottom: 12px;
+    }
+    .feature-card p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.7; font-weight: 300; }
+    .feature-card:nth-child(2) .feature-icon { background: linear-gradient(135deg, rgba(255,200,50,0.1), rgba(255,80,100,0.1)); border-color: rgba(255,200,50,0.1); }
+    .feature-card:nth-child(3) .feature-icon { background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(255,80,100,0.1)); border-color: rgba(168,85,247,0.1); }
+    .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, rgba(80,255,160,0.1), rgba(80,160,255,0.1)); border-color: rgba(80,255,160,0.1); }
+    .feature-card:nth-child(5) .feature-icon { background: linear-gradient(135deg, rgba(255,80,100,0.1), rgba(255,200,50,0.1)); border-color: rgba(255,80,100,0.1); }
+    .feature-card:nth-child(6) .feature-icon { background: linear-gradient(135deg, rgba(80,160,255,0.1), rgba(80,255,160,0.1)); border-color: rgba(80,160,255,0.1); }
+
+    /* ── PLANETS SECTION ── */
+    .planets {
+      padding: var(--section-gap) 24px;
+      max-width: 1200px; margin: 0 auto; text-align: center;
+    }
+    .planets h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; margin-bottom: 16px; letter-spacing: 2px;
+    }
+    .planets > p {
+      color: var(--text-dim); font-size: 1.05rem; max-width: 600px;
+      margin: 0 auto clamp(48px, 6vw, 80px); font-weight: 300; line-height: 1.7;
+    }
+    .planet-carousel {
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    }
+    .planet-orb {
+      width: 100px; height: 100px; border-radius: 50%;
+      position: relative; cursor: pointer;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .planet-orb:hover { transform: scale(1.15); }
+    .planet-orb .planet-sphere {
+      width: 100%; height: 100%; border-radius: 50%;
+      position: relative; overflow: hidden;
+    }
+    .planet-orb .planet-name {
+      position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-dim); white-space: nowrap;
+    }
+    .planet-mercury .planet-sphere { background: radial-gradient(circle at 35% 35%, #d4c8b4, #8a7e6e, #5c544a); box-shadow: 0 0 30px rgba(180,160,140,0.3); }
+    .planet-venus .planet-sphere { background: radial-gradient(circle at 35% 35%, #ffe0a0, #d4a050, #a07030); box-shadow: 0 0 30px rgba(255,200,100,0.3); }
+    .planet-earth .planet-sphere { background: radial-gradient(circle at 35% 35%, #60c0ff, #2080d0, #104080); box-shadow: 0 0 30px rgba(40,120,255,0.3); }
+    .planet-mars .planet-sphere { background: radial-gradient(circle at 35% 35%, #ff8060, #c04020, #801800); box-shadow: 0 0 30px rgba(255,80,40,0.3); }
+    .planet-jupiter .planet-sphere { background: radial-gradient(circle at 35% 35%, #f0d0a0, #d0a060, #a08040); box-shadow: 0 0 30px rgba(200,160,80,0.3); }
+    .planet-saturn .planet-sphere { background: radial-gradient(circle at 35% 35%, #f0e0c0, #d0b880, #a09060); box-shadow: 0 0 30px rgba(220,200,140,0.3); }
+    .planet-saturn::after {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateX(75deg);
+      width: 140px; height: 140px; border-radius: 50%;
+      border: 3px solid rgba(220,200,140,0.3); pointer-events: none;
+    }
+    .planet-uranus .planet-sphere { background: radial-gradient(circle at 35% 35%, #a0e8e8, #50b8c0, #208088); box-shadow: 0 0 30px rgba(80,200,200,0.3); }
+    .planet-neptune .planet-sphere { background: radial-gradient(circle at 35% 35%, #6080ff, #3040d0, #101880); box-shadow: 0 0 30px rgba(60,60,255,0.3); }
+    .planet-moon .planet-sphere { background: radial-gradient(circle at 35% 35%, #e0e0e0, #b0b0b0, #808080); box-shadow: 0 0 30px rgba(200,200,200,0.3); }
+    .planet-sun .planet-sphere { background: radial-gradient(circle at 35% 35%, #fff8d0, #ffc020, #ff8000); box-shadow: 0 0 40px rgba(255,180,0,0.5); }
+
+    /* ── HOW TO PLAY ── */
+    .how-to-play {
+      padding: var(--section-gap) 24px;
+      max-width: 1000px; margin: 0 auto; text-align: center;
+    }
+    .how-to-play h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; margin-bottom: 16px; letter-spacing: 2px;
+    }
+    .how-to-play > p {
+      color: var(--text-dim); font-size: 1.05rem; max-width: 600px;
+      margin: 0 auto clamp(48px, 6vw, 80px); font-weight: 300; line-height: 1.7;
+    }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px; counter-reset: step;
+    }
+    .step {
+      counter-increment: step;
+      padding: 40px 28px; border-radius: 24px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      position: relative; text-align: center;
+    }
+    .step::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; opacity: 0.2;
+      display: block; margin-bottom: 16px;
+    }
+    .step h3 {
+      font-family: 'Orbitron', monospace; font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 1px; margin-bottom: 10px;
+    }
+    .step p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.7; font-weight: 300; }
+
+    /* ── POWERUPS ── */
+    .powerups {
+      padding: var(--section-gap) 24px;
+      max-width: 1000px; margin: 0 auto; text-align: center;
+    }
+    .powerups h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; margin-bottom: 60px; letter-spacing: 2px;
+    }
+    .powerup-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .powerup-item {
+      padding: 36px 28px; border-radius: 20px; width: 260px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      transition: transform 0.3s;
+    }
+    .powerup-item:hover { transform: translateY(-4px); }
+    .powerup-icon {
+      width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .powerup-shield .powerup-icon { background: radial-gradient(circle, rgba(80,160,255,0.2), rgba(80,160,255,0.05)); border: 2px solid rgba(80,160,255,0.3); }
+    .powerup-magnet .powerup-icon { background: radial-gradient(circle, rgba(255,200,50,0.2), rgba(255,200,50,0.05)); border: 2px solid rgba(255,200,50,0.3); }
+    .powerup-slowtime .powerup-icon { background: radial-gradient(circle, rgba(168,85,247,0.2), rgba(168,85,247,0.05)); border: 2px solid rgba(168,85,247,0.3); }
+    .powerup-item h3 {
+      font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 1px; margin-bottom: 8px;
+    }
+    .powerup-item p { color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; font-weight: 300; }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: var(--section-gap) 24px;
+      text-align: center; position: relative;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(80,160,255,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; margin-bottom: 20px;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #fff, var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-section p {
+      color: var(--text-dim); font-size: 1.1rem; margin-bottom: 40px;
+      font-weight: 300; max-width: 500px; margin-left: auto; margin-right: auto;
+    }
+    .store-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 14px 28px; border-radius: 14px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: #fff; text-decoration: none;
+      transition: all 0.3s; backdrop-filter: blur(10px);
+    }
+    .store-btn:hover {
+      background: rgba(255,255,255,0.1); border-color: rgba(80,160,255,0.3);
+      transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    .store-btn svg { width: 28px; height: 28px; fill: #fff; }
+    .store-btn-text { text-align: left; }
+    .store-btn-text small { display: block; font-size: 0.65rem; opacity: 0.6; letter-spacing: 1px; text-transform: uppercase; }
+    .store-btn-text span { display: block; font-size: 1.05rem; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 60px 24px 40px; text-align: center;
+      border-top: 1px solid var(--glass-border);
+    }
+    .footer-brand {
+      font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700;
+      letter-spacing: 4px; margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-links { display: flex; gap: 32px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-copy { color: var(--text-dim); font-size: 0.75rem; opacity: 0.5; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .showcase { flex-direction: column; text-align: center; }
+      .feature-chips { justify-content: center; }
+      .hero-stats { gap: 32px; }
+      .phone-frame { width: 240px; height: 490px; }
+      .hero-orbit-ring:nth-child(2) { width: 350px; height: 350px; }
+      .hero-orbit-ring:nth-child(3) { width: 500px; height: 500px; }
+      .hero-orbit-ring:nth-child(4) { width: 650px; height: 650px; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { letter-spacing: 1px; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-brand">
+    <img src="logo.png" alt="Astro Orbit">
+    <span>ASTRO ORBIT</span>
+  </a>
+  <div class="nav-links">
+    <a href="#gameplay">Gameplay</a>
+    <a href="#features">Features</a>
+    <a href="#planets">Planets</a>
+    <a href="#download" class="nav-cta">Download</a>
+  </div>
+  <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#gameplay" onclick="closeMobileMenu()">Gameplay</a>
+  <a href="#features" onclick="closeMobileMenu()">Features</a>
+  <a href="#planets" onclick="closeMobileMenu()">Planets</a>
+  <a href="#download" onclick="closeMobileMenu()">Download</a>
+  <a href="support.html">Support</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-orbit-ring"><div class="hero-dot"></div></div>
+  <div class="hero-orbit-ring"><div class="hero-dot"></div></div>
+  <div class="hero-orbit-ring"><div class="hero-dot"></div></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Now Available on iOS & Android</div>
+    <h1>ASTRO<br>ORBIT</h1>
+    <p>Defy gravity. Hop between orbital rings. Dodge cosmic obstacles. How far can you orbit before the cosmos catches up?</p>
+    <div class="hero-buttons">
+      <a href="#download" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Free
+      </a>
+      <a href="#gameplay" class="btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        See Gameplay
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num" data-count="10">0</div><div class="label">Planet Skins</div></div>
+      <div class="hero-stat"><div class="num" data-count="3">0</div><div class="label">Difficulty Modes</div></div>
+      <div class="hero-stat"><div class="num" data-count="10">0</div><div class="label">Achievements</div></div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="chevron"></div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="showcase reveal" id="gameplay">
+  <div class="showcase-visual">
+    <div class="phone-glow"></div>
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <canvas class="phone-screen" id="demoCanvas"></canvas>
+    </div>
+  </div>
+  <div class="showcase-text">
+    <div class="section-label">Gameplay</div>
+    <h2>One Tap.<br>Infinite Orbits.</h2>
+    <p>Orbit around rings at blistering speeds. Tap at the exact right moment to leap to the next ring. Mistiming means oblivion. Every ring is procedurally generated — no two games are ever the same.</p>
+    <div class="feature-chips">
+      <span class="chip">Procedural Rings</span>
+      <span class="chip">Precision Timing</span>
+      <span class="chip">Near-Miss Bonuses</span>
+      <span class="chip">Combo System</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features reveal" id="features">
+  <div class="section-label">Features</div>
+  <h2>Engineered for Obsession</h2>
+  <p>Every pixel, every sound, every mechanic crafted to keep you in the zone.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">&#9790;</div>
+      <h3>Procedural Worlds</h3>
+      <p>Every ring is uniquely generated with dynamic speeds, directions, and obstacle patterns. No two runs are ever the same.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#9733;</div>
+      <h3>Unlock Planet Skins</h3>
+      <p>Play as Mercury, Earth, Jupiter, or even the Sun. Each skin has unique particle trails — dust, clouds, storms, and solar flares.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#9889;</div>
+      <h3>Power-Ups</h3>
+      <p>Shields absorb hits. Magnets attract gems. Slow Time bends reality. Use them wisely — they're rare and precious.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#9878;</div>
+      <h3>Three Difficulty Modes</h3>
+      <p>Easy for beginners. Normal for the skilled. Hard for the fearless. Obstacles appear earlier and rings spin faster as you level up.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#9813;</div>
+      <h3>Achievements & Milestones</h3>
+      <p>10 achievements to hunt. Score milestones trigger celebrations. Combo chains reward precision with massive point multipliers.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#9835;</div>
+      <h3>Procedural Audio</h3>
+      <p>Every sound is generated in real-time. The music evolves as your score climbs, creating a unique soundtrack for every session.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLANETS -->
+<section class="planets reveal" id="planets">
+  <div class="section-label">Collection</div>
+  <h2>Command the Solar System</h2>
+  <p>Unlock 10 planetary skins as you progress. Each celestial body has its own visual identity and particle trail effects.</p>
+  <div class="planet-carousel">
+    <div class="planet-orb planet-mercury"><div class="planet-sphere"></div><span class="planet-name">Mercury</span></div>
+    <div class="planet-orb planet-venus"><div class="planet-sphere"></div><span class="planet-name">Venus</span></div>
+    <div class="planet-orb planet-earth"><div class="planet-sphere"></div><span class="planet-name">Earth</span></div>
+    <div class="planet-orb planet-mars"><div class="planet-sphere"></div><span class="planet-name">Mars</span></div>
+    <div class="planet-orb planet-jupiter"><div class="planet-sphere"></div><span class="planet-name">Jupiter</span></div>
+    <div class="planet-orb planet-saturn"><div class="planet-sphere"></div><span class="planet-name">Saturn</span></div>
+    <div class="planet-orb planet-uranus"><div class="planet-sphere"></div><span class="planet-name">Uranus</span></div>
+    <div class="planet-orb planet-neptune"><div class="planet-sphere"></div><span class="planet-name">Neptune</span></div>
+    <div class="planet-orb planet-moon"><div class="planet-sphere"></div><span class="planet-name">Moon</span></div>
+    <div class="planet-orb planet-sun"><div class="planet-sphere"></div><span class="planet-name">Sun</span></div>
+  </div>
+</section>
+
+<!-- HOW TO PLAY -->
+<section class="how-to-play reveal">
+  <div class="section-label">How To Play</div>
+  <h2>Simple to Learn. Impossible to Master.</h2>
+  <p>Three steps. One tap. Infinite depth.</p>
+  <div class="steps">
+    <div class="step">
+      <h3>Orbit</h3>
+      <p>Your planet automatically orbits the current ring at high speed. Watch the rhythm. Feel the flow.</p>
+    </div>
+    <div class="step">
+      <h3>Tap to Jump</h3>
+      <p>Tap at the perfect moment to leap to the next ring. Time it wrong and you'll crash into an obstacle.</p>
+    </div>
+    <div class="step">
+      <h3>Survive & Score</h3>
+      <p>Each ring scored is a point. Golden rings give double. Chain combos. Collect gems. Beat your high score.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POWERUPS -->
+<section class="powerups reveal">
+  <div class="section-label">Arsenal</div>
+  <h2>Cosmic Power-Ups</h2>
+  <div class="powerup-row">
+    <div class="powerup-item powerup-shield">
+      <div class="powerup-icon">&#9670;</div>
+      <h3>Shield</h3>
+      <p>Absorbs one collision. A second chance when you need it most.</p>
+    </div>
+    <div class="powerup-item powerup-magnet">
+      <div class="powerup-icon">&#10022;</div>
+      <h3>Magnet</h3>
+      <p>Pulls nearby gems straight to you. Collect without the risk.</p>
+    </div>
+    <div class="powerup-item powerup-slowtime">
+      <div class="powerup-icon">&#9678;</div>
+      <h3>Slow Time</h3>
+      <p>Bends time itself. Everything slows down except your reflexes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal" id="download">
+  <div class="section-label">Download</div>
+  <h2>Ready to Orbit?</h2>
+  <p>Free to play. Available now on iOS and Android.</p>
+  <div class="store-buttons">
+    <a href="#" class="store-btn" aria-label="Download on the App Store">
+      <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="store-btn-text"><small>Download on the</small><span>App Store</span></div>
+    </a>
+    <a href="#" class="store-btn" aria-label="Get it on Google Play">
+      <svg viewBox="0 0 24 24"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.56.69.56 1.19s-.22.92-.56 1.19l-1.97 1.13-2.5-2.5 2.5-2.5 1.97 1.13M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg>
+      <div class="store-btn-text"><small>Get it on</small><span>Google Play</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">ASTRO ORBIT</div>
+  <div class="footer-links">
+    <a href="support.html">Support</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </div>
+  <div class="footer-copy">&copy; 2025 PlayPal Apps. All rights reserved.</div>
+</footer>
+
+<script>
+// ── STARFIELD ──
+(function() {
+  const c = document.getElementById('starfield');
+  const ctx = c.getContext('2d');
+  let w, h, stars = [], shootingStars = [];
+  function resize() { w = c.width = window.innerWidth; h = c.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  for (let i = 0; i < 200; i++) {
+    stars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.5 + 0.3, a: Math.random(), s: Math.random() * 0.005 + 0.002 });
+  }
+  function spawnShootingStar() {
+    if (Math.random() < 0.005 && shootingStars.length < 2) {
+      shootingStars.push({ x: Math.random() * w, y: Math.random() * h * 0.5, vx: 4 + Math.random() * 4, vy: 2 + Math.random() * 2, life: 1 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    stars.forEach(s => {
+      s.a += s.s;
+      const a = 0.3 + Math.abs(Math.sin(s.a)) * 0.7;
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,200,255,${a})`; ctx.fill();
+    });
+    spawnShootingStar();
+    shootingStars.forEach((s, i) => {
+      s.x += s.vx; s.y += s.vy; s.life -= 0.015;
+      if (s.life <= 0) { shootingStars.splice(i, 1); return; }
+      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - s.vx * 8, s.y - s.vy * 8);
+      const g = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 8, s.y - s.vy * 8);
+      g.addColorStop(0, `rgba(180,220,255,${s.life})`); g.addColorStop(1, 'transparent');
+      ctx.strokeStyle = g; ctx.lineWidth = 1.5; ctx.stroke();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── PHONE DEMO CANVAS ──
+(function() {
+  const c = document.getElementById('demoCanvas');
+  const ctx = c.getContext('2d');
+  c.width = 280 * 2; c.height = 570 * 2;
+  ctx.scale(2, 2);
+  let t = 0;
+  const rings = [];
+  for (let i = 0; i < 6; i++) {
+    rings.push({ r: 40 + i * 38, speed: (0.02 - i * 0.002) * (i % 2 === 0 ? 1 : -1), obs: [] });
+    const numObs = i < 2 ? 0 : Math.floor(Math.random() * 2) + 1;
+    for (let j = 0; j < numObs; j++) rings[i].obs.push(Math.random() * Math.PI * 2);
+  }
+  let playerRing = 2, playerAngle = 0;
+
+  function draw() {
+    t += 0.016;
+    ctx.clearRect(0, 0, 280, 570);
+    const cx = 140, cy = 280;
+
+    // rings
+    rings.forEach((ring, i) => {
+      ctx.beginPath(); ctx.arc(cx, cy, ring.r, 0, Math.PI * 2);
+      const isGolden = i === 3;
+      ctx.strokeStyle = isGolden ? 'rgba(255,200,50,0.25)' : 'rgba(80,160,255,0.12)';
+      ctx.lineWidth = isGolden ? 2.5 : 1.5; ctx.stroke();
+
+      // obstacles
+      ring.obs.forEach(oa => {
+        const angle = oa + t * ring.speed * 3;
+        const ox = cx + Math.cos(angle) * ring.r;
+        const oy = cy + Math.sin(angle) * ring.r;
+        ctx.beginPath(); ctx.arc(ox, oy, 5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,80,100,0.7)'; ctx.fill();
+        ctx.beginPath(); ctx.arc(ox, oy, 10, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,80,100,0.1)'; ctx.fill();
+      });
+    });
+
+    // player
+    playerAngle += rings[playerRing].speed * 3;
+    if (Math.random() < 0.008) {
+      playerRing = (playerRing + 1) % rings.length;
+      if (playerRing < 2) playerRing = 2;
+    }
+    const px = cx + Math.cos(playerAngle) * rings[playerRing].r;
+    const py = cy + Math.sin(playerAngle) * rings[playerRing].r;
+
+    // player glow
+    const grd = ctx.createRadialGradient(px, py, 0, px, py, 18);
+    grd.addColorStop(0, 'rgba(80,160,255,0.4)'); grd.addColorStop(1, 'transparent');
+    ctx.beginPath(); ctx.arc(px, py, 18, 0, Math.PI * 2);
+    ctx.fillStyle = grd; ctx.fill();
+
+    // player orb
+    const pgrd = ctx.createRadialGradient(px - 2, py - 2, 0, px, py, 7);
+    pgrd.addColorStop(0, '#90d0ff'); pgrd.addColorStop(1, '#3080e0');
+    ctx.beginPath(); ctx.arc(px, py, 7, 0, Math.PI * 2);
+    ctx.fillStyle = pgrd; ctx.fill();
+
+    // score
+    ctx.font = '600 28px Orbitron'; ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.textAlign = 'center';
+    ctx.fillText(Math.floor(t * 2), cx, 60);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── MOBILE MENU ──
+const menuBtn = document.getElementById('menuBtn');
+const mobileNav = document.getElementById('mobileNav');
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+  document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+});
+function closeMobileMenu() {
+  menuBtn.classList.remove('active');
+  mobileNav.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+// ── COUNTER ANIMATION ──
+const counters = document.querySelectorAll('.num[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target, target = +el.dataset.count;
+      let current = 0;
+      const step = () => {
+        current += Math.ceil(target / 30);
+        if (current >= target) { el.textContent = target; return; }
+        el.textContent = current;
+        requestAnimationFrame(step);
+      };
+      step();
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => counterObserver.observe(el));
+</script>
+</body>
+</html>
