@@ -796,6 +796,45 @@
   let camX = 0, camY = 0, targetCamX = 0, targetCamY = 0;
   let trailParticles = [], burstParticles = [];
 
+  // 3-layer parallax stars (from game's ParticleSystem)
+  const starLayers = [
+    { stars: [], speed: 0.015 },
+    { stars: [], speed: 0.04 },
+    { stars: [], speed: 0.08 },
+  ];
+  const starCounts = [60, 35, 18];
+  const starSizes = [0.5, 1.1, 1.8];
+  starLayers.forEach((layer, li) => {
+    for (let i = 0; i < starCounts[li]; i++) {
+      layer.stars.push({
+        x: Math.random(), y: Math.random(),
+        size: starSizes[li] * (0.5 + Math.random() * 0.8),
+        brightness: 0.1 + Math.random() * (0.2 + li * 0.15),
+        twinkleSpeed: 0.005 + Math.random() * 0.015,
+        twinkleOffset: Math.random() * Math.PI * 2,
+      });
+    }
+  });
+
+  // Nebula clouds (from game)
+  const nebulaHues = [220, 280, 180, 340];
+  const nebulae = [];
+  for (let i = 0; i < 4; i++) {
+    nebulae.push({
+      x: 0.15 + Math.random() * 0.7, y: 0.15 + Math.random() * 0.7,
+      radius: 0.2 + Math.random() * 0.25,
+      hue: nebulaHues[i] + (Math.random() - 0.5) * 30,
+      alpha: 0.03 + Math.random() * 0.025,
+      driftX: (Math.random() - 0.5) * 0.00006,
+      driftY: (Math.random() - 0.5) * 0.00006,
+    });
+  }
+
+  // Shooting stars
+  let shootingStars = [];
+  // Floating texts (score popups)
+  let floatingTexts = [];
+
   // Generate rings exactly like the game — each positioned relative to the previous
   const rings = [];
   function createRing(index) {
@@ -836,7 +875,7 @@
       }
     }
     const gem = (index > 0 && Math.random() < 0.55) ? { angle: Math.random() * Math.PI * 2, dist: radius, collected: false } : null;
-    return { cx, cy, radius, speed, direction, ringType, rotation: Math.random() * Math.PI * 2, obstacles, gem, alpha: index < 3 ? 1 : 0, targetAlpha: 1 };
+    return { cx, cy, radius, speed, direction, ringType, rotation: Math.random() * Math.PI * 2, obstacles, gem, alpha: index < 3 ? 1 : 0, targetAlpha: 1, pulse: 0 };
   }
   for (let i = 0; i < 12; i++) rings.push(createRing(i));
 
@@ -860,10 +899,15 @@
     jumpSX = ox; jumpSY = oy; jumpEX = ex; jumpEY = ey;
     jumpCX = mx + (px / pl) * 30; jumpCY = my + (py / pl) * 30;
     jumping = true; jumpProgress = 0;
-    // Landing burst
-    burstParticles.push(...Array.from({length: 6}, () => ({
-      x: ex, y: ey, vx: (Math.random()-0.5)*3, vy: (Math.random()-0.5)*3, life: 1
-    })));
+    // Landing burst — ring ripple + scattered particles
+    burstParticles.push(...Array.from({length: 12}, () => {
+      const a = Math.random() * Math.PI * 2;
+      const sp = 1.5 + Math.random() * 3;
+      return { x: ex, y: ey, vx: Math.cos(a)*sp, vy: Math.sin(a)*sp, life: 1, color: Math.random() < 0.5 ? 'cyan' : 'white' };
+    }));
+    // Ring pulse on the target ring
+    const targetRing = rings[curRing + 1];
+    if (targetRing) targetRing.pulse = 1.0;
   }
 
   function drawDashedRing(rcx, rcy, radius, color, alpha, rotation) {
@@ -877,10 +921,15 @@
 
   function drawGlowRing(rcx, rcy, radius, color, alpha) {
     ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    // Wide ambient glow
     ctx.beginPath(); ctx.arc(rcx, rcy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = color.replace(/[\d.]+\)$/, `${alpha * 0.15})`); ctx.lineWidth = 10; ctx.stroke();
+    ctx.strokeStyle = color.replace(/[\d.]+\)$/, `${alpha * 0.08})`); ctx.lineWidth = 22; ctx.stroke();
+    // Medium glow
     ctx.beginPath(); ctx.arc(rcx, rcy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = color.replace(/[\d.]+\)$/, `${alpha * 0.35})`); ctx.lineWidth = 3; ctx.stroke();
+    ctx.strokeStyle = color.replace(/[\d.]+\)$/, `${alpha * 0.18})`); ctx.lineWidth = 10; ctx.stroke();
+    // Tight core glow
+    ctx.beginPath(); ctx.arc(rcx, rcy, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = color.replace(/[\d.]+\)$/, `${alpha * 0.4})`); ctx.lineWidth = 3; ctx.stroke();
     ctx.restore();
   }
 
@@ -938,18 +987,60 @@
   function draw() {
     t += 0.016;
 
-    // Background
-    const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, H * 0.6);
+    // Background — radial gradient
+    const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, H * 0.65);
     bg.addColorStop(0, '#0d1530'); bg.addColorStop(1, '#050810');
     ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
 
-    // Stars (fixed, don't move with camera for parallax)
-    ctx.fillStyle = 'rgba(180,200,255,0.35)';
-    for (let i = 0; i < 40; i++) {
-      const sx = ((i * 137.5 + camX * 0.02) % W + W) % W;
-      const sy = ((i * 97.3 + camY * 0.02) % H + H) % H;
-      const sr = 0.3 + Math.sin(i + t * 2) * 0.3;
-      ctx.beginPath(); ctx.arc(sx, sy, Math.max(0.2, sr), 0, Math.PI * 2); ctx.fill();
+    // Nebula clouds (drifting, color-shifting)
+    nebulae.forEach(n => {
+      n.x += n.driftX; n.y += n.driftY;
+      if (n.x < 0.05 || n.x > 0.95) n.driftX *= -1;
+      if (n.y < 0.05 || n.y > 0.95) n.driftY *= -1;
+      const nx = n.x * W, ny = n.y * H, nr = n.radius * Math.max(W, H);
+      const hue = (n.hue + t * 0.6) % 360;
+      const grad = ctx.createRadialGradient(nx, ny, 0, nx, ny, nr);
+      grad.addColorStop(0, `hsla(${hue},60%,40%,${n.alpha})`);
+      grad.addColorStop(0.5, `hsla(${hue},40%,30%,${n.alpha * 0.5})`);
+      grad.addColorStop(1, `hsla(${hue},20%,20%,0)`);
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+    });
+
+    // 3-layer parallax stars with twinkling
+    starLayers.forEach(layer => {
+      const ox = camX * layer.speed;
+      const oy = camY * layer.speed;
+      layer.stars.forEach(star => {
+        const twinkle = Math.sin(t * 60 * star.twinkleSpeed + star.twinkleOffset) * 0.5 + 0.5;
+        const alpha = star.brightness * (0.4 + twinkle * 0.6);
+        const sx = ((star.x * W - ox) % W + W) % W;
+        const sy = ((star.y * H - oy) % H + H) % H;
+        ctx.beginPath(); ctx.arc(sx, sy, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200,220,255,${alpha})`; ctx.fill();
+        // Bright stars get a cross flare
+        if (star.size > 1.4 && twinkle > 0.7) {
+          ctx.save(); ctx.globalAlpha = alpha * 0.4;
+          ctx.strokeStyle = `rgba(200,220,255,${alpha * 0.3})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(sx - star.size * 3, sy); ctx.lineTo(sx + star.size * 3, sy); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(sx, sy - star.size * 3); ctx.lineTo(sx, sy + star.size * 3); ctx.stroke();
+          ctx.restore();
+        }
+      });
+    });
+
+    // Shooting stars (rare)
+    if (Math.random() < 0.006 && shootingStars.length < 2) {
+      shootingStars.push({ x: Math.random() * W, y: Math.random() * H * 0.4, vx: 3 + Math.random() * 3, vy: 1.5 + Math.random() * 1.5, life: 1 });
+    }
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const s = shootingStars[i];
+      s.x += s.vx; s.y += s.vy; s.life -= 0.02;
+      if (s.life <= 0) { shootingStars.splice(i, 1); continue; }
+      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - s.vx * 6, s.y - s.vy * 6);
+      const sg = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 6, s.y - s.vy * 6);
+      sg.addColorStop(0, `rgba(200,220,255,${s.life})`); sg.addColorStop(1, 'transparent');
+      ctx.strokeStyle = sg; ctx.lineWidth = 1.2; ctx.stroke();
     }
 
     // Update game logic
@@ -971,6 +1062,11 @@
         doJump();
         autoJumpTimer = 55 + Math.random() * 40;
         score++;
+        // Score popup
+        const popText = score % 10 === 0 ? 'INCREDIBLE!' : score % 5 === 0 ? 'AMAZING!' : Math.random() < 0.2 ? 'CLOSE!' : '+1';
+        const popColor = score % 10 === 0 ? 'rgba(255,215,50,1)' : score % 5 === 0 ? 'rgba(100,255,200,1)' : popText === 'CLOSE!' ? 'rgba(255,80,100,1)' : 'rgba(100,200,255,1)';
+        const popSize = popText.length > 2 ? 13 : 11;
+        floatingTexts.push({ x: orbX, y: orbY - 15, text: popText, color: popColor, size: popSize, life: 1 });
         // Extend rings
         while (rings.length < curRing + 10) rings.push(createRing(rings.length));
       }
@@ -996,11 +1092,15 @@
     camX += (targetCamX - camX) * 0.06;
     camY += (targetCamY - camY) * 0.06;
 
-    // Trail particles
-    if (Math.random() < 0.7) trailParticles.push({
-      x: orbX, y: orbY, life: 1,
-      vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8
-    });
+    // Trail particles — lush multi-colored
+    for (let tp = 0; tp < 2; tp++) {
+      if (Math.random() < 0.8) trailParticles.push({
+        x: orbX + (Math.random()-0.5)*4, y: orbY + (Math.random()-0.5)*4, life: 1,
+        vx: (Math.random()-0.5)*1.0, vy: (Math.random()-0.5)*1.0,
+        size: 1.5 + Math.random() * 1.5,
+        hue: Math.random() < 0.7 ? 210 : (Math.random() < 0.5 ? 180 : 260),
+      });
+    }
 
     // Draw world (camera-transformed)
     ctx.save();
@@ -1018,12 +1118,28 @@
       drawGlowRing(r.cx, r.cy, r.radius, ringColor, r.alpha * 0.3);
       drawDashedRing(r.cx, r.cy, r.radius, ringColor, r.alpha * 0.5, r.rotation);
 
+      // Ring pulse effect (expands outward on landing)
+      if (r.pulse > 0.02) {
+        ctx.save(); ctx.globalCompositeOperation = 'lighter';
+        ctx.beginPath(); ctx.arc(r.cx, r.cy, r.radius + r.pulse * 18, 0, Math.PI * 2);
+        ctx.strokeStyle = ringColor.replace(/[\d.]+\)$/, `${r.pulse * 0.5})`);
+        ctx.lineWidth = r.pulse * 12; ctx.stroke(); ctx.restore();
+        r.pulse *= 0.93;
+      }
+
       // Obstacles
       r.obstacles.forEach(obs => {
         const s = obs.startAngle + obs.offset + t * obs.rotSpeed * 5;
         ctx.globalAlpha = r.alpha;
         drawObstacle(r.cx, r.cy, r.radius, s, obs.arcLength);
         ctx.globalAlpha = 1;
+        // Danger ember particles near obstacles
+        if (r.alpha > 0.5 && Math.random() < 0.15) {
+          const ea = s + obs.arcLength * Math.random();
+          const ex = r.cx + Math.cos(ea) * r.radius;
+          const ey = r.cy + Math.sin(ea) * r.radius;
+          burstParticles.push({ x: ex, y: ey, vx: (Math.random()-0.5)*0.6, vy: -0.4 - Math.random()*0.6, life: 0.6, color: 'red' });
+        }
       });
 
       // Gems
@@ -1055,24 +1171,79 @@
       ctx.setLineDash([]);
     }
 
-    // Trail particles
+    // Trail particles — with glow and color variation
     for (let i = trailParticles.length - 1; i >= 0; i--) {
       const p = trailParticles[i];
-      p.x += p.vx; p.y += p.vy; p.life -= 0.025;
+      p.x += p.vx; p.y += p.vy; p.vx *= 0.98; p.vy *= 0.98; p.life -= 0.02;
       if (p.life <= 0) { trailParticles.splice(i, 1); continue; }
-      ctx.beginPath(); ctx.arc(p.x, p.y, 2 * p.life, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(74,158,255,${p.life * 0.4})`; ctx.fill();
+      const h = p.hue || 210;
+      const sz = (p.size || 2) * p.life;
+      // Glow
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      ctx.beginPath(); ctx.arc(p.x, p.y, sz * 3, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${h},80%,60%,${p.life * 0.08})`; ctx.fill();
+      ctx.restore();
+      ctx.beginPath(); ctx.arc(p.x, p.y, sz, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${h},80%,65%,${p.life * 0.5})`; ctx.fill();
     }
-    if (trailParticles.length > 50) trailParticles.splice(0, trailParticles.length - 50);
+    if (trailParticles.length > 80) trailParticles.splice(0, trailParticles.length - 80);
 
-    // Burst particles
+    // Burst particles (colored)
     for (let i = burstParticles.length - 1; i >= 0; i--) {
       const p = burstParticles[i];
-      p.x += p.vx; p.y += p.vy; p.vx *= 0.95; p.vy *= 0.95; p.life -= 0.03;
+      p.x += p.vx; p.y += p.vy; p.vx *= 0.96; p.vy *= 0.96; p.life -= 0.025;
       if (p.life <= 0) { burstParticles.splice(i, 1); continue; }
-      ctx.beginPath(); ctx.arc(p.x, p.y, 2.5 * p.life, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(100,200,255,${p.life * 0.6})`; ctx.fill();
+      const col = p.color === 'red' ? `rgba(255,80,100,${p.life * 0.7})`
+                : p.color === 'white' ? `rgba(255,255,255,${p.life * 0.6})`
+                : `rgba(100,200,255,${p.life * 0.6})`;
+      // Glow
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      ctx.beginPath(); ctx.arc(p.x, p.y, 5 * p.life, 0, Math.PI * 2);
+      ctx.fillStyle = col.replace(/[\d.]+\)$/, `${p.life * 0.15})`); ctx.fill();
+      ctx.restore();
+      ctx.beginPath(); ctx.arc(p.x, p.y, 2 * p.life, 0, Math.PI * 2);
+      ctx.fillStyle = col; ctx.fill();
     }
+    if (burstParticles.length > 80) burstParticles.splice(0, burstParticles.length - 80);
+
+    // ═══ WEBSITE-ONLY MAGIC ═══
+
+    // Ethereal connection lines between nearby rings (faint energy threads)
+    for (let i = 0; i < rings.length - 1; i++) {
+      const a = rings[i], b = rings[i + 1];
+      if (a.alpha < 0.1 || b.alpha < 0.1) continue;
+      const dx = b.cx - a.cx, dy = b.cy - a.cy;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const midX = (a.cx + b.cx) / 2, midY = (a.cy + b.cy) / 2;
+      const nx = -dy / dist * 15, ny = dx / dist * 15;
+      const flowAlpha = Math.min(a.alpha, b.alpha) * 0.08;
+      ctx.beginPath();
+      ctx.moveTo(a.cx, a.cy);
+      ctx.quadraticCurveTo(midX + nx, midY + ny, b.cx, b.cy);
+      ctx.strokeStyle = `rgba(80,160,255,${flowAlpha})`;
+      ctx.lineWidth = 1; ctx.stroke();
+      // Flowing dot along the line
+      const flowT = (t * 0.8 + i * 0.3) % 1;
+      const ft = flowT;
+      const fx = (1-ft)*(1-ft)*a.cx + 2*(1-ft)*ft*(midX+nx) + ft*ft*b.cx;
+      const fy = (1-ft)*(1-ft)*a.cy + 2*(1-ft)*ft*(midY+ny) + ft*ft*b.cy;
+      ctx.beginPath(); ctx.arc(fx, fy, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(100,180,255,${flowAlpha * 3})`; ctx.fill();
+    }
+
+    // Ambient light rays from the player (subtle radial beams)
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 4; i++) {
+      const rayAngle = t * 0.3 + i * Math.PI / 2;
+      const rayLen = 35 + Math.sin(t * 2 + i) * 15;
+      const rx = orbX + Math.cos(rayAngle) * rayLen;
+      const ry = orbY + Math.sin(rayAngle) * rayLen;
+      const rg = ctx.createLinearGradient(orbX, orbY, rx, ry);
+      rg.addColorStop(0, 'rgba(74,158,255,0.06)'); rg.addColorStop(1, 'rgba(74,158,255,0)');
+      ctx.beginPath(); ctx.moveTo(orbX, orbY); ctx.lineTo(rx, ry);
+      ctx.strokeStyle = rg; ctx.lineWidth = 3; ctx.stroke();
+    }
+    ctx.restore();
 
     // Player orb
     drawEarthOrb(orbX, orbY, ORB_R);
@@ -1102,6 +1273,20 @@
     ctx.textAlign = 'right';
     ctx.fillText('\u2666 ' + Math.floor(score / 3), W - 16, 44);
     ctx.textAlign = 'center';
+
+    // Floating score text on jump
+    floatingTexts.forEach((ft, i) => {
+      ft.y -= 0.6; ft.life -= 0.015;
+      if (ft.life <= 0) { floatingTexts.splice(i, 1); return; }
+      const s = ft.life > 0.85 ? Math.min(1.2, (1 - (ft.life - 0.85) / 0.15) * 1.3) : 1;
+      ctx.save();
+      ctx.font = `bold ${ft.size * s}px Orbitron`; ctx.textAlign = 'center';
+      ctx.fillStyle = ft.color.replace(/[\d.]+\)$/, `${ft.life})`);
+      ctx.shadowColor = ft.color.replace(/[\d.]+\)$/, `${ft.life * 0.5})`);
+      ctx.shadowBlur = 10;
+      ctx.fillText(ft.text, ft.x - camX, ft.y - camY);
+      ctx.shadowBlur = 0; ctx.restore();
+    });
 
     requestAnimationFrame(draw);
   }
