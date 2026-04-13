@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaperLens — Document Scanner & PDF Intelligence</title>
+  <meta name="description" content="Scan documents, extract text with OCR, translate in 50+ languages, sign PDFs, redact sensitive info — all 100% on-device. No cloud. No subscriptions required.">
+  <meta property="og:title" content="PaperLens — Document Scanner & PDF Intelligence">
+  <meta property="og:description" content="Your documents. Your device. Total privacy.">
+  <meta property="og:image" content="icon.png">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#060A14">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060A14;
+      --bg2: #0B1020;
+      --surface: rgba(255,255,255,0.04);
+      --surface2: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.14);
+      --text: #F0F4FF;
+      --text2: #8B96B0;
+      --text3: #545E78;
+      --blue: #3D8EF0;
+      --teal: #0FC5A8;
+      --purple: #7C6FCD;
+      --blue-dim: rgba(61,142,240,0.15);
+      --teal-dim: rgba(15,197,168,0.12);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(61,142,240,0.25); }
+
+    /* ── MESH BG ── */
+    .mesh {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(110px);
+      animation: drift 22s ease-in-out infinite;
+    }
+    .o1 { width: 700px; height: 700px; background: rgba(61,142,240,0.12); top: -200px; right: -200px; animation-duration: 26s; }
+    .o2 { width: 500px; height: 500px; background: rgba(15,197,168,0.09); bottom: 5%; left: -150px; animation-duration: 32s; animation-delay: -8s; }
+    .o3 { width: 400px; height: 400px; background: rgba(124,111,205,0.08); top: 40%; left: 30%; animation-duration: 28s; animation-delay: -14s; }
+    .o4 { width: 300px; height: 300px; background: rgba(61,142,240,0.07); bottom: 20%; right: 10%; animation-duration: 20s; animation-delay: -5s; }
+    @keyframes drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(40px,-60px) scale(1.05); }
+      66% { transform: translate(-30px,40px) scale(0.95); }
+    }
+
+    /* Grid overlay */
+    .grid-overlay {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      transition: all 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(6,10,20,0.85);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 20px 36px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-icon {
+      width: 38px; height: 38px; border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 4px 20px rgba(61,142,240,0.3);
+    }
+    .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .logo-name {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px; font-weight: 700; color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .logo-name span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      color: var(--text2); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: #fff; text-decoration: none;
+      padding: 10px 22px; border-radius: 10px;
+      font-size: 14px; font-weight: 600;
+      transition: all 0.3s; box-shadow: 0 4px 16px rgba(61,142,240,0.25);
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(61,142,240,0.4); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; min-height: 100dvh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 36px 80px;
+      position: relative; z-index: 1;
+    }
+    .hero-inner { max-width: 780px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: 100px;
+      background: rgba(61,142,240,0.1); border: 1px solid rgba(61,142,240,0.2);
+      font-size: 13px; font-weight: 600; color: #7BB8F8;
+      margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.7s 0.1s ease-out forwards;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    .hero-icon-wrap {
+      position: relative; display: inline-block; margin-bottom: 40px;
+      opacity: 0; animation: fadeUp 0.8s 0.15s ease-out forwards;
+    }
+    .hero-icon {
+      width: 120px; height: 120px; border-radius: 30px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 20px 80px rgba(61,142,240,0.35),
+        0 0 120px rgba(15,197,168,0.15);
+      position: relative; z-index: 1;
+    }
+    .hero-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-icon-ring {
+      position: absolute; inset: -14px; border-radius: 44px;
+      border: 1.5px solid rgba(61,142,240,0.2);
+      animation: ring-pulse 3s ease-in-out infinite;
+    }
+    .hero-icon-ring2 {
+      position: absolute; inset: -28px; border-radius: 58px;
+      border: 1px solid rgba(15,197,168,0.1);
+      animation: ring-pulse 3s 1s ease-in-out infinite;
+    }
+    @keyframes ring-pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.02); }
+    }
+
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(44px, 8vw, 80px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.8s 0.25s ease-out forwards;
+    }
+    .grad-text {
+      background: linear-gradient(135deg, #7BB8F8 0%, var(--blue) 30%, var(--teal) 70%, #5FE8D4 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 20px); color: var(--text2);
+      line-height: 1.7; max-width: 520px; margin: 0 auto 44px;
+      opacity: 0; animation: fadeUp 0.8s 0.35s ease-out forwards;
+    }
+    .hero-store-row {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.8s 0.45s ease-out forwards;
+    }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px; border-radius: 14px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      transition: all 0.3s; white-space: nowrap;
+    }
+    .store-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .store-btn.ios {
+      background: linear-gradient(135deg, var(--blue) 0%, #2A6FCC 100%);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(61,142,240,0.35);
+    }
+    .store-btn.ios:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(61,142,240,0.5); }
+    .store-btn.android {
+      background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border2);
+      backdrop-filter: blur(12px);
+    }
+    .store-btn.android:hover { transform: translateY(-3px); background: rgba(255,255,255,0.1); }
+    .hero-note {
+      font-size: 13px; color: var(--text3);
+      opacity: 0; animation: fadeUp 0.7s 0.55s ease-out forwards;
+    }
+    .hero-note span { color: var(--text2); }
+
+    /* Stats strip */
+    .stats-strip {
+      position: relative; z-index: 1;
+      max-width: 700px; margin: -20px auto 0;
+      padding: 0 36px 80px;
+      display: flex; justify-content: center; gap: 0;
+      opacity: 0; animation: fadeUp 0.8s 0.65s ease-out forwards;
+    }
+    .stat {
+      flex: 1; text-align: center; padding: 28px 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      transition: all 0.3s;
+    }
+    .stat:first-child { border-radius: 16px 0 0 16px; }
+    .stat:last-child { border-radius: 0 16px 16px 0; }
+    .stat:not(:first-child) { border-left: none; }
+    .stat:hover { background: var(--surface2); }
+    .stat-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 28px; font-weight: 800; letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block; margin-bottom: 4px;
+    }
+    .stat-label { font-size: 12px; color: var(--text3); font-weight: 500; }
+
+    /* ── SECTION WRAPPER ── */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 36px; position: relative; z-index: 1; }
+    section { padding: 100px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800; letter-spacing: -1.5px;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--text2); line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* ── FEATURES ── */
+    #features { background: linear-gradient(180deg, transparent, rgba(61,142,240,0.03) 50%, transparent); }
+    .features-header { text-align: center; margin-bottom: 64px; }
+    .features-header .section-sub { margin: 0 auto; }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 0 0 1px var(--border);
+    }
+    .feat-card {
+      background: var(--bg2);
+      padding: 32px 28px;
+      transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .feat-card::before {
+      content: ''; position: absolute;
+      inset: 0; opacity: 0; transition: opacity 0.4s;
+      background: radial-gradient(ellipse at 30% 30%, rgba(61,142,240,0.08), transparent 70%);
+    }
+    .feat-card:hover { background: rgba(61,142,240,0.04); }
+    .feat-card:hover::before { opacity: 1; }
+    .feat-icon {
+      width: 46px; height: 46px; border-radius: 13px;
+      display: grid; place-items: center;
+      margin-bottom: 18px; font-size: 22px;
+      position: relative; z-index: 1;
+    }
+    .feat-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 700; margin-bottom: 8px;
+      position: relative; z-index: 1;
+    }
+    .feat-desc {
+      font-size: 13px; color: var(--text2); line-height: 1.6;
+      position: relative; z-index: 1;
+    }
+
+    /* ── PRIVACY SECTION ── */
+    #privacy {
+      position: relative;
+    }
+    .privacy-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .privacy-visual {
+      position: relative;
+    }
+    .privacy-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 24px; padding: 40px;
+      backdrop-filter: blur(12px);
+      position: relative; overflow: hidden;
+    }
+    .privacy-card::before {
+      content: ''; position: absolute;
+      inset: 0; border-radius: 24px;
+      background: linear-gradient(135deg, rgba(15,197,168,0.06), transparent 60%);
+    }
+    .shield-icon {
+      width: 72px; height: 72px; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(15,197,168,0.15), rgba(15,197,168,0.05));
+      border: 1px solid rgba(15,197,168,0.2);
+      display: grid; place-items: center;
+      font-size: 32px; margin-bottom: 24px;
+    }
+    .privacy-promise-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px; font-weight: 700; margin-bottom: 16px;
+    }
+    .privacy-promise-text { font-size: 15px; color: var(--text2); line-height: 1.7; }
+    .privacy-checks { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .privacy-check {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--text2);
+    }
+    .check-dot {
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(15,197,168,0.15); border: 1px solid rgba(15,197,168,0.3);
+      display: grid; place-items: center;
+    }
+    .check-dot::after {
+      content: '✓'; font-size: 11px; font-weight: 700; color: var(--teal);
+    }
+
+    .privacy-points { display: flex; flex-direction: column; gap: 28px; }
+    .privacy-point { display: flex; gap: 20px; }
+    .pp-icon {
+      width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0;
+      display: grid; place-items: center; font-size: 20px;
+    }
+    .pp-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px; font-weight: 700; margin-bottom: 6px;
+    }
+    .pp-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
+
+    /* ── PRICING ── */
+    #pricing {
+      background: linear-gradient(180deg, transparent, rgba(124,111,205,0.04) 50%, transparent);
+    }
+    .pricing-header { text-align: center; margin-bottom: 56px; }
+    .pricing-header .section-sub { margin: 0 auto; }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; max-width: 900px; margin: 0 auto;
+    }
+    .price-card {
+      border-radius: 24px; padding: 36px 32px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      position: relative; overflow: hidden;
+      transition: all 0.3s;
+    }
+    .price-card:hover { transform: translateY(-4px); border-color: var(--border2); }
+    .price-card.featured {
+      background: linear-gradient(145deg, rgba(61,142,240,0.1), rgba(15,197,168,0.06));
+      border-color: rgba(61,142,240,0.3);
+      box-shadow: 0 20px 60px rgba(61,142,240,0.15);
+    }
+    .price-card.featured:hover { box-shadow: 0 30px 80px rgba(61,142,240,0.25); }
+    .price-badge {
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+      padding: 5px 16px; border-radius: 0 0 10px 10px;
+      text-transform: uppercase;
+    }
+    .price-plan {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 600; color: var(--text2);
+      margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .price-amount {
+      font-family: 'Sora', sans-serif;
+      font-size: 48px; font-weight: 800; letter-spacing: -2px;
+      line-height: 1; margin-bottom: 4px;
+    }
+    .price-amount span { font-size: 22px; font-weight: 600; vertical-align: super; letter-spacing: 0; }
+    .price-period { font-size: 13px; color: var(--text3); margin-bottom: 28px; }
+    .price-features { display: flex; flex-direction: column; gap: 11px; margin-bottom: 32px; }
+    .price-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--text2);
+    }
+    .price-feature::before {
+      content: '✓'; color: var(--teal); font-weight: 700; font-size: 13px; flex-shrink: 0;
+    }
+    .price-btn {
+      display: block; text-align: center;
+      padding: 14px; border-radius: 12px;
+      font-size: 15px; font-weight: 700;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .price-btn.outline {
+      border: 1.5px solid var(--border2); color: var(--text);
+    }
+    .price-btn.outline:hover { background: var(--surface2); border-color: var(--text3); }
+    .price-btn.filled {
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(61,142,240,0.3);
+    }
+    .price-btn.filled:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(61,142,240,0.45); }
+    .price-discount {
+      display: inline-block; background: rgba(15,197,168,0.15);
+      color: var(--teal); font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 6px; margin-left: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── FREE vs PRO TABLE ── */
+    .free-note {
+      text-align: center; margin-top: 40px;
+      font-size: 14px; color: var(--text3);
+    }
+    .free-note a { color: var(--blue); text-decoration: none; }
+
+    /* ── MORE FEATURES STRIP ── */
+    .extras-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px; margin-top: 64px;
+    }
+    .extra-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: all 0.3s;
+    }
+    .extra-card:hover { background: var(--surface2); border-color: var(--border2); }
+    .extra-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: grid; place-items: center; font-size: 20px; flex-shrink: 0;
+    }
+    .extra-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 700; margin-bottom: 5px;
+    }
+    .extra-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+    /* ── TESTIMONIALS ── */
+    #reviews { background: linear-gradient(180deg, transparent, rgba(15,197,168,0.03) 50%, transparent); }
+    .reviews-header { text-align: center; margin-bottom: 56px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px;
+      transition: all 0.3s;
+    }
+    .review-card:hover { background: var(--surface2); border-color: var(--border2); transform: translateY(-3px); }
+    .review-stars { color: #F59E0B; font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+    .review-text { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .review-name { font-size: 14px; font-weight: 600; }
+    .review-role { font-size: 12px; color: var(--text3); }
+
+    /* ── CTA ── */
+    #cta {
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(61,142,240,0.08), transparent);
+      padding: 120px 36px;
+    }
+    .cta-icon {
+      width: 96px; height: 96px; border-radius: 26px;
+      overflow: hidden; margin: 0 auto 32px;
+      box-shadow: 0 20px 60px rgba(61,142,240,0.3);
+    }
+    .cta-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .cta-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 800; letter-spacing: -2px;
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .cta-sub {
+      font-size: 18px; color: var(--text2);
+      max-width: 480px; margin: 0 auto 44px; line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 36px;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .footer-logo img { width: 30px; height: 30px; border-radius: 8px; }
+    .footer-logo-name { font-weight: 700; font-size: 15px; color: var(--text2); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a {
+      color: var(--text3); text-decoration: none; font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text2); }
+    .footer-right { font-size: 12px; color: var(--text3); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .feat-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+      .privacy-inner { grid-template-columns: 1fr; gap: 48px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .extras-grid { grid-template-columns: 1fr; }
+      .stats-strip { padding: 0 20px 60px; }
+    }
+    @media (max-width: 640px) {
+      .nav-inner { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .wrap { padding: 0 20px; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .hero { padding: 100px 20px 60px; }
+      .hero h1 { letter-spacing: -1.5px; }
+      section { padding: 72px 0; }
+      .stat { padding: 20px 12px; }
+      .stat-num { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mesh background -->
+<div class="mesh">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="orb o4"></div>
+</div>
+<div class="grid-overlay"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon"><img src="icon.png" alt="PaperLens icon"></div>
+      <span class="logo-name">Paper<span>Lens</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#pricing">Pricing</a>
+      <a href="support.html">Support</a>
+      <a class="nav-cta" href="https://apps.apple.com/app/id6762161072">Download</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Available on iOS &amp; Android
+    </div>
+
+    <div class="hero-icon-wrap">
+      <div class="hero-icon-ring2"></div>
+      <div class="hero-icon-ring"></div>
+      <div class="hero-icon">
+        <img src="icon.png" alt="PaperLens">
+      </div>
+    </div>
+
+    <h1>
+      Documents,<br>
+      <span class="grad-text">intelligently handled.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Scan, extract, translate, sign, and protect your documents — powered by on-device AI. Zero cloud. Zero tracking. Total privacy.
+    </p>
+
+    <div class="hero-store-row">
+      <a class="store-btn ios" href="https://apps.apple.com/app/id6762161072">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+      <a class="store-btn android" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens">
+        <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.35.2.75.22 1.12.05l12.44-7.18-2.63-2.63-10.93 9.76zm-1.06-19.7a1.8 1.8 0 0 0-.12.66v18.56c0 .23.04.45.12.66l.09.08 10.4-10.4v-.24L2.21 3.98l-.09.08zM20.67 10.4l-2.68-1.55-2.94 2.94 2.94 2.94 2.7-1.56c.77-.44.77-1.33-.02-1.77zM4.3.24L16.74 7.42l-2.63 2.63L3.18.29C3.55.12 3.95.14 4.3.24z"/></svg>
+        Google Play
+      </a>
+    </div>
+    <p class="hero-note">Free to download · <span>Pro from $1.99/mo</span></p>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-strip">
+  <div class="stat reveal">
+    <span class="stat-num">50+</span>
+    <span class="stat-label">Languages</span>
+  </div>
+  <div class="stat reveal reveal-d1">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">On-Device</span>
+  </div>
+  <div class="stat reveal reveal-d2">
+    <span class="stat-num">0</span>
+    <span class="stat-label">Data Collected</span>
+  </div>
+  <div class="stat reveal reveal-d3">
+    <span class="stat-num">∞</span>
+    <span class="stat-label">Documents</span>
+  </div>
+</div>
+
+<!-- Features -->
+<section id="features">
+  <div class="wrap">
+    <div class="features-header reveal">
+      <span class="section-label">What's inside</span>
+      <h2 class="section-title">Everything your documents need.</h2>
+      <p class="section-sub">Eight powerful tools built into one beautifully focused app.</p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(45,125,210,0.15)">📷</div>
+        <div class="feat-title">Smart Scanning</div>
+        <div class="feat-desc">Auto-detect edges, correct perspective, and enhance contrast — all in one tap. Unlimited pages, unlimited documents.</div>
+      </div>
+      <div class="feat-card reveal reveal-d1">
+        <div class="feat-icon" style="background:rgba(15,197,168,0.15)">🔍</div>
+        <div class="feat-title">OCR Text Extraction</div>
+        <div class="feat-desc">Blazing-fast on-device text recognition. Copy, share, or edit extracted text instantly — no internet required.</div>
+      </div>
+      <div class="feat-card reveal reveal-d2">
+        <div class="feat-icon" style="background:rgba(139,92,246,0.15)">🌐</div>
+        <div class="feat-title">Offline Translation</div>
+        <div class="feat-desc">Translate extracted text into 50+ languages using on-device ML models. Works in airplane mode.</div>
+      </div>
+      <div class="feat-card reveal reveal-d3">
+        <div class="feat-icon" style="background:rgba(239,68,68,0.15)">🛡️</div>
+        <div class="feat-title">Redaction</div>
+        <div class="feat-desc">Permanently black out names, numbers, or any sensitive information before sharing documents.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(236,72,153,0.15)">📄</div>
+        <div class="feat-title">PDF Power Tools</div>
+        <div class="feat-desc">Merge multiple PDFs, split by page, compress for email — a full PDF toolkit in your pocket.</div>
+      </div>
+      <div class="feat-card reveal reveal-d1">
+        <div class="feat-icon" style="background:rgba(245,158,11,0.15)">🔐</div>
+        <div class="feat-title">Secure Folders</div>
+        <div class="feat-desc">Lock sensitive documents behind Face ID or Touch ID. Your private files stay truly private.</div>
+      </div>
+      <div class="feat-card reveal reveal-d2">
+        <div class="feat-icon" style="background:rgba(20,184,166,0.15)">📊</div>
+        <div class="feat-title">Smart Extraction</div>
+        <div class="feat-desc">Automatically parse receipts, business cards, and tables. Export to contacts or spreadsheets instantly.</div>
+      </div>
+      <div class="feat-card reveal reveal-d3">
+        <div class="feat-icon" style="background:rgba(99,102,241,0.15)">✍️</div>
+        <div class="feat-title">Digital Signatures</div>
+        <div class="feat-desc">Draw, type, or upload your signature. Place it precisely on any PDF page and export instantly.</div>
+      </div>
+    </div>
+
+    <!-- Extra features -->
+    <div class="extras-grid">
+      <div class="extra-card reveal">
+        <div class="extra-icon" style="background:rgba(61,142,240,0.12); border:1px solid rgba(61,142,240,0.2)">☁️</div>
+        <div>
+          <div class="extra-title">Backup &amp; Restore</div>
+          <div class="extra-desc">Export a complete ZIP of all your documents to iCloud, Google Drive, or anywhere you choose. Restore in seconds.</div>
+        </div>
+      </div>
+      <div class="extra-card reveal reveal-d1">
+        <div class="extra-icon" style="background:rgba(15,197,168,0.12); border:1px solid rgba(15,197,168,0.2)">📐</div>
+        <div>
+          <div class="extra-title">Document Templates</div>
+          <div class="extra-desc">Fill invoices, receipts, and forms in seconds with built-in templates. Export to PDF instantly.</div>
+        </div>
+      </div>
+      <div class="extra-card reveal reveal-d2">
+        <div class="extra-icon" style="background:rgba(124,111,205,0.12); border:1px solid rgba(124,111,205,0.2)">🖊️</div>
+        <div>
+          <div class="extra-title">Annotations &amp; Notes</div>
+          <div class="extra-desc">Highlight, underline, draw, and annotate directly on document pages with a pixel-perfect editor.</div>
+        </div>
+      </div>
+      <div class="extra-card reveal reveal-d3">
+        <div class="extra-icon" style="background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.2)">🔎</div>
+        <div>
+          <div class="extra-title">Full-Text Search</div>
+          <div class="extra-desc">Instantly search across all your documents and their OCR content. Find anything in milliseconds.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="privacy-inner">
+      <div class="privacy-visual reveal">
+        <div class="privacy-card">
+          <div class="shield-icon">🔒</div>
+          <div class="privacy-promise-title">Your documents never leave your device.</div>
+          <div class="privacy-promise-text">
+            Every scan, every OCR extraction, every translation — processed entirely on your iPhone or Android phone. No servers. No cloud uploads. No accounts required.
+          </div>
+          <div class="privacy-checks">
+            <div class="privacy-check"><div class="check-dot"></div>No account or sign-in required</div>
+            <div class="privacy-check"><div class="check-dot"></div>No analytics or usage tracking</div>
+            <div class="privacy-check"><div class="check-dot"></div>No crash reports sent externally</div>
+            <div class="privacy-check"><div class="check-dot"></div>No ads, ever</div>
+            <div class="privacy-check"><div class="check-dot"></div>Google ML Kit runs 100% on-device</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-points">
+        <div class="privacy-point reveal">
+          <div class="pp-icon" style="background:rgba(61,142,240,0.12); border:1px solid rgba(61,142,240,0.2); font-size:22px">🤖</div>
+          <div>
+            <div class="pp-title">On-Device AI</div>
+            <div class="pp-desc">OCR and translation are powered by Google ML Kit, running entirely locally. Your documents are never sent to any AI service.</div>
+          </div>
+        </div>
+        <div class="privacy-point reveal reveal-d1">
+          <div class="pp-icon" style="background:rgba(15,197,168,0.12); border:1px solid rgba(15,197,168,0.2); font-size:22px">🫁</div>
+          <div>
+            <div class="pp-title">Biometrics Handled by OS</div>
+            <div class="pp-desc">Secure folder authentication uses Face ID and Touch ID directly through iOS and Android. PaperLens never sees or stores your biometric data.</div>
+          </div>
+        </div>
+        <div class="privacy-point reveal reveal-d2">
+          <div class="pp-icon" style="background:rgba(124,111,205,0.12); border:1px solid rgba(124,111,205,0.2); font-size:22px">📤</div>
+          <div>
+            <div class="pp-title">You Control Your Backups</div>
+            <div class="pp-desc">Backups are exported as a ZIP file to wherever you choose — iCloud, Dropbox, a USB drive. The app never uploads anything automatically.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="pricing-header reveal">
+      <span class="section-label">Simple pricing</span>
+      <h2 class="section-title">Start free. Upgrade when you're ready.</h2>
+      <p class="section-sub">Core scanning is free forever. Unlock all Pro features with a plan that suits you.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Monthly -->
+      <div class="price-card reveal">
+        <div class="price-plan">Monthly</div>
+        <div class="price-amount"><span>$</span>1.99</div>
+        <div class="price-period">per month · cancel anytime</div>
+        <div class="price-features">
+          <div class="price-feature">Unlimited scans</div>
+          <div class="price-feature">OCR text extraction</div>
+          <div class="price-feature">Offline translation</div>
+          <div class="price-feature">PDF tools</div>
+          <div class="price-feature">Digital signatures</div>
+          <div class="price-feature">Secure folders</div>
+          <div class="price-feature">Redaction</div>
+          <div class="price-feature">Smart extraction</div>
+        </div>
+        <a class="price-btn outline" href="https://apps.apple.com/app/id6762161072">Get Started</a>
+      </div>
+
+      <!-- Annual - featured -->
+      <div class="price-card featured reveal reveal-d1">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-plan">Annual</div>
+        <div class="price-amount"><span>$</span>9.99 <span class="price-discount">SAVE 58%</span></div>
+        <div class="price-period">per year · 7-day free trial</div>
+        <div class="price-features">
+          <div class="price-feature">Everything in Monthly</div>
+          <div class="price-feature">7-day free trial</div>
+          <div class="price-feature">Priority support</div>
+          <div class="price-feature">All future features</div>
+        </div>
+        <a class="price-btn filled" href="https://apps.apple.com/app/id6762161072">Start Free Trial</a>
+      </div>
+
+      <!-- Lifetime -->
+      <div class="price-card reveal reveal-d2">
+        <div class="price-plan">Lifetime</div>
+        <div class="price-amount"><span>$</span>39.99</div>
+        <div class="price-period">one-time · own forever</div>
+        <div class="price-features">
+          <div class="price-feature">Everything in Annual</div>
+          <div class="price-feature">Never pay again</div>
+          <div class="price-feature">All future updates</div>
+          <div class="price-feature">Best long-term value</div>
+        </div>
+        <a class="price-btn outline" href="https://apps.apple.com/app/id6762161072">Buy Once</a>
+      </div>
+    </div>
+
+    <p class="free-note reveal">
+      All purchases through <a href="https://apps.apple.com/app/id6762161072">App Store</a> or
+      <a href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens">Google Play</a>.
+      Subscriptions renew automatically. Cancel anytime in your account settings.
+    </p>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="reviews-header reveal">
+      <span class="section-label">Reviews</span>
+      <h2 class="section-title">Loved by people who care about their docs.</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Finally a scanner that doesn't send everything to the cloud. The OCR is incredibly accurate and translation works perfectly offline."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#3D8EF0,#0FC5A8)">S</div>
+          <div>
+            <div class="review-name">Sarah M.</div>
+            <div class="review-role">Legal Professional</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-d1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The redaction feature alone is worth it. I handle confidential documents daily and knowing nothing leaves my phone is a game changer."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#7C6FCD,#3D8EF0)">J</div>
+          <div>
+            <div class="review-name">James T.</div>
+            <div class="review-role">Healthcare Admin</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-d2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Scanned my entire archive of research papers. The search works instantly, the translation is surprisingly good, and the UI is absolutely beautiful."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#0FC5A8,#7C6FCD)">A</div>
+          <div>
+            <div class="review-name">Amira K.</div>
+            <div class="review-role">Researcher</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-icon reveal">
+    <img src="icon.png" alt="PaperLens">
+  </div>
+  <h2 class="cta-title reveal reveal-d1">
+    Your documents deserve<br>
+    <span class="grad-text">better intelligence.</span>
+  </h2>
+  <p class="cta-sub reveal reveal-d2">
+    Download PaperLens free and see what happens when privacy meets powerful document AI.
+  </p>
+  <div class="hero-store-row reveal reveal-d3">
+    <a class="store-btn ios" href="https://apps.apple.com/app/id6762161072">
+      <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on App Store
+    </a>
+    <a class="store-btn android" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens">
+      <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.35.2.75.22 1.12.05l12.44-7.18-2.63-2.63-10.93 9.76zm-1.06-19.7a1.8 1.8 0 0 0-.12.66v18.56c0 .23.04.45.12.66l.09.08 10.4-10.4v-.24L2.21 3.98l-.09.08zM20.67 10.4l-2.68-1.55-2.94 2.94 2.94 2.94 2.7-1.56c.77-.44.77-1.33-.02-1.77zM4.3.24L16.74 7.42l-2.63 2.63L3.18.29C3.55.12 3.95.14 4.3.24z"/></svg>
+      Get it on Google Play
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <a class="footer-logo" href="#">
+      <img src="icon.png" alt="PaperLens">
+      <span class="footer-logo-name">PaperLens</span>
+    </a>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="support.html">Support</a>
+      <a href="https://apps.apple.com/app/id6762161072">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens">Google Play</a>
+      <a href="..">More Apps</a>
+    </div>
+    <div class="footer-right">© 2026 PlayPal Apps</div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
