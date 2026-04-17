@@ -3,380 +3,440 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family</title>
+  <title>Fuzzy Pop! — 7 Fun Mini-Games for Kids & Families</title>
   <meta name="description" content="Fuzzy Pop! is a free casual mini-game collection — 7 magical games for kids and families. No sign-up, play offline!">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family">
+  <meta property="og:title" content="Fuzzy Pop! — 7 Fun Mini-Games for Kids & Families">
   <meta property="og:description" content="Free. Offline. No sign-up. 7 magical mini-games for kids and families.">
   <meta property="og:url" content="https://playpalapps.github.io/FuzzyPop/">
   <meta property="og:image" content="https://playpalapps.github.io/FuzzyPop/icon.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://playpalapps.github.io/FuzzyPop/icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
-
   <style>
-/* ═══════════════════════════════════════════════════
-   THE ONE BIG IDEA:
-   The entire page sits on a single fixed-attachment
-   gradient. Sections are semi-transparent layers
-   floating on that background — not coloured boxes.
-   Everything breathes from the same world.
-══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; overflow-x: hidden; background: #fff; color: #1E2A5E; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ─── WAVE DIVIDERS ─── */
+    .wv { line-height: 0; overflow: hidden; display: block; }
+    .wv svg { display: block; width: 100%; }
 
-html { scroll-behavior: smooth; }
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 68px; z-index: 100;
+      background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    }
+    .nav-in { max-width: 1180px; margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 38px; height: 38px; border-radius: 10px; }
+    .nav-logo span { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #1E2A5E; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-weight: 700; font-size: .92rem; color: #555; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: #FF6B6B; }
+    .nav-cta { background: #FF6B6B; color: #fff; font-weight: 900; font-size: .9rem; padding: 10px 22px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 16px rgba(255,107,107,.35); transition: transform .2s, box-shadow .2s; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,107,.5); }
+    .burger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+    @media (max-width: 720px) {
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 14px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+      .nav-links.open { display: flex; }
+      .burger { display: block; }
+      .nav-cta { display: none; }
+    }
 
-body {
-  font-family: 'Nunito', sans-serif;
-  overflow-x: hidden;
-  /* THE FIXED WORLD BACKGROUND */
-  background:
-    radial-gradient(ellipse 55% 40% at 8%   15%, rgba(255,107,107,.35) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 45% at 92%  10%, rgba(176,110,245,.40) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 35% at 50%  50%, rgba(61,219,176,.18)  0%, transparent 50%),
-    radial-gradient(ellipse 55% 40% at 5%   75%, rgba(79,195,247,.28)  0%, transparent 50%),
-    radial-gradient(ellipse 55% 40% at 95%  80%, rgba(255,217,61,.28)  0%, transparent 50%),
-    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255,121,198,.22) 0%, transparent 55%),
-    linear-gradient(160deg, #08021a 0%, #150834 30%, #1a0f52 60%, #090520 100%);
-  background-attachment: fixed;
-  color: #fff;
-}
+    /* ══════════════════════════════════════════
+       HERO — bright sky, sunshine, bubbles
+    ══════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(175deg, #4EC8FF 0%, #7ED8FF 18%, #B8EBFF 48%, #E8F8FF 72%, #FFF0E8 100%);
+      padding: calc(68px + 64px) 6% 60px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
 
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; height: 68px;
-  background: rgba(8,2,26,.7); backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255,255,255,.06); z-index: 100;
-}
-.nav-in { max-width: 1200px; margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-logo img { width: 36px; height: 36px; border-radius: 9px; }
-.nav-logo span { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #FFD93D; }
-.nav-links { display: flex; gap: 28px; }
-.nav-links a { font-weight: 700; font-size: .9rem; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
-.nav-links a:hover { color: #fff; }
-.nav-dl { background: #FF6B6B; color: #fff; font-weight: 900; font-size: .88rem; padding: 9px 20px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(255,107,107,.5); transition: transform .2s, box-shadow .2s; }
-.nav-dl:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,107,.6); }
-.burger { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #fff; }
-@media (max-width: 720px) {
-  .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; background: rgba(8,2,26,.97); padding: 20px 28px; gap: 16px; border-bottom: 1px solid rgba(255,255,255,.06); }
-  .nav-links.open { display: flex; }
-  .burger { display: block; }
-  .nav-dl { display: none; }
-}
+    /* Sun */
+    .sun {
+      position: absolute; top: -80px; right: 3%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle at 38% 38%, #fffde7 0%, #FFE066 40%, #FFD93D 60%, #FF9A3C 80%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px rgba(255,217,61,.5), 0 0 130px rgba(255,217,61,.25), 0 0 220px rgba(255,154,60,.15);
+      animation: sunPulse 5s ease-in-out infinite;
+    }
+    .sun-ray {
+      position: absolute; top: -80px; right: 3%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: transparent;
+    }
+    .sun-ray::before, .sun-ray::after {
+      content: ''; position: absolute; inset: -30px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,217,61,.15);
+      animation: sunRing 5s ease-in-out infinite;
+    }
+    .sun-ray::after { inset: -55px; border-color: rgba(255,217,61,.08); animation-delay: .5s; }
+    @keyframes sunRing { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.08);opacity:.6} }
+    @keyframes sunPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
 
-/* ═══════════════════════════════════════════════════
-   HERO — transparent, world shows through
-══════════════════════════════════════════════════════ */
-.hero {
-  min-height: 100vh;
-  padding: 110px 6% 80px;
-  position: relative; overflow: visible;
-  display: grid; grid-template-columns: 1fr 300px;
-  align-items: center; gap: 56px;
-  max-width: 1200px; margin: 0 auto;
-}
-@media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding: 120px 6% 70px; } .hero-phone-wrap { display: none; } }
+    /* CSS Clouds */
+    .cloud { position: absolute; background: #fff; border-radius: 60px; opacity: .92; }
+    .cloud::before, .cloud::after { content: ''; position: absolute; background: #fff; border-radius: 50%; }
+    .cl1 { width: 200px; height: 62px; top: 18%; left: 1%; animation: cdrift 45s ease-in-out infinite; box-shadow: 0 8px 24px rgba(120,180,220,.12); }
+    .cl1::before { width: 96px; height: 96px; top: -54px; left: 18px; }
+    .cl1::after  { width: 72px; height: 72px; top: -40px; left: 86px; }
+    .cl2 { width: 260px; height: 78px; top: 10%; right: 22%; animation: cdrift 58s ease-in-out infinite reverse; box-shadow: 0 8px 24px rgba(120,180,220,.10); }
+    .cl2::before { width: 120px; height: 120px; top: -66px; left: 24px; }
+    .cl2::after  { width: 88px; height: 88px; top: -48px; left: 116px; }
+    .cl3 { width: 150px; height: 48px; top: 58%; left: 30%; opacity: .5; animation: cdrift 70s ease-in-out infinite; }
+    .cl3::before { width: 72px; height: 72px; top: -40px; left: 14px; }
+    .cl3::after  { width: 56px; height: 56px; top: -30px; left: 62px; }
+    @keyframes cdrift { 0%,100%{transform:translateX(0)} 50%{transform:translateX(32px)} }
 
-/* floating coloured shapes */
-.orb {
-  position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
-  animation: orbDrift var(--d,20s) ease-in-out infinite alternate;
-}
-@keyframes orbDrift { from { transform: translate(0,0) scale(1); } to { transform: translate(var(--tx,30px), var(--ty,-30px)) scale(var(--sc,1.1)); } }
+    /* Bubbles */
+    .bub {
+      position: absolute; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.75);
+      background: radial-gradient(circle at 28% 28%, rgba(255,255,255,.8) 0%, rgba(180,230,255,.3) 50%, rgba(120,200,255,.06) 100%);
+      box-shadow: inset 0 -4px 8px rgba(120,200,255,.1);
+      animation: bubRise var(--d,8s) ease-in-out infinite;
+      animation-delay: var(--dl,0s);
+    }
+    @keyframes bubRise {
+      0%,100% { transform: translateY(0) translateX(0) scale(1); }
+      40%      { transform: translateY(-26px) translateX(9px) scale(1.04); }
+      70%      { transform: translateY(-14px) translateX(-7px) scale(.97); }
+    }
 
-.pip {
-  position: absolute; border-radius: 50%; pointer-events: none;
-  animation: pipPop var(--d,6s) ease-in-out infinite; animation-delay: var(--dl,0s);
-}
-@keyframes pipPop { 0%,100%{transform:translateY(0) scale(1);opacity:var(--op,.8)} 50%{transform:translateY(var(--ty,-20px)) scale(1.2);opacity:1} }
+    /* Floating stars/sparkles in hero */
+    .spark {
+      position: absolute; color: #FFD93D; font-size: var(--sz,1.2rem);
+      animation: sparkle var(--d,3s) ease-in-out infinite;
+      animation-delay: var(--dl,0s); opacity: 0;
+    }
+    @keyframes sparkle { 0%,100%{opacity:0;transform:scale(.5) rotate(0deg)} 40%,60%{opacity:1;transform:scale(1.1) rotate(15deg)} }
 
-/* Hero text */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
-  backdrop-filter: blur(10px); color: rgba(255,255,255,.85);
-  font-weight: 800; font-size: .82rem; padding: 7px 16px; border-radius: 50px; margin-bottom: 20px;
-}
-.live { width: 7px; height: 7px; border-radius: 50%; background: #3DDBB0; animation: livePulse 2s ease-in-out infinite; }
-@keyframes livePulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.6);opacity:.5} }
+    /* Floating coloured dots */
+    .fdot {
+      position: absolute; border-radius: 50%;
+      animation: fdotF var(--d,6s) ease-in-out infinite;
+      animation-delay: var(--dl,0s);
+    }
+    @keyframes fdotF { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-20px) scale(1.12)} }
 
-.hero-title {
-  font-family: 'Fredoka One', cursive;
-  font-size: clamp(4rem, 9vw, 7.5rem);
-  line-height: .88; letter-spacing: -2px; margin-bottom: 22px;
-  position: relative; z-index: 1;
-}
-.hero-title .row { display: flex; }
-.L { display: inline-block; transition: transform .18s cubic-bezier(.34,1.56,.64,1); cursor: default; }
-.L:hover { transform: translateY(-12px) scale(1.15) rotate(-4deg); }
-.La { color: #FF6B6B; text-shadow: 0 0 30px rgba(255,107,107,.8), 0 0 60px rgba(255,107,107,.4); }
-.Lb { color: #FFD93D; text-shadow: 0 0 30px rgba(255,217,61,.8),  0 0 60px rgba(255,217,61,.4); }
-.Lc { color: #3DDBB0; text-shadow: 0 0 30px rgba(61,219,176,.8),  0 0 60px rgba(61,219,176,.4); }
-.Ld { color: #BF7FFF; text-shadow: 0 0 30px rgba(191,127,255,.8), 0 0 60px rgba(191,127,255,.4); }
-.Le { color: #67D7F5; text-shadow: 0 0 30px rgba(103,215,245,.8), 0 0 60px rgba(103,215,245,.4); }
-.Lf { color: #FF79C6; text-shadow: 0 0 30px rgba(255,121,198,.8), 0 0 60px rgba(255,121,198,.4); }
-.Lg { color: #6EE7B7; text-shadow: 0 0 30px rgba(110,231,183,.8), 0 0 60px rgba(110,231,183,.4); }
-.Lh { color: #FB923C; text-shadow: 0 0 30px rgba(251,146,60,.8),  0 0 60px rgba(251,146,60,.4); }
+    .hero-inner {
+      max-width: 1180px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 340px;
+      align-items: center; gap: 52px; position: relative; z-index: 2;
+    }
+    @media (max-width: 920px) { .hero-inner { grid-template-columns: 1fr; } .hero-phone { display: none; } }
 
-.hero-sub { font-size: 1.15rem; font-weight: 700; color: rgba(255,255,255,.55); line-height: 1.6; margin-bottom: 24px; max-width: 480px; }
-.hero-pills { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 32px; }
-.pill { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.8); font-weight: 800; font-size: .78rem; padding: 6px 14px; border-radius: 50px; }
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { display: flex; align-items: center; gap: 11px; padding: 13px 22px; border-radius: 16px; text-decoration: none; font-weight: 900; transition: transform .2s, box-shadow .2s; }
-.btn:hover { transform: translateY(-4px) scale(1.04); }
-.btn-a { background: #fff; color: #1E2A5E; box-shadow: 0 6px 28px rgba(255,255,255,.18); }
-.btn-a:hover { box-shadow: 0 12px 40px rgba(255,255,255,.28); }
-.btn-g { background: rgba(255,255,255,.09); color: #fff; border: 1.5px solid rgba(255,255,255,.22); backdrop-filter: blur(8px); }
-.btn-g:hover { background: rgba(255,255,255,.16); }
-.bs { display: block; font-size: .65rem; opacity: .55; font-weight: 700; }
-.bb { display: block; font-size: .98rem; font-weight: 900; }
+    /* TITLE */
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.75); border: 2px solid rgba(255,255,255,.95);
+      backdrop-filter: blur(8px); color: #1E2A5E;
+      font-weight: 800; font-size: .85rem; padding: 7px 18px; border-radius: 50px;
+      margin-bottom: 18px; box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    }
+    .green-dot { width: 8px; height: 8px; border-radius: 50%; background: #3DDBB0; animation: gdot 2s ease-in-out infinite; }
+    @keyframes gdot { 0%,100%{transform:scale(1)} 50%{transform:scale(1.5);opacity:.7} }
 
-/* Phone */
-.hero-phone-wrap { display: flex; justify-content: center; position: relative; z-index: 1; }
-.phone-float { animation: pf 4.5s ease-in-out infinite; filter: drop-shadow(0 30px 60px rgba(0,0,0,.55)) drop-shadow(0 0 50px rgba(176,110,245,.4)); }
-@keyframes pf { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-22px) rotate(2deg)} }
-.phone {
-  width: 220px; height: 440px;
-  background: linear-gradient(175deg, #1c1535, #0d0b20);
-  border-radius: 40px; padding: 10px 10px 14px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14), inset 0 2px 0 rgba(255,255,255,.2);
-  position: relative;
-}
-.phone::before { content:''; position:absolute; top:11px; left:50%; transform:translateX(-50%); width:74px; height:18px; background:#100e24; border-radius:0 0 11px 11px; z-index:5; }
-.phone-screen { width:100%; height:100%; background:linear-gradient(160deg,#5EC8FF,#C0EAFF); border-radius:30px; overflow:hidden; display:flex; flex-direction:column; align-items:center; padding:30px 9px 9px; gap:7px; }
-.ps-icon { width:72px; height:72px; border-radius:18px; object-fit:cover; box-shadow:0 5px 18px rgba(0,0,0,.22); }
-.ps-name { font-family:'Fredoka One',cursive; font-size:.95rem; color:#1E2A5E; }
-.ps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; width:100%; }
-.ps-tile { aspect-ratio:1; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+    .hero-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(4.5rem, 10vw, 8.5rem);
+      line-height: .88; letter-spacing: -2px;
+      margin-bottom: 22px; display: flex; flex-direction: column;
+    }
+    .trow { display: flex; }
+    .tL { display: inline-block; transition: transform .18s cubic-bezier(.34,1.56,.64,1); cursor: default; }
+    .tL:hover { transform: translateY(-12px) rotate(-6deg) scale(1.25); }
+    .t1 { color: #FF6B6B; text-shadow: 4px 5px 0 rgba(255,107,107,.28); }
+    .t2 { color: #FF9A3C; text-shadow: 4px 5px 0 rgba(255,154,60,.28); }
+    .t3 { color: #56CFB2; text-shadow: 4px 5px 0 rgba(86,207,178,.28); }
+    .t4 { color: #845EC2; text-shadow: 4px 5px 0 rgba(132,94,194,.28); }
+    .t5 { color: #1E88E5; text-shadow: 4px 5px 0 rgba(30,136,229,.28); }
+    .t6 { color: #E91E8C; text-shadow: 4px 5px 0 rgba(233,30,140,.28); }
+    .t7 { color: #FF9A3C; text-shadow: 4px 5px 0 rgba(255,154,60,.28); }
+    .t8 { color: #56CFB2; text-shadow: 4px 5px 0 rgba(86,207,178,.28); }
+    .t9 { color: #FF6B6B; text-shadow: 4px 5px 0 rgba(255,107,107,.28); }
 
-.scroll-cue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.3); font-size:.75rem; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:5px; animation:sc 2s ease-in-out infinite; z-index:1; }
-@keyframes sc { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+    .hero-sub { font-size: 1.14rem; font-weight: 700; color: #3A5A7A; line-height: 1.65; margin-bottom: 24px; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .hpill {
+      background: rgba(255,255,255,.82); border: 2px solid rgba(255,255,255,.95);
+      color: #1E2A5E; font-weight: 800; font-size: .8rem; padding: 6px 15px; border-radius: 50px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06); backdrop-filter: blur(4px);
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-s { display: flex; align-items: center; gap: 11px; padding: 14px 24px; border-radius: 18px; text-decoration: none; font-weight: 900; transition: transform .2s, box-shadow .2s; }
+    .btn-s:hover { transform: translateY(-5px) scale(1.04); }
+    .btn-apple { background: #1E2A5E; color: #fff; box-shadow: 0 6px 24px rgba(30,42,94,.28); }
+    .btn-apple:hover { box-shadow: 0 14px 38px rgba(30,42,94,.42); }
+    .btn-gplay { background: #fff; color: #1E2A5E; box-shadow: 0 4px 20px rgba(0,0,0,.12); border: 2px solid #e2e8f5; }
+    .btn-gplay:hover { box-shadow: 0 12px 34px rgba(0,0,0,.18); }
+    .bs { display: block; font-size: .65rem; opacity: .55; font-weight: 700; }
+    .bb { display: block; font-size: .96rem; font-weight: 900; }
 
-/* ═══════════════════════════════════════════════════
-   MARQUEE — coral strip, flows out of hero
-══════════════════════════════════════════════════════ */
-.marquee {
-  overflow: hidden; padding: 12px 0;
-  background: linear-gradient(90deg, #FF6B6B, #FF4F4F);
-  box-shadow: 0 0 60px rgba(255,107,107,.5);
-}
-.mtrack { display:flex; width:max-content; animation:ms 22s linear infinite; }
-.mtrack:hover { animation-play-state: paused; }
-@keyframes ms { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.mi { font-family:'Fredoka One',cursive; font-size:1rem; color:#fff; padding:0 22px; white-space:nowrap; display:flex; align-items:center; gap:8px; }
-.md { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.4); }
+    /* App icon display */
+    .hero-phone { display: flex; justify-content: center; align-items: center; }
+    .icon-display {
+      position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px;
+      animation: iconBob 3.5s ease-in-out infinite;
+    }
+    @keyframes iconBob { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-20px) rotate(2deg)} }
+    .icon-display img {
+      width: 210px; height: 210px; border-radius: 48px;
+      box-shadow: 0 0 0 8px #fff, 0 0 0 16px #FFD93D, 0 30px 80px rgba(0,0,0,.2);
+    }
+    .icon-label {
+      font-family: 'Fredoka One', cursive; font-size: 1.65rem; color: #1E2A5E;
+      background: rgba(255,255,255,.88); padding: 9px 26px; border-radius: 50px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.1);
+    }
+    .orbit { position: absolute; font-size: 2.2rem; animation: orbitPop var(--d,5s) ease-in-out infinite; animation-delay: var(--dl,0s); filter: drop-shadow(0 4px 8px rgba(0,0,0,.18)); }
+    @keyframes orbitPop { 0%,100%{transform:translateY(0) scale(1) rotate(0deg)} 50%{transform:translateY(-18px) scale(1.18) rotate(-10deg)} }
 
-/* ═══════════════════════════════════════════════════
-   GAMES — glass panel floats on world background
-══════════════════════════════════════════════════════ */
-.games-section {
-  position: relative;
-  padding: 90px 6% 110px;
-  background: rgba(255,255,255,.06);
-  backdrop-filter: blur(40px) saturate(150%);
-  border-top: 1px solid rgba(255,255,255,.06);
-  border-bottom: 1px solid rgba(255,255,255,.04);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 70px), 0 100%);
-}
-/* Big decorative background text */
-.games-section::before {
-  content: 'POP!';
-  position: absolute; bottom: 60px; right: 3%;
-  font-family: 'Fredoka One', cursive;
-  font-size: 18vw; color: rgba(255,255,255,.025);
-  line-height: 1; pointer-events: none; z-index: 0;
-  letter-spacing: -4px;
-}
+    .scroll-hint { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); font-size: .76rem; font-weight: 800; color: #6AAABE; display: flex; flex-direction: column; align-items: center; gap: 5px; animation: shint 2s ease-in-out infinite; z-index: 2; letter-spacing: .4px; }
+    @keyframes shint { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
-.sec-label { text-align:center; margin-bottom:52px; position:relative; z-index:1; }
-.stag { display:inline-block; font-weight:900; font-size:.75rem; padding:5px 16px; border-radius:50px; margin-bottom:12px; letter-spacing:.5px; text-transform:uppercase; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7); background:rgba(255,255,255,.06); }
-.stitle { font-family:'Fredoka One',cursive; font-size:clamp(2.4rem,5vw,3.8rem); line-height:1.05; margin-bottom:10px; }
-.stitle u { text-decoration:underline; text-decoration-color:#FFD93D; text-decoration-thickness:4px; text-underline-offset:5px; text-decoration-style:wavy; }
-.ssub { font-size:.95rem; font-weight:600; color:rgba(255,255,255,.45); max-width:440px; margin:0 auto; }
+    /* ══════════════════════════════════════════
+       MARQUEE
+    ══════════════════════════════════════════ */
+    .marquee { overflow: hidden; padding: 16px 0; background: linear-gradient(90deg, #FF6B6B, #FF5252); }
+    .mtrack { display: flex; width: max-content; animation: ms 24s linear infinite; }
+    .mtrack:hover { animation-play-state: paused; }
+    @keyframes ms { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .mi { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: #fff; padding: 0 22px; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+    .md { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.4); }
 
-.ggrid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; max-width:1160px; margin:0 auto; position:relative; z-index:1; }
-@media (max-width:960px){ .ggrid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:480px){ .ggrid{grid-template-columns:1fr} }
+    /* ══════════════════════════════════════════
+       STATS — cheerful yellow
+    ══════════════════════════════════════════ */
+    .stats { background: #FFD93D; padding: 52px 5%; position: relative; }
+    .stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); text-align: center; gap: 10px; }
+    @media (max-width:580px) { .stats-inner{grid-template-columns:repeat(2,1fr)} }
+    .stat { padding: 10px; }
+    .stat-icon { font-size: 2rem; margin-bottom: 6px; display: block; }
+    .stat-n { font-family: 'Fredoka One', cursive; font-size: 3.2rem; line-height: 1; color: #1E2A5E; display: block; margin-bottom: 4px; }
+    .stat-l { font-size: .84rem; font-weight: 800; color: rgba(30,42,94,.55); }
+    .stat-divider { width: 2px; background: rgba(30,42,94,.12); border-radius: 2px; align-self: center; height: 70%; display: none; }
+    @media (min-width:580px) { .stat-divider { display: block; } }
 
-.gcard {
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 22px; overflow: hidden;
-  transform: rotate(var(--r,0deg)) translateY(30px);
-  opacity: 0; transition: transform .4s ease, opacity .4s ease, box-shadow .22s, background .22s;
-}
-.gcard.on { opacity:1; transform:rotate(var(--r,0deg)) translateY(0); }
-.gcard:hover {
-  transform: rotate(0deg) scale(1.07) translateY(-10px) !important;
-  background: rgba(255,255,255,.14);
-  box-shadow: 0 24px 60px rgba(0,0,0,.35), 0 0 0 2px var(--gc,rgba(255,255,255,.3));
-  z-index: 5; position: relative;
-}
-.gbanner { height:140px; display:flex; align-items:center; justify-content:center; font-size:68px; position:relative; overflow:hidden; }
-.gbanner::after { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.1) 2px,transparent 2px); background-size:20px 20px; }
-.gemoji { position:relative; z-index:1; filter:drop-shadow(0 4px 10px rgba(0,0,0,.3)); }
-.gbody { padding:15px 17px 18px; }
-.gname { font-family:'Fredoka One',cursive; font-size:1.2rem; margin-bottom:4px; }
-.gdesc { font-size:.83rem; color:rgba(255,255,255,.5); line-height:1.5; font-weight:600; margin-bottom:12px; }
-.gbtn { display:inline-block; font-weight:900; font-size:.78rem; padding:5px 13px; border-radius:14px; }
+    /* ══════════════════════════════════════════
+       GAMES — playful white, star-speckled
+    ══════════════════════════════════════════ */
+    .games {
+      background: #F8F6FF;
+      padding: 92px 5% 100px;
+      position: relative;
+    }
+    /* subtle star pattern */
+    .games::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(132,94,194,.06) 2px, transparent 2px);
+      background-size: 36px 36px;
+      pointer-events: none;
+    }
+    .sec-hdr { text-align: center; margin-bottom: 56px; position: relative; }
+    .sec-tag { display: inline-block; font-weight: 900; font-size: .75rem; padding: 5px 16px; border-radius: 50px; margin-bottom: 14px; letter-spacing: .5px; text-transform: uppercase; }
+    .sec-title { font-family: 'Fredoka One', cursive; font-size: clamp(2.3rem,5vw,3.8rem); color: #1E2A5E; line-height: 1.05; margin-bottom: 12px; }
+    .sec-title u { text-decoration: underline; text-decoration-color: #FFD93D; text-decoration-thickness: 5px; text-underline-offset: 5px; text-decoration-style: wavy; }
+    .sec-sub { font-size: .95rem; font-weight: 600; color: #7A8BB0; max-width: 440px; margin: 0 auto; }
 
-/* ═══════════════════════════════════════════════════
-   WHY PLAY — 2-col, phone + features, dark glass
-══════════════════════════════════════════════════════ */
-.why {
-  padding: 110px 6% 110px;
-  clip-path: polygon(0 70px, 100% 0, 100% calc(100% - 70px), 0 100%);
-  margin-top: -70px;
-  background: rgba(10,5,32,.72);
-  backdrop-filter: blur(40px);
-  border-top: 1px solid rgba(255,255,255,.04);
-}
-.why-wrap { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:260px 1fr; gap:72px; align-items:center; }
-@media (max-width:860px) { .why-wrap{grid-template-columns:1fr} .why-phone{display:flex;justify-content:center} }
+    .ggrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
+    @media (max-width:960px) { .ggrid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:480px) { .ggrid{grid-template-columns:1fr} }
 
-.why-phone .phone-float { --rot: -4deg; }
+    .gcard {
+      background: #fff; border-radius: 24px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      transform: rotate(var(--r,0deg)) translateY(32px); opacity: 0;
+      transition: transform .4s ease, opacity .4s ease, box-shadow .22s;
+    }
+    .gcard.on { opacity: 1; transform: rotate(var(--r,0deg)) translateY(0); }
+    .gcard:hover { transform: rotate(0) scale(1.07) translateY(-10px) !important; opacity: 1;
+      box-shadow: 0 24px 56px rgba(0,0,0,.14), 0 0 0 3px var(--gc,#FFD93D); z-index: 2; position: relative; }
+    .gbanner { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 76px; position: relative; overflow: hidden; }
+    .gbanner::after { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.18) 2px,transparent 2px); background-size:20px 20px; }
+    .gemoji { position: relative; z-index: 1; filter: drop-shadow(0 5px 12px rgba(0,0,0,.22)); animation: gemAnim 3s ease-in-out infinite; animation-delay: var(--ga,0s); }
+    @keyframes gemAnim { 0%,100%{transform:scale(1) rotate(0deg)} 50%{transform:scale(1.1) rotate(-5deg)} }
+    .gbody { padding: 18px 18px 22px; }
+    .gname { font-family: 'Fredoka One', cursive; font-size: 1.22rem; margin-bottom: 6px; }
+    .gdesc { font-size: .85rem; color: #7A8BB0; line-height: 1.5; font-weight: 600; margin-bottom: 14px; }
+    .gbtn { display: inline-flex; align-items: center; gap: 4px; font-weight: 900; font-size: .82rem; padding: 7px 16px; border-radius: 14px; }
 
-.why-text .stag { text-align:left; }
-.why-title { font-family:'Fredoka One',cursive; font-size:clamp(2rem,4vw,3.2rem); line-height:1.05; margin-bottom:8px; }
-.why-title u { text-decoration:underline; text-decoration-color:#3DDBB0; text-decoration-thickness:4px; text-underline-offset:5px; text-decoration-style:wavy; }
-.why-sub { font-size:.92rem; color:rgba(255,255,255,.4); font-weight:600; margin-bottom:32px; line-height:1.6; }
-.flist { list-style:none; display:flex; flex-direction:column; gap:18px; }
-.fitem { display:flex; align-items:flex-start; gap:16px; }
-.fico { width:48px; height:48px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:1.4rem; box-shadow:0 5px 18px rgba(0,0,0,.3); }
-.ftit { font-family:'Fredoka One',cursive; font-size:1.1rem; margin-bottom:3px; }
-.fdesc { font-size:.85rem; color:rgba(255,255,255,.42); font-weight:600; line-height:1.5; }
+    /* ══════════════════════════════════════════
+       FEATURES — light sky, 2-col
+    ══════════════════════════════════════════ */
+    .features {
+      padding: 100px 5% 100px;
+      background: linear-gradient(155deg, #D6F0FF 0%, #E8F6FF 40%, #EAF9F2 100%);
+      position: relative; overflow: hidden;
+    }
+    .features::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(30,136,229,.04) 1.5px, transparent 1.5px);
+      background-size: 32px 32px; pointer-events: none;
+    }
+    .feat-wrap { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; position: relative; z-index: 1; }
+    @media (max-width: 840px) { .feat-wrap { grid-template-columns: 1fr; gap: 48px; } }
 
-/* ═══════════════════════════════════════════════════
-   HOW — warm glass, interlocks with WHY
-══════════════════════════════════════════════════════ */
-.how {
-  padding: 110px 6% 110px;
-  clip-path: polygon(0 0, 100% 70px, 100% 100%, 0 calc(100% - 70px));
-  margin-top: -70px;
-  background: rgba(255,248,240,.07);
-  backdrop-filter: blur(30px);
-  border-top: 1px solid rgba(255,255,255,.05);
-}
-.how .stag { background:rgba(255,217,61,.12); color:#FFD93D; border-color:rgba(255,217,61,.3); }
+    /* Game emoji mosaic */
+    .icon-showcase { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .is-tile {
+      aspect-ratio: 1; border-radius: 22px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem; box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+      cursor: default;
+    }
+    .is-tile:hover { transform: scale(1.14) rotate(-4deg); box-shadow: 0 16px 36px rgba(0,0,0,.18); }
+    .is-tile-big {
+      grid-column: span 2; aspect-ratio: 2.1/1; border-radius: 22px;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); transition: transform .25s;
+    }
+    .is-tile-big:hover { transform: scale(1.04); }
+    .is-tile-big img { width: 64px; height: 64px; border-radius: 16px; }
+    .is-tile-big span { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #fff; }
 
-.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; max-width:940px; margin:0 auto; position:relative; }
-.steps::before { content:''; position:absolute; top:48px; left:18%; right:18%; height:3px; background:linear-gradient(90deg,#FFD93D,#FF6B6B,#BF7FFF); border-radius:3px; }
-@media (max-width:640px) { .steps{grid-template-columns:1fr} .steps::before{display:none} }
+    .feat-title { font-family: 'Fredoka One', cursive; font-size: clamp(2.1rem,4vw,3.1rem); color: #1E2A5E; line-height: 1.05; margin-bottom: 10px; }
+    .feat-title u { text-decoration: underline; text-decoration-color: #56CFB2; text-decoration-thickness: 4px; text-underline-offset: 5px; text-decoration-style: wavy; }
+    .feat-sub { font-size: .92rem; color: #5A7A9A; font-weight: 600; margin-bottom: 32px; line-height: 1.65; }
+    .flist { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+    .fitem { display: flex; align-items: flex-start; gap: 16px; background: rgba(255,255,255,.65); border-radius: 18px; padding: 16px 18px; box-shadow: 0 2px 12px rgba(0,0,0,.05); backdrop-filter: blur(4px); transition: transform .2s; }
+    .fitem:hover { transform: translateX(6px); }
+    .fico { width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 14px rgba(0,0,0,.1); }
+    .ftit { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: #1E2A5E; margin-bottom: 2px; }
+    .fdesc { font-size: .84rem; color: #7A8BB0; font-weight: 600; line-height: 1.5; }
 
-.step {
-  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.09);
-  backdrop-filter: blur(20px); border-radius:24px; padding:30px 22px;
-  text-align:center; position:relative; z-index:1;
-  opacity:0; transform:translateY(24px); transition:opacity .4s,transform .4s,background .2s;
-}
-.step.on { opacity:1; transform:translateY(0); }
-.step:hover { background:rgba(255,255,255,.12); transform:translateY(-5px); }
-.stepn { width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Fredoka One',cursive; font-size:2.2rem; color:#fff; margin:0 auto 18px; box-shadow:0 6px 22px rgba(0,0,0,.25); }
-.stept { font-family:'Fredoka One',cursive; font-size:1.25rem; margin-bottom:8px; }
-.stepd { font-size:.88rem; color:rgba(255,255,255,.45); line-height:1.6; font-weight:600; }
+    /* ══════════════════════════════════════════
+       HOW TO PLAY — warm cream
+    ══════════════════════════════════════════ */
+    .how { padding: 100px 5%; background: #FFF8EC; position: relative; }
+    .how .sec-tag { background: #FFF0D0; color: #C47800; border: 2px solid #FFD88A; }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 960px; margin: 0 auto; position: relative; }
+    /* connecting line between steps */
+    .steps::before { content:''; position:absolute; top:52px; left:calc(16.6% + 14px); right:calc(16.6% + 14px); height:3px; background:linear-gradient(90deg,#FFD93D,#FF6B6B,#845EC2); border-radius:3px; z-index:0; }
+    @media (max-width:640px) { .steps{grid-template-columns:1fr} .steps::before{display:none} }
+    .step {
+      background: #fff; border-radius: 26px; padding: 32px 24px 28px; text-align: center;
+      position: relative; z-index: 1;
+      box-shadow: 0 6px 28px rgba(0,0,0,.07);
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .4s, transform .4s, box-shadow .2s;
+    }
+    .step.on { opacity: 1; transform: translateY(0); }
+    .step:hover { transform: translateY(-7px); box-shadow: 0 16px 44px rgba(0,0,0,.11); }
+    .stepn { width: 84px; height: 84px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 2.4rem; color: #fff; margin: 0 auto 20px; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    .stept { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #1E2A5E; margin-bottom: 10px; }
+    .stepd { font-size: .88rem; color: #7A8BB0; line-height: 1.65; font-weight: 600; }
+    .step-emoji { font-size: 2rem; margin-bottom: 4px; display: block; }
 
-/* ═══════════════════════════════════════════════════
-   DOWNLOAD CTA — the big finale
-   Full-bleed overlay, no clip-path, seals the page
-══════════════════════════════════════════════════════ */
-.dl {
-  margin-top: -70px;
-  padding: 140px 6% 100px;
-  text-align: center; position: relative; overflow: hidden;
-  background: linear-gradient(135deg, rgba(255,107,107,.9) 0%, rgba(196,96,216,.92) 40%, rgba(132,94,194,.92) 70%, rgba(79,195,247,.88) 100%);
-}
-.dl::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.06) 2px,transparent 2px); background-size:28px 28px; }
+    /* ══════════════════════════════════════════
+       CTA — coral/orange/yellow, warm & happy
+    ══════════════════════════════════════════ */
+    .cta {
+      padding: 120px 5%; text-align: center; position: relative; overflow: hidden;
+      background: linear-gradient(145deg, #FF6B6B 0%, #FF8C42 35%, #FFB627 65%, #FFD93D 100%);
+    }
+    .cta::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.12) 2px,transparent 2px); background-size:30px 30px; }
+    .cta-in { position: relative; z-index: 2; max-width: 620px; margin: 0 auto; }
+    .cta-icon { width: 120px; height: 120px; border-radius: 28px; object-fit: cover; box-shadow: 0 0 0 6px rgba(255,255,255,.4), 0 0 0 12px rgba(255,255,255,.15), 0 20px 56px rgba(0,0,0,.2); margin-bottom: 28px; animation: iconBob 3.5s ease-in-out infinite; }
+    .cta-title { font-family: 'Fredoka One', cursive; font-size: clamp(2.8rem,6vw,4.4rem); color: #fff; margin-bottom: 12px; text-shadow: 3px 5px 0 rgba(0,0,0,.08); }
+    .cta-sub { color: rgba(255,255,255,.88); font-size: 1.08rem; font-weight: 700; margin-bottom: 36px; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .cta-btn { display: flex; align-items: center; gap: 13px; background: #fff; color: #1E2A5E; padding: 16px 28px; border-radius: 18px; text-decoration: none; font-weight: 900; box-shadow: 0 8px 30px rgba(0,0,0,.16); transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .2s; }
+    .cta-btn:hover { transform: translateY(-6px) scale(1.05); box-shadow: 0 18px 44px rgba(0,0,0,.22); }
+    .cta-note { color: rgba(255,255,255,.75); font-size: .82rem; font-weight: 700; }
+    .cdot { position: absolute; border-radius: 50%; animation: ca var(--d,8s) ease-in-out infinite; animation-delay: var(--dl,0s); pointer-events: none; }
+    @keyframes ca { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(var(--tx,20px),var(--ty,-28px)) scale(1.2)} 66%{transform:translate(var(--tx2,-15px),var(--ty2,-15px)) scale(.8)} }
 
-/* Big emoji behind CTA */
-.dl-bg-emoji { position:absolute; font-size:22vw; opacity:.04; pointer-events:none; top:50%; left:50%; transform:translate(-50%,-50%); line-height:1; }
-
-.dl-in { position:relative; z-index:2; max-width:620px; margin:0 auto; }
-.dl-icon { width:110px; height:110px; border-radius:26px; object-fit:cover; box-shadow:0 0 0 5px rgba(255,255,255,.22), 0 18px 50px rgba(0,0,0,.22); margin-bottom:24px; animation:pf 3.5s ease-in-out infinite; }
-.dl-title { font-family:'Fredoka One',cursive; font-size:clamp(2.6rem,6vw,4.4rem); color:#fff; margin-bottom:10px; text-shadow:3px 5px 0 rgba(0,0,0,.12); }
-.dl-sub { color:rgba(255,255,255,.75); font-size:1rem; font-weight:700; margin-bottom:34px; }
-.dl-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
-.dl-btn { display:flex; align-items:center; gap:12px; background:#fff; color:#1E2A5E; padding:14px 26px; border-radius:16px; text-decoration:none; font-weight:900; box-shadow:0 6px 30px rgba(0,0,0,.18); transition:transform .2s,box-shadow .2s; }
-.dl-btn:hover { transform:translateY(-5px) scale(1.04); box-shadow:0 16px 44px rgba(0,0,0,.24); }
-.dl-note { color:rgba(255,255,255,.55); font-size:.82rem; font-weight:700; }
-.cdot { position:absolute; border-radius:50%; animation:ca var(--d,8s) ease-in-out infinite; animation-delay:var(--dl,0s); pointer-events:none; }
-@keyframes ca { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(var(--tx,20px),var(--ty,-28px)) scale(1.2)} 66%{transform:translate(var(--tx2,-15px),var(--ty2,-15px)) scale(.8)} }
-
-/* ─── FOOTER ─── */
-footer { background:rgba(4,2,14,.95); padding:44px 6% 30px; text-align:center; border-top:1px solid rgba(255,255,255,.04); }
-.ft-logo { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:18px; }
-.ft-logo img { width:32px; height:32px; border-radius:8px; }
-.ft-logo span { font-family:'Fredoka One',cursive; font-size:1.3rem; color:#FFD93D; }
-.ft-links { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:18px; }
-.ft-links a { color:rgba(255,255,255,.3); text-decoration:none; font-weight:700; font-size:.85rem; transition:color .2s; }
-.ft-links a:hover { color:#FFD93D; }
-.ft-copy { color:rgba(255,255,255,.15); font-size:.78rem; font-weight:600; }
-</style>
+    /* ─── FOOTER ─── */
+    footer { background: #1E2A5E; padding: 48px 5% 32px; text-align: center; }
+    .ft-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    .ft-logo img { width: 34px; height: 34px; border-radius: 9px; }
+    .ft-logo span { font-family: 'Fredoka One', cursive; font-size: 1.35rem; color: #FFD93D; }
+    .ft-links { display: flex; justify-content: center; gap: 26px; flex-wrap: wrap; margin-bottom: 20px; }
+    .ft-links a { color: rgba(255,255,255,.4); text-decoration: none; font-weight: 700; font-size: .85rem; transition: color .2s; }
+    .ft-links a:hover { color: #FFD93D; }
+    .ft-copy { color: rgba(255,255,255,.18); font-size: .78rem; font-weight: 600; }
+  </style>
 </head>
 <body>
-
-<!-- AMBIENT ORBS — part of world, fixed, behind everything -->
-<div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(255,107,107,.18),transparent 70%);top:-100px;left:-100px;--d:25s;--tx:40px;--ty:30px;--sc:1.1"></div>
-<div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(176,110,245,.16),transparent 70%);top:-150px;right:-150px;--d:30s;--tx:-50px;--ty:40px;--sc:1.05"></div>
-<div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(61,219,176,.14),transparent 70%);top:50%;left:-100px;--d:22s;--tx:30px;--ty:-30px;--sc:1.08"></div>
-<div class="orb" style="width:450px;height:450px;background:radial-gradient(circle,rgba(79,195,247,.15),transparent 70%);bottom:-100px;right:-100px;--d:28s;--tx:-30px;--ty:-25px;--sc:1.12"></div>
-<div class="orb" style="width:350px;height:350px;background:radial-gradient(circle,rgba(255,217,61,.14),transparent 70%);bottom:20%;left:40%;--d:20s;--tx:20px;--ty:20px;--sc:1.06"></div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-in">
-    <a href="/" class="nav-logo">
-      <img src="icon.png" alt="Fuzzy Pop!">
-      <span>Fuzzy Pop!</span>
-    </a>
+    <a href="/" class="nav-logo"><img src="icon.png" alt="Fuzzy Pop!"><span>Fuzzy Pop!</span></a>
     <div class="nav-links" id="nl">
       <a href="#games">Games</a>
-      <a href="#why">Features</a>
+      <a href="#features">Features</a>
       <a href="#download">Download</a>
       <a href="support.html">Support</a>
     </div>
-    <a href="#download" class="nav-dl">Download Free 🎮</a>
+    <a href="#download" class="nav-cta">Download Free 🎮</a>
     <button class="burger" id="burger">☰</button>
   </div>
 </nav>
 
 <!-- HERO -->
-<div style="position:relative;overflow:hidden">
-  <!-- Small floating pips in hero -->
-  <div class="pip" style="width:18px;height:18px;background:#FF6B6B;border-radius:50%;position:fixed;top:22%;left:5%;--d:6s;--dl:0s;--ty:-20px;--op:.7;z-index:1"></div>
-  <div class="pip" style="width:12px;height:12px;background:#FFD93D;border-radius:4px;position:fixed;top:35%;left:8%;--d:8s;--dl:1s;--ty:-16px;--op:.65;z-index:1"></div>
-  <div class="pip" style="width:22px;height:22px;background:#3DDBB0;border-radius:50%;position:fixed;top:65%;left:3%;--d:7s;--dl:2s;--ty:-24px;--op:.6;z-index:1"></div>
-  <div class="pip" style="width:14px;height:14px;background:#BF7FFF;border-radius:50%;position:fixed;top:20%;right:6%;--d:7.5s;--dl:.5s;--ty:-18px;--op:.7;z-index:1"></div>
-  <div class="pip" style="width:20px;height:20px;background:#67D7F5;border-radius:50%;position:fixed;top:50%;right:4%;--d:9s;--dl:1.5s;--ty:-22px;--op:.6;z-index:1"></div>
-  <div class="pip" style="width:16px;height:16px;background:#FF79C6;border-radius:50%;position:fixed;top:78%;right:7%;--d:6.5s;--dl:3s;--ty:-18px;--op:.65;z-index:1"></div>
+<section class="hero">
+  <div class="sun"></div>
+  <div class="sun-ray"></div>
+  <div class="cloud cl1"></div>
+  <div class="cloud cl2"></div>
+  <div class="cloud cl3"></div>
 
-  <section class="hero" id="top">
-    <div style="position:relative;z-index:2">
-      <div class="hero-badge"><span class="live"></span> Free to Play &nbsp;·&nbsp; No Sign-Up Needed</div>
+  <!-- Bubbles -->
+  <div class="bub" style="width:80px;height:80px;top:22%;left:5%;--d:9s;--dl:0s"></div>
+  <div class="bub" style="width:48px;height:48px;top:56%;left:2%;--d:7s;--dl:1.5s"></div>
+  <div class="bub" style="width:110px;height:110px;top:74%;left:16%;--d:12s;--dl:3s;opacity:.5"></div>
+  <div class="bub" style="width:38px;height:38px;top:32%;left:44%;--d:6s;--dl:.8s"></div>
+  <div class="bub" style="width:66px;height:66px;top:80%;left:60%;--d:10s;--dl:2s"></div>
+  <div class="bub" style="width:52px;height:52px;top:14%;left:68%;--d:8s;--dl:4s"></div>
+
+  <!-- Sparkles -->
+  <div class="spark" style="top:24%;left:8%;--d:2.8s;--dl:0s;--sz:1.4rem">✨</div>
+  <div class="spark" style="top:60%;left:14%;--d:3.5s;--dl:.7s;--sz:1rem">⭐</div>
+  <div class="spark" style="top:38%;left:50%;--d:2.5s;--dl:1.2s;--sz:1.2rem">✨</div>
+  <div class="spark" style="top:82%;left:72%;--d:4s;--dl:.4s;--sz:.9rem">🌟</div>
+  <div class="spark" style="top:16%;left:58%;--d:3.2s;--dl:2s;--sz:1.1rem">✨</div>
+
+  <!-- Coloured dots -->
+  <div class="fdot" style="width:18px;height:18px;background:#FF6B6B;top:32%;left:8%;--d:5s;--dl:0s;opacity:.65"></div>
+  <div class="fdot" style="width:13px;height:13px;background:#FFD93D;border-radius:4px;top:68%;left:11%;--d:7s;--dl:1s;opacity:.75;transform:rotate(15deg)"></div>
+  <div class="fdot" style="width:16px;height:16px;background:#56CFB2;top:82%;left:38%;--d:6s;--dl:2s;opacity:.6"></div>
+  <div class="fdot" style="width:20px;height:20px;background:#845EC2;top:28%;left:82%;--d:8s;--dl:.5s;opacity:.5"></div>
+  <div class="fdot" style="width:14px;height:14px;background:#FF9A3C;top:72%;left:76%;--d:5.5s;--dl:3s;opacity:.65"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-kicker"><span class="green-dot"></span> Free to Play &nbsp;·&nbsp; No Sign-Up Needed</div>
       <h1 class="hero-title">
-        <span class="row"><span class="L La">F</span><span class="L Lb">U</span><span class="L Lc">Z</span><span class="L Ld">Z</span><span class="L Le">Y</span></span>
-        <span class="row"><span class="L Lf">P</span><span class="L Lb">O</span><span class="L Lg">P</span><span class="L Lh">!</span></span>
+        <span class="trow"><span class="tL t1">F</span><span class="tL t2">U</span><span class="tL t3">Z</span><span class="tL t4">Z</span><span class="tL t5">Y</span></span>
+        <span class="trow"><span class="tL t6">P</span><span class="tL t7">O</span><span class="tL t8">P</span><span class="tL t9">!</span></span>
       </h1>
       <p class="hero-sub">7 magical mini-games for the whole family.<br>Tap, pop, match and slash your way to fun!</p>
       <div class="hero-pills">
-        <span class="pill">🎯 Zero Sign-Up</span>
-        <span class="pill">📶 100% Offline</span>
-        <span class="pill">🔒 Child-Safe</span>
-        <span class="pill">📱 iOS &amp; Android</span>
+        <span class="hpill">🎯 Zero Sign-Up</span>
+        <span class="hpill">📶 100% Offline</span>
+        <span class="hpill">🔒 Child-Safe</span>
+        <span class="hpill">📱 iOS &amp; Android</span>
       </div>
       <div class="hero-btns">
-        <a href="#download" class="btn btn-a">
-          <svg viewBox="0 0 24 24" fill="#1E2A5E" width="24" height="24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <a href="#download" class="btn-s btn-apple">
+          <svg viewBox="0 0 24 24" fill="#fff" width="26" height="26"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           <div><span class="bs">Download on the</span><span class="bb">App Store</span></div>
         </a>
-        <a href="#download" class="btn btn-g">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <a href="#download" class="btn-s btn-gplay">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="26" height="26">
             <path fill="#4285F4" d="M.43.57C.16.85 0 1.28 0 1.84v20.32c0 .56.16.99.43 1.27l.07.06 11.38-11.38v-.27L.5.51z"/>
             <path fill="#34A853" d="M15.76 15.81l-3.88-3.88v-.27l3.88-3.88.09.05 4.49 2.55c1.28.73 1.28 1.92 0 2.65l-4.49 2.55z"/>
             <path fill="#EA4335" d="M15.85 15.76L11.88 12 .43 23.43c.42.45 1.12.5 1.9.06l13.52-7.73z"/>
@@ -386,123 +446,168 @@ footer { background:rgba(4,2,14,.95); padding:44px 6% 30px; text-align:center; b
         </a>
       </div>
     </div>
-
-    <div class="hero-phone-wrap">
-      <div style="position:relative">
-        <div class="pip" style="width:16px;height:16px;background:#FF6B6B;top:-16px;right:-20px;--d:4s;--dl:0s;--ty:-16px;--op:.9"></div>
-        <div class="pip" style="width:11px;height:11px;background:#FFD93D;top:25%;left:-28px;--d:5.5s;--dl:.8s;--ty:-14px;--op:.85"></div>
-        <div class="pip" style="width:14px;height:14px;background:#3DDBB0;bottom:20%;right:-24px;--d:6s;--dl:1.6s;--ty:-16px;--op:.8"></div>
-        <div class="pip" style="width:9px;height:9px;background:#BF7FFF;bottom:-10px;left:24px;--d:4.5s;--dl:2.4s;--ty:-12px;--op:.9"></div>
-        <div class="phone-float">
-          <div class="phone">
-            <div class="phone-screen">
-              <img src="icon.png" alt="Fuzzy Pop!" class="ps-icon">
-              <div class="ps-name">Fuzzy Pop!</div>
-              <div class="ps-grid">
-                <div class="ps-tile" style="background:linear-gradient(135deg,#4FC3F7,#1976D2)">🫧</div>
-                <div class="ps-tile" style="background:linear-gradient(135deg,#66BB6A,#388E3C)">🐾</div>
-                <div class="ps-tile" style="background:linear-gradient(135deg,#FF8A65,#D84315)">🎨</div>
-                <div class="ps-tile" style="background:linear-gradient(135deg,#CE93D8,#7B1FA2)">🦁</div>
-                <div class="ps-tile" style="background:linear-gradient(135deg,#FFD93D,#F57C00)">🔢</div>
-                <div class="ps-tile" style="background:linear-gradient(135deg,#4DD0E1,#00695C)">💎</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="hero-phone">
+      <div class="icon-display">
+        <div class="orbit" style="top:-24px;left:-34px;--d:4.5s;--dl:0s">🫧</div>
+        <div class="orbit" style="top:24px;right:-40px;--d:5.5s;--dl:1s">⭐</div>
+        <div class="orbit" style="bottom:64px;left:-42px;--d:6s;--dl:2s">🎮</div>
+        <div class="orbit" style="bottom:34px;right:-36px;--d:5s;--dl:.5s">🍉</div>
+        <img src="icon.png" alt="Fuzzy Pop!">
+        <div class="icon-label">Fuzzy Pop! 🎉</div>
       </div>
     </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore ↓</div>
+</section>
 
-    <div class="scroll-cue">Scroll &darr;</div>
-  </section>
+<!-- WAVE: Hero → Marquee -->
+<div class="wv" style="background:#FF6B6B">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px">
+    <path d="M0,0 C360,80 1080,0 1440,60 L1440,0 Z" fill="#FFF0E8"/>
+  </svg>
 </div>
 
 <!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="mtrack" id="mt"></div>
+<div class="marquee" aria-hidden="true"><div class="mtrack" id="mt"></div></div>
+
+<!-- WAVE: Marquee → Stats -->
+<div class="wv" style="background:#FFD93D">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px">
+    <path d="M0,0 C480,80 960,20 1440,60 L1440,0 Z" fill="#FF6B6B"/>
+  </svg>
+</div>
+
+<!-- STATS — sunny yellow -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-icon">🎮</span>
+      <span class="stat-n">7</span>
+      <div class="stat-l">Mini Games</div>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">📶</span>
+      <span class="stat-n">100%</span>
+      <div class="stat-l">Works Offline</div>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">🆓</span>
+      <span class="stat-n">Free</span>
+      <div class="stat-l">Always Free</div>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">📱</span>
+      <span class="stat-n">iOS+</span>
+      <div class="stat-l">iOS &amp; Android</div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVE: Stats → Games -->
+<div class="wv" style="background:#F8F6FF">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px">
+    <path d="M0,40 C300,0 700,80 1100,30 C1240,10 1360,50 1440,40 L1440,0 Z" fill="#FFD93D"/>
+  </svg>
 </div>
 
 <!-- GAMES -->
-<section class="games-section" id="games">
-  <div class="sec-label">
-    <div class="stag">✨ Mini Games</div>
-    <h2 class="stitle">PLAY ALL <u>7 GAMES</u></h2>
-    <p class="ssub">Each one a burst of joy — tap, pop, match and slash!</p>
+<section class="games" id="games">
+  <div class="sec-hdr">
+    <div class="sec-tag" style="background:#EEE8FF;color:#845EC2;border:2px solid #D4C0FF">✨ Mini Games</div>
+    <h2 class="sec-title">PLAY ALL <u>7 GAMES</u></h2>
+    <p class="sec-sub">Each game is a burst of joy — tap, pop, match and slash!</p>
   </div>
   <div class="ggrid" id="gg"></div>
 </section>
 
-<!-- WHY PLAY -->
-<section class="why" id="why">
-  <div class="why-wrap">
-    <div class="why-phone">
-      <div class="phone-float">
-        <div class="phone">
-          <div class="phone-screen">
-            <img src="icon.png" alt="Fuzzy Pop!" class="ps-icon">
-            <div class="ps-name">Fuzzy Pop!</div>
-            <div class="ps-grid">
-              <div class="ps-tile" style="background:linear-gradient(135deg,#4FC3F7,#1976D2)">🫧</div>
-              <div class="ps-tile" style="background:linear-gradient(135deg,#66BB6A,#388E3C)">🐾</div>
-              <div class="ps-tile" style="background:linear-gradient(135deg,#FF8A65,#D84315)">🎨</div>
-              <div class="ps-tile" style="background:linear-gradient(135deg,#CE93D8,#7B1FA2)">🦁</div>
-              <div class="ps-tile" style="background:linear-gradient(135deg,#FFD93D,#F57C00)">🔢</div>
-              <div class="ps-tile" style="background:linear-gradient(135deg,#4DD0E1,#00695C)">💎</div>
-              <div class="ps-tile" style="background:linear-gradient(135deg,#EF9A9A,#B71C1C)">🍉</div>
-              <div class="ps-tile" style="background:rgba(255,255,255,.08)"></div>
-              <div class="ps-tile" style="background:rgba(255,255,255,.08)"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="why-text">
-      <div class="stag" style="background:rgba(61,219,176,.1);color:#3DDBB0;border-color:rgba(61,219,176,.25)">💡 Why Play?</div>
-      <h2 class="why-title">WHY YOU'LL <u>LOVE IT</u></h2>
-      <p class="why-sub">Everything families actually need — nothing they don't.</p>
+<!-- WAVE: Games → Features -->
+<div class="wv" style="background:#D6F0FF">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px">
+    <path d="M0,60 C240,0 600,80 900,40 C1140,10 1340,60 1440,30 L1440,0 L0,0 Z" fill="#F8F6FF"/>
+  </svg>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="feat-wrap">
+    <div>
+      <div class="sec-tag" style="background:#D6F5ED;color:#1B8A6B;border:2px solid #8EE0C6">💡 Why Families Love It</div>
+      <h2 class="feat-title">WHY YOU'LL <u>LOVE IT</u></h2>
+      <p class="feat-sub">Everything families actually need — nothing they don't.</p>
       <ul class="flist" id="fl"></ul>
+    </div>
+    <div>
+      <div class="icon-showcase">
+        <div class="is-tile-big" style="background:linear-gradient(135deg,#4EC8FF,#1976D2)">
+          <img src="icon.png" alt="Fuzzy Pop!"><span>Fuzzy Pop!</span>
+        </div>
+        <div class="is-tile" style="background:linear-gradient(135deg,#4FC3F7,#1565C0)">🫧</div>
+        <div class="is-tile" style="background:linear-gradient(135deg,#66BB6A,#2E7D32)">🐾</div>
+        <div class="is-tile" style="background:linear-gradient(135deg,#FF8A65,#BF360C)">🎨</div>
+        <div class="is-tile" style="background:linear-gradient(135deg,#CE93D8,#6A1B9A)">🦁</div>
+        <div class="is-tile" style="background:linear-gradient(135deg,#FFD93D,#E65100)">🔢</div>
+        <div class="is-tile" style="background:linear-gradient(135deg,#4DD0E1,#004D40)">💎</div>
+        <div class="is-tile" style="background:linear-gradient(135deg,#EF9A9A,#880E0E)">🍉</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- WAVE: Features → How to Play -->
+<div class="wv" style="background:#FFF8EC">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px">
+    <path d="M0,0 C400,80 900,0 1440,50 L1440,0 Z" fill="#EAF9F2"/>
+  </svg>
+</div>
+
 <!-- HOW TO PLAY -->
-<section class="how">
-  <div class="sec-label">
-    <div class="stag" style="background:rgba(255,217,61,.1);color:#FFD93D;border-color:rgba(255,217,61,.3)">🚀 Super Simple</div>
-    <h2 class="stitle">READY IN <u>3 TAPS</u></h2>
-    <p class="ssub">No tutorials. No logins. Pure fun from the very first second.</p>
+<section class="how" id="how">
+  <div class="sec-hdr">
+    <div class="sec-tag">🚀 Super Simple</div>
+    <h2 class="sec-title">READY IN <u>3 TAPS</u></h2>
+    <p class="sec-sub">No tutorials. No logins. Pure fun from the very first second.</p>
   </div>
   <div class="steps">
     <div class="step">
+      <span class="step-emoji">📲</span>
       <div class="stepn" style="background:linear-gradient(135deg,#FFD93D,#FF9A3C)">1</div>
       <div class="stept">Download Free</div>
       <p class="stepd">Grab Fuzzy Pop! from the App Store or Google Play — free, no credit card, no account.</p>
     </div>
     <div class="step" style="transition-delay:.1s">
-      <div class="stepn" style="background:linear-gradient(135deg,#FF6B6B,#C460D8)">2</div>
+      <span class="step-emoji">🎮</span>
+      <div class="stepn" style="background:linear-gradient(135deg,#FF6B6B,#E91E8C)">2</div>
       <div class="stept">Pick a Game</div>
       <p class="stepd">7 colourful games on the home screen. Each plays differently — try them all!</p>
     </div>
     <div class="step" style="transition-delay:.2s">
-      <div class="stepn" style="background:linear-gradient(135deg,#845EC2,#4FC3F7)">3</div>
+      <span class="step-emoji">🏆</span>
+      <div class="stepn" style="background:linear-gradient(135deg,#56CFB2,#1E88E5)">3</div>
       <div class="stept">Beat Your Score</div>
       <p class="stepd">High scores saved for every game. Keep coming back to top your personal best!</p>
     </div>
   </div>
 </section>
 
-<!-- DOWNLOAD -->
-<section class="dl" id="download">
-  <div class="dl-bg-emoji">🫧</div>
-  <div class="dl-in">
-    <img src="icon.png" alt="Fuzzy Pop!" class="dl-icon">
-    <h2 class="dl-title">GET FUZZY POP! FREE</h2>
-    <p class="dl-sub">Available on iOS and Android &middot; No sign-up needed</p>
-    <div class="dl-btns">
-      <a href="#download" class="dl-btn">
+<!-- WAVE: How → CTA -->
+<div class="wv" style="background:#FF6B6B">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px">
+    <path d="M0,0 C200,80 500,20 750,60 C1000,90 1250,10 1440,50 L1440,0 Z" fill="#FFF8EC"/>
+  </svg>
+</div>
+
+<!-- CTA -->
+<section class="cta" id="download">
+  <div class="cta-in">
+    <img src="icon.png" alt="Fuzzy Pop!" class="cta-icon">
+    <h2 class="cta-title">GET FUZZY POP! FREE</h2>
+    <p class="cta-sub">Available on iOS and Android &middot; No sign-up needed</p>
+    <div class="cta-btns">
+      <a href="#download" class="cta-btn">
         <svg viewBox="0 0 24 24" fill="#1E2A5E" width="24" height="24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         <div><div style="font-size:.65rem;opacity:.45;font-weight:700">Download on the</div><div style="font-size:.98rem;font-weight:900">App Store</div></div>
       </a>
-      <a href="#download" class="dl-btn">
+      <a href="#download" class="cta-btn">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
           <path fill="#4285F4" d="M.43.57C.16.85 0 1.28 0 1.84v20.32c0 .56.16.99.43 1.27l.07.06 11.38-11.38v-.27L.5.51z"/>
           <path fill="#34A853" d="M15.76 15.81l-3.88-3.88v-.27l3.88-3.88.09.05 4.49 2.55c1.28.73 1.28 1.92 0 2.65l-4.49 2.55z"/>
@@ -512,16 +617,20 @@ footer { background:rgba(4,2,14,.95); padding:44px 6% 30px; text-align:center; b
         <div><div style="font-size:.65rem;opacity:.45;font-weight:700">Get it on</div><div style="font-size:.98rem;font-weight:900">Google Play</div></div>
       </a>
     </div>
-    <p class="dl-note">Free to download &middot; Optional Remove Ads purchase available</p>
+    <p class="cta-note">Free to download &middot; Optional Remove Ads purchase available</p>
   </div>
 </section>
 
+<!-- WAVE: CTA → Footer -->
+<div class="wv" style="background:#1E2A5E">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" style="height:70px">
+    <path d="M0,0 C600,70 900,10 1440,40 L1440,0 Z" fill="#FFD93D"/>
+  </svg>
+</div>
+
 <!-- FOOTER -->
 <footer>
-  <div class="ft-logo">
-    <img src="icon.png" alt="Fuzzy Pop!">
-    <span>Fuzzy Pop!</span>
-  </div>
+  <div class="ft-logo"><img src="icon.png" alt="Fuzzy Pop!"><span>Fuzzy Pop!</span></div>
   <div class="ft-links">
     <a href="privacy.html">Privacy Policy</a>
     <a href="terms.html">Terms of Service</a>
@@ -534,59 +643,49 @@ footer { background:rgba(4,2,14,.95); padding:44px 6% 30px; text-align:center; b
 <script>
   document.getElementById('burger').onclick = () => document.getElementById('nl').classList.toggle('open');
 
-  /* Marquee */
   const mg = ['🫧 Bubble Pop','🐾 Animal Match','🎨 Color Catch','🦁 Animal Tap','🔢 Count Pop','💎 Shape Sorter','🍉 Fruit Slash'];
   const mt = document.getElementById('mt');
-  const seg = mg.map(g => `<span class="mi">${g}<span class="md"></span></span>`).join('');
-  mt.innerHTML = seg + seg;
+  const seg = mg.map(g=>`<span class="mi">${g}<span class="md"></span></span>`).join('');
+  mt.innerHTML = seg+seg;
 
-  /* Game cards */
   const gd = [
-    { n:'Bubble Pop',   e:'🫧', c:'#4FC3F7', dk:'#1565C0', d:'Pop colourful bubbles before they escape!',       r:'-1.8deg' },
-    { n:'Animal Match', e:'🐾', c:'#66BB6A', dk:'#2E7D32', d:'Flip cards and find all the matching pairs!',     r:'1.4deg'  },
-    { n:'Color Catch',  e:'🎨', c:'#FF8A65', dk:'#BF360C', d:'Catch falling objects that match your colour!',   r:'-1deg'   },
-    { n:'Animal Tap',   e:'🦁', c:'#CE93D8', dk:'#6A1B9A', d:'Tap all the animals as fast as you can!',         r:'1.8deg'  },
-    { n:'Count Pop',    e:'🔢', c:'#FFD93D', dk:'#E65100', d:'Pop numbered bubbles in the right order!',        r:'-1.4deg' },
-    { n:'Shape Sorter', e:'💎', c:'#4DD0E1', dk:'#004D40', d:'Sort the falling shapes into the right bins!',    r:'1deg'    },
-    { n:'Fruit Slash',  e:'🍉', c:'#EF9A9A', dk:'#880E0E', d:"Swipe to slash flying fruit — don't miss any!", r:'-1.8deg' },
+    {n:'Bubble Pop',   e:'🫧', c:'#29B6F6', dk:'#0277BD', d:'Pop colourful bubbles before they escape!',      r:'-1.8deg', ga:'0s'},
+    {n:'Animal Match', e:'🐾', c:'#66BB6A', dk:'#2E7D32', d:'Flip cards and find all the matching pairs!',    r:'1.4deg',  ga:'.3s'},
+    {n:'Color Catch',  e:'🎨', c:'#FF7043', dk:'#BF360C', d:'Catch falling objects that match your colour!',  r:'-1deg',   ga:'.6s'},
+    {n:'Animal Tap',   e:'🦁', c:'#AB47BC', dk:'#6A1B9A', d:'Tap all the animals as fast as you can!',        r:'1.8deg',  ga:'.9s'},
+    {n:'Count Pop',    e:'🔢', c:'#FFA726', dk:'#E65100', d:'Pop numbered bubbles in the right order!',       r:'-1.4deg', ga:'1.2s'},
+    {n:'Shape Sorter', e:'💎', c:'#26C6DA', dk:'#00695C', d:'Sort the falling shapes into the right bins!',   r:'1deg',    ga:'1.5s'},
+    {n:'Fruit Slash',  e:'🍉', c:'#EF5350', dk:'#880E0E', d:"Swipe to slash flying fruit — don't miss any!", r:'-1.8deg', ga:'1.8s'},
   ];
   const gg = document.getElementById('gg');
-  gd.forEach((g,i) => {
-    const el = document.createElement('div');
-    el.className = 'gcard';
-    el.style.cssText = `--r:${g.r};--gc:${g.c};transition-delay:${i*60}ms`;
-    el.innerHTML = `<div class="gbanner" style="background:linear-gradient(135deg,${g.c},${g.dk})"><span class="gemoji">${g.e}</span></div><div class="gbody"><div class="gname" style="color:${g.c}">${g.n}</div><div class="gdesc">${g.d}</div><span class="gbtn" style="background:${g.c}20;color:${g.c}">Play &rarr;</span></div>`;
+  gd.forEach((g,i)=>{
+    const el=document.createElement('div');
+    el.className='gcard';
+    el.style.cssText=`--r:${g.r};--gc:${g.c};transition-delay:${i*70}ms`;
+    el.innerHTML=`<div class="gbanner" style="background:linear-gradient(135deg,${g.c},${g.dk})"><span class="gemoji" style="--ga:${g.ga}">${g.e}</span></div><div class="gbody"><div class="gname" style="color:${g.c}">${g.n}</div><div class="gdesc">${g.d}</div><span class="gbtn" style="background:${g.c}22;color:${g.c}">Play now &rarr;</span></div>`;
     gg.appendChild(el);
   });
 
-  /* Features */
-  const fd = [
-    { e:'🆓', bg:'linear-gradient(135deg,#FFD93D,#FF9A3C)', t:'Always Free',    d:'All 7 games at no cost. No subscriptions, ever.' },
-    { e:'📶', bg:'linear-gradient(135deg,#4FC3F7,#1565C0)', t:'Fully Offline',  d:'No WiFi needed. Perfect for road trips or planes.' },
-    { e:'🔒', bg:'linear-gradient(135deg,#3DDBB0,#1B8A6B)', t:'Child-Safe Ads', d:'COPPA-compliant. G-rated content only. Always.' },
-    { e:'🏆', bg:'linear-gradient(135deg,#BF7FFF,#6A1BA8)', t:'Beat Your Best', d:'High scores saved locally. Challenge yourself!' },
-  ];
-  document.getElementById('fl').innerHTML = fd.map(f =>
-    `<li class="fitem"><div class="fico" style="background:${f.bg}">${f.e}</div><div><div class="ftit">${f.t}</div><div class="fdesc">${f.d}</div></div></li>`
-  ).join('');
+  document.getElementById('fl').innerHTML = [
+    {e:'🆓',bg:'linear-gradient(135deg,#FFD93D,#FF9A3C)',t:'Always Free',    d:'All 7 games at no cost. No subscriptions, ever.'},
+    {e:'📶',bg:'linear-gradient(135deg,#4FC3F7,#1565C0)',t:'Fully Offline',  d:'No WiFi needed. Perfect for road trips or planes.'},
+    {e:'🔒',bg:'linear-gradient(135deg,#56CFB2,#1B8A6B)',t:'Child-Safe Ads', d:'COPPA-compliant. G-rated content only. Always.'},
+    {e:'🏆',bg:'linear-gradient(135deg,#CE93D8,#6A1B9A)',t:'Beat Your Best', d:'High scores saved locally for every single game!'},
+  ].map(f=>`<li class="fitem"><div class="fico" style="background:${f.bg}">${f.e}</div><div><div class="ftit">${f.t}</div><div class="fdesc">${f.d}</div></div></li>`).join('');
 
-  /* Confetti dots */
-  const dlSec = document.querySelector('.dl');
-  ['#FFD93D','#FF6B6B','#3DDBB0','#BF7FFF','#4FC3F7','#FF79C6'].forEach(c => {
-    for (let j = 0; j < 4; j++) {
-      const d = document.createElement('div');
-      d.className = 'cdot';
-      const sz = 6 + Math.random()*18;
-      const tx = (Math.random()-.5)*60, ty = -20-Math.random()*40;
-      const tx2 = (Math.random()-.5)*50, ty2 = -15-Math.random()*30;
-      d.style.cssText = `width:${sz}px;height:${sz}px;background:${c};left:${5+Math.random()*90}%;top:${5+Math.random()*90}%;--d:${6+Math.random()*7}s;--dl:${Math.random()*4}s;--tx:${tx}px;--ty:${ty}px;--tx2:${tx2}px;--ty2:${ty2}px;border-radius:${Math.random()>.4?'50%':'5px'};opacity:.7`;
-      dlSec.appendChild(d);
+  const cta=document.querySelector('.cta');
+  ['rgba(255,255,255,.6)','rgba(255,217,61,.5)','rgba(255,255,255,.4)','rgba(255,107,107,.35)','rgba(255,255,255,.5)','rgba(86,207,178,.4)'].forEach(c=>{
+    for(let j=0;j<4;j++){
+      const d=document.createElement('div');
+      d.className='cdot';
+      const sz=5+Math.random()*18,tx=(Math.random()-.5)*70,ty=-22-Math.random()*44,tx2=(Math.random()-.5)*56,ty2=-14-Math.random()*32;
+      d.style.cssText=`width:${sz}px;height:${sz}px;background:${c};left:${3+Math.random()*94}%;top:${4+Math.random()*92}%;--d:${5+Math.random()*7}s;--dl:${Math.random()*5}s;--tx:${tx}px;--ty:${ty}px;--tx2:${tx2}px;--ty2:${ty2}px;border-radius:${Math.random()>.45?'50%':'6px'};opacity:.55`;
+      cta.appendChild(d);
     }
   });
 
-  /* Intersection observer */
-  const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), { threshold:.1 });
-  document.querySelectorAll('.gcard,.step').forEach(el => obs.observe(el));
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:.1});
+  document.querySelectorAll('.gcard,.step').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
