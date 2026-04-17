@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family</title>
   <meta name="description" content="Fuzzy Pop! is a free casual mini-game collection with 7 fun games for kids and families. Play Bubble Pop, Animal Match, Color Catch, and more! Available on iOS and Android." />
-  <meta name="keywords" content="Fuzzy Pop, kids games, family games, casual games, mini games, iOS, Android, free games" />
+  <meta name="keywords" content="Fuzzy Pop, kids games, family games, casual games, mini games, iOS, Android, free games, bubble pop, animal match" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -19,698 +19,1119 @@
   <meta name="twitter:title" content="Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family" />
   <meta name="twitter:description" content="Free casual mini-game collection for kids and families." />
 
-  <!-- Favicon placeholder -->
+  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫧</text></svg>" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --purple:   #5c06e8;
-      --purple-light: #7c3aed;
-      --sky-top:  #4fc3f7;
-      --sky-bot:  #0288d1;
-      --white:    #ffffff;
-      --off-white:#f8faff;
-      --text:     #1a1a2e;
-      --text-soft:#555577;
-      --radius:   24px;
-      --nav-h:    68px;
+      --hero-bg-top: #120826;
+      --hero-bg-bot: #0d1b4b;
+      --gold: #FFD700;
+      --orange: #FF6B35;
+      --purple: #7B2FBE;
+      --c-bubble: #1a8cff;
+      --c-match: #0ad12e;
+      --c-catch: #ff6a00;
+      --c-tap: #f51480;
+      --c-count: #9406fa;
+      --c-shape: #00a69e;
+      --c-fruit: #f50f1a;
+      --nav-h: 72px;
+      --radius: 28px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
-      color: var(--text);
-      background: var(--off-white);
+      color: #1a1a2e;
+      background: #ffffff;
       overflow-x: hidden;
     }
 
-    /* ─── NAV ─────────────────────────────────────────── */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
       height: var(--nav-h);
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(92,6,232,0.1);
       display: flex;
       align-items: center;
-      padding: 0 clamp(16px, 5vw, 48px);
-      gap: 24px;
+      justify-content: space-between;
+      padding: 0 28px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(18, 8, 38, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      z-index: 1000;
     }
+
     .nav-logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--purple);
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: var(--gold);
       text-decoration: none;
-      letter-spacing: -0.5px;
-      white-space: nowrap;
-      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 1px;
     }
-    .nav-logo span { color: var(--sky-bot); }
+
+    .nav-logo .spin-star {
+      display: inline-block;
+      animation: spinStar 3s linear infinite;
+    }
+
+    @keyframes spinStar {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-left: auto;
-      flex-wrap: wrap;
+      list-style: none;
+      gap: 36px;
     }
-    .nav-links a {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-soft);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 50px;
-      transition: all .2s;
-    }
-    .nav-links a:hover { color: var(--purple); background: rgba(92,6,232,0.08); }
-    .nav-cta {
-      background: var(--purple) !important;
-      color: var(--white) !important;
-      padding: 8px 20px !important;
-    }
-    .nav-cta:hover { background: var(--purple-light) !important; transform: translateY(-1px); }
 
-    /* ─── HERO ────────────────────────────────────────── */
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: rgba(18, 8, 38, 0.97);
+      padding: 20px 28px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nav-mobile.open { display: flex; }
+
+    .nav-mobile a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .nav-mobile a:hover { color: var(--gold); }
+
+    /* ─── HERO ────────────────────────────────────────────── */
     .hero {
       position: relative;
-      min-height: calc(100svh - var(--nav-h));
-      background: linear-gradient(160deg, var(--sky-top) 0%, var(--sky-bot) 100%);
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 60% 40%, #2a0a5e 0%, #120826 45%, #0d1b4b 100%);
+    }
+
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      padding: clamp(48px, 10vw, 100px) clamp(16px, 5vw, 48px) 80px;
-      overflow: hidden;
+      padding: 0 24px;
+      padding-top: var(--nav-h);
     }
 
-    /* Floating bubbles */
-    .bubbles-wrap {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .bubble {
-      position: absolute;
-      bottom: -120px;
-      border-radius: 50%;
-      opacity: 0;
-      animation: floatUp linear infinite;
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(0) scale(1);   opacity: 0; }
-      10%  { opacity: 0.65; }
-      90%  { opacity: 0.45; }
-      100% { transform: translateY(-110vh) scale(0.8); opacity: 0; }
+    .hero-title-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
-    .hero-badge {
+    .hero-star-deco {
+      font-size: 2.4rem;
+      animation: rotateStar 8s linear infinite;
       display: inline-block;
-      background: rgba(255,255,255,0.25);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 18px;
-      border-radius: 50px;
-      border: 1.5px solid rgba(255,255,255,0.5);
-      margin-bottom: 20px;
-      backdrop-filter: blur(8px);
+      filter: drop-shadow(0 0 12px var(--gold));
+    }
+    .hero-star-deco.rev { animation-direction: reverse; }
+
+    @keyframes rotateStar {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
     }
 
     .hero-title {
-      font-size: clamp(3.2rem, 12vw, 8rem);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -2px;
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(56px, 10vw, 120px);
       line-height: 1;
-      text-shadow: 0 4px 32px rgba(0,0,0,0.18), 0 1px 0 rgba(255,255,255,0.3);
-      position: relative;
-      z-index: 1;
+      -webkit-text-stroke: 4px #ffffff;
+      background: linear-gradient(90deg,
+        var(--c-bubble),
+        var(--c-match),
+        var(--gold),
+        var(--c-catch),
+        var(--c-tap),
+        var(--c-count),
+        var(--c-shape),
+        var(--c-fruit),
+        var(--c-bubble)
+      );
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: rainbowShift 5s linear infinite;
+      letter-spacing: 2px;
     }
-    .hero-title .pop { color: #fff700; text-shadow: 0 4px 32px rgba(0,0,0,0.25), 0 2px 0 rgba(0,0,0,0.15); }
+
+    @keyframes rainbowShift {
+      0%   { background-position: 0% center; }
+      100% { background-position: 300% center; }
+    }
 
     .hero-subtitle {
-      margin-top: 20px;
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      margin-top: 22px;
+      color: rgba(255,255,255,0.9);
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(15px, 2.5vw, 22px);
       font-weight: 700;
-      color: rgba(255,255,255,0.92);
-      max-width: 520px;
-      line-height: 1.4;
-      position: relative;
-      z-index: 1;
+      letter-spacing: 0.5px;
+      animation: subtlePulse 3s ease-in-out infinite;
     }
 
-    .hero-stars {
-      margin-top: 18px;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-stars-label {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.75);
-      margin-top: 4px;
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 0.9; }
+      50%       { opacity: 1; text-shadow: 0 0 20px rgba(255,255,255,0.4); }
     }
 
-    .hero-badges {
+    /* Floating game emojis */
+    .float-emoji {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      font-size: 72px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .float-emoji.fe-art {
+      left: 6%;
+      top: 35%;
+      font-size: 72px;
+      filter: drop-shadow(0 0 20px var(--c-catch));
+      animation: floatA 7s ease-in-out infinite;
+    }
+    .float-emoji.fe-lion {
+      right: 6%;
+      top: 40%;
+      font-size: 72px;
+      filter: drop-shadow(0 0 20px var(--c-tap));
+      animation: floatB 5.5s ease-in-out infinite;
+    }
+    .float-emoji.fe-bubble {
+      right: 14%;
+      top: 20%;
+      font-size: 56px;
+      filter: drop-shadow(0 0 20px var(--c-bubble));
+      animation: floatC 4s ease-in-out infinite;
+    }
+    .float-emoji.fe-melon {
+      left: 12%;
+      bottom: 22%;
+      font-size: 56px;
+      filter: drop-shadow(0 0 20px var(--c-fruit));
+      animation: floatB 6s ease-in-out infinite 1s;
+    }
+
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50%       { transform: translateY(-30px) rotate(5deg); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: translateY(0) rotate(4deg); }
+      50%       { transform: translateY(-24px) rotate(-4deg); }
+    }
+    @keyframes floatC {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-20px) scale(1.08); }
+    }
+
+    /* Download buttons */
+    .hero-buttons {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 16px;
       justify-content: center;
-      margin-top: 36px;
-      position: relative;
-      z-index: 1;
+      margin-top: 40px;
     }
-    .dl-btn {
+
+    .store-btn {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       padding: 14px 28px;
+      background: rgba(10, 10, 20, 0.85);
+      border: 2px solid rgba(255,255,255,0.3);
       border-radius: 16px;
+      color: #fff;
       text-decoration: none;
+      font-family: 'Nunito', sans-serif;
       font-weight: 800;
       font-size: 1rem;
-      transition: all .25s cubic-bezier(.34,1.56,.64,1);
-      border: none;
-      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      overflow: hidden;
     }
-    .dl-btn-ios {
-      background: #000;
-      color: #fff;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    }
-    .dl-btn-android {
-      background: #fff;
-      color: #1a1a2e;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
-    .dl-btn:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
-    .dl-btn svg { width: 28px; height: 28px; flex-shrink: 0; }
-    .dl-btn-text { text-align: left; line-height: 1.2; }
-    .dl-btn-text small { display: block; font-size: 0.72rem; font-weight: 600; opacity: 0.7; }
-    .dl-btn-text strong { display: block; font-size: 1.05rem; }
 
-    .hero-scroll {
+    .store-btn::before {
+      content: '';
       position: absolute;
-      bottom: 28px;
+      inset: -4px;
+      border-radius: 20px;
+      border: 2px solid var(--gold);
+      opacity: 0;
+      animation: pulseRing 2.5s ease-in-out infinite;
+    }
+
+    .store-btn:nth-child(2)::before {
+      animation-delay: 1.25s;
+    }
+
+    @keyframes pulseRing {
+      0%   { transform: scale(1);   opacity: 0.6; }
+      100% { transform: scale(1.18); opacity: 0; }
+    }
+
+    .store-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 40px rgba(255,215,0,0.35);
+      border-color: var(--gold);
+    }
+
+    .store-btn svg {
+      flex-shrink: 0;
+    }
+
+    .btn-label-small {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      opacity: 0.7;
+      letter-spacing: 0.5px;
+    }
+    .btn-label-big {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      animation: bounce 2s ease-in-out infinite;
-    }
-    .hero-scroll svg { width: 20px; height: 20px; }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
-
-    /* ─── SECTION COMMON ──────────────────────────────── */
-    section { padding: clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px); }
-    .section-label {
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 900;
-      color: var(--text);
-      letter-spacing: -1px;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-    .section-sub {
-      font-size: 1.1rem;
-      color: var(--text-soft);
-      max-width: 560px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.75rem;
       font-weight: 600;
-      line-height: 1.6;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
-    .section-head { text-align: center; margin-bottom: clamp(32px, 6vw, 56px); }
 
-    /* ─── GAMES SECTION ───────────────────────────────── */
-    .games { background: #fff; }
+    .scroll-chevron {
+      width: 24px;
+      height: 24px;
+      border-right: 3px solid rgba(255,255,255,0.5);
+      border-bottom: 3px solid rgba(255,255,255,0.5);
+      transform: rotate(45deg);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(8px); }
+    }
+
+    /* ─── GAMES SECTION ───────────────────────────────────── */
+    .games-section {
+      background: #f8f4ff;
+      padding: 80px 24px 100px;
+    }
+
+    .section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(36px, 6vw, 72px);
+      text-align: center;
+      color: #120826;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 60px;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--gold);
+      margin-top: 8px;
+      clip-path: polygon(0 20%, 2% 0, 4% 20%, 6% 0, 8% 20%, 10% 0, 12% 20%, 14% 0, 16% 20%, 18% 0, 20% 20%, 22% 0, 24% 20%, 26% 0, 28% 20%, 30% 0, 32% 20%, 34% 0, 36% 20%, 38% 0, 40% 20%, 42% 0, 44% 20%, 46% 0, 48% 20%, 50% 0, 52% 20%, 54% 0, 56% 20%, 58% 0, 60% 20%, 62% 0, 64% 20%, 66% 0, 68% 20%, 70% 0, 72% 20%, 74% 0, 76% 20%, 78% 0, 80% 20%, 82% 0, 84% 20%, 86% 0, 88% 20%, 90% 0, 92% 20%, 94% 0, 96% 20%, 98% 0, 100% 20%, 100% 100%, 0 100%);
+    }
 
     .games-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: 1fr;
+      gap: 28px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* Game cards */
+    .game-card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 3px solid var(--c);
+      box-shadow: 0 8px 32px color-mix(in srgb, var(--c) 25%, transparent),
+                  0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s;
+      cursor: pointer;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .game-card.visible {
+      animation: cardIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 20px 60px color-mix(in srgb, var(--c) 40%, transparent),
+                  0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .game-card:hover .card-shine { animation: shine 0.45s linear; }
+
+    .card-banner {
+      height: 120px;
+      background: linear-gradient(135deg, var(--c), var(--cd));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.12) 0%, transparent 60%),
+                  repeating-radial-gradient(circle, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 14px);
+    }
+
+    .card-emoji {
+      font-size: 72px;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    }
+
+    .card-shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+      transform: translateX(-100%);
+      pointer-events: none;
+    }
+
+    @keyframes shine {
+      from { transform: translateX(-100%); }
+      to   { transform: translateX(100%); }
+    }
+
+    .card-body {
+      padding: 20px 22px 24px;
+    }
+
+    .card-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--c);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .card-desc {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      color: #555577;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card-stars {
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+    }
+
+    /* ─── FEATURES SECTION ────────────────────────────────── */
+    .features-section {
+      background: #120826;
+      padding: 80px 24px 100px;
+    }
+
+    .features-section .section-title {
+      color: var(--gold);
+    }
+
+    .features-section .section-title::after {
+      background: var(--orange);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 24px;
       max-width: 1100px;
       margin: 0 auto;
     }
 
-    .game-card {
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    .game-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .game-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
-      border-radius: inherit;
-    }
-    .game-card:hover { transform: translateY(-8px) scale(1.02); }
-
-    .game-card[data-color="#1a8cff"] { background: linear-gradient(135deg,#1a8cff,#006edb); box-shadow: 0 12px 40px rgba(26,140,255,0.4); }
-    .game-card[data-color="#0ad12e"] { background: linear-gradient(135deg,#0ad12e,#079e22); box-shadow: 0 12px 40px rgba(10,209,46,0.35); }
-    .game-card[data-color="#ff6a00"] { background: linear-gradient(135deg,#ff6a00,#e05500); box-shadow: 0 12px 40px rgba(255,106,0,0.4); }
-    .game-card[data-color="#f51480"] { background: linear-gradient(135deg,#f51480,#c01060); box-shadow: 0 12px 40px rgba(245,20,128,0.4); }
-    .game-card[data-color="#9406fa"] { background: linear-gradient(135deg,#9406fa,#6b04b8); box-shadow: 0 12px 40px rgba(148,6,250,0.4); }
-    .game-card[data-color="#00a69e"] { background: linear-gradient(135deg,#00a69e,#007b75); box-shadow: 0 12px 40px rgba(0,166,158,0.4); }
-    .game-card[data-color="#f50f1a"] { background: linear-gradient(135deg,#f50f1a,#b80011); box-shadow: 0 12px 40px rgba(245,15,26,0.4); }
-
-    .game-card-icon { font-size: 3.5rem; margin-bottom: 16px; line-height: 1; }
-    .game-card-name {
-      font-size: 1.4rem;
-      font-weight: 900;
-      margin-bottom: 8px;
-      letter-spacing: -0.3px;
-    }
-    .game-card-desc {
-      font-size: 0.95rem;
-      font-weight: 600;
-      opacity: 0.88;
-      line-height: 1.5;
-    }
-    .game-card-tag {
-      display: inline-block;
-      margin-top: 16px;
-      background: rgba(255,255,255,0.22);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 50px;
-      padding: 4px 12px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    /* ─── FEATURES SECTION ────────────────────────────── */
-    .features { background: var(--off-white); }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 20px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
     .feature-card {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: 0 4px 24px rgba(92,6,232,0.08);
-      border: 1.5px solid rgba(92,6,232,0.07);
-      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      transition: border-color 0.25s, transform 0.25s;
       opacity: 0;
-      transform: translateY(30px);
-    }
-    .feature-card.visible { opacity: 1; transform: translateY(0); }
-    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(92,6,232,0.15); }
-    .feature-icon { font-size: 2.8rem; margin-bottom: 14px; }
-    .feature-title {
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .feature-desc {
-      font-size: 0.9rem;
-      color: var(--text-soft);
-      font-weight: 600;
-      line-height: 1.5;
+      transform: translateX(-40px);
     }
 
-    /* ─── DOWNLOAD SECTION ────────────────────────────── */
-    .download-section {
-      background: linear-gradient(135deg, var(--purple) 0%, #8b2be2 100%);
-      text-align: center;
-      padding: clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px);
+    .feature-card.visible {
+      animation: slideIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards;
     }
-    .download-section .section-label { color: rgba(255,255,255,0.7); }
-    .download-section .section-title { color: #fff; }
-    .download-section .section-sub { color: rgba(255,255,255,0.8); margin: 0 auto 40px; }
-    .download-btns {
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .feature-card:hover {
+      border-color: var(--gold);
+      transform: scale(1.02);
+    }
+
+    .feature-icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .feature-icon-wrap.ic1 { background: rgba(255,215,0,0.15); box-shadow: 0 0 24px rgba(255,215,0,0.3); }
+    .feature-icon-wrap.ic2 { background: rgba(26,140,255,0.15); box-shadow: 0 0 24px rgba(26,140,255,0.3); }
+    .feature-icon-wrap.ic3 { background: rgba(10,209,46,0.15); box-shadow: 0 0 24px rgba(10,209,46,0.3); }
+    .feature-icon-wrap.ic4 { background: rgba(255,107,53,0.15); box-shadow: 0 0 24px rgba(255,107,53,0.3); }
+
+    .feature-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.35rem;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-desc {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    /* ─── DOWNLOAD CTA SECTION ────────────────────────────── */
+    .cta-section {
+      position: relative;
+      padding: 100px 24px;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #120826 0%, #1e0a5c 40%, #0d1b4b 100%);
+      background-size: 300% 300%;
+      animation: ctaBgShift 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes ctaBgShift {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .cta-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta-glow.g1 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(123,47,190,0.35) 0%, transparent 70%);
+      top: -100px; left: -100px;
+      animation: glowPulse 5s ease-in-out infinite;
+    }
+    .cta-glow.g2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, transparent 70%);
+      bottom: -80px; right: -60px;
+      animation: glowPulse 5s ease-in-out infinite 2.5s;
+    }
+    .cta-glow.g3 {
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(26,140,255,0.2) 0%, transparent 70%);
+      top: 20%; right: 20%;
+      animation: glowPulse 6s ease-in-out infinite 1s;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50%       { transform: scale(1.2); opacity: 1; }
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(42px, 7vw, 72px);
+      color: #fff;
+      -webkit-text-stroke: 3px rgba(255,255,255,0.2);
+      letter-spacing: 2px;
+      text-shadow: 0 0 60px rgba(255,215,0,0.3);
+      margin-bottom: 14px;
+    }
+
+    .cta-sub {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
       gap: 16px;
       justify-content: center;
-      flex-wrap: wrap;
-    }
-    .download-section .dl-btn-ios { box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
-    .download-section .dl-btn-android { box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
-    .download-free-tag {
-      margin-top: 20px;
-      color: rgba(255,255,255,0.65);
-      font-size: 0.9rem;
-      font-weight: 700;
+      margin-bottom: 28px;
     }
 
-    /* ─── FOOTER ──────────────────────────────────────── */
-    footer {
-      background: #0f0f1a;
-      color: rgba(255,255,255,0.7);
-      text-align: center;
-      padding: 48px clamp(16px, 5vw, 48px) 32px;
-    }
-    .footer-logo {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .footer-logo span { color: var(--sky-top); }
-    .footer-tagline {
+    .cta-tagline {
+      font-family: 'Nunito', sans-serif;
       font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 28px;
-      opacity: 0.6;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 1px;
     }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: #0a0a1a;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .footer-copy {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+
     .footer-links {
       display: flex;
-      gap: 8px;
       flex-wrap: wrap;
+      gap: 8px 24px;
       justify-content: center;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
+
     .footer-links a {
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.5);
       text-decoration: none;
+      font-family: 'Nunito', sans-serif;
       font-size: 0.9rem;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: color .2s, background .2s;
-    }
-    .footer-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-    .footer-sep { color: rgba(255,255,255,0.2); }
-    .footer-copy {
-      font-size: 0.8rem;
-      opacity: 0.4;
-      margin-top: 8px;
+      font-weight: 600;
+      transition: color 0.2s;
     }
 
-    /* ─── RESPONSIVE ──────────────────────────────────── */
-    @media (max-width: 600px) {
-      .nav-links a:not(.nav-cta) { display: none; }
-      .hero-badges { flex-direction: column; align-items: center; }
-      .dl-btn { width: 240px; justify-content: center; }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-heart {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.35);
     }
 
-    /* ─── ANIMATION HELPERS ───────────────────────────── */
-    .game-card { transition: opacity .5s ease, transform .5s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
-    .feature-card { transition: opacity .5s ease, transform .5s cubic-bezier(.34,1.56,.64,1), box-shadow .25s; }
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (min-width: 540px) {
+      .games-grid { grid-template-columns: 1fr 1fr; }
+    }
 
-    /* Stagger delays */
-    .game-card:nth-child(1) { transition-delay: 0s; }
-    .game-card:nth-child(2) { transition-delay: .07s; }
-    .game-card:nth-child(3) { transition-delay: .14s; }
-    .game-card:nth-child(4) { transition-delay: .21s; }
-    .game-card:nth-child(5) { transition-delay: .28s; }
-    .game-card:nth-child(6) { transition-delay: .35s; }
-    .game-card:nth-child(7) { transition-delay: .42s; }
-    .feature-card:nth-child(1) { transition-delay: 0s; }
-    .feature-card:nth-child(2) { transition-delay: .08s; }
-    .feature-card:nth-child(3) { transition-delay: .16s; }
-    .feature-card:nth-child(4) { transition-delay: .24s; }
+    @media (min-width: 768px) {
+      .nav-hamburger { display: none !important; }
+      .nav-links { display: flex !important; }
+
+      .features-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .games-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 1200px) {
+      .games-grid { grid-template-columns: repeat(4, 1fr); }
+      .features-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (max-width: 767px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+      .float-emoji.fe-art,
+      .float-emoji.fe-lion { font-size: 48px; }
+      .float-emoji.fe-bubble,
+      .float-emoji.fe-melon { font-size: 36px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- ─── NAV ──────────────────────────────────────────── -->
-<nav class="nav" role="navigation" aria-label="Main navigation">
-  <a href="index.html" class="nav-logo">Fuzzy <span>Pop!</span></a>
-  <div class="nav-links">
-    <a href="#games">Games</a>
-    <a href="#features">Features</a>
-    <a href="support.html">Support</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="#download" class="nav-cta">Download Free</a>
-  </div>
-</nav>
-
-<!-- ─── HERO ─────────────────────────────────────────── -->
-<header class="hero" role="banner">
-  <div class="bubbles-wrap" aria-hidden="true" id="bubblesWrap"></div>
-
-  <div class="hero-badge">Free to Play &bull; iOS &amp; Android</div>
-
-  <h1 class="hero-title">FUZZY <span class="pop">POP!</span></h1>
-
-  <p class="hero-subtitle">7 fun mini-games for the whole family — pop, match, slash, and more!</p>
-
-  <div class="hero-stars" aria-label="Five stars">⭐⭐⭐⭐⭐</div>
-  <p class="hero-stars-label">Loved by kids &amp; families everywhere</p>
-
-  <div class="hero-badges">
-    <a href="#appstore" class="dl-btn dl-btn-ios" aria-label="Download on the App Store">
-      <!-- Apple icon -->
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      <span class="dl-btn-text"><small>Download on the</small><strong>App Store</strong></span>
-    </a>
-    <a href="#googleplay" class="dl-btn dl-btn-android" aria-label="Get it on Google Play">
-      <!-- Google Play icon -->
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3.18 23.76c.36.2.78.22 1.16.07L14.84 12 4.34.17C3.96.02 3.54.04 3.18.24 2.46.65 2 1.44 2 2.29v19.42c0 .85.46 1.64 1.18 2.05z" fill="#32BBFF"/>
-        <path d="M20.96 10.16l-3.03-1.74-3.63 3.58 3.63 3.58 3.06-1.76c.87-.5 1.41-1.42 1.41-2.4 0-.97-.54-1.76-1.44-2.26z" fill="#FFD400"/>
-        <path d="M4.34.17 14.84 12 4.34 23.83c-.13-.04-.26-.1-.38-.17A2.29 2.29 0 0 1 2 21.71V2.29C2 1.44 2.46.65 3.18.24c.38-.22.81-.26 1.16-.07z" fill="#32BBFF"/>
-        <path d="m4.34.17 10.5 11.83 3.09-3.08L7.17.22A2.04 2.04 0 0 0 4.34.17z" fill="#2C9FD9"/>
-        <path d="m4.34 23.83 10.5-11.83 3.09 3.08-10.76 6.7a2.04 2.04 0 0 1-2.83-.95z" fill="#29CC5E"/>
-      </svg>
-      <span class="dl-btn-text"><small>Get it on</small><strong>Google Play</strong></span>
-    </a>
-  </div>
-
-  <div class="hero-scroll" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    Explore
-  </div>
-</header>
-
-<!-- ─── GAMES SECTION ─────────────────────────────────── -->
-<section class="games" id="games">
-  <div class="section-head">
-    <p class="section-label">Mini-Game Collection</p>
-    <h2 class="section-title">7 Games, Endless Fun</h2>
-    <p class="section-sub">Every game is designed to be instantly playable — no tutorials, no wait times, just pure joy.</p>
-  </div>
-
-  <div class="games-grid" id="gamesGrid">
-
-    <article class="game-card" data-color="#1a8cff">
-      <div class="game-card-icon">🫧</div>
-      <h3 class="game-card-name">Bubble Pop</h3>
-      <p class="game-card-desc">Tap the colorful bubbles before they float away! Fast reflexes earn big points.</p>
-      <span class="game-card-tag">Reflexes</span>
-    </article>
-
-    <article class="game-card" data-color="#0ad12e">
-      <div class="game-card-icon">🐾</div>
-      <h3 class="game-card-name">Animal Match</h3>
-      <p class="game-card-desc">Find matching pairs of cute animals. Train your memory with furry friends!</p>
-      <span class="game-card-tag">Memory</span>
-    </article>
-
-    <article class="game-card" data-color="#ff6a00">
-      <div class="game-card-icon">🎨</div>
-      <h3 class="game-card-name">Color Catch</h3>
-      <p class="game-card-desc">Move the basket to catch falling balls of the right color. Speed and focus!</p>
-      <span class="game-card-tag">Focus</span>
-    </article>
-
-    <article class="game-card" data-color="#f51480">
-      <div class="game-card-icon">🐸</div>
-      <h3 class="game-card-name">Animal Tap</h3>
-      <p class="game-card-desc">Tap the correct animals as they pop up on screen. How fast can you go?</p>
-      <span class="game-card-tag">Speed</span>
-    </article>
-
-    <article class="game-card" data-color="#9406fa">
-      <div class="game-card-icon">🔢</div>
-      <h3 class="game-card-name">Count Pop</h3>
-      <p class="game-card-desc">Pop the bubbles in the right number order. Learning math never felt so fun!</p>
-      <span class="game-card-tag">Learning</span>
-    </article>
-
-    <article class="game-card" data-color="#00a69e">
-      <div class="game-card-icon">🔷</div>
-      <h3 class="game-card-name">Shape Sorter</h3>
-      <p class="game-card-desc">Drag each shape into its matching slot before time runs out. Think fast!</p>
-      <span class="game-card-tag">Puzzle</span>
-    </article>
-
-    <article class="game-card" data-color="#f50f1a">
-      <div class="game-card-icon">🍉</div>
-      <h3 class="game-card-name">Fruit Slash</h3>
-      <p class="game-card-desc">Swipe to slice flying fruit in mid-air. A juicy twist on classic action!</p>
-      <span class="game-card-tag">Action</span>
-    </article>
-
-  </div>
-</section>
-
-<!-- ─── FEATURES SECTION ──────────────────────────────── -->
-<section class="features" id="features">
-  <div class="section-head">
-    <p class="section-label">Why Families Love It</p>
-    <h2 class="section-title">Simple. Safe. Fun.</h2>
-    <p class="section-sub">Fuzzy Pop! is designed for everyone — from tiny tots to grandparents.</p>
-  </div>
-
-  <div class="features-grid" id="featuresGrid">
-    <div class="feature-card">
-      <div class="feature-icon">🆓</div>
-      <h3 class="feature-title">Free to Play</h3>
-      <p class="feature-desc">All 7 games are completely free. Optional one-time "Remove Ads" for $1.99.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🚫</div>
-      <h3 class="feature-title">No Sign-Up Needed</h3>
-      <p class="feature-desc">Jump right in — no account, no email, no personal info required. Ever.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">👨‍👩‍👧‍👦</div>
-      <h3 class="feature-title">Family Friendly</h3>
-      <p class="feature-desc">Rated 4+ with child-safe ads. Designed for all ages from preschool up.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">✈️</div>
-      <h3 class="feature-title">Play Offline</h3>
-      <p class="feature-desc">No Wi-Fi? No problem. All games work perfectly without an internet connection.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─── DOWNLOAD CTA ───────────────────────────────────── -->
-<section class="download-section" id="download">
-  <p class="section-label">Ready to Pop?</p>
-  <h2 class="section-title" style="color:#fff;">Download Free Today</h2>
-  <p class="section-sub">Available on iPhone, iPad, and Android devices. Free forever, no strings attached.</p>
-  <div class="download-btns">
-    <a href="#appstore" class="dl-btn dl-btn-ios" aria-label="Download on the App Store">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      <span class="dl-btn-text"><small>Download on the</small><strong>App Store</strong></span>
-    </a>
-    <a href="#googleplay" class="dl-btn dl-btn-android" aria-label="Get it on Google Play">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3.18 23.76c.36.2.78.22 1.16.07L14.84 12 4.34.17C3.96.02 3.54.04 3.18.24 2.46.65 2 1.44 2 2.29v19.42c0 .85.46 1.64 1.18 2.05z" fill="#32BBFF"/>
-        <path d="M20.96 10.16l-3.03-1.74-3.63 3.58 3.63 3.58 3.06-1.76c.87-.5 1.41-1.42 1.41-2.4 0-.97-.54-1.76-1.44-2.26z" fill="#FFD400"/>
-        <path d="M4.34.17 14.84 12 4.34 23.83c-.13-.04-.26-.1-.38-.17A2.29 2.29 0 0 1 2 21.71V2.29C2 1.44 2.46.65 3.18.24c.38-.22.81-.26 1.16-.07z" fill="#32BBFF"/>
-        <path d="m4.34.17 10.5 11.83 3.09-3.08L7.17.22A2.04 2.04 0 0 0 4.34.17z" fill="#2C9FD9"/>
-        <path d="m4.34 23.83 10.5-11.83 3.09 3.08-10.76 6.7a2.04 2.04 0 0 1-2.83-.95z" fill="#29CC5E"/>
-      </svg>
-      <span class="dl-btn-text"><small>Get it on</small><strong>Google Play</strong></span>
-    </a>
-  </div>
-  <p class="download-free-tag">Free &bull; No subscription &bull; Remove ads for $1.99</p>
-</section>
-
-<!-- ─── FOOTER ────────────────────────────────────────── -->
-<footer role="contentinfo">
-  <div class="footer-logo">PlayPal <span>Apps</span></div>
-  <p class="footer-tagline">Making joyful games for the whole family</p>
-  <nav class="footer-links" aria-label="Footer navigation">
-    <a href="privacy.html">Privacy Policy</a>
-    <span class="footer-sep" aria-hidden="true">&bull;</span>
-    <a href="terms.html">Terms of Service</a>
-    <span class="footer-sep" aria-hidden="true">&bull;</span>
-    <a href="support.html">Support</a>
-    <span class="footer-sep" aria-hidden="true">&bull;</span>
-    <a href="mailto:support@playpalapps.com">support@playpalapps.com</a>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">🫧 FUZZY POP! <span class="spin-star">✨</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#games">Games</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#download">Download</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">☰</button>
   </nav>
-  <p class="footer-copy">&copy; 2026 PlayPal Apps. All rights reserved.</p>
-</footer>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="#games" onclick="closeMobileNav()">Games</a>
+    <a href="#features" onclick="closeMobileNav()">Features</a>
+    <a href="#download" onclick="closeMobileNav()">Download</a>
+  </div>
 
-<script>
-  /* ── Bubble generator ─────────────────────────────── */
-  (function () {
-    const wrap = document.getElementById('bubblesWrap');
-    if (!wrap) return;
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="particle-canvas"></canvas>
 
-    const colors = [
-      'rgba(255,255,255,0.55)',
-      'rgba(255,247,0,0.4)',
-      'rgba(79,195,247,0.5)',
-      'rgba(255,106,0,0.35)',
-      'rgba(148,6,250,0.3)',
-      'rgba(10,209,46,0.3)',
+    <!-- Floating emojis -->
+    <span class="float-emoji fe-art" aria-hidden="true">🎨</span>
+    <span class="float-emoji fe-lion" aria-hidden="true">🦁</span>
+    <span class="float-emoji fe-bubble" aria-hidden="true">🫧</span>
+    <span class="float-emoji fe-melon" aria-hidden="true">🍉</span>
+
+    <div class="hero-content">
+      <div class="hero-title-wrap">
+        <span class="hero-star-deco" aria-hidden="true">✦</span>
+        <h1 class="hero-title">FUZZY POP!</h1>
+        <span class="hero-star-deco rev" aria-hidden="true">✦</span>
+      </div>
+
+      <p class="hero-subtitle">7 magical mini-games &middot; Free to play &middot; No sign-up</p>
+
+      <div class="hero-buttons">
+        <a href="#appstore" class="store-btn" aria-label="Download on the App Store">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <span>
+            <span class="btn-label-small">Download on the</span>
+            <span class="btn-label-big">App Store</span>
+          </span>
+        </a>
+        <a href="#googleplay" class="store-btn" aria-label="Get it on Google Play">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.18 23.76c.37.2.8.22 1.21.02l12.71-7.23-2.78-2.78-11.14 9.99zM.69 1.7C.27 2.06 0 2.62 0 3.33v17.34c0 .71.27 1.27.69 1.63l.09.08 9.71-9.71v-.23L.78 1.62.69 1.7zM20.12 10.43l-2.56-1.46-3.07 3.07 3.07 3.07 2.59-1.47c.74-.42.74-1.79-.03-2.21zM4.39.22L17.1 7.45l-2.78 2.78L3.18.24C3.59.04 4.02.02 4.39.22z"/>
+          </svg>
+          <span>
+            <span class="btn-label-small">Get it on</span>
+            <span class="btn-label-big">Google Play</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-chevron"></div>
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section class="games-section" id="games">
+    <h2 class="section-title">THE GAMES</h2>
+    <div class="games-grid" id="gamesGrid"></div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <h2 class="section-title">WHY YOU'LL LOVE IT</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrap ic1">🎮</div>
+        <div>
+          <div class="feature-title">Free to Play</div>
+          <div class="feature-desc">No hidden costs, ever. Jump straight in and enjoy all 7 games without spending a penny.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap ic2">📶</div>
+        <div>
+          <div class="feature-title">Play Offline</div>
+          <div class="feature-desc">No Wi-Fi needed. Play anywhere, anytime — on a plane, in the car, or at the park.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap ic3">👨‍👩‍👧‍👦</div>
+        <div>
+          <div class="feature-title">Family Friendly</div>
+          <div class="feature-desc">Safe for all ages. Zero inappropriate content. Games designed for kids, loved by everyone.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap ic4">⚡</div>
+        <div>
+          <div class="feature-title">Instant Fun</div>
+          <div class="feature-desc">No tutorials, no sign-up. Just tap and play! Every game is intuitive from the first second.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD CTA -->
+  <section class="cta-section" id="download">
+    <div class="cta-glow g1"></div>
+    <div class="cta-glow g2"></div>
+    <div class="cta-glow g3"></div>
+    <div class="cta-content">
+      <h2 class="cta-title">READY TO PLAY?</h2>
+      <p class="cta-sub">Download free on iOS and Android</p>
+      <div class="cta-buttons">
+        <a href="#appstore" class="store-btn" aria-label="Download on the App Store">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <span>
+            <span class="btn-label-small">Download on the</span>
+            <span class="btn-label-big">App Store</span>
+          </span>
+        </a>
+        <a href="#googleplay" class="store-btn" aria-label="Get it on Google Play">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.18 23.76c.37.2.8.22 1.21.02l12.71-7.23-2.78-2.78-11.14 9.99zM.69 1.7C.27 2.06 0 2.62 0 3.33v17.34c0 .71.27 1.27.69 1.63l.09.08 9.71-9.71v-.23L.78 1.62.69 1.7zM20.12 10.43l-2.56-1.46-3.07 3.07 3.07 3.07 2.59-1.47c.74-.42.74-1.79-.03-2.21zM4.39.22L17.1 7.45l-2.78 2.78L3.18.24C3.59.04 4.02.02 4.39.22z"/>
+          </svg>
+          <span>
+            <span class="btn-label-small">Get it on</span>
+            <span class="btn-label-big">Google Play</span>
+          </span>
+        </a>
+      </div>
+      <p class="cta-tagline">★ 7 Games &middot; Free &middot; No Ads Option &middot; Offline Play</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">🫧 FUZZY POP! by PlayPal Apps</span>
+    <p class="footer-copy">© 2026 PlayPal Apps. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="support.html">Support</a>
+    </div>
+    <p class="footer-heart">Made with ❤️ for families everywhere</p>
+  </footer>
+
+  <script>
+    // ─── GAME DATA ─────────────────────────────────────────────
+    const games = [
+      { id:'bubble', name:'Bubble Pop',   emoji:'🫧', color:'#1a8cff', dark:'#0055cc', desc:'Pop the bubbles before they escape!' },
+      { id:'match',  name:'Animal Match', emoji:'🐾', color:'#0ad12e', dark:'#007a1a', desc:'Find all the matching animal pairs!' },
+      { id:'catch',  name:'Color Catch',  emoji:'🎨', color:'#ff6a00', dark:'#b34700', desc:'Catch falling objects by colour!' },
+      { id:'tap',    name:'Animal Tap',   emoji:'🦁', color:'#f51480', dark:'#a0005a', desc:'Tap the animals as fast as you can!' },
+      { id:'count',  name:'Count Pop',    emoji:'🔢', color:'#9406fa', dark:'#5c0099', desc:'Pop the bubbles in the right order!' },
+      { id:'shape',  name:'Shape Sorter', emoji:'🔷', color:'#00a69e', dark:'#006b66', desc:'Sort the falling shapes into the right bins!' },
+      { id:'fruit',  name:'Fruit Slash',  emoji:'🍉', color:'#f50f1a', dark:'#a00010', desc:'Slice the fruit with a swipe!' },
     ];
 
-    function makeBubble() {
-      const b = document.createElement('div');
-      b.className = 'bubble';
-      const size = 18 + Math.random() * 64;
-      b.style.cssText = [
-        `width:${size}px`,
-        `height:${size}px`,
-        `left:${Math.random() * 100}%`,
-        `background:${colors[Math.floor(Math.random() * colors.length)]}`,
-        `border:2px solid rgba(255,255,255,0.4)`,
-        `animation-duration:${6 + Math.random() * 10}s`,
-        `animation-delay:${Math.random() * 8}s`,
-      ].join(';');
-      wrap.appendChild(b);
-      // Remove after animation to avoid DOM bloat
-      b.addEventListener('animationiteration', () => {
-        b.style.animationDelay = '0s';
-      });
+    // Build game cards
+    const grid = document.getElementById('gamesGrid');
+    games.forEach((g, i) => {
+      const card = document.createElement('article');
+      card.className = 'game-card';
+      card.style.setProperty('--c', g.color);
+      card.style.setProperty('--cd', g.dark);
+      card.style.animationDelay = (i * 80) + 'ms';
+      card.innerHTML = `
+        <div class="card-banner">
+          <span class="card-emoji" role="img" aria-label="${g.name}">${g.emoji}</span>
+          <div class="card-shine"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">${g.name}</div>
+          <div class="card-desc">${g.desc}</div>
+          <div class="card-stars">★★★★★</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // ─── PARTICLE CANVAS ───────────────────────────────────────
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let W, H, mouse = { x: -9999, y: -9999 };
+    const BRAND_COLORS = ['#1a8cff','#0ad12e','#ff6a00','#f51480','#9406fa','#00a69e','#f50f1a','#FFD700','#ffffff','#ffffff'];
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
     }
 
-    for (let i = 0; i < 22; i++) makeBubble();
-  })();
+    window.addEventListener('resize', resize);
+    resize();
 
-  /* ── Intersection Observer — pop-in animations ───── */
-  (function () {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
+    class Particle {
+      constructor() { this.reset(true); }
+
+      reset(initial) {
+        this.x     = Math.random() * W;
+        this.y     = initial ? Math.random() * H : H + 20;
+        this.size  = 4 + Math.random() * 18;
+        this.speedY = 0.3 + Math.random() * 1.2;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.color  = BRAND_COLORS[Math.floor(Math.random() * BRAND_COLORS.length)];
+        this.opacity = 0.15 + Math.random() * 0.6;
+        this.phase  = Math.random() * Math.PI * 2;
+        // type: 0=bubble, 1=star, 2=dot
+        const r = Math.random();
+        this.type = r < 0.45 ? 0 : r < 0.65 ? 1 : 2;
+      }
+
+      update(t) {
+        this.y -= this.speedY;
+        this.x += this.speedX + Math.sin(t * 0.001 + this.phase) * 0.3;
+
+        // Mouse repulsion
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          const force = (120 - dist) / 120;
+          this.x += (dx / dist) * force * 3;
+          this.y += (dy / dist) * force * 3;
+        }
+
+        // Fade near edges
+        const edgeFade = Math.min(this.y / 60, 1) * Math.min((H - this.y) / 60, 1);
+        this.displayOpacity = this.opacity * Math.max(0, edgeFade);
+
+        if (this.y < -40) this.reset(false);
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.displayOpacity;
+
+        if (this.type === 0) {
+          // Bubble
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+          // Inner highlight
+          ctx.beginPath();
+          ctx.arc(this.x - this.size * 0.3, this.y - this.size * 0.3, this.size * 0.25, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,0.6)';
+          ctx.fill();
+        } else if (this.type === 1) {
+          // Star ✦
+          ctx.fillStyle = this.color;
+          ctx.font = `${this.size * 1.4}px serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('✦', this.x, this.y);
+        } else {
+          // Small dot
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size * 0.4, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+    }
+
+    const particles = Array.from({ length: 60 }, () => new Particle());
+
+    let raf;
+    function animate(t) {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => { p.update(t); p.draw(); });
+      raf = requestAnimationFrame(animate);
+    }
+
+    // Only animate when hero is visible
+    const heroSection = document.querySelector('.hero');
+    const heroObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        if (!raf) raf = requestAnimationFrame(animate);
+      } else {
+        cancelAnimationFrame(raf);
+        raf = null;
+      }
+    }, { threshold: 0 });
+    heroObs.observe(heroSection);
+
+    canvas.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+    // ─── SCROLL ANIMATIONS (IntersectionObserver) ──────────────
+    // Game cards
+    const cardObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          cardObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll('.game-card, .feature-card').forEach(el => observer.observe(el));
-  })();
-</script>
+    document.querySelectorAll('.game-card').forEach(card => cardObs.observe(card));
+
+    // Feature cards
+    const featObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100 * Array.from(document.querySelectorAll('.feature-card')).indexOf(entry.target));
+          featObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.feature-card').forEach(card => featObs.observe(card));
+
+    // ─── MOBILE NAV ────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+    }
+
+    // Close mobile nav on outside click
+    document.addEventListener('click', e => {
+      if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
