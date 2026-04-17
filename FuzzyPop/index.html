@@ -63,8 +63,7 @@
     .hero-eyebrow{display:inline-block;background:var(--sun);color:var(--navy);font-weight:800;font-size:.95rem;padding:8px 20px;border-radius:50px;margin-bottom:26px;box-shadow:0 4px 14px rgba(255,217,61,.4)}
     .hero-title{font-family:'Fredoka One',cursive;font-size:clamp(3.8rem,9vw,6.8rem);line-height:1;color:var(--navy);margin-bottom:22px;text-shadow:5px 7px 0 rgba(255,107,107,.18),10px 14px 0 rgba(132,94,194,.10);letter-spacing:-1px}
     .hero-sub{font-size:1.2rem;font-weight:700;color:var(--soft);line-height:1.6;margin-bottom:20px}
-    .hero-stars{display:flex;align-items:center;gap:8px;margin-bottom:36px;font-size:.95rem;color:var(--soft);font-weight:600}
-    .stars-gold{color:#FFB800;font-size:1.2rem;letter-spacing:2px}
+    .hero-stars{display:flex;align-items:center;gap:8px;margin-bottom:36px;font-size:.95rem;color:var(--soft);font-weight:700;flex-wrap:wrap}
     .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
     .btn-store{display:flex;align-items:center;gap:12px;padding:14px 26px;border-radius:18px;text-decoration:none;transition:transform .22s,box-shadow .22s;animation:btnBounce 3s ease-in-out infinite}
     .btn-store:nth-child(2){animation-delay:.5s}
@@ -145,19 +144,14 @@
     .step-title{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--navy);margin-bottom:10px}
     .step-desc{font-size:.95rem;color:var(--soft);line-height:1.65;font-weight:600;max-width:240px;margin:0 auto}
 
-    /* TESTIMONIALS */
-    .testimonials{padding:90px 5%;background:linear-gradient(135deg,#FFF0F9 0%,#F0F4FF 100%)}
-    .testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;max-width:1100px;margin:0 auto}
-    .testi-card{background:#fff;border-radius:22px;padding:28px 26px;box-shadow:0 4px 24px rgba(0,0,0,.07);opacity:0;transform:translateY(24px);transition:transform .2s}
-    .testi-card.visible{opacity:1;transform:translateY(0)}
-    .testi-card:hover{transform:translateY(-5px)}
-    .testi-stars{color:#FFB800;font-size:1.1rem;letter-spacing:3px;margin-bottom:14px}
-    .testi-text{font-size:1rem;color:var(--navy);line-height:1.7;font-weight:700;margin-bottom:18px;font-style:italic}
-    .testi-text::before{content:'\201C';font-family:'Fredoka One',cursive;font-size:2.4rem;color:var(--sun);line-height:0;vertical-align:-.4em;margin-right:4px}
-    .testi-author{display:flex;align-items:center;gap:12px}
-    .testi-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
-    .testi-name{font-weight:800;font-size:.9rem;color:var(--navy)}
-    .testi-meta{font-size:.8rem;color:var(--soft);font-weight:600}
+    /* LAUNCH SECTION */
+    .launch-sec{padding:90px 5%;background:linear-gradient(135deg,#FFF0F9 0%,#F0F4FF 100%)}
+    .launch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;max-width:1000px;margin:0 auto}
+    .launch-card{background:#fff;border-radius:22px;padding:32px 28px;box-shadow:0 4px 24px rgba(0,0,0,.07);text-align:center;transition:transform .2s}
+    .launch-card:hover{transform:translateY(-5px)}
+    .launch-icon{width:70px;height:70px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 18px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+    .launch-card h3{font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--navy);margin-bottom:10px}
+    .launch-card p{font-size:.95rem;color:var(--soft);line-height:1.65;font-weight:600}
 
     /* CTA */
     .cta-sec{padding:100px 5%;background:linear-gradient(135deg,#FF6B6B 0%,#C779D0 35%,#845EC2 65%,#4FC3F7 100%);text-align:center;position:relative;overflow:hidden}
@@ -224,8 +218,7 @@
       <h1 class="hero-title">FUZZY<br>POP!</h1>
       <p class="hero-sub">7 magical mini-games<br>for the whole family</p>
       <div class="hero-stars">
-        <span class="stars-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        Loved by families everywhere
+        <span>🎯 Zero sign-up &nbsp;·&nbsp; 📶 Plays offline &nbsp;·&nbsp; 🔒 Child-safe</span>
       </div>
       <div class="hero-btns">
         <a href="#appstore" class="btn-store btn-apple">
@@ -271,9 +264,9 @@
       <div class="stat-label">Mini Games</div>
     </div>
     <div class="stat-item">
-      <span class="stat-emoji">⭐</span>
-      <span class="stat-num">4.9</span>
-      <div class="stat-label">Star Rating</div>
+      <span class="stat-emoji">👶</span>
+      <span class="stat-num">3–10</span>
+      <div class="stat-label">Perfect Age Range</div>
     </div>
     <div class="stat-item">
       <span class="stat-emoji">📶</span>
@@ -332,44 +325,27 @@
 </section>
 
 <!-- ═══ TESTIMONIALS ═══ -->
-<section class="testimonials">
+<section class="launch-sec">
   <div class="section-hdr">
-    <div class="sec-tag" style="background:#FFF0EC;color:#FF6B6B;border-color:#ffc8b8">💬 Happy Players</div>
-    <h2 class="sec-title">FAMILIES <u>LOVE IT</u></h2>
-    <p class="sec-sub">Don't just take our word for it!</p>
+    <div class="sec-tag" style="background:#FFF9EC;color:#FF9A3C;border-color:#ffd8a0">🚀 Just Launched</div>
+    <h2 class="sec-title">BE AMONG THE <u>FIRST!</u></h2>
+    <p class="sec-sub">Fuzzy Pop! is brand new — download it, play it, and leave us our very first review!</p>
   </div>
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">My 5-year-old absolutely loves Animal Match and Bubble Pop. She plays it every morning before school. The games are the perfect length for little ones!</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:#FFF0FA">👩</div>
-        <div><div class="testi-name">Sarah M.</div><div class="testi-meta">Parent · App Store Review</div></div>
-      </div>
+  <div class="launch-grid">
+    <div class="launch-card">
+      <div class="launch-icon" style="background:linear-gradient(135deg,#FFD93D,#FF9A3C)">🎮</div>
+      <h3>Download &amp; Play Free</h3>
+      <p>All 7 games are completely free to download. No hidden costs, no subscriptions — just tap and play.</p>
     </div>
-    <div class="testi-card" style="transition-delay:100ms">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Great collection of games! My kids compete to get the highest score in Fruit Slash. The fact that it works offline is a lifesaver on road trips.</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:#F0FFF4">👨</div>
-        <div><div class="testi-name">James T.</div><div class="testi-meta">Parent · Google Play Review</div></div>
-      </div>
+    <div class="launch-card">
+      <div class="launch-icon" style="background:linear-gradient(135deg,#FF6B6B,#f51480)">⭐</div>
+      <h3>Leave the First Review</h3>
+      <p>Love it? Let other families know! A quick 5-star review helps parents discover Fuzzy Pop! for their kids.</p>
     </div>
-    <div class="testi-card" style="transition-delay:200ms">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Clean, colourful and completely safe. No creepy ads, no purchases pestering my kids. Just pure fun. This is how kids apps should be made!</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:#F0F4FF">👩‍💼</div>
-        <div><div class="testi-name">Priya K.</div><div class="testi-meta">Parent · App Store Review</div></div>
-      </div>
-    </div>
-    <div class="testi-card" style="transition-delay:300ms">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Shape Sorter and Count Pop are brilliant for learning while playing. My son didn't even realise he was practising his numbers. Genius!</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:#FFFBEA">👨‍🏫</div>
-        <div><div class="testi-name">David R.</div><div class="testi-meta">Teacher &amp; Parent · Google Play</div></div>
-      </div>
+    <div class="launch-card">
+      <div class="launch-icon" style="background:linear-gradient(135deg,#56CFB2,#4285F4)">💌</div>
+      <h3>Share Your Thoughts</h3>
+      <p>Got feedback or a favourite game? We'd love to hear from you at <strong>playpalapps2024@gmail.com</strong></p>
     </div>
   </div>
 </section>
@@ -427,7 +403,7 @@ GAMES.forEach((g,i)=>{
   const c=document.createElement('div');
   c.className='game-card';
   c.style.cssText=`--glow:${g.color}33;transition-delay:${i*80}ms`;
-  c.innerHTML=`<div class="card-banner" style="background:linear-gradient(135deg,${g.color} 0%,${g.dark} 100%)"><span class="card-emoji">${g.emoji}</span></div><div class="card-body"><div class="card-name" style="color:${g.color}">${g.name}</div><div class="card-desc">${g.desc}</div><div class="card-foot"><span class="card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="card-pill" style="background:${g.color}18;color:${g.color}">Play &#8594;</span></div></div>`;
+  c.innerHTML=`<div class="card-banner" style="background:linear-gradient(135deg,${g.color} 0%,${g.dark} 100%)"><span class="card-emoji">${g.emoji}</span></div><div class="card-body"><div class="card-name" style="color:${g.color}">${g.name}</div><div class="card-desc">${g.desc}</div><div class="card-foot"><span class="card-age" style="font-size:.8rem;font-weight:800;color:${g.color}99">Ages 3–10</span><span class="card-pill" style="background:${g.color}18;color:${g.color}">Play &#8594;</span></div></div>`;
   grid.appendChild(c);
 });
 
