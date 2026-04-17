@@ -230,10 +230,10 @@
         </a>
         <a href="#googleplay" class="btn-store btn-google">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3.18 23.76c.3.17.64.24.98.2l11.93-11.91-3.39-3.44L3.18 23.76z" fill="#EA4335"/>
-  <path d="M22.49 10.27L19.1 8.3l-3.4 3.45 3.4 3.44 3.39-1.97a1.47 1.47 0 000-3z" fill="#FBBC04"/>
-  <path d="M3.18.24C2.83.44 2.57.84 2.57 1.4v21.2c0 .56.26.96.61 1.16l12.52-11.91L3.18.24z" fill="#4285F4"/>
-  <path d="M4.16 0L16.1 11.85 19.1 8.3 5.14.2A1.6 1.6 0 004.16 0z" fill="#34A853"/>
+  <path fill="#4285F4" d="M.43.57C.16.85 0 1.28 0 1.84v20.32c0 .56.16.99.43 1.27l.07.06 11.38-11.38v-.27L.5.51z"/>
+  <path fill="#34A853" d="M15.76 15.81l-3.88-3.88v-.27l3.88-3.88.09.05 4.49 2.55c1.28.73 1.28 1.92 0 2.65l-4.49 2.55z"/>
+  <path fill="#EA4335" d="M15.85 15.76L11.88 12 .43 23.43c.42.45 1.12.5 1.9.06l13.52-7.73z"/>
+  <path fill="#FBBC04" d="M15.85 8.24L2.33.51C1.55.07.85.12.43.57L11.88 12l3.97-3.76z"/>
 </svg>
           <div><span class="bst-small">Get it on</span><span class="bst-big">Google Play</span></div>
         </a>
@@ -267,9 +267,9 @@
       <div class="stat-label">Mini Games</div>
     </div>
     <div class="stat-item">
-      <span class="stat-emoji">👶</span>
-      <span class="stat-num">3–10</span>
-      <div class="stat-label">Perfect Age Range</div>
+      <span class="stat-emoji">📱</span>
+      <span class="stat-num">iOS+</span>
+      <div class="stat-label">iOS &amp; Android</div>
     </div>
     <div class="stat-item">
       <span class="stat-emoji">📶</span>
@@ -429,7 +429,7 @@ GAMES.forEach((g,i)=>{
   const c=document.createElement('div');
   c.className='game-card';
   c.style.cssText=`--glow:${g.color}33;transition-delay:${i*80}ms`;
-  c.innerHTML=`<div class="card-banner" style="background:linear-gradient(135deg,${g.color} 0%,${g.dark} 100%)"><span class="card-emoji">${g.emoji}</span></div><div class="card-body"><div class="card-name" style="color:${g.color}">${g.name}</div><div class="card-desc">${g.desc}</div><div class="card-foot"><span class="card-age" style="font-size:.8rem;font-weight:800;color:${g.color}99">Ages 3–10</span><span class="card-pill" style="background:${g.color}18;color:${g.color}">Play &#8594;</span></div></div>`;
+  c.innerHTML=`<div class="card-banner" style="background:linear-gradient(135deg,${g.color} 0%,${g.dark} 100%)"><span class="card-emoji">${g.emoji}</span></div><div class="card-body"><div class="card-name" style="color:${g.color}">${g.name}</div><div class="card-desc">${g.desc}</div><div class="card-foot"><span class="card-pill" style="background:${g.color}18;color:${g.color}">Play &#8594;</span></div></div>`;
   grid.appendChild(c);
 });
 
