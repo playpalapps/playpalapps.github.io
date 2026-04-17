@@ -93,7 +93,8 @@
     .wave-wrap svg{display:block;width:100%}
 
     /* GAMES */
-    .games{padding:90px 5%;background:#fff}
+    .games{padding:90px 5%;background:#F7F9FF;position:relative}
+    .games::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,#C8DAFF 1px,transparent 1px);background-size:28px 28px;opacity:.4;pointer-events:none}
     .section-hdr{text-align:center;margin-bottom:60px}
     .sec-tag{display:inline-block;background:#F3EEFF;color:var(--purple);font-weight:800;font-size:.9rem;padding:6px 18px;border-radius:50px;margin-bottom:16px;border:2px solid #e0c8ff}
     .sec-title{font-family:'Fredoka One',cursive;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--navy);margin-bottom:12px;line-height:1.1}
@@ -124,17 +125,18 @@
     .feat-desc{font-size:.95rem;color:var(--soft);line-height:1.65;font-weight:600}
 
     /* STATS STRIP */
-    .stats-strip{background:#fff;padding:48px 5%;border-bottom:2px solid #f0eeff}
-    .stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
+    .stats-strip{background:linear-gradient(135deg,#1E2A5E 0%,#2D3E8C 100%);padding:48px 5%;position:relative;overflow:hidden}
+    .stats-strip::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+    .stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center;position:relative;z-index:1}
     .stat-item{padding:20px 10px;position:relative}
-    .stat-item+.stat-item::before{content:'';position:absolute;left:0;top:20%;height:60%;width:2px;background:#f0eeff}
-    .stat-num{font-family:'Fredoka One',cursive;font-size:3rem;line-height:1;color:var(--navy);display:block}
-    .stat-label{font-size:.9rem;font-weight:700;color:var(--soft);margin-top:6px}
+    .stat-item+.stat-item::before{content:'';position:absolute;left:0;top:20%;height:60%;width:2px;background:rgba(255,255,255,.15)}
+    .stat-num{font-family:'Fredoka One',cursive;font-size:3rem;line-height:1;color:#FFD93D;display:block}
+    .stat-label{font-size:.9rem;font-weight:700;color:rgba(255,255,255,.7);margin-top:6px}
     .stat-emoji{font-size:1.8rem;margin-bottom:8px;display:block}
     @media(max-width:600px){.stats-inner{grid-template-columns:repeat(2,1fr)}.stat-item+.stat-item:nth-child(3)::before{display:none}}
 
     /* HOW IT WORKS */
-    .how{padding:90px 5%;background:#FFFDF7}
+    .how{padding:90px 5%;background:linear-gradient(160deg,#FFFDF7 0%,#FFF5EA 50%,#FFF0FA 100%);position:relative;overflow:hidden}
     .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;max-width:1000px;margin:0 auto;position:relative}
     .steps::before{content:'';position:absolute;top:52px;left:17%;right:17%;height:3px;background:linear-gradient(90deg,var(--sun),var(--coral),var(--purple));border-radius:3px;z-index:0}
     @media(max-width:700px){.steps{grid-template-columns:1fr;gap:28px}.steps::before{display:none}}
@@ -145,7 +147,8 @@
     .step-desc{font-size:.95rem;color:var(--soft);line-height:1.65;font-weight:600;max-width:240px;margin:0 auto}
 
     /* LAUNCH SECTION */
-    .launch-sec{padding:90px 5%;background:linear-gradient(135deg,#FFF0F9 0%,#F0F4FF 100%)}
+    .launch-sec{padding:90px 5%;background:linear-gradient(135deg,#FFF0F9 0%,#F0F4FF 100%);position:relative;overflow:hidden}
+    .launch-sec::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,107,107,.06) 2px,transparent 2px),radial-gradient(circle,rgba(132,94,194,.06) 2px,transparent 2px);background-size:40px 40px,60px 60px;background-position:0 0,20px 20px}
     .launch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;max-width:1000px;margin:0 auto}
     .launch-card{background:#fff;border-radius:22px;padding:32px 28px;box-shadow:0 4px 24px rgba(0,0,0,.07);text-align:center;transition:transform .2s}
     .launch-card:hover{transform:translateY(-5px)}
@@ -249,9 +252,9 @@
   <div class="scroll-hint">Scroll to explore <span>&#8595;</span></div>
 </section>
 
-<div class="wave-wrap">
+<div class="wave-wrap" style="background:linear-gradient(175deg,#6EC6FF 0%,var(--cream) 100%)">
   <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0,55 C240,95 480,15 720,55 C960,95 1200,15 1440,55 L1440,90 L0,90 Z" fill="#ffffff"/>
+    <path d="M0,55 C240,95 480,15 720,55 C960,95 1200,15 1440,55 L1440,90 L0,90 Z" fill="#1E2A5E"/>
   </svg>
 </div>
 
@@ -290,8 +293,17 @@
   <div class="games-grid" id="gamesGrid"></div>
 </section>
 
+<div class="wave-wrap" style="background:#F7F9FF">
+  <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,35 C360,70 720,0 1080,35 C1260,52 1380,28 1440,35 L1440,70 L0,70 Z" fill="#FFFDF7"/>
+  </svg>
+</div>
+
 <!-- ═══ HOW IT WORKS ═══ -->
 <section class="how">
+  <div style="position:absolute;font-size:80px;opacity:.06;top:20px;left:2%;pointer-events:none;transform:rotate(-15deg)">🎮</div>
+  <div style="position:absolute;font-size:60px;opacity:.07;top:60%;right:3%;pointer-events:none;transform:rotate(10deg)">⭐</div>
+  <div style="position:absolute;font-size:70px;opacity:.06;bottom:10%;left:40%;pointer-events:none;transform:rotate(-8deg)">🎯</div>
   <div class="section-hdr">
     <div class="sec-tag" style="background:#FFF9EC;color:#FF9A3C;border-color:#ffd8a0">🚀 Super Simple</div>
     <h2 class="sec-title">READY IN <u>3 TAPS</u></h2>
@@ -316,6 +328,12 @@
   </div>
 </section>
 
+<div class="wave-wrap" style="background:linear-gradient(160deg,#FFFDF7,#FFF0FA)">
+  <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,20 C480,65 960,0 1440,30 L1440,70 L0,70 Z" fill="#FFF9EC"/>
+  </svg>
+</div>
+
 <section class="features" id="features">
   <div class="section-hdr">
     <div class="sec-tag" style="background:#FFF0EC;color:#FF6B6B;border-color:#ffc8b8">&#128155; Why Play?</div>
@@ -324,8 +342,16 @@
   <div class="feat-grid" id="featGrid"></div>
 </section>
 
+<div class="wave-wrap" style="background:linear-gradient(135deg,#FFF9EC,#EEF2FF)">
+  <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C300,5 600,65 900,30 C1100,10 1300,55 1440,35 L1440,70 L0,70 Z" fill="#FFF0F9"/>
+  </svg>
+</div>
+
 <!-- ═══ TESTIMONIALS ═══ -->
 <section class="launch-sec">
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#FF6B6B22,transparent);top:-60px;left:-60px;pointer-events:none"></div>
+  <div style="position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,#845EC222,transparent);bottom:-40px;right:-40px;pointer-events:none"></div>
   <div class="section-hdr">
     <div class="sec-tag" style="background:#FFF9EC;color:#FF9A3C;border-color:#ffd8a0">🚀 Just Launched</div>
     <h2 class="sec-title">BE AMONG THE <u>FIRST!</u></h2>
