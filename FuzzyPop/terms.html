@@ -1,465 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service — Fuzzy Pop!</title>
-  <meta name="description" content="Terms of Service for Fuzzy Pop! — The rules and conditions for using PlayPal Apps' Fuzzy Pop! mobile game." />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
-
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --sky:       #6DD5FA;
-      --sky-light: #E0F7FF;
-      --sun:       #FFD93D;
-      --coral:     #FF6B6B;
-      --mint:      #6BCB77;
-      --purple:    #845EC2;
-      --white:     #FFFFFF;
-      --cream:     #FFFDF4;
-      --navy:      #1A1A3E;
-      --text-soft: #5a5a8a;
-      --nav-h: 70px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
-      color: var(--navy);
-      background: var(--cream);
-      overflow-x: hidden;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ─── NAV ─────────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      background: var(--white);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-      z-index: 1000;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-logo img {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    .nav-logo span {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.5rem;
-      color: var(--navy);
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--navy);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover { color: var(--coral); }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--sun);
-      color: var(--navy);
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.95rem;
-      padding: 10px 22px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: transform 0.2s ease;
-      box-shadow: 0 4px 14px rgba(255,217,61,0.4);
-    }
-
-    .nav-cta:hover { transform: scale(1.04); }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 26px; height: 3px;
-      background: var(--navy);
-      border-radius: 3px;
-    }
-
-    /* ─── PAGE HERO ───────────────────────────────────────────── */
-    .page-hero {
-      padding-top: var(--nav-h);
-      min-height: 220px;
-      background: linear-gradient(135deg, var(--sky-light) 0%, #F0F8FF 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .page-hero-inner {
-      text-align: center;
-      padding: 40px 24px;
-      animation: fadeInUp 0.6s ease both;
-    }
-
-    .page-hero-emoji {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .page-hero-title {
-      font-family: 'Fredoka One', cursive;
-      font-size: 2.5rem;
-      color: var(--navy);
-      margin-bottom: 10px;
-    }
-
-    .page-breadcrumb {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--text-soft);
-    }
-
-    .page-breadcrumb a {
-      color: var(--purple);
-      text-decoration: none;
-    }
-
-    .page-breadcrumb a:hover { text-decoration: underline; }
-
-    /* ─── CONTENT ─────────────────────────────────────────────── */
-    .content-wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 60px 24px 80px;
-      background: white;
-    }
-
-    .content-wrap section {
-      border-top: 2px dashed #e8e0ff;
-      padding: 32px 0;
-    }
-
-    .content-wrap section:first-child { border-top: none; padding-top: 0; }
-
-    .last-updated {
-      display: inline-block;
-      background: rgba(255,217,61,0.15);
-      color: var(--navy);
-      border: 1px solid var(--sun);
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 0.88rem;
-      margin-bottom: 36px;
-    }
-
-    .content-wrap h2 {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.6rem;
-      color: var(--navy);
-      border-left: 3px solid var(--sun);
-      padding-left: 14px;
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
-
-    .content-wrap h3 {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--coral);
-      margin-bottom: 10px;
-      margin-top: 20px;
-    }
-
-    .content-wrap p {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 400;
-      color: var(--text-soft);
-      line-height: 1.8;
-      margin-bottom: 14px;
-    }
-
-    .content-wrap ul, .content-wrap ol {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.05rem;
-      color: var(--text-soft);
-      line-height: 1.8;
-      padding-left: 24px;
-      margin-bottom: 14px;
-    }
-
-    .content-wrap li { margin-bottom: 6px; }
-
-    .content-wrap a {
-      color: var(--purple);
-      text-decoration: none;
-    }
-
-    .content-wrap a:hover { text-decoration: underline; }
-
-    /* ─── FOOTER ──────────────────────────────────────────────── */
-    footer {
-      background: var(--navy);
-      padding: 48px 24px 32px;
-    }
-
-    .footer-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .footer-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      margin-bottom: 24px;
-    }
-
-    .footer-logo img {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .footer-logo span {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.4rem;
-      color: var(--sun);
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .footer-links a {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover { color: var(--sun); }
-
-    .footer-copy {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.45);
-      font-weight: 600;
-    }
-
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-links  { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: var(--nav-h);
-        left: 0; right: 0;
-        background: white;
-        padding: 20px 28px;
-        gap: 16px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      }
-      .nav-cta { display: none; }
-      .page-hero-title { font-size: 1.8rem; }
-    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--navy:#1E2A5E;--soft:#6B7A99;--sun:#FFD93D;--coral:#FF6B6B;--purple:#845EC2;--nav-h:72px}
+    html{scroll-behavior:smooth}
+    body{font-family:'Nunito',sans-serif;color:var(--navy);background:#fff;overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:#fff;box-shadow:0 2px 20px rgba(0,0,0,.07);z-index:1000}
+    .nav-inner{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{width:42px;height:42px;border-radius:10px;object-fit:cover}
+    .nav-logo span{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--navy)}
+    .nav-links{display:flex;gap:34px}
+    .nav-links a{font-weight:700;color:var(--navy);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--coral)}
+    .nav-cta{display:inline-block;background:var(--sun);color:var(--navy);font-weight:800;font-size:.95rem;padding:10px 22px;border-radius:50px;text-decoration:none}
+    .hamburger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--navy)}
+    @media(max-width:768px){.nav-links{display:none;position:absolute;top:var(--nav-h);left:0;right:0;background:#fff;flex-direction:column;padding:20px 32px;gap:16px;box-shadow:0 8px 20px rgba(0,0,0,.08)}.nav-links.open{display:flex}.hamburger{display:block}.nav-cta{display:none}}
+    .page-hero{padding:calc(var(--nav-h) + 50px) 5% 50px;background:linear-gradient(135deg,#FFF5EA 0%,#FFECF5 50%,#EAF6FF 100%);text-align:center}
+    .page-hero-emoji{font-size:3rem;margin-bottom:12px;display:block}
+    .page-hero-breadcrumb{font-size:.9rem;font-weight:700;color:var(--soft);margin-bottom:12px}
+    .page-hero-breadcrumb a{color:var(--purple);text-decoration:none}
+    .page-hero h1{font-family:'Fredoka One',cursive;font-size:clamp(2rem,5vw,3rem);color:var(--navy);margin-bottom:10px}
+    .page-hero-sub{font-size:1rem;font-weight:600;color:var(--soft)}
+    .content-wrap{max-width:820px;margin:0 auto;padding:60px 24px 80px}
+    .updated-badge{display:inline-block;background:#FFFBE8;color:var(--navy);border:1.5px solid var(--sun);border-radius:20px;padding:5px 16px;font-size:.85rem;font-weight:700;margin-bottom:40px}
+    .content-wrap h2{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--navy);padding-left:14px;border-left:4px solid var(--sun);margin:40px 0 14px}
+    .content-wrap p{font-size:1rem;color:var(--soft);line-height:1.8;margin-bottom:14px;font-weight:600}
+    .content-wrap ul{padding-left:22px;margin-bottom:14px}
+    .content-wrap li{font-size:1rem;color:var(--soft);line-height:1.8;margin-bottom:6px;font-weight:600}
+    .content-wrap a{color:var(--purple);text-decoration:none}
+    .content-wrap a:hover{text-decoration:underline}
+    .sec-divider{border:none;border-top:2px dashed #e8e0ff;margin:36px 0}
+    footer{background:var(--navy);padding:50px 5% 36px;text-align:center}
+    .foot-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px}
+    .foot-logo img{width:36px;height:36px;border-radius:8px}
+    .foot-logo span{font-family:'Fredoka One',cursive;font-size:1.4rem;color:var(--sun)}
+    .foot-links{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:24px}
+    .foot-links a{color:rgba(255,255,255,.7);text-decoration:none;font-weight:700;transition:color .2s}
+    .foot-links a:hover{color:var(--sun)}
+    .foot-copy{color:rgba(255,255,255,.4);font-size:.85rem;font-weight:600}
   </style>
 </head>
 <body>
-
-  <!-- ─── NAVIGATION ────────────────────────────────────────────── -->
-  <nav>
-    <a href="index.html" class="nav-logo" aria-label="Fuzzy Pop! Home">
-      <img src="icon.png" alt="Fuzzy Pop! icon" />
-      <span>Fuzzy Pop!</span>
-    </a>
-    <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="index.html#games">Games</a></li>
-      <li><a href="index.html#features">Features</a></li>
-      <li><a href="index.html#download">Download</a></li>
-    </ul>
-    <a href="index.html#download" class="nav-cta">Download Free ↓</a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- ─── PAGE HERO ─────────────────────────────────────────────── -->
-  <div class="page-hero">
-    <div class="page-hero-inner">
-      <span class="page-hero-emoji">📋</span>
-      <h1 class="page-hero-title">Terms of Service</h1>
-      <p class="page-breadcrumb"><a href="index.html">Fuzzy Pop!</a> › Terms of Service</p>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="icon.png" alt="Fuzzy Pop!"><span>Fuzzy Pop!</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#games">Games</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#download">Download</a>
+      <a href="support.html">Support</a>
     </div>
+    <a href="index.html#download" class="nav-cta">Download Free &#127918;</a>
+    <button class="hamburger" id="hamburger">&#9776;</button>
   </div>
+</nav>
+<div class="page-hero">
+  <span class="page-hero-emoji">&#128220;</span>
+  <div class="page-hero-breadcrumb"><a href="index.html">Fuzzy Pop!</a> &rsaquo; Terms of Service</div>
+  <h1>Terms of Service</h1>
+  <p class="page-hero-sub">Plain English. No surprises. Just the rules for enjoying Fuzzy Pop!</p>
+</div>
+<div class="content-wrap">
+  <span class="updated-badge">&#128197; Effective Date: April 17, 2026</span>
+  <p>By downloading or using Fuzzy Pop!, you agree to these terms. If you don't agree, please don't use the app.</p>
 
-  <!-- ─── CONTENT ───────────────────────────────────────────────── -->
-  <main>
-    <div class="content-wrap">
-      <span class="last-updated">Last updated: January 1, 2026</span>
+  <h2>1. License to Use</h2>
+  <p>PlayPal Apps grants you a personal, non-exclusive, non-transferable, revocable licence to use Fuzzy Pop! for your personal, non-commercial entertainment. You may not copy, modify, distribute, sell or lease any part of the app.</p>
 
-      <section>
-        <h2>Welcome!</h2>
-        <p>These Terms of Service ("Terms") govern your use of Fuzzy Pop!, a mobile application developed and operated by PlayPal Apps ("we," "our," or "us"). By downloading or using the App, you agree to these Terms. If you don't agree, please don't use the App.</p>
-        <p>If you are allowing a child to use the App, you (the parent or guardian) accept these Terms on their behalf and are responsible for their use of the App.</p>
-      </section>
+  <h2>2. Who Can Use the App</h2>
+  <p>Fuzzy Pop! is rated 4+ and suitable for all ages. Children under 13 should use the app with parental guidance. By using the app you confirm you are entitled to agree to these terms under the laws of your country, or you have parental/guardian consent.</p>
 
-      <section>
-        <h2>Using the App</h2>
-        <h3>What You Can Do</h3>
-        <ul>
-          <li>Download, install, and play Fuzzy Pop! for personal, non-commercial use</li>
-          <li>Share the App with family and friends by directing them to the App Store or Google Play</li>
-          <li>Make in-app purchases for optional features (like ad removal)</li>
-        </ul>
+  <hr class="sec-divider">
+  <h2>3. In-App Purchases</h2>
+  <p>Fuzzy Pop! offers a one-time "Remove Ads" purchase. All purchases are:</p>
+  <ul>
+    <li>Processed by Apple App Store (iOS) or Google Play (Android) — not by us directly</li>
+    <li>Subject to the respective platform's refund policy</li>
+    <li>Non-refundable by PlayPal Apps directly (contact Apple or Google for refund requests)</li>
+    <li>Linked to your Apple ID or Google account and can be restored on re-installation</li>
+  </ul>
+  <p>We never see or store your payment information.</p>
 
-        <h3>What You Cannot Do</h3>
-        <ul>
-          <li>Copy, modify, distribute, or create derivative works of the App</li>
-          <li>Reverse engineer, decompile, or disassemble the App</li>
-          <li>Use the App for any commercial purpose without our written consent</li>
-          <li>Attempt to hack, exploit, or disrupt the App or its servers</li>
-          <li>Use the App in any way that violates applicable laws or regulations</li>
-        </ul>
-      </section>
+  <hr class="sec-divider">
+  <h2>4. Advertising</h2>
+  <p>The free version of Fuzzy Pop! displays advertisements via Google AdMob. All ads are child-safe, non-personalised and rated G. You can remove ads permanently via the in-app purchase. See our <a href="privacy.html">Privacy Policy</a> for full details on how ads work.</p>
 
-      <section>
-        <h2>In-App Purchases</h2>
-        <p>Fuzzy Pop! offers a one-time in-app purchase to remove advertisements ($1.99 USD or local equivalent). All purchases are:</p>
-        <ul>
-          <li>Processed through Apple App Store or Google Play Store</li>
-          <li>Subject to the respective store's purchase terms and refund policies</li>
-          <li>Non-transferable and linked to your store account</li>
-        </ul>
-        <p>If you are a parent, we strongly recommend enabling parental controls on your device to prevent unintended purchases by children.</p>
-        <p>We do not offer refunds directly — please contact Apple or Google for refund requests in accordance with their policies.</p>
-      </section>
+  <hr class="sec-divider">
+  <h2>5. User Conduct</h2>
+  <p>You agree not to: reverse engineer, decompile or disassemble the app; use cheats, exploits or automation tools; attempt to gain unauthorised access to any part of the app or its services; use the app for any unlawful purpose.</p>
 
-      <section>
-        <h2>Intellectual Property</h2>
-        <p>All content within Fuzzy Pop!, including but not limited to game graphics, characters, music, sound effects, code, and branding, is owned by PlayPal Apps and protected by intellectual property laws. Nothing in these Terms grants you any ownership or license rights beyond what is explicitly stated.</p>
-        <p>"Fuzzy Pop!", "PlayPal Apps", and associated logos are trademarks of PlayPal Apps. You may not use them without our prior written permission.</p>
-      </section>
+  <hr class="sec-divider">
+  <h2>6. Intellectual Property</h2>
+  <p>All content in Fuzzy Pop! — including graphics, sounds, game logic, names and the "Fuzzy Pop!" brand — is the property of PlayPal Apps and is protected by copyright and intellectual property law. You may not use any of it without our written permission.</p>
 
-      <section>
-        <h2>Children</h2>
-        <p>Fuzzy Pop! is designed for all ages and is suitable for children. We have taken steps to make the App safe for younger users, including child-appropriate advertising and no collection of personal data from children.</p>
-        <p>Parents and guardians are responsible for supervising their children's use of the App and any in-app purchases. We encourage parents to explore the App themselves and discuss appropriate use with their children.</p>
-      </section>
+  <hr class="sec-divider">
+  <h2>7. Disclaimer of Warranties</h2>
+  <p>Fuzzy Pop! is provided "as is" without warranties of any kind, express or implied. We do not guarantee the app will be error-free, uninterrupted or free of viruses. We reserve the right to modify, suspend or discontinue the app at any time.</p>
 
-      <section>
-        <h2>Disclaimers and Limitations</h2>
-        <p>Fuzzy Pop! is provided "as is" without warranties of any kind. We strive to keep the App working well, but we cannot guarantee it will always be available, error-free, or bug-free.</p>
-        <p>To the maximum extent permitted by applicable law, PlayPal Apps shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the App.</p>
-        <p>Our total liability to you for any claims arising from these Terms or the App shall not exceed the amount you paid us in the twelve months preceding the claim (which, for most users, will be $1.99 or zero).</p>
-      </section>
+  <hr class="sec-divider">
+  <h2>8. Limitation of Liability</h2>
+  <p>To the maximum extent permitted by law, PlayPal Apps shall not be liable for any indirect, incidental, special, consequential or punitive damages arising from your use of the app. Our total liability to you for any claims shall not exceed the amount you paid us directly (which in most cases is nothing, since the app is free).</p>
 
-      <section>
-        <h2>Termination</h2>
-        <p>We reserve the right to discontinue the App or modify its features at any time. You may stop using the App at any time by deleting it from your device. If you breach these Terms, we may restrict your access.</p>
-        <p>Sections on Intellectual Property, Disclaimers, and Governing Law survive termination of these Terms.</p>
-      </section>
+  <hr class="sec-divider">
+  <h2>9. Changes to These Terms</h2>
+  <p>We may update these terms from time to time. We will update the effective date above. Continued use of the app after changes constitutes acceptance of the updated terms.</p>
 
-      <section>
-        <h2>Governing Law</h2>
-        <p>These Terms are governed by the laws of the jurisdiction in which PlayPal Apps is established, without regard to conflict of law principles. Any disputes shall be resolved through good-faith negotiation first, and if necessary, through binding arbitration or the courts of competent jurisdiction.</p>
-      </section>
+  <hr class="sec-divider">
+  <h2>10. Governing Law</h2>
+  <p>These terms are governed by the laws of the jurisdiction in which you reside. Any disputes shall be subject to the exclusive jurisdiction of the courts in that jurisdiction.</p>
 
-      <section>
-        <h2>Changes to These Terms</h2>
-        <p>We may update these Terms from time to time. When we do, we'll update the "last updated" date at the top. Continued use of the App after changes constitutes acceptance of the updated Terms. We'll notify users of material changes through in-app notices where possible.</p>
-      </section>
-
-      <section>
-        <h2>Contact Us</h2>
-        <p>Have questions about these Terms? We're happy to help! Please visit our <a href="support.html">Support page</a> to get in touch with the PlayPal Apps team.</p>
-      </section>
-    </div>
-  </main>
-
-  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
-  <footer>
-    <div class="footer-inner">
-      <a href="index.html" class="footer-logo">
-        <img src="icon.png" alt="Fuzzy Pop! icon" />
-        <span>Fuzzy Pop!</span>
-      </a>
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="support.html">Support</a>
-      </nav>
-      <p class="footer-copy">© 2026 PlayPal Apps · Made with ❤️ for families everywhere</p>
-    </div>
-  </footer>
-
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-  </script>
+  <hr class="sec-divider">
+  <h2>11. Contact</h2>
+  <p>Questions about these terms? Reach us at <a href="mailto:playpalapps2024@gmail.com">playpalapps2024@gmail.com</a>.</p>
+</div>
+<footer>
+  <div class="foot-logo"><img src="icon.png" alt="Fuzzy Pop!"><span>Fuzzy Pop!</span></div>
+  <div class="foot-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="support.html">Support</a>
+    <a href="mailto:playpalapps2024@gmail.com">Contact</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 PlayPal Apps &middot; Made with &#10084;&#65039; for families everywhere</p>
+</footer>
+<script>document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open')});</script>
 </body>
 </html>

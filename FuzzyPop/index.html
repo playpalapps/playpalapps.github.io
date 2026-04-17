@@ -1,1187 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family</title>
-  <meta name="description" content="Fuzzy Pop! is a free casual mini-game collection with 7 fun games for kids and families. Play Bubble Pop, Animal Match, Color Catch, and more! Available on iOS and Android." />
-  <meta name="keywords" content="Fuzzy Pop, kids games, family games, casual games, mini games, iOS, Android, free games, bubble pop, animal match" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family" />
-  <meta property="og:description" content="Free casual mini-game collection for kids and families. 7 adorable games, no sign-up needed, play offline!" />
-  <meta property="og:url" content="https://playpalapps.github.io/FuzzyPop/" />
-  <meta property="og:image" content="https://playpalapps.github.io/FuzzyPop/icon.png" />
-  <meta property="og:site_name" content="PlayPal Apps" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family" />
-  <meta name="twitter:description" content="Free casual mini-game collection for kids and families." />
-  <meta name="twitter:image" content="https://playpalapps.github.io/FuzzyPop/icon.png" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
-
+  <meta name="description" content="Fuzzy Pop! is a free casual mini-game collection — 7 magical games for kids and families. No sign-up, play offline!">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family">
+  <meta property="og:description" content="Free casual mini-game collection. 7 adorable games, no sign-up, play offline!">
+  <meta property="og:url" content="https://playpalapps.github.io/FuzzyPop/">
+  <meta property="og:image" content="https://playpalapps.github.io/FuzzyPop/icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://playpalapps.github.io/FuzzyPop/icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --sky:       #6DD5FA;
-      --sky-light: #E0F7FF;
-      --sun:       #FFD93D;
-      --coral:     #FF6B6B;
-      --mint:      #6BCB77;
-      --purple:    #845EC2;
-      --white:     #FFFFFF;
-      --cream:     #FFFDF4;
-      --navy:      #1A1A3E;
-      --text-soft: #5a5a8a;
-      --c-bubble:  #1a8cff;
-      --c-match:   #0ad12e;
-      --c-catch:   #ff6a00;
-      --c-tap:     #f51480;
-      --c-count:   #9406fa;
-      --c-shape:   #00a69e;
-      --c-fruit:   #f50f1a;
-      --nav-h: 70px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
-      color: var(--navy);
-      background: var(--cream);
-      overflow-x: hidden;
-    }
-
-    /* ─── KEYFRAMES ───────────────────────────────────────────── */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-12px); }
-    }
-
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-8px); }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-6px); }
-    }
-
-    @keyframes btnBounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-4px); }
-    }
-
-    @keyframes cloudDrift {
-      0%   { transform: translateX(-120px); }
-      100% { transform: translateX(calc(100vw + 120px)); }
-    }
-
-    @keyframes sunPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(255,217,61,0.4); }
-      50%       { transform: scale(1.05); box-shadow: 0 0 60px 20px rgba(255,217,61,0.6); }
-    }
-
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(-8deg) scale(1); }
-      50%       { transform: rotate(8deg) scale(1.1); }
-    }
-
-    @keyframes confettiFloat {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-      100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-40px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(40px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    /* ─── NAV ─────────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      background: var(--white);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-      z-index: 1000;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-logo img {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    .nav-logo span {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.5rem;
-      color: var(--navy);
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--navy);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover { color: var(--coral); }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--sun);
-      color: var(--navy);
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.95rem;
-      padding: 10px 22px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 4px 14px rgba(255,217,61,0.4);
-    }
-
-    .nav-cta:hover {
-      transform: scale(1.04);
-      box-shadow: 0 6px 20px rgba(255,217,61,0.5);
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 26px; height: 3px;
-      background: var(--navy);
-      border-radius: 3px;
-      transition: all 0.3s ease;
-    }
-
-    /* ─── HERO ─────────────────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      padding-top: var(--nav-h);
-      background: linear-gradient(180deg, #87CEEB 0%, #B8E4F9 40%, #E8F7FF 70%, #FFFDF4 100%);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Sun */
-    .hero-sun {
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 220px; height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 40%, #FFE566, #FFD93D);
-      animation: sunPulse 4s ease-in-out infinite;
-      z-index: 1;
-    }
-
-    .hero-sun::before {
-      content: '';
-      position: absolute;
-      inset: -20px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,217,61,0.3) 0%, transparent 70%);
-    }
-
-    /* Sun rays */
-    .hero-sun::after {
-      content: '';
-      position: absolute;
-      inset: -30px;
-      border-radius: 50%;
-      background: repeating-conic-gradient(
-        rgba(255,217,61,0.25) 0deg 10deg,
-        transparent 10deg 20deg
-      );
-      animation: spin 20s linear infinite;
-    }
-
-    /* Clouds */
-    .cloud {
-      position: absolute;
-      z-index: 1;
-    }
-
-    .cloud-shape {
-      position: relative;
-      background: rgba(255,255,255,0.88);
-      border-radius: 50px;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
-    }
-
-    .cloud-shape::before, .cloud-shape::after {
-      content: '';
-      position: absolute;
-      background: rgba(255,255,255,0.88);
-      border-radius: 50%;
-    }
-
-    .cloud-1 .cloud-shape { width: 140px; height: 48px; top: 100px; }
-    .cloud-1 .cloud-shape::before { width: 72px; height: 72px; top: -36px; left: 20px; }
-    .cloud-1 .cloud-shape::after  { width: 50px; height: 50px; top: -24px; left: 72px; }
-    .cloud-1 { animation: cloudDrift 45s linear infinite; top: 110px; left: -160px; }
-
-    .cloud-2 .cloud-shape { width: 100px; height: 36px; }
-    .cloud-2 .cloud-shape::before { width: 52px; height: 52px; top: -28px; left: 16px; }
-    .cloud-2 .cloud-shape::after  { width: 38px; height: 38px; top: -18px; left: 54px; }
-    .cloud-2 { animation: cloudDrift 30s linear infinite; animation-delay: -12s; top: 160px; left: -120px; }
-
-    .cloud-3 .cloud-shape { width: 120px; height: 42px; }
-    .cloud-3 .cloud-shape::before { width: 62px; height: 62px; top: -32px; left: 18px; }
-    .cloud-3 .cloud-shape::after  { width: 44px; height: 44px; top: -20px; left: 64px; }
-    .cloud-3 { animation: cloudDrift 60s linear infinite; animation-delay: -30s; top: 80px; left: -140px; }
-
-    .cloud-4 .cloud-shape { width: 90px; height: 32px; }
-    .cloud-4 .cloud-shape::before { width: 46px; height: 46px; top: -24px; left: 14px; }
-    .cloud-4 .cloud-shape::after  { width: 34px; height: 34px; top: -16px; left: 50px; }
-    .cloud-4 { animation: cloudDrift 38s linear infinite; animation-delay: -20s; top: 200px; left: -110px; }
-
-    /* Sparkles */
-    .sparkle {
-      position: absolute;
-      font-size: 1.4rem;
-      z-index: 1;
-      animation: wiggle 3s ease-in-out infinite;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    /* Hero content */
-    .hero-inner {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 40px 40px;
-      position: relative;
-      z-index: 2;
-      gap: 60px;
-    }
-
-    .hero-text {
-      flex: 1;
-      max-width: 560px;
-      animation: fadeInLeft 0.8s ease both;
-    }
-
-    .eyebrow-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--sun);
-      color: var(--navy);
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      padding: 6px 16px;
-      border-radius: 50px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(255,217,61,0.35);
-    }
-
-    .hero-title {
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(3rem, 6vw, 5rem);
-      color: var(--navy);
-      line-height: 1.1;
-      text-shadow: 4px 4px 0px rgba(0,0,0,0.08);
-      margin-bottom: 16px;
-      letter-spacing: 1px;
-    }
-
-    .hero-sub {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--text-soft);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .hero-stars {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 32px;
-    }
-
-    .stars-row {
-      color: #FFB800;
-      font-size: 1.3rem;
-      letter-spacing: 2px;
-    }
-
-    .stars-label {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--text-soft);
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn-store {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 24px;
-      border-radius: 16px;
-      text-decoration: none;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.95rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      animation: btnBounce 3s ease-in-out infinite;
-    }
-
-    .btn-store:nth-child(2) { animation-delay: 0.4s; }
-
-    .btn-store:hover {
-      transform: scale(1.04) translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    .btn-apple {
-      background: var(--navy);
-      color: white;
-      box-shadow: 0 6px 20px rgba(26,26,62,0.3);
-    }
-
-    .btn-google {
-      background: white;
-      color: var(--navy);
-      border: 2px solid var(--navy);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
-
-    .btn-store-icon { font-size: 1.4rem; }
-    .btn-store-text { display: flex; flex-direction: column; text-align: left; }
-    .btn-store-label { font-size: 0.7rem; font-weight: 600; opacity: 0.75; line-height: 1; }
-    .btn-store-name  { font-size: 1rem; font-weight: 900; line-height: 1.2; }
-
-    /* Hero icon */
-    .hero-icon-wrap {
-      flex-shrink: 0;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      animation: fadeInRight 0.8s ease 0.2s both;
-    }
-
-    .hero-icon {
-      width: 280px; height: 280px;
-      border-radius: 56px;
-      object-fit: cover;
-      box-shadow:
-        0 20px 60px rgba(0,0,0,0.18),
-        0 0 0 6px white,
-        0 0 0 10px var(--sun);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .icon-rating-pill {
-      background: white;
-      border-radius: 50px;
-      padding: 8px 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.95rem;
-      color: var(--navy);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    }
-
-    .icon-rating-pill span { color: #FFB800; font-size: 1.1rem; }
-
-    /* Decorative dots around icon */
-    .icon-dot {
-      position: absolute;
-      border-radius: 50%;
-      z-index: -1;
-    }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-      text-align: center;
-      padding: 20px 0 36px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .scroll-indicator p {
-      font-family: 'Nunito', sans-serif;
-      font-style: italic;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
-
-    .scroll-arrow {
-      display: inline-block;
-      font-size: 1.3rem;
-      color: var(--text-soft);
-      animation: bounce 1.5s ease-in-out infinite;
-    }
-
-    /* ─── WAVE DIVIDER ────────────────────────────────────────── */
-    .wave-divider {
-      line-height: 0;
-      margin-top: -2px;
-    }
-
-    .wave-divider svg {
-      display: block;
-      width: 100%;
-    }
-
-    /* ─── SECTION COMMON ──────────────────────────────────────── */
-    section { padding: 80px 24px; }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .section-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 18px;
-      border-radius: 50px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.88rem;
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--navy);
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    .section-sub {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: var(--text-soft);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* ─── GAMES SECTION ───────────────────────────────────────── */
-    #games {
-      background: var(--cream);
-    }
-
-    .games-pill {
-      background: rgba(255,217,61,0.2);
-      color: #b07c00;
-      border: 1.5px solid var(--sun);
-    }
-
-    .games-title-inner {
-      display: inline;
-      text-decoration: underline wavy var(--sun);
-      text-underline-offset: 6px;
-    }
-
-    .games-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .game-card {
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .game-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease;
-    }
-
-    .game-card:hover {
-      transform: translateY(-6px) rotate(-0.5deg);
-    }
-
-    .game-banner {
-      height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .game-banner::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
-
-    .game-emoji {
-      font-size: 80px;
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
-      line-height: 1;
-    }
-
-    .game-body {
-      padding: 20px;
-    }
-
-    .game-name {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    .game-desc {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      color: var(--text-soft);
-      line-height: 1.5;
-      margin-bottom: 14px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .game-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .game-stars { color: #FFB800; font-size: 1rem; letter-spacing: 1px; }
-
-    .game-play-tag {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.8rem;
-      padding: 5px 14px;
-      border-radius: 50px;
-    }
-
-    /* ─── FEATURES SECTION ────────────────────────────────────── */
-    #features {
-      background: linear-gradient(135deg, #E8F4FD 0%, #F0E8FF 100%);
-    }
-
-    .features-pill {
-      background: rgba(132,94,194,0.12);
-      color: var(--purple);
-      border: 1.5px solid rgba(132,94,194,0.3);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 24px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: white;
-      border-radius: 20px;
-      padding: 28px 24px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-      transition: transform 0.3s ease;
-      opacity: 0;
-    }
-
-    .feature-card.visible {
-      opacity: 1;
-    }
-
-    .feature-card:hover { transform: translateY(-4px); }
-
-    .feature-emoji-wrap {
-      width: 70px; height: 70px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin-bottom: 18px;
-    }
-
-    .feature-title {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.25rem;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-
-    .feature-desc {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      color: var(--text-soft);
-      line-height: 1.65;
-    }
-
-    /* ─── CTA SECTION ─────────────────────────────────────────── */
-    #download {
-      background: linear-gradient(135deg, #845EC2 0%, #1a8cff 50%, #00a69e 100%);
-      position: relative;
-      overflow: hidden;
-      padding: 100px 24px;
-    }
-
-    .cta-confetti {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .confetti-dot {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.6;
-    }
-
-    .cta-inner {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .cta-icon-wrap {
-      margin-bottom: 28px;
-    }
-
-    .cta-icon {
-      width: 120px; height: 120px;
-      border-radius: 28px;
-      object-fit: cover;
-      border: 4px solid white;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .cta-title {
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: white;
-      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-    }
-
-    .cta-sub {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 36px;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .btn-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 28px;
-      border-radius: 18px;
-      text-decoration: none;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      background: white;
-      color: var(--navy);
-      font-size: 1rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-cta:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-    }
-
-    .cta-note {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 600;
-    }
-
-    /* ─── FOOTER ──────────────────────────────────────────────── */
-    footer {
-      background: var(--navy);
-      padding: 48px 24px 32px;
-    }
-
-    .footer-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .footer-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      margin-bottom: 24px;
-    }
-
-    .footer-logo img {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .footer-logo span {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.4rem;
-      color: var(--sun);
-      letter-spacing: 0.5px;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .footer-links a {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover { color: var(--sun); }
-
-    .footer-copy {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.45);
-      font-weight: 600;
-    }
-
-    /* ─── MOBILE NAV ──────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-links  { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: var(--nav-h);
-        left: 0; right: 0;
-        background: white;
-        padding: 20px 28px;
-        gap: 16px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        animation: fadeInUp 0.25s ease;
-      }
-      .nav-cta { display: none; }
-
-      .hero-inner { flex-direction: column; padding: 30px 24px 20px; gap: 32px; text-align: center; }
-      .hero-icon-wrap { order: -1; }
-      .hero-icon { width: 180px; height: 180px; border-radius: 36px; }
-      .hero-buttons { justify-content: center; }
-      .hero-stars { justify-content: center; }
-
-      .features-grid { grid-template-columns: 1fr; }
-      .cta-buttons { flex-direction: column; align-items: center; }
-    }
-
-    @media (min-width: 769px) {
-      .hamburger { display: none; }
-      .hero-icon-wrap { display: flex; }
-    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--navy:#1E2A5E;--soft:#6B7A99;--sun:#FFD93D;--coral:#FF6B6B;--mint:#56CFB2;--purple:#845EC2;--cream:#FFFDF7;--nav-h:72px}
+    html{scroll-behavior:smooth}
+    body{font-family:'Nunito',sans-serif;color:var(--navy);background:#fff;overflow-x:hidden}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:#fff;box-shadow:0 2px 20px rgba(0,0,0,.07);z-index:1000}
+    .nav-inner{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{width:42px;height:42px;border-radius:10px;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+    .nav-logo span{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--navy)}
+    .nav-links{display:flex;gap:34px}
+    .nav-links a{font-weight:700;font-size:1rem;color:var(--navy);text-decoration:none;position:relative;transition:color .2s}
+    .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:3px;background:var(--coral);border-radius:2px;transition:width .25s}
+    .nav-links a:hover{color:var(--coral)}
+    .nav-links a:hover::after{width:100%}
+    .nav-cta{display:inline-block;background:var(--sun);color:var(--navy);font-weight:800;font-size:.95rem;padding:10px 22px;border-radius:50px;text-decoration:none;box-shadow:0 4px 14px rgba(255,217,61,.45);transition:transform .2s,box-shadow .2s}
+    .nav-cta:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(255,217,61,.6)}
+    .hamburger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--navy)}
+    @media(max-width:768px){.nav-links{display:none;position:absolute;top:var(--nav-h);left:0;right:0;background:#fff;flex-direction:column;padding:20px 32px;gap:16px;box-shadow:0 8px 20px rgba(0,0,0,.08)}.nav-links.open{display:flex}.hamburger{display:block}.nav-cta{display:none}}
+
+    /* HERO */
+    .hero{min-height:100vh;padding:calc(var(--nav-h) + 60px) 5% 90px;background:linear-gradient(175deg,#6EC6FF 0%,#A8DCFF 20%,#C8EDFF 45%,#EAF7FF 68%,var(--cream) 100%);position:relative;overflow:hidden;display:flex;align-items:center}
+    .sun{position:absolute;top:-50px;right:5%;width:250px;height:250px;background:radial-gradient(circle at 38% 38%,#fff9c4 0%,#FFD93D 40%,#FF9A3C 72%,transparent 100%);border-radius:50%;box-shadow:0 0 70px #FFD93D99,0 0 140px #FFD93D44;animation:sunPulse 5s ease-in-out infinite}
+    @keyframes sunPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07);box-shadow:0 0 100px #FFD93Dbb,0 0 180px #FFD93D55}}
+    .cloud{position:absolute;background:#fff;border-radius:50px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.05));opacity:.92}
+    .cloud::before,.cloud::after{content:'';position:absolute;background:#fff;border-radius:50%}
+    .c1{width:190px;height:58px;top:23%;left:2%;animation:cd 40s ease-in-out infinite}
+    .c1::before{width:92px;height:92px;top:-50px;left:16px}
+    .c1::after{width:70px;height:70px;top:-37px;left:82px}
+    .c2{width:250px;height:76px;top:13%;right:26%;animation:cd 55s ease-in-out infinite reverse}
+    .c2::before{width:115px;height:115px;top:-62px;left:22px}
+    .c2::after{width:85px;height:85px;top:-46px;left:112px}
+    .c3{width:150px;height:46px;top:57%;left:30%;animation:cd 70s ease-in-out infinite;opacity:.5}
+    .c3::before{width:72px;height:72px;top:-38px;left:14px}
+    .c3::after{width:55px;height:55px;top:-30px;left:62px}
+    @keyframes cd{0%,100%{transform:translateX(0)}50%{transform:translateX(32px)}}
+    .dot{position:absolute;border-radius:50%;animation:df var(--d,6s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+    @keyframes df{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.1)}}
+
+    .hero-content{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:48px;position:relative;z-index:2}
+    .hero-text{flex:1;max-width:580px}
+    .hero-eyebrow{display:inline-block;background:var(--sun);color:var(--navy);font-weight:800;font-size:.95rem;padding:8px 20px;border-radius:50px;margin-bottom:26px;box-shadow:0 4px 14px rgba(255,217,61,.4)}
+    .hero-title{font-family:'Fredoka One',cursive;font-size:clamp(3.8rem,9vw,6.8rem);line-height:1;color:var(--navy);margin-bottom:22px;text-shadow:5px 7px 0 rgba(255,107,107,.18),10px 14px 0 rgba(132,94,194,.10);letter-spacing:-1px}
+    .hero-sub{font-size:1.2rem;font-weight:700;color:var(--soft);line-height:1.6;margin-bottom:20px}
+    .hero-stars{display:flex;align-items:center;gap:8px;margin-bottom:36px;font-size:.95rem;color:var(--soft);font-weight:600}
+    .stars-gold{color:#FFB800;font-size:1.2rem;letter-spacing:2px}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+    .btn-store{display:flex;align-items:center;gap:12px;padding:14px 26px;border-radius:18px;text-decoration:none;transition:transform .22s,box-shadow .22s;animation:btnBounce 3s ease-in-out infinite}
+    .btn-store:nth-child(2){animation-delay:.5s}
+    @keyframes btnBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+    .btn-store:hover{transform:translateY(-6px) scale(1.03)!important;animation:none}
+    .btn-apple{background:var(--navy);color:#fff;box-shadow:0 6px 24px rgba(30,42,94,.28)}
+    .btn-google{background:#fff;color:var(--navy);box-shadow:0 6px 24px rgba(0,0,0,.11);border:2px solid #dde4f8}
+    .btn-store svg{width:28px;height:28px;flex-shrink:0}
+    .bst-small{display:block;font-size:.72rem;opacity:.7}
+    .bst-big{display:block;font-size:1.05rem;font-weight:900}
+
+    .hero-icon-side{flex-shrink:0;position:relative;display:flex;flex-direction:column;align-items:center;gap:18px}
+    .hero-app-icon{width:260px;height:260px;border-radius:58px;object-fit:cover;box-shadow:0 0 0 8px #fff,0 0 0 14px var(--sun),0 30px 80px rgba(0,0,0,.18);animation:iconFloat 3.5s ease-in-out infinite}
+    @keyframes iconFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
+    .icon-badge{background:#fff;border-radius:50px;padding:9px 22px;font-weight:800;font-size:.95rem;color:var(--navy);box-shadow:0 4px 20px rgba(0,0,0,.1)}
+    .icon-badge .star{color:#FFB800}
+    .idot{position:absolute;border-radius:50%;animation:idotF 3.2s ease-in-out infinite}
+    @keyframes idotF{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+    .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:.82rem;font-weight:700;color:var(--soft);display:flex;flex-direction:column;align-items:center;gap:5px;animation:scrollB 2s ease-in-out infinite;z-index:2}
+    @keyframes scrollB{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+    @media(max-width:900px){.hero-content{flex-direction:column;text-align:center}.hero-text{max-width:100%}.hero-eyebrow,.hero-stars{justify-content:center}.hero-btns{justify-content:center}.hero-icon-side{order:-1}.hero-app-icon{width:160px;height:160px;border-radius:36px}}
+
+    /* WAVE */
+    .wave-wrap{line-height:0;background:linear-gradient(175deg,#6EC6FF 0%,var(--cream) 100%)}
+    .wave-wrap svg{display:block;width:100%}
+
+    /* GAMES */
+    .games{padding:90px 5%;background:#fff}
+    .section-hdr{text-align:center;margin-bottom:60px}
+    .sec-tag{display:inline-block;background:#F3EEFF;color:var(--purple);font-weight:800;font-size:.9rem;padding:6px 18px;border-radius:50px;margin-bottom:16px;border:2px solid #e0c8ff}
+    .sec-title{font-family:'Fredoka One',cursive;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--navy);margin-bottom:12px;line-height:1.1}
+    .sec-title u{text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:5px;text-underline-offset:6px;text-decoration-style:wavy}
+    .sec-sub{font-size:1.05rem;color:var(--soft);font-weight:600;max-width:500px;margin:0 auto}
+    .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:28px;max-width:1200px;margin:0 auto}
+    .game-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07);transition:transform .25s,box-shadow .25s;cursor:pointer;opacity:0;transform:translateY(30px)}
+    .game-card.visible{opacity:1;transform:translateY(0)}
+    .game-card:hover{transform:translateY(-10px) rotate(-.5deg);box-shadow:0 20px 50px var(--glow,rgba(0,0,0,.15))}
+    .card-banner{height:155px;display:flex;align-items:center;justify-content:center;font-size:76px;position:relative;overflow:hidden}
+    .card-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.14) 2px,transparent 2px);background-size:22px 22px}
+    .card-emoji{position:relative;z-index:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))}
+    .card-body{padding:20px 22px 22px}
+    .card-name{font-family:'Fredoka One',cursive;font-size:1.35rem;margin-bottom:6px}
+    .card-desc{font-size:.92rem;color:var(--soft);line-height:1.55;margin-bottom:16px;font-weight:600}
+    .card-foot{display:flex;align-items:center;justify-content:space-between}
+    .card-stars{color:#FFB800;font-size:1rem;letter-spacing:2px}
+    .card-pill{font-weight:800;font-size:.82rem;padding:6px 14px;border-radius:20px}
+
+    /* FEATURES */
+    .features{padding:100px 5%;background:linear-gradient(135deg,#FFF9EC 0%,#FFEEF8 50%,#EEF2FF 100%)}
+    .feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+    .feat-card{background:#fff;border-radius:22px;padding:34px 26px;box-shadow:0 4px 24px rgba(0,0,0,.07);border-top:5px solid var(--fc,var(--sun));text-align:center;transition:transform .22s,box-shadow .22s;opacity:0;transform:translateY(24px)}
+    .feat-card.visible{opacity:1;transform:translateY(0)}
+    .feat-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.11)}
+    .feat-ico{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 18px}
+    .feat-name{font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--navy);margin-bottom:10px}
+    .feat-desc{font-size:.95rem;color:var(--soft);line-height:1.65;font-weight:600}
+
+    /* CTA */
+    .cta-sec{padding:100px 5%;background:linear-gradient(135deg,#FF6B6B 0%,#C779D0 35%,#845EC2 65%,#4FC3F7 100%);text-align:center;position:relative;overflow:hidden}
+    .cta-sec::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 2px,transparent 2px);background-size:30px 30px}
+    .cdot{position:absolute;border-radius:50%;opacity:.6;animation:cdotF var(--d,6s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+    @keyframes cdotF{0%,100%{transform:translateY(0) rotate(0deg)}40%{transform:translateY(-28px) rotate(140deg)}70%{transform:translateY(-14px) rotate(260deg)}}
+    .cta-in{position:relative;z-index:2;max-width:700px;margin:0 auto}
+    .cta-ico{width:110px;height:110px;border-radius:26px;box-shadow:0 0 0 5px rgba(255,255,255,.4),0 16px 48px rgba(0,0,0,.2);margin-bottom:28px;animation:iconFloat 3s ease-in-out infinite}
+    .cta-title{font-family:'Fredoka One',cursive;font-size:clamp(2.4rem,6vw,4rem);color:#fff;margin-bottom:12px;text-shadow:3px 4px 0 rgba(0,0,0,.15)}
+    .cta-sub{color:rgba(255,255,255,.85);font-size:1.1rem;font-weight:700;margin-bottom:36px}
+    .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+    .cta-btn{display:flex;align-items:center;gap:12px;background:#fff;color:var(--navy);padding:14px 28px;border-radius:18px;text-decoration:none;font-weight:900;font-size:1rem;box-shadow:0 6px 24px rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s}
+    .cta-btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 14px 36px rgba(0,0,0,.22)}
+    .cta-btn svg{width:26px;height:26px}
+    .cta-note{color:rgba(255,255,255,.72);font-size:.88rem;font-weight:700}
+
+    /* FOOTER */
+    footer{background:var(--navy);padding:50px 5% 36px;text-align:center}
+    .foot-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px}
+    .foot-logo img{width:36px;height:36px;border-radius:8px}
+    .foot-logo span{font-family:'Fredoka One',cursive;font-size:1.4rem;color:var(--sun)}
+    .foot-links{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:24px}
+    .foot-links a{color:rgba(255,255,255,.7);text-decoration:none;font-weight:700;font-size:.95rem;transition:color .2s}
+    .foot-links a:hover{color:var(--sun)}
+    .foot-copy{color:rgba(255,255,255,.4);font-size:.85rem;font-weight:600}
   </style>
 </head>
 <body>
 
-  <!-- ─── NAVIGATION ──────────────────────────────────────────── -->
-  <nav>
-    <a href="/" class="nav-logo" aria-label="Fuzzy Pop! Home">
-      <img src="icon.png" alt="Fuzzy Pop! icon" />
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon.png" alt="Fuzzy Pop!">
       <span>Fuzzy Pop!</span>
     </a>
-
-    <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#games">Games</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#download">Download</a></li>
-    </ul>
-
-    <a href="#download" class="nav-cta">Download Free ↓</a>
-
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </nav>
-
-  <!-- ─── HERO ────────────────────────────────────────────────── -->
-  <section class="hero" id="home">
-    <!-- Sun -->
-    <div class="hero-sun" aria-hidden="true"></div>
-
-    <!-- Clouds -->
-    <div class="cloud cloud-1" aria-hidden="true"><div class="cloud-shape"></div></div>
-    <div class="cloud cloud-2" aria-hidden="true"><div class="cloud-shape"></div></div>
-    <div class="cloud cloud-3" aria-hidden="true"><div class="cloud-shape"></div></div>
-    <div class="cloud cloud-4" aria-hidden="true"><div class="cloud-shape"></div></div>
-
-    <!-- Sparkles -->
-    <div class="sparkle" style="top:22%;left:8%;animation-delay:0s;animation-duration:2.8s;" aria-hidden="true">★</div>
-    <div class="sparkle" style="top:35%;left:16%;animation-delay:0.7s;animation-duration:3.4s;font-size:1rem;" aria-hidden="true">✦</div>
-    <div class="sparkle" style="top:18%;left:40%;animation-delay:1.2s;animation-duration:2.5s;" aria-hidden="true">⭐</div>
-    <div class="sparkle" style="top:55%;left:6%;animation-delay:0.4s;animation-duration:4s;font-size:0.9rem;" aria-hidden="true">✦</div>
-    <div class="sparkle" style="top:28%;right:22%;animation-delay:1.5s;animation-duration:3s;" aria-hidden="true">★</div>
-    <div class="sparkle" style="top:60%;right:8%;animation-delay:0.9s;animation-duration:3.6s;font-size:0.8rem;" aria-hidden="true">✦</div>
-    <div class="sparkle" style="top:42%;left:52%;animation-delay:2s;animation-duration:2.7s;font-size:1.1rem;" aria-hidden="true">★</div>
-
-    <!-- Main content -->
-    <div class="hero-inner">
-      <div class="hero-text">
-        <div class="eyebrow-tag">🎮 Free to Play</div>
-        <h1 class="hero-title">FUZZY POP!</h1>
-        <p class="hero-sub">7 magical mini-games for the whole family</p>
-        <div class="hero-stars">
-          <span class="stars-row">★★★★★</span>
-          <span class="stars-label">Loved by families everywhere</span>
-        </div>
-        <div class="hero-buttons">
-          <a href="#download" class="btn-store btn-apple">
-            <span class="btn-store-icon">🍎</span>
-            <span class="btn-store-text">
-              <span class="btn-store-label">Download on the</span>
-              <span class="btn-store-name">App Store</span>
-            </span>
-          </a>
-          <a href="#download" class="btn-store btn-google">
-            <span class="btn-store-icon">▶</span>
-            <span class="btn-store-text">
-              <span class="btn-store-label">Get it on</span>
-              <span class="btn-store-name">Google Play</span>
-            </span>
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-icon-wrap" aria-hidden="false">
-        <!-- Decorative dots -->
-        <div class="icon-dot" style="width:18px;height:18px;background:var(--coral);top:-10px;left:-20px;animation:float 2.4s ease-in-out infinite;position:absolute;"></div>
-        <div class="icon-dot" style="width:12px;height:12px;background:var(--mint);top:20px;right:-24px;animation:float 3.1s ease-in-out infinite 0.5s;position:absolute;"></div>
-        <div class="icon-dot" style="width:22px;height:22px;background:var(--sun);bottom:60px;right:-30px;animation:float 2.8s ease-in-out infinite 1s;position:absolute;"></div>
-        <div class="icon-dot" style="width:14px;height:14px;background:var(--purple);bottom:20px;left:-18px;animation:float 3.5s ease-in-out infinite 0.2s;position:absolute;"></div>
-        <div class="icon-dot" style="width:10px;height:10px;background:var(--c-bubble);top:50%;left:-32px;animation:float 2.6s ease-in-out infinite 1.4s;position:absolute;"></div>
-
-        <img src="icon.png" alt="Fuzzy Pop! app icon" class="hero-icon" />
-
-        <div class="icon-rating-pill">
-          <span>★</span>
-          4.9 · App Store Rating
-        </div>
-      </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#games">Games</a>
+      <a href="#features">Features</a>
+      <a href="#download">Download</a>
+      <a href="support.html">Support</a>
     </div>
-
-    <div class="scroll-indicator">
-      <p>scroll to discover</p>
-      <span class="scroll-arrow">↓</span>
-    </div>
-  </section>
-
-  <!-- ─── WAVE DIVIDER ─────────────────────────────────────────── -->
-  <div class="wave-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#FFFDF4"/>
-    </svg>
+    <a href="#download" class="nav-cta">Download Free 🎮</a>
+    <button class="hamburger" id="hamburger">☰</button>
   </div>
+</nav>
 
-  <!-- ─── GAMES SECTION ────────────────────────────────────────── -->
-  <section id="games">
-    <div class="section-header">
-      <div class="section-pill games-pill">✨ Mini Games</div>
-      <h2 class="section-title"><span class="games-title-inner">PLAY ALL 7 GAMES</span></h2>
-      <p class="section-sub">Each game is a burst of fun. Tap, pop, match, slash!</p>
-    </div>
-    <div class="games-grid" id="games-grid"></div>
-  </section>
+<section class="hero">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="dot" style="width:18px;height:18px;background:#FF6B6B;top:32%;left:8%;--d:5s;--dl:0s;opacity:.7"></div>
+  <div class="dot" style="width:12px;height:12px;background:#FFD93D;top:62%;left:14%;--d:7s;--dl:1s;opacity:.8"></div>
+  <div class="dot" style="width:22px;height:22px;background:#56CFB2;top:76%;left:7%;--d:6s;--dl:2s;opacity:.6"></div>
+  <div class="dot" style="width:14px;height:14px;background:#845EC2;top:20%;left:42%;--d:8s;--dl:.5s;opacity:.55"></div>
+  <div class="dot" style="width:20px;height:20px;background:#1a8cff;top:78%;left:56%;--d:5.5s;--dl:1.5s;opacity:.5"></div>
+  <div class="dot" style="width:10px;height:10px;background:#f51480;top:42%;left:76%;--d:7s;--dl:.8s;opacity:.7"></div>
+  <div class="dot" style="width:24px;height:24px;background:#FFD93D;top:66%;left:84%;--d:6s;--dl:2.5s;opacity:.6"></div>
+  <div class="dot" style="width:16px;height:16px;background:#f50f1a;top:24%;left:90%;--d:9s;--dl:.3s;opacity:.5"></div>
 
-  <!-- ─── FEATURES SECTION ─────────────────────────────────────── -->
-  <section id="features">
-    <div class="section-header">
-      <div class="section-pill features-pill">💜 Why You'll Love It</div>
-      <h2 class="section-title">WHY YOU'LL LOVE IT</h2>
-      <p class="section-sub">Built for families, loved by everyone from tiny tots to grandparents.</p>
-    </div>
-    <div class="features-grid" id="features-grid">
-      <div class="feature-card" style="border-top:4px solid var(--sun);animation:fadeInLeft 0.6s ease both;">
-        <div class="feature-emoji-wrap" style="background:rgba(255,217,61,0.15);">🎮</div>
-        <h3 class="feature-title">100% Free</h3>
-        <p class="feature-desc">Jump in with zero cost. No hidden charges, no paywalls, ever.</p>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">🎮 Free to Play &middot; No Sign-Up Needed</div>
+      <h1 class="hero-title">FUZZY<br>POP!</h1>
+      <p class="hero-sub">7 magical mini-games<br>for the whole family</p>
+      <div class="hero-stars">
+        <span class="stars-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        Loved by families everywhere
       </div>
-      <div class="feature-card" style="border-top:4px solid var(--mint);animation:fadeInLeft 0.6s ease 0.1s both;">
-        <div class="feature-emoji-wrap" style="background:rgba(107,203,119,0.15);">📶</div>
-        <h3 class="feature-title">Play Offline</h3>
-        <p class="feature-desc">No Wi-Fi needed. Play on the plane, in the car, anywhere!</p>
-      </div>
-      <div class="feature-card" style="border-top:4px solid var(--coral);animation:fadeInRight 0.6s ease 0.2s both;">
-        <div class="feature-emoji-wrap" style="background:rgba(255,107,107,0.15);">👨‍👩‍👧</div>
-        <h3 class="feature-title">Family Safe</h3>
-        <p class="feature-desc">Child-safe ads only. No data collected. Safe for all ages.</p>
-      </div>
-      <div class="feature-card" style="border-top:4px solid var(--purple);animation:fadeInRight 0.6s ease 0.3s both;">
-        <div class="feature-emoji-wrap" style="background:rgba(132,94,194,0.15);">⚡</div>
-        <h3 class="feature-title">Instant Play</h3>
-        <p class="feature-desc">No tutorials, no logins. Just tap and have fun immediately!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── DOWNLOAD CTA ──────────────────────────────────────────── -->
-  <section id="download">
-    <div class="cta-confetti" id="ctaConfetti" aria-hidden="true"></div>
-    <div class="cta-inner">
-      <div class="cta-icon-wrap">
-        <img src="icon.png" alt="Fuzzy Pop!" class="cta-icon" />
-      </div>
-      <h2 class="cta-title">GET FUZZY POP! FREE</h2>
-      <p class="cta-sub">Available on iOS and Android</p>
-      <div class="cta-buttons">
-        <a href="#" class="btn-cta">
-          <span style="font-size:1.5rem">🍎</span>
-          <span>
-            <span style="display:block;font-size:0.7rem;opacity:0.6;font-weight:600">Download on the</span>
-            <span style="display:block;font-size:1rem;font-weight:900">App Store</span>
-          </span>
+      <div class="hero-btns">
+        <a href="#appstore" class="btn-store btn-apple">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div><span class="bst-small">Download on the</span><span class="bst-big">App Store</span></div>
         </a>
-        <a href="#" class="btn-cta">
-          <span style="font-size:1.5rem">▶</span>
-          <span>
-            <span style="display:block;font-size:0.7rem;opacity:0.6;font-weight:600">Get it on</span>
-            <span style="display:block;font-size:1rem;font-weight:900">Google Play</span>
-          </span>
+        <a href="#googleplay" class="btn-store btn-google">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 11.9 8.56 3.18 23.76zM20.96 10.36l-2.79-1.6-3.88 3.45 3.89 3.89 2.78-1.6c.79-.46.79-1.68 0-2.14zM2.01 1.36C1.7 1.7 1.5 2.2 1.5 2.87v18.26c0 .67.2 1.17.51 1.51l.08.08 10.23-10.24v-.24L2.09 1.28l-.08.08zM11.9 12.56l3.27-3.27-10.22-5.87L11.9 12.56z"/></svg>
+          <div><span class="bst-small">Get it on</span><span class="bst-big">Google Play</span></div>
         </a>
       </div>
-      <p class="cta-note">★ No sign-up · Play offline · Remove ads for $1.99</p>
     </div>
-  </section>
+    <div class="hero-icon-side">
+      <div class="idot" style="width:20px;height:20px;background:#FF6B6B;position:absolute;top:-10px;right:-22px;animation-delay:0s"></div>
+      <div class="idot" style="width:14px;height:14px;background:#FFD93D;position:absolute;top:28px;left:-32px;animation-delay:.8s"></div>
+      <div class="idot" style="width:18px;height:18px;background:#56CFB2;position:absolute;bottom:50px;right:-28px;animation-delay:1.6s"></div>
+      <div class="idot" style="width:12px;height:12px;background:#845EC2;position:absolute;bottom:-8px;left:-18px;animation-delay:2.4s"></div>
+      <div class="idot" style="width:16px;height:16px;background:#1a8cff;position:absolute;top:-22px;left:38px;animation-delay:1.2s"></div>
+      <img src="icon.png" alt="Fuzzy Pop! App Icon" class="hero-app-icon">
+      <div class="icon-badge"><span class="star">&#9733;</span> 4.9 &middot; Free Download</div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore <span>&#8595;</span></div>
+</section>
 
-  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
-  <footer>
-    <div class="footer-inner">
-      <a href="/" class="footer-logo" aria-label="Fuzzy Pop! Home">
-        <img src="icon.png" alt="Fuzzy Pop! icon" />
-        <span>Fuzzy Pop!</span>
+<div class="wave-wrap">
+  <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,55 C240,95 480,15 720,55 C960,95 1200,15 1440,55 L1440,90 L0,90 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+<section class="games" id="games">
+  <div class="section-hdr">
+    <div class="sec-tag">&#10024; Mini Games</div>
+    <h2 class="sec-title">PLAY ALL <u>7 GAMES</u></h2>
+    <p class="sec-sub">Each game is a burst of joy &mdash; tap, pop, match and slash!</p>
+  </div>
+  <div class="games-grid" id="gamesGrid"></div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-hdr">
+    <div class="sec-tag" style="background:#FFF0EC;color:#FF6B6B;border-color:#ffc8b8">&#128155; Why Play?</div>
+    <h2 class="sec-title">WHY YOU'LL <u>LOVE IT</u></h2>
+  </div>
+  <div class="feat-grid" id="featGrid"></div>
+</section>
+
+<section class="cta-sec" id="download">
+  <div class="cta-in">
+    <img src="icon.png" alt="Fuzzy Pop!" class="cta-ico">
+    <h2 class="cta-title">GET FUZZY POP! FREE</h2>
+    <p class="cta-sub">Available on iOS and Android &middot; No sign-up needed</p>
+    <div class="cta-btns">
+      <a href="#appstore" class="cta-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div><div style="font-size:.7rem;opacity:.6;font-weight:700">Download on the</div><div style="font-size:1.05rem;font-weight:900">App Store</div></div>
       </a>
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="support.html">Support</a>
-      </nav>
-      <p class="footer-copy">© 2026 PlayPal Apps · Made with ❤️ for families everywhere</p>
+      <a href="#googleplay" class="cta-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 11.9 8.56 3.18 23.76zM20.96 10.36l-2.79-1.6-3.88 3.45 3.89 3.89 2.78-1.6c.79-.46.79-1.68 0-2.14zM2.01 1.36C1.7 1.7 1.5 2.2 1.5 2.87v18.26c0 .67.2 1.17.51 1.51l.08.08 10.23-10.24v-.24L2.09 1.28l-.08.08zM11.9 12.56l3.27-3.27-10.22-5.87L11.9 12.56z"/></svg>
+        <div><div style="font-size:.7rem;opacity:.6;font-weight:700">Get it on</div><div style="font-size:1.05rem;font-weight:900">Google Play</div></div>
+      </a>
     </div>
-  </footer>
+    <p class="cta-note">&#9733; No sign-up &middot; Play offline &middot; Remove ads option available</p>
+  </div>
+</section>
 
-  <script>
-    // ─── GAME DATA ───────────────────────────────────────────────
-    const GAMES = [
-      {name:'Bubble Pop',   emoji:'🫧', color:'#1a8cff', dark:'#0055cc', desc:'Pop colourful bubbles before they escape!'},
-      {name:'Animal Match', emoji:'🐾', color:'#0ad12e', dark:'#007a1a', desc:'Find all the matching animal pairs!'},
-      {name:'Color Catch',  emoji:'🎨', color:'#ff6a00', dark:'#b34700', desc:'Catch falling objects by colour!'},
-      {name:'Animal Tap',   emoji:'🦁', color:'#f51480', dark:'#a0005a', desc:'Tap the animals as fast as you can!'},
-      {name:'Count Pop',    emoji:'🔢', color:'#9406fa', dark:'#5c0099', desc:'Pop the bubbles in the right order!'},
-      {name:'Shape Sorter', emoji:'🔷', color:'#00a69e', dark:'#006b66', desc:'Sort the falling shapes into bins!'},
-      {name:'Fruit Slash',  emoji:'🍉', color:'#f50f1a', dark:'#a00010', desc:'Slash the fruit with a swipe!'},
-    ];
+<footer>
+  <div class="foot-logo">
+    <img src="icon.png" alt="Fuzzy Pop!">
+    <span>Fuzzy Pop!</span>
+  </div>
+  <div class="foot-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="support.html">Support</a>
+    <a href="mailto:playpalapps2024@gmail.com">Contact</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 PlayPal Apps &middot; Made with &#10084;&#65039; for families everywhere</p>
+</footer>
 
-    // ─── BUILD GAME CARDS ─────────────────────────────────────────
-    const grid = document.getElementById('games-grid');
-    GAMES.forEach((g, i) => {
-      const card = document.createElement('div');
-      card.className = 'game-card';
-      card.style.setProperty('--c', g.color);
-      card.style.setProperty('--cd', g.dark);
-      card.dataset.index = i;
-      card.innerHTML = `
-        <div class="game-banner" style="background:linear-gradient(135deg,${g.color} 0%,${g.dark} 100%)">
-          <span class="game-emoji">${g.emoji}</span>
-        </div>
-        <div class="game-body">
-          <div class="game-name" style="color:${g.color}">${g.name}</div>
-          <p class="game-desc">${g.desc}</p>
-          <div class="game-footer">
-            <span class="game-stars">★★★★★</span>
-            <span class="game-play-tag" style="background:${g.color}22;color:${g.color}">PLAY →</span>
-          </div>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
+<script>
+const GAMES=[
+  {name:'Bubble Pop',emoji:'&#129671;',color:'#1a8cff',dark:'#0055cc',desc:'Pop colourful bubbles before they escape the screen!'},
+  {name:'Animal Match',emoji:'&#128062;',color:'#0ad12e',dark:'#007a1a',desc:'Flip cards and find all the matching animal pairs!'},
+  {name:'Color Catch',emoji:'&#127912;',color:'#ff6a00',dark:'#b34700',desc:'Catch the falling objects that match your colour!'},
+  {name:'Animal Tap',emoji:'&#129409;',color:'#f51480',dark:'#a0005a',desc:'Tap all the animals as fast as you possibly can!'},
+  {name:'Count Pop',emoji:'&#128290;',color:'#9406fa',dark:'#5c0099',desc:'Pop the numbered bubbles in the right order!'},
+  {name:'Shape Sorter',emoji:'&#128311;',color:'#00a69e',dark:'#006b66',desc:'Sort the falling shapes into the correct bins!'},
+  {name:'Fruit Slash',emoji:'&#127817;',color:'#f50f1a',dark:'#a00010',desc:'Swipe to slash the flying fruit — don\'t miss any!'},
+];
+const grid=document.getElementById('gamesGrid');
+GAMES.forEach((g,i)=>{
+  const c=document.createElement('div');
+  c.className='game-card';
+  c.style.cssText=`--glow:${g.color}33;transition-delay:${i*80}ms`;
+  c.innerHTML=`<div class="card-banner" style="background:linear-gradient(135deg,${g.color} 0%,${g.dark} 100%)"><span class="card-emoji">${g.emoji}</span></div><div class="card-body"><div class="card-name" style="color:${g.color}">${g.name}</div><div class="card-desc">${g.desc}</div><div class="card-foot"><span class="card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="card-pill" style="background:${g.color}18;color:${g.color}">Play &#8594;</span></div></div>`;
+  grid.appendChild(c);
+});
 
-    // ─── CONFETTI DOTS ────────────────────────────────────────────
-    const confettiColors = ['#FFD93D','#FF6B6B','#6BCB77','#845EC2','#1a8cff','#f51480','#00a69e','#ff6a00'];
-    const confettiContainer = document.getElementById('ctaConfetti');
-    for (let i = 0; i < 12; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'confetti-dot';
-      const size = 8 + Math.random() * 16;
-      const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-      dot.style.cssText = `
-        width:${size}px;
-        height:${size}px;
-        background:${color};
-        left:${Math.random() * 100}%;
-        top:${20 + Math.random() * 70}%;
-        animation:confettiFloat ${4 + Math.random() * 4}s ease-in-out ${Math.random() * 4}s infinite;
-      `;
-      confettiContainer.appendChild(dot);
-    }
+const FEATS=[
+  {e:'&#127918;',name:'100% Free',desc:'Jump in with zero cost. All 7 games, no hidden charges, ever.',fc:'#FFD93D',fb:'#FFFBEA'},
+  {e:'&#128246;',name:'Play Offline',desc:'No Wi-Fi needed. Play on a plane, in the car, anywhere!',fc:'#56CFB2',fb:'#EDFAF6'},
+  {e:'&#128106;',name:'Family Safe',desc:'Child-safe content only. No personal data collected. Safe for every age.',fc:'#FF6B6B',fb:'#FFF0F0'},
+  {e:'&#9889;',name:'Instant Fun',desc:'No tutorials, no logins. Just tap and play from second one!',fc:'#845EC2',fb:'#F3EEFF'},
+];
+const fg=document.getElementById('featGrid');
+FEATS.forEach((f,i)=>{
+  const c=document.createElement('div');
+  c.className='feat-card';
+  c.style.cssText=`--fc:${f.fc};transition-delay:${i*100}ms`;
+  c.innerHTML=`<div class="feat-ico" style="background:${f.fb}">${f.e}</div><div class="feat-name">${f.name}</div><div class="feat-desc">${f.desc}</div>`;
+  fg.appendChild(c);
+});
 
-    // ─── HAMBURGER ────────────────────────────────────────────────
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', open);
-    });
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', false);
-      });
-    });
+// Confetti
+const cta=document.querySelector('.cta-sec');
+const cols=['#FFD93D','#FF6B6B','#56CFB2','#845EC2','#1a8cff','#f51480','#0ad12e','#ff6a00'];
+for(let i=0;i<14;i++){
+  const d=document.createElement('div');
+  const s=8+Math.random()*20;
+  d.className='cdot';
+  d.style.cssText=`width:${s}px;height:${s}px;background:${cols[i%cols.length]};top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${4+Math.random()*5}s;--dl:${Math.random()*3}s`;
+  cta.appendChild(d);
+}
 
-    // ─── INTERSECTION OBSERVER ─────────────────────────────────────
-    const cards = document.querySelectorAll('.game-card');
-    const cardObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const i = parseInt(entry.target.dataset.index, 10);
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-          cardObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    cards.forEach(c => cardObserver.observe(c));
+// Scroll animations
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.game-card,.feat-card').forEach(el=>obs.observe(el));
 
-    const featureCards = document.querySelectorAll('.feature-card');
-    const featureObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          featureObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    featureCards.forEach(c => featureObserver.observe(c));
-  </script>
-
+// Mobile nav
+document.getElementById('hamburger').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+</script>
 </body>
 </html>
