@@ -13,13 +13,13 @@
   <meta property="og:description" content="Free casual mini-game collection for kids and families. 7 adorable games, no sign-up needed, play offline!" />
   <meta property="og:url" content="https://playpalapps.github.io/FuzzyPop/" />
   <meta property="og:image" content="https://playpalapps.github.io/FuzzyPop/icon.png" />
-  <meta name="twitter:image" content="https://playpalapps.github.io/FuzzyPop/icon.png" />
   <meta property="og:site_name" content="PlayPal Apps" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Fuzzy Pop! — 7 Fun Mini-Games for the Whole Family" />
   <meta name="twitter:description" content="Free casual mini-game collection for kids and families." />
+  <meta name="twitter:image" content="https://playpalapps.github.io/FuzzyPop/icon.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -28,38 +28,103 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --hero-bg-top: #120826;
-      --hero-bg-bot: #0d1b4b;
-      --gold: #FFD700;
-      --orange: #FF6B35;
-      --purple: #7B2FBE;
-      --c-bubble: #1a8cff;
-      --c-match: #0ad12e;
-      --c-catch: #ff6a00;
-      --c-tap: #f51480;
-      --c-count: #9406fa;
-      --c-shape: #00a69e;
-      --c-fruit: #f50f1a;
-      --nav-h: 72px;
-      --radius: 28px;
+      --sky:       #6DD5FA;
+      --sky-light: #E0F7FF;
+      --sun:       #FFD93D;
+      --coral:     #FF6B6B;
+      --mint:      #6BCB77;
+      --purple:    #845EC2;
+      --white:     #FFFFFF;
+      --cream:     #FFFDF4;
+      --navy:      #1A1A3E;
+      --text-soft: #5a5a8a;
+      --c-bubble:  #1a8cff;
+      --c-match:   #0ad12e;
+      --c-catch:   #ff6a00;
+      --c-tap:     #f51480;
+      --c-count:   #9406fa;
+      --c-shape:   #00a69e;
+      --c-fruit:   #f50f1a;
+      --nav-h: 70px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
-      color: #1a1a2e;
-      background: #ffffff;
+      color: var(--navy);
+      background: var(--cream);
       overflow-x: hidden;
     }
 
-    /* ─── NAV ─────────────────────────────────────────────── */
+    /* ─── KEYFRAMES ───────────────────────────────────────────── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    @keyframes btnBounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-4px); }
+    }
+
+    @keyframes cloudDrift {
+      0%   { transform: translateX(-120px); }
+      100% { transform: translateX(calc(100vw + 120px)); }
+    }
+
+    @keyframes sunPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(255,217,61,0.4); }
+      50%       { transform: scale(1.05); box-shadow: 0 0 60px 20px rgba(255,217,61,0.6); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-8deg) scale(1); }
+      50%       { transform: rotate(8deg) scale(1.1); }
+    }
+
+    @keyframes confettiFloat {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -68,1073 +133,1055 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 28px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(18, 8, 38, 0.85);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
       z-index: 1000;
     }
 
     .nav-logo {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.6rem;
-      color: var(--gold);
-      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 6px;
-      letter-spacing: 1px;
+      gap: 10px;
+      text-decoration: none;
     }
 
-    .nav-logo .spin-star {
-      display: inline-block;
-      animation: spinStar 3s linear infinite;
+    .nav-logo img {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
 
-    @keyframes spinStar {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+    .nav-logo span {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--navy);
+      letter-spacing: 0.5px;
     }
 
     .nav-links {
       display: flex;
+      align-items: center;
+      gap: 32px;
       list-style: none;
-      gap: 36px;
     }
 
     .nav-links a {
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
       font-family: 'Nunito', sans-serif;
       font-weight: 700;
       font-size: 1rem;
-      position: relative;
-      transition: color 0.2s;
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 2px;
-      background: var(--gold);
-      transition: width 0.25s;
+    .nav-links a:hover { color: var(--coral); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--sun);
+      color: var(--navy);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(255,217,61,0.4);
     }
 
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { width: 100%; }
+    .nav-cta:hover {
+      transform: scale(1.04);
+      box-shadow: 0 6px 20px rgba(255,217,61,0.5);
+    }
 
-    .nav-hamburger {
+    .hamburger {
       display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
       background: none;
       border: none;
-      color: #fff;
-      font-size: 1.8rem;
-      cursor: pointer;
-      line-height: 1;
+      padding: 4px;
     }
 
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      top: var(--nav-h);
-      left: 0; right: 0;
-      background: rgba(18, 8, 38, 0.97);
-      padding: 20px 28px 28px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      z-index: 999;
-      flex-direction: column;
-      gap: 20px;
+    .hamburger span {
+      display: block;
+      width: 26px; height: 3px;
+      background: var(--navy);
+      border-radius: 3px;
+      transition: all 0.3s ease;
     }
 
-    .nav-mobile.open { display: flex; }
-
-    .nav-mobile a {
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      transition: color 0.2s;
-    }
-
-    .nav-mobile a:hover { color: var(--gold); }
-
-    /* ─── HERO ────────────────────────────────────────────── */
+    /* ─── HERO ─────────────────────────────────────────────────── */
     .hero {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      background: linear-gradient(180deg, #87CEEB 0%, #B8E4F9 40%, #E8F7FF 70%, #FFFDF4 100%);
       position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Sun */
+    .hero-sun {
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #FFE566, #FFD93D);
+      animation: sunPulse 4s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .hero-sun::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,217,61,0.3) 0%, transparent 70%);
+    }
+
+    /* Sun rays */
+    .hero-sun::after {
+      content: '';
+      position: absolute;
+      inset: -30px;
+      border-radius: 50%;
+      background: repeating-conic-gradient(
+        rgba(255,217,61,0.25) 0deg 10deg,
+        transparent 10deg 20deg
+      );
+      animation: spin 20s linear infinite;
+    }
+
+    /* Clouds */
+    .cloud {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .cloud-shape {
+      position: relative;
+      background: rgba(255,255,255,0.88);
+      border-radius: 50px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+    }
+
+    .cloud-shape::before, .cloud-shape::after {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.88);
+      border-radius: 50%;
+    }
+
+    .cloud-1 .cloud-shape { width: 140px; height: 48px; top: 100px; }
+    .cloud-1 .cloud-shape::before { width: 72px; height: 72px; top: -36px; left: 20px; }
+    .cloud-1 .cloud-shape::after  { width: 50px; height: 50px; top: -24px; left: 72px; }
+    .cloud-1 { animation: cloudDrift 45s linear infinite; top: 110px; left: -160px; }
+
+    .cloud-2 .cloud-shape { width: 100px; height: 36px; }
+    .cloud-2 .cloud-shape::before { width: 52px; height: 52px; top: -28px; left: 16px; }
+    .cloud-2 .cloud-shape::after  { width: 38px; height: 38px; top: -18px; left: 54px; }
+    .cloud-2 { animation: cloudDrift 30s linear infinite; animation-delay: -12s; top: 160px; left: -120px; }
+
+    .cloud-3 .cloud-shape { width: 120px; height: 42px; }
+    .cloud-3 .cloud-shape::before { width: 62px; height: 62px; top: -32px; left: 18px; }
+    .cloud-3 .cloud-shape::after  { width: 44px; height: 44px; top: -20px; left: 64px; }
+    .cloud-3 { animation: cloudDrift 60s linear infinite; animation-delay: -30s; top: 80px; left: -140px; }
+
+    .cloud-4 .cloud-shape { width: 90px; height: 32px; }
+    .cloud-4 .cloud-shape::before { width: 46px; height: 46px; top: -24px; left: 14px; }
+    .cloud-4 .cloud-shape::after  { width: 34px; height: 34px; top: -16px; left: 50px; }
+    .cloud-4 { animation: cloudDrift 38s linear infinite; animation-delay: -20s; top: 200px; left: -110px; }
+
+    /* Sparkles */
+    .sparkle {
+      position: absolute;
+      font-size: 1.4rem;
+      z-index: 1;
+      animation: wiggle 3s ease-in-out infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Hero content */
+    .hero-inner {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      background: radial-gradient(ellipse at 60% 40%, #2a0a5e 0%, #120826 45%, #0d1b4b 100%);
-    }
-
-    #particle-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .hero-content {
+      padding: 60px 40px 40px;
       position: relative;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
+      gap: 60px;
+    }
+
+    .hero-text {
+      flex: 1;
+      max-width: 560px;
+      animation: fadeInLeft 0.8s ease both;
+    }
+
+    .eyebrow-tag {
+      display: inline-flex;
       align-items: center;
-      text-align: center;
-      padding: 0 24px;
-      padding-top: var(--nav-h);
-    }
-
-    .hero-title-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .hero-star-deco {
-      font-size: 2.4rem;
-      animation: rotateStar 8s linear infinite;
-      display: inline-block;
-      filter: drop-shadow(0 0 12px var(--gold));
-    }
-    .hero-star-deco.rev { animation-direction: reverse; }
-
-    @keyframes rotateStar {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      gap: 6px;
+      background: var(--sun);
+      color: var(--navy);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(255,217,61,0.35);
     }
 
     .hero-title {
       font-family: 'Fredoka One', cursive;
-      font-size: clamp(56px, 10vw, 120px);
-      line-height: 1;
-      -webkit-text-stroke: 4px #ffffff;
-      background: linear-gradient(90deg,
-        var(--c-bubble),
-        var(--c-match),
-        var(--gold),
-        var(--c-catch),
-        var(--c-tap),
-        var(--c-count),
-        var(--c-shape),
-        var(--c-fruit),
-        var(--c-bubble)
-      );
-      background-size: 300% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: rainbowShift 5s linear infinite;
+      font-size: clamp(3rem, 6vw, 5rem);
+      color: var(--navy);
+      line-height: 1.1;
+      text-shadow: 4px 4px 0px rgba(0,0,0,0.08);
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .hero-sub {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .hero-stars {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .stars-row {
+      color: #FFB800;
+      font-size: 1.3rem;
       letter-spacing: 2px;
     }
 
-    @keyframes rainbowShift {
-      0%   { background-position: 0% center; }
-      100% { background-position: 300% center; }
-    }
-
-    .hero-subtitle {
-      margin-top: 22px;
-      color: rgba(255,255,255,0.9);
+    .stars-label {
       font-family: 'Nunito', sans-serif;
-      font-size: clamp(15px, 2.5vw, 22px);
       font-weight: 700;
-      letter-spacing: 0.5px;
-      animation: subtlePulse 3s ease-in-out infinite;
+      font-size: 0.9rem;
+      color: var(--text-soft);
     }
 
-    @keyframes subtlePulse {
-      0%, 100% { opacity: 0.9; }
-      50%       { opacity: 1; text-shadow: 0 0 20px rgba(255,255,255,0.4); }
-    }
-
-    /* Floating game emojis */
-    .float-emoji {
-      position: absolute;
-      z-index: 1;
-      pointer-events: none;
-      font-size: 72px;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .float-emoji.fe-art {
-      left: 6%;
-      top: 35%;
-      font-size: 72px;
-      filter: drop-shadow(0 0 20px var(--c-catch));
-      animation: floatA 7s ease-in-out infinite;
-    }
-    .float-emoji.fe-lion {
-      right: 6%;
-      top: 40%;
-      font-size: 72px;
-      filter: drop-shadow(0 0 20px var(--c-tap));
-      animation: floatB 5.5s ease-in-out infinite;
-    }
-    .float-emoji.fe-bubble {
-      right: 14%;
-      top: 20%;
-      font-size: 56px;
-      filter: drop-shadow(0 0 20px var(--c-bubble));
-      animation: floatC 4s ease-in-out infinite;
-    }
-    .float-emoji.fe-melon {
-      left: 12%;
-      bottom: 22%;
-      font-size: 56px;
-      filter: drop-shadow(0 0 20px var(--c-fruit));
-      animation: floatB 6s ease-in-out infinite 1s;
-    }
-
-    @keyframes floatA {
-      0%, 100% { transform: translateY(0) rotate(-5deg); }
-      50%       { transform: translateY(-30px) rotate(5deg); }
-    }
-    @keyframes floatB {
-      0%, 100% { transform: translateY(0) rotate(4deg); }
-      50%       { transform: translateY(-24px) rotate(-4deg); }
-    }
-    @keyframes floatC {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50%       { transform: translateY(-20px) scale(1.08); }
-    }
-
-    /* Download buttons */
     .hero-buttons {
       display: flex;
+      gap: 14px;
       flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 40px;
     }
 
-    .store-btn {
-      position: relative;
-      display: flex;
+    .btn-store {
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 14px 28px;
-      background: rgba(10, 10, 20, 0.85);
-      border: 2px solid rgba(255,255,255,0.3);
+      gap: 10px;
+      padding: 14px 24px;
       border-radius: 16px;
-      color: #fff;
       text-decoration: none;
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
-      font-size: 1rem;
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-      overflow: hidden;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: btnBounce 3s ease-in-out infinite;
     }
 
-    .store-btn::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 20px;
-      border: 2px solid var(--gold);
-      opacity: 0;
-      animation: pulseRing 2.5s ease-in-out infinite;
+    .btn-store:nth-child(2) { animation-delay: 0.4s; }
+
+    .btn-store:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
-    .store-btn:nth-child(2)::before {
-      animation-delay: 1.25s;
+    .btn-apple {
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 6px 20px rgba(26,26,62,0.3);
     }
 
-    @keyframes pulseRing {
-      0%   { transform: scale(1);   opacity: 0.6; }
-      100% { transform: scale(1.18); opacity: 0; }
+    .btn-google {
+      background: white;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
 
-    .store-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 40px rgba(255,215,0,0.35);
-      border-color: var(--gold);
-    }
+    .btn-store-icon { font-size: 1.4rem; }
+    .btn-store-text { display: flex; flex-direction: column; text-align: left; }
+    .btn-store-label { font-size: 0.7rem; font-weight: 600; opacity: 0.75; line-height: 1; }
+    .btn-store-name  { font-size: 1rem; font-weight: 900; line-height: 1.2; }
 
-    .store-btn svg {
+    /* Hero icon */
+    .hero-icon-wrap {
       flex-shrink: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      animation: fadeInRight 0.8s ease 0.2s both;
     }
 
-    .btn-label-small {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      opacity: 0.7;
-      letter-spacing: 0.5px;
+    .hero-icon {
+      width: 280px; height: 280px;
+      border-radius: 56px;
+      object-fit: cover;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.18),
+        0 0 0 6px white,
+        0 0 0 10px var(--sun);
+      animation: float 3s ease-in-out infinite;
     }
-    .btn-label-big {
-      display: block;
-      font-size: 1.05rem;
+
+    .icon-rating-pill {
+      background: white;
+      border-radius: 50px;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Nunito', sans-serif;
       font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--navy);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .icon-rating-pill span { color: #FFB800; font-size: 1.1rem; }
+
+    /* Decorative dots around icon */
+    .icon-dot {
+      position: absolute;
+      border-radius: 50%;
+      z-index: -1;
     }
 
     /* Scroll indicator */
     .scroll-indicator {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
+      text-align: center;
+      padding: 20px 0 36px;
+      position: relative;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
+    }
+
+    .scroll-indicator p {
+      font-family: 'Nunito', sans-serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .scroll-arrow {
+      display: inline-block;
+      font-size: 1.3rem;
+      color: var(--text-soft);
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+
+    /* ─── WAVE DIVIDER ────────────────────────────────────────── */
+    .wave-divider {
+      line-height: 0;
+      margin-top: -2px;
+    }
+
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* ─── SECTION COMMON ──────────────────────────────────────── */
+    section { padding: 80px 24px; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-pill {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: rgba(255,255,255,0.5);
+      padding: 6px 18px;
+      border-radius: 50px;
       font-family: 'Nunito', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .scroll-chevron {
-      width: 24px;
-      height: 24px;
-      border-right: 3px solid rgba(255,255,255,0.5);
-      border-bottom: 3px solid rgba(255,255,255,0.5);
-      transform: rotate(45deg);
-      animation: bounce 1.6s ease-in-out infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: rotate(45deg) translateY(0); }
-      50%       { transform: rotate(45deg) translateY(8px); }
-    }
-
-    /* ─── GAMES SECTION ───────────────────────────────────── */
-    .games-section {
-      background: #f8f4ff;
-      padding: 80px 24px 100px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
     }
 
     .section-title {
       font-family: 'Fredoka One', cursive;
-      font-size: clamp(36px, 6vw, 72px);
-      text-align: center;
-      color: #120826;
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-bottom: 60px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
 
-    .section-title::after {
-      content: '';
-      display: block;
-      height: 8px;
-      border-radius: 4px;
-      background: var(--gold);
-      margin-top: 8px;
-      clip-path: polygon(0 20%, 2% 0, 4% 20%, 6% 0, 8% 20%, 10% 0, 12% 20%, 14% 0, 16% 20%, 18% 0, 20% 20%, 22% 0, 24% 20%, 26% 0, 28% 20%, 30% 0, 32% 20%, 34% 0, 36% 20%, 38% 0, 40% 20%, 42% 0, 44% 20%, 46% 0, 48% 20%, 50% 0, 52% 20%, 54% 0, 56% 20%, 58% 0, 60% 20%, 62% 0, 64% 20%, 66% 0, 68% 20%, 70% 0, 72% 20%, 74% 0, 76% 20%, 78% 0, 80% 20%, 82% 0, 84% 20%, 86% 0, 88% 20%, 90% 0, 92% 20%, 94% 0, 96% 20%, 98% 0, 100% 20%, 100% 100%, 0 100%);
+    .section-sub {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ─── GAMES SECTION ───────────────────────────────────────── */
+    #games {
+      background: var(--cream);
+    }
+
+    .games-pill {
+      background: rgba(255,217,61,0.2);
+      color: #b07c00;
+      border: 1.5px solid var(--sun);
+    }
+
+    .games-title-inner {
+      display: inline;
+      text-decoration: underline wavy var(--sun);
+      text-underline-offset: 6px;
     }
 
     .games-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    /* Game cards */
-    .game-card {
-      background: #fff;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 3px solid var(--c);
-      box-shadow: 0 8px 32px color-mix(in srgb, var(--c) 25%, transparent),
-                  0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s;
-      cursor: pointer;
-      position: relative;
-      opacity: 0;
-      transform: translateY(40px);
-    }
-
-    .game-card.visible {
-      animation: cardIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards;
-    }
-
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(40px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .game-card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 20px 60px color-mix(in srgb, var(--c) 40%, transparent),
-                  0 4px 16px rgba(0,0,0,0.12);
-    }
-
-    .game-card:hover .card-shine { animation: shine 0.45s linear; }
-
-    .card-banner {
-      height: 120px;
-      background: linear-gradient(135deg, var(--c), var(--cd));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-banner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.12) 0%, transparent 60%),
-                  repeating-radial-gradient(circle, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 14px);
-    }
-
-    .card-emoji {
-      font-size: 72px;
-      line-height: 1;
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-    }
-
-    .card-shine {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
-      transform: translateX(-100%);
-      pointer-events: none;
-    }
-
-    @keyframes shine {
-      from { transform: translateX(-100%); }
-      to   { transform: translateX(100%); }
-    }
-
-    .card-body {
-      padding: 20px 22px 24px;
-    }
-
-    .card-name {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.5rem;
-      color: var(--c);
-      margin-bottom: 6px;
-      letter-spacing: 0.5px;
-    }
-
-    .card-desc {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      color: #555577;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .card-stars {
-      color: var(--gold);
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-    }
-
-    /* ─── FEATURES SECTION ────────────────────────────────── */
-    .features-section {
-      background: #120826;
-      padding: 80px 24px 100px;
-    }
-
-    .features-section .section-title {
-      color: var(--gold);
-    }
-
-    .features-section .section-title::after {
-      background: var(--orange);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 24px;
       max-width: 1100px;
       margin: 0 auto;
     }
 
-    .feature-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
+    .game-card {
+      background: white;
       border-radius: 24px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 36px 28px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 14px;
-      transition: border-color 0.25s, transform 0.25s;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
       opacity: 0;
-      transform: translateX(-40px);
+      transform: translateY(30px);
+    }
+
+    .game-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px) rotate(-0.5deg);
+    }
+
+    .game-banner {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .game-emoji {
+      font-size: 80px;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+      line-height: 1;
+    }
+
+    .game-body {
+      padding: 20px;
+    }
+
+    .game-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .game-desc {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .game-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .game-stars { color: #FFB800; font-size: 1rem; letter-spacing: 1px; }
+
+    .game-play-tag {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 5px 14px;
+      border-radius: 50px;
+    }
+
+    /* ─── FEATURES SECTION ────────────────────────────────────── */
+    #features {
+      background: linear-gradient(135deg, #E8F4FD 0%, #F0E8FF 100%);
+    }
+
+    .features-pill {
+      background: rgba(132,94,194,0.12);
+      color: var(--purple);
+      border: 1.5px solid rgba(132,94,194,0.3);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease;
+      opacity: 0;
     }
 
     .feature-card.visible {
-      animation: slideIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards;
+      opacity: 1;
     }
 
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-40px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
+    .feature-card:hover { transform: translateY(-4px); }
 
-    .feature-card:hover {
-      border-color: var(--gold);
-      transform: scale(1.02);
-    }
-
-    .feature-icon-wrap {
-      width: 64px;
-      height: 64px;
+    .feature-emoji-wrap {
+      width: 70px; height: 70px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2rem;
-      flex-shrink: 0;
+      margin-bottom: 18px;
     }
-
-    .feature-icon-wrap.ic1 { background: rgba(255,215,0,0.15); box-shadow: 0 0 24px rgba(255,215,0,0.3); }
-    .feature-icon-wrap.ic2 { background: rgba(26,140,255,0.15); box-shadow: 0 0 24px rgba(26,140,255,0.3); }
-    .feature-icon-wrap.ic3 { background: rgba(10,209,46,0.15); box-shadow: 0 0 24px rgba(10,209,46,0.3); }
-    .feature-icon-wrap.ic4 { background: rgba(255,107,53,0.15); box-shadow: 0 0 24px rgba(255,107,53,0.3); }
 
     .feature-title {
       font-family: 'Fredoka One', cursive;
-      font-size: 1.35rem;
-      color: #fff;
-      letter-spacing: 0.5px;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 8px;
     }
 
     .feature-desc {
       font-family: 'Nunito', sans-serif;
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.65);
-      font-weight: 600;
-      line-height: 1.6;
+      color: var(--text-soft);
+      line-height: 1.65;
     }
 
-    /* ─── DOWNLOAD CTA SECTION ────────────────────────────── */
-    .cta-section {
+    /* ─── CTA SECTION ─────────────────────────────────────────── */
+    #download {
+      background: linear-gradient(135deg, #845EC2 0%, #1a8cff 50%, #00a69e 100%);
       position: relative;
-      padding: 100px 24px;
-      text-align: center;
       overflow: hidden;
-      background: linear-gradient(135deg, #120826 0%, #1e0a5c 40%, #0d1b4b 100%);
-      background-size: 300% 300%;
-      animation: ctaBgShift 8s ease-in-out infinite alternate;
+      padding: 100px 24px;
     }
 
-    @keyframes ctaBgShift {
-      0%   { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+    .cta-confetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
 
-    .cta-glow {
+    .confetti-dot {
       position: absolute;
       border-radius: 50%;
-      pointer-events: none;
+      opacity: 0.6;
     }
 
-    .cta-glow.g1 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(123,47,190,0.35) 0%, transparent 70%);
-      top: -100px; left: -100px;
-      animation: glowPulse 5s ease-in-out infinite;
-    }
-    .cta-glow.g2 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, transparent 70%);
-      bottom: -80px; right: -60px;
-      animation: glowPulse 5s ease-in-out infinite 2.5s;
-    }
-    .cta-glow.g3 {
-      width: 250px; height: 250px;
-      background: radial-gradient(circle, rgba(26,140,255,0.2) 0%, transparent 70%);
-      top: 20%; right: 20%;
-      animation: glowPulse 6s ease-in-out infinite 1s;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% { transform: scale(1); opacity: 0.8; }
-      50%       { transform: scale(1.2); opacity: 1; }
-    }
-
-    .cta-content {
+    .cta-inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .cta-icon-wrap {
+      margin-bottom: 28px;
+    }
+
+    .cta-icon {
+      width: 120px; height: 120px;
+      border-radius: 28px;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+      animation: float 3s ease-in-out infinite;
     }
 
     .cta-title {
       font-family: 'Fredoka One', cursive;
-      font-size: clamp(42px, 7vw, 72px);
-      color: #fff;
-      -webkit-text-stroke: 3px rgba(255,255,255,0.2);
-      letter-spacing: 2px;
-      text-shadow: 0 0 60px rgba(255,215,0,0.3);
-      margin-bottom: 14px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: white;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
     }
 
     .cta-sub {
       font-family: 'Nunito', sans-serif;
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.8);
-      font-weight: 700;
-      margin-bottom: 40px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 36px;
     }
 
     .cta-buttons {
       display: flex;
-      flex-wrap: wrap;
       gap: 16px;
       justify-content: center;
-      margin-bottom: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
-    .cta-tagline {
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 18px;
+      text-decoration: none;
       font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      color: var(--gold);
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-weight: 800;
+      background: white;
+      color: var(--navy);
+      font-size: 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* ─── FOOTER ──────────────────────────────────────────── */
+    .btn-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+
+    .cta-note {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────────── */
     footer {
-      background: #0a0a1a;
-      padding: 48px 24px;
+      background: var(--navy);
+      padding: 48px 24px 32px;
+    }
+
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
       text-align: center;
     }
 
     .footer-logo {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.5rem;
-      color: var(--gold);
-      margin-bottom: 16px;
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-bottom: 24px;
     }
 
-    .footer-copy {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 16px;
+    .footer-logo img {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .footer-logo span {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--sun);
+      letter-spacing: 0.5px;
     }
 
     .footer-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px 24px;
       justify-content: center;
-      margin-bottom: 20px;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     .footer-links a {
-      color: rgba(255,255,255,0.5);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover { color: var(--sun); }
+
+    .footer-copy {
       font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
       font-weight: 600;
-      transition: color 0.2s;
     }
 
-    .footer-links a:hover { color: var(--gold); }
+    /* ─── MOBILE NAV ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links  { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: white;
+        padding: 20px 28px;
+        gap: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        animation: fadeInUp 0.25s ease;
+      }
+      .nav-cta { display: none; }
 
-    .footer-heart {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.35);
+      .hero-inner { flex-direction: column; padding: 30px 24px 20px; gap: 32px; text-align: center; }
+      .hero-icon-wrap { order: -1; }
+      .hero-icon { width: 180px; height: 180px; border-radius: 36px; }
+      .hero-buttons { justify-content: center; }
+      .hero-stars { justify-content: center; }
+
+      .features-grid { grid-template-columns: 1fr; }
+      .cta-buttons { flex-direction: column; align-items: center; }
     }
 
-    /* ─── RESPONSIVE ──────────────────────────────────────── */
-    @media (min-width: 540px) {
-      .games-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (min-width: 768px) {
-      .nav-hamburger { display: none !important; }
-      .nav-links { display: flex !important; }
-
-      .features-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (min-width: 1024px) {
-      .games-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (min-width: 1200px) {
-      .games-grid { grid-template-columns: repeat(4, 1fr); }
-      .features-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-
-    @media (max-width: 767px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: block; }
-      .float-emoji.fe-art,
-      .float-emoji.fe-lion { font-size: 48px; }
-      .float-emoji.fe-bubble,
-      .float-emoji.fe-melon { font-size: 36px; }
+    @media (min-width: 769px) {
+      .hamburger { display: none; }
+      .hero-icon-wrap { display: flex; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- ─── NAVIGATION ──────────────────────────────────────────── -->
   <nav>
-    <a href="#" class="nav-logo">🫧 FUZZY POP! <span class="spin-star">✨</span></a>
-    <ul class="nav-links" id="navLinks">
+    <a href="/" class="nav-logo" aria-label="Fuzzy Pop! Home">
+      <img src="icon.png" alt="Fuzzy Pop! icon" />
+      <span>Fuzzy Pop!</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks" role="list">
       <li><a href="#games">Games</a></li>
       <li><a href="#features">Features</a></li>
       <li><a href="#download">Download</a></li>
     </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">☰</button>
+
+    <a href="#download" class="nav-cta">Download Free ↓</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
-  <div class="nav-mobile" id="mobileNav">
-    <a href="#games" onclick="closeMobileNav()">Games</a>
-    <a href="#features" onclick="closeMobileNav()">Features</a>
-    <a href="#download" onclick="closeMobileNav()">Download</a>
+
+  <!-- ─── HERO ────────────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <!-- Sun -->
+    <div class="hero-sun" aria-hidden="true"></div>
+
+    <!-- Clouds -->
+    <div class="cloud cloud-1" aria-hidden="true"><div class="cloud-shape"></div></div>
+    <div class="cloud cloud-2" aria-hidden="true"><div class="cloud-shape"></div></div>
+    <div class="cloud cloud-3" aria-hidden="true"><div class="cloud-shape"></div></div>
+    <div class="cloud cloud-4" aria-hidden="true"><div class="cloud-shape"></div></div>
+
+    <!-- Sparkles -->
+    <div class="sparkle" style="top:22%;left:8%;animation-delay:0s;animation-duration:2.8s;" aria-hidden="true">★</div>
+    <div class="sparkle" style="top:35%;left:16%;animation-delay:0.7s;animation-duration:3.4s;font-size:1rem;" aria-hidden="true">✦</div>
+    <div class="sparkle" style="top:18%;left:40%;animation-delay:1.2s;animation-duration:2.5s;" aria-hidden="true">⭐</div>
+    <div class="sparkle" style="top:55%;left:6%;animation-delay:0.4s;animation-duration:4s;font-size:0.9rem;" aria-hidden="true">✦</div>
+    <div class="sparkle" style="top:28%;right:22%;animation-delay:1.5s;animation-duration:3s;" aria-hidden="true">★</div>
+    <div class="sparkle" style="top:60%;right:8%;animation-delay:0.9s;animation-duration:3.6s;font-size:0.8rem;" aria-hidden="true">✦</div>
+    <div class="sparkle" style="top:42%;left:52%;animation-delay:2s;animation-duration:2.7s;font-size:1.1rem;" aria-hidden="true">★</div>
+
+    <!-- Main content -->
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow-tag">🎮 Free to Play</div>
+        <h1 class="hero-title">FUZZY POP!</h1>
+        <p class="hero-sub">7 magical mini-games for the whole family</p>
+        <div class="hero-stars">
+          <span class="stars-row">★★★★★</span>
+          <span class="stars-label">Loved by families everywhere</span>
+        </div>
+        <div class="hero-buttons">
+          <a href="#download" class="btn-store btn-apple">
+            <span class="btn-store-icon">🍎</span>
+            <span class="btn-store-text">
+              <span class="btn-store-label">Download on the</span>
+              <span class="btn-store-name">App Store</span>
+            </span>
+          </a>
+          <a href="#download" class="btn-store btn-google">
+            <span class="btn-store-icon">▶</span>
+            <span class="btn-store-text">
+              <span class="btn-store-label">Get it on</span>
+              <span class="btn-store-name">Google Play</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-icon-wrap" aria-hidden="false">
+        <!-- Decorative dots -->
+        <div class="icon-dot" style="width:18px;height:18px;background:var(--coral);top:-10px;left:-20px;animation:float 2.4s ease-in-out infinite;position:absolute;"></div>
+        <div class="icon-dot" style="width:12px;height:12px;background:var(--mint);top:20px;right:-24px;animation:float 3.1s ease-in-out infinite 0.5s;position:absolute;"></div>
+        <div class="icon-dot" style="width:22px;height:22px;background:var(--sun);bottom:60px;right:-30px;animation:float 2.8s ease-in-out infinite 1s;position:absolute;"></div>
+        <div class="icon-dot" style="width:14px;height:14px;background:var(--purple);bottom:20px;left:-18px;animation:float 3.5s ease-in-out infinite 0.2s;position:absolute;"></div>
+        <div class="icon-dot" style="width:10px;height:10px;background:var(--c-bubble);top:50%;left:-32px;animation:float 2.6s ease-in-out infinite 1.4s;position:absolute;"></div>
+
+        <img src="icon.png" alt="Fuzzy Pop! app icon" class="hero-icon" />
+
+        <div class="icon-rating-pill">
+          <span>★</span>
+          4.9 · App Store Rating
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <p>scroll to discover</p>
+      <span class="scroll-arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- ─── WAVE DIVIDER ─────────────────────────────────────────── -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#FFFDF4"/>
+    </svg>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <canvas id="particle-canvas"></canvas>
-
-    <!-- Floating emojis -->
-    <span class="float-emoji fe-art" aria-hidden="true">🎨</span>
-    <span class="float-emoji fe-lion" aria-hidden="true">🦁</span>
-    <span class="float-emoji fe-bubble" aria-hidden="true">🫧</span>
-    <span class="float-emoji fe-melon" aria-hidden="true">🍉</span>
-
-    <div class="hero-content">
-      <div class="hero-title-wrap">
-        <span class="hero-star-deco" aria-hidden="true">✦</span>
-        <h1 class="hero-title">FUZZY POP!</h1>
-        <span class="hero-star-deco rev" aria-hidden="true">✦</span>
-      </div>
-
-      <p class="hero-subtitle">7 magical mini-games &middot; Free to play &middot; No sign-up</p>
-
-      <div class="hero-buttons">
-        <a href="#appstore" class="store-btn" aria-label="Download on the App Store">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-          </svg>
-          <span>
-            <span class="btn-label-small">Download on the</span>
-            <span class="btn-label-big">App Store</span>
-          </span>
-        </a>
-        <a href="#googleplay" class="store-btn" aria-label="Get it on Google Play">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.18 23.76c.37.2.8.22 1.21.02l12.71-7.23-2.78-2.78-11.14 9.99zM.69 1.7C.27 2.06 0 2.62 0 3.33v17.34c0 .71.27 1.27.69 1.63l.09.08 9.71-9.71v-.23L.78 1.62.69 1.7zM20.12 10.43l-2.56-1.46-3.07 3.07 3.07 3.07 2.59-1.47c.74-.42.74-1.79-.03-2.21zM4.39.22L17.1 7.45l-2.78 2.78L3.18.24C3.59.04 4.02.02 4.39.22z"/>
-          </svg>
-          <span>
-            <span class="btn-label-small">Get it on</span>
-            <span class="btn-label-big">Google Play</span>
-          </span>
-        </a>
-      </div>
+  <!-- ─── GAMES SECTION ────────────────────────────────────────── -->
+  <section id="games">
+    <div class="section-header">
+      <div class="section-pill games-pill">✨ Mini Games</div>
+      <h2 class="section-title"><span class="games-title-inner">PLAY ALL 7 GAMES</span></h2>
+      <p class="section-sub">Each game is a burst of fun. Tap, pop, match, slash!</p>
     </div>
-
-    <div class="scroll-indicator" aria-hidden="true">
-      <span>Scroll</span>
-      <div class="scroll-chevron"></div>
-    </div>
+    <div class="games-grid" id="games-grid"></div>
   </section>
 
-  <!-- GAMES -->
-  <section class="games-section" id="games">
-    <h2 class="section-title">THE GAMES</h2>
-    <div class="games-grid" id="gamesGrid"></div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features-section" id="features">
-    <h2 class="section-title">WHY YOU'LL LOVE IT</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon-wrap ic1">🎮</div>
-        <div>
-          <div class="feature-title">Free to Play</div>
-          <div class="feature-desc">No hidden costs, ever. Jump straight in and enjoy all 7 games without spending a penny.</div>
-        </div>
+  <!-- ─── FEATURES SECTION ─────────────────────────────────────── -->
+  <section id="features">
+    <div class="section-header">
+      <div class="section-pill features-pill">💜 Why You'll Love It</div>
+      <h2 class="section-title">WHY YOU'LL LOVE IT</h2>
+      <p class="section-sub">Built for families, loved by everyone from tiny tots to grandparents.</p>
+    </div>
+    <div class="features-grid" id="features-grid">
+      <div class="feature-card" style="border-top:4px solid var(--sun);animation:fadeInLeft 0.6s ease both;">
+        <div class="feature-emoji-wrap" style="background:rgba(255,217,61,0.15);">🎮</div>
+        <h3 class="feature-title">100% Free</h3>
+        <p class="feature-desc">Jump in with zero cost. No hidden charges, no paywalls, ever.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap ic2">📶</div>
-        <div>
-          <div class="feature-title">Play Offline</div>
-          <div class="feature-desc">No Wi-Fi needed. Play anywhere, anytime — on a plane, in the car, or at the park.</div>
-        </div>
+      <div class="feature-card" style="border-top:4px solid var(--mint);animation:fadeInLeft 0.6s ease 0.1s both;">
+        <div class="feature-emoji-wrap" style="background:rgba(107,203,119,0.15);">📶</div>
+        <h3 class="feature-title">Play Offline</h3>
+        <p class="feature-desc">No Wi-Fi needed. Play on the plane, in the car, anywhere!</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap ic3">👨‍👩‍👧‍👦</div>
-        <div>
-          <div class="feature-title">Family Friendly</div>
-          <div class="feature-desc">Safe for all ages. Zero inappropriate content. Games designed for kids, loved by everyone.</div>
-        </div>
+      <div class="feature-card" style="border-top:4px solid var(--coral);animation:fadeInRight 0.6s ease 0.2s both;">
+        <div class="feature-emoji-wrap" style="background:rgba(255,107,107,0.15);">👨‍👩‍👧</div>
+        <h3 class="feature-title">Family Safe</h3>
+        <p class="feature-desc">Child-safe ads only. No data collected. Safe for all ages.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap ic4">⚡</div>
-        <div>
-          <div class="feature-title">Instant Fun</div>
-          <div class="feature-desc">No tutorials, no sign-up. Just tap and play! Every game is intuitive from the first second.</div>
-        </div>
+      <div class="feature-card" style="border-top:4px solid var(--purple);animation:fadeInRight 0.6s ease 0.3s both;">
+        <div class="feature-emoji-wrap" style="background:rgba(132,94,194,0.15);">⚡</div>
+        <h3 class="feature-title">Instant Play</h3>
+        <p class="feature-desc">No tutorials, no logins. Just tap and have fun immediately!</p>
       </div>
     </div>
   </section>
 
-  <!-- DOWNLOAD CTA -->
-  <section class="cta-section" id="download">
-    <div class="cta-glow g1"></div>
-    <div class="cta-glow g2"></div>
-    <div class="cta-glow g3"></div>
-    <div class="cta-content">
-      <h2 class="cta-title">READY TO PLAY?</h2>
-      <p class="cta-sub">Download free on iOS and Android</p>
+  <!-- ─── DOWNLOAD CTA ──────────────────────────────────────────── -->
+  <section id="download">
+    <div class="cta-confetti" id="ctaConfetti" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <div class="cta-icon-wrap">
+        <img src="icon.png" alt="Fuzzy Pop!" class="cta-icon" />
+      </div>
+      <h2 class="cta-title">GET FUZZY POP! FREE</h2>
+      <p class="cta-sub">Available on iOS and Android</p>
       <div class="cta-buttons">
-        <a href="#appstore" class="store-btn" aria-label="Download on the App Store">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-          </svg>
+        <a href="#" class="btn-cta">
+          <span style="font-size:1.5rem">🍎</span>
           <span>
-            <span class="btn-label-small">Download on the</span>
-            <span class="btn-label-big">App Store</span>
+            <span style="display:block;font-size:0.7rem;opacity:0.6;font-weight:600">Download on the</span>
+            <span style="display:block;font-size:1rem;font-weight:900">App Store</span>
           </span>
         </a>
-        <a href="#googleplay" class="store-btn" aria-label="Get it on Google Play">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.18 23.76c.37.2.8.22 1.21.02l12.71-7.23-2.78-2.78-11.14 9.99zM.69 1.7C.27 2.06 0 2.62 0 3.33v17.34c0 .71.27 1.27.69 1.63l.09.08 9.71-9.71v-.23L.78 1.62.69 1.7zM20.12 10.43l-2.56-1.46-3.07 3.07 3.07 3.07 2.59-1.47c.74-.42.74-1.79-.03-2.21zM4.39.22L17.1 7.45l-2.78 2.78L3.18.24C3.59.04 4.02.02 4.39.22z"/>
-          </svg>
+        <a href="#" class="btn-cta">
+          <span style="font-size:1.5rem">▶</span>
           <span>
-            <span class="btn-label-small">Get it on</span>
-            <span class="btn-label-big">Google Play</span>
+            <span style="display:block;font-size:0.7rem;opacity:0.6;font-weight:600">Get it on</span>
+            <span style="display:block;font-size:1rem;font-weight:900">Google Play</span>
           </span>
         </a>
       </div>
-      <p class="cta-tagline">★ 7 Games &middot; Free &middot; No Ads Option &middot; Offline Play</p>
+      <p class="cta-note">★ No sign-up · Play offline · Remove ads for $1.99</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
   <footer>
-    <span class="footer-logo">🫧 FUZZY POP! by PlayPal Apps</span>
-    <p class="footer-copy">© 2026 PlayPal Apps. All rights reserved.</p>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="support.html">Support</a>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo" aria-label="Fuzzy Pop! Home">
+        <img src="icon.png" alt="Fuzzy Pop! icon" />
+        <span>Fuzzy Pop!</span>
+      </a>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="support.html">Support</a>
+      </nav>
+      <p class="footer-copy">© 2026 PlayPal Apps · Made with ❤️ for families everywhere</p>
     </div>
-    <p class="footer-heart">Made with ❤️ for families everywhere</p>
   </footer>
 
   <script>
-    // ─── GAME DATA ─────────────────────────────────────────────
-    const games = [
-      { id:'bubble', name:'Bubble Pop',   emoji:'🫧', color:'#1a8cff', dark:'#0055cc', desc:'Pop the bubbles before they escape!' },
-      { id:'match',  name:'Animal Match', emoji:'🐾', color:'#0ad12e', dark:'#007a1a', desc:'Find all the matching animal pairs!' },
-      { id:'catch',  name:'Color Catch',  emoji:'🎨', color:'#ff6a00', dark:'#b34700', desc:'Catch falling objects by colour!' },
-      { id:'tap',    name:'Animal Tap',   emoji:'🦁', color:'#f51480', dark:'#a0005a', desc:'Tap the animals as fast as you can!' },
-      { id:'count',  name:'Count Pop',    emoji:'🔢', color:'#9406fa', dark:'#5c0099', desc:'Pop the bubbles in the right order!' },
-      { id:'shape',  name:'Shape Sorter', emoji:'🔷', color:'#00a69e', dark:'#006b66', desc:'Sort the falling shapes into the right bins!' },
-      { id:'fruit',  name:'Fruit Slash',  emoji:'🍉', color:'#f50f1a', dark:'#a00010', desc:'Slice the fruit with a swipe!' },
+    // ─── GAME DATA ───────────────────────────────────────────────
+    const GAMES = [
+      {name:'Bubble Pop',   emoji:'🫧', color:'#1a8cff', dark:'#0055cc', desc:'Pop colourful bubbles before they escape!'},
+      {name:'Animal Match', emoji:'🐾', color:'#0ad12e', dark:'#007a1a', desc:'Find all the matching animal pairs!'},
+      {name:'Color Catch',  emoji:'🎨', color:'#ff6a00', dark:'#b34700', desc:'Catch falling objects by colour!'},
+      {name:'Animal Tap',   emoji:'🦁', color:'#f51480', dark:'#a0005a', desc:'Tap the animals as fast as you can!'},
+      {name:'Count Pop',    emoji:'🔢', color:'#9406fa', dark:'#5c0099', desc:'Pop the bubbles in the right order!'},
+      {name:'Shape Sorter', emoji:'🔷', color:'#00a69e', dark:'#006b66', desc:'Sort the falling shapes into bins!'},
+      {name:'Fruit Slash',  emoji:'🍉', color:'#f50f1a', dark:'#a00010', desc:'Slash the fruit with a swipe!'},
     ];
 
-    // Build game cards
-    const grid = document.getElementById('gamesGrid');
-    games.forEach((g, i) => {
-      const card = document.createElement('article');
+    // ─── BUILD GAME CARDS ─────────────────────────────────────────
+    const grid = document.getElementById('games-grid');
+    GAMES.forEach((g, i) => {
+      const card = document.createElement('div');
       card.className = 'game-card';
       card.style.setProperty('--c', g.color);
       card.style.setProperty('--cd', g.dark);
-      card.style.animationDelay = (i * 80) + 'ms';
+      card.dataset.index = i;
       card.innerHTML = `
-        <div class="card-banner">
-          <span class="card-emoji" role="img" aria-label="${g.name}">${g.emoji}</span>
-          <div class="card-shine"></div>
+        <div class="game-banner" style="background:linear-gradient(135deg,${g.color} 0%,${g.dark} 100%)">
+          <span class="game-emoji">${g.emoji}</span>
         </div>
-        <div class="card-body">
-          <div class="card-name">${g.name}</div>
-          <div class="card-desc">${g.desc}</div>
-          <div class="card-stars">★★★★★</div>
+        <div class="game-body">
+          <div class="game-name" style="color:${g.color}">${g.name}</div>
+          <p class="game-desc">${g.desc}</p>
+          <div class="game-footer">
+            <span class="game-stars">★★★★★</span>
+            <span class="game-play-tag" style="background:${g.color}22;color:${g.color}">PLAY →</span>
+          </div>
         </div>
       `;
       grid.appendChild(card);
     });
 
-    // ─── PARTICLE CANVAS ───────────────────────────────────────
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-
-    let W, H, mouse = { x: -9999, y: -9999 };
-    const BRAND_COLORS = ['#1a8cff','#0ad12e','#ff6a00','#f51480','#9406fa','#00a69e','#f50f1a','#FFD700','#ffffff','#ffffff'];
-
-    function resize() {
-      W = canvas.width  = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+    // ─── CONFETTI DOTS ────────────────────────────────────────────
+    const confettiColors = ['#FFD93D','#FF6B6B','#6BCB77','#845EC2','#1a8cff','#f51480','#00a69e','#ff6a00'];
+    const confettiContainer = document.getElementById('ctaConfetti');
+    for (let i = 0; i < 12; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'confetti-dot';
+      const size = 8 + Math.random() * 16;
+      const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      dot.style.cssText = `
+        width:${size}px;
+        height:${size}px;
+        background:${color};
+        left:${Math.random() * 100}%;
+        top:${20 + Math.random() * 70}%;
+        animation:confettiFloat ${4 + Math.random() * 4}s ease-in-out ${Math.random() * 4}s infinite;
+      `;
+      confettiContainer.appendChild(dot);
     }
 
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-      constructor() { this.reset(true); }
-
-      reset(initial) {
-        this.x     = Math.random() * W;
-        this.y     = initial ? Math.random() * H : H + 20;
-        this.size  = 4 + Math.random() * 18;
-        this.speedY = 0.3 + Math.random() * 1.2;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.color  = BRAND_COLORS[Math.floor(Math.random() * BRAND_COLORS.length)];
-        this.opacity = 0.15 + Math.random() * 0.6;
-        this.phase  = Math.random() * Math.PI * 2;
-        // type: 0=bubble, 1=star, 2=dot
-        const r = Math.random();
-        this.type = r < 0.45 ? 0 : r < 0.65 ? 1 : 2;
-      }
-
-      update(t) {
-        this.y -= this.speedY;
-        this.x += this.speedX + Math.sin(t * 0.001 + this.phase) * 0.3;
-
-        // Mouse repulsion
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          const force = (120 - dist) / 120;
-          this.x += (dx / dist) * force * 3;
-          this.y += (dy / dist) * force * 3;
-        }
-
-        // Fade near edges
-        const edgeFade = Math.min(this.y / 60, 1) * Math.min((H - this.y) / 60, 1);
-        this.displayOpacity = this.opacity * Math.max(0, edgeFade);
-
-        if (this.y < -40) this.reset(false);
-      }
-
-      draw() {
-        ctx.save();
-        ctx.globalAlpha = this.displayOpacity;
-
-        if (this.type === 0) {
-          // Bubble
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.strokeStyle = this.color;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-          // Inner highlight
-          ctx.beginPath();
-          ctx.arc(this.x - this.size * 0.3, this.y - this.size * 0.3, this.size * 0.25, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255,255,255,0.6)';
-          ctx.fill();
-        } else if (this.type === 1) {
-          // Star ✦
-          ctx.fillStyle = this.color;
-          ctx.font = `${this.size * 1.4}px serif`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText('✦', this.x, this.y);
-        } else {
-          // Small dot
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size * 0.4, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    }
-
-    const particles = Array.from({ length: 60 }, () => new Particle());
-
-    let raf;
-    function animate(t) {
-      ctx.clearRect(0, 0, W, H);
-      particles.forEach(p => { p.update(t); p.draw(); });
-      raf = requestAnimationFrame(animate);
-    }
-
-    // Only animate when hero is visible
-    const heroSection = document.querySelector('.hero');
-    const heroObs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        if (!raf) raf = requestAnimationFrame(animate);
-      } else {
-        cancelAnimationFrame(raf);
-        raf = null;
-      }
-    }, { threshold: 0 });
-    heroObs.observe(heroSection);
-
-    canvas.addEventListener('mousemove', e => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+    // ─── HAMBURGER ────────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
     });
-    canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
 
-    // ─── SCROLL ANIMATIONS (IntersectionObserver) ──────────────
-    // Game cards
-    const cardObs = new IntersectionObserver((entries) => {
+    // ─── INTERSECTION OBSERVER ─────────────────────────────────────
+    const cards = document.querySelectorAll('.game-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const i = parseInt(entry.target.dataset.index, 10);
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(c => cardObserver.observe(c));
+
+    const featureCards = document.querySelectorAll('.feature-card');
+    const featureObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          cardObs.unobserve(entry.target);
+          featureObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15 });
-
-    document.querySelectorAll('.game-card').forEach(card => cardObs.observe(card));
-
-    // Feature cards
-    const featObs = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, 100 * Array.from(document.querySelectorAll('.feature-card')).indexOf(entry.target));
-          featObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.feature-card').forEach(card => featObs.observe(card));
-
-    // ─── MOBILE NAV ────────────────────────────────────────────
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-
-    hamburger.addEventListener('click', () => {
-      mobileNav.classList.toggle('open');
-    });
-
-    function closeMobileNav() {
-      mobileNav.classList.remove('open');
-    }
-
-    // Close mobile nav on outside click
-    document.addEventListener('click', e => {
-      if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
-        mobileNav.classList.remove('open');
-      }
-    });
+    featureCards.forEach(c => featureObserver.observe(c));
   </script>
+
 </body>
 </html>
