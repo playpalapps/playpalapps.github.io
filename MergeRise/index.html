@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MERGE RISE — Merge tiles. Chain reactions. Rise empires.</title>
+<meta name="description" content="A number-merge puzzle with soul. Combine tiles, trigger chain reactions, and rise from settlement to skyline across four hand-painted worlds. Coming soon to iOS and Android.">
+<meta property="og:title" content="MERGE RISE — Merge tiles. Chain reactions. Rise empires.">
+<meta property="og:description" content="A number-merge puzzle with soul. Four hand-painted worlds. Chain reactions that feel electric. Free to play, zero paywalls on progress.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="feature.png">
+<meta name="theme-color" content="#05040f">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ══════════════════════════════════════════════════════════════════════
+     MERGE RISE — marketing site. Single-file HTML/CSS/JS. The visual
+     language matches the in-app tile painter: deep cosmos ground, stone
+     violet architecture, amber lamp accents, silver starlight highlights.
+     The interactive "Merge Tower" embodies the game's Rise metaphor —
+     tiles merge, the tower grows, civilization ascends.
+     ════════════════════════════════════════════════════════════════════ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; width: 100%; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    /* Cosmos ground */
+    --bg-deep:    #05040f;
+    --bg:         #080718;
+    --bg-alt:     #0d0c24;
+
+    /* Stone palette — ported from lib/game/tile_painter.dart */
+    --stone-lit:  #4e5cae;
+    --stone-mid:  #2d366c;
+    --stone-dk:   #1a1f50;
+    --stone-deep: #0f1238;
+    --outline:    #06071e;
+
+    /* Amber lamp — warm focal highlight */
+    --amber-lit:  #ffc878;
+    --amber-warm: #ffa850;
+    --amber-hot:  #ff8428;
+    --amber-glow: rgba(255, 168, 80, 0.45);
+
+    /* Silver starlight + gold */
+    --silver:     #e8ecf8;
+    --silver-md:  #a8b0cc;
+    --gold:       #ffd280;
+    --gold-hot:   #f4a53c;
+
+    /* Violet hero glow */
+    --violet:     #7c4dff;
+    --violet-glow: rgba(124, 77, 255, 0.38);
+
+    /* Type */
+    --text:       #d6d2e8;
+    --text-dim:   #8a87a8;
+    --text-faint: #5f5e7a;
+
+    /* Glass */
+    --glass:      rgba(255, 255, 255, 0.04);
+    --glass-br:   rgba(255, 255, 255, 0.08);
+
+    --section-gap: clamp(80px, 11vw, 160px);
+    --content-w:   min(1180px, 92vw);
+  }
+
+  body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(124, 77, 255, 0.35); color: #fff; }
+
+  /* ── CANVAS STARFIELD ──────────────────────────────────────────────── */
+  #starfield {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  }
+
+  /* Soft aurora wash behind everything — gives the cosmos depth */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 15%, rgba(124, 77, 255, 0.22), transparent 60%),
+      radial-gradient(ellipse 65% 40% at 80% 25%, rgba(38, 212, 255, 0.14), transparent 60%),
+      radial-gradient(ellipse 70% 40% at 50% 100%, rgba(255, 168, 80, 0.12), transparent 60%);
+  }
+
+  /* ── NAV ───────────────────────────────────────────────────────────── */
+  nav.site {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(16px, 4vw, 40px);
+    background: rgba(5, 4, 15, 0.55);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid transparent;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  nav.site.scrolled {
+    background: rgba(5, 4, 15, 0.88);
+    border-bottom-color: var(--glass-br);
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; color: #fff;
+  }
+  .nav-brand img {
+    width: 34px; height: 34px; border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(124, 77, 255, 0.35);
+  }
+  .nav-brand span {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 0.95rem;
+    letter-spacing: 2.8px;
+    background: linear-gradient(90deg, var(--silver) 0%, var(--amber-lit) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative; padding: 6px 2px;
+  }
+  .nav-links a:hover { color: var(--silver); }
+  .nav-cta {
+    padding: 8px 18px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--amber-warm), var(--gold-hot));
+    color: #2a1500 !important;
+    font-weight: 800; letter-spacing: 1.5px;
+    box-shadow: 0 6px 20px var(--amber-glow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 28px var(--amber-glow); }
+  @media (max-width: 720px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* ── LAYOUT PRIMITIVES ─────────────────────────────────────────────── */
+  main { position: relative; z-index: 1; }
+  section { position: relative; z-index: 1; padding: var(--section-gap) 0; }
+  .wrap { width: var(--content-w); margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600; font-size: 0.72rem;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--amber-lit);
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before {
+    content: ''; width: 22px; height: 1.5px;
+    background: linear-gradient(90deg, var(--amber-warm), transparent);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: clamp(2rem, 5.6vw, 4rem);
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .lead {
+    font-size: clamp(1rem, 1.3vw, 1.18rem);
+    color: var(--text-dim);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════════════ */
+  header#hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 120px 20px 80px;
+    text-align: center;
+  }
+
+  .hero-icon {
+    width: clamp(88px, 12vw, 128px);
+    height: clamp(88px, 12vw, 128px);
+    border-radius: 28%;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 20px 60px rgba(124, 77, 255, 0.35),
+      0 0 120px rgba(255, 168, 80, 0.18);
+    animation: float 6s ease-in-out infinite;
+    margin-bottom: 28px;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(0.5deg); }
+  }
+
+  .hero-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.2rem, 13vw, 9.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+    margin: 0 0 26px;
+    text-transform: uppercase;
+  }
+  .hero-title .row {
+    display: block;
+    background: linear-gradient(180deg,
+      var(--silver) 0%,
+      #c9cdea 45%,
+      var(--stone-lit) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 30px rgba(124, 77, 255, 0.35));
+  }
+  .hero-title .row.rise {
+    background: linear-gradient(180deg,
+      var(--gold) 0%,
+      var(--amber-warm) 55%,
+      var(--amber-hot) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 40px rgba(255, 168, 80, 0.45));
+  }
+
+  .hero-pill {
+    display: inline-block;
+    padding: 9px 22px;
+    border-radius: 999px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.72rem, 1vw, 0.82rem);
+    letter-spacing: 3.5px;
+    color: #3a1e00;
+    background: linear-gradient(180deg, #ffe5a8 0%, var(--gold-hot) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 8px 28px rgba(244, 165, 60, 0.45),
+      0 0 60px rgba(255, 168, 80, 0.25);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    font-weight: 500;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  }
+
+  /* Store badges — custom built to match site aesthetic */
+  .store-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 12px 22px 12px 18px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #1a1930 0%, #0c0a1e 100%);
+    border: 1px solid var(--glass-br);
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.25s;
+    min-width: 190px;
+  }
+  .store-badge:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 168, 80, 0.4);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px var(--amber-glow);
+  }
+  .store-badge svg {
+    flex: 0 0 auto;
+    width: 26px; height: 26px;
+    fill: #fff;
+  }
+  .store-badge-text {
+    display: flex; flex-direction: column; align-items: flex-start;
+    line-height: 1.15; text-align: left;
+  }
+  .store-badge-text small {
+    font-size: 0.62rem; letter-spacing: 1.5px;
+    color: var(--text-dim); text-transform: uppercase; font-weight: 600;
+  }
+  .store-badge-text strong {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 0.98rem;
+    letter-spacing: 0.5px;
+  }
+  .store-badge.coming::after {
+    content: 'Soon';
+    position: absolute;
+    transform: translate(58px, -18px);
+    font-size: 0.55rem; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--amber-warm), var(--gold-hot));
+    color: #2a1500;
+    pointer-events: none;
+  }
+  .store-badge { position: relative; }
+
+  .hero-scroll {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 3px;
+    color: var(--text-faint); text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: scrollCue 2.4s ease-in-out infinite;
+  }
+  .hero-scroll::after {
+    content: ''; width: 1px; height: 28px;
+    background: linear-gradient(180deg, var(--text-faint), transparent);
+  }
+  @keyframes scrollCue {
+    0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
+    50%      { transform: translate(-50%, 6px); opacity: 1; }
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     LOOP — interactive Merge Tower demo
+     ════════════════════════════════════════════════════════════════════ */
+  #loop .wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(40px, 6vw, 90px);
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    #loop .wrap { grid-template-columns: 1fr; }
+  }
+  #loop h2 {
+    font-size: clamp(2rem, 4.6vw, 3.4rem);
+    letter-spacing: -0.02em;
+  }
+  #loop h2 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--amber-warm), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .loop-caption {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    margin-top: 18px;
+    line-height: 1.65;
+  }
+  .loop-stats {
+    display: flex; gap: 32px; margin-top: 30px;
+  }
+  .loop-stat small {
+    display: block;
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 2.4px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 4px;
+  }
+  .loop-stat strong {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.6rem; font-weight: 800;
+    color: var(--silver);
+  }
+  .loop-stat strong span { color: var(--amber-lit); }
+
+  /* Merge Tower visual */
+  .tower-stage {
+    position: relative;
+    aspect-ratio: 1 / 1.05;
+    max-width: 520px; width: 100%;
+    margin: 0 auto;
+    background:
+      radial-gradient(ellipse at 50% 95%, rgba(255, 168, 80, 0.25), transparent 55%),
+      radial-gradient(ellipse at 50% 20%, rgba(124, 77, 255, 0.18), transparent 60%),
+      linear-gradient(180deg, rgba(15, 18, 56, 0.7), rgba(5, 4, 15, 0.4));
+    border-radius: 28px;
+    border: 1px solid var(--glass-br);
+    overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+  .tower-stage::before {
+    /* Subtle scattered dust inside the stage — matches the citadel's starfield */
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgba(232, 236, 248, 0.6), transparent 50%),
+      radial-gradient(1px 1px at 82% 22%, rgba(232, 236, 248, 0.5), transparent 50%),
+      radial-gradient(1px 1px at 35% 8%, rgba(232, 236, 248, 0.8), transparent 50%),
+      radial-gradient(1px 1px at 64% 12%, rgba(232, 236, 248, 0.55), transparent 50%),
+      radial-gradient(1px 1px at 20% 35%, rgba(232, 236, 248, 0.45), transparent 50%),
+      radial-gradient(1px 1px at 90% 42%, rgba(232, 236, 248, 0.7), transparent 50%);
+    pointer-events: none;
+  }
+  .tower-grid {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column-reverse;
+    padding: 40px 30px 70px;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .tower-row {
+    display: flex; justify-content: center; gap: 8px;
+    width: 100%;
+  }
+  .tower-pad {
+    width: clamp(44px, 10%, 68px);
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    background: rgba(15, 18, 56, 0.35);
+    border: 1px dashed rgba(168, 176, 206, 0.08);
+  }
+  .tile {
+    width: clamp(44px, 10%, 68px);
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    background:
+      linear-gradient(145deg, var(--stone-lit) 0%, var(--stone-mid) 55%, var(--stone-dk) 100%);
+    border: 1px solid var(--outline);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -3px 0 rgba(6, 7, 30, 0.65),
+      0 6px 16px rgba(0, 0, 0, 0.55);
+    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.4),
+                box-shadow 0.3s,
+                opacity 0.25s;
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+  }
+  .tile::after {
+    /* little amber window */
+    content: '';
+    position: absolute;
+    left: 40%; right: 40%; bottom: 14%;
+    height: 16%;
+    background: linear-gradient(180deg, var(--amber-lit), var(--amber-warm));
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--amber-glow);
+    opacity: 0.85;
+  }
+  .tile.t-high {
+    background: linear-gradient(145deg, #ff9a50 0%, #f46d25 60%, #c4420e 100%);
+    border-color: #4a1808;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -3px 0 rgba(70, 20, 0, 0.65),
+      0 10px 30px rgba(255, 132, 40, 0.55),
+      0 0 36px rgba(255, 168, 80, 0.4);
+  }
+  .tile.t-high::after {
+    background: linear-gradient(180deg, #fff, var(--amber-lit));
+    height: 22%;
+    opacity: 1;
+  }
+  .tile.t-apex {
+    background: linear-gradient(145deg, #ffd98a 0%, #ffa850 40%, #ff6d1a 100%);
+    border-color: #3f1600;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -3px 0 rgba(70, 20, 0, 0.6),
+      0 14px 48px rgba(255, 132, 40, 0.7),
+      0 0 80px rgba(255, 200, 120, 0.55);
+    transform: scale(1.05);
+  }
+  .tile.spawn {
+    animation: tileSpawn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+  }
+  .tile.merging { opacity: 0; transform: scale(0.3); }
+  .tile.pop {
+    animation: tilePop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+  }
+  @keyframes tileSpawn {
+    from { transform: scale(0.2); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+  @keyframes tilePop {
+    0%   { transform: scale(0.4); }
+    55%  { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+
+  .tower-ground {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 70px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255, 168, 80, 0.45), transparent 60%),
+      linear-gradient(180deg, transparent, rgba(5, 4, 15, 0.75));
+    pointer-events: none;
+  }
+  .tower-cta {
+    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+    padding: 9px 22px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--amber-warm), var(--gold-hot));
+    color: #2a1500;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 2.4px; text-transform: uppercase;
+    cursor: pointer; border: none;
+    box-shadow: 0 8px 24px var(--amber-glow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tower-cta:hover { transform: translate(-50%, -2px); box-shadow: 0 12px 32px var(--amber-glow); }
+  .tower-cta:active { transform: translate(-50%, 0); }
+
+  /* Particle burst (merge celebration) */
+  .burst {
+    position: absolute;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--amber-lit);
+    pointer-events: none;
+    filter: blur(0.5px);
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     WORLDS — four skins showcase
+     ════════════════════════════════════════════════════════════════════ */
+  #worlds { padding-top: var(--section-gap); }
+  #worlds .wrap > header { margin-bottom: 48px; max-width: 780px; }
+  .worlds-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 900px) { .worlds-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .worlds-grid { grid-template-columns: 1fr; } }
+
+  .world-card {
+    padding: 28px 22px;
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+    border: 1px solid var(--glass-br);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .world-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  }
+  .world-card::before {
+    content: '';
+    position: absolute; inset: -1px;
+    border-radius: 20px;
+    padding: 1px;
+    background: var(--accent-grad, linear-gradient(135deg, var(--violet), transparent));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .world-card:hover::before { opacity: 1; }
+
+  .world-tile {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -4px 0 rgba(0, 0, 0, 0.35),
+      0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  .world-tile::after {
+    /* Amber window on every world's tile */
+    content: '';
+    position: absolute;
+    left: 44%; right: 44%; bottom: 18%;
+    height: 14%; border-radius: 2px;
+    background: linear-gradient(180deg, var(--amber-lit), var(--amber-warm));
+    box-shadow: 0 0 14px var(--amber-glow);
+  }
+  .world-tile .starry {
+    /* Scattered stars overlay — subtle, repeated on each world */
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 14% 16%, rgba(255, 255, 255, 0.75), transparent 50%),
+      radial-gradient(1px 1px at 78% 22%, rgba(255, 255, 255, 0.6), transparent 50%),
+      radial-gradient(1px 1px at 42% 10%, rgba(255, 255, 255, 0.5), transparent 50%),
+      radial-gradient(1px 1px at 62% 30%, rgba(255, 255, 255, 0.4), transparent 50%);
+    pointer-events: none;
+  }
+  .world-tile.civ {
+    background:
+      linear-gradient(135deg, #5f6ec4 0%, #3a4490 45%, #1a1f50 100%);
+  }
+  .world-tile.ocean {
+    background:
+      radial-gradient(ellipse at 50% 10%, #4ec3df 0%, #1e6e9a 35%, #0b2d4a 100%);
+  }
+  .world-tile.space {
+    background:
+      radial-gradient(ellipse at 30% 20%, #9b5edc 0%, #4d2088 40%, #14062b 100%);
+  }
+  .world-tile.neon {
+    background:
+      linear-gradient(135deg, #ff3d8e 0%, #b81465 40%, #2b0533 100%);
+  }
+  .world-tile.neon::before {
+    /* Synthwave grid */
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 40%;
+    background-image:
+      linear-gradient(180deg, transparent 0%, rgba(255, 61, 142, 0.35) 100%),
+      repeating-linear-gradient(90deg, transparent 0 12px, rgba(255, 255, 255, 0.22) 12px 13px),
+      repeating-linear-gradient(0deg, transparent 0 12px, rgba(255, 255, 255, 0.14) 12px 13px);
+    transform: perspective(100px) rotateX(40deg);
+    transform-origin: bottom;
+  }
+
+  .world-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.05rem; font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .world-meta {
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 2.4px; text-transform: uppercase;
+    color: var(--world-accent, var(--amber-lit));
+    margin-bottom: 10px;
+  }
+  .world-blurb {
+    font-size: 0.9rem; color: var(--text-dim); line-height: 1.55;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     GALLERY — phone-frame screenshots
+     ════════════════════════════════════════════════════════════════════ */
+  #gallery .wrap > header { margin-bottom: 48px; max-width: 780px; }
+  .phones-track {
+    display: flex;
+    gap: clamp(16px, 2.5vw, 32px);
+    padding: 20px 0 40px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 calc(50% - 50vw);
+    padding-left: clamp(20px, 4vw, calc(50% - (var(--content-w) / 2)));
+    padding-right: clamp(20px, 4vw, calc(50% - (var(--content-w) / 2)));
+  }
+  .phones-track::-webkit-scrollbar { display: none; }
+
+  .phone-frame {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    width: clamp(220px, 24vw, 300px);
+    aspect-ratio: 9 / 19.5;
+    border-radius: 38px;
+    padding: 10px;
+    background: linear-gradient(180deg, #1e1d35, #0a0a1c);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow:
+      0 25px 60px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .phone-frame:hover {
+    transform: translateY(-8px) rotate(-0.5deg);
+    box-shadow:
+      0 40px 90px rgba(0, 0, 0, 0.7),
+      0 0 60px rgba(124, 77, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  .phone-frame::before {
+    /* notch */
+    content: '';
+    position: absolute;
+    top: 16px; left: 50%; transform: translateX(-50%);
+    width: 32%; height: 22px;
+    background: #000; border-radius: 999px;
+    z-index: 3;
+  }
+  .phone-frame img {
+    width: 100%; height: 100%; display: block;
+    object-fit: cover;
+    border-radius: 30px;
+    position: relative; z-index: 1;
+  }
+
+  .phone-caption {
+    display: block;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 2.8px; text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     FEATURES — 6-card grid
+     ════════════════════════════════════════════════════════════════════ */
+  #features .wrap > header { margin-bottom: 56px; max-width: 780px; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .features-grid { grid-template-columns: 1fr; } }
+
+  .feature-card {
+    padding: 30px 24px;
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+    border: 1px solid var(--glass-br);
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .feature-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 168, 80, 0.3);
+  }
+  .feat-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, rgba(124, 77, 255, 0.2), rgba(255, 168, 80, 0.15));
+    border: 1px solid rgba(255, 168, 80, 0.3);
+    color: var(--amber-lit);
+  }
+  .feat-icon svg { width: 22px; height: 22px; fill: currentColor; }
+  .feature-card p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     CTA BANNER
+     ════════════════════════════════════════════════════════════════════ */
+  #download {
+    text-align: center;
+    padding: calc(var(--section-gap) * 0.9) 20px calc(var(--section-gap) * 0.8);
+  }
+  #download .wrap {
+    max-width: 900px;
+    position: relative;
+  }
+  #download::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%, rgba(255, 168, 80, 0.2), transparent 70%),
+      radial-gradient(ellipse 50% 30% at 50% 50%, rgba(124, 77, 255, 0.18), transparent 70%);
+    pointer-events: none;
+  }
+  #download h2 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+  }
+  #download h2 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--amber-lit), var(--gold-hot));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  #download .lead {
+    margin: 0 auto 36px;
+    font-size: 1.1rem;
+  }
+  #download .hero-ctas { justify-content: center; }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════════════ */
+  footer.site {
+    position: relative; z-index: 1;
+    padding: 40px 20px 50px;
+    border-top: 1px solid var(--glass-br);
+    background: rgba(5, 4, 15, 0.6);
+  }
+  footer.site .wrap {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    align-items: center; justify-content: space-between;
+  }
+  footer.site .brand {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--text-dim);
+    font-size: 0.84rem;
+  }
+  footer.site .brand img {
+    width: 28px; height: 28px; border-radius: 7px;
+  }
+  footer.site a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 1.8px; text-transform: uppercase;
+    padding: 6px 10px;
+    transition: color 0.2s;
+  }
+  footer.site a:hover { color: var(--amber-lit); }
+  footer.site nav { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     SCROLL REVEAL
+     ════════════════════════════════════════════════════════════════════ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+    .hero-icon { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<!-- ═════════════════════════════ NAV ═════════════════════════════════ -->
+<nav class="site" id="siteNav">
+  <a class="nav-brand" href="#top">
+    <img src="logo.png" alt="Merge Rise logo">
+    <span>MERGE RISE</span>
+  </a>
+  <div class="nav-links">
+    <a href="#loop">The loop</a>
+    <a href="#worlds">Worlds</a>
+    <a href="#gallery">Screens</a>
+    <a href="#features">Depth</a>
+    <a href="#download" class="nav-cta">Play free</a>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- ═════════════════════════════ HERO ═══════════════════════════════ -->
+<header id="hero">
+  <img class="hero-icon" src="logo.png" alt="Merge Rise app icon">
+  <h1 class="hero-title">
+    <span class="row">Merge</span>
+    <span class="row rise">Rise</span>
+  </h1>
+  <span class="hero-pill">Build your citadel</span>
+  <p class="hero-tagline">Merge tiles. Chain reactions. Rise empires.</p>
+
+  <div class="hero-ctas">
+    <a href="#download" class="store-badge coming" aria-label="Coming soon to the App Store">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+      <span class="store-badge-text"><small>Coming soon on</small><strong>App Store</strong></span>
+    </a>
+    <a href="#download" class="store-badge coming" aria-label="Coming soon on Google Play">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.61 1.81a1.5 1.5 0 0 0-.61 1.2v17.98a1.5 1.5 0 0 0 .6 1.2l9.78-10.19-9.77-10.19zm11.27 11.74l2.45 2.55-10.6 6.13 8.15-8.68zm2.45-3.1l-2.45 2.55-8.15-8.68 10.6 6.13zm3.16 1.77c.56.32.89.79.89 1.29s-.34.97-.89 1.29l-2.51 1.45-2.72-2.74 2.72-2.74 2.51 1.45z"/></svg>
+      <span class="store-badge-text"><small>Coming soon on</small><strong>Google Play</strong></span>
+    </a>
+  </div>
+
+  <div class="hero-scroll">Scroll to explore</div>
+</header>
+
+<!-- ═════════════════════════════ LOOP ═══════════════════════════════ -->
+<section id="loop" class="reveal">
+  <div class="wrap">
+    <div class="loop-copy">
+      <div class="eyebrow">The loop</div>
+      <h2>Two becomes four.<br>Four becomes sixteen.<br><em>Sixteen becomes an empire.</em></h2>
+      <p class="loop-caption">Drop a number onto its twin and watch the chain light up. Every merge cascades, every cascade climbs — the board clears, the skyline grows, and the next run is always one combo away from legendary.</p>
+      <div class="loop-stats">
+        <div class="loop-stat">
+          <small>Tile ladder</small>
+          <strong>2 → <span>4096</span></strong>
+        </div>
+        <div class="loop-stat">
+          <small>Board</small>
+          <strong>5 × <span>5</span></strong>
+        </div>
+        <div class="loop-stat">
+          <small>Runs per day</small>
+          <strong><span>∞</span></strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="tower-stage" id="towerStage" aria-hidden="true">
+      <div class="tower-grid" id="towerGrid"></div>
+      <div class="tower-ground"></div>
+      <button class="tower-cta" id="towerReplay">Run the loop</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════ WORLDS ═════════════════════════════ -->
+<section id="worlds" class="reveal">
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Four worlds</div>
+      <h2>One board.<br>Four skylines.</h2>
+      <p class="lead">Every skin repaints the entire ladder — palette, windows, lore, and the little stories each tile tells. All four ship unlocked. Pick the one that matches the hour you play.</p>
+    </header>
+    <div class="worlds-grid">
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #7c4dff, #ffa850); --world-accent: #a48bff;">
+        <div class="world-tile civ"><span class="starry"></span></div>
+        <div class="world-meta">Skin 01</div>
+        <div class="world-name">Civilization</div>
+        <p class="world-blurb">Stone ziggurats, lamp-lit gates. A golden-age palette for the long chain.</p>
+      </div>
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #1ac8d2, #8deeff); --world-accent: #5ddbe6;">
+        <div class="world-tile ocean"><span class="starry"></span></div>
+        <div class="world-meta">Skin 02</div>
+        <div class="world-name">Ocean Depths</div>
+        <p class="world-blurb">Bioluminescent reefs fading into abyssal black. Cool, patient, meditative.</p>
+      </div>
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #b061ff, #ff8de7); --world-accent: #d598ff;">
+        <div class="world-tile space"><span class="starry"></span></div>
+        <div class="world-meta">Skin 03</div>
+        <div class="world-name">Deep Space</div>
+        <p class="world-blurb">Nebulae, dwarf stars, and one very stubborn orbital lighthouse.</p>
+      </div>
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #ff3d8e, #ffb63d); --world-accent: #ff6dab;">
+        <div class="world-tile neon"><span class="starry"></span></div>
+        <div class="world-meta">Skin 04</div>
+        <div class="world-name">Neon City</div>
+        <p class="world-blurb">Synthwave pinks, chrome horizons, and a grid that keeps going forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════ GALLERY ════════════════════════════ -->
+<section id="gallery" class="reveal">
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">In motion</div>
+      <h2>Every screen,<br>hand-painted.</h2>
+      <p class="lead">Scroll through the full loop — from citadel home to live chains to the run recap. No stock UI here. Every pixel is drawn for this game.</p>
+    </header>
+  </div>
+  <div class="phones-track">
+    <figure class="phone-frame"><img src="shots/01-home-citadel.png" alt="Home screen with the Civilization citadel"><figcaption class="phone-caption" aria-hidden="true" style="display:none">Home</figcaption></figure>
+    <figure class="phone-frame"><img src="shots/02-gameplay.png" alt="Live gameplay — tile chains mid-merge"></figure>
+    <figure class="phone-frame"><img src="shots/03-recap.png" alt="Run recap screen"></figure>
+    <figure class="phone-frame"><img src="shots/04-skins.png" alt="Skins picker"></figure>
+    <figure class="phone-frame"><img src="shots/05-home-supernova.png" alt="Supernova home variant"></figure>
+  </div>
+</section>
+
+<!-- ═════════════════════════════ FEATURES ═══════════════════════════ -->
+<section id="features" class="reveal">
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Depth</div>
+      <h2>Easy to hold.<br>Hard to put down.</h2>
+      <p class="lead">A merge puzzle is a 30-second loop. The systems around it are where weeks turn into months. Here's what keeps the second run from ever being the same as the first.</p>
+    </header>
+    <div class="features-grid">
+      <article class="feature-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L3 7v10l9 5 9-5V7l-9-5zm0 2.18L18.5 8 12 11.82 5.5 8 12 4.18zM5 9.72l6 3.46V19.5l-6-3.32V9.72zm14 0v6.46l-6 3.32V13.18l6-3.46z"/></svg></div>
+        <h3>Daily Challenges</h3>
+        <p>A new seed, a new modifier, same 24 hours for everyone. Chase the leaderboard or just chase yesterday's score.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2v2.07c3.61.46 6.47 3.32 6.93 6.93H22v2h-2.07c-.46 3.61-3.32 6.47-6.93 6.93V22h-2v-2.07c-3.61-.46-6.47-3.32-6.93-6.93H2v-2h2.07C4.53 7.39 7.39 4.53 11 4.07V2h2zm-1 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 2.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z"/></svg></div>
+        <h3>Zen Mode</h3>
+        <p>No timer, no modifier, no noise. Just the board and the next number. Pour a coffee, merge for an hour.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm2 4v2h8V6H8zm0 4v2h8v-2H8zm0 4v2h5v-2H8z"/></svg></div>
+        <h3>The Codex</h3>
+        <p>Every tile you merge is logged with hand-written lore. Four skins × every tier = a small museum of your progress.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14l-1 9h-2.5a4.5 4.5 0 0 1-4.5 4.5v2h4v2H9v-2h4v-2A4.5 4.5 0 0 1 8.5 12H6L5 3zm2.24 2l.6 5H9a3 3 0 0 1-3-3V5h1.24zm9.52 0H17v2a3 3 0 0 1-3 3h-.84l.6-5z"/></svg></div>
+        <h3>Achievements</h3>
+        <p>Eight real milestones — Village Elder to Castle Lord. No checkbox busywork; each one marks a genuine leap in skill.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 3h5v2.5L23 10l-3 2.5V17h-5l-3 3-3-3H4v-4.5L1 10l3-2.5V5h5l3-3zm0 4.5A3.5 3.5 0 1 0 12 13.5 3.5 3.5 0 0 0 12 6.5z"/></svg></div>
+        <h3>Missions</h3>
+        <p>Rotating goals that reward how you play, not just how long. Chain-driven, merge-driven, or pure endurance — pick your lane.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 4h2v6h5v2h-7V6z"/></svg></div>
+        <h3>Built for the commute</h3>
+        <p>30-second runs for the train, hour-long sessions for the couch. Resumes instantly, saves every tile, never begs for your data.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════ DOWNLOAD ═══════════════════════════ -->
+<section id="download" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">Ready to rise</div>
+    <h2>Your first civilization<br>is <em>one merge</em> away.</h2>
+    <p class="lead">Free to play. No ads interrupting the board. No paywall on any skin, mission, or mode. Just a merge puzzle with soul.</p>
+    <div class="hero-ctas">
+      <a href="#" class="store-badge coming" aria-label="Coming soon to the App Store" data-href="REPLACE-WITH-APPSTORE-URL">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        <span class="store-badge-text"><small>Coming soon on</small><strong>App Store</strong></span>
+      </a>
+      <a href="#" class="store-badge coming" aria-label="Coming soon on Google Play" data-href="REPLACE-WITH-PLAYSTORE-URL">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.61 1.81a1.5 1.5 0 0 0-.61 1.2v17.98a1.5 1.5 0 0 0 .6 1.2l9.78-10.19-9.77-10.19zm11.27 11.74l2.45 2.55-10.6 6.13 8.15-8.68zm2.45-3.1l-2.45 2.55-8.15-8.68 10.6 6.13zm3.16 1.77c.56.32.89.79.89 1.29s-.34.97-.89 1.29l-2.51 1.45-2.72-2.74 2.72-2.74 2.51 1.45z"/></svg>
+        <span class="store-badge-text"><small>Coming soon on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═════════════════════════════ FOOTER ═════════════════════════════ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo.png" alt="Merge Rise">
+      <span>© <span id="footerYear">2026</span> PlayPal Apps · Merge Rise</span>
+    </div>
+    <nav>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="support.html">Support</a>
+      <a href="/">Playpal</a>
+      <a href="https://twitter.com" rel="noopener">Twitter</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════════
+   STARFIELD — two parallax layers, occasional shooting star, DPR-capped.
+   Purely decorative; respects prefers-reduced-motion.
+   ════════════════════════════════════════════════════════════════════════ */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  const stars = [];
+  const STAR_COUNT_BASE = 140;
+  let shootingStars = [];
+
+  function fit() {
+    W = canvas.clientWidth = window.innerWidth;
+    H = canvas.clientHeight = Math.max(window.innerHeight, document.body.scrollHeight);
+    canvas.width = Math.floor(W * DPR);
+    canvas.height = Math.floor(H * DPR);
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  function seed() {
+    stars.length = 0;
+    const count = Math.floor((W * H) / 10000);
+    const total = Math.min(Math.max(STAR_COUNT_BASE, count), 380);
+    for (let i = 0; i < total; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.3 + 0.3,
+        tw: Math.random() * Math.PI * 2,
+        speed: 0.25 + Math.random() * 0.6,
+        depth: Math.random() * 0.7 + 0.3,
+      });
+    }
+  }
+
+  function spawnShooter() {
+    if (reduce) return;
+    const startX = Math.random() * W * 0.9 + W * 0.05;
+    const startY = Math.random() * H * 0.35;
+    const angle = (Math.PI / 4) + (Math.random() * 0.35 - 0.175);
+    const speed = 6 + Math.random() * 4;
+    shootingStars.push({
+      x: startX, y: startY,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 0, maxLife: 60 + Math.random() * 20,
+    });
+  }
+
+  let scrollY = 0;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY || 0; }, { passive: true });
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Twinkling field
+    for (const s of stars) {
+      s.tw += 0.02 * s.speed;
+      const a = 0.35 + Math.sin(s.tw) * 0.35;
+      const y = s.y - scrollY * (1 - s.depth) * 0.3;
+      ctx.beginPath();
+      ctx.arc(s.x, y, s.r * s.depth, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(232, 236, 248, ${a * s.depth})`;
+      ctx.fill();
+    }
+
+    // Shooting stars
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const sh = shootingStars[i];
+      sh.x += sh.vx; sh.y += sh.vy; sh.life++;
+      const fade = Math.max(0, 1 - sh.life / sh.maxLife);
+      const grad = ctx.createLinearGradient(sh.x, sh.y, sh.x - sh.vx * 10, sh.y - sh.vy * 10);
+      grad.addColorStop(0, `rgba(255, 220, 150, ${0.95 * fade})`);
+      grad.addColorStop(1, 'rgba(255, 220, 150, 0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(sh.x, sh.y);
+      ctx.lineTo(sh.x - sh.vx * 10, sh.y - sh.vy * 10);
+      ctx.stroke();
+      if (sh.life > sh.maxLife || sh.x < -50 || sh.y > H + 50) shootingStars.splice(i, 1);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  function init() {
+    fit(); seed();
+    draw();
+    setInterval(() => { if (Math.random() < 0.6) spawnShooter(); }, 4200);
+  }
+
+  let fitTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(fitTimer);
+    fitTimer = setTimeout(() => { fit(); seed(); }, 150);
+  });
+
+  init();
+})();
+
+/* ════════════════════════════════════════════════════════════════════════
+   NAV scrolled state
+   ════════════════════════════════════════════════════════════════════════ */
+(() => {
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ════════════════════════════════════════════════════════════════════════
+   SCROLL REVEAL
+   ════════════════════════════════════════════════════════════════════════ */
+(() => {
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+/* ════════════════════════════════════════════════════════════════════════
+   MERGE TOWER — scripted animation of the core loop.
+
+   The board is 5 rows × 5 columns of "pads". Animation steps spawn tiles
+   into specific cells, slide adjacent pairs into the merge target, and
+   emit a particle burst on each merge. After the cascade reaches the
+   apex tile (1024), the board pauses then resets.
+   ════════════════════════════════════════════════════════════════════════ */
+(() => {
+  const COLS = 5, ROWS = 5;
+  const grid = document.getElementById('towerGrid');
+  const stage = document.getElementById('towerStage');
+  const replayBtn = document.getElementById('towerReplay');
+
+  // Build the 5×5 pad scaffold. Row 0 is bottom, row 4 is top.
+  const cells = [];
+  for (let r = 0; r < ROWS; r++) {
+    const row = document.createElement('div');
+    row.className = 'tower-row';
+    const rowCells = [];
+    for (let c = 0; c < COLS; c++) {
+      const pad = document.createElement('div');
+      pad.className = 'tower-pad';
+      row.appendChild(pad);
+      rowCells.push(pad);
+    }
+    cells.push(rowCells);
+    grid.appendChild(row);
+  }
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  function makeTile(value, apex) {
+    const t = document.createElement('div');
+    t.className = 'tile spawn' + (value >= 256 ? ' t-high' : '') + (apex ? ' t-apex' : '');
+    t.textContent = value >= 1024 ? '1K' : value;
+    if (value >= 128) t.style.fontSize = '0.95rem';
+    if (value >= 512) t.style.fontSize = '0.85rem';
+    return t;
+  }
+
+  function spawn(row, col, value, apex = false) {
+    const pad = cells[row][col];
+    pad.innerHTML = '';
+    const t = makeTile(value, apex);
+    pad.appendChild(t);
+    return t;
+  }
+
+  function clear(row, col) {
+    const pad = cells[row][col];
+    if (pad.firstChild) pad.firstChild.classList.add('merging');
+    return sleep(220).then(() => { pad.innerHTML = ''; });
+  }
+
+  function burst(row, col, color = '#ffd280') {
+    const pad = cells[row][col];
+    const rect = pad.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2 - stageRect.left;
+    const cy = rect.top + rect.height / 2 - stageRect.top;
+    const N = 10;
+    for (let i = 0; i < N; i++) {
+      const b = document.createElement('span');
+      b.className = 'burst';
+      b.style.background = color;
+      b.style.left = cx + 'px';
+      b.style.top = cy + 'px';
+      stage.appendChild(b);
+      const ang = (i / N) * Math.PI * 2 + Math.random() * 0.4;
+      const dist = 40 + Math.random() * 30;
+      const dx = Math.cos(ang) * dist;
+      const dy = Math.sin(ang) * dist;
+      b.animate([
+        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.2)`, opacity: 0 }
+      ], { duration: 600 + Math.random() * 200, easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)' }).onfinish = () => b.remove();
+    }
+  }
+
+  function popAt(row, col) {
+    const pad = cells[row][col];
+    if (pad.firstChild) {
+      pad.firstChild.classList.remove('spawn');
+      void pad.firstChild.offsetWidth;
+      pad.firstChild.classList.add('pop');
+    }
+  }
+
+  function resetBoard() {
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) cells[r][c].innerHTML = '';
+  }
+
+  // Scripted sequence: two tiles appear on a row → they merge upward to
+  // the next row, doubling. Each merge step triggers a burst. The apex
+  // is 1024 at row 4.
+  async function runLoop() {
+    resetBoard();
+    replayBtn.disabled = true;
+    replayBtn.textContent = 'Running...';
+
+    const steps = [
+      // row, col-left, col-right, new row, new col, value
+      { r: 0, a: 1, b: 3, newR: 1, newC: 2, value: 2, next: 4 },
+      { r: 0, a: 0, b: 4, newR: 1, newC: 2, value: 2, next: 4 }, // fills both level-0 pairs later
+    ];
+
+    // Phase 1 — spawn a line of 2s at the bottom
+    for (let c = 0; c < COLS; c++) {
+      spawn(0, c, 2);
+      await sleep(80);
+    }
+    await sleep(260);
+
+    // Phase 2 — pair-merge bottom row into row 1 as 4s (cols 1 and 3)
+    burst(0, 0); burst(0, 1);
+    await Promise.all([clear(0, 0), clear(0, 1)]);
+    spawn(1, 1, 4);
+    popAt(1, 1);
+    await sleep(200);
+
+    burst(0, 3); burst(0, 4);
+    await Promise.all([clear(0, 3), clear(0, 4)]);
+    spawn(1, 3, 4);
+    popAt(1, 3);
+    await sleep(200);
+
+    // The lonely middle 2 promotes — another 2 appears on its side and merges
+    spawn(0, 1, 2);
+    await sleep(260);
+    burst(0, 2); burst(0, 1);
+    await Promise.all([clear(0, 2), clear(0, 1)]);
+    spawn(1, 2, 4);
+    popAt(1, 2);
+    await sleep(320);
+
+    // Phase 3 — row 1 (4, 4, 4 at cols 1, 2, 3) merges into row 2 as 8 and 8
+    burst(1, 1, '#ffd280'); burst(1, 2, '#ffd280');
+    await Promise.all([clear(1, 1), clear(1, 2)]);
+    spawn(2, 1, 8);
+    popAt(2, 1);
+    await sleep(240);
+
+    // Another 4 spawns next to the remaining 4 at col 3 to make an 8
+    spawn(1, 2, 4);
+    await sleep(220);
+    burst(1, 2, '#ffd280'); burst(1, 3, '#ffd280');
+    await Promise.all([clear(1, 2), clear(1, 3)]);
+    spawn(2, 3, 8);
+    popAt(2, 3);
+    await sleep(320);
+
+    // Phase 4 — two 8s → 16 at row 3 col 2
+    burst(2, 1, '#ffa850'); burst(2, 3, '#ffa850');
+    await Promise.all([clear(2, 1), clear(2, 3)]);
+    spawn(3, 2, 16);
+    popAt(3, 2);
+    await sleep(360);
+
+    // Phase 5 — second 16 appears next to first, merges to 32
+    spawn(3, 1, 16);
+    await sleep(220);
+    burst(3, 1, '#ff8428'); burst(3, 2, '#ff8428');
+    await Promise.all([clear(3, 1), clear(3, 2)]);
+    spawn(4, 2, 32, /* apex */ false);
+    popAt(4, 2);
+    await sleep(240);
+
+    // Phase 6 — climb to apex: another 32 spawns + merges to 64 → 128 → ...
+    // We compress the final climb into same-cell morphs for visual punch.
+    const climb = [64, 128, 256, 512, 1024];
+    for (const v of climb) {
+      // show twin briefly on the side
+      spawn(4, 1, v / 2);
+      await sleep(180);
+      burst(4, 1, v >= 256 ? '#ffd280' : '#ffa850');
+      burst(4, 2, v >= 256 ? '#ffd280' : '#ffa850');
+      await Promise.all([clear(4, 1), clear(4, 2)]);
+      spawn(4, 2, v, v === 1024);
+      popAt(4, 2);
+      await sleep(v === 1024 ? 1200 : 340);
+    }
+
+    // Big final burst at apex
+    for (let i = 0; i < 3; i++) { burst(4, 2, '#fff4c8'); await sleep(140); }
+
+    await sleep(1400);
+    replayBtn.disabled = false;
+    replayBtn.textContent = 'Run the loop';
+  }
+
+  replayBtn.addEventListener('click', () => runLoop());
+
+  // Auto-run when the tower first enters view
+  let played = false;
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting && !played) {
+        played = true;
+        setTimeout(runLoop, 500);
+      }
+    }
+  }, { threshold: 0.35 });
+  io.observe(stage);
+})();
+
+/* Footer year */
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
