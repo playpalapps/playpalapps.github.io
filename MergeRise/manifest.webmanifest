@@ -1,0 +1,15 @@
+{
+  "name": "Merge Rise",
+  "short_name": "Merge Rise",
+  "description": "A number-merge puzzle with soul. Four hand-painted worlds. Chain reactions that feel electric.",
+  "start_url": "/MergeRise/",
+  "scope": "/MergeRise/",
+  "display": "standalone",
+  "background_color": "#05040f",
+  "theme_color": "#05040f",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

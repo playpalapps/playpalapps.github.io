@@ -5,18 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>MERGE RISE — Merge tiles. Chain reactions. Rise empires.</title>
 <meta name="description" content="A number-merge puzzle with soul. Combine tiles, trigger chain reactions, and rise from settlement to skyline across four hand-painted worlds. Available on iOS and Android.">
+<meta name="author" content="PlayPal Apps">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://playpalapps.github.io/MergeRise/">
+
+<!-- Open Graph / Facebook -->
 <meta property="og:title" content="MERGE RISE — Merge tiles. Chain reactions. Rise empires.">
 <meta property="og:description" content="A number-merge puzzle with soul. Four hand-painted worlds. Chain reactions that feel electric. Free to play, zero paywalls on progress.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="feature.png">
+<meta property="og:url" content="https://playpalapps.github.io/MergeRise/">
+<meta property="og:site_name" content="Merge Rise">
+<meta property="og:image" content="https://playpalapps.github.io/MergeRise/feature.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="Merge Rise — a glowing citadel rising from a 5×5 tile board">
+
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="feature.png">
+<meta name="twitter:title" content="MERGE RISE — Merge tiles. Rise empires.">
+<meta name="twitter:description" content="A number-merge puzzle with soul. Four hand-painted worlds. Chain reactions that feel electric.">
+<meta name="twitter:image" content="https://playpalapps.github.io/MergeRise/feature.png">
+<meta name="twitter:image:alt" content="Merge Rise — a glowing citadel rising from a 5×5 tile board">
+
+<meta name="theme-color" content="#05040f" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#05040f">
+<meta name="apple-mobile-web-app-title" content="Merge Rise">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Structured data — helps Google surface us as a game. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Merge Rise",
+  "description": "A number-merge puzzle with soul. Combine tiles, trigger chain reactions, and rise from settlement to skyline across four hand-painted worlds.",
+  "url": "https://playpalapps.github.io/MergeRise/",
+  "image": "https://playpalapps.github.io/MergeRise/feature.png",
+  "author": { "@type": "Organization", "name": "PlayPal Apps" },
+  "publisher": { "@type": "Organization", "name": "PlayPal Apps" },
+  "genre": ["Puzzle", "Casual"],
+  "applicationCategory": "Game",
+  "operatingSystem": "iOS, Android",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 <style>
   /* ══════════════════════════════════════════════════════════════════════
      MERGE RISE — marketing site. Single-file HTML/CSS/JS. The visual
@@ -138,6 +180,24 @@
     position: relative; padding: 6px 2px;
   }
   .nav-links a:hover { color: var(--silver); }
+  .nav-links a.active:not(.nav-cta) { color: var(--silver); }
+  .nav-links a.active:not(.nav-cta)::after {
+    content: '';
+    position: absolute;
+    left: 50%; bottom: -2px;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--amber-lit);
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px var(--amber-glow);
+  }
+  .nav-links a:focus-visible:not(.nav-cta) {
+    outline: none;
+    color: var(--silver);
+  }
+  .nav-cta:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 200, 120, 0.4), 0 6px 20px var(--amber-glow);
+  }
   .nav-cta {
     padding: 8px 18px; border-radius: 999px;
     background: linear-gradient(90deg, var(--amber-warm), var(--gold-hot));
@@ -160,14 +220,21 @@
     font-family: 'Unbounded', sans-serif;
     font-weight: 600; font-size: 0.72rem;
     letter-spacing: 4px; text-transform: uppercase;
-    color: var(--amber-lit);
+    color: var(--eyebrow-color, var(--amber-lit));
     display: inline-flex; align-items: center; gap: 10px;
     margin-bottom: 18px;
   }
   .eyebrow::before {
     content: ''; width: 22px; height: 1.5px;
-    background: linear-gradient(90deg, var(--amber-warm), transparent);
+    background: linear-gradient(90deg, var(--eyebrow-color, var(--amber-warm)), transparent);
   }
+  /* Per-section accent — each section gets its own skin-inspired hue so the
+     page feels like the four worlds bleeding through, not a monotone. */
+  #loop     { --eyebrow-color: var(--amber-lit); }
+  #worlds   { --eyebrow-color: #b08bff; }   /* violet */
+  #gallery  { --eyebrow-color: #5ddbe6; }   /* ocean cyan */
+  #features { --eyebrow-color: #ff8de7; }   /* neon rose */
+  #download { --eyebrow-color: var(--amber-lit); }
 
   h1, h2, h3 {
     font-family: 'Unbounded', sans-serif;
@@ -204,7 +271,57 @@
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     padding: 120px 20px 80px;
     text-align: center;
+    overflow: hidden;
   }
+
+  /* Drifting skin tile chips — one per world. Purely decorative backdrop
+     that bleeds the four skin palettes into the hero, so the page feels
+     alive before you've even seen a tile merge. */
+  .hero-chips {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hero-chip {
+    position: absolute;
+    width: clamp(54px, 7vw, 88px);
+    aspect-ratio: 1/1;
+    border-radius: 14%;
+    filter: blur(0.6px);
+    opacity: 0;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 55%),
+      linear-gradient(160deg,
+        color-mix(in srgb, var(--c) 100%, white 18%) 0%,
+        var(--c) 55%,
+        color-mix(in srgb, var(--c) 100%, black 22%) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.3),
+      0 14px 40px color-mix(in srgb, var(--c) 45%, transparent),
+      0 0 50px color-mix(in srgb, var(--c) 35%, transparent);
+    animation: chipDrift 14s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+  .hero-chip.c1 { top: 14%;  left:  6%; --c:#78D6E0; animation-delay: 0s;   }
+  .hero-chip.c2 { top: 22%;  right: 8%; --c:#FF7847; animation-delay: -3s;  }
+  .hero-chip.c3 { bottom:18%; left: 10%; --c:#FF1E8E; animation-delay: -6s; }
+  .hero-chip.c4 { bottom:14%; right: 6%; --c:#FFE066; animation-delay: -9s; }
+  @keyframes chipDrift {
+    0%, 100% { transform: translate(0, 0) rotate(-4deg); opacity: 0.55; }
+    25%      { transform: translate(8px, -14px) rotate(2deg); opacity: 0.85; }
+    50%      { transform: translate(-6px, 10px) rotate(-2deg); opacity: 0.7; }
+    75%      { transform: translate(10px, 4px) rotate(3deg); opacity: 0.9; }
+  }
+  @media (max-width: 600px) {
+    .hero-chip.c1 { top: 10%; left: -2%; }
+    .hero-chip.c2 { top: 18%; right: -2%; }
+    .hero-chip.c3 { bottom: 22%; left: -4%; }
+    .hero-chip.c4 { bottom: 18%; right: -2%; }
+  }
+  /* Everything inside the hero sits above the chips */
+  header#hero > :not(.hero-chips) { position: relative; z-index: 1; }
 
   .hero-icon {
     width: clamp(88px, 12vw, 128px);
@@ -292,11 +409,31 @@
     color: #fff;
     transition: transform 0.2s, border-color 0.2s, box-shadow 0.25s;
     min-width: 190px;
+    position: relative; overflow: hidden;
   }
+  /* Diagonal shine sweep — subtly pulses across the badge on hover. */
+  .store-badge::before {
+    content: '';
+    position: absolute; top: 0; left: -120%;
+    width: 60%; height: 100%;
+    background: linear-gradient(100deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.14) 50%,
+      transparent 100%);
+    transform: skewX(-18deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  .store-badge:hover::before { left: 160%; }
   .store-badge:hover {
     transform: translateY(-2px);
     border-color: rgba(255, 168, 80, 0.4);
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px var(--amber-glow);
+  }
+  .store-badge:focus-visible {
+    outline: none;
+    border-color: var(--amber-lit);
+    box-shadow: 0 0 0 3px rgba(255, 200, 120, 0.35);
   }
   .store-badge svg {
     flex: 0 0 auto;
@@ -428,6 +565,9 @@
     border: 1px dashed rgba(168, 176, 206, 0.08);
   }
   .tile {
+    /* Per-value color is set via --tc on the element. Same three-stop
+       lighten → mid → darken recipe the game's TilePainter uses. */
+    --tc: var(--stone-mid);
     width: clamp(44px, 10%, 68px);
     aspect-ratio: 1 / 1;
     border-radius: 10px;
@@ -436,52 +576,31 @@
     font-family: 'Unbounded', sans-serif;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #fff;
+    color: var(--tc-text, #fff);
     background:
-      linear-gradient(145deg, var(--stone-lit) 0%, var(--stone-mid) 55%, var(--stone-dk) 100%);
-    border: 1px solid var(--outline);
+      linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.03) 40%, transparent 55%),
+      linear-gradient(160deg,
+        color-mix(in srgb, var(--tc) 100%, white 18%) 0%,
+        var(--tc) 55%,
+        color-mix(in srgb, var(--tc) 100%, black 22%) 100%);
+    border: 1px solid color-mix(in srgb, var(--tc) 100%, black 45%);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.22),
-      inset 0 -3px 0 rgba(6, 7, 30, 0.65),
-      0 6px 16px rgba(0, 0, 0, 0.55);
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      inset 0 -3px 0 color-mix(in srgb, var(--tc) 100%, black 55%),
+      0 6px 16px rgba(0, 0, 0, 0.5),
+      0 0 24px color-mix(in srgb, var(--tc) 35%, transparent);
     transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.4),
                 box-shadow 0.3s,
                 opacity 0.25s;
     font-size: clamp(0.85rem, 1.6vw, 1.1rem);
-  }
-  .tile::after {
-    /* little amber window */
-    content: '';
-    position: absolute;
-    left: 40%; right: 40%; bottom: 14%;
-    height: 16%;
-    background: linear-gradient(180deg, var(--amber-lit), var(--amber-warm));
-    border-radius: 2px;
-    box-shadow: 0 0 8px var(--amber-glow);
-    opacity: 0.85;
-  }
-  .tile.t-high {
-    background: linear-gradient(145deg, #ff9a50 0%, #f46d25 60%, #c4420e 100%);
-    border-color: #4a1808;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      inset 0 -3px 0 rgba(70, 20, 0, 0.65),
-      0 10px 30px rgba(255, 132, 40, 0.55),
-      0 0 36px rgba(255, 168, 80, 0.4);
-  }
-  .tile.t-high::after {
-    background: linear-gradient(180deg, #fff, var(--amber-lit));
-    height: 22%;
-    opacity: 1;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.35), 0 0 8px rgba(0,0,0,0.2);
   }
   .tile.t-apex {
-    background: linear-gradient(145deg, #ffd98a 0%, #ffa850 40%, #ff6d1a 100%);
-    border-color: #3f1600;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.7),
-      inset 0 -3px 0 rgba(70, 20, 0, 0.6),
-      0 14px 48px rgba(255, 132, 40, 0.7),
-      0 0 80px rgba(255, 200, 120, 0.55);
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -3px 0 color-mix(in srgb, var(--tc) 100%, black 40%),
+      0 14px 48px color-mix(in srgb, var(--tc) 70%, transparent),
+      0 0 80px color-mix(in srgb, var(--tc) 50%, transparent);
     transform: scale(1.05);
   }
   .tile.spawn {
@@ -508,22 +627,6 @@
       linear-gradient(180deg, transparent, rgba(5, 4, 15, 0.75));
     pointer-events: none;
   }
-  .tower-cta {
-    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-    padding: 9px 22px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--amber-warm), var(--gold-hot));
-    color: #2a1500;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 700; font-size: 0.78rem;
-    letter-spacing: 2.4px; text-transform: uppercase;
-    cursor: pointer; border: none;
-    box-shadow: 0 8px 24px var(--amber-glow);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .tower-cta:hover { transform: translate(-50%, -2px); box-shadow: 0 12px 32px var(--amber-glow); }
-  .tower-cta:active { transform: translate(-50%, 0); }
-
   /* Particle burst (merge celebration) */
   .burst {
     position: absolute;
@@ -671,6 +774,7 @@
   .phones-track::-webkit-scrollbar { display: none; }
 
   .phone-frame {
+    --pg: var(--violet);
     flex: 0 0 auto;
     scroll-snap-align: center;
     width: clamp(220px, 24vw, 300px);
@@ -682,6 +786,7 @@
     box-shadow:
       0 25px 60px rgba(0, 0, 0, 0.6),
       0 0 0 1px rgba(0, 0, 0, 0.5),
+      0 0 40px color-mix(in srgb, var(--pg) 18%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
     position: relative;
     transition: transform 0.4s, box-shadow 0.4s;
@@ -690,7 +795,7 @@
     transform: translateY(-8px) rotate(-0.5deg);
     box-shadow:
       0 40px 90px rgba(0, 0, 0, 0.7),
-      0 0 60px rgba(124, 77, 255, 0.3),
+      0 0 80px color-mix(in srgb, var(--pg) 45%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   .phone-frame::before {
@@ -732,32 +837,52 @@
   @media (max-width: 520px) { .features-grid { grid-template-columns: 1fr; } }
 
   .feature-card {
+    --fc: var(--amber-lit);
     padding: 30px 24px;
     border-radius: 20px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
     border: 1px solid var(--glass-br);
     position: relative;
-    transition: transform 0.3s, border-color 0.3s;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .feature-card::before {
+    /* Subtle corner wash tinted to the card's accent color */
+    content: '';
+    position: absolute; top: -40%; right: -40%;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--fc) 30%, transparent), transparent 65%);
+    opacity: 0.6; pointer-events: none;
+    transition: opacity 0.4s, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .feature-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(255, 168, 80, 0.3);
+    border-color: color-mix(in srgb, var(--fc) 40%, transparent);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45),
+                0 0 40px color-mix(in srgb, var(--fc) 15%, transparent);
   }
+  .feature-card:hover::before { opacity: 1; transform: scale(1.2); }
   .feat-icon {
     width: 44px; height: 44px;
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 18px;
-    background: linear-gradient(135deg, rgba(124, 77, 255, 0.2), rgba(255, 168, 80, 0.15));
-    border: 1px solid rgba(255, 168, 80, 0.3);
-    color: var(--amber-lit);
+    background:
+      linear-gradient(135deg,
+        color-mix(in srgb, var(--fc) 30%, transparent),
+        color-mix(in srgb, var(--fc) 12%, transparent));
+    border: 1px solid color-mix(in srgb, var(--fc) 45%, transparent);
+    color: var(--fc);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
   .feat-icon svg { width: 22px; height: 22px; fill: currentColor; }
+  .feature-card h3 { position: relative; }
   .feature-card p {
     color: var(--text-dim);
     font-size: 0.92rem;
     line-height: 1.6;
+    position: relative;
   }
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -872,7 +997,14 @@
 
 <!-- ═════════════════════════════ HERO ═══════════════════════════════ -->
 <header id="hero">
-  <img class="hero-icon" src="logo.png" alt="Merge Rise app icon">
+  <!-- Drifting skin chips — pure decoration, no semantic weight -->
+  <div class="hero-chips" aria-hidden="true">
+    <span class="hero-chip c1"></span>
+    <span class="hero-chip c2"></span>
+    <span class="hero-chip c3"></span>
+    <span class="hero-chip c4"></span>
+  </div>
+  <img class="hero-icon" src="logo.png" alt="Merge Rise app icon" width="128" height="128" fetchpriority="high" decoding="async">
   <h1 class="hero-title">
     <span class="row">Merge</span>
     <span class="row rise">Rise</span>
@@ -920,7 +1052,6 @@
     <div class="tower-stage" id="towerStage" aria-hidden="true">
       <div class="tower-grid" id="towerGrid"></div>
       <div class="tower-ground"></div>
-      <button class="tower-cta" id="towerReplay">Run the loop</button>
     </div>
   </div>
 </section>
@@ -999,11 +1130,11 @@
     </header>
   </div>
   <div class="phones-track">
-    <figure class="phone-frame"><img src="shots/01-home-citadel.png" alt="Home screen with the Civilization citadel"><figcaption class="phone-caption" aria-hidden="true" style="display:none">Home</figcaption></figure>
-    <figure class="phone-frame"><img src="shots/02-gameplay.png" alt="Live gameplay — tile chains mid-merge"></figure>
-    <figure class="phone-frame"><img src="shots/03-recap.png" alt="Run recap screen"></figure>
-    <figure class="phone-frame"><img src="shots/04-skins.png" alt="Skins picker"></figure>
-    <figure class="phone-frame"><img src="shots/05-home-supernova.png" alt="Supernova home variant"></figure>
+    <figure class="phone-frame" style="--pg:#7c4dff;"><img src="shots/01-home-citadel.png" alt="Home screen with the Civilization citadel" loading="lazy" decoding="async" width="1290" height="2796"></figure>
+    <figure class="phone-frame" style="--pg:#ffa850;"><img src="shots/02-gameplay.png" alt="Live gameplay — tile chains mid-merge" loading="lazy" decoding="async" width="1290" height="2796"></figure>
+    <figure class="phone-frame" style="--pg:#5ddbe6;"><img src="shots/03-recap.png" alt="Run recap screen" loading="lazy" decoding="async" width="1290" height="2796"></figure>
+    <figure class="phone-frame" style="--pg:#ff6dab;"><img src="shots/04-skins.png" alt="Skins picker" loading="lazy" decoding="async" width="1290" height="2796"></figure>
+    <figure class="phone-frame" style="--pg:#FF7847;"><img src="shots/05-home-supernova.png" alt="Supernova home variant" loading="lazy" decoding="async" width="1290" height="2796"></figure>
   </div>
 </section>
 
@@ -1016,32 +1147,32 @@
       <p class="lead">A merge puzzle is a 30-second loop. The systems around it are where weeks turn into months. Here's what keeps the second run from ever being the same as the first.</p>
     </header>
     <div class="features-grid">
-      <article class="feature-card">
+      <article class="feature-card" style="--fc:#5ddbe6;">
         <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L3 7v10l9 5 9-5V7l-9-5zm0 2.18L18.5 8 12 11.82 5.5 8 12 4.18zM5 9.72l6 3.46V19.5l-6-3.32V9.72zm14 0v6.46l-6 3.32V13.18l6-3.46z"/></svg></div>
         <h3>Daily Challenges</h3>
         <p>A new seed, a new modifier, same 24 hours for everyone. Chase the leaderboard or just chase yesterday's score.</p>
       </article>
-      <article class="feature-card">
+      <article class="feature-card" style="--fc:#b08bff;">
         <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2v2.07c3.61.46 6.47 3.32 6.93 6.93H22v2h-2.07c-.46 3.61-3.32 6.47-6.93 6.93V22h-2v-2.07c-3.61-.46-6.47-3.32-6.93-6.93H2v-2h2.07C4.53 7.39 7.39 4.53 11 4.07V2h2zm-1 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 2.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z"/></svg></div>
         <h3>Zen Mode</h3>
         <p>No timer, no modifier, no noise. Just the board and the next number. Pour a coffee, merge for an hour.</p>
       </article>
-      <article class="feature-card">
+      <article class="feature-card" style="--fc:#ffc878;">
         <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm2 4v2h8V6H8zm0 4v2h8v-2H8zm0 4v2h5v-2H8z"/></svg></div>
         <h3>The Codex</h3>
         <p>Every tile you merge is logged with hand-written lore. Four skins × every tier = a small museum of your progress.</p>
       </article>
-      <article class="feature-card">
+      <article class="feature-card" style="--fc:#FF7847;">
         <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14l-1 9h-2.5a4.5 4.5 0 0 1-4.5 4.5v2h4v2H9v-2h4v-2A4.5 4.5 0 0 1 8.5 12H6L5 3zm2.24 2l.6 5H9a3 3 0 0 1-3-3V5h1.24zm9.52 0H17v2a3 3 0 0 1-3 3h-.84l.6-5z"/></svg></div>
         <h3>Achievements</h3>
         <p>Eight real milestones — Village Elder to Castle Lord. No checkbox busywork; each one marks a genuine leap in skill.</p>
       </article>
-      <article class="feature-card">
+      <article class="feature-card" style="--fc:#ff6dab;">
         <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 3h5v2.5L23 10l-3 2.5V17h-5l-3 3-3-3H4v-4.5L1 10l3-2.5V5h5l3-3zm0 4.5A3.5 3.5 0 1 0 12 13.5 3.5 3.5 0 0 0 12 6.5z"/></svg></div>
         <h3>Missions</h3>
         <p>Rotating goals that reward how you play, not just how long. Chain-driven, merge-driven, or pure endurance — pick your lane.</p>
       </article>
-      <article class="feature-card">
+      <article class="feature-card" style="--fc:#FFE066;">
         <div class="feat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 4h2v6h5v2h-7V6z"/></svg></div>
         <h3>Built for the commute</h3>
         <p>30-second runs for the train, hour-long sessions for the couch. Resumes instantly, saves every tile, never begs for your data.</p>
@@ -1081,8 +1212,7 @@
     <nav>
       <a href="privacy-policy.html">Privacy</a>
       <a href="support.html">Support</a>
-      <a href="/">Playpal</a>
-      <a href="https://twitter.com" rel="noopener">Twitter</a>
+      <a href="/">Playpal Apps</a>
     </nav>
   </div>
 </footer>
@@ -1194,7 +1324,7 @@
 })();
 
 /* ════════════════════════════════════════════════════════════════════════
-   NAV scrolled state
+   NAV scrolled state + active-section indicator
    ════════════════════════════════════════════════════════════════════════ */
 (() => {
   const nav = document.getElementById('siteNav');
@@ -1203,6 +1333,37 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // Active-section tracking — add .active to the nav link whose href target
+  // is currently the most prominent section in the viewport. aria-current
+  // gets set to "true" for AT users.
+  const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+  const byId = new Map();
+  const targets = [];
+  for (const a of links) {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) { byId.set(id, a); targets.push(el); }
+  }
+  if (targets.length) {
+    const activate = (id) => {
+      for (const a of links) {
+        const match = a.getAttribute('href') === '#' + id;
+        a.classList.toggle('active', match);
+        if (match) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      }
+    };
+    const io = new IntersectionObserver((entries) => {
+      // Pick the entry with the largest intersection ratio still on screen.
+      let best = null;
+      for (const e of entries) {
+        if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) best = e;
+      }
+      if (best) activate(best.target.id);
+    }, { threshold: [0.25, 0.5, 0.75], rootMargin: '-40% 0px -40% 0px' });
+    targets.forEach(t => io.observe(t));
+  }
 })();
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -1232,7 +1393,6 @@
   const COLS = 5, ROWS = 5;
   const grid = document.getElementById('towerGrid');
   const stage = document.getElementById('towerStage');
-  const replayBtn = document.getElementById('towerReplay');
 
   // Build the 5×5 pad scaffold. Row 0 is bottom, row 4 is top.
   const cells = [];
@@ -1252,9 +1412,31 @@
 
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+  // Authentic civilization-skin palette from lib/game/game_constants.dart.
+  // Each merge lands on a tile whose color genuinely represents its tier —
+  // so the climb reads ember → canvas → clay → terracotta → village green →
+  // castle slate → cathedral violet → citadel indigo → empire deep-violet →
+  // colosseum travertine → wonder gold.
+  const TILE_PALETTE = {
+    2:    { c: '#7A3515', text: '#fff' },   // Campfire — ember
+    4:    { c: '#3C6B2E', text: '#fff' },   // Tent — canvas green
+    8:    { c: '#8A5B2B', text: '#fff' },   // Hut — warm clay
+    16:   { c: '#B8423B', text: '#fff' },   // Cottage — terracotta
+    32:   { c: '#4B8B3B', text: '#fff' },   // Village — green
+    64:   { c: '#5C6A72', text: '#fff' },   // Castle — slate
+    128:  { c: '#6A4DAD', text: '#fff' },   // Cathedral — violet
+    256:  { c: '#2D3670', text: '#fff' },   // Citadel — moonlit indigo
+    512:  { c: '#3E2A72', text: '#fff' },   // Empire — deep-violet
+    1024: { c: '#B07A3A', text: '#2a1700' },// Colosseum — travertine
+    2048: { c: '#D4A038', text: '#2a1a02' },// Wonder — antique gold
+  };
+
   function makeTile(value, apex) {
     const t = document.createElement('div');
-    t.className = 'tile spawn' + (value >= 256 ? ' t-high' : '') + (apex ? ' t-apex' : '');
+    t.className = 'tile spawn' + (apex ? ' t-apex' : '');
+    const p = TILE_PALETTE[value] || TILE_PALETTE[2];
+    t.style.setProperty('--tc', p.c);
+    t.style.setProperty('--tc-text', p.text);
     t.textContent = value >= 1024 ? '1K' : value;
     if (value >= 128) t.style.fontSize = '0.95rem';
     if (value >= 512) t.style.fontSize = '0.85rem';
@@ -1313,19 +1495,15 @@
     for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) cells[r][c].innerHTML = '';
   }
 
+  // Color the burst particles with the outgoing tile's own hue so each
+  // merge reads as "that color escaping upward" instead of a monotone spark.
+  const burstColorFor = v => (TILE_PALETTE[v] && TILE_PALETTE[v].c) || '#ffc878';
+
   // Scripted sequence: two tiles appear on a row → they merge upward to
   // the next row, doubling. Each merge step triggers a burst. The apex
-  // is 1024 at row 4.
+  // is 1024 at row 4. The loop runs continuously — no user action required.
   async function runLoop() {
     resetBoard();
-    replayBtn.disabled = true;
-    replayBtn.textContent = 'Running...';
-
-    const steps = [
-      // row, col-left, col-right, new row, new col, value
-      { r: 0, a: 1, b: 3, newR: 1, newC: 2, value: 2, next: 4 },
-      { r: 0, a: 0, b: 4, newR: 1, newC: 2, value: 2, next: 4 }, // fills both level-0 pairs later
-    ];
 
     // Phase 1 — spawn a line of 2s at the bottom
     for (let c = 0; c < COLS; c++) {
@@ -1335,95 +1513,111 @@
     await sleep(260);
 
     // Phase 2 — pair-merge bottom row into row 1 as 4s (cols 1 and 3)
-    burst(0, 0); burst(0, 1);
+    const c2 = burstColorFor(2);
+    burst(0, 0, c2); burst(0, 1, c2);
     await Promise.all([clear(0, 0), clear(0, 1)]);
-    spawn(1, 1, 4);
-    popAt(1, 1);
+    spawn(1, 1, 4); popAt(1, 1);
     await sleep(200);
 
-    burst(0, 3); burst(0, 4);
+    burst(0, 3, c2); burst(0, 4, c2);
     await Promise.all([clear(0, 3), clear(0, 4)]);
-    spawn(1, 3, 4);
-    popAt(1, 3);
+    spawn(1, 3, 4); popAt(1, 3);
     await sleep(200);
 
     // The lonely middle 2 promotes — another 2 appears on its side and merges
     spawn(0, 1, 2);
     await sleep(260);
-    burst(0, 2); burst(0, 1);
+    burst(0, 2, c2); burst(0, 1, c2);
     await Promise.all([clear(0, 2), clear(0, 1)]);
-    spawn(1, 2, 4);
-    popAt(1, 2);
+    spawn(1, 2, 4); popAt(1, 2);
     await sleep(320);
 
     // Phase 3 — row 1 (4, 4, 4 at cols 1, 2, 3) merges into row 2 as 8 and 8
-    burst(1, 1, '#ffd280'); burst(1, 2, '#ffd280');
+    const c4 = burstColorFor(4);
+    burst(1, 1, c4); burst(1, 2, c4);
     await Promise.all([clear(1, 1), clear(1, 2)]);
-    spawn(2, 1, 8);
-    popAt(2, 1);
+    spawn(2, 1, 8); popAt(2, 1);
     await sleep(240);
 
-    // Another 4 spawns next to the remaining 4 at col 3 to make an 8
     spawn(1, 2, 4);
     await sleep(220);
-    burst(1, 2, '#ffd280'); burst(1, 3, '#ffd280');
+    burst(1, 2, c4); burst(1, 3, c4);
     await Promise.all([clear(1, 2), clear(1, 3)]);
-    spawn(2, 3, 8);
-    popAt(2, 3);
+    spawn(2, 3, 8); popAt(2, 3);
     await sleep(320);
 
     // Phase 4 — two 8s → 16 at row 3 col 2
-    burst(2, 1, '#ffa850'); burst(2, 3, '#ffa850');
+    const c8 = burstColorFor(8);
+    burst(2, 1, c8); burst(2, 3, c8);
     await Promise.all([clear(2, 1), clear(2, 3)]);
-    spawn(3, 2, 16);
-    popAt(3, 2);
+    spawn(3, 2, 16); popAt(3, 2);
     await sleep(360);
 
     // Phase 5 — second 16 appears next to first, merges to 32
     spawn(3, 1, 16);
     await sleep(220);
-    burst(3, 1, '#ff8428'); burst(3, 2, '#ff8428');
+    const c16 = burstColorFor(16);
+    burst(3, 1, c16); burst(3, 2, c16);
     await Promise.all([clear(3, 1), clear(3, 2)]);
-    spawn(4, 2, 32, /* apex */ false);
-    popAt(4, 2);
+    spawn(4, 2, 32); popAt(4, 2);
     await sleep(240);
 
-    // Phase 6 — climb to apex: another 32 spawns + merges to 64 → 128 → ...
-    // We compress the final climb into same-cell morphs for visual punch.
+    // Phase 6 — climb to apex: 64 → 128 → 256 → 512 → 1024
     const climb = [64, 128, 256, 512, 1024];
     for (const v of climb) {
-      // show twin briefly on the side
       spawn(4, 1, v / 2);
       await sleep(180);
-      burst(4, 1, v >= 256 ? '#ffd280' : '#ffa850');
-      burst(4, 2, v >= 256 ? '#ffd280' : '#ffa850');
+      const cc = burstColorFor(v / 2);
+      burst(4, 1, cc); burst(4, 2, cc);
       await Promise.all([clear(4, 1), clear(4, 2)]);
       spawn(4, 2, v, v === 1024);
       popAt(4, 2);
-      await sleep(v === 1024 ? 1200 : 340);
+      await sleep(v === 1024 ? 1100 : 340);
     }
 
-    // Big final burst at apex
-    for (let i = 0; i < 3; i++) { burst(4, 2, '#fff4c8'); await sleep(140); }
-
+    // Big final burst at apex — use the wonder gold
+    const apexColor = burstColorFor(2048);
+    for (let i = 0; i < 3; i++) { burst(4, 2, apexColor); await sleep(140); }
     await sleep(1400);
-    replayBtn.disabled = false;
-    replayBtn.textContent = 'Run the loop';
   }
 
-  replayBtn.addEventListener('click', () => runLoop());
+  // Loop runner — keeps running indefinitely as long as the section is
+  // in view (or at least has been seen once). We pause the recursion when
+  // the tab is hidden to avoid wasted work.
+  let running = false;
+  let inView = false;
+  let everSeen = false;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Auto-run when the tower first enters view
-  let played = false;
+  async function loopForever() {
+    if (running) return;
+    running = true;
+    try {
+      while (!document.hidden && (inView || everSeen)) {
+        await runLoop();
+        // Short breath between cycles so the apex pop lingers
+        await sleep(500);
+      }
+    } finally {
+      running = false;
+    }
+  }
+
+  // Only animate when user has seen it at least once and section is visible
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) {
-      if (e.isIntersecting && !played) {
-        played = true;
-        setTimeout(runLoop, 500);
+      inView = e.isIntersecting;
+      if (e.isIntersecting) {
+        everSeen = true;
+        if (!reduce) loopForever();
       }
     }
-  }, { threshold: 0.35 });
+  }, { threshold: 0.25 });
   io.observe(stage);
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && everSeen && !reduce) loopForever();
+  });
 })();
 
 /* Footer year */
