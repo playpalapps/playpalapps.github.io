@@ -588,64 +588,62 @@
   }
   .world-card:hover::before { opacity: 1; }
 
-  .world-tile {
+  /* Authentic 2×2 tile preview — uses the game's actual per-skin palette
+     from lib/game/game_constants.dart. Each cell gets the same lighten →
+     mid → darken three-stop gradient the in-game TilePainter uses. */
+  .world-tiles {
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 14px;
-    margin-bottom: 18px;
-    position: relative;
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 16px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 70%),
+      var(--world-board, #0c0a22);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.18),
-      inset 0 -4px 0 rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
       0 10px 30px rgba(0, 0, 0, 0.5);
   }
-  .world-tile::after {
-    /* Amber window on every world's tile */
-    content: '';
-    position: absolute;
-    left: 44%; right: 44%; bottom: 18%;
-    height: 14%; border-radius: 2px;
-    background: linear-gradient(180deg, var(--amber-lit), var(--amber-warm));
-    box-shadow: 0 0 14px var(--amber-glow);
-  }
-  .world-tile .starry {
-    /* Scattered stars overlay — subtle, repeated on each world */
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 14% 16%, rgba(255, 255, 255, 0.75), transparent 50%),
-      radial-gradient(1px 1px at 78% 22%, rgba(255, 255, 255, 0.6), transparent 50%),
-      radial-gradient(1px 1px at 42% 10%, rgba(255, 255, 255, 0.5), transparent 50%),
-      radial-gradient(1px 1px at 62% 30%, rgba(255, 255, 255, 0.4), transparent 50%);
-    pointer-events: none;
-  }
-  .world-tile.civ {
+  .wt {
+    position: relative;
+    border-radius: 9px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 2px;
     background:
-      linear-gradient(135deg, #5f6ec4 0%, #3a4490 45%, #1a1f50 100%);
+      /* Glass highlight on top-left */
+      linear-gradient(135deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.05) 35%, transparent 55%),
+      /* Lighten → mid → darken, same recipe as TilePainter */
+      linear-gradient(160deg,
+        color-mix(in srgb, var(--c) 100%, white 18%) 0%,
+        var(--c) 55%,
+        color-mix(in srgb, var(--c) 100%, black 22%) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.28),
+      0 4px 10px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    color: var(--c-text, #fff);
   }
-  .world-tile.ocean {
-    background:
-      radial-gradient(ellipse at 50% 10%, #4ec3df 0%, #1e6e9a 35%, #0b2d4a 100%);
+  .wt .wt-val {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: clamp(0.95rem, 2.1vw, 1.3rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 0 8px rgba(0, 0, 0, 0.25);
   }
-  .world-tile.space {
-    background:
-      radial-gradient(ellipse at 30% 20%, #9b5edc 0%, #4d2088 40%, #14062b 100%);
-  }
-  .world-tile.neon {
-    background:
-      linear-gradient(135deg, #ff3d8e 0%, #b81465 40%, #2b0533 100%);
-  }
-  .world-tile.neon::before {
-    /* Synthwave grid */
-    content: '';
-    position: absolute; left: 0; right: 0; bottom: 0; height: 40%;
-    background-image:
-      linear-gradient(180deg, transparent 0%, rgba(255, 61, 142, 0.35) 100%),
-      repeating-linear-gradient(90deg, transparent 0 12px, rgba(255, 255, 255, 0.22) 12px 13px),
-      repeating-linear-gradient(0deg, transparent 0 12px, rgba(255, 255, 255, 0.14) 12px 13px);
-    transform: perspective(100px) rotateX(40deg);
-    transform-origin: bottom;
+  .wt .wt-name {
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    opacity: 0.85;
   }
 
   .world-name {
@@ -947,29 +945,56 @@
       <p class="lead">Every skin repaints the entire ladder — palette, windows, lore, and the little stories each tile tells. All four ship unlocked. Pick the one that matches the hour you play.</p>
     </header>
     <div class="worlds-grid">
-      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #7c4dff, #ffa850); --world-accent: #a48bff;">
-        <div class="world-tile civ"><span class="starry"></span></div>
+      <!-- Civilization: Campfire 2 → Castle 64 → Citadel 256 → Wonder 2048 -->
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #7c4dff, #ffa850); --world-accent: #a48bff; --world-board: #0c0a22;">
+        <div class="world-tiles" aria-label="Civilization tile preview">
+          <div class="wt" style="--c:#7A3515;"><span class="wt-val">2</span><span class="wt-name">Campfire</span></div>
+          <div class="wt" style="--c:#5C6A72;"><span class="wt-val">64</span><span class="wt-name">Castle</span></div>
+          <div class="wt" style="--c:#2D3670;"><span class="wt-val">256</span><span class="wt-name">Citadel</span></div>
+          <div class="wt" style="--c:#D4A038; --c-text:#2a1a02;"><span class="wt-val">2048</span><span class="wt-name">Wonder</span></div>
+        </div>
         <div class="world-meta">Skin 01</div>
         <div class="world-name">Civilization</div>
         <p class="world-blurb">Stone ziggurats, lamp-lit gates. A golden-age palette for the long chain.</p>
       </div>
-      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #1ac8d2, #8deeff); --world-accent: #5ddbe6;">
-        <div class="world-tile ocean"><span class="starry"></span></div>
+
+      <!-- Ocean: Minnow 2 → Tuna 64 → Manta 256 → Blue Whale 2048 -->
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #1ac8d2, #8deeff); --world-accent: #5ddbe6; --world-board: #081822;">
+        <div class="world-tiles" aria-label="Ocean Depths tile preview">
+          <div class="wt" style="--c:#78D6E0; --c-text:#052028;"><span class="wt-val">2</span><span class="wt-name">Minnow</span></div>
+          <div class="wt" style="--c:#3A7EAE;"><span class="wt-val">64</span><span class="wt-name">Tuna</span></div>
+          <div class="wt" style="--c:#1A406E;"><span class="wt-val">256</span><span class="wt-name">Manta</span></div>
+          <div class="wt" style="--c:#1266B8;"><span class="wt-val">2048</span><span class="wt-name">Whale</span></div>
+        </div>
         <div class="world-meta">Skin 02</div>
         <div class="world-name">Ocean Depths</div>
         <p class="world-blurb">Bioluminescent reefs fading into abyssal black. Cool, patient, meditative.</p>
       </div>
-      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #b061ff, #ff8de7); --world-accent: #d598ff;">
-        <div class="world-tile space"><span class="starry"></span></div>
+
+      <!-- Space: Dust 2 → Star 64 → Supernova 256 → Galaxy 2048 -->
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #b061ff, #ff8de7); --world-accent: #d598ff; --world-board: #140a28;">
+        <div class="world-tiles" aria-label="Deep Space tile preview">
+          <div class="wt" style="--c:#3A3478;"><span class="wt-val">2</span><span class="wt-name">Dust</span></div>
+          <div class="wt" style="--c:#FFE066; --c-text:#2a1a00;"><span class="wt-val">64</span><span class="wt-name">Star</span></div>
+          <div class="wt" style="--c:#FF7847;"><span class="wt-val">256</span><span class="wt-name">Supernova</span></div>
+          <div class="wt" style="--c:#9F5FFF;"><span class="wt-val">2048</span><span class="wt-name">Galaxy</span></div>
+        </div>
         <div class="world-meta">Skin 03</div>
         <div class="world-name">Deep Space</div>
-        <p class="world-blurb">Nebulae, dwarf stars, and one very stubborn orbital lighthouse.</p>
+        <p class="world-blurb">Cosmic dust, supernova flares, and a final galactic spiral at the apex.</p>
       </div>
-      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #ff3d8e, #ffb63d); --world-accent: #ff6dab;">
-        <div class="world-tile neon"><span class="starry"></span></div>
+
+      <!-- Neon: Pixel 2 → Server 64 → Mainframe 256 → Singularity 2048 -->
+      <div class="world-card" style="--accent-grad: linear-gradient(135deg, #ff3d8e, #ffb63d); --world-accent: #ff6dab; --world-board: #1a0820;">
+        <div class="world-tiles" aria-label="Neon City tile preview">
+          <div class="wt" style="--c:#FF1E8E;"><span class="wt-val">2</span><span class="wt-name">Pixel</span></div>
+          <div class="wt" style="--c:#2B9BFF;"><span class="wt-val">64</span><span class="wt-name">Server</span></div>
+          <div class="wt" style="--c:#FF6EC7;"><span class="wt-val">256</span><span class="wt-name">Mainframe</span></div>
+          <div class="wt" style="--c:#F5F5FF; --c-text:#1a0a22;"><span class="wt-val">2048</span><span class="wt-name">Singularity</span></div>
+        </div>
         <div class="world-meta">Skin 04</div>
         <div class="world-name">Neon City</div>
-        <p class="world-blurb">Synthwave pinks, chrome horizons, and a grid that keeps going forever.</p>
+        <p class="world-blurb">Cyberpunk rise of machine intelligence. Pixel to singularity, no turning back.</p>
       </div>
     </div>
   </div>
