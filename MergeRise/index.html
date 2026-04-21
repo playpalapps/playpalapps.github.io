@@ -194,19 +194,54 @@
     outline: none;
     color: var(--silver);
   }
-  .nav-cta:focus-visible {
+  .nav-links a.nav-cta:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 200, 120, 0.4), 0 6px 20px var(--amber-glow);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      0 0 0 3px rgba(255, 200, 120, 0.45),
+      0 6px 20px var(--amber-glow);
   }
-  .nav-cta {
-    padding: 8px 18px; border-radius: 999px;
-    background: linear-gradient(90deg, var(--amber-warm), var(--gold-hot));
-    color: #2a1500 !important;
-    font-weight: 800; letter-spacing: 1.5px;
-    box-shadow: 0 6px 20px var(--amber-glow);
-    transition: transform 0.2s, box-shadow 0.2s;
+  .nav-links a.nav-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px 7px 16px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #ffe5a8 0%, var(--gold-hot) 100%);
+    color: #2a1500;
+    font-weight: 800; letter-spacing: 1.2px; font-size: 0.74rem;
+    border: 1px solid rgba(120, 60, 0, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      inset 0 -1px 0 rgba(120, 60, 0, 0.18),
+      0 4px 14px rgba(244, 165, 60, 0.35);
+    transition: transform 0.18s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    position: relative; overflow: hidden;
   }
-  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 28px var(--amber-glow); }
+  .nav-links a.nav-cta::before {
+    /* Soft glass sheen across the top half */
+    content: '';
+    position: absolute; left: 0; right: 0; top: 0;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent);
+    pointer-events: none;
+    border-radius: 999px 999px 40% 40% / 999px 999px 100% 100%;
+  }
+  .nav-links a.nav-cta svg {
+    width: 11px; height: 11px;
+    fill: none; stroke: currentColor;
+    transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+    position: relative;
+  }
+  .nav-links a.nav-cta:hover {
+    color: #2a1500;
+    transform: translateY(-1px);
+    filter: saturate(1.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 rgba(120, 60, 0, 0.2),
+      0 8px 24px rgba(244, 165, 60, 0.55);
+  }
+  .nav-links a.nav-cta:hover svg { transform: translateX(2px); }
+  .nav-links a.nav-cta:active { transform: translateY(0); }
   @media (max-width: 720px) {
     .nav-links a:not(.nav-cta) { display: none; }
   }
@@ -454,22 +489,6 @@
     letter-spacing: 0.5px;
   }
   .store-badge { position: relative; }
-
-  .hero-scroll {
-    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-    font-size: 0.68rem; font-weight: 600; letter-spacing: 3px;
-    color: var(--text-faint); text-transform: uppercase;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    animation: scrollCue 2.4s ease-in-out infinite;
-  }
-  .hero-scroll::after {
-    content: ''; width: 1px; height: 28px;
-    background: linear-gradient(180deg, var(--text-faint), transparent);
-  }
-  @keyframes scrollCue {
-    0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
-    50%      { transform: translate(-50%, 6px); opacity: 1; }
-  }
 
   /* ══════════════════════════════════════════════════════════════════════
      LOOP — interactive Merge Tower demo
@@ -989,7 +1008,7 @@
     <a href="#worlds">Worlds</a>
     <a href="#gallery">Screens</a>
     <a href="#features">Depth</a>
-    <a href="#download" class="nav-cta">Play free</a>
+    <a href="#download" class="nav-cta">Play free<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
   </div>
 </nav>
 
@@ -1022,8 +1041,6 @@
       <span class="store-badge-text"><small>Get it on</small><strong>Google Play</strong></span>
     </a>
   </div>
-
-  <div class="hero-scroll">Scroll to explore</div>
 </header>
 
 <!-- ═════════════════════════════ LOOP ═══════════════════════════════ -->
