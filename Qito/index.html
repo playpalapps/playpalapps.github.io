@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Qito — Premium QR code studio for iOS & Android</title>
+<meta name="description" content="Design QR codes worth keeping. Qito is a premium, offline-first QR studio with 25+ hand-crafted styles, Art QR, wallpaper export, batch generation, and a respectful privacy model. iOS and Android.">
+<meta name="author" content="PlayPal Apps">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://playpalapps.github.io/Qito/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="Qito — Premium QR code studio">
+<meta property="og:description" content="Design QR codes worth keeping. 25+ hand-crafted styles, Art QR, batch generation. Offline-first. iOS & Android.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://playpalapps.github.io/Qito/">
+<meta property="og:site_name" content="Qito">
+<meta property="og:image" content="https://playpalapps.github.io/Qito/icon-1024.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="Qito app icon — a stylized QR mark on a violet-to-pink gradient">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Qito — Premium QR code studio">
+<meta name="twitter:description" content="Design QR codes worth keeping. 25+ styles, Art QR, batch generation. Offline-first. iOS & Android.">
+<meta name="twitter:image" content="https://playpalapps.github.io/Qito/icon-1024.png">
+<meta name="twitter:image:alt" content="Qito app icon — a stylized QR mark on a violet-to-pink gradient">
+
+<meta name="theme-color" content="#0A0612" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0A0612">
+<meta name="apple-mobile-web-app-title" content="Qito">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- QR matrix generator (~4 KB gzipped). MIT, kazuhikoarase. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
+
+<!-- Structured data — marks Qito as a MobileApplication. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Qito",
+  "description": "A premium, offline-first QR code studio with 25+ hand-crafted styles, Art QR, wallpaper export, batch generation, and a respectful privacy model.",
+  "url": "https://playpalapps.github.io/Qito/",
+  "image": "https://playpalapps.github.io/Qito/icon-1024.png",
+  "applicationCategory": "Utilities",
+  "operatingSystem": "iOS, Android",
+  "author": { "@type": "Organization", "name": "PlayPal Apps" },
+  "publisher": { "@type": "Organization", "name": "PlayPal Apps" },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free to download. Optional Pro upgrade removes ads and unlocks premium styles, SVG/PDF export, and unlimited batch."
+  }
+}
+</script>
+
+<style>
+/* ==========================================================================
+   Qito — landing page
+   Design language: deep-violet void, gradient accents, premium typography,
+   magazine-quality spacing, subtle grain texture. Dark-only for now.
+   ========================================================================== */
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* Palette — matches lib/app/design_tokens.dart#kBrandGradient */
+  --brand-1: #5B2FE0;          /* violet */
+  --brand-2: #9D4EDD;           /* magenta */
+  --brand-3: #EC4899;           /* pink */
+  --brand-gradient: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 55%, var(--brand-3) 100%);
+
+  /* Backgrounds */
+  --bg: #08050F;                 /* near-black with violet bias */
+  --bg-elevated: #120A22;        /* surface 1 */
+  --bg-sunken: #05030B;          /* deeper void */
+  --surface: rgba(255,255,255,0.03);
+  --surface-2: rgba(255,255,255,0.055);
+  --surface-3: rgba(255,255,255,0.085);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.14);
+
+  /* Text */
+  --ink: #F6F3FF;               /* primary */
+  --ink-2: rgba(246,243,255,0.74);
+  --ink-3: rgba(246,243,255,0.54);
+  --ink-4: rgba(246,243,255,0.34);
+
+  /* Motion */
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --ease-in: cubic-bezier(.5,0,.9,.3);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+
+  /* Sizing scale (design tokens style) */
+  --page-max: 1240px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-2xl: 44px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  overflow-x: hidden;
+  min-height: 100dvh;
+  /* Cover the full viewport with the deep-violet void. */
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(157,78,221,0.22), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 20%, rgba(91,47,224,0.18), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 40%, rgba(236,72,153,0.14), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* Subtle grain overlay gives the page a matte, printed feel. */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 1  0 0 0 0.12 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+::selection { background: var(--brand-2); color: white; }
+
+/* ---------- Typography ---------- */
+.display,
+h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.05; font-weight: 800; margin: 0; }
+h1 { font-size: clamp(2.6rem, 6.2vw, 5.4rem); font-weight: 900; letter-spacing: -0.035em; }
+h2 { font-size: clamp(2rem, 4.2vw, 3.4rem); }
+h3 { font-size: clamp(1.25rem, 1.6vw, 1.5rem); }
+.serif { font-family: 'Instrument Serif', 'New York', Georgia, serif; font-weight: 400; font-style: italic; letter-spacing: -0.01em; }
+
+.gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Navigation ---------- */
+nav.site {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  background: linear-gradient(to bottom, rgba(8,5,15,0.88), rgba(8,5,15,0.72));
+  border-bottom: 1px solid rgba(255,255,255,0);
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+nav.site.scrolled { border-bottom-color: var(--border); }
+nav.site .row {
+  display: flex; align-items: center; gap: 24px;
+  padding: 16px 0;
+}
+nav.site .brand {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-weight: 700; font-size: 17px; letter-spacing: -0.015em;
+}
+nav.site .brand .mark {
+  width: 32px; height: 32px; border-radius: 9px;
+  background: var(--brand-gradient);
+  display: grid; place-items: center;
+  box-shadow: 0 6px 30px -8px rgba(157,78,221,0.6);
+}
+nav.site .brand .mark svg { width: 18px; height: 18px; fill: white; }
+nav.site .links { display: flex; gap: 28px; margin-left: auto; align-items: center; }
+nav.site .links a { color: var(--ink-2); font-size: 14.5px; font-weight: 500; transition: color .2s var(--ease); }
+nav.site .links a:hover { color: var(--ink); }
+nav.site .cta { padding: 9px 16px; border-radius: 999px; background: white; color: #0B0612; font-weight: 600; font-size: 14px; transition: transform .2s var(--ease), box-shadow .3s var(--ease); box-shadow: 0 4px 28px -8px rgba(255,255,255,0.3); }
+nav.site .cta:hover { transform: translateY(-1px); box-shadow: 0 8px 32px -6px rgba(255,255,255,0.45); }
+nav.site .kbd-hint { display: none; font-size: 12px; color: var(--ink-3); padding: 5px 10px; border: 1px solid var(--border); border-radius: 8px; }
+@media (min-width: 760px) { nav.site .kbd-hint { display: inline-flex; gap: 6px; align-items: center; } }
+nav.site .kbd-hint kbd { font: inherit; padding: 0 6px; border-radius: 5px; background: rgba(255,255,255,0.08); border: 1px solid var(--border); }
+nav.site .menu-toggle { display: none; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); color: var(--ink); }
+@media (max-width: 720px) {
+  nav.site .links { display: none; }
+  nav.site .menu-toggle { display: grid; place-items: center; margin-left: auto; }
+  nav.site .cta { padding: 8px 14px; font-size: 13px; }
+}
+
+/* ---------- Hero ---------- */
+header.hero {
+  position: relative;
+  padding: clamp(64px, 10vw, 128px) 0 clamp(80px, 10vw, 140px);
+  overflow: hidden;
+}
+header.hero::before {
+  content: "";
+  position: absolute; inset: -20% -5% auto -5%; height: 80%;
+  background: radial-gradient(ellipse at 50% 10%, rgba(157,78,221,0.38), transparent 55%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 7px 14px 7px 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+  margin-bottom: 28px;
+  animation: fadeDown .8s var(--ease-out) both;
+}
+.hero-eyebrow .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--brand-gradient);
+  box-shadow: 0 0 12px rgba(236,72,153,0.8);
+  margin-left: 4px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: left; }
+}
+
+.hero-lead {
+  font-size: clamp(18px, 1.5vw, 22px);
+  color: var(--ink-2);
+  max-width: 56ch;
+  margin-top: 28px;
+  line-height: 1.45;
+  animation: fadeUp 1s var(--ease-out) .2s both;
+}
+
+.hero-cta-row {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  margin-top: 40px;
+  align-items: center;
+  animation: fadeUp 1s var(--ease-out) .35s both;
+}
+
+.store-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid var(--border-strong);
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform .25s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+}
+.store-btn:hover { transform: translateY(-2px); background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.24); }
+.store-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+.store-btn .label { display: flex; flex-direction: column; line-height: 1.1; }
+.store-btn .label .small { font-size: 11px; color: var(--ink-3); font-weight: 400; letter-spacing: 0.02em; }
+.store-btn .label .big { font-size: 16px; font-weight: 700; }
+.store-btn.primary {
+  background: var(--brand-gradient);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 14px 40px -12px rgba(157,78,221,0.6);
+}
+.store-btn.primary:hover { box-shadow: 0 18px 46px -10px rgba(236,72,153,0.55); }
+
+.launch-note {
+  font-size: 13px; color: var(--ink-3);
+  margin-top: 14px;
+  animation: fadeUp 1s var(--ease-out) .5s both;
+}
+
+/* ---------- Hero QR (big morphing showcase) ---------- */
+.hero-qr-stage {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  animation: fadeScale 1.2s var(--ease-out) .3s both;
+}
+.hero-qr-stage::after {
+  /* Purple halo */
+  content: "";
+  position: absolute; inset: -15%;
+  background: radial-gradient(circle at 50% 50%, rgba(157,78,221,0.4), transparent 60%);
+  filter: blur(40px);
+  z-index: 0;
+}
+.hero-qr-card {
+  position: relative;
+  z-index: 1;
+  width: 100%; height: 100%;
+  padding: clamp(20px, 3vw, 36px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 40px 80px -30px rgba(157,78,221,0.35),
+    0 18px 50px -20px rgba(0,0,0,0.6);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+}
+.hero-qr-caption { display: flex; align-items: center; justify-content: space-between; color: var(--ink-3); font-size: 12.5px; }
+.hero-qr-caption .style-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); color: var(--ink-2); font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; font-size: 10.5px; }
+.hero-qr-caption .style-tag::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--brand-gradient); }
+.hero-qr-svg-wrap {
+  border-radius: var(--radius-xl);
+  background: white;
+  overflow: hidden;
+  position: relative;
+  display: grid; place-items: center;
+  padding: clamp(12px, 2vw, 22px);
+}
+.hero-qr-svg-wrap svg { width: 100%; height: 100%; transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.hero-qr-meta { display: flex; justify-content: space-between; align-items: center; }
+.hero-qr-meta .payload-label { color: var(--ink-3); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
+.hero-qr-meta .payload-value { color: var(--ink); font-size: 13px; font-weight: 500; font-family: ui-monospace, Menlo, Consolas, monospace; }
+.hero-qr-meta .logo-dot { width: 28px; height: 28px; border-radius: 8px; background: var(--brand-gradient); display: grid; place-items: center; box-shadow: 0 4px 14px -2px rgba(236,72,153,0.4); }
+.hero-qr-meta .logo-dot svg { width: 14px; height: 14px; fill: white; }
+
+/* Trust bar */
+.trust-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  max-width: 860px;
+  margin: clamp(64px, 8vw, 96px) auto 0;
+  padding-top: clamp(40px, 5vw, 56px);
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 760px) { .trust-bar { grid-template-columns: repeat(2, 1fr); } }
+.trust-bar .item { text-align: center; }
+.trust-bar .item .num {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.trust-bar .item .lbl { font-size: 12.5px; color: var(--ink-3); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ---------- Generic section shell ---------- */
+section.slab {
+  position: relative;
+  padding: clamp(80px, 12vw, 148px) 0;
+}
+.section-head { max-width: 780px; margin-bottom: clamp(40px, 5vw, 64px); }
+.section-eyebrow {
+  display: inline-block;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.section-lead {
+  color: var(--ink-2); margin-top: 18px; font-size: 18px; line-height: 1.55;
+  max-width: 60ch;
+}
+
+/* ---------- Playground ---------- */
+#playground {
+  background: linear-gradient(180deg, transparent, rgba(157,78,221,0.05) 30%, transparent 100%);
+}
+.playground-card {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  padding: clamp(24px, 3vw, 48px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 420px);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  box-shadow: 0 30px 100px -50px rgba(91,47,224,0.5);
+}
+@media (max-width: 900px) { .playground-card { grid-template-columns: 1fr; } }
+
+.playground-controls label { display: block; font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.playground-controls .input {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color .2s var(--ease), background .2s var(--ease);
+}
+.playground-controls .input:focus-within { border-color: var(--brand-2); background: var(--surface-2); box-shadow: 0 0 0 4px rgba(157,78,221,0.18); }
+.playground-controls .input input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--ink); font-size: 16px; }
+.playground-controls .input input::placeholder { color: var(--ink-4); }
+.playground-controls .input .prefix { color: var(--ink-3); font-size: 15px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+.playground-controls .tabs {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 24px;
+}
+.playground-controls .tabs button {
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all .2s var(--ease);
+}
+.playground-controls .tabs button:hover { color: var(--ink); border-color: var(--border-strong); }
+.playground-controls .tabs button.active {
+  background: var(--brand-gradient);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 8px 24px -8px rgba(157,78,221,0.6);
+}
+.playground-controls .color-swatches {
+  display: flex; gap: 10px; margin-top: 12px;
+}
+.playground-controls .swatch {
+  width: 32px; height: 32px; border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform .2s var(--ease), border-color .2s var(--ease);
+}
+.playground-controls .swatch:hover { transform: scale(1.08); }
+.playground-controls .swatch.active { border-color: white; }
+.playground-controls .group { margin-top: 24px; }
+.playground-controls .group-label {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+}
+.playground-qr {
+  aspect-ratio: 1;
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: clamp(14px, 2vw, 24px);
+  display: grid; place-items: center;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.playground-qr::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 15% 15%, rgba(255,255,255,1), rgba(255,255,255,0.9) 55%, rgba(240,238,255,0.95));
+  z-index: 0;
+}
+.playground-qr svg { width: 100%; height: auto; position: relative; z-index: 1; }
+
+/* ---------- Feature grid ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+@media (max-width: 1040px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+
+.feature {
+  position: relative;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition: transform .4s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
+  overflow: hidden;
+  isolation: isolate;
+}
+.feature::before {
+  content: "";
+  position: absolute; inset: auto -30% -50% auto;
+  width: 60%; aspect-ratio: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(157,78,221,0.25), transparent 60%);
+  transform: translateY(20px);
+  transition: transform .5s var(--ease), opacity .3s var(--ease);
+  opacity: 0;
+  z-index: -1;
+}
+.feature:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-2); }
+.feature:hover::before { opacity: 1; transform: translateY(0); }
+.feature .icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(157,78,221,0.2), rgba(236,72,153,0.15));
+  border: 1px solid var(--border-strong);
+  display: grid; place-items: center;
+  margin-bottom: 18px;
+}
+.feature .icon svg { width: 22px; height: 22px; color: var(--ink); }
+.feature h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.012em; }
+.feature p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+
+/* Split row of long-form feature callouts */
+.split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  margin-top: clamp(48px, 6vw, 80px);
+}
+@media (max-width: 900px) { .split-row { grid-template-columns: 1fr; } }
+
+.callout {
+  padding: clamp(28px, 3vw, 40px);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-strong);
+  background: linear-gradient(160deg, rgba(91,47,224,0.09), rgba(236,72,153,0.04));
+  display: flex;
+  flex-direction: column;
+}
+.callout .eyebrow { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.callout h3 { font-size: clamp(1.4rem, 2vw, 1.9rem); margin-top: 10px; }
+.callout p { color: var(--ink-2); margin-top: 10px; max-width: 46ch; }
+.callout .chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.callout .chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.callout .visual {
+  margin-top: 24px;
+  min-height: 160px;
+  border-radius: var(--radius-md);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* ---------- Style showcase ---------- */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+@media (max-width: 1040px) { .showcase-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.showcase-card {
+  position: relative;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: transform .4s var(--ease), border-color .3s var(--ease);
+}
+.showcase-card:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+.showcase-card .qr-holder {
+  aspect-ratio: 1;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  display: grid; place-items: center;
+}
+.showcase-card .qr-holder svg { width: 100%; height: auto; }
+.showcase-card .lbl { font-size: 12.5px; color: var(--ink-2); margin-top: 10px; text-align: center; font-weight: 500; }
+
+/* ---------- Privacy manifesto ---------- */
+#privacy { background: linear-gradient(180deg, transparent, rgba(91,47,224,0.06) 50%, transparent); }
+.privacy-card {
+  padding: clamp(48px, 6vw, 80px);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(135deg, rgba(91,47,224,0.15), rgba(236,72,153,0.06)),
+    var(--bg-elevated);
+  position: relative;
+  overflow: hidden;
+}
+.privacy-card::after {
+  content: "";
+  position: absolute; inset: auto -20% -40% auto;
+  width: 520px; aspect-ratio: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(236,72,153,0.2), transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.privacy-card h2 { font-size: clamp(2rem, 4vw, 3rem); max-width: 24ch; }
+.privacy-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 44px;
+}
+@media (max-width: 760px) { .privacy-list { grid-template-columns: 1fr; } }
+.privacy-item { position: relative; padding-left: 40px; }
+.privacy-item::before {
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--brand-gradient);
+  display: grid; place-items: center;
+  box-shadow: 0 6px 20px -6px rgba(157,78,221,0.55);
+  background-image:
+    linear-gradient(135deg, var(--brand-1), var(--brand-3)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/></svg>");
+  background-blend-mode: normal;
+  background-size: cover, 14px 14px;
+  background-repeat: no-repeat;
+  background-position: center, center;
+}
+.privacy-item h4 { font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+.privacy-item p { color: var(--ink-2); font-size: 14.5px; }
+
+/* ---------- Pricing ---------- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+.price-card {
+  padding: clamp(28px, 3vw, 40px);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform .4s var(--ease), border-color .3s var(--ease);
+}
+.price-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+.price-card.featured {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--bg-elevated), var(--bg-elevated)) padding-box,
+    var(--brand-gradient) border-box;
+  box-shadow: 0 30px 80px -30px rgba(157,78,221,0.45);
+}
+.price-card .badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  padding: 5px 14px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;
+  background: var(--brand-gradient);
+  color: white;
+  border-radius: 999px;
+}
+.price-card h3 { font-size: 18px; font-weight: 600; letter-spacing: 0; color: var(--ink-2); }
+.price-card .price { margin-top: 12px; font-size: clamp(2.2rem, 3vw, 2.8rem); font-weight: 800; letter-spacing: -0.025em; }
+.price-card .price .unit { font-size: 14px; font-weight: 500; color: var(--ink-3); margin-left: 4px; }
+.price-card .summary { color: var(--ink-2); margin-top: 8px; font-size: 14.5px; }
+.price-card ul { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 12px; }
+.price-card li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; color: var(--ink-2); }
+.price-card li svg { flex-shrink: 0; width: 16px; height: 16px; margin-top: 3px; color: var(--brand-3); }
+.price-card .action {
+  margin-top: auto;
+  padding: 13px 18px;
+  text-align: center;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14.5px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  transition: background .2s var(--ease);
+}
+.price-card .action:hover { background: var(--surface-3); }
+.price-card.featured .action {
+  background: var(--brand-gradient);
+  color: white;
+  border-color: transparent;
+}
+
+/* ---------- FAQ ---------- */
+.faq-list { display: grid; gap: 12px; max-width: 860px; margin: 0 auto; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+.faq-item[open] { border-color: var(--border-strong); background: var(--surface-2); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-weight: 600; font-size: 16.5px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-size: 22px; font-weight: 300; color: var(--ink-3);
+  transition: transform .3s var(--ease), color .3s var(--ease);
+}
+.faq-item[open] summary::after { content: "−"; color: var(--ink); }
+.faq-item .body {
+  padding: 0 24px 24px;
+  color: var(--ink-2);
+  font-size: 15.5px;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+/* ---------- CTA footer ---------- */
+#cta { padding-bottom: 0; }
+.cta-card {
+  padding: clamp(56px, 8vw, 120px);
+  text-align: center;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(236,72,153,0.4), transparent 55%),
+    radial-gradient(ellipse at 20% 20%, rgba(91,47,224,0.3), transparent 50%),
+    var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-bottom: 0;
+}
+.cta-card::before {
+  /* Subtle grid lines on the gradient for depth */
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask: radial-gradient(circle at 50% 50%, black 40%, transparent 75%);
+  -webkit-mask: radial-gradient(circle at 50% 50%, black 40%, transparent 75%);
+  pointer-events: none;
+}
+.cta-card h2 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); font-weight: 900; letter-spacing: -0.035em; position: relative; }
+.cta-card p { color: var(--ink-2); font-size: 18px; max-width: 48ch; margin: 22px auto 40px; position: relative; }
+.cta-card .cta-row { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; }
+
+/* ---------- Footer ---------- */
+footer.site {
+  padding: 48px 0 64px;
+  border-top: 1px solid var(--border);
+  margin-top: 80px;
+}
+.footer-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+.footer-row .links { display: flex; gap: 26px; flex-wrap: wrap; }
+.footer-row a { color: var(--ink-3); font-size: 14px; transition: color .2s var(--ease); }
+.footer-row a:hover { color: var(--ink); }
+.footer-row .copyright { color: var(--ink-3); font-size: 13.5px; }
+
+/* ---------- Reveal animations ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Command palette ---------- */
+.palette-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(5,3,11,0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  animation: fadeIn .2s var(--ease-out);
+}
+.palette-backdrop.open { display: flex; }
+.palette {
+  width: min(560px, 92vw);
+  background: #110822;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 40px 120px -40px rgba(0,0,0,0.8);
+}
+.palette input {
+  width: 100%;
+  padding: 18px 22px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 16px;
+  outline: 0;
+}
+.palette input::placeholder { color: var(--ink-4); }
+.palette ul { list-style: none; padding: 8px; margin: 0; max-height: 50vh; overflow: auto; }
+.palette li {
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: var(--ink-2);
+  cursor: pointer;
+  display: flex; gap: 12px; align-items: center;
+  font-size: 14.5px;
+}
+.palette li:hover, .palette li.active { background: var(--surface-2); color: var(--ink); }
+.palette li .k { font-size: 11.5px; color: var(--ink-3); margin-left: auto; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--border); }
+
+/* ---------- Animations ---------- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+@keyframes fadeScale { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.08); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute; top: 8px; left: 8px;
+  padding: 10px 14px;
+  background: white; color: black;
+  border-radius: 8px;
+  transform: translateY(-200%);
+  transition: transform .3s var(--ease);
+  z-index: 200;
+  font-weight: 600;
+}
+.skip-link:focus { transform: none; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="#" class="brand" aria-label="Qito home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zm2 2v3h3V5zM14 3h7v7h-7zm2 2v3h3V5zM3 14h7v7H3zm2 2v3h3v-3zM13 13h2v2h-2zM15 15h2v2h-2zM13 17h2v2h-2zM17 13h2v2h-2zM19 15h2v2h-2zM17 17h2v2h-2zM15 19h2v2h-2z"/></svg>
+      </span>
+      <span>Qito</span>
+    </a>
+    <div class="links" role="navigation">
+      <a href="#playground">Playground</a>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#pricing">Pricing</a>
+      <a href="support.html">Support</a>
+    </div>
+    <span class="kbd-hint" title="Press ⌘K to search"><kbd>⌘</kbd><kbd>K</kbd> <span style="margin-left:4px;color:var(--ink-4)">Jump</span></span>
+    <a href="#cta" class="cta">Get Qito</a>
+    <button class="menu-toggle" aria-label="Open menu" id="menu-toggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-eyebrow">
+            New for iOS & Android
+            <span class="dot" aria-hidden="true"></span>
+          </span>
+          <h1>
+            Design QR codes<br>
+            <span class="serif gradient-text">worth&nbsp;keeping.</span>
+          </h1>
+          <p class="hero-lead">
+            Qito is a premium QR code studio built for the details. 25+ hand-crafted styles, Art QR that blends into a photo, wallpaper export, batch generation, and camera scanning — all offline, all yours.
+          </p>
+          <div class="hero-cta-row">
+            <a class="store-btn primary" href="#cta" aria-label="Get Qito on the App Store">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.52-3.2 0-1.39.66-2.13.52-3-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+              <span class="label">
+                <span class="small">Get it on</span>
+                <span class="big">App Store</span>
+              </span>
+            </a>
+            <a class="store-btn" href="#cta" aria-label="Get Qito on Google Play">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gp1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00D4FF"/><stop offset="100%" stop-color="#0079FF"/>
+                  </linearGradient>
+                  <linearGradient id="gp2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFE100"/><stop offset="100%" stop-color="#FF9D00"/>
+                  </linearGradient>
+                  <linearGradient id="gp3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FF6D00"/><stop offset="100%" stop-color="#FF2D00"/>
+                  </linearGradient>
+                  <linearGradient id="gp4" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00E87C"/><stop offset="100%" stop-color="#00A060"/>
+                  </linearGradient>
+                </defs>
+                <path fill="url(#gp1)" d="M3.6 2.6C3.2 3 3 3.5 3 4.3v15.4c0 .8.2 1.3.6 1.7l10.3-10.4z"/>
+                <path fill="url(#gp2)" d="m16.4 8.7 2.7 1.5c1.1.6 1.1 1.5 0 2.2l-2.7 1.5L13.9 11z"/>
+                <path fill="url(#gp3)" d="M14 11.4 3.6 21.5c.5.5 1.3.5 2.2 0l10.7-6z"/>
+                <path fill="url(#gp4)" d="M16.4 8.7 5.7 2.5c-.9-.5-1.7-.5-2.2 0L13.9 11z"/>
+              </svg>
+              <span class="label">
+                <span class="small">Get it on</span>
+                <span class="big">Google Play</span>
+              </span>
+            </a>
+          </div>
+          <p class="launch-note">Rolling out to iOS & Android · Spring 2026 · Free, with optional Pro.</p>
+        </div>
+
+        <!-- Hero QR: a live-generated QR that morphs through styles -->
+        <div class="hero-qr-stage" aria-hidden="true">
+          <div class="hero-qr-card">
+            <div class="hero-qr-caption">
+              <span class="style-tag" id="hero-style-label">Aurora</span>
+              <span>Qito Studio</span>
+            </div>
+            <div class="hero-qr-svg-wrap" id="hero-qr-wrap"></div>
+            <div class="hero-qr-meta">
+              <div>
+                <div class="payload-label">Payload</div>
+                <div class="payload-value">qito.app</div>
+              </div>
+              <span class="logo-dot"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM13 13h2v2h-2zM15 15h2v2h-2zM13 17h2v2h-2zM17 13h2v2h-2zM19 15h2v2h-2zM17 17h2v2h-2zM15 19h2v2h-2z"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust bar -->
+      <div class="trust-bar reveal">
+        <div class="item"><div class="num">25+</div><div class="lbl">Hand-crafted styles</div></div>
+        <div class="item"><div class="num">11</div><div class="lbl">Data types</div></div>
+        <div class="item"><div class="num">0</div><div class="lbl">Trackers</div></div>
+        <div class="item"><div class="num">100%</div><div class="lbl">Offline</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       LIVE PLAYGROUND
+       ============================================================ -->
+  <section class="slab" id="playground">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Try it right here</span>
+        <h2>A live taste of the <span class="serif gradient-text">studio.</span></h2>
+        <p class="section-lead">Type anything. Pick a style. That's roughly the shape of using Qito — except the real app adds gradients, logos, scan-confidence analysis, and 30+ more touches.</p>
+      </div>
+      <div class="playground-card reveal">
+        <div class="playground-controls">
+          <label for="pg-input">Payload</label>
+          <div class="input">
+            <span class="prefix">›</span>
+            <input id="pg-input" type="text" value="https://qito.app" maxlength="200" autocomplete="off" spellcheck="false" aria-label="QR payload">
+          </div>
+
+          <div class="group">
+            <div class="group-label"><span>Module shape</span></div>
+            <div class="tabs" id="pg-shape" role="tablist">
+              <button class="active" data-shape="square" role="tab">Square</button>
+              <button data-shape="rounded" role="tab">Rounded</button>
+              <button data-shape="dots" role="tab">Dots</button>
+              <button data-shape="diamond" role="tab">Diamond</button>
+              <button data-shape="heart" role="tab">Hearts</button>
+              <button data-shape="star" role="tab">Stars</button>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-label"><span>Color</span></div>
+            <div class="color-swatches" id="pg-color" role="radiogroup">
+              <button class="swatch active" data-color="gradient" style="background: linear-gradient(135deg, #5B2FE0, #9D4EDD, #EC4899);" role="radio" aria-checked="true" aria-label="Gradient"></button>
+              <button class="swatch" data-color="#0B0612" style="background: #0B0612;" role="radio" aria-checked="false" aria-label="Midnight"></button>
+              <button class="swatch" data-color="#1E88E5" style="background: #1E88E5;" role="radio" aria-checked="false" aria-label="Blue"></button>
+              <button class="swatch" data-color="#059669" style="background: #059669;" role="radio" aria-checked="false" aria-label="Green"></button>
+              <button class="swatch" data-color="#E11D48" style="background: #E11D48;" role="radio" aria-checked="false" aria-label="Red"></button>
+              <button class="swatch" data-color="#F59E0B" style="background: #F59E0B;" role="radio" aria-checked="false" aria-label="Amber"></button>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-label"><span>Error correction</span></div>
+            <div class="tabs" id="pg-ecc" role="tablist">
+              <button data-ecc="L" role="tab">L · 7%</button>
+              <button class="active" data-ecc="M" role="tab">M · 15%</button>
+              <button data-ecc="Q" role="tab">Q · 25%</button>
+              <button data-ecc="H" role="tab">H · 30%</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="playground-qr" id="pg-qr"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURES
+       ============================================================ -->
+  <section class="slab" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">What's inside</span>
+        <h2>Every knob, none of the <span class="serif gradient-text">cruft.</span></h2>
+        <p class="section-lead">Qito is obsessive where it matters: the painter, the scan reliability, the print fidelity. It's boring where it doesn't: no accounts, no servers, no ads for Pro users.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg></div>
+          <h3>11 data types</h3>
+          <p>Links, Wi-Fi, vCard contacts, SMS, email, calendar events, geo, phone, crypto, WhatsApp, plain text. Encoded natively, validated locally.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+          <h3>25+ hand-crafted styles</h3>
+          <p>Six module shapes × six eye frames × six eye balls × full-range gradients. Each preset is tuned by eye, not auto-generated.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></div>
+          <h3>Art QR</h3>
+          <p>Blend a QR into a photo via layered composition, halftone dots, or circular portrait cutout. Still scans, still looks gallery-ready.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <h3>Wallpaper export</h3>
+          <p>Six themed frames in phone, square, and A4 sizes. Title + subtitle typography. Save to Photos or share as PDF.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v6H4zm0 10h16v6H4zM8 7v0M8 17v0"/></svg></div>
+          <h3>Unlimited batch</h3>
+          <p>Paste a list of URLs or text. Qito generates all of them, zips them, and lets you download the set. No row cap, no watermark with Pro.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></div>
+          <h3>Scanner with hygiene</h3>
+          <p>Camera scan with instant data-type detection, shortener expansion warnings, and a risk indicator for suspicious links.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h10"/></svg></div>
+          <h3>SVG · PDF · PNG</h3>
+          <p>Export anywhere: crisp vectors for print, PNGs for the web, PDFs with embedded captions for client-ready deliverables.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 10l7-7 7 7"/></svg></div>
+          <h3>Home-screen widget</h3>
+          <p>Pin your most-used QR to the home screen, lock screen, or StandBy. Update it once; the widget re-renders. Works on iOS and Android.</p>
+        </article>
+      </div>
+
+      <!-- Featured callouts -->
+      <div class="split-row">
+        <article class="callout reveal">
+          <span class="eyebrow">Built for print</span>
+          <h3>Designed at 4K. Exports true vectors.</h3>
+          <p>Every export is rendered at 2048 px minimum for rasters, and as genuine SVG for vector. Your QR keeps its eye-sharp shapes all the way to billboard size.</p>
+          <div class="chip-row">
+            <span class="chip">PNG</span>
+            <span class="chip">JPEG</span>
+            <span class="chip">SVG</span>
+            <span class="chip">PDF A4 / Letter</span>
+          </div>
+          <div class="visual" id="callout-print"></div>
+        </article>
+
+        <article class="callout reveal">
+          <span class="eyebrow">Shortcuts & widgets</span>
+          <h3>One gesture away from your most-used QR.</h3>
+          <p>"Hey Siri, show my Wi-Fi QR." Tap the home-screen widget and the pinned code fills the phone. Qito ships with App Intents, iOS 18 tinted icons, Android App Actions, and a proper widget timeline.</p>
+          <div class="chip-row">
+            <span class="chip">Siri</span>
+            <span class="chip">Shortcuts</span>
+            <span class="chip">WidgetKit</span>
+            <span class="chip">StandBy</span>
+            <span class="chip">Material You</span>
+          </div>
+          <div class="visual" id="callout-shortcut"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STYLE SHOWCASE
+       ============================================================ -->
+  <section class="slab" id="styles">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">The painter</span>
+        <h2>Six shapes. Six eyes. <span class="serif gradient-text">Infinite combinations.</span></h2>
+        <p class="section-lead">The same payload — <code style="background:var(--surface);border:1px solid var(--border);padding:2px 6px;border-radius:5px;font-size:0.9em">qito.app</code> — rendered through six representative presets. Each one is a real, scannable QR.</p>
+      </div>
+      <div class="showcase-grid" id="showcase-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRIVACY
+       ============================================================ -->
+  <section class="slab" id="privacy">
+    <div class="container">
+      <div class="privacy-card reveal">
+        <span class="section-eyebrow">Quietly principled</span>
+        <h2>Your codes never leave <span class="serif gradient-text">your device.</span></h2>
+        <p style="color:var(--ink-2); font-size:18px; max-width: 56ch; margin-top: 20px;">
+          Qito makes zero network calls from your QR content, your history, or your style edits. There is no server. There is nowhere to send it, even if we wanted to.
+        </p>
+        <div class="privacy-list">
+          <div class="privacy-item">
+            <h4>No tracking SDKs</h4>
+            <p>Not a single third-party analytics or crash reporter. We read your usage by reading your reviews.</p>
+          </div>
+          <div class="privacy-item">
+            <h4>No account required</h4>
+            <p>No sign-up, no email, no OAuth. The app works the second you open it.</p>
+          </div>
+          <div class="privacy-item">
+            <h4>No URL resolution</h4>
+            <p>When you scan a shortened link, Qito flags it — but never visits it. Your destination stays private.</p>
+          </div>
+          <div class="privacy-item">
+            <h4>No cloud sync</h4>
+            <p>Your history lives in the app sandbox. Back it up yourself, import on another device. You're in control.</p>
+          </div>
+          <div class="privacy-item">
+            <h4>Purchases via stores</h4>
+            <p>Pro is sold by Apple and Google directly. We only read the entitlement they hand back. We never see a card number.</p>
+          </div>
+          <div class="privacy-item">
+            <h4>Open inspection</h4>
+            <p>An in-app privacy screen lists every byte Qito stores, in plain language. Audit any time — no fine print.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRICING
+       ============================================================ -->
+  <section class="slab" id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Pricing</span>
+        <h2>Free for the essentials. <span class="serif gradient-text">Pro for the professionals.</span></h2>
+        <p class="section-lead">The core is genuinely free — not a trial, not a throttled demo. Pro unlocks the premium painter surfaces and removes banner ads.</p>
+      </div>
+      <div class="pricing-grid">
+        <article class="price-card reveal">
+          <h3>Free</h3>
+          <div class="price">$0<span class="unit">forever</span></div>
+          <p class="summary">Everything you need to generate, customize, and scan.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>All 11 data types</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>15 standard presets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>PNG export (up to 2 K)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Scanner with hygiene</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Home-screen widget</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Full history & favorites</li>
+          </ul>
+          <a class="action" href="#cta">Download</a>
+        </article>
+
+        <article class="price-card featured reveal">
+          <span class="badge">Best value</span>
+          <h3>Pro · Yearly</h3>
+          <div class="price">$9.99<span class="unit">/year</span></div>
+          <p class="summary">Unlock the full studio and lose every banner.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Ad-free forever</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>10+ premium presets (prism, rose-gold, midnight-foil)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Art QR & halftone</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Wallpaper export</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Unlimited batch</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>SVG · PDF export at 4 K</li>
+          </ul>
+          <a class="action" href="#cta">Start 7-day trial</a>
+        </article>
+
+        <article class="price-card reveal">
+          <h3>Pro · Lifetime</h3>
+          <div class="price">$39.99<span class="unit">once</span></div>
+          <p class="summary">Pay once. Own it. Every update included.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Everything in Yearly</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>All future styles</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>All future data types</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Priority email support</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Works offline forever</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Pays for itself in 4 years</li>
+          </ul>
+          <a class="action" href="#cta">Unlock forever</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section class="slab" id="faq">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center; margin-inline:auto;">
+        <span class="section-eyebrow">Frequently asked</span>
+        <h2>Still on the <span class="serif gradient-text">fence?</span></h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item reveal" open>
+          <summary>Does Qito work without an internet connection?</summary>
+          <div class="body">Yes — 100%. All QR generation, scanning, history, and export happens on-device. The only network calls are (a) fetching Google Fonts once on first launch, and (b) verifying a store purchase when you upgrade to Pro. Both are clearly labeled in the in-app privacy screen.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Will my QRs actually scan reliably with these custom styles?</summary>
+          <div class="body">Every preset ships with a scan-confidence meter. The painter automatically boosts error-correction when you add a logo, and the scanner runs a live check before you export. If a style isn't reliably scannable at a given payload length, Qito tells you and suggests adjustments.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What's the difference between Qito and other QR apps?</summary>
+          <div class="body">Most QR apps are either free-with-ads scanners or paid-but-generic generators. Qito is the premium tier of the generator side: hand-crafted presets, Art QR, wallpaper export, real vector SVG output, home-screen widgets, Siri shortcuts, and zero tracking. It's built like a paid Mac app — for your phone.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Can I try Pro before buying?</summary>
+          <div class="body">Yes. The Pro yearly plan includes a 7-day free trial, and you can cancel in your App Store or Play Store account at any time before the trial ends. Lifetime is a one-time purchase with no trial, refundable via the store's standard refund policy.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Does Qito support dynamic QR codes (editable after generation)?</summary>
+          <div class="body">Not in the classic "dynamic link redirector" sense — that would require a server, and we don't run one. You can always edit the source payload in Qito and regenerate the code, but the code itself is fully self-contained and scans to the exact data you encoded. That's a privacy choice: no link redirector means no tracking pixel.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Which platforms are supported?</summary>
+          <div class="body">iOS 16.0+ (iPhone and iPad) and Android 8.0+ (API 26+). The iOS build includes WidgetKit extensions and App Intents for Siri. The Android build includes the AppWidgetProvider and Material You monochrome icon.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Is my QR history backed up?</summary>
+          <div class="body">By design, no — we don't operate a cloud. Qito does give you a one-tap JSON export of your full history so you can back it up yourself, sync it between devices over AirDrop or any sharing service you trust, or re-import it after a reinstall.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Design a QR <span class="serif gradient-text">worth keeping.</span></h2>
+        <p>Launching on iOS and Android this spring. The core is free. Your QRs are yours.</p>
+        <div class="cta-row">
+          <a class="store-btn primary" href="#" aria-label="Get Qito on the App Store">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.52-3.2 0-1.39.66-2.13.52-3-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+            <span class="label">
+              <span class="small">Get it on</span>
+              <span class="big">App Store</span>
+            </span>
+          </a>
+          <a class="store-btn" href="#" aria-label="Get Qito on Google Play">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <defs>
+                <linearGradient id="gpc1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00D4FF"/><stop offset="100%" stop-color="#0079FF"/></linearGradient>
+                <linearGradient id="gpc2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFE100"/><stop offset="100%" stop-color="#FF9D00"/></linearGradient>
+                <linearGradient id="gpc3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF6D00"/><stop offset="100%" stop-color="#FF2D00"/></linearGradient>
+                <linearGradient id="gpc4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00E87C"/><stop offset="100%" stop-color="#00A060"/></linearGradient>
+              </defs>
+              <path fill="url(#gpc1)" d="M3.6 2.6C3.2 3 3 3.5 3 4.3v15.4c0 .8.2 1.3.6 1.7l10.3-10.4z"/>
+              <path fill="url(#gpc2)" d="m16.4 8.7 2.7 1.5c1.1.6 1.1 1.5 0 2.2l-2.7 1.5L13.9 11z"/>
+              <path fill="url(#gpc3)" d="M14 11.4 3.6 21.5c.5.5 1.3.5 2.2 0l10.7-6z"/>
+              <path fill="url(#gpc4)" d="M16.4 8.7 5.7 2.5c-.9-.5-1.7-.5-2.2 0L13.9 11z"/>
+            </svg>
+            <span class="label">
+              <span class="small">Get it on</span>
+              <span class="big">Google Play</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site">
+  <div class="container footer-row">
+    <div class="copyright">© 2026 PlayPal Apps · Crafted with attention in Flutter.</div>
+    <div class="links">
+      <a href="support.html">Support</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="mailto:playpalapps2024@gmail.com?subject=Qito%20hello">Contact</a>
+      <a href="https://github.com/playpalapps/qito" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     COMMAND PALETTE
+     ============================================================ -->
+<div class="palette-backdrop" id="palette" role="dialog" aria-label="Jump to" aria-hidden="true">
+  <div class="palette">
+    <input type="text" id="palette-input" placeholder="Jump to a section…" autocomplete="off">
+    <ul id="palette-list"></ul>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   Qito — landing page behaviors
+   1. Scroll-triggered .reveal animations via IntersectionObserver
+   2. Navigation shadow on scroll
+   3. Command palette (⌘K / Ctrl+K)
+   4. QR renderer (SVG, using qrcode-generator for the matrix)
+   5. Hero QR morph timeline (cycles through preset styles)
+   6. Playground bindings (input, shape, color, ecc)
+   7. Style showcase grid
+   8. Callout visuals (small decorative QRs)
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  // ---------- 1) Reveal-on-scroll ----------
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
+
+  // ---------- 2) Nav shadow on scroll ----------
+  const nav = document.querySelector('nav.site');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---------- 3) Command palette ----------
+  const palette = document.getElementById('palette');
+  const paletteInput = document.getElementById('palette-input');
+  const paletteList = document.getElementById('palette-list');
+  const paletteItems = [
+    { label: 'Hero', href: '#main', k: 'H' },
+    { label: 'Playground', href: '#playground', k: 'P' },
+    { label: 'Features', href: '#features', k: 'F' },
+    { label: 'Styles showcase', href: '#styles', k: 'S' },
+    { label: 'Privacy', href: '#privacy', k: 'R' },
+    { label: 'Pricing', href: '#pricing', k: '$' },
+    { label: 'FAQ', href: '#faq', k: 'Q' },
+    { label: 'Download', href: '#cta', k: 'D' },
+    { label: 'Support page', href: 'support.html', k: '?' },
+    { label: 'Privacy policy', href: 'privacy-policy.html', k: 'L' },
+  ];
+  let paletteActive = 0;
+
+  function renderPalette(filter = '') {
+    const f = filter.trim().toLowerCase();
+    const list = paletteItems.filter(i => i.label.toLowerCase().includes(f));
+    paletteList.innerHTML = list.map((i, idx) =>
+      `<li data-href="${i.href}" class="${idx === 0 ? 'active' : ''}"><span>${i.label}</span><span class="k">${i.k}</span></li>`
+    ).join('') || '<li style="color:var(--ink-4)">No matches</li>';
+    paletteActive = 0;
+  }
+  function openPalette() {
+    palette.classList.add('open');
+    palette.setAttribute('aria-hidden', 'false');
+    paletteInput.value = '';
+    renderPalette();
+    setTimeout(() => paletteInput.focus(), 10);
+  }
+  function closePalette() {
+    palette.classList.remove('open');
+    palette.setAttribute('aria-hidden', 'true');
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      palette.classList.contains('open') ? closePalette() : openPalette();
+    } else if (e.key === 'Escape' && palette.classList.contains('open')) {
+      closePalette();
+    } else if (palette.classList.contains('open')) {
+      const items = paletteList.querySelectorAll('li[data-href]');
+      if (e.key === 'ArrowDown') { e.preventDefault(); paletteActive = Math.min(paletteActive + 1, items.length - 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); paletteActive = Math.max(paletteActive - 1, 0); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        const href = items[paletteActive]?.dataset.href;
+        if (href) {
+          closePalette();
+          if (href.startsWith('#')) document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+          else window.location.href = href;
+        }
+      }
+      items.forEach((li, i) => li.classList.toggle('active', i === paletteActive));
+    }
+  });
+  palette.addEventListener('click', (e) => {
+    if (e.target === palette) closePalette();
+    const li = e.target.closest('li[data-href]');
+    if (li) {
+      closePalette();
+      const href = li.dataset.href;
+      if (href.startsWith('#')) document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      else window.location.href = href;
+    }
+  });
+  paletteInput.addEventListener('input', (e) => renderPalette(e.target.value));
+
+  // ---------- 4) QR renderer ----------
+  // Using the qrcode-generator matrix; we draw the SVG ourselves so we can
+  // style every module shape independently.
+  const SHAPES = ['square', 'rounded', 'dots', 'diamond', 'heart', 'star'];
+  const FINDER_SIZE = 7; // standard QR finder pattern is 7x7 modules
+
+  // Returns true if the (r,c) module is part of one of the three finder patterns.
+  function isFinderModule(r, c, size) {
+    return (r < FINDER_SIZE && c < FINDER_SIZE) ||
+           (r < FINDER_SIZE && c >= size - FINDER_SIZE) ||
+           (r >= size - FINDER_SIZE && c < FINDER_SIZE);
+  }
+
+  // Paint one module as a per-shape SVG path/element.
+  function moduleSvg(r, c, unit, shape) {
+    const x = c * unit, y = r * unit, cx = x + unit / 2, cy = y + unit / 2;
+    const pad = unit * 0.05; // slight inset so adjacent modules don't merge into chunks for "dots"/"heart"
+    switch (shape) {
+      case 'rounded':
+        return `<rect x="${x + pad}" y="${y + pad}" width="${unit - 2*pad}" height="${unit - 2*pad}" rx="${unit*0.28}"/>`;
+      case 'dots':
+        return `<circle cx="${cx}" cy="${cy}" r="${unit * 0.42}"/>`;
+      case 'diamond':
+        return `<path d="M${cx} ${y + pad}L${x + unit - pad} ${cy}L${cx} ${y + unit - pad}L${x + pad} ${cy}Z"/>`;
+      case 'heart': {
+        // Small heart scaled into the module — keeps scannability since bounding box is preserved.
+        const s = unit * 0.9;
+        const ox = x + unit * 0.05, oy = y + unit * 0.1;
+        return `<path d="M${ox + s*0.5} ${oy + s*0.85} C${ox + s*0.2} ${oy + s*0.6} ${ox} ${oy + s*0.35} ${ox + s*0.15} ${oy + s*0.18} C${ox + s*0.3} ${oy} ${ox + s*0.45} ${oy + s*0.1} ${ox + s*0.5} ${oy + s*0.22} C${ox + s*0.55} ${oy + s*0.1} ${ox + s*0.7} ${oy} ${ox + s*0.85} ${oy + s*0.18} C${ox + s} ${oy + s*0.35} ${ox + s*0.8} ${oy + s*0.6} ${ox + s*0.5} ${oy + s*0.85}Z"/>`;
+      }
+      case 'star': {
+        // 5-point star inscribed in the module.
+        const r1 = unit * 0.48, r2 = unit * 0.22;
+        let d = '';
+        for (let i = 0; i < 10; i++) {
+          const a = -Math.PI / 2 + i * Math.PI / 5;
+          const rr = (i % 2 === 0) ? r1 : r2;
+          d += (i === 0 ? 'M' : 'L') + (cx + rr * Math.cos(a)).toFixed(3) + ' ' + (cy + rr * Math.sin(a)).toFixed(3) + ' ';
+        }
+        return `<path d="${d}Z"/>`;
+      }
+      case 'square':
+      default:
+        return `<rect x="${x}" y="${y}" width="${unit}" height="${unit}"/>`;
+    }
+  }
+
+  // Render a "bold" finder eye — classic square frame + square ball, regardless of module shape.
+  // Keeps scan reliability when modules are styled.
+  function finderEye(x, y, unit, darkId) {
+    const outer = unit * 7;
+    const inner = unit * 5;
+    const ball = unit * 3;
+    return `
+      <rect x="${x}" y="${y}" width="${outer}" height="${outer}" rx="${unit * 1.6}" fill="url(#${darkId})"/>
+      <rect x="${x + unit}" y="${y + unit}" width="${inner}" height="${inner}" rx="${unit * 1}" fill="white"/>
+      <rect x="${x + unit * 2}" y="${y + unit * 2}" width="${ball}" height="${ball}" rx="${unit * 0.7}" fill="url(#${darkId})"/>
+    `;
+  }
+
+  // Build the full SVG for a given payload + style.
+  function renderQR({ text, shape = 'square', ecc = 'M', color = 'gradient', size = 33 }) {
+    if (!window.qrcode) return '';
+    const eccMap = { L: 'L', M: 'M', Q: 'Q', H: 'H' };
+    // Try version 0 (auto) up to 40. Some inputs need larger versions.
+    let qr;
+    for (let v = 0; v <= 40; v++) {
+      try {
+        qr = window.qrcode(v, eccMap[ecc] || 'M');
+        qr.addData(text || ' ');
+        qr.make();
+        break;
+      } catch (_) { qr = null; }
+    }
+    if (!qr) return '';
+    const count = qr.getModuleCount();
+    const unit = size / count;
+    const darkId = 'qrDark_' + Math.random().toString(36).slice(2, 8);
+    const modulesSvg = [];
+    for (let r = 0; r < count; r++) {
+      for (let c = 0; c < count; c++) {
+        if (!qr.isDark(r, c)) continue;
+        if (isFinderModule(r, c, count)) continue; // drawn by finderEye
+        modulesSvg.push(moduleSvg(r, c, unit, shape));
+      }
+    }
+    const fillAttr = `fill="url(#${darkId})"`;
+    const darkDef = color === 'gradient'
+      ? `<linearGradient id="${darkId}" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" stop-color="#5B2FE0"/>
+           <stop offset="50%" stop-color="#9D4EDD"/>
+           <stop offset="100%" stop-color="#EC4899"/>
+         </linearGradient>`
+      : `<linearGradient id="${darkId}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${color}"/><stop offset="100%" stop-color="${color}"/></linearGradient>`;
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
+        <defs>${darkDef}</defs>
+        <g ${fillAttr}>${modulesSvg.join('')}</g>
+        ${finderEye(0, 0, unit, darkId)}
+        ${finderEye((count - FINDER_SIZE) * unit, 0, unit, darkId)}
+        ${finderEye(0, (count - FINDER_SIZE) * unit, unit, darkId)}
+      </svg>`;
+  }
+
+  // ---------- 5) Hero morphing QR ----------
+  // Cycles through a curated sequence of (shape, label) pairs every 2.2s.
+  const heroSequence = [
+    { shape: 'square',  label: 'Classic' },
+    { shape: 'rounded', label: 'Aurora' },
+    { shape: 'dots',    label: 'Mosaic' },
+    { shape: 'star',    label: 'Cosmos' },
+    { shape: 'heart',   label: 'Tender' },
+    { shape: 'diamond', label: 'Prism' },
+  ];
+  let heroIdx = 1; // start on Aurora (matches the label initially in HTML)
+  const heroWrap = document.getElementById('hero-qr-wrap');
+  const heroLabel = document.getElementById('hero-style-label');
+
+  function paintHero() {
+    const step = heroSequence[heroIdx % heroSequence.length];
+    heroWrap.innerHTML = renderQR({ text: 'https://qito.app', shape: step.shape, ecc: 'Q' });
+    heroLabel.textContent = step.label;
+    heroIdx++;
+  }
+
+  // ---------- 6) Playground ----------
+  const pgInput = document.getElementById('pg-input');
+  const pgShape = document.getElementById('pg-shape');
+  const pgColor = document.getElementById('pg-color');
+  const pgEcc = document.getElementById('pg-ecc');
+  const pgQr = document.getElementById('pg-qr');
+  const pgState = { text: pgInput.value, shape: 'square', color: 'gradient', ecc: 'M' };
+
+  function paintPlayground() {
+    pgQr.innerHTML = renderQR({ text: pgState.text || ' ', shape: pgState.shape, color: pgState.color, ecc: pgState.ecc });
+  }
+
+  // Debounced input so we don't re-encode on every keypress.
+  let inputTimer;
+  pgInput.addEventListener('input', () => {
+    clearTimeout(inputTimer);
+    inputTimer = setTimeout(() => {
+      pgState.text = pgInput.value;
+      paintPlayground();
+    }, 80);
+  });
+  pgShape.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pgShape.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      pgState.shape = btn.dataset.shape;
+      paintPlayground();
+    });
+  });
+  pgColor.querySelectorAll('.swatch').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pgColor.querySelectorAll('.swatch').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-checked', 'false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-checked', 'true');
+      pgState.color = btn.dataset.color;
+      paintPlayground();
+    });
+  });
+  pgEcc.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pgEcc.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      pgState.ecc = btn.dataset.ecc;
+      paintPlayground();
+    });
+  });
+
+  // ---------- 7) Style showcase ----------
+  const showcaseGrid = document.getElementById('showcase-grid');
+  const showcasePresets = [
+    { shape: 'square',  label: 'Classic', color: '#0B0612' },
+    { shape: 'rounded', label: 'Aurora', color: 'gradient' },
+    { shape: 'dots',    label: 'Mosaic', color: '#1E88E5' },
+    { shape: 'heart',   label: 'Tender', color: '#E11D48' },
+    { shape: 'star',    label: 'Cosmos', color: 'gradient' },
+    { shape: 'diamond', label: 'Prism',  color: '#059669' },
+  ];
+
+  function paintShowcase() {
+    showcaseGrid.innerHTML = showcasePresets.map(p => `
+      <article class="showcase-card reveal in">
+        <div class="qr-holder">${renderQR({ text: 'https://qito.app', shape: p.shape, color: p.color, ecc: 'Q' })}</div>
+        <div class="lbl">${p.label}</div>
+      </article>
+    `).join('');
+  }
+
+  // ---------- 8) Callout visuals ----------
+  function paintCallouts() {
+    const printEl = document.getElementById('callout-print');
+    const shortEl = document.getElementById('callout-shortcut');
+    if (printEl) {
+      printEl.innerHTML = `
+        <div style="display:flex;gap:12px;align-items:center;justify-content:center;width:100%;">
+          <div style="flex:0 0 auto;padding:10px;background:white;border-radius:14px;width:96px;height:96px;display:grid;place-items:center;">
+            ${renderQR({ text: 'https://qito.app', shape: 'rounded', color: 'gradient', ecc: 'Q' })}
+          </div>
+          <div style="color:var(--ink-2);font-size:13px;text-align:left;line-height:1.4;">
+            <div style="color:var(--ink);font-weight:600;margin-bottom:4px;">Export 4 K SVG</div>
+            qito.app · eye-sharp to any size
+          </div>
+        </div>`;
+    }
+    if (shortEl) {
+      shortEl.innerHTML = `
+        <div style="display:flex;gap:12px;align-items:center;justify-content:center;width:100%;">
+          <div style="padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;color:var(--ink-2);font-size:13px;line-height:1.4;max-width:220px;text-align:left;">
+            <div style="color:var(--ink);font-weight:600;margin-bottom:6px;">"Hey Siri, show my Wi-Fi QR."</div>
+            Qito opens, renders your pinned Wi-Fi code full-screen.
+          </div>
+          <div style="flex:0 0 auto;padding:8px;background:white;border-radius:14px;width:88px;height:88px;display:grid;place-items:center;">
+            ${renderQR({ text: 'WIFI:T:WPA;S:Qito;P:hello;;', shape: 'dots', color: 'gradient', ecc: 'M' })}
+          </div>
+        </div>`;
+    }
+  }
+
+  // ---------- Boot sequence ----------
+  // qrcode-generator loads deferred, so kick off when it's ready.
+  function boot() {
+    if (!window.qrcode) return setTimeout(boot, 30);
+    paintHero();
+    paintPlayground();
+    paintShowcase();
+    paintCallouts();
+    // Start the hero morph after a beat so it settles on the initial render first.
+    setTimeout(() => {
+      setInterval(() => {
+        const wrap = document.getElementById('hero-qr-wrap');
+        if (!wrap) return;
+        wrap.style.opacity = '0';
+        wrap.style.transform = 'scale(0.985)';
+        setTimeout(() => {
+          paintHero();
+          wrap.style.opacity = '';
+          wrap.style.transform = '';
+        }, 260);
+      }, 2600);
+    }, 1200);
+  }
+  boot();
+})();
+</script>
+
+</body>
+</html>

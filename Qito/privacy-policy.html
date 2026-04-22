@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Privacy Policy — Qito</title>
+<meta name="description" content="Qito's privacy policy. Zero tracking. Zero servers. Zero third-party analytics. Your QR codes never leave your device.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/Qito/privacy-policy.html">
+
+<meta property="og:title" content="Privacy Policy — Qito">
+<meta property="og:description" content="Qito's privacy policy. Zero tracking. Zero servers. Your QR codes never leave your device.">
+<meta property="og:url" content="https://playpalapps.github.io/Qito/privacy-policy.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://playpalapps.github.io/Qito/icon-1024.png">
+
+<meta name="theme-color" content="#0A0612">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --brand-1: #5B2FE0; --brand-2: #9D4EDD; --brand-3: #EC4899;
+  --brand-gradient: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 55%, var(--brand-3) 100%);
+  --bg: #08050F;
+  --surface: rgba(255,255,255,0.03);
+  --surface-2: rgba(255,255,255,0.055);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.14);
+  --ink: #F6F3FF;
+  --ink-2: rgba(246,243,255,0.74);
+  --ink-3: rgba(246,243,255,0.54);
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --page-max: 860px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(157,78,221,0.22), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 20%, rgba(91,47,224,0.15), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 1  0 0 0 0.10 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+.container { width: 100%; max-width: var(--page-max); margin-inline: auto; padding-inline: var(--gutter); position: relative; z-index: 1; }
+
+a { color: #D8B5FF; text-decoration: none; border-bottom: 1px solid rgba(216,181,255,0.2); transition: border-color .2s var(--ease), color .2s var(--ease); }
+a:hover { color: var(--ink); border-color: rgba(216,181,255,0.6); }
+
+nav.site {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  background: linear-gradient(to bottom, rgba(8,5,15,0.88), rgba(8,5,15,0.72));
+  border-bottom: 1px solid var(--border);
+}
+nav.site .row { display: flex; align-items: center; gap: 24px; padding: 14px 0; }
+nav.site .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; border: 0; color: var(--ink); }
+nav.site .brand .mark { width: 28px; height: 28px; border-radius: 8px; background: var(--brand-gradient); display: grid; place-items: center; box-shadow: 0 4px 20px -6px rgba(157,78,221,0.5); }
+nav.site .brand .mark svg { width: 15px; height: 15px; fill: white; }
+nav.site .links { margin-left: auto; display: flex; gap: 24px; }
+nav.site .links a { color: var(--ink-2); border: 0; font-size: 14px; font-weight: 500; }
+nav.site .links a:hover { color: var(--ink); }
+
+header.doc {
+  padding: clamp(60px, 8vw, 110px) 0 clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--border);
+}
+header.doc .eyebrow {
+  display: inline-block;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+header.doc h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+header.doc h1 .serif { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: italic; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+header.doc p.meta { color: var(--ink-3); font-size: 14px; margin: 0; }
+header.doc p.lead { color: var(--ink-2); font-size: 19px; line-height: 1.55; max-width: 58ch; margin-top: 18px; }
+
+main.doc { padding: clamp(40px, 5vw, 72px) 0 clamp(60px, 8vw, 100px); }
+main.doc h2 {
+  font-size: clamp(1.4rem, 2vw, 1.7rem);
+  font-weight: 800;
+  letter-spacing: -0.018em;
+  margin: 48px 0 14px;
+}
+main.doc h3 {
+  font-size: 17px; font-weight: 700;
+  margin: 28px 0 8px;
+  color: var(--ink);
+}
+main.doc p, main.doc li { color: var(--ink-2); }
+main.doc ul { padding-left: 20px; }
+main.doc li { margin-bottom: 6px; }
+main.doc code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 0.92em;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+main.doc .callout {
+  margin: 32px 0;
+  padding: 22px 26px;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(91,47,224,0.08), rgba(236,72,153,0.04));
+}
+main.doc .callout strong { color: var(--ink); }
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0 8px;
+}
+@media (max-width: 580px) { .nutrition-grid { grid-template-columns: 1fr; } }
+.nutrition-item {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.nutrition-item .k { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); font-weight: 600; }
+.nutrition-item .v { color: var(--ink); font-weight: 600; margin-top: 4px; }
+.nutrition-item .v.yes { color: #81C784; }
+.nutrition-item .v.no { color: #FF8A80; }
+
+footer.site { padding: 40px 0 56px; border-top: 1px solid var(--border); margin-top: 40px; }
+footer.site .row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+footer.site a { color: var(--ink-3); border: 0; font-size: 13.5px; }
+footer.site a:hover { color: var(--ink); }
+footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zm2 2v3h3V5zM14 3h7v7h-7zm2 2v3h3V5zM3 14h7v7H3zm2 2v3h3v-3zM13 13h2v2h-2zM15 15h2v2h-2zM13 17h2v2h-2zM17 13h2v2h-2zM19 15h2v2h-2zM17 17h2v2h-2zM15 19h2v2h-2z"/></svg>
+      </span>
+      <span>Qito</span>
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="support.html">Support</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<header class="doc">
+  <div class="container">
+    <span class="eyebrow">Legal</span>
+    <h1>Privacy <span class="serif">Policy.</span></h1>
+    <p class="meta">Last updated: 22 April 2026 · Effective on first launch of Qito v1.0</p>
+    <p class="lead">Qito is built on a simple premise: the QR codes you create are yours and only yours. This document is our plain-English commitment to that, and the full list of every byte Qito touches.</p>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="container">
+
+    <div class="callout">
+      <strong>TL;DR —</strong> Qito does not operate a server. It does not include analytics or crash reporters. It does not collect, transmit, or store your QR content, your history, or your styles anywhere other than on your device. The only network calls are (a) fetching the Google Fonts typeface the first time you open the app, and (b) verifying a purchase receipt with Apple or Google when you upgrade to Pro. Both are visible in the in-app privacy screen.
+    </div>
+
+    <h2>What Qito stores on your device</h2>
+    <p>All of the following live in your app's sandbox (iOS: the app container; Android: internal storage or SharedPreferences). None of it is transmitted off-device by Qito itself.</p>
+    <ul>
+      <li><strong>Your QR history</strong> — the payloads you've generated, the styles you've applied, timestamps, and a favorite flag. Stored via <code>SharedPreferences</code>.</li>
+      <li><strong>Your app settings</strong> — theme preference, haptic toggle, auto-save toggle, accessibility settings, one-handed mode.</li>
+      <li><strong>Photos you pick</strong> — if you pick a background, logo, or Art QR photo, the file is copied into the app's sandbox so Qito can read it reliably. You can clear it by deleting the corresponding history entry.</li>
+      <li><strong>Pro entitlement</strong> — a single boolean indicating whether you purchased Pro, the product ID, and the expiry date (for subscriptions). This is read back from Apple/Google on every launch; we never store payment data.</li>
+    </ul>
+    <p>You can clear all of this at any time via <em>Settings → Clear history</em> or by offloading/uninstalling the app.</p>
+
+    <h2>What Qito does not do</h2>
+    <div class="nutrition-grid">
+      <div class="nutrition-item"><div class="k">Cloud sync</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Account sign-up</div><div class="v no">Never required</div></div>
+      <div class="nutrition-item"><div class="k">Third-party analytics</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Crash reporters</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">URL resolution on scan</div><div class="v no">No (we never visit URLs)</div></div>
+      <div class="nutrition-item"><div class="k">Camera roll access</div><div class="v">Only when you explicitly pick</div></div>
+      <div class="nutrition-item"><div class="k">Contacts access</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Location</div><div class="v no">None</div></div>
+    </div>
+
+    <h2>The network calls Qito does make</h2>
+
+    <h3>1. Google Fonts (first launch only)</h3>
+    <p>On the very first launch, Qito fetches the Inter typeface from Google Fonts via <code>fonts.googleapis.com</code>. The file is then cached locally forever; subsequent launches are fully offline. Google may log the IP of that single request in its general server logs; we neither request nor receive any such data. If you need strict offline, you can bundle the fonts in <code>assets/</code> and disable runtime fetching — see the <a href="https://github.com/playpalapps/qito">source repository</a> for the flag.</p>
+
+    <h3>2. In-app purchases (only when you upgrade)</h3>
+    <p>If you choose to upgrade to Pro, Qito talks to Apple StoreKit or Google Play Billing directly via their native SDKs. Those stores handle the payment and hand back a receipt + entitlement flag. We read that flag; we never see your card, your bank, or any personal identifier. Refunds, subscription management, and tax handling are all done by Apple or Google under their respective policies.</p>
+
+    <h3>3. Ads (free tier only)</h3>
+    <p>The free tier shows banner and occasional interstitial ads served by Google AdMob. AdMob requires a <code>GADApplicationIdentifier</code> per platform; the production IDs are published in the app and can be inspected in the source. AdMob may use device-level identifiers for ad personalization; on iOS this is gated by App Tracking Transparency (you'll see the prompt), on Android by Play Services' advertising ID settings. <strong>Upgrading to Pro removes all ads and the AdMob SDK initialization entirely.</strong></p>
+
+    <h2>Your data rights (GDPR, CCPA, equivalents)</h2>
+    <p>Because Qito does not collect personal data to a server, there is no central database from which to retrieve, correct, or delete your information — there is no such database. Your data lives on your device, under your control. You may:</p>
+    <ul>
+      <li>View every stored entry via <em>Settings → Privacy</em> inside the app.</li>
+      <li>Export your full history as a JSON file via <em>Settings → Export backup</em>.</li>
+      <li>Delete individual items from the History tab, or wipe everything via <em>Settings → Clear history</em>.</li>
+      <li>Uninstalling Qito deletes all app data.</li>
+    </ul>
+
+    <h2>Children's privacy</h2>
+    <p>Qito is suitable for general audiences. It does not knowingly collect personal information from children under 13, because it does not knowingly collect personal information from anyone. Ads served to devices that identify as child-directed (via the store's age rating or device-level configuration) are restricted per Google's and Apple's family-safe ad policies.</p>
+
+    <h2>Security</h2>
+    <p>Since no personal data is transmitted by Qito itself, there is no transport or database security to guarantee on our end. For the small surfaces that exist:</p>
+    <ul>
+      <li>The marketplace share-link codec uses an HMAC-SHA-256 tamper-evident checksum; decoding a tampered link fails closed.</li>
+      <li>Locally stored payloads are placed in the standard app sandbox, which iOS and Android encrypt at rest when the device passcode is set.</li>
+      <li>In-app purchase verification relies on Apple's and Google's signed receipts; we do not roll our own crypto for entitlements.</li>
+    </ul>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the updated version will be published at this URL and the "Last updated" date above will change. Material changes (for example, if Qito ever introduced any form of server-backed feature) would be surfaced in-app as a nutrition-label update the next time you open the app, with a changelog entry linking to this page.</p>
+
+    <h2>Contact</h2>
+    <p>Questions, concerns, or a privacy complaint? Email <a href="mailto:playpalapps2024@gmail.com?subject=Qito%20privacy%20question">playpalapps2024@gmail.com</a> and we'll reply personally. We answer all privacy-tagged messages within seven calendar days.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container row">
+    <div class="copy">© 2026 PlayPal Apps</div>
+    <div>
+      <a href="index.html">Home</a> · <a href="support.html">Support</a> · <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

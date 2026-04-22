@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Support — Qito</title>
+<meta name="description" content="Help, FAQs, and direct contact for Qito users. Scan troubleshooting, Pro purchase help, and privacy questions.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/Qito/support.html">
+
+<meta property="og:title" content="Support — Qito">
+<meta property="og:description" content="Help, FAQs, and direct contact for Qito users.">
+<meta property="og:url" content="https://playpalapps.github.io/Qito/support.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://playpalapps.github.io/Qito/icon-1024.png">
+
+<meta name="theme-color" content="#0A0612">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --brand-1: #5B2FE0; --brand-2: #9D4EDD; --brand-3: #EC4899;
+  --brand-gradient: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 55%, var(--brand-3) 100%);
+  --bg: #08050F;
+  --surface: rgba(255,255,255,0.03);
+  --surface-2: rgba(255,255,255,0.055);
+  --surface-3: rgba(255,255,255,0.085);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.14);
+  --ink: #F6F3FF;
+  --ink-2: rgba(246,243,255,0.74);
+  --ink-3: rgba(246,243,255,0.54);
+  --ink-4: rgba(246,243,255,0.34);
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --page-max: 980px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(157,78,221,0.22), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 20%, rgba(91,47,224,0.15), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 1  0 0 0 0.10 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+.container { width: 100%; max-width: var(--page-max); margin-inline: auto; padding-inline: var(--gutter); position: relative; z-index: 1; }
+
+a { color: #D8B5FF; text-decoration: none; border-bottom: 1px solid rgba(216,181,255,0.2); transition: border-color .2s var(--ease), color .2s var(--ease); }
+a:hover { color: var(--ink); border-color: rgba(216,181,255,0.6); }
+
+nav.site {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  background: linear-gradient(to bottom, rgba(8,5,15,0.88), rgba(8,5,15,0.72));
+  border-bottom: 1px solid var(--border);
+}
+nav.site .row { display: flex; align-items: center; gap: 24px; padding: 14px 0; }
+nav.site .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; border: 0; color: var(--ink); }
+nav.site .brand .mark { width: 28px; height: 28px; border-radius: 8px; background: var(--brand-gradient); display: grid; place-items: center; box-shadow: 0 4px 20px -6px rgba(157,78,221,0.5); }
+nav.site .brand .mark svg { width: 15px; height: 15px; fill: white; }
+nav.site .links { margin-left: auto; display: flex; gap: 24px; }
+nav.site .links a { color: var(--ink-2); border: 0; font-size: 14px; font-weight: 500; }
+nav.site .links a:hover { color: var(--ink); }
+
+header.doc {
+  padding: clamp(60px, 8vw, 110px) 0 clamp(32px, 4vw, 56px);
+  border-bottom: 1px solid var(--border);
+}
+header.doc .eyebrow {
+  display: inline-block;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+header.doc h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  line-height: 1.03;
+}
+header.doc h1 .serif { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: italic; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+header.doc p.lead { color: var(--ink-2); font-size: 19px; line-height: 1.55; max-width: 58ch; margin: 18px 0 0; }
+
+main { padding: clamp(40px, 5vw, 72px) 0 clamp(60px, 8vw, 100px); }
+.section { margin-bottom: clamp(48px, 6vw, 88px); }
+.section-head h2 {
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+}
+.section-head p { color: var(--ink-2); max-width: 60ch; margin: 0 0 22px; }
+
+/* Quick help tile grid */
+.quickhelp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 820px) { .quickhelp-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .quickhelp-grid { grid-template-columns: 1fr; } }
+.qh {
+  padding: 22px 22px 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  transition: transform .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+  text-decoration: none; border-bottom: 0;
+  display: block;
+}
+.qh:hover { transform: translateY(-2px); background: var(--surface-2); border-color: var(--border-strong); }
+.qh .icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, rgba(157,78,221,0.22), rgba(236,72,153,0.15)); border: 1px solid var(--border-strong); display: grid; place-items: center; margin-bottom: 14px; }
+.qh .icon svg { width: 18px; height: 18px; color: var(--ink); }
+.qh .title { font-weight: 700; font-size: 15.5px; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 4px; }
+.qh .desc { font-size: 13.5px; color: var(--ink-2); line-height: 1.45; }
+
+/* FAQ accordion */
+.faq-list { display: grid; gap: 10px; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+.faq-item[open] { border-color: var(--border-strong); background: var(--surface-2); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-weight: 600; font-size: 16px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-size: 22px; font-weight: 300; color: var(--ink-3);
+  transition: color .3s var(--ease);
+}
+.faq-item[open] summary::after { content: "−"; color: var(--ink); }
+.faq-item .body {
+  padding: 0 22px 22px;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 72ch;
+}
+.faq-item .body code { background: rgba(255,255,255,0.06); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.92em; }
+.faq-item .body ul { margin-top: 8px; padding-left: 22px; }
+.faq-item .body li { margin-bottom: 4px; }
+
+/* Contact card */
+.contact-card {
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: 22px;
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(135deg, rgba(91,47,224,0.14), rgba(236,72,153,0.05)),
+    rgba(255,255,255,0.015);
+  display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+}
+@media (max-width: 760px) { .contact-card { grid-template-columns: 1fr; } }
+.contact-card h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px; }
+.contact-card p { color: var(--ink-2); margin: 0; max-width: 56ch; }
+.contact-card .btn {
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: var(--brand-gradient);
+  color: white;
+  font-weight: 600;
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 0;
+  box-shadow: 0 10px 30px -10px rgba(157,78,221,0.55);
+  transition: transform .2s var(--ease), box-shadow .3s var(--ease);
+}
+.contact-card .btn:hover { transform: translateY(-1px); box-shadow: 0 16px 40px -10px rgba(236,72,153,0.5); }
+
+footer.site { padding: 40px 0 56px; border-top: 1px solid var(--border); margin-top: 40px; }
+footer.site .row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+footer.site a { color: var(--ink-3); border: 0; font-size: 13.5px; }
+footer.site a:hover { color: var(--ink); }
+footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zm2 2v3h3V5zM14 3h7v7h-7zm2 2v3h3V5zM3 14h7v7H3zm2 2v3h3v-3zM13 13h2v2h-2zM15 15h2v2h-2zM13 17h2v2h-2zM17 13h2v2h-2zM19 15h2v2h-2zM17 17h2v2h-2zM15 19h2v2h-2z"/></svg>
+      </span>
+      <span>Qito</span>
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<header class="doc">
+  <div class="container">
+    <span class="eyebrow">Help & Support</span>
+    <h1>Every answer, <span class="serif">in one place.</span></h1>
+    <p class="lead">We built Qito as a small, careful thing. Support is the same. Most questions are answered below — and if you still need a human, we reply personally within seven days.</p>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Quick help</h2>
+        <p>The fastest paths to a fix. Tap into the section that describes your issue.</p>
+      </div>
+      <div class="quickhelp-grid">
+        <a class="qh" href="#scan">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 20h1v1h-1zM14 19h2v2h-2zM19 14h2v2h-2z"/></svg></div>
+          <div class="title">Scan or generate issues</div>
+          <div class="desc">A QR won't scan, the camera won't focus, or the style won't apply. Troubleshoot in three steps.</div>
+        </a>
+        <a class="qh" href="#pro">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 10l7-7 7 7"/></svg></div>
+          <div class="title">Pro & purchases</div>
+          <div class="desc">Restore purchases across devices, cancel a subscription, or claim a refund.</div>
+        </a>
+        <a class="qh" href="#history">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></div>
+          <div class="title">History & backup</div>
+          <div class="desc">Export your history, move it between devices, or recover after a reinstall.</div>
+        </a>
+        <a class="qh" href="#widget">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/></svg></div>
+          <div class="title">Home-screen widget</div>
+          <div class="desc">Pin a QR to the home screen, lock screen, or StandBy. Troubleshoot iOS and Android setup.</div>
+        </a>
+        <a class="qh" href="#privacy">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v7c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5z"/></svg></div>
+          <div class="title">Privacy questions</div>
+          <div class="desc">What Qito stores, what it sends, and how to wipe everything.</div>
+        </a>
+        <a class="qh" href="#contact">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6 12 13 2 6"/></svg></div>
+          <div class="title">Contact a human</div>
+          <div class="desc">None of the above? We reply to every email within seven days.</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="scan">
+      <div class="section-head">
+        <h2>Scan & generate</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>My generated QR won't scan</summary>
+          <div class="body">
+            In order of likelihood:
+            <ul>
+              <li><strong>Contrast.</strong> Very dark backgrounds with dark-colored modules reduce the scanner's contrast budget. Bump the background to a lighter tone or increase the QR fill's brightness.</li>
+              <li><strong>Logo too large.</strong> Logos shouldn't cover more than ~25% of the QR area. Qito automatically boosts error correction when a logo is present, but huge logos will still fail on some scanners.</li>
+              <li><strong>Error correction.</strong> Bump ECC from L/M to Q or H in <em>Style → Error correction</em>. This adds redundancy at the cost of module density.</li>
+              <li><strong>Preview before exporting.</strong> Qito shows a scan-confidence meter in the editor. If it reads "Risky" or "Poor", adjust before exporting.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>The camera won't focus or scan anything</summary>
+          <div class="body">
+            Make sure Qito has camera permission: Settings → Qito → Camera, or the equivalent on Android. If granted and still failing, try: better lighting, holding the phone 8–12 inches from the code, and ensuring the code fills at least half the viewfinder frame. Older devices may struggle with highly-stylized codes; switch to the "Classic" preset on the creator side for maximum compatibility.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Does Qito work with Wi-Fi QR codes?</summary>
+          <div class="body">
+            Yes, in both directions. You can generate a Wi-Fi QR from <em>Create → Wi-Fi</em>, entering SSID, password, and encryption (WPA/WPA2/WPA3/Open). When you scan a Wi-Fi QR, Qito decodes it to show the network name, password, and (on iOS 11+) offers to join with one tap.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Can Qito generate crypto address QRs?</summary>
+          <div class="body">
+            Yes. <em>Create → Crypto</em> supports plain BTC/ETH/SOL addresses and chain-specific payment URIs (bitcoin:, ethereum:, solana:) with optional amount. Regional payment QRs — UPI (India), PIX (Brazil), PayNow (Singapore), PromptPay (Thailand) — each have their own dedicated creator.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="pro">
+      <div class="section-head">
+        <h2>Pro & purchases</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>How do I restore purchases on a new device?</summary>
+          <div class="body">
+            Install Qito, open <em>Settings → Pro</em>, and tap <strong>Restore purchases</strong>. The app asks Apple or Google for your past purchase history and re-grants the entitlement. You must be signed into the same App Store / Play Store account you used to buy originally.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I cancel a subscription?</summary>
+          <div class="body">
+            Subscriptions are managed by Apple or Google directly — we don't touch them. To cancel:
+            <ul>
+              <li><strong>iOS</strong> — <em>Settings app → your Apple ID → Subscriptions → Qito Pro → Cancel</em>.</li>
+              <li><strong>Android</strong> — <em>Play Store app → profile icon → Payments & subscriptions → Subscriptions → Qito Pro → Cancel</em>.</li>
+            </ul>
+            You keep Pro benefits until the end of the current billing period.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I get a refund?</summary>
+          <div class="body">
+            Refunds are handled by Apple and Google per their standard refund policies. On iOS, request via <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>. On Android, via <em>Play Store → My orders → Request a refund</em>. If either store declines and you feel there's a legitimate issue with the app itself, email us and we'll advocate for you.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Is Pro a one-time purchase or subscription?</summary>
+          <div class="body">
+            Both, at your choice. Monthly ($1.99) and Yearly ($9.99) are auto-renewing subscriptions. Lifetime ($39.99) is a one-time, non-consumable purchase that never expires and unlocks every current and future Pro feature.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Does Lifetime survive across devices?</summary>
+          <div class="body">
+            Yes — as long as you use the same App Store or Play Store account. Lifetime is tied to your store account, not the device. New phone, same Apple ID → Restore Purchases → Pro is back.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="history">
+      <div class="section-head">
+        <h2>History & backup</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Where is my QR history stored?</summary>
+          <div class="body">
+            Locally on your device, inside Qito's app sandbox, via the system's SharedPreferences. It is never transmitted off-device by Qito. This is a deliberate privacy choice.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I back up my history?</summary>
+          <div class="body">
+            <em>Settings → Data → Export backup</em> produces a single JSON file containing every saved QR, its payload, and its style. Save it to iCloud Drive, Google Drive, email it to yourself — whatever sharing service you trust. On a new device, install Qito and use <em>Settings → Data → Import backup</em>.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I sync history between iPhone and Android?</summary>
+          <div class="body">
+            Yes, via the backup JSON. The format is platform-agnostic. Export from one, transfer the file however you like, import on the other. Since Qito doesn't run a server, there's no automatic sync — but the JSON round-trip is fully lossless.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>I uninstalled Qito by accident. Is my history gone?</summary>
+          <div class="body">
+            Yes. Uninstalling removes the app sandbox on both iOS and Android, including all Qito data. This is a platform behavior, not something Qito controls. If you hadn't exported a backup before uninstalling, the data is unrecoverable — there is no cloud copy. We recommend exporting a backup after any major session.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="widget">
+      <div class="section-head">
+        <h2>Home-screen widget</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>How do I add the Qito widget?</summary>
+          <div class="body">
+            <strong>iOS</strong> — long-press an empty spot on the home screen → tap the + in the corner → search "Qito" → choose a size. The widget shows the QR you've "pinned" in the app (tap a saved QR → Pin as Widget).<br><br>
+            <strong>Android</strong> — long-press an empty home-screen spot → tap Widgets → scroll to Qito → drag the "Pinned QR" tile onto the home screen.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>The widget shows "Tap to pin" and nothing else</summary>
+          <div class="body">
+            That's the empty state. Open Qito, save or select a QR, and tap <em>Pin as Widget</em>. Within a second or two, the widget re-renders with your QR.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Does the widget work in StandBy (iOS 17+)?</summary>
+          <div class="body">
+            Yes. Qito ships a StandBy-compatible accessoryInline and accessoryRectangular layout. On iPhones in StandBy mode, the widget renders the pinned QR full-width with a monochrome palette suitable for night view.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Does the widget support Material You (Android 12+)?</summary>
+          <div class="body">
+            The Qito launcher icon includes a monochrome layer, so it tints to match your Material You palette on Android 12+. The widget itself uses brand colors; tinting the widget to system colors is on the roadmap.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="privacy">
+      <div class="section-head">
+        <h2>Privacy</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Short answer: what do you collect?</summary>
+          <div class="body">Nothing personal. No email, no account, no usage analytics, no crash reports. Your QRs and history live exclusively on your device. See the <a href="privacy-policy.html">full privacy policy</a> for the byte-level audit.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I delete all of my data?</summary>
+          <div class="body">
+            <em>Settings → Clear history</em> removes everything. For total wipe (including settings and the Pro entitlement cache), uninstall the app. On iOS you can also use <em>Settings → General → iPhone Storage → Qito → Offload app</em> which preserves settings; <em>Delete app</em> wipes everything.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Do you use any third-party SDKs?</summary>
+          <div class="body">
+            Only three: (1) Apple StoreKit / Google Play Billing, for in-app purchases. (2) Google AdMob, on the free tier only — it goes away when you upgrade to Pro. (3) Google Fonts, once on first launch to fetch the Inter typeface. No analytics SDKs, no crash reporters, no experimentation frameworks.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-head">
+        <h2>Still stuck?</h2>
+      </div>
+      <div class="contact-card">
+        <div>
+          <h3>Email us directly.</h3>
+          <p>For bugs, feature requests, account issues, or just to say hi. Every message reaches a real person. We reply within seven calendar days, usually much faster.</p>
+        </div>
+        <a class="btn" href="mailto:playpalapps2024@gmail.com?subject=Qito%20support">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6 12 13 2 6"/></svg>
+          playpalapps2024@gmail.com
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container row">
+    <div class="copy">© 2026 PlayPal Apps</div>
+    <div>
+      <a href="index.html">Home</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
