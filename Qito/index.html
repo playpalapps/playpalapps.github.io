@@ -603,11 +603,12 @@ section.slab {
 .showcase-card:hover::before { opacity: 1; }
 .showcase-card .qr-holder {
   aspect-ratio: 1;
-  background: white;
+  /* Per-card background set via --qr-bg inline style, matching the app preset. */
+  background: var(--qr-bg, white);
   border-radius: 14px;
   padding: 12px;
   display: grid; place-items: center;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04), 0 6px 18px -10px rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06), 0 8px 22px -12px rgba(0,0,0,0.55);
 }
 .showcase-card .qr-holder svg { width: 100%; height: auto; }
 .showcase-card .lbl { font-size: 13px; color: var(--ink); margin-top: 12px; text-align: center; font-weight: 600; letter-spacing: -0.005em; }
@@ -1472,24 +1473,124 @@ footer.site {
     }
   }
 
-  // Render a "bold" finder eye — classic square frame + square ball, regardless of module shape.
-  // Keeps scan reliability when modules are styled.
-  function finderEye(x, y, unit, darkId) {
-    const outer = unit * 7;
-    const inner = unit * 5;
-    const ball = unit * 3;
-    return `
-      <rect x="${x}" y="${y}" width="${outer}" height="${outer}" rx="${unit * 1.6}" fill="url(#${darkId})"/>
-      <rect x="${x + unit}" y="${y + unit}" width="${inner}" height="${inner}" rx="${unit * 1}" fill="white"/>
-      <rect x="${x + unit * 2}" y="${y + unit * 2}" width="${ball}" height="${ball}" rx="${unit * 0.7}" fill="url(#${darkId})"/>
-    `;
+  // Finder eye = outer 7×7 frame (ring) + inner 3×3 ball. Drawn independently
+  // so presets can mix different shapes AND colors — exactly like the Flutter
+  // painter. The inner punch-hole of the frame is filled with `bg` (the QR's
+  // background color) instead of hardcoded white, so dark-background presets
+  // like Aurora / Halloween / Cyberpunk render their eye rings correctly.
+  function eyeFrameSvg(x, y, unit, frameFill, bg, shape) {
+    const size = unit * 7;
+    const hole = unit * 5;
+    const hx = x + unit, hy = y + unit;
+    switch (shape) {
+      case 'square':
+        return `<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${frameFill}"/>`
+             + `<rect x="${hx}" y="${hy}" width="${hole}" height="${hole}" fill="${bg}"/>`;
+      case 'circle':
+        return `<circle cx="${x + size/2}" cy="${y + size/2}" r="${size/2}" fill="${frameFill}"/>`
+             + `<circle cx="${x + size/2}" cy="${y + size/2}" r="${hole/2}" fill="${bg}"/>`;
+      case 'leaf': {
+        // Asymmetric rounding: top-left + bottom-right are rounded, the other
+        // two corners pointed. Iconic "leaf" silhouette (Forest / Blob presets).
+        const r = unit * 2.4, hr = unit * 1.6;
+        return `<path d="M${x + r} ${y} H${x + size} V${y + size - r} A${r} ${r} 0 0 1 ${x + size - r} ${y + size} H${x} V${y + r} A${r} ${r} 0 0 1 ${x + r} ${y} Z" fill="${frameFill}"/>`
+             + `<path d="M${hx + hr} ${hy} H${hx + hole} V${hy + hole - hr} A${hr} ${hr} 0 0 1 ${hx + hole - hr} ${hy + hole} H${hx} V${hy + hr} A${hr} ${hr} 0 0 1 ${hx + hr} ${hy} Z" fill="${bg}"/>`;
+      }
+      case 'cushion': {
+        // Big-radius all-corner rounding — "squircle" (Diamond / Midnight Foil / Rose Gold).
+        const r = unit * 2.6, hr = unit * 1.8;
+        return `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="${r}" fill="${frameFill}"/>`
+             + `<rect x="${hx}" y="${hy}" width="${hole}" height="${hole}" rx="${hr}" fill="${bg}"/>`;
+      }
+      case 'flower': {
+        // Four-petal bloom (Halloween / Pastel). Rounded-rect core with 4 half-circle
+        // lobes at the orthogonal midpoints.
+        const r = unit * 1.75;
+        const cx = x + size/2, cy = y + size/2;
+        const outer = `M${x + r} ${y} H${x + size - r} A${r} ${r} 0 0 1 ${x + size} ${y + r} V${y + size - r} A${r} ${r} 0 0 1 ${x + size - r} ${y + size} H${x + r} A${r} ${r} 0 0 1 ${x} ${y + size - r} V${y + r} A${r} ${r} 0 0 1 ${x + r} ${y} Z`;
+        const hrr = unit * 1.2;
+        return `<path d="${outer}" fill="${frameFill}"/>`
+             + `<circle cx="${cx}" cy="${y}" r="${unit * 0.65}" fill="${frameFill}"/>`
+             + `<circle cx="${cx}" cy="${y + size}" r="${unit * 0.65}" fill="${frameFill}"/>`
+             + `<circle cx="${x}" cy="${cy}" r="${unit * 0.65}" fill="${frameFill}"/>`
+             + `<circle cx="${x + size}" cy="${cy}" r="${unit * 0.65}" fill="${frameFill}"/>`
+             + `<rect x="${hx}" y="${hy}" width="${hole}" height="${hole}" rx="${hrr}" fill="${bg}"/>`;
+      }
+      case 'rounded':
+      default: {
+        const r = unit * 1.7, hr = unit * 1.1;
+        return `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="${r}" fill="${frameFill}"/>`
+             + `<rect x="${hx}" y="${hy}" width="${hole}" height="${hole}" rx="${hr}" fill="${bg}"/>`;
+      }
+    }
+  }
+
+  function eyeBallSvg(x, y, unit, ballFill, shape) {
+    // Ball lives at offset (2u, 2u) inside the 7u frame, 3u × 3u.
+    const bx = x + unit * 2, by = y + unit * 2;
+    const size = unit * 3;
+    const cx = bx + size / 2, cy = by + size / 2;
+    switch (shape) {
+      case 'square':
+        return `<rect x="${bx}" y="${by}" width="${size}" height="${size}" fill="${ballFill}"/>`;
+      case 'circle':
+        return `<circle cx="${cx}" cy="${cy}" r="${size/2}" fill="${ballFill}"/>`;
+      case 'diamond':
+        return `<path d="M${cx} ${by}L${bx + size} ${cy}L${cx} ${by + size}L${bx} ${cy}Z" fill="${ballFill}"/>`;
+      case 'star': {
+        const r1 = size * 0.5, r2 = size * 0.22;
+        let d = '';
+        for (let i = 0; i < 10; i++) {
+          const a = -Math.PI / 2 + i * Math.PI / 5;
+          const rr = (i % 2 === 0) ? r1 : r2;
+          d += (i === 0 ? 'M' : 'L') + (cx + rr * Math.cos(a)).toFixed(3) + ' ' + (cy + rr * Math.sin(a)).toFixed(3) + ' ';
+        }
+        return `<path d="${d}Z" fill="${ballFill}"/>`;
+      }
+      case 'heart': {
+        const s = size * 1.02;
+        const ox = bx - s * 0.01, oy = by + s * 0.02;
+        return `<path d="M${ox + s*0.5} ${oy + s*0.88} C${ox + s*0.2} ${oy + s*0.62} ${ox} ${oy + s*0.35} ${ox + s*0.15} ${oy + s*0.18} C${ox + s*0.3} ${oy} ${ox + s*0.45} ${oy + s*0.1} ${ox + s*0.5} ${oy + s*0.22} C${ox + s*0.55} ${oy + s*0.1} ${ox + s*0.7} ${oy} ${ox + s*0.85} ${oy + s*0.18} C${ox + s} ${oy + s*0.35} ${ox + s*0.8} ${oy + s*0.62} ${ox + s*0.5} ${oy + s*0.88}Z" fill="${ballFill}"/>`;
+      }
+      case 'rounded':
+      default:
+        return `<rect x="${bx}" y="${by}" width="${size}" height="${size}" rx="${unit * 0.75}" fill="${ballFill}"/>`;
+    }
+  }
+
+  function finderEye(x, y, unit, frameFill, ballFill, bg, eyeFrame, eyeBall) {
+    return eyeFrameSvg(x, y, unit, frameFill, bg, eyeFrame) +
+           eyeBallSvg(x, y, unit, ballFill, eyeBall);
+  }
+
+  // Build a <linearGradient> stop-string from a color spec.
+  //   'gradient'           → brand violet→magenta→pink (legacy)
+  //   '#RRGGBB'            → solid single color
+  //   ['#a','#b','#c',...] → multi-stop, evenly spaced
+  function gradStopsFrom(spec) {
+    if (Array.isArray(spec)) {
+      const n = Math.max(spec.length, 1);
+      if (n === 1) return `<stop offset="0%" stop-color="${spec[0]}"/><stop offset="100%" stop-color="${spec[0]}"/>`;
+      return spec.map((c, i) =>
+        `<stop offset="${((i / (n - 1)) * 100).toFixed(1)}%" stop-color="${c}"/>`
+      ).join('');
+    }
+    if (spec === 'gradient') {
+      return `<stop offset="0%" stop-color="#5B2FE0"/><stop offset="50%" stop-color="#9D4EDD"/><stop offset="100%" stop-color="#EC4899"/>`;
+    }
+    return `<stop offset="0%" stop-color="${spec}"/><stop offset="100%" stop-color="${spec}"/>`;
   }
 
   // Build the full SVG for a given payload + style.
-  function renderQR({ text, shape = 'square', ecc = 'M', color = 'gradient', size = 33 }) {
+  //  color   — module fill (string / array / 'gradient')
+  //  frame   — eye frame fill; defaults to color
+  //  ball    — eye ball fill; defaults to color
+  //  bg      — background color of the QR holder (used for the eye punch-hole).
+  //            Default 'white'. Set to a dark hex to render dark-background presets
+  //            (Aurora, Halloween, Cyberpunk, Iridescent, etc.) correctly.
+  function renderQR({ text, shape = 'square', ecc = 'M', color = 'gradient', frame = null, ball = null, bg = 'white', size = 33, eyeFrame = 'rounded', eyeBall = 'rounded' }) {
     if (!window.qrcode) return '';
     const eccMap = { L: 'L', M: 'M', Q: 'Q', H: 'H' };
-    // Try version 0 (auto) up to 40. Some inputs need larger versions.
     let qr;
     for (let v = 0; v <= 40; v++) {
       try {
@@ -1502,7 +1603,20 @@ footer.site {
     if (!qr) return '';
     const count = qr.getModuleCount();
     const unit = size / count;
-    const darkId = 'qrDark_' + Math.random().toString(36).slice(2, 8);
+
+    // Three independent gradient defs — modules, eye frame, eye ball.
+    const uid = Math.random().toString(36).slice(2, 8);
+    const modId = 'qrMod_' + uid;
+    const frameId = 'qrFrame_' + uid;
+    const ballId = 'qrBall_' + uid;
+    const frameSpec = frame != null ? frame : color;
+    const ballSpec = ball != null ? ball : color;
+    const defs = [
+      `<linearGradient id="${modId}" x1="0%" y1="0%" x2="100%" y2="100%">${gradStopsFrom(color)}</linearGradient>`,
+      `<linearGradient id="${frameId}" x1="0%" y1="0%" x2="100%" y2="100%">${gradStopsFrom(frameSpec)}</linearGradient>`,
+      `<linearGradient id="${ballId}" x1="0%" y1="0%" x2="100%" y2="100%">${gradStopsFrom(ballSpec)}</linearGradient>`,
+    ].join('');
+
     const modulesSvg = [];
     for (let r = 0; r < count; r++) {
       for (let c = 0; c < count; c++) {
@@ -1511,31 +1625,16 @@ footer.site {
         modulesSvg.push(moduleSvg(r, c, unit, shape));
       }
     }
-    const fillAttr = `fill="url(#${darkId})"`;
-    // `color` accepts three shapes:
-    //   'gradient'           → brand violet→magenta→pink
-    //   '#RRGGBB'            → solid color
-    //   ['#a','#b','#c',...] → multi-stop linear gradient, evenly spaced, 135° diagonal
-    let gradStops;
-    if (Array.isArray(color)) {
-      const n = Math.max(color.length, 1);
-      gradStops = color.map((c, i) =>
-        `<stop offset="${(n === 1 ? 0 : (i / (n - 1)) * 100).toFixed(1)}%" stop-color="${c}"/>`
-      ).join('');
-      if (n === 1) gradStops += `<stop offset="100%" stop-color="${color[0]}"/>`;
-    } else if (color === 'gradient') {
-      gradStops = `<stop offset="0%" stop-color="#5B2FE0"/><stop offset="50%" stop-color="#9D4EDD"/><stop offset="100%" stop-color="#EC4899"/>`;
-    } else {
-      gradStops = `<stop offset="0%" stop-color="${color}"/><stop offset="100%" stop-color="${color}"/>`;
-    }
-    const darkDef = `<linearGradient id="${darkId}" x1="0%" y1="0%" x2="100%" y2="100%">${gradStops}</linearGradient>`;
+
+    const frameFill = `url(#${frameId})`;
+    const ballFill = `url(#${ballId})`;
     return `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
-        <defs>${darkDef}</defs>
-        <g ${fillAttr}>${modulesSvg.join('')}</g>
-        ${finderEye(0, 0, unit, darkId)}
-        ${finderEye((count - FINDER_SIZE) * unit, 0, unit, darkId)}
-        ${finderEye(0, (count - FINDER_SIZE) * unit, unit, darkId)}
+        <defs>${defs}</defs>
+        <g fill="url(#${modId})">${modulesSvg.join('')}</g>
+        ${finderEye(0, 0, unit, frameFill, ballFill, bg, eyeFrame, eyeBall)}
+        ${finderEye((count - FINDER_SIZE) * unit, 0, unit, frameFill, ballFill, bg, eyeFrame, eyeBall)}
+        ${finderEye(0, (count - FINDER_SIZE) * unit, unit, frameFill, ballFill, bg, eyeFrame, eyeBall)}
       </svg>`;
   }
 
@@ -1608,29 +1707,58 @@ footer.site {
 
   // ---------- 7) Style showcase ----------
   const showcaseGrid = document.getElementById('showcase-grid');
+  // Each preset mirrors the corresponding entry in lib/features/styles/style_presets.dart
+  // so the website renders what the app actually renders: real module shape, real eye
+  // frame/ball combos, real per-section fills, real background color.
   const showcasePresets = [
-    // Flagship brand gradient, rounded modules.
-    { shape: 'rounded', label: 'Aurora',      sub: 'Signature',  color: ['#5B2FE0', '#9D4EDD', '#EC4899'],             halo: 'rgba(157,78,221,0.35)' },
-    // Clean sky blue, dotted.
-    { shape: 'dots',    label: 'Mosaic',      sub: 'Ocean',      color: ['#0284C7', '#0EA5E9', '#38BDF8'],             halo: 'rgba(14,165,233,0.35)' },
-    // Spooky season — orange → crimson → deep violet.
-    { shape: 'diamond', label: 'Halloween',   sub: 'Seasonal',   color: ['#FF7A00', '#E11D48', '#4A148C'],             halo: 'rgba(225,29,72,0.32)' },
-    // 80s neon palette, blocky squares.
-    { shape: 'square',  label: 'Cyberpunk',   sub: 'Neon',       color: ['#FF2079', '#00F0FF', '#FFEE00'],             halo: 'rgba(255,32,121,0.32)' },
-    // Oil-slick iridescent, 4-stop.
-    { shape: 'star',    label: 'Iridescent',  sub: 'Prismatic',  color: ['#00E0FF', '#9D4EDD', '#EC4899', '#FFB020'],  halo: 'rgba(157,78,221,0.32)' },
-    // Red-hot fire, heart modules for warmth.
-    { shape: 'heart',   label: 'Inferno',     sub: 'Heat',       color: ['#7F0000', '#FF2D00', '#FF9500', '#FFD400'],  halo: 'rgba(255,45,0,0.32)' },
-    // Deep emerald forest, rounded.
-    { shape: 'rounded', label: 'Forest',      sub: 'Organic',    color: ['#064E3B', '#047857', '#10B981'],             halo: 'rgba(16,185,129,0.32)' },
-    // Royal midnight, dotted for softness.
-    { shape: 'dots',    label: 'Midnight',    sub: 'Indigo',     color: ['#1e1b4b', '#4338ca', '#7c3aed'],             halo: 'rgba(124,58,237,0.32)' },
+    // aurora: modules=linear cyan→violet→pink, eyes=white, bg=midnight violet
+    { label: 'Aurora',        sub: 'Signature', shape: 'rounded', eyeFrame: 'rounded', eyeBall: 'circle',
+      color: ['#00C6FF', '#7F00FF', '#FF1CB6'], frame: '#FFFFFF', ball: '#FFFFFF',
+      bg: '#0D0B1F', ecc: 'H', halo: 'rgba(127,0,255,0.38)' },
+    // mosaic: warm amber→red→pink, rounded eyes, cream bg
+    { label: 'Mosaic',        sub: 'Artistic',  shape: 'rounded', eyeFrame: 'rounded', eyeBall: 'rounded',
+      color: ['#F59E0B', '#EF4444', '#EC4899'],
+      bg: '#FFF7ED', ecc: 'Q', halo: 'rgba(239,68,68,0.34)' },
+    // halloween: orange→violet modules, flower eye frames, circle balls, near-black bg
+    { label: 'Halloween',     sub: 'Seasonal',  shape: 'rounded', eyeFrame: 'flower', eyeBall: 'circle',
+      color: ['#F97316', '#7C3AED'],
+      bg: '#0F0A19', ecc: 'H', halo: 'rgba(249,115,22,0.38)' },
+    // cyberpunk: pink↔cyan modules, CYAN eye frame, PINK eye ball (contrasting)
+    { label: 'Cyberpunk',     sub: 'Neon',      shape: 'square', eyeFrame: 'square', eyeBall: 'square',
+      color: ['#FF006E', '#00F5FF'], frame: '#00F5FF', ball: '#FF006E',
+      bg: '#0A0118', ecc: 'H', halo: 'rgba(0,245,255,0.36)' },
+    // pro-iridescent: oil-slick 4-stop (violet→cyan→pink→amber), white eyes, deep-violet bg
+    { label: 'Iridescent',    sub: 'Prismatic', shape: 'rounded', eyeFrame: 'rounded', eyeBall: 'circle',
+      color: ['#A78BFA', '#22D3EE', '#F472B6', '#FDE68A'], frame: '#FFFFFF', ball: '#FFFFFF',
+      bg: '#0F0B1F', ecc: 'H', halo: 'rgba(167,139,250,0.36)' },
+    // galaxy: magenta→blue cosmic, WHITE circle eye frame + YELLOW star eye ball
+    { label: 'Galaxy',        sub: 'Cosmic',    shape: 'dots',    eyeFrame: 'circle', eyeBall: 'star',
+      color: ['#E040FB', '#3D5AFE', '#00B0FF'], frame: '#FFFFFF', ball: '#FFEB3B',
+      bg: '#0B1020', ecc: 'H', halo: 'rgba(224,64,251,0.35)' },
+    // forest: deep-green gradient, LEAF eye frames, sage bg
+    { label: 'Forest',        sub: 'Organic',   shape: 'rounded', eyeFrame: 'leaf', eyeBall: 'circle',
+      color: ['#2E7D32', '#66BB6A'],
+      bg: '#F1F8E9', ecc: 'Q', halo: 'rgba(46,125,50,0.34)' },
+    // pro-midnight-foil: blue foil gradient, GOLD cushion eyes + GOLD diamond ball, near-black bg
+    { label: 'Midnight Foil', sub: 'Premium',   shape: 'rounded', eyeFrame: 'cushion', eyeBall: 'diamond',
+      color: ['#1E3A8A', '#0EA5E9', '#1E3A8A'], frame: '#FBBF24', ball: '#FBBF24',
+      bg: '#05060F', ecc: 'H', halo: 'rgba(251,191,36,0.34)' },
   ];
 
   function paintShowcase() {
     showcaseGrid.innerHTML = showcasePresets.map(p => `
-      <article class="showcase-card reveal in" style="--halo:${p.halo};">
-        <div class="qr-holder">${renderQR({ text: 'https://qito.app', shape: p.shape, color: p.color, ecc: 'Q' })}</div>
+      <article class="showcase-card reveal in" style="--halo:${p.halo}; --qr-bg:${p.bg};">
+        <div class="qr-holder">${renderQR({
+          text: 'https://qito.app',
+          shape: p.shape,
+          color: p.color,
+          frame: p.frame || null,
+          ball: p.ball || null,
+          bg: p.bg,
+          eyeFrame: p.eyeFrame,
+          eyeBall: p.eyeBall,
+          ecc: p.ecc || 'Q'
+        })}</div>
         <div class="lbl">${p.label}</div>
         <div class="sublbl">${p.sub}</div>
       </article>
