@@ -572,30 +572,46 @@ section.slab {
 /* ---------- Style showcase ---------- */
 .showcase-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 @media (max-width: 1040px) { .showcase-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px)  { .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
 
 .showcase-card {
   position: relative;
-  padding: 16px;
+  padding: 18px;
   border-radius: var(--radius-lg);
   background: var(--surface);
   border: 1px solid var(--border);
-  transition: transform .4s var(--ease), border-color .3s var(--ease);
+  transition: transform .4s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
+  isolation: isolate;
+  overflow: hidden;
 }
-.showcase-card:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+.showcase-card::before {
+  /* Preset-tinted halo that intensifies on hover — set via --halo CSS var per card. */
+  content: "";
+  position: absolute; inset: -40% -40% auto auto;
+  width: 70%; aspect-ratio: 1;
+  background: radial-gradient(circle, var(--halo, rgba(157,78,221,0.25)), transparent 60%);
+  filter: blur(30px);
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+  z-index: -1;
+}
+.showcase-card:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-2); }
+.showcase-card:hover::before { opacity: 1; }
 .showcase-card .qr-holder {
   aspect-ratio: 1;
   background: white;
   border-radius: 14px;
-  padding: 10px;
+  padding: 12px;
   display: grid; place-items: center;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04), 0 6px 18px -10px rgba(0,0,0,0.5);
 }
 .showcase-card .qr-holder svg { width: 100%; height: auto; }
-.showcase-card .lbl { font-size: 12.5px; color: var(--ink-2); margin-top: 10px; text-align: center; font-weight: 500; }
+.showcase-card .lbl { font-size: 13px; color: var(--ink); margin-top: 12px; text-align: center; font-weight: 600; letter-spacing: -0.005em; }
+.showcase-card .sublbl { font-size: 11px; color: var(--ink-3); text-align: center; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
 
 /* ---------- Privacy manifesto ---------- */
 #privacy { background: linear-gradient(180deg, transparent, rgba(91,47,224,0.06) 50%, transparent); }
@@ -1129,9 +1145,9 @@ footer.site {
   <section class="slab" id="styles">
     <div class="container">
       <div class="section-head reveal">
-        <span class="section-eyebrow">The painter</span>
-        <h2>Six shapes. Six eyes. <span class="serif gradient-text">Infinite combinations.</span></h2>
-        <p class="section-lead">The same payload — <code style="background:var(--surface);border:1px solid var(--border);padding:2px 6px;border-radius:5px;font-size:0.9em">qito.app</code> — rendered through six representative presets. Each one is a real, scannable QR.</p>
+        <span class="section-eyebrow">The palette</span>
+        <h2>Vibrant by design. <span class="serif gradient-text">Many more inside.</span></h2>
+        <p class="section-lead">A taste of Qito's color library. Each palette is tuned by eye — vivid on screen, reliably scannable in print, and easy to re-color further. All eight below encode the same <code style="background:var(--surface);border:1px solid var(--border);padding:2px 6px;border-radius:5px;font-size:0.9em">qito.app</code> payload.</p>
       </div>
       <div class="showcase-grid" id="showcase-grid"></div>
     </div>
@@ -1496,13 +1512,23 @@ footer.site {
       }
     }
     const fillAttr = `fill="url(#${darkId})"`;
-    const darkDef = color === 'gradient'
-      ? `<linearGradient id="${darkId}" x1="0%" y1="0%" x2="100%" y2="100%">
-           <stop offset="0%" stop-color="#5B2FE0"/>
-           <stop offset="50%" stop-color="#9D4EDD"/>
-           <stop offset="100%" stop-color="#EC4899"/>
-         </linearGradient>`
-      : `<linearGradient id="${darkId}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${color}"/><stop offset="100%" stop-color="${color}"/></linearGradient>`;
+    // `color` accepts three shapes:
+    //   'gradient'           → brand violet→magenta→pink
+    //   '#RRGGBB'            → solid color
+    //   ['#a','#b','#c',...] → multi-stop linear gradient, evenly spaced, 135° diagonal
+    let gradStops;
+    if (Array.isArray(color)) {
+      const n = Math.max(color.length, 1);
+      gradStops = color.map((c, i) =>
+        `<stop offset="${(n === 1 ? 0 : (i / (n - 1)) * 100).toFixed(1)}%" stop-color="${c}"/>`
+      ).join('');
+      if (n === 1) gradStops += `<stop offset="100%" stop-color="${color[0]}"/>`;
+    } else if (color === 'gradient') {
+      gradStops = `<stop offset="0%" stop-color="#5B2FE0"/><stop offset="50%" stop-color="#9D4EDD"/><stop offset="100%" stop-color="#EC4899"/>`;
+    } else {
+      gradStops = `<stop offset="0%" stop-color="${color}"/><stop offset="100%" stop-color="${color}"/>`;
+    }
+    const darkDef = `<linearGradient id="${darkId}" x1="0%" y1="0%" x2="100%" y2="100%">${gradStops}</linearGradient>`;
     return `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
         <defs>${darkDef}</defs>
@@ -1583,19 +1609,30 @@ footer.site {
   // ---------- 7) Style showcase ----------
   const showcaseGrid = document.getElementById('showcase-grid');
   const showcasePresets = [
-    { shape: 'square',  label: 'Classic', color: '#0B0612' },
-    { shape: 'rounded', label: 'Aurora', color: 'gradient' },
-    { shape: 'dots',    label: 'Mosaic', color: '#1E88E5' },
-    { shape: 'heart',   label: 'Tender', color: '#E11D48' },
-    { shape: 'star',    label: 'Cosmos', color: 'gradient' },
-    { shape: 'diamond', label: 'Prism',  color: '#059669' },
+    // Flagship brand gradient, rounded modules.
+    { shape: 'rounded', label: 'Aurora',      sub: 'Signature',  color: ['#5B2FE0', '#9D4EDD', '#EC4899'],             halo: 'rgba(157,78,221,0.35)' },
+    // Clean sky blue, dotted.
+    { shape: 'dots',    label: 'Mosaic',      sub: 'Ocean',      color: ['#0284C7', '#0EA5E9', '#38BDF8'],             halo: 'rgba(14,165,233,0.35)' },
+    // Spooky season — orange → crimson → deep violet.
+    { shape: 'diamond', label: 'Halloween',   sub: 'Seasonal',   color: ['#FF7A00', '#E11D48', '#4A148C'],             halo: 'rgba(225,29,72,0.32)' },
+    // 80s neon palette, blocky squares.
+    { shape: 'square',  label: 'Cyberpunk',   sub: 'Neon',       color: ['#FF2079', '#00F0FF', '#FFEE00'],             halo: 'rgba(255,32,121,0.32)' },
+    // Oil-slick iridescent, 4-stop.
+    { shape: 'star',    label: 'Iridescent',  sub: 'Prismatic',  color: ['#00E0FF', '#9D4EDD', '#EC4899', '#FFB020'],  halo: 'rgba(157,78,221,0.32)' },
+    // Red-hot fire, heart modules for warmth.
+    { shape: 'heart',   label: 'Inferno',     sub: 'Heat',       color: ['#7F0000', '#FF2D00', '#FF9500', '#FFD400'],  halo: 'rgba(255,45,0,0.32)' },
+    // Deep emerald forest, rounded.
+    { shape: 'rounded', label: 'Forest',      sub: 'Organic',    color: ['#064E3B', '#047857', '#10B981'],             halo: 'rgba(16,185,129,0.32)' },
+    // Royal midnight, dotted for softness.
+    { shape: 'dots',    label: 'Midnight',    sub: 'Indigo',     color: ['#1e1b4b', '#4338ca', '#7c3aed'],             halo: 'rgba(124,58,237,0.32)' },
   ];
 
   function paintShowcase() {
     showcaseGrid.innerHTML = showcasePresets.map(p => `
-      <article class="showcase-card reveal in">
+      <article class="showcase-card reveal in" style="--halo:${p.halo};">
         <div class="qr-holder">${renderQR({ text: 'https://qito.app', shape: p.shape, color: p.color, ecc: 'Q' })}</div>
         <div class="lbl">${p.label}</div>
+        <div class="sublbl">${p.sub}</div>
       </article>
     `).join('');
   }
