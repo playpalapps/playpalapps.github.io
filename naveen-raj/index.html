@@ -263,7 +263,8 @@
 
     /* ── APPS — dark showcase ── */
     .apps-section {
-      background: #09090B;
+      /* Gradient bridge: white → dark over the top padding, eliminating the hard cut */
+      background: linear-gradient(180deg, #ffffff 0px, #0D0D16 80px, #09090B 140px, #09090B 100%);
       position: relative; overflow: hidden;
     }
 
@@ -340,55 +341,158 @@
     .store-pill svg { width: 10px; height: 10px; fill: currentColor; }
 
     /* ── EXPERIENCE ── */
-    .exp-section {
-      background: linear-gradient(180deg, #F8FAFF 0%, #EEF2FF 60%, #F8FAFF 100%);
+    .exp-section { background: linear-gradient(180deg, #F8FAFF 0%, #F0F4FF 50%, #F8FAFF 100%); }
+
+    /* ── JOURNEY MAP ── */
+    .journey-map {
+      position: relative; height: 580px;
+      margin-top: 80px; border-radius: 28px;
+      border: 1px solid rgba(226,232,240,0.9);
+      overflow: hidden;
+    }
+    /* Dot grid background */
+    .journey-map::before {
+      content: ''; position: absolute; inset: 0;
+      background-color: #F8FAFF;
+      background-image: radial-gradient(rgba(99,102,241,0.13) 1px, transparent 1px);
+      background-size: 30px 30px;
     }
 
-    .timeline { margin-top: 64px; display: flex; flex-direction: column; gap: 0; }
-
-    .tl-item {
-      display: grid; grid-template-columns: 220px 1fr;
-      gap: 56px; padding: 48px 0;
-      border-bottom: 1px solid rgba(226,232,240,0.7);
-      position: relative;
+    /* The road */
+    .jm-road {
+      position: absolute; left: 56px; right: 88px;
+      top: 280px; height: 4px;
+      background: linear-gradient(90deg, #F59E0B 0%, #06B6D4 33%, #7C3AED 66%, #6366F1 100%);
+      border-radius: 2px; z-index: 2;
     }
-    .tl-item:first-child { padding-top: 0; }
-    .tl-item:last-child { border-bottom: none; padding-bottom: 0; }
-
-    /* Vertical line */
-    .tl-item::after {
-      content: ''; position: absolute; left: 220px; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(99,102,241,0.18) 20%, rgba(99,102,241,0.18) 80%, transparent);
+    /* Lane dashes */
+    .jm-road::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(90deg, transparent 0, transparent 10px, rgba(255,255,255,0.5) 10px, rgba(255,255,255,0.5) 16px);
     }
-    .tl-item:first-child::after { top: 0; }
 
-    /* Dot on the line */
-    .tl-dot {
-      position: absolute; left: calc(220px - 5px); top: 52px;
-      width: 11px; height: 11px; border-radius: 50%;
-      border: 2px solid;
-      z-index: 2; background: white;
+    /* Present arrow */
+    .jm-end {
+      position: absolute; right: 14px; top: 268px;
+      display: flex; align-items: center; gap: 6px; z-index: 5;
     }
-    .tl-item:first-child .tl-dot { top: 4px; border-color: #6366F1; box-shadow: 0 0 0 4px rgba(99,102,241,0.12); }
-    .tl-item:nth-child(2) .tl-dot { border-color: #7C3AED; }
-    .tl-item:nth-child(3) .tl-dot { border-color: #06B6D4; }
-    .tl-item:nth-child(4) .tl-dot { border-color: #F59E0B; }
-
-    .tl-left { padding-right: 0; }
-    .tl-period { font-size: 0.76rem; color: var(--muted); font-weight: 600; margin-bottom: 8px; letter-spacing: 0.3px; }
-    .tl-company {
-      font-weight: 900; font-size: 1rem; letter-spacing: -0.3px;
+    .jm-end-label { font-size: 0.58rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: #4338CA; }
+    .jm-end-arrow {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, #6366F1, #7C3AED);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 12px; line-height: 1;
     }
-    .tl-item:nth-child(1) .tl-company { background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .tl-item:nth-child(2) .tl-company { background: linear-gradient(135deg, #7C3AED, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .tl-item:nth-child(3) .tl-company { background: linear-gradient(135deg, #06B6D4, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .tl-item:nth-child(4) .tl-company { background: linear-gradient(135deg, #F59E0B, #EF4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-    .tl-right {}
-    .tl-role { font-size: 1.15rem; font-weight: 800; color: var(--text); margin-bottom: 12px; letter-spacing: -0.4px; }
-    .tl-desc { font-size: 0.9rem; color: var(--body); line-height: 1.82; }
-    .tl-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+    /* Dots on road */
+    .jm-dot {
+      position: absolute; top: 271px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: white; border: 3px solid; z-index: 5;
+    }
+    .jm-d1 { left: calc(14% - 11px); border-color: #F59E0B; box-shadow: 0 0 0 5px rgba(245,158,11,0.1); }
+    .jm-d2 { left: calc(37% - 11px); border-color: #06B6D4; box-shadow: 0 0 0 5px rgba(6,182,212,0.1); }
+    .jm-d3 { left: calc(63% - 11px); border-color: #7C3AED; box-shadow: 0 0 0 5px rgba(124,58,237,0.1); }
+    .jm-d4 {
+      left: calc(87% - 11px); border-color: #6366F1; background: #6366F1;
+      box-shadow: 0 0 0 6px rgba(99,102,241,0.2), 0 0 0 13px rgba(99,102,241,0.08);
+      animation: jm-pulse 2s ease-in-out infinite;
+    }
+    @keyframes jm-pulse {
+      0%,100% { box-shadow: 0 0 0 6px rgba(99,102,241,0.2), 0 0 0 13px rgba(99,102,241,0.08); }
+      50% { box-shadow: 0 0 0 9px rgba(99,102,241,0.24), 0 0 0 18px rgba(99,102,241,0.1); }
+    }
+
+    /* Year badges */
+    .jm-year {
+      position: absolute; top: 297px; z-index: 4;
+      font-size: 0.6rem; font-weight: 800; color: var(--muted);
+      background: white; border: 1px solid var(--border);
+      padding: 2px 8px; border-radius: 100px;
+      transform: translateX(-50%);
+    }
+    .jm-y1 { left: 14%; } .jm-y2 { left: 37%; } .jm-y3 { left: 63%; } .jm-y4 { left: 87%; }
+
+    /* Connectors (dashed vertical lines) */
+    .jm-conn {
+      position: absolute; width: 2px; z-index: 3;
+      background: repeating-linear-gradient(to bottom, currentColor 0, currentColor 4px, transparent 4px, transparent 8px);
+      opacity: 0.4;
+    }
+    /* above → from card bottom (262px) to dot top (271px) */
+    .jm-conn-1 { left: 14%; top: 262px; height: 9px; color: #F59E0B; }
+    .jm-conn-3 { left: 63%; top: 262px; height: 9px; color: #7C3AED; }
+    /* below → from dot bottom (293px) to card top (310px) */
+    .jm-conn-2 { left: 37%; top: 293px; height: 17px; color: #06B6D4; }
+    .jm-conn-4 { left: 87%; top: 293px; height: 17px; color: #6366F1; }
+
+    /* Cards */
+    .jm-card {
+      position: absolute; width: 224px;
+      background: white; border-radius: 20px; padding: 20px 22px;
+      border: 1px solid rgba(226,232,240,0.8);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transition: transform 0.24s cubic-bezier(.22,1,.36,1), box-shadow 0.24s;
+      z-index: 4;
+    }
+    .jm-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(99,102,241,0.13); }
+    /* Left accent */
+    .jm-card::before {
+      content: ''; position: absolute; left: 0; top: 18px; bottom: 18px;
+      width: 3px; border-radius: 0 2px 2px 0;
+    }
+    .jm-c1::before { background: linear-gradient(180deg, #F59E0B, #EF4444); }
+    .jm-c2::before { background: linear-gradient(180deg, #06B6D4, #3B82F6); }
+    .jm-c3::before { background: linear-gradient(180deg, #7C3AED, #EC4899); }
+    .jm-c4::before { background: linear-gradient(180deg, #6366F1, #7C3AED); }
+
+    /* ABOVE cards — bottom at ~262px, so top: 262 - height */
+    .jm-c1 { top: 46px; left: max(12px, calc(14% - 112px)); }
+    .jm-c3 { top: 46px; left: calc(63% - 112px); }
+    /* BELOW cards — top at 310px */
+    .jm-c2 { top: 310px; left: calc(37% - 112px); }
+    .jm-c4 { top: 310px; left: calc(87% - 112px); }
+
+    /* Card internals */
+    .jm-label { font-size: 0.58rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .jm-co { font-size: 1rem; font-weight: 900; letter-spacing: -0.3px; margin-bottom: 2px; line-height: 1.2; }
+    .jm-c1 .jm-co { color: #92400E; }
+    .jm-c2 .jm-co { color: #0E7490; }
+    .jm-c3 .jm-co { color: #6D28D9; }
+    .jm-c4 .jm-co { background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .jm-period { font-size: 0.7rem; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+    .jm-role { font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.35; }
+    .jm-desc { font-size: 0.76rem; color: var(--body); line-height: 1.65; }
+    .jm-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 10px; padding: 3px 10px; border-radius: 100px;
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2px;
+      background: rgba(16,185,129,0.07); color: #047857;
+      border: 1px solid rgba(16,185,129,0.18);
+    }
+    .jm-live {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-bottom: 8px; font-size: 0.58rem; font-weight: 900;
+      letter-spacing: 2px; text-transform: uppercase; color: #4338CA;
+    }
+    .jm-live-dot { width: 5px; height: 5px; border-radius: 50%; background: #6366F1; animation: pulse 2s infinite; }
+
+    /* Mobile vertical fallback */
+    .journey-mobile { display: none; margin-top: 48px; }
+    .jm-mob-item { display: flex; gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--border); }
+    .jm-mob-item:last-child { border-bottom: none; }
+    .jm-mob-num {
+      width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 900; color: white;
+    }
+    .jm-mob-num.amber { background: linear-gradient(135deg, #F59E0B, #EF4444); }
+    .jm-mob-num.cyan  { background: linear-gradient(135deg, #06B6D4, #3B82F6); }
+    .jm-mob-num.violet{ background: linear-gradient(135deg, #7C3AED, #EC4899); }
+    .jm-mob-num.indigo{ background: linear-gradient(135deg, #6366F1, #7C3AED); }
+    .jm-mob-co   { font-size: 0.95rem; font-weight: 900; color: var(--text); margin-bottom: 2px; }
+    .jm-mob-meta { font-size: 0.75rem; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+    .jm-mob-desc { font-size: 0.85rem; color: var(--body); line-height: 1.72; }
 
     /* ── SKILLS marquee ── */
     .skills-section { background: white; overflow: hidden; }
@@ -533,8 +637,8 @@
       .hero-stats { grid-template-columns: repeat(2,1fr); }
       section { padding: 80px 20px; }
       .about-grid { grid-template-columns: 1fr; }
-      .tl-item { grid-template-columns: 1fr; gap: 10px; }
-      .tl-item::after, .tl-dot { display: none; }
+      .journey-map { display: none; }
+      .journey-mobile { display: block; }
       .hero-photo { width: 240px; height: 240px; }
       footer { padding: 24px 20px; flex-direction: column; text-align: center; }
     }
@@ -782,71 +886,110 @@
     <div class="reveal">
       <div class="eyebrow">Experience</div>
       <h2 class="section-title">10+ years in fintech quality.</h2>
-      <p class="section-sub">From Infosys to Block — building quality frameworks that protect millions of users.</p>
+      <p class="section-sub">From Infosys to Block — a journey through banking, payments, and fintech at scale.</p>
     </div>
-    <div class="timeline">
 
-      <div class="tl-item reveal">
-        <div class="tl-dot"></div>
-        <div class="tl-left">
-          <div class="tl-period">2022 – Present</div>
-          <div class="tl-company">Block (Cash App)</div>
-        </div>
-        <div class="tl-right">
-          <div class="tl-role">Senior / Lead Quality Engineer</div>
-          <p class="tl-desc">Lead QA for the Trust & Risk domain. Owned end-to-end quality strategy across identity verification, login migration, disputes, Borrow Loans, and account recovery. QA DRI for compliance-sensitive launches. Used AI tools to scale automation coverage across critical financial flows.</p>
-          <div class="tl-tags">
-            <span class="tag tag-indigo">XCUITest</span><span class="tag tag-indigo">Espresso</span><span class="tag tag-indigo">IDV</span><span class="tag tag-indigo">Compliance</span><span class="tag tag-indigo">AI-Assisted</span>
-          </div>
-        </div>
+    <!-- Desktop: Journey map -->
+    <div class="journey-map reveal">
+      <!-- Road -->
+      <div class="jm-road"></div>
+      <div class="jm-end">
+        <span class="jm-end-label">Present</span>
+        <span class="jm-end-arrow">▶</span>
       </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-dot"></div>
-        <div class="tl-left">
-          <div class="tl-period">2021 – 2022</div>
-          <div class="tl-company">Afterpay (Block)</div>
-        </div>
-        <div class="tl-right">
-          <div class="tl-role">Senior Quality Engineer</div>
-          <p class="tl-desc">Built the mobile automation framework from scratch for Money by Afterpay. Led quality initiatives across payments and risk systems during the Block acquisition transition.</p>
-          <div class="tl-tags">
-            <span class="tag tag-plain">Mobile Automation</span><span class="tag tag-plain">Payments</span><span class="tag tag-plain">Framework Design</span>
-          </div>
-        </div>
+      <!-- Dots -->
+      <div class="jm-dot jm-d1"></div>
+      <div class="jm-dot jm-d2"></div>
+      <div class="jm-dot jm-d3"></div>
+      <div class="jm-dot jm-d4"></div>
+
+      <!-- Year badges -->
+      <div class="jm-year jm-y1">2015</div>
+      <div class="jm-year jm-y2">2017</div>
+      <div class="jm-year jm-y3">2021</div>
+      <div class="jm-year jm-y4">2022</div>
+
+      <!-- Connectors -->
+      <div class="jm-conn jm-conn-1"></div>
+      <div class="jm-conn jm-conn-2"></div>
+      <div class="jm-conn jm-conn-3"></div>
+      <div class="jm-conn jm-conn-4"></div>
+
+      <!-- Card 1: Infosys — ABOVE road, left -->
+      <div class="jm-card jm-c1">
+        <div class="jm-label">01 · 2015 – 2017</div>
+        <div class="jm-co">Infosys</div>
+        <div class="jm-role">Systems Engineer</div>
+        <p class="jm-desc">Built enterprise automation frameworks. Led the department's first-ever automation POC.</p>
+        <div class="jm-badge">🏆 Abstraction's First Automation Project</div>
       </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-dot"></div>
-        <div class="tl-left">
-          <div class="tl-period">2017 – 2021</div>
-          <div class="tl-company">UBank</div>
-        </div>
-        <div class="tl-right">
-          <div class="tl-role">Senior Automation Engineer</div>
-          <p class="tl-desc">Primary automation owner for iOS and Android native banking apps. Designed mobile automation framework using Appium. Led strategic transition to Perfecto. Received Individual Achievement Award for Automation Excellence.</p>
-          <div class="tl-tags">
-            <span class="tag tag-plain">Appium</span><span class="tag tag-plain">Perfecto</span><span class="tag tag-plain">iOS &amp; Android</span><span class="tag tag-green">🏆 Award</span>
-          </div>
-        </div>
+      <!-- Card 2: UBank — BELOW road, centre-left -->
+      <div class="jm-card jm-c2">
+        <div class="jm-label">02 · 2017 – 2021</div>
+        <div class="jm-co">UBank</div>
+        <div class="jm-role">Senior Automation Engineer</div>
+        <p class="jm-desc">iOS & Android automation owner. 4 years protecting millions of banking customers.</p>
+        <div class="jm-badge">🏆 Individual Achievement Award</div>
       </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-dot"></div>
-        <div class="tl-left">
-          <div class="tl-period">2015 – 2017</div>
-          <div class="tl-company">Infosys</div>
-        </div>
-        <div class="tl-right">
-          <div class="tl-role">Systems Engineer</div>
-          <p class="tl-desc">Built automation frameworks for enterprise digital platforms. Led the first-ever automation testing POC in the department, winning Abstraction's first Automation Project.</p>
-          <div class="tl-tags">
-            <span class="tag tag-plain">Selenium</span><span class="tag tag-plain">Enterprise</span><span class="tag tag-green">🏆 First Automation POC</span>
-          </div>
-        </div>
+      <!-- Card 3: Afterpay — ABOVE road, centre-right -->
+      <div class="jm-card jm-c3">
+        <div class="jm-label">03 · 2021 – 2022</div>
+        <div class="jm-co">Afterpay · Block</div>
+        <div class="jm-role">Senior Quality Engineer</div>
+        <p class="jm-desc">Built mobile automation from scratch for Money by Afterpay during the Block acquisition.</p>
       </div>
 
+      <!-- Card 4: Block — BELOW road, right (current) -->
+      <div class="jm-card jm-c4">
+        <div class="jm-live"><span class="jm-live-dot"></span>Current Role</div>
+        <div class="jm-label">04 · 2022 – Present</div>
+        <div class="jm-co">Block · Cash App</div>
+        <div class="jm-role">Senior / Lead Quality Engineer</div>
+        <p class="jm-desc">QA Lead for Trust & Risk — identity, compliance, fraud, and financial flows at scale.</p>
+      </div>
     </div>
+
+    <!-- Mobile: Vertical stack -->
+    <div class="journey-mobile">
+      <div class="jm-mob-item">
+        <div class="jm-mob-num amber">01</div>
+        <div>
+          <div class="jm-mob-co">Infosys</div>
+          <div class="jm-mob-meta">2015 – 2017 · Systems Engineer</div>
+          <p class="jm-mob-desc">Built enterprise automation frameworks. Led the department's first automation POC, winning Abstraction's first Automation Project.</p>
+          <div class="jm-badge" style="margin-top:10px;">🏆 First Automation POC</div>
+        </div>
+      </div>
+      <div class="jm-mob-item">
+        <div class="jm-mob-num cyan">02</div>
+        <div>
+          <div class="jm-mob-co">UBank</div>
+          <div class="jm-mob-meta">2017 – 2021 · Senior Automation Engineer</div>
+          <p class="jm-mob-desc">iOS & Android automation owner. Designed mobile frameworks using Appium. Led transition to Perfecto. Individual Achievement Award for Automation Excellence.</p>
+          <div class="jm-badge" style="margin-top:10px;">🏆 Individual Achievement Award</div>
+        </div>
+      </div>
+      <div class="jm-mob-item">
+        <div class="jm-mob-num violet">03</div>
+        <div>
+          <div class="jm-mob-co">Afterpay · Block</div>
+          <div class="jm-mob-meta">2021 – 2022 · Senior Quality Engineer</div>
+          <p class="jm-mob-desc">Built mobile automation framework from scratch for Money by Afterpay during the Block acquisition transition.</p>
+        </div>
+      </div>
+      <div class="jm-mob-item">
+        <div class="jm-mob-num indigo">04</div>
+        <div>
+          <div class="jm-mob-co">Block · Cash App</div>
+          <div class="jm-mob-meta">2022 – Present · Senior / Lead Quality Engineer</div>
+          <p class="jm-mob-desc">QA Lead for Trust & Risk. Identity verification, login migration, disputes, Borrow Loans, compliance-sensitive launches, and AI-assisted automation at scale.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
