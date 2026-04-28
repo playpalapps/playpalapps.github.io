@@ -197,13 +197,18 @@
     .exp-entry:first-child { padding-top: 4px; }
     .exp-entry:last-child { border-bottom: none; padding-bottom: 0; }
 
-    /* Huge watermark company name */
+    /* Logo watermark */
     .exp-watermark {
-      position: absolute; right: -10px; bottom: -8px;
-      font-size: 9rem; font-weight: 900; letter-spacing: -6px;
-      color: var(--text); opacity: 0.035;
+      position: absolute; right: 0; bottom: 0;
+      width: 340px; height: 120px;
+      display: flex; align-items: flex-end; justify-content: flex-end;
+      opacity: 0.08;
       pointer-events: none; user-select: none;
-      line-height: 1; white-space: nowrap;
+    }
+    .exp-watermark img {
+      width: 100%; height: 100%;
+      object-fit: contain; object-position: right bottom;
+      filter: grayscale(1);
     }
 
     /* Left meta column */
@@ -312,7 +317,7 @@
       section { padding: 80px 20px; }
       .about-grid { grid-template-columns: 1fr; }
       .exp-entry { grid-template-columns: 1fr; gap: 24px; }
-      .exp-watermark { font-size: 5rem; }
+      .exp-watermark { width: 200px; height: 80px; }
       .exp-left::before { display: none; }
       .exp-left { padding-left: 0; }
       .hero-photo { width: 240px; height: 240px; }
@@ -513,7 +518,7 @@
 
       <!-- Block — current, newest first -->
       <div class="exp-entry exp-e1 reveal">
-        <div class="exp-watermark">Block</div>
+        <div class="exp-watermark"><img src="assets/block.png" alt="Block"></div>
         <div class="exp-left">
           <span class="exp-num">01</span>
           <span class="exp-period">2022 – Present</span>
@@ -531,7 +536,7 @@
 
       <!-- Afterpay -->
       <div class="exp-entry exp-e2 reveal">
-        <div class="exp-watermark">Afterpay</div>
+        <div class="exp-watermark"><img src="assets/afterpay.png" alt="Afterpay"></div>
         <div class="exp-left">
           <span class="exp-num">02</span>
           <span class="exp-period">2021 – 2022</span>
@@ -548,7 +553,7 @@
 
       <!-- UBank -->
       <div class="exp-entry exp-e3 reveal">
-        <div class="exp-watermark">UBank</div>
+        <div class="exp-watermark"><img src="assets/ubank.svg" alt="UBank"></div>
         <div class="exp-left">
           <span class="exp-num">03</span>
           <span class="exp-period">2017 – 2021</span>
@@ -566,7 +571,7 @@
 
       <!-- Infosys -->
       <div class="exp-entry exp-e4 reveal">
-        <div class="exp-watermark">Infosys</div>
+        <div class="exp-watermark"><img src="assets/infosys.png" alt="Infosys"></div>
         <div class="exp-left">
           <span class="exp-num">04</span>
           <span class="exp-period">2015 – 2017</span>
