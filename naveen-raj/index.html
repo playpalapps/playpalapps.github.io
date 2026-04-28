@@ -200,13 +200,13 @@
     /* Logo watermark */
     .exp-watermark {
       position: absolute; right: 0; bottom: 0;
-      width: 340px; height: 120px;
-      display: flex; align-items: flex-end; justify-content: flex-end;
+      width: 520px; height: 160px;
       opacity: 0.08;
       pointer-events: none; user-select: none;
     }
     .exp-watermark img {
-      width: 100%; height: 100%;
+      position: absolute; right: 0; bottom: 0;
+      width: 520px; height: 160px;
       object-fit: contain; object-position: right bottom;
       filter: grayscale(1);
     }
@@ -317,7 +317,7 @@
       section { padding: 80px 20px; }
       .about-grid { grid-template-columns: 1fr; }
       .exp-entry { grid-template-columns: 1fr; gap: 24px; }
-      .exp-watermark { width: 200px; height: 80px; }
+      .exp-watermark, .exp-watermark img { width: 260px; height: 90px; }
       .exp-left::before { display: none; }
       .exp-left { padding-left: 0; }
       .hero-photo { width: 240px; height: 240px; }
