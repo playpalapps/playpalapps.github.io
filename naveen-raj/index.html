@@ -11,642 +11,381 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:      #FFFFFF;
-      --surface: #F8FAFC;
-      --surface2:#F1F5F9;
-      --border:  #E2E8F0;
-      --text:    #0F172A;
-      --body:    #334155;
-      --muted:   #94A3B8;
-      --accent:  #6366F1;
-      --violet:  #8B5CF6;
+      --indigo: #6366F1;
+      --violet: #7C3AED;
       --emerald: #10B981;
-      --grad:    linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-      --grad2:   linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+      --cyan: #06B6D4;
+      --pink: #EC4899;
+      --text: #0F172A;
+      --body: #334155;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --surface: #F8FAFC;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
+      background: #ffffff;
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ── REVEAL ANIMATION ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity: 1; transform: none; }
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      height: 68px;
-      padding: 0 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 64px; padding: 0 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(226,232,240,0.8);
       transition: box-shadow 0.3s;
     }
-    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
-
-    .nav-logo {
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: -0.5px;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .nav-links { display: flex; gap: 8px; list-style: none; align-items: center; }
-    .nav-links a {
-      padding: 7px 14px;
-      border-radius: 8px;
-      color: var(--body);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nav-links a:hover { background: var(--surface); color: var(--text); }
-    .nav-links .nav-cta {
-      background: var(--accent);
-      color: #fff;
-      font-weight: 600;
-    }
-    .nav-links .nav-cta:hover { background: var(--violet); color: #fff; }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(99,102,241,0.08); }
+    .nav-logo { font-weight: 900; font-size: 1.1rem; letter-spacing: -0.5px; background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+    .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+    .nav-links a { padding: 7px 14px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: all 0.18s; }
+    .nav-links a:hover { color: var(--text); background: var(--surface); }
+    .nav-cta { background: linear-gradient(135deg, #6366F1, #7C3AED) !important; color: #fff !important; font-weight: 600 !important; box-shadow: 0 4px 14px rgba(99,102,241,0.3); }
+    .nav-cta:hover { box-shadow: 0 6px 20px rgba(99,102,241,0.4) !important; transform: translateY(-1px); }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 68px 48px 0;
-      position: relative;
-      overflow: hidden;
+      display: flex; align-items: center;
+      padding: 64px 48px 0;
+      position: relative; overflow: hidden;
+      background: #ffffff;
     }
 
-    /* Mesh gradient background */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(16,185,129,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 60% 90%, rgba(139,92,246,0.05) 0%, transparent 60%);
-      pointer-events: none;
-    }
+    /* Gradient orbs */
+    .hero-orb { position: absolute; border-radius: 50%; pointer-events: none; }
+    .orb-1 { width: 800px; height: 800px; background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%); top: -200px; right: -200px; }
+    .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%); bottom: -100px; left: -100px; }
+    .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 70%); top: 50%; left: 40%; transform: translate(-50%,-50%); }
 
     .hero-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 80px;
-      align-items: center;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 400px;
+      gap: 80px; align-items: center;
       padding: 80px 0;
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
     }
-
-    /* LEFT */
-    .hero-left {}
 
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px 6px 8px;
-      background: #ECFDF5;
-      border: 1px solid #A7F3D0;
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #059669;
-      margin-bottom: 32px;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px 6px 10px;
+      background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,182,212,0.08));
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 100px; font-size: 0.78rem; font-weight: 600;
+      color: #047857; margin-bottom: 28px;
     }
-    .badge-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #10B981;
-      box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
-      50% { box-shadow: 0 0 0 6px rgba(16,185,129,0.1); }
-    }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.25); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.25); } 50% { box-shadow: 0 0 0 7px rgba(16,185,129,0.08); } }
 
     .hero-name {
-      font-size: clamp(3.5rem, 7vw, 6rem);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -3px;
-      color: var(--text);
-      margin-bottom: 16px;
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 900; line-height: 0.95; letter-spacing: -4px;
+      color: var(--text); margin-bottom: 8px;
     }
-    .hero-name span {
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero-name .grad {
+      background: linear-gradient(135deg, #6366F1 0%, #7C3AED 50%, #EC4899 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    .hero-role {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: var(--muted);
-      margin-bottom: 24px;
-      letter-spacing: -0.2px;
-    }
+    .hero-role { font-size: 1.05rem; color: var(--muted); font-weight: 500; margin-bottom: 24px; letter-spacing: 0.2px; }
 
-    .hero-desc {
-      font-size: 1.1rem;
-      color: var(--body);
-      line-height: 1.75;
-      max-width: 500px;
-      margin-bottom: 40px;
-    }
+    .hero-desc { font-size: 1.05rem; color: var(--body); line-height: 1.8; max-width: 480px; margin-bottom: 40px; }
 
-    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 0; }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 28px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-    }
     .btn-primary {
-      background: var(--grad);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(99,102,241,0.25);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px;
+      background: linear-gradient(135deg, #6366F1, #7C3AED);
+      color: #fff; font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(99,102,241,0.35);
+      transition: all 0.22s;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(99,102,241,0.35); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(99,102,241,0.45); }
 
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px;
+      background: white; color: var(--text);
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none;
       border: 1.5px solid var(--border);
+      transition: all 0.22s;
     }
-    .btn-ghost:hover { background: var(--surface); border-color: var(--accent); color: var(--accent); }
+    .btn-outline:hover { border-color: var(--indigo); color: var(--indigo); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99,102,241,0.1); }
 
-    /* Stats row */
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      margin-top: 56px;
-      padding-top: 40px;
-      border-top: 1px solid var(--border);
-    }
-    .stat {}
-    .stat-num {
-      font-size: 2.4rem;
-      font-weight: 900;
-      letter-spacing: -2px;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 500;
-      margin-top: 4px;
-      letter-spacing: 0.5px;
-    }
+    /* Stats */
+    .hero-stats { display: flex; gap: 40px; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .stat-num { font-size: 2.6rem; font-weight: 900; letter-spacing: -2px; line-height: 1; background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.8px; }
 
-    /* RIGHT — photo */
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
+    /* PHOTO */
+    .hero-right { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 
-    .photo-frame {
-      position: relative;
-      width: 320px;
-      height: 320px;
-    }
+    .photo-wrap { position: relative; }
 
-    /* Gradient ring */
-    .photo-frame::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: var(--grad);
+    /* Animated conic gradient ring */
+    .photo-ring {
+      position: absolute; inset: -6px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #6366F1, #7C3AED, #EC4899, #06B6D4, #10B981, #6366F1);
+      animation: spin 6s linear infinite;
       z-index: 0;
     }
-    /* White spacer ring */
-    .photo-frame::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 50%;
-      background: white;
-      z-index: 1;
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Glow behind ring */
+    .photo-glow {
+      position: absolute; inset: -20px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
+      z-index: -1;
+      animation: glow-pulse 3s ease-in-out infinite;
+    }
+    @keyframes glow-pulse { 0%,100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+
+    /* White gap between ring and photo */
+    .photo-gap {
+      position: absolute; inset: -2px; border-radius: 50%;
+      background: white; z-index: 1;
     }
 
     .hero-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      width: 300px; height: 300px;
       border-radius: 50%;
-      display: block;
-      position: relative;
-      z-index: 2;
+      object-fit: cover; object-position: center top;
+      display: block; position: relative; z-index: 2;
     }
 
-    /* Floating chips beside photo */
-    .float-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-    }
+    /* Floating chips */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
     .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      display: inline-flex; align-items: center; gap: 6px;
       padding: 7px 14px;
       background: white;
       border: 1px solid var(--border);
       border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--body);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      font-size: 0.78rem; font-weight: 600; color: var(--body);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .chip-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .chip-dot.indigo { background: #6366F1; }
-    .chip-dot.green  { background: #10B981; }
-    .chip-dot.violet { background: #8B5CF6; }
-    .chip-dot.blue   { background: #3B82F6; }
+    .chip:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .chip-dot { width: 7px; height: 7px; border-radius: 50%; }
 
-    /* ── SECTION BASICS ── */
+    /* ── SECTIONS ── */
     section { padding: 100px 48px; }
     .container { max-width: 1200px; margin: 0 auto; }
 
-    .section-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--indigo); margin-bottom: 16px;
     }
-    .section-eyebrow::before {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: var(--grad);
-      border-radius: 2px;
-    }
+    .eyebrow::before { content: ''; width: 24px; height: 2px; background: linear-gradient(90deg, #6366F1, #7C3AED); border-radius: 2px; display: block; }
 
-    .section-heading {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-    .section-sub {
-      font-size: 1.05rem;
-      color: var(--body);
-      max-width: 520px;
-      line-height: 1.7;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 24px;
-      margin-bottom: 56px;
-      flex-wrap: wrap;
-    }
-    .section-header-left {}
+    .section-title { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; color: var(--text); margin-bottom: 14px; }
+    .section-sub { font-size: 1rem; color: var(--body); max-width: 500px; line-height: 1.75; }
 
     /* ── ABOUT ── */
-    .about-section { background: var(--surface); }
+    .about-section { background: linear-gradient(180deg, #F8FAFF 0%, #ffffff 100%); }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
 
     .about-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
+      border-radius: 24px; padding: 40px; position: relative; overflow: hidden;
+      border: 1px solid rgba(226,232,240,0.8);
       transition: transform 0.25s, box-shadow 0.25s;
+      background: white;
     }
-    .about-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+    .about-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(99,102,241,0.1); }
 
-    .about-card-accent {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
+    .about-card-bg {
+      position: absolute; inset: 0; opacity: 0.03; pointer-events: none;
     }
-    .about-card.qa .about-card-accent { background: var(--grad); }
-    .about-card.builder .about-card-accent { background: var(--grad2); }
+    .about-card.qa .about-card-bg { background: linear-gradient(135deg, #6366F1, #7C3AED); opacity: 0.04; }
+    .about-card.builder .about-card-bg { background: linear-gradient(135deg, #10B981, #06B6D4); opacity: 0.04; }
 
-    .about-card-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      margin-bottom: 20px;
-    }
-    .about-card.qa .about-card-icon { background: rgba(99,102,241,0.08); }
-    .about-card.builder .about-card-icon { background: rgba(16,185,129,0.08); }
+    /* Colored top stripe */
+    .about-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .about-card.qa::before { background: linear-gradient(90deg, #6366F1, #7C3AED, #EC4899); }
+    .about-card.builder::before { background: linear-gradient(90deg, #10B981, #06B6D4); }
 
-    .about-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text);
+    .about-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.75rem; margin-bottom: 24px;
     }
-    .about-card p {
-      font-size: 0.93rem;
-      color: var(--body);
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
+    .about-card.qa .about-icon { background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(124,58,237,0.08)); }
+    .about-card.builder .about-icon { background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(6,182,212,0.08)); }
+
+    .about-card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 14px; }
+    .about-card p { font-size: 0.92rem; color: var(--body); line-height: 1.78; margin-bottom: 24px; }
 
     .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      color: var(--body);
-      background: var(--surface);
-    }
-    .tag.indigo { border-color: rgba(99,102,241,0.25); background: rgba(99,102,241,0.06); color: #4338CA; }
-    .tag.green  { border-color: rgba(16,185,129,0.25); background: rgba(16,185,129,0.06); color: #059669; }
+    .tag { padding: 5px 13px; border-radius: 100px; font-size: 0.73rem; font-weight: 600; }
+    .tag-indigo { background: rgba(99,102,241,0.08); color: #4338CA; border: 1px solid rgba(99,102,241,0.2); }
+    .tag-green  { background: rgba(16,185,129,0.08); color: #047857; border: 1px solid rgba(16,185,129,0.2); }
+    .tag-plain  { background: var(--surface); color: var(--body); border: 1px solid var(--border); }
 
     /* ── APPS ── */
-    .apps-section {}
+    .apps-section { background: white; }
 
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
-    }
+    .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 56px; }
 
     .app-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      background: white; border: 1px solid var(--border); border-radius: 20px;
+      padding: 24px; cursor: pointer;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: transform 0.22s cubic-bezier(.22,1,.36,1), box-shadow 0.22s, border-color 0.22s;
+      position: relative; overflow: hidden;
     }
-    .app-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
-      border-color: rgba(99,102,241,0.3);
+    .app-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.04), transparent);
+      opacity: 0; transition: opacity 0.22s;
     }
+    .app-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(99,102,241,0.12); border-color: rgba(99,102,241,0.3); }
+    .app-card:hover::after { opacity: 1; }
 
     .app-head { display: flex; align-items: center; gap: 14px; }
-
-    .app-icon-img {
-      width: 54px; height: 54px;
-      border-radius: 13px;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 1px solid var(--border);
-    }
-
-    .app-meta {}
-    .app-name { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 2px; }
-    .app-cat { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
-
-    .app-desc { font-size: 0.875rem; color: var(--body); line-height: 1.65; flex: 1; }
+    .app-icon-img { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .app-name { font-weight: 800; font-size: 1rem; color: var(--text); margin-bottom: 2px; }
+    .app-cat { font-size: 0.73rem; color: var(--muted); font-weight: 500; }
+    .app-desc { font-size: 0.875rem; color: var(--body); line-height: 1.68; flex: 1; }
 
     .app-foot {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding-top: 14px; border-top: 1px solid var(--border);
     }
-
     .store-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 5px 11px;
-      border-radius: 100px;
-      font-size: 0.72rem;
-      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 6px 13px; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 600;
       border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--body);
-      text-decoration: none;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      background: var(--surface); color: var(--body);
+      text-decoration: none; transition: all 0.18s;
     }
-    .store-pill:hover { background: var(--accent); border-color: var(--accent); color: white; }
+    .store-pill:hover { background: linear-gradient(135deg, #6366F1, #7C3AED); border-color: transparent; color: white; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
     .store-pill svg { width: 10px; height: 10px; fill: currentColor; }
 
     /* ── EXPERIENCE ── */
-    .exp-section { background: var(--surface); }
+    .exp-section {
+      background: linear-gradient(180deg, #F8FAFF 0%, #EEF2FF 50%, #F8FAFF 100%);
+    }
 
-    .timeline { display: flex; flex-direction: column; gap: 0; }
-
+    .timeline { margin-top: 56px; }
     .tl-item {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 40px;
-      padding: 40px 0;
-      border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 48px; padding: 40px 0;
+      border-bottom: 1px solid rgba(226,232,240,0.8);
       position: relative;
     }
     .tl-item:last-child { border-bottom: none; }
+    .tl-item::before { content: ''; position: absolute; left: 200px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(99,102,241,0.2), transparent); }
 
-    .tl-item::before {
-      content: '';
-      position: absolute;
-      left: 220px;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: var(--border);
-      transform: translateX(-40px);
-    }
-
-    .tl-left {}
     .tl-period { font-size: 0.78rem; color: var(--muted); font-weight: 500; margin-bottom: 6px; }
-    .tl-company { font-weight: 700; font-size: 0.95rem; color: var(--accent); }
+    .tl-company { font-weight: 800; font-size: 1rem; background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-    .tl-right {}
-    .tl-role {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .tl-desc { font-size: 0.9rem; color: var(--body); line-height: 1.75; }
+    .tl-role { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .tl-desc { font-size: 0.9rem; color: var(--body); line-height: 1.78; }
     .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 
     /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
+    .skills-section { background: white; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 56px; }
 
     .skill-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: transform 0.22s, box-shadow 0.22s;
+      background: white; border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      position: relative; overflow: hidden;
     }
-    .skill-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.07); }
-    .skill-icon { font-size: 1.75rem; margin-bottom: 14px; }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.25); }
+
+    .skill-icon-wrap {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 18px;
+    }
+
+    .skill-card:nth-child(1) .skill-icon-wrap { background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(124,58,237,0.06)); }
+    .skill-card:nth-child(2) .skill-icon-wrap { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,182,212,0.06)); }
+    .skill-card:nth-child(3) .skill-icon-wrap { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(239,68,68,0.06)); }
+    .skill-card:nth-child(4) .skill-icon-wrap { background: linear-gradient(135deg, rgba(6,182,212,0.1), rgba(99,102,241,0.06)); }
+    .skill-card:nth-child(5) .skill-icon-wrap { background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(124,58,237,0.06)); }
+    .skill-card:nth-child(6) .skill-icon-wrap { background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.06)); }
+
     .skill-card h4 { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: var(--text); }
-    .skill-card p { font-size: 0.85rem; color: var(--body); line-height: 1.65; }
+    .skill-card p { font-size: 0.84rem; color: var(--body); line-height: 1.68; }
 
     /* ── CONTACT ── */
-    .contact-section { text-align: center; }
+    .contact-section { background: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 50%, #ECFDF5 100%); text-align: center; }
 
-    .contact-box {
-      max-width: 600px;
-      margin: 48px auto 0;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 56px 48px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
-      position: relative;
-      overflow: hidden;
+    .contact-card {
+      max-width: 600px; margin: 56px auto 0;
+      background: white; border-radius: 28px; padding: 56px 48px;
+      border: 1px solid rgba(226,232,240,0.8);
+      box-shadow: 0 8px 48px rgba(99,102,241,0.08);
+      position: relative; overflow: hidden;
     }
-    .contact-box::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--grad);
-    }
-    .contact-box p {
-      font-size: 1rem;
-      color: var(--body);
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
+    .contact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #6366F1, #7C3AED, #EC4899, #10B981); }
+
+    .contact-card p { font-size: 1rem; color: var(--body); line-height: 1.8; margin-bottom: 36px; }
+
     .contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
     .contact-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 24px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 1.5px solid var(--border);
-      color: var(--text);
-      background: white;
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 13px 24px; border-radius: 12px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: all 0.22s;
+      border: 1.5px solid var(--border); color: var(--text); background: white;
     }
-    .contact-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99,102,241,0.12); }
-    .contact-btn svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.75; }
-    .contact-btn.primary { background: var(--grad); border-color: transparent; color: white; }
-    .contact-btn.primary:hover { box-shadow: 0 8px 24px rgba(99,102,241,0.3); color: white; }
+    .contact-btn:hover { border-color: var(--indigo); color: var(--indigo); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,0.1); }
+    .contact-btn svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.7; }
+    .contact-btn.primary { background: linear-gradient(135deg, #6366F1, #7C3AED); border-color: transparent; color: white; box-shadow: 0 6px 24px rgba(99,102,241,0.3); }
     .contact-btn.primary svg { opacity: 1; }
+    .contact-btn.primary:hover { box-shadow: 0 10px 32px rgba(99,102,241,0.4); color: white; border-color: transparent; }
 
     /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
     footer p { font-size: 0.82rem; color: var(--muted); }
     .footer-links { display: flex; gap: 24px; }
     .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
+    .footer-links a:hover { color: var(--indigo); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      nav { padding: 0 24px; }
+      nav { padding: 0 20px; }
       .nav-links li:not(:last-child) { display: none; }
-      .hero { padding: 68px 24px 0; }
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 60px 0;
-        text-align: center;
-      }
+      .hero { padding: 64px 20px 0; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 56px 0; text-align: center; }
       .hero-right { order: -1; }
-      .hero-badge { display: inline-flex; }
-      .hero-desc { margin: 0 auto 40px; }
       .hero-ctas { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      section { padding: 72px 24px; }
+      .hero-stats { justify-content: center; gap: 28px; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      section { padding: 72px 20px; }
       .about-grid { grid-template-columns: 1fr; }
       .tl-item { grid-template-columns: 1fr; gap: 8px; }
       .tl-item::before { display: none; }
-      .photo-frame { width: 240px; height: 240px; }
-      footer { padding: 24px; flex-direction: column; text-align: center; }
+      .hero-photo { width: 240px; height: 240px; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">Naveen Raj</a>
   <ul class="nav-links">
@@ -658,473 +397,317 @@
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero">
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div>
+
   <div class="hero-inner">
-
     <div class="hero-left reveal">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Sydney, Australia
-      </div>
-
-      <h1 class="hero-name">Naveen<br><span>Raj</span></h1>
+      <div class="hero-badge"><span class="badge-dot"></span> Sydney, Australia</div>
+      <h1 class="hero-name">Naveen<br><span class="grad">Raj</span></h1>
       <p class="hero-role">Senior Quality Engineering Lead &nbsp;·&nbsp; Indie App Builder</p>
       <p class="hero-desc">10+ years breaking complex systems so users don't have to. After hours, building AI-powered mobile apps that ship to real people.</p>
-
       <div class="hero-ctas">
-        <a href="#apps" class="btn btn-primary">
+        <a href="#apps" class="btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
           View My Apps
         </a>
-        <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" class="btn btn-ghost">
+        <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" class="btn-outline">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           LinkedIn
         </a>
       </div>
-
       <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num">10+</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">10</div>
-          <div class="stat-label">Apps Shipped</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">2</div>
-          <div class="stat-label">Stores</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">4</div>
-          <div class="stat-label">Companies</div>
-        </div>
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years Exp</div></div>
+        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Apps Shipped</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Stores</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Companies</div></div>
       </div>
     </div>
 
-    <div class="hero-right reveal" style="transition-delay:0.15s;">
-      <div class="photo-frame">
+    <div class="hero-right reveal" style="transition-delay:0.12s;">
+      <div class="photo-wrap">
+        <div class="photo-glow"></div>
+        <div class="photo-ring"></div>
+        <div class="photo-gap"></div>
         <img class="hero-photo" src="naveen.png" alt="Naveen Raj">
       </div>
-      <div class="float-chips">
-        <div class="chip"><span class="chip-dot indigo"></span> Cash App · Block</div>
-        <div class="chip"><span class="chip-dot green"></span> 10 apps live</div>
-        <div class="chip"><span class="chip-dot violet"></span> AI-Assisted Dev</div>
-        <div class="chip"><span class="chip-dot blue"></span> iOS & Android</div>
+      <div class="chips">
+        <div class="chip"><span class="chip-dot" style="background:#6366F1"></span> Cash App · Block</div>
+        <div class="chip"><span class="chip-dot" style="background:#10B981"></span> 10 apps live</div>
+        <div class="chip"><span class="chip-dot" style="background:#7C3AED"></span> AI-Assisted Dev</div>
+        <div class="chip"><span class="chip-dot" style="background:#06B6D4"></span> iOS &amp; Android</div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ── ABOUT ── -->
+<!-- ABOUT -->
 <section id="about" class="about-section">
   <div class="container">
-    <div class="section-header">
-      <div class="section-header-left reveal">
-        <div class="section-eyebrow">About</div>
-        <h2 class="section-heading">QA by day.<br>Builder by night.</h2>
-        <p class="section-sub">A decade making fintech bulletproof. Then I started building my own.</p>
-      </div>
+    <div class="reveal">
+      <div class="eyebrow">About</div>
+      <h2 class="section-title">QA by day.<br>Builder by night.</h2>
+      <p class="section-sub">A decade making fintech bulletproof. Then I started building my own.</p>
     </div>
-
     <div class="about-grid">
-      <div class="about-card qa reveal">
-        <div class="about-card-accent"></div>
-        <div class="about-card-icon">🛡️</div>
+      <div class="about-card qa reveal" style="transition-delay:0.05s;">
+        <div class="about-card-bg"></div>
+        <div class="about-icon">🛡️</div>
         <h3>Senior QA Lead</h3>
-        <p>Lead Quality Engineer at Block (Cash App), owning end-to-end quality strategy for the Trust & Risk domain — identity verification, login systems, disputes, transfers, and compliance-sensitive financial flows. Quality DRI for launches affecting millions of users.</p>
+        <p>Lead Quality Engineer at Block (Cash App), owning end-to-end quality strategy for the Trust & Risk domain — identity verification, login systems, disputes, transfers, and compliance-sensitive financial flows.</p>
         <div class="tags">
-          <span class="tag indigo">Cash App</span>
-          <span class="tag indigo">Afterpay</span>
-          <span class="tag indigo">UBank</span>
-          <span class="tag indigo">Infosys</span>
+          <span class="tag tag-indigo">Cash App</span>
+          <span class="tag tag-indigo">Afterpay</span>
+          <span class="tag tag-indigo">UBank</span>
+          <span class="tag tag-indigo">Infosys</span>
         </div>
       </div>
-
       <div class="about-card builder reveal" style="transition-delay:0.1s;">
-        <div class="about-card-accent"></div>
-        <div class="about-card-icon">🚀</div>
+        <div class="about-card-bg"></div>
+        <div class="about-icon">🚀</div>
         <h3>Indie App Builder</h3>
-        <p>Using AI tools — Cursor, Claude — to design, build, and ship iOS & Android apps completely solo. 10 apps live across the App Store and Google Play spanning games, utilities, wellness, and productivity. From idea to production in weeks.</p>
+        <p>Using AI tools — Cursor, Claude — to design, build, and ship iOS & Android apps completely solo. 10 apps live across the App Store and Google Play spanning games, utilities, wellness, and productivity.</p>
         <div class="tags">
-          <span class="tag green">SwiftUI</span>
-          <span class="tag green">Flutter</span>
-          <span class="tag green">AI-Assisted</span>
-          <span class="tag green">10 Apps Live</span>
+          <span class="tag tag-green">SwiftUI</span>
+          <span class="tag tag-green">Flutter</span>
+          <span class="tag tag-green">AI-Assisted</span>
+          <span class="tag tag-green">10 Apps Live</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── APPS ── -->
+<!-- APPS -->
 <section id="apps" class="apps-section">
   <div class="container">
-    <div class="section-header">
-      <div class="section-header-left reveal">
-        <div class="section-eyebrow">Apps</div>
-        <h2 class="section-heading">Built &amp; shipped solo.</h2>
-        <p class="section-sub">Every app designed, developed, and launched independently using AI-assisted engineering.</p>
-      </div>
+    <div class="reveal">
+      <div class="eyebrow">Apps</div>
+      <h2 class="section-title">Built &amp; shipped solo.</h2>
+      <p class="section-sub">Every app designed, developed, and launched independently using AI-assisted engineering.</p>
     </div>
-
     <div class="apps-grid">
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/AstroOrbit/">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/AstroOrbit/'">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/astroorbit.png" alt="Astro Orbit">
-          <div class="app-meta">
-            <div class="app-name">Astro Orbit</div>
-            <div class="app-cat">Game · Arcade</div>
-          </div>
+          <div><div class="app-name">Astro Orbit</div><div class="app-cat">Game · Arcade</div></div>
         </div>
         <p class="app-desc">Defy gravity. Hop between orbital rings and dodge cosmic obstacles in this fast-paced space arcade game.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/canwasa/" style="transition-delay:0.05s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/canwasa/'" style="transition-delay:0.05s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/canwasa.png" alt="Canwasa">
-          <div class="app-meta">
-            <div class="app-name">Canwasa</div>
-            <div class="app-cat">Creativity · Wallpapers</div>
-          </div>
+          <div><div class="app-name">Canwasa</div><div class="app-cat">Creativity · Wallpapers</div></div>
         </div>
         <p class="app-desc">Generate stunning 4K abstract wallpapers instantly on your device. No cloud, no uploads, no tracking.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.canwasa.canwasa" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.canwasa.canwasa" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/FuzzyPop/" style="transition-delay:0.1s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/FuzzyPop/'" style="transition-delay:0.1s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/fuzzypop.png" alt="Fuzzy Pop">
-          <div class="app-meta">
-            <div class="app-name">Fuzzy Pop</div>
-            <div class="app-cat">Game · Family</div>
-          </div>
+          <div><div class="app-name">Fuzzy Pop</div><div class="app-cat">Game · Family</div></div>
         </div>
         <p class="app-desc">A child-safe, colourful bubble-popping game. Simple mechanics, satisfying to play — no ads interrupting the fun.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/MergeRise/" style="transition-delay:0.15s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/MergeRise/'" style="transition-delay:0.15s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/mergerise.png" alt="MergeRise">
-          <div class="app-meta">
-            <div class="app-name">MergeRise</div>
-            <div class="app-cat">Game · Puzzle</div>
-          </div>
+          <div><div class="app-name">MergeRise</div><div class="app-cat">Game · Puzzle</div></div>
         </div>
         <p class="app-desc">A 2048-style merge puzzle with civilisation building. Merge tiles to raise cities, unlock skins, and conquer missions.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/NightBloom/" style="transition-delay:0.2s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/NightBloom/'" style="transition-delay:0.2s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/nightbloom.png" alt="Night Bloom">
-          <div class="app-meta">
-            <div class="app-name">Night Bloom</div>
-            <div class="app-cat">Health &amp; Wellness</div>
-          </div>
+          <div><div class="app-name">Night Bloom</div><div class="app-cat">Health &amp; Wellness</div></div>
         </div>
         <p class="app-desc">Sleep sounds, breathing exercises, and relaxation tools to help you wind down, sleep deeper, and wake up restored.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/Palettely/" style="transition-delay:0.25s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Palettely/'" style="transition-delay:0.25s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/palettely.png" alt="Palettely">
-          <div class="app-meta">
-            <div class="app-name">Palettely</div>
-            <div class="app-cat">Creativity · Design</div>
-          </div>
+          <div><div class="app-name">Palettely</div><div class="app-cat">Creativity · Design</div></div>
         </div>
         <p class="app-desc">Extract colour palettes from any photo. Build moodboards. Export art that's unmistakably yours.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/PaperLens/" style="transition-delay:0.3s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/PaperLens/'" style="transition-delay:0.3s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/paperlens.png" alt="PaperLens">
-          <div class="app-meta">
-            <div class="app-name">PaperLens</div>
-            <div class="app-cat">Productivity · Documents</div>
-          </div>
+          <div><div class="app-name">PaperLens</div><div class="app-cat">Productivity · Documents</div></div>
         </div>
         <p class="app-desc">Scan, extract, translate, sign, and protect your documents — powered by on-device AI. Zero cloud. Zero tracking.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/Qito/" style="transition-delay:0.35s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Qito/'" style="transition-delay:0.35s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/qito.png" alt="Qito">
-          <div class="app-meta">
-            <div class="app-name">Qito</div>
-            <div class="app-cat">Utilities · QR &amp; Barcode</div>
-          </div>
+          <div><div class="app-name">Qito</div><div class="app-cat">Utilities · QR &amp; Barcode</div></div>
         </div>
         <p class="app-desc">Fast QR code and barcode scanner. Generate, scan, and manage codes — clean interface, no bloat.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/TimezoneConnect/" style="transition-delay:0.4s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/TimezoneConnect/'" style="transition-delay:0.4s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/timezoneconnect.png" alt="Time Zone Connect">
-          <div class="app-meta">
-            <div class="app-name">Time Zone Connect</div>
-            <div class="app-cat">Productivity</div>
-          </div>
+          <div><div class="app-name">Time Zone Connect</div><div class="app-cat">Productivity</div></div>
         </div>
         <p class="app-desc">Compare global times, find overlapping work hours, and plan the perfect meeting across any time zone.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.timezoneconnect" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.timezoneconnect" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
-      <a class="app-card reveal" href="https://playpalapps.github.io/UtilifyApp/" style="transition-delay:0.45s;">
+      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/UtilifyApp/'" style="transition-delay:0.45s;">
         <div class="app-head">
           <img class="app-icon-img" src="../icons/utilify.png" alt="Utilify">
-          <div class="app-meta">
-            <div class="app-name">Utilify</div>
-            <div class="app-cat">Utilities</div>
-          </div>
+          <div><div class="app-name">Utilify</div><div class="app-cat">Utilities</div></div>
         </div>
         <p class="app-desc">Your everyday tech toolkit. 18 tools, 2 platforms, 1 app — everything you need in one clean interface.</p>
         <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-            Google Play
-          </a>
+          <a class="store-pill" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
         </div>
-      </a>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- ── EXPERIENCE ── -->
+<!-- EXPERIENCE -->
 <section id="experience" class="exp-section">
   <div class="container">
-    <div class="section-header">
-      <div class="section-header-left reveal">
-        <div class="section-eyebrow">Experience</div>
-        <h2 class="section-heading">10+ years in fintech quality.</h2>
-        <p class="section-sub">From Infosys to Block — building quality frameworks that protect millions of users.</p>
-      </div>
+    <div class="reveal">
+      <div class="eyebrow">Experience</div>
+      <h2 class="section-title">10+ years in fintech quality.</h2>
+      <p class="section-sub">From Infosys to Block — building quality frameworks that protect millions of users.</p>
     </div>
-
     <div class="timeline">
-
       <div class="tl-item reveal">
-        <div class="tl-left">
+        <div>
           <div class="tl-period">2022 – Present</div>
           <div class="tl-company">Block (Cash App)</div>
         </div>
-        <div class="tl-right">
+        <div>
           <div class="tl-role">Senior / Lead Quality Engineer</div>
-          <p class="tl-desc">Lead QA for the Trust &amp; Risk domain. Owned end-to-end quality strategy across identity verification, login migration, disputes, Borrow Loans, and account recovery. QA DRI for compliance-sensitive launches including IDV, ITIN/SSN handling, and in-app appeals. Used AI tools to scale automation coverage across critical financial flows.</p>
+          <p class="tl-desc">Lead QA for the Trust & Risk domain. Owned end-to-end quality strategy across identity verification, login migration, disputes, Borrow Loans, and account recovery. QA DRI for compliance-sensitive launches. Used AI tools to scale automation coverage across critical financial flows.</p>
           <div class="tl-tags">
-            <span class="tag indigo">XCUITest</span>
-            <span class="tag indigo">Espresso</span>
-            <span class="tag indigo">IDV</span>
-            <span class="tag indigo">Compliance</span>
-            <span class="tag indigo">AI-Assisted</span>
+            <span class="tag tag-indigo">XCUITest</span><span class="tag tag-indigo">Espresso</span><span class="tag tag-indigo">IDV</span><span class="tag tag-indigo">Compliance</span><span class="tag tag-indigo">AI-Assisted</span>
           </div>
         </div>
       </div>
-
       <div class="tl-item reveal">
-        <div class="tl-left">
+        <div>
           <div class="tl-period">2021 – 2022</div>
           <div class="tl-company">Afterpay (Block)</div>
         </div>
-        <div class="tl-right">
+        <div>
           <div class="tl-role">Senior Quality Engineer</div>
           <p class="tl-desc">Built the mobile automation framework from scratch for Money by Afterpay. Led quality initiatives across payments and risk systems during the Block acquisition transition.</p>
           <div class="tl-tags">
-            <span class="tag">Mobile Automation</span>
-            <span class="tag">Payments</span>
-            <span class="tag">Framework Design</span>
+            <span class="tag tag-plain">Mobile Automation</span><span class="tag tag-plain">Payments</span><span class="tag tag-plain">Framework Design</span>
           </div>
         </div>
       </div>
-
       <div class="tl-item reveal">
-        <div class="tl-left">
+        <div>
           <div class="tl-period">2017 – 2021</div>
           <div class="tl-company">UBank</div>
         </div>
-        <div class="tl-right">
+        <div>
           <div class="tl-role">Senior Automation Engineer</div>
-          <p class="tl-desc">Primary automation owner for iOS and Android native banking apps. Designed mobile automation framework using Appium. Led strategic transition to Perfecto. Received Individual Achievement Award for Automation Excellence (2018).</p>
+          <p class="tl-desc">Primary automation owner for iOS and Android native banking apps. Designed mobile automation framework using Appium. Led strategic transition to Perfecto. Received Individual Achievement Award for Automation Excellence.</p>
           <div class="tl-tags">
-            <span class="tag">Appium</span>
-            <span class="tag">Perfecto</span>
-            <span class="tag">iOS &amp; Android</span>
-            <span class="tag green">🏆 Award</span>
+            <span class="tag tag-plain">Appium</span><span class="tag tag-plain">Perfecto</span><span class="tag tag-plain">iOS &amp; Android</span><span class="tag tag-green">🏆 Award</span>
           </div>
         </div>
       </div>
-
       <div class="tl-item reveal">
-        <div class="tl-left">
+        <div>
           <div class="tl-period">2015 – 2017</div>
           <div class="tl-company">Infosys</div>
         </div>
-        <div class="tl-right">
+        <div>
           <div class="tl-role">Systems Engineer</div>
           <p class="tl-desc">Built automation frameworks for enterprise digital platforms. Led the first-ever automation testing POC in the department, winning the company's first Automation Project.</p>
           <div class="tl-tags">
-            <span class="tag">Selenium</span>
-            <span class="tag">Enterprise</span>
-            <span class="tag green">🏆 First Automation POC</span>
+            <span class="tag tag-plain">Selenium</span><span class="tag tag-plain">Enterprise</span><span class="tag tag-green">🏆 First Automation POC</span>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ── SKILLS ── -->
-<section id="skills">
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
   <div class="container">
-    <div class="section-header">
-      <div class="section-header-left reveal">
-        <div class="section-eyebrow">Skills</div>
-        <h2 class="section-heading">What I bring.</h2>
-      </div>
+    <div class="reveal">
+      <div class="eyebrow">Skills</div>
+      <h2 class="section-title">What I bring.</h2>
     </div>
-
     <div class="skills-grid">
-      <div class="skill-card reveal">
-        <div class="skill-icon">📱</div>
-        <h4>Mobile Automation</h4>
-        <p>XCUITest, Espresso, Appium, Perfecto, BrowserStack, Sauce Labs, Seetest</p>
-      </div>
-      <div class="skill-card reveal" style="transition-delay:0.05s;">
-        <div class="skill-icon">🤖</div>
-        <h4>AI-Assisted Engineering</h4>
-        <p>Cursor, Claude — automation scripting, framework acceleration, debugging, test generation</p>
-      </div>
-      <div class="skill-card reveal" style="transition-delay:0.1s;">
-        <div class="skill-icon">🔗</div>
-        <h4>API &amp; Backend Testing</h4>
-        <p>REST Assured, Postman, SOAP UI, JMeter — API validation across critical financial flows</p>
-      </div>
-      <div class="skill-card reveal" style="transition-delay:0.15s;">
-        <div class="skill-icon">🚀</div>
-        <h4>CI/CD &amp; Tooling</h4>
-        <p>Jenkins, TestRail, JIRA, QTest, HP QC ALM, LaunchDarkly</p>
-      </div>
-      <div class="skill-card reveal" style="transition-delay:0.2s;">
-        <div class="skill-icon">🛡️</div>
-        <h4>Quality Strategy</h4>
-        <p>Risk-based testing, release governance, compliance validation, regression optimisation</p>
-      </div>
-      <div class="skill-card reveal" style="transition-delay:0.25s;">
-        <div class="skill-icon">💻</div>
-        <h4>Programming</h4>
-        <p>Java, JavaScript, SwiftUI — test frameworks and production-grade mobile apps</p>
-      </div>
+      <div class="skill-card reveal"><div class="skill-icon-wrap">📱</div><h4>Mobile Automation</h4><p>XCUITest, Espresso, Appium, Perfecto, BrowserStack, Sauce Labs, Seetest</p></div>
+      <div class="skill-card reveal" style="transition-delay:0.05s;"><div class="skill-icon-wrap">🤖</div><h4>AI-Assisted Engineering</h4><p>Cursor, Claude — automation scripting, framework acceleration, debugging, test generation</p></div>
+      <div class="skill-card reveal" style="transition-delay:0.1s;"><div class="skill-icon-wrap">🔗</div><h4>API &amp; Backend Testing</h4><p>REST Assured, Postman, SOAP UI, JMeter — API validation across critical financial flows</p></div>
+      <div class="skill-card reveal" style="transition-delay:0.15s;"><div class="skill-icon-wrap">🚀</div><h4>CI/CD &amp; Tooling</h4><p>Jenkins, TestRail, JIRA, QTest, HP QC ALM, LaunchDarkly</p></div>
+      <div class="skill-card reveal" style="transition-delay:0.2s;"><div class="skill-icon-wrap">🛡️</div><h4>Quality Strategy</h4><p>Risk-based testing, release governance, compliance validation, regression optimisation</p></div>
+      <div class="skill-card reveal" style="transition-delay:0.25s;"><div class="skill-icon-wrap">💻</div><h4>Programming</h4><p>Java, JavaScript, SwiftUI — test frameworks and production-grade mobile apps</p></div>
     </div>
   </div>
 </section>
 
-<!-- ── CONTACT ── -->
+<!-- CONTACT -->
 <section id="contact" class="contact-section">
   <div class="container">
     <div class="reveal">
-      <div class="section-eyebrow" style="justify-content:center;">Contact</div>
-      <h2 class="section-heading">Let's connect.</h2>
-      <p class="section-sub" style="margin: 0 auto;">Open to senior QA, quality engineering leadership, and AI-assisted engineering conversations.</p>
+      <div class="eyebrow" style="justify-content:center;">Contact</div>
+      <h2 class="section-title">Let's connect.</h2>
+      <p class="section-sub" style="margin:0 auto;">Open to senior QA, quality engineering leadership, and AI-assisted engineering conversations.</p>
     </div>
-    <div class="contact-box reveal">
-      <p>Based in Sydney, Australia. 10+ years in fintech. Currently building AI-powered apps on the side and always open to meaningful conversations.</p>
+    <div class="contact-card reveal">
+      <p>Based in Sydney, Australia. 10+ years in fintech quality engineering. Currently building AI-powered apps and always open to meaningful conversations.</p>
       <div class="contact-btns">
         <a href="mailto:naveenmercedes@gmail.com" class="contact-btn primary">
           <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1139,7 +722,7 @@
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
   <p>© 2026 Naveen Raj · Sydney, Australia</p>
   <div class="footer-links">
@@ -1150,23 +733,15 @@
 </footer>
 
 <script>
-  // Nav shadow on scroll
+  // Nav shadow
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
 
   // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 
 </body>
