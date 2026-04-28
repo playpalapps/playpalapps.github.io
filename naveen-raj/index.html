@@ -702,19 +702,30 @@
 
   // Interactive marquee — JS-driven so drag/touch works while auto-flow continues
   function initMarquee(track, speed, reverse) {
-    let pos = reverse ? -(track.scrollWidth / 2) : 0;
+    let pos = 0;
     let dragging = false, startX = 0, startPos = 0;
 
     function step() {
+      const half = track.scrollWidth / 2;
+      // Guard: wait until track is rendered and has real width
+      if (half < 10) { requestAnimationFrame(step); return; }
+
       if (!dragging) {
         pos += reverse ? speed : -speed;
-        const half = track.scrollWidth / 2;
-        if (pos <= -half) pos = 0;
-        if (pos >= 0)     pos = -half;
+        // Seamless loop: shift by half-width instead of jumping to 0/-half
+        // This avoids the double-trigger bug when pos lands exactly on boundary
+        if (pos <= -half) pos += half;
+        if (pos > 0)      pos -= half;
       }
       track.style.transform = 'translateX(' + pos + 'px)';
       requestAnimationFrame(step);
     }
+
+    // Set initial position after first layout paint so scrollWidth is accurate
+    requestAnimationFrame(() => {
+      pos = reverse ? -(track.scrollWidth / 2) : 0;
+      requestAnimationFrame(step);
+    });
 
     function getX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
 
