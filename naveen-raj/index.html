@@ -34,8 +34,9 @@
     }
 
     /* ── SCROLL REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* JS adds .js-reveal-ready to body before observing, so without JS content is always visible */
+    body.js-reveal-ready .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
+    body.js-reveal-ready .reveal.visible { opacity: 1; transform: none; }
 
     /* ── NAV ── */
     nav {
@@ -737,11 +738,18 @@
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
 
-  // Scroll reveal
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // Scroll reveal — reliable getBoundingClientRect approach
+  document.body.classList.add('js-reveal-ready');
+  function checkReveal() {
+    const vh = window.innerHeight;
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+      if (el.getBoundingClientRect().top < vh * 0.95) el.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', checkReveal, { passive: true });
+  // Run immediately and again after a short delay (for first paint)
+  checkReveal();
+  setTimeout(checkReveal, 100);
 </script>
 
 </body>
