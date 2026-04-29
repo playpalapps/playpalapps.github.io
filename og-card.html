@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px; height: 630px; overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      background: #FFFCF5;
+      position: relative;
+    }
+    .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; }
+    .b1 { width: 540px; height: 540px; background: radial-gradient(circle, #FF5F8A, transparent 65%); top: -160px; left: -120px; }
+    .b2 { width: 620px; height: 620px; background: radial-gradient(circle, #FFD93D, transparent 65%); top: -120px; right: -180px; }
+    .b3 { width: 480px; height: 480px; background: radial-gradient(circle, #4DA8FF, transparent 65%); bottom: -160px; left: 20%; }
+    .b4 { width: 500px; height: 500px; background: radial-gradient(circle, #845EC2, transparent 65%); bottom: -180px; right: 8%; }
+
+    .grain {
+      position: absolute; inset: 0; opacity: 0.4;
+      background-image: radial-gradient(rgba(9,9,11,0.04) 1.5px, transparent 1.5px);
+      background-size: 32px 32px;
+    }
+
+    .accent-bar {
+      position: absolute; left: 0; top: 0; right: 0; height: 8px;
+      background: linear-gradient(90deg, #FF5F8A, #FF8E3C, #FFD93D, #6BCB77, #4DA8FF, #845EC2);
+    }
+
+    .layout {
+      position: relative; z-index: 2;
+      height: 100%; padding: 80px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+
+    .top-row { display: flex; align-items: center; gap: 18px; }
+    .mark {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: conic-gradient(from 220deg, #FF5F8A, #FF8E3C, #FFD93D, #6BCB77, #4DA8FF, #845EC2, #FF5F8A);
+      box-shadow: 0 8px 24px rgba(255,95,138,0.35);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mark::after { content: ''; position: absolute; inset: 6px; border-radius: 11px; background: white; }
+    .mark span { position: relative; z-index: 2; font-size: 28px; }
+    .brand-name { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: #09090B; }
+    .brand-name b { background: linear-gradient(135deg, #FF5F8A, #845EC2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .badge {
+      padding: 8px 18px; border-radius: 100px;
+      background: rgba(255,255,255,0.7); border: 1px solid rgba(9,9,11,0.08);
+      font-size: 13px; font-weight: 700; color: #09090B;
+      letter-spacing: 0.6px; text-transform: uppercase;
+    }
+    .badge .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #6BCB77; margin-right: 8px; vertical-align: 1px; }
+
+    .title-block { padding: 0; }
+    .title {
+      font-size: 110px; font-weight: 900; line-height: 0.9;
+      letter-spacing: -6px; color: #09090B;
+      padding-bottom: 0.18em;
+    }
+    .title .joy {
+      display: block;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic; font-weight: 400;
+      letter-spacing: -3px;
+      background: linear-gradient(110deg, #FF5F8A 0%, #FF8E3C 25%, #FFD93D 50%, #6BCB77 70%, #4DA8FF 85%, #845EC2 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding-right: 0.05em;
+    }
+    .sub { font-size: 22px; color: #3F3F46; margin-top: 24px; max-width: 720px; line-height: 1.55; }
+
+    .bottom-row {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;
+    }
+    .stat-strip {
+      display: flex; gap: 32px; align-items: center;
+    }
+    .stat-num { font-size: 42px; font-weight: 900; letter-spacing: -2px; line-height: 1; color: #09090B; }
+    .stat-num .accent { background: linear-gradient(135deg, #FF5F8A, #845EC2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-lbl { font-size: 11px; color: #71717A; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; margin-top: 6px; }
+    .stat-sep { width: 1px; height: 36px; background: rgba(9,9,11,0.12); }
+
+    .icons-stack { display: flex; gap: -10px; }
+    .icon-sm {
+      width: 64px; height: 64px; border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(9,9,11,0.18), 0 0 0 3px white;
+      margin-left: -10px;
+    }
+    .icon-sm:first-child { margin-left: 0; }
+    .icon-sm img { width: 100%; height: 100%; border-radius: 14px; object-fit: cover; }
+
+    .url-stamp {
+      position: absolute; bottom: 28px; right: 80px;
+      font-size: 14px; font-weight: 700; color: #71717A;
+      letter-spacing: 0.5px;
+    }
+    .url-stamp b { background: linear-gradient(135deg, #FF5F8A, #845EC2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="accent-bar"></div>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+  <div class="grain"></div>
+
+  <div class="layout">
+    <div class="top-row">
+      <div class="mark"><span>🌈</span></div>
+      <div class="brand-name">Playpal <b>Apps</b></div>
+      <div style="flex:1"></div>
+      <div class="badge"><span class="dot"></span>Live on iOS &amp; Android</div>
+    </div>
+
+    <div class="title-block">
+      <h1 class="title">Apps you'll<span class="joy">actually love.</span></h1>
+      <p class="sub">Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand.</p>
+    </div>
+
+    <div class="bottom-row">
+      <div class="stat-strip">
+        <div><div class="stat-num">2</div><div class="stat-lbl">App Stores</div></div>
+        <div class="stat-sep"></div>
+        <div><div class="stat-num">5</div><div class="stat-lbl">Categories</div></div>
+        <div class="stat-sep"></div>
+        <div><div class="stat-num">1</div><div class="stat-lbl">Studio</div></div>
+        <div class="stat-sep"></div>
+        <div><div class="stat-num"><span class="accent">∞</span></div><div class="stat-lbl">Always Shipping</div></div>
+      </div>
+      <div class="icons-stack">
+        <div class="icon-sm"><img src="icons/utilify.png" alt=""></div>
+        <div class="icon-sm"><img src="icons/canwasa.png" alt=""></div>
+        <div class="icon-sm"><img src="icons/nightbloom.png" alt=""></div>
+        <div class="icon-sm"><img src="icons/palettely.png" alt=""></div>
+        <div class="icon-sm"><img src="icons/astroorbit.png" alt=""></div>
+        <div class="icon-sm"><img src="icons/fuzzypop.png" alt=""></div>
+      </div>
+    </div>
+  </div>
+  <div class="url-stamp">playpalapps<b>.github.io</b></div>
+</body>
+</html>
