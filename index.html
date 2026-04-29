@@ -211,92 +211,143 @@
     .section-sub { font-size: 1.05rem; color: var(--body); max-width: 600px; margin-top: 16px; line-height: 1.7; }
 
     /* APPS BENTO */
-    .apps-section { background: var(--bg); }
-    .apps-bento { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 200px; gap: 16px; margin-top: 56px; }
-    .app-card {
-      position: relative; border-radius: 24px; overflow: hidden;
-      cursor: pointer; text-decoration: none;
-      padding: 24px;
-      display: flex; flex-direction: column; justify-content: space-between;
-      gap: 16px;
-      transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s;
-      isolation: isolate;
-      box-shadow: 0 4px 14px rgba(9,9,11,0.04), 0 0 0 1px var(--border);
-      min-height: 200px;
+    .apps-section { background: var(--bg); position: relative; overflow: hidden; }
+    .apps-watermark {
+      position: absolute; right: -120px; top: 60px;
+      width: 640px; height: 640px; opacity: 0.04;
+      pointer-events: none; z-index: 0;
+      transform: rotate(-12deg);
     }
-    .app-card.featured { padding: 36px; border-radius: 32px; gap: 24px; }
-    .app-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(9,9,11,0.12); }
-    .app-card:hover .app-card-bg { transform: scale(1.06); }
-    .app-card-bg { position: absolute; inset: 0; z-index: -1; transition: transform 0.6s cubic-bezier(.22,1,.36,1); }
-    .app-card-overlay {
-      position: absolute; inset: 0; z-index: -1; pointer-events: none;
-      background-image: radial-gradient(rgba(255,255,255,0.13) 1.2px, transparent 1.2px);
-      background-size: 22px 22px;
-      mask-image: linear-gradient(180deg, transparent, black 50%, transparent);
+    .apps-watermark img { width: 100%; height: 100%; object-fit: contain; }
+    .apps-section .container { position: relative; z-index: 1; }
+    .apps-bento {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 240px; gap: 16px; margin-top: 56px;
+    }
+    /* Editorial app cards — white with soft per-app accent, dark text, prominent stores */
+    .app-card {
+      position: relative; border-radius: 22px; overflow: hidden;
+      cursor: pointer; text-decoration: none;
+      padding: 22px;
+      display: flex; flex-direction: column; gap: 14px;
+      background: white;
+      transition: transform 0.32s cubic-bezier(.22,1,.36,1), box-shadow 0.32s, border-color 0.32s;
+      box-shadow: 0 0 0 1px var(--border), 0 2px 8px rgba(9,9,11,0.03);
+    }
+    .app-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 2;
+    }
+    .app-card-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.85;
+      transition: opacity 0.32s, transform 0.5s cubic-bezier(.22,1,.36,1);
+    }
+    .app-card-overlay { display: none; }
+    .app-card:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px var(--borderStrong), 0 18px 40px rgba(9,9,11,0.08); }
+    .app-card:hover .app-card-bg { opacity: 1; transform: scale(1.04); }
+    .app-card > * { position: relative; z-index: 1; }
+
+    .app-card-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
     .app-icon-mega {
-      width: 64px; height: 64px; border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.18) inset;
+      width: 56px; height: 56px; border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(9,9,11,0.12), 0 0 0 3px white;
       display: block; object-fit: cover; flex-shrink: 0;
     }
-    .app-card.featured .app-icon-mega { width: 104px; height: 104px; border-radius: 24px; }
-    .featured-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-    .featured-pill { padding: 6px 14px !important; font-size: 0.7rem !important; }
-    .app-meta { display: flex; flex-direction: column; gap: 8px; color: white; }
+
+    .app-meta { display: flex; flex-direction: column; gap: 4px; flex: 1; }
     .app-cat-pill {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 4px 10px; border-radius: 100px; width: fit-content;
-      background: rgba(255,255,255,0.18); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.22);
-      font-size: 0.66rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
-      color: white;
+      background: rgba(9,9,11,0.04); border: 1px solid var(--border);
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--muted);
     }
-    .app-name { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.8px; color: white; line-height: 1.05; }
-    .app-card.featured .app-name { font-size: 2.6rem; letter-spacing: -1.6px; }
-    .app-tag-text {
-      font-size: 1rem; font-weight: 500;
-      color: rgba(255,255,255,0.84); max-width: 360px;
-      margin-top: 8px;
-    }
-    .app-stores { display: flex; gap: 8px; margin-top: 16px; opacity: 0.92; }
+    .app-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.4px; color: var(--text); line-height: 1.15; }
+
+    .app-stores { display: flex; gap: 6px; margin-top: auto; }
     .store-mini {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 6px 12px; border-radius: 100px;
-      background: rgba(255,255,255,0.16); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.22);
-      font-size: 0.7rem; font-weight: 700; color: white; text-decoration: none;
-      transition: background 0.2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 7px 12px; border-radius: 100px; flex: 1;
+      background: var(--bg); border: 1px solid var(--border);
+      font-size: 0.7rem; font-weight: 700; color: var(--text); text-decoration: none;
+      transition: all 0.2s;
     }
-    .store-mini:hover { background: rgba(255,255,255,0.3); }
-    .store-mini svg { width: 12px; height: 12px; fill: currentColor; }
+    .store-mini:hover { background: var(--text); color: white; border-color: var(--text); transform: translateY(-1px); }
+    .store-mini svg { width: 11px; height: 11px; fill: currentColor; }
 
-    .app-utilify .app-card-bg     { background: linear-gradient(135deg, #FB923C 0%, #F59E0B 50%, #EF4444 100%); }
-    .app-canwasa .app-card-bg     { background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 60%, #06B6D4 100%); }
-    .app-nightbloom .app-card-bg  { background: linear-gradient(135deg, #1E1B4B 0%, #4338CA 50%, #6366F1 100%); }
-    .app-palettely .app-card-bg   { background: linear-gradient(135deg, #F97316 0%, #EC4899 35%, #8B5CF6 70%, #06B6D4 100%); }
-    .app-paperlens .app-card-bg   { background: linear-gradient(135deg, #1E40AF 0%, #2563EB 50%, #06B6D4 100%); }
-    .app-astroorbit .app-card-bg  { background: linear-gradient(135deg, #5B21B6 0%, #7C3AED 50%, #6366F1 100%); }
-    .app-mergerise .app-card-bg   { background: linear-gradient(135deg, #047857 0%, #10B981 50%, #14B8A6 100%); }
-    .app-fuzzypop .app-card-bg    { background: linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #EC4899 100%); }
-    .app-tzc .app-card-bg         { background: linear-gradient(135deg, #0E7490 0%, #2563EB 50%, #6366F1 100%); }
-    .app-qito .app-card-bg        { background: linear-gradient(135deg, #18181B 0%, #3F3F46 100%); }
+    /* Per-app: soft gradient wash from top-right + accent stripe at top */
+    .app-utilify    .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(251,146,60,0.18), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(239,68,68,0.08), transparent 70%); }
+    .app-utilify::before    { background: linear-gradient(90deg, #FB923C, #EF4444); }
 
-    /* Bento layout — no gaps, varied rhythm
-       Row 1-2: [Utilify 4×2] [Canwasa 2×1]
-                                [NightBloom 2×1]
-       Row 3:   [Palettely 3×1] [PaperLens 3×1]
-       Row 4:   [Astro 2×1] [MergeRise 2×1] [FuzzyPop 2×1]
-       Row 5:   [TimeZone 3×1] [Qito 3×1]                          */
-    .app-utilify   { grid-column: span 4; grid-row: span 2; }
-    .app-canwasa   { grid-column: span 2; grid-row: span 1; }
-    .app-nightbloom{ grid-column: span 2; grid-row: span 1; }
-    .app-palettely { grid-column: span 3; grid-row: span 1; }
-    .app-paperlens { grid-column: span 3; grid-row: span 1; }
+    .app-canwasa    .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(236,72,153,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(6,182,212,0.08), transparent 70%); }
+    .app-canwasa::before    { background: linear-gradient(90deg, #EC4899, #06B6D4); }
+
+    .app-nightbloom .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(99,102,241,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(67,56,202,0.08), transparent 70%); }
+    .app-nightbloom::before { background: linear-gradient(90deg, #4338CA, #6366F1); }
+
+    .app-palettely  .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(236,72,153,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(6,182,212,0.08), transparent 70%); }
+    .app-palettely::before  { background: linear-gradient(90deg, #F97316, #EC4899, #8B5CF6, #06B6D4); }
+
+    .app-paperlens  .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(37,99,235,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(6,182,212,0.08), transparent 70%); }
+    .app-paperlens::before  { background: linear-gradient(90deg, #2563EB, #06B6D4); }
+
+    .app-astroorbit .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(124,58,237,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(99,102,241,0.08), transparent 70%); }
+    .app-astroorbit::before { background: linear-gradient(90deg, #7C3AED, #6366F1); }
+
+    .app-mergerise  .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(16,185,129,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(20,184,166,0.08), transparent 70%); }
+    .app-mergerise::before  { background: linear-gradient(90deg, #10B981, #14B8A6); }
+
+    .app-fuzzypop   .app-card-bg { background: radial-gradient(ellipse 70% 60% at 100% 0%, rgba(245,158,11,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(236,72,153,0.08), transparent 70%); }
+    .app-fuzzypop::before   { background: linear-gradient(90deg, #F59E0B, #EC4899); }
+
+    .app-tzc        .app-card-bg { background: radial-gradient(ellipse 60% 60% at 100% 0%, rgba(37,99,235,0.16), transparent 70%), radial-gradient(ellipse 40% 40% at 0% 100%, rgba(99,102,241,0.08), transparent 70%); }
+    .app-tzc::before        { background: linear-gradient(90deg, #2563EB, #6366F1); }
+
+    .app-qito       .app-card-bg { background: radial-gradient(ellipse 60% 60% at 100% 0%, rgba(63,63,70,0.13), transparent 70%), radial-gradient(ellipse 40% 40% at 0% 100%, rgba(24,24,27,0.05), transparent 70%); }
+    .app-qito::before       { background: linear-gradient(90deg, #3F3F46, #18181B); }
+
+    /* Non-uniform bento — varied rhythm, all cards with full store CTAs
+       Row 1-2: [Utilify 2×2 featured] [Canwasa 1×1] [NightBloom 1×1]
+                                       [Palettely 1×1] [PaperLens 1×1]
+       Row 3:   [AstroOrbit 2×1 wide] [MergeRise 1×1] [FuzzyPop 1×1]
+       Row 4:   [TimeZone Connect 2×1 wide] [Qito 2×1 wide]          */
+    .app-utilify   { grid-column: span 2; grid-row: span 2; }
+    .app-canwasa   { grid-column: span 1; grid-row: span 1; }
+    .app-nightbloom{ grid-column: span 1; grid-row: span 1; }
+    .app-palettely { grid-column: span 1; grid-row: span 1; }
+    .app-paperlens { grid-column: span 1; grid-row: span 1; }
     .app-astroorbit{ grid-column: span 2; grid-row: span 1; }
-    .app-mergerise { grid-column: span 2; grid-row: span 1; }
-    .app-fuzzypop  { grid-column: span 2; grid-row: span 1; }
-    .app-tzc       { grid-column: span 3; grid-row: span 1; }
-    .app-qito      { grid-column: span 3; grid-row: span 1; }
+    .app-mergerise { grid-column: span 1; grid-row: span 1; }
+    .app-fuzzypop  { grid-column: span 1; grid-row: span 1; }
+    .app-tzc       { grid-column: span 2; grid-row: span 1; }
+    .app-qito      { grid-column: span 2; grid-row: span 1; }
+
+    /* Featured card — Utilify (2×2) gets prominence + description */
+    .app-card.featured { padding: 28px; gap: 18px; }
+    .app-card.featured .app-icon-mega { width: 80px; height: 80px; border-radius: 18px; }
+    .app-card.featured .app-name { font-size: 1.7rem; letter-spacing: -0.7px; }
+    .app-card.featured .app-tag-text {
+      font-size: 0.92rem; color: var(--body); line-height: 1.55; max-width: none;
+      margin-top: 2px;
+    }
+    .app-card.featured::before { height: 4px; }
+    .featured-pill { background: rgba(9,9,11,0.06) !important; border-color: var(--border) !important; color: var(--text) !important; padding: 4px 12px !important; font-size: 0.62rem !important; }
+
+    /* Wide cards — horizontal layout (icon left, meta right, stores below) */
+    .app-card.wide {
+      flex-direction: row; gap: 18px; align-items: stretch;
+      padding: 22px 24px;
+    }
+    .app-card.wide .app-icon-mega { width: 64px; height: 64px; align-self: flex-start; margin-top: 4px; }
+    .app-card.wide .wide-body { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 0; }
+    .app-card.wide .app-name { font-size: 1.18rem; }
+    .app-card.wide .app-stores { margin-top: auto; }
+
+    /* Featured-top: icon + meta + stores, vertical with description */
+    .featured-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .app-tag-text { display: none; }
+    .app-card.featured .app-tag-text { display: block; }
 
     .featured-sparkles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
     .sparkle {
@@ -503,19 +554,20 @@
       .hero-stats { gap: 12px; }
       .hero-stat-num { font-size: 1.8rem; }
       .float-icon { width: 44px; height: 44px; opacity: 0.6; }
-      .apps-bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: 12px; }
+      .apps-bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 230px; gap: 12px; }
       .app-utilify { grid-column: span 2; grid-row: span 2; }
       .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
       .app-astroorbit, .app-mergerise, .app-fuzzypop { grid-column: span 1; grid-row: span 1; }
       .app-tzc, .app-qito { grid-column: span 2; grid-row: span 1; }
-      .app-card { padding: 20px; border-radius: 22px; }
-      .app-icon-mega { width: 56px; height: 56px; border-radius: 14px; }
-      .app-card.featured .app-icon-mega { width: 84px; height: 84px; border-radius: 20px; }
-      .app-name { font-size: 1.15rem; }
-      .app-card.featured .app-name { font-size: 1.8rem; letter-spacing: -1px; }
-      .app-card.featured .app-tag-text { font-size: 0.9rem; max-width: none; }
-      .app-stores { display: none; }
-      .app-card.featured .app-stores { display: flex; }
+      .app-card { padding: 18px; border-radius: 20px; }
+      .app-card.wide { flex-direction: column; gap: 14px; padding: 18px; }
+      .app-card.wide .app-icon-mega { margin-top: 0; }
+      .app-icon-mega { width: 52px; height: 52px; border-radius: 12px; }
+      .app-card.featured .app-icon-mega { width: 76px; height: 76px; border-radius: 18px; }
+      .app-name { font-size: 1.05rem; }
+      .app-card.featured .app-name { font-size: 1.5rem; letter-spacing: -0.7px; }
+      .app-card.featured .app-tag-text { font-size: 0.88rem; max-width: none; }
+      .apps-watermark { width: 380px; height: 380px; right: -60px; top: 40px; opacity: 0.05; }
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
       .story-grid { grid-template-columns: 1fr; gap: 40px; }
       .builder-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -602,88 +654,151 @@
 </section>
 
 <section id="apps" class="std apps-section">
+  <div class="apps-watermark"><img src="assets/logo.png" alt=""></div>
   <div class="container">
     <div class="reveal" style="max-width:660px;">
       <div class="eyebrow">The Apps</div>
       <h2 class="section-title">Every app, every store, <em>all yours.</em></h2>
-      <p class="section-sub">Each one designed, built, and shipped solo. Tap any card to dive in — every app is live on the App Store and Google Play.</p>
+      <p class="section-sub">Each one designed, built, and shipped solo. Tap any card to open the app's page, or jump straight to the App Store or Google Play.</p>
     </div>
 
     <div class="apps-bento">
 
+      <!-- Featured: Utilify (2x2) — flagship with description + stores -->
       <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/UtilifyApp/'" class="app-card featured app-utilify reveal">
         <div class="app-card-bg"></div>
-        <div class="app-card-overlay"></div>
-        <div class="featured-sparkles"><div class="sparkle s1"></div><div class="sparkle s2"></div><div class="sparkle s3"></div></div>
         <div class="featured-top">
           <img class="app-icon-mega" src="icons/utilify.png" alt="Utilify">
-          <span class="app-cat-pill featured-pill">★ Flagship · Utilities</span>
+          <span class="app-cat-pill featured-pill">★ Flagship</span>
         </div>
         <div class="app-meta">
           <div class="app-name">Utilify</div>
-          <div class="app-tag-text">Your everyday tech toolkit. 18 tools, 2 platforms, 1 app.</div>
+          <div class="app-tag-text">Your everyday tech toolkit. 18 tools, 2 platforms, 1 app — everything you need in one clean interface.</div>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
+      </div>
+
+      <!-- Canwasa (1x1) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/canwasa/'" class="app-card app-canwasa reveal">
+        <div class="app-card-bg"></div>
+        <div class="app-card-head">
+          <img class="app-icon-mega" src="icons/canwasa.png" alt="Canwasa">
+        </div>
+        <div class="app-meta"><span class="app-cat-pill">Creativity</span><div class="app-name">Canwasa</div></div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" onclick="event.stopPropagation()" aria-label="App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>iOS</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.canwasa.canwasa" target="_blank" onclick="event.stopPropagation()" aria-label="Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Play</a>
+        </div>
+      </div>
+
+      <!-- Night Bloom (1x1) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/NightBloom/'" class="app-card app-nightbloom reveal">
+        <div class="app-card-bg"></div>
+        <div class="app-card-head">
+          <img class="app-icon-mega" src="icons/nightbloom.png" alt="Night Bloom">
+        </div>
+        <div class="app-meta"><span class="app-cat-pill">Wellness</span><div class="app-name">Night Bloom</div></div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>iOS</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Play</a>
+        </div>
+      </div>
+
+      <!-- Palettely (1x1) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Palettely/'" class="app-card app-palettely reveal">
+        <div class="app-card-bg"></div>
+        <div class="app-card-head">
+          <img class="app-icon-mega" src="icons/palettely.png" alt="Palettely">
+        </div>
+        <div class="app-meta"><span class="app-cat-pill">Creativity</span><div class="app-name">Palettely</div></div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>iOS</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Play</a>
+        </div>
+      </div>
+
+      <!-- PaperLens (1x1) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/PaperLens/'" class="app-card app-paperlens reveal">
+        <div class="app-card-bg"></div>
+        <div class="app-card-head">
+          <img class="app-icon-mega" src="icons/paperlens.png" alt="PaperLens">
+        </div>
+        <div class="app-meta"><span class="app-cat-pill">Productivity</span><div class="app-name">PaperLens</div></div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>iOS</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Play</a>
+        </div>
+      </div>
+
+      <!-- Astro Orbit (2x1 wide) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/AstroOrbit/'" class="app-card wide app-astroorbit reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/astroorbit.png" alt="Astro Orbit">
+        <div class="wide-body">
+          <div class="app-meta"><span class="app-cat-pill">Game · Arcade</span><div class="app-name">Astro Orbit</div></div>
           <div class="app-stores">
-            <a class="store-mini" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" onclick="event.stopPropagation()">
-              <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-            <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" onclick="event.stopPropagation()">
-              <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+            <a class="store-mini" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+            <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
           </div>
         </div>
       </div>
 
-      <a href="https://playpalapps.github.io/canwasa/" class="app-card app-canwasa reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
-        <img class="app-icon-mega" src="icons/canwasa.png" alt="Canwasa">
-        <div class="app-meta"><span class="app-cat-pill">Creativity</span><div class="app-name">Canwasa</div></div>
-      </a>
-
-      <a href="https://playpalapps.github.io/NightBloom/" class="app-card app-nightbloom reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
-        <img class="app-icon-mega" src="icons/nightbloom.png" alt="Night Bloom">
-        <div class="app-meta"><span class="app-cat-pill">Wellness</span><div class="app-name">Night Bloom</div></div>
-      </a>
-
-      <a href="https://playpalapps.github.io/Palettely/" class="app-card app-palettely reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
-        <img class="app-icon-mega" src="icons/palettely.png" alt="Palettely">
-        <div class="app-meta"><span class="app-cat-pill">Creativity</span><div class="app-name">Palettely</div></div>
-      </a>
-
-      <a href="https://playpalapps.github.io/PaperLens/" class="app-card app-paperlens reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
-        <img class="app-icon-mega" src="icons/paperlens.png" alt="PaperLens">
-        <div class="app-meta"><span class="app-cat-pill">Productivity</span><div class="app-name">PaperLens</div></div>
-      </a>
-
-      <a href="https://playpalapps.github.io/AstroOrbit/" class="app-card app-astroorbit reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
-        <img class="app-icon-mega" src="icons/astroorbit.png" alt="Astro Orbit">
-        <div class="app-meta"><span class="app-cat-pill">Game · Arcade</span><div class="app-name">Astro Orbit</div></div>
-      </a>
-
-      <a href="https://playpalapps.github.io/MergeRise/" class="app-card app-mergerise reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
-        <img class="app-icon-mega" src="icons/mergerise.png" alt="MergeRise">
+      <!-- MergeRise (1x1) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/MergeRise/'" class="app-card app-mergerise reveal">
+        <div class="app-card-bg"></div>
+        <div class="app-card-head">
+          <img class="app-icon-mega" src="icons/mergerise.png" alt="MergeRise">
+        </div>
         <div class="app-meta"><span class="app-cat-pill">Game · Puzzle</span><div class="app-name">MergeRise</div></div>
-      </a>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>iOS</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Play</a>
+        </div>
+      </div>
 
-      <a href="https://playpalapps.github.io/FuzzyPop/" class="app-card app-fuzzypop reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
-        <img class="app-icon-mega" src="icons/fuzzypop.png" alt="Fuzzy Pop">
+      <!-- Fuzzy Pop (1x1) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/FuzzyPop/'" class="app-card app-fuzzypop reveal">
+        <div class="app-card-bg"></div>
+        <div class="app-card-head">
+          <img class="app-icon-mega" src="icons/fuzzypop.png" alt="Fuzzy Pop">
+        </div>
         <div class="app-meta"><span class="app-cat-pill">Game · Family</span><div class="app-name">Fuzzy Pop</div></div>
-      </a>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>iOS</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Play</a>
+        </div>
+      </div>
 
-      <a href="https://playpalapps.github.io/TimezoneConnect/" class="app-card app-tzc reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
+      <!-- Time Zone Connect (2x1 wide) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/TimezoneConnect/'" class="app-card wide app-tzc reveal">
+        <div class="app-card-bg"></div>
         <img class="app-icon-mega" src="icons/timezoneconnect.png" alt="Time Zone Connect">
-        <div class="app-meta"><span class="app-cat-pill">Productivity</span><div class="app-name">Time Zone Connect</div></div>
-      </a>
+        <div class="wide-body">
+          <div class="app-meta"><span class="app-cat-pill">Productivity</span><div class="app-name">Time Zone Connect</div></div>
+          <div class="app-stores">
+            <a class="store-mini" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+            <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.timezoneconnect" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          </div>
+        </div>
+      </div>
 
-      <a href="https://playpalapps.github.io/Qito/" class="app-card app-qito reveal">
-        <div class="app-card-bg"></div><div class="app-card-overlay"></div>
+      <!-- Qito (2x1 wide) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Qito/'" class="app-card wide app-qito reveal">
+        <div class="app-card-bg"></div>
         <img class="app-icon-mega" src="icons/qito.png" alt="Qito">
-        <div class="app-meta"><span class="app-cat-pill">Utilities · QR</span><div class="app-name">Qito</div></div>
-      </a>
+        <div class="wide-body">
+          <div class="app-meta"><span class="app-cat-pill">Utilities · QR</span><div class="app-name">Qito</div></div>
+          <div class="app-stores">
+            <a class="store-mini" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+            <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
