@@ -34,18 +34,11 @@
       display: flex; flex-direction: column; justify-content: space-between;
     }
 
-    .top-row { display: flex; align-items: center; gap: 18px; }
-    .mark {
-      width: 56px; height: 56px; border-radius: 16px;
-      background: conic-gradient(from 220deg, #FF5F8A, #FF8E3C, #FFD93D, #6BCB77, #4DA8FF, #845EC2, #FF5F8A);
-      box-shadow: 0 8px 24px rgba(255,95,138,0.35);
-      position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mark::after { content: ''; position: absolute; inset: 6px; border-radius: 11px; background: white; }
-    .mark span { position: relative; z-index: 2; font-size: 28px; }
-    .brand-name { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: #09090B; }
-    .brand-name b { background: linear-gradient(135deg, #FF5F8A, #845EC2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .top-row { display: flex; align-items: center; gap: 16px; }
+    .mark { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; }
+    .mark img { width: 100%; height: 100%; object-fit: contain; }
+    .brand-name { font-size: 26px; font-weight: 800; letter-spacing: -0.6px; color: #09090B; }
+    .brand-name b { background: linear-gradient(135deg, #1E40AF, #4F46E5, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .badge {
       padding: 8px 18px; border-radius: 100px;
       background: rgba(255,255,255,0.7); border: 1px solid rgba(9,9,11,0.08);
@@ -110,7 +103,7 @@
 
   <div class="layout">
     <div class="top-row">
-      <div class="mark"><span>🌈</span></div>
+      <div class="mark"><img src="assets/logo.png" alt="Playpal"></div>
       <div class="brand-name">Playpal <b>Apps</b></div>
       <div style="flex:1"></div>
       <div class="badge"><span class="dot"></span>Live on iOS &amp; Android</div>

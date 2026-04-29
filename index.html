@@ -71,16 +71,15 @@
     nav.scrolled { box-shadow: 0 14px 40px rgba(9,9,11,0.08); }
     .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-mark {
-      width: 32px; height: 32px; border-radius: 10px;
-      background: conic-gradient(from 220deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c6), var(--c1));
+      width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 14px rgba(255,95,138,0.3);
-      position: relative; overflow: hidden;
     }
-    .nav-mark::after { content: ''; position: absolute; inset: 4px; border-radius: 7px; background: white; }
-    .nav-mark-inner { position: relative; z-index: 2; font-size: 16px; }
-    .nav-brand-name { font-weight: 800; font-size: 1rem; letter-spacing: -0.5px; color: var(--text); }
-    .nav-brand-name b { background: linear-gradient(135deg, var(--c1), var(--c6)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-mark img { width: 100%; height: 100%; object-fit: contain; }
+    .nav-brand-name { font-weight: 800; font-size: 1.02rem; letter-spacing: -0.5px; color: var(--text); }
+    .nav-brand-name b {
+      background: linear-gradient(135deg, #1E40AF, #4F46E5, #7C3AED);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
     .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
     .nav-links a { padding: 8px 14px; border-radius: 100px; color: var(--body); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: background 0.2s, color 0.2s; }
     .nav-links a:hover { color: var(--text); background: rgba(9,9,11,0.05); }
@@ -215,16 +214,19 @@
     .apps-section { background: var(--bg); }
     .apps-bento { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 200px; gap: 16px; margin-top: 56px; }
     .app-card {
-      position: relative; border-radius: 28px; overflow: hidden;
+      position: relative; border-radius: 24px; overflow: hidden;
       cursor: pointer; text-decoration: none;
-      padding: 28px;
+      padding: 24px;
       display: flex; flex-direction: column; justify-content: space-between;
+      gap: 16px;
       transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s;
       isolation: isolate;
       box-shadow: 0 4px 14px rgba(9,9,11,0.04), 0 0 0 1px var(--border);
+      min-height: 200px;
     }
+    .app-card.featured { padding: 36px; border-radius: 32px; gap: 24px; }
     .app-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(9,9,11,0.12); }
-    .app-card:hover .app-card-bg { transform: scale(1.04); }
+    .app-card:hover .app-card-bg { transform: scale(1.06); }
     .app-card-bg { position: absolute; inset: 0; z-index: -1; transition: transform 0.6s cubic-bezier(.22,1,.36,1); }
     .app-card-overlay {
       position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -233,11 +235,13 @@
       mask-image: linear-gradient(180deg, transparent, black 50%, transparent);
     }
     .app-icon-mega {
-      width: 84px; height: 84px; border-radius: 22px;
-      box-shadow: 0 14px 36px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.18) inset;
-      display: block; object-fit: cover;
+      width: 64px; height: 64px; border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.18) inset;
+      display: block; object-fit: cover; flex-shrink: 0;
     }
-    .app-card.featured .app-icon-mega { width: 120px; height: 120px; border-radius: 28px; }
+    .app-card.featured .app-icon-mega { width: 104px; height: 104px; border-radius: 24px; }
+    .featured-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .featured-pill { padding: 6px 14px !important; font-size: 0.7rem !important; }
     .app-meta { display: flex; flex-direction: column; gap: 8px; color: white; }
     .app-cat-pill {
       display: inline-flex; align-items: center; gap: 6px;
@@ -277,11 +281,17 @@
     .app-tzc .app-card-bg         { background: linear-gradient(135deg, #0E7490 0%, #2563EB 50%, #6366F1 100%); }
     .app-qito .app-card-bg        { background: linear-gradient(135deg, #18181B 0%, #3F3F46 100%); }
 
+    /* Bento layout — no gaps, varied rhythm
+       Row 1-2: [Utilify 4×2] [Canwasa 2×1]
+                                [NightBloom 2×1]
+       Row 3:   [Palettely 3×1] [PaperLens 3×1]
+       Row 4:   [Astro 2×1] [MergeRise 2×1] [FuzzyPop 2×1]
+       Row 5:   [TimeZone 3×1] [Qito 3×1]                          */
     .app-utilify   { grid-column: span 4; grid-row: span 2; }
     .app-canwasa   { grid-column: span 2; grid-row: span 1; }
     .app-nightbloom{ grid-column: span 2; grid-row: span 1; }
-    .app-palettely { grid-column: span 2; grid-row: span 1; }
-    .app-paperlens { grid-column: span 2; grid-row: span 1; }
+    .app-palettely { grid-column: span 3; grid-row: span 1; }
+    .app-paperlens { grid-column: span 3; grid-row: span 1; }
     .app-astroorbit{ grid-column: span 2; grid-row: span 1; }
     .app-mergerise { grid-column: span 2; grid-row: span 1; }
     .app-fuzzypop  { grid-column: span 2; grid-row: span 1; }
@@ -388,6 +398,12 @@
         radial-gradient(ellipse 60% 60% at 25% 30%, rgba(255,95,138,0.15), transparent 60%),
         radial-gradient(ellipse 60% 60% at 80% 70%, rgba(132,94,194,0.13), transparent 60%);
     }
+    .builder-watermark {
+      position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+      width: 360px; height: 360px; opacity: 0.05; pointer-events: none;
+      filter: brightness(2);
+    }
+    .builder-watermark img { width: 100%; height: 100%; object-fit: contain; }
     .builder-inner {
       max-width: 1180px; margin: 0 auto; position: relative;
       display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
@@ -447,6 +463,11 @@
     }
     .contact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c6)); }
     .contact-emoji { font-size: 3rem; margin-bottom: 16px; display: inline-block; animation: wave 2.5s ease-in-out infinite; transform-origin: 70% 70%; }
+    .contact-logo {
+      width: 72px; height: 72px; margin: 0 auto 18px; display: block;
+      animation: bob 4s ease-in-out infinite;
+    }
+    .contact-logo img { width: 100%; height: 100%; object-fit: contain; }
     @keyframes wave {
       0%, 60%, 100% { transform: rotate(0); }
       10%, 30% { transform: rotate(14deg); }
@@ -512,7 +533,7 @@
 
 <nav id="nav">
   <a href="#" class="nav-brand">
-    <div class="nav-mark"><span class="nav-mark-inner">🌈</span></div>
+    <div class="nav-mark"><img src="assets/logo.png" alt="Playpal Apps logo"></div>
     <span class="nav-brand-name">Playpal <b>Apps</b></span>
   </a>
   <ul class="nav-links">
@@ -544,7 +565,7 @@
   <div class="hero-inner reveal">
     <div class="hero-eyebrow"><span class="dot"></span>Live on iOS &amp; Android · Made solo with AI</div>
     <h1 class="hero-title">Apps you'll<br><span class="joy">actually love.</span></h1>
-    <p class="hero-sub">Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand. All free on the App Store and Google Play.</p>
+    <p class="hero-sub">Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand. Live on the App Store and Google Play.</p>
     <div class="hero-ctas">
       <a href="#apps" class="btn btn-dark">Explore apps
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -568,15 +589,15 @@
     <span class="strip-item"><span class="star"></span>Made in Sydney</span>
     <span class="strip-item"><span class="star"></span>Crafted with AI</span>
     <span class="strip-item"><span class="star"></span>Polished by hand</span>
-    <span class="strip-item"><span class="star"></span>No ads, no tracking</span>
     <span class="strip-item"><span class="star"></span>iOS &amp; Android</span>
-    <span class="strip-item"><span class="star"></span>Always free to try</span>
+    <span class="strip-item"><span class="star"></span>Built solo</span>
+    <span class="strip-item"><span class="star"></span>Always shipping</span>
     <span class="strip-item"><span class="star"></span>Made in Sydney</span>
     <span class="strip-item"><span class="star"></span>Crafted with AI</span>
     <span class="strip-item"><span class="star"></span>Polished by hand</span>
-    <span class="strip-item"><span class="star"></span>No ads, no tracking</span>
     <span class="strip-item"><span class="star"></span>iOS &amp; Android</span>
-    <span class="strip-item"><span class="star"></span>Always free to try</span>
+    <span class="strip-item"><span class="star"></span>Built solo</span>
+    <span class="strip-item"><span class="star"></span>Always shipping</span>
   </div>
 </section>
 
@@ -585,7 +606,7 @@
     <div class="reveal" style="max-width:660px;">
       <div class="eyebrow">The Apps</div>
       <h2 class="section-title">Every app, every store, <em>all yours.</em></h2>
-      <p class="section-sub">Each one designed, built, and shipped solo. Tap any card to dive in — every app is free on the App Store and Google Play.</p>
+      <p class="section-sub">Each one designed, built, and shipped solo. Tap any card to dive in — every app is live on the App Store and Google Play.</p>
     </div>
 
     <div class="apps-bento">
@@ -594,9 +615,9 @@
         <div class="app-card-bg"></div>
         <div class="app-card-overlay"></div>
         <div class="featured-sparkles"><div class="sparkle s1"></div><div class="sparkle s2"></div><div class="sparkle s3"></div></div>
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div class="featured-top">
           <img class="app-icon-mega" src="icons/utilify.png" alt="Utilify">
-          <span class="app-cat-pill">★ Flagship · Utilities</span>
+          <span class="app-cat-pill featured-pill">★ Flagship · Utilities</span>
         </div>
         <div class="app-meta">
           <div class="app-name">Utilify</div>
@@ -712,7 +733,7 @@
           <div class="story-stat s1"><div class="story-stat-num">AI</div><div class="story-stat-label">Built with Cursor &amp; Claude</div></div>
           <div class="story-stat s2"><div class="story-stat-num">2</div><div class="story-stat-label">Stores · iOS &amp; Android</div></div>
           <div class="story-stat s3"><div class="story-stat-num">5</div><div class="story-stat-label">Distinct categories</div></div>
-          <div class="story-stat s4"><div class="story-stat-num">100%</div><div class="story-stat-label">Solo · indie · all free</div></div>
+          <div class="story-stat s4"><div class="story-stat-num">100%</div><div class="story-stat-label">Solo · indie studio</div></div>
         </div>
       </div>
       <div class="story-visual reveal" style="transition-delay:.1s;">
@@ -734,6 +755,7 @@
 </section>
 
 <section class="builder-section">
+  <div class="builder-watermark"><img src="assets/logo.png" alt=""></div>
   <div class="builder-inner">
     <div class="reveal">
       <div class="eyebrow">The Builder</div>
@@ -765,7 +787,7 @@
 
 <section id="contact" class="contact-section">
   <div class="contact-card reveal">
-    <span class="contact-emoji">👋</span>
+    <div class="contact-logo"><img src="assets/logo.png" alt="Playpal"></div>
     <h2>Got an idea? <em>Say hi.</em></h2>
     <p>Feedback, ideas, partnerships, or just a friendly hello — all welcome. Quickest way is email.</p>
     <div class="contact-btns">
@@ -780,7 +802,7 @@
 
 <footer>
   <div class="footer-inner">
-    <p>© 2026 Playpal Apps · Made in Sydney with care.</p>
+    <p style="display:flex;align-items:center;gap:10px;"><img src="assets/logo.png" alt="" style="width:22px;height:22px;object-fit:contain;">© 2026 Playpal Apps · Made in Sydney with care.</p>
     <div class="footer-links">
       <a href="#apps">Apps</a>
       <a href="#story">Story</a>
