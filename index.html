@@ -336,17 +336,17 @@
       box-shadow: 0 14px 36px rgba(0,0,0,0.4), 0 0 24px var(--app-glow, rgba(99,102,241,0.4));
     }
 
-    /* Solid dark cards — rich substrate for caustic glows to paint on */
-    .app-utilify    { background: linear-gradient(135deg, #2A180E 0%, #150A06 60%, #221408 100%); --app-glow: rgba(251,146,60,0.9); --app-spot: rgba(255,200,140,0.85); }
-    .app-canwasa    { background: linear-gradient(135deg, #2A1530 0%, #100418 50%, #0E1828 100%); --app-glow: rgba(236,72,153,0.85); --app-spot: rgba(255,180,230,0.8); }
-    .app-nightbloom { background: linear-gradient(135deg, #181038 0%, #08061F 60%, #1F1038 100%); --app-glow: rgba(99,102,241,0.9); --app-spot: rgba(190,190,255,0.8); }
-    .app-palettely  { background: linear-gradient(135deg, #2A1232 0%, #14061C 50%, #0A1828 100%); --app-glow: rgba(168,85,247,0.85); --app-spot: rgba(255,180,210,0.8); }
-    .app-paperlens  { background: linear-gradient(135deg, #102045 0%, #06122A 60%, #0A2538 100%); --app-glow: rgba(37,99,235,0.9); --app-spot: rgba(160,210,255,0.8); }
-    .app-astroorbit { background: linear-gradient(135deg, #181038 0%, #0E0620 50%, #221545 100%); --app-glow: rgba(124,58,237,0.9); --app-spot: rgba(200,170,255,0.85); }
-    .app-mergerise  { background: linear-gradient(135deg, #0E2418 0%, #06140A 60%, #0E2A22 100%); --app-glow: rgba(16,185,129,0.85); --app-spot: rgba(160,255,210,0.8); }
-    .app-fuzzypop   { background: linear-gradient(135deg, #321420 0%, #1A0A10 50%, #2E1E10 100%); --app-glow: rgba(245,158,11,0.85); --app-spot: rgba(255,210,160,0.8); }
-    .app-tzc        { background: linear-gradient(135deg, #102045 0%, #08182A 60%, #142438 100%); --app-glow: rgba(37,99,235,0.9); --app-spot: rgba(170,210,255,0.8); }
-    .app-qito       { background: linear-gradient(135deg, #1F1F26 0%, #0E0E14 60%, #25252C 100%); --app-glow: rgba(161,161,170,0.6); --app-spot: rgba(230,230,240,0.6); }
+    /* Solid dark cards — rich substrate for caustic glows */
+    .app-utilify    { background: linear-gradient(135deg, #2A180E 0%, #150A06 60%, #221408 100%); --app-glow: rgba(251,146,60,0.55); --app-spot: rgba(255,200,140,0.5); }
+    .app-canwasa    { background: linear-gradient(135deg, #2A1530 0%, #100418 50%, #0E1828 100%); --app-glow: rgba(236,72,153,0.5); --app-spot: rgba(6,182,212,0.45); }
+    .app-nightbloom { background: linear-gradient(135deg, #181038 0%, #08061F 60%, #1F1038 100%); --app-glow: rgba(99,102,241,0.55); --app-spot: rgba(190,190,255,0.45); }
+    .app-palettely  { background: linear-gradient(135deg, #2A1232 0%, #14061C 50%, #0A1828 100%); --app-glow: rgba(168,85,247,0.5); --app-spot: rgba(236,72,153,0.45); }
+    .app-paperlens  { background: linear-gradient(135deg, #102045 0%, #06122A 60%, #0A2538 100%); --app-glow: rgba(37,99,235,0.55); --app-spot: rgba(6,182,212,0.45); }
+    .app-astroorbit { background: linear-gradient(135deg, #181038 0%, #0E0620 50%, #221545 100%); --app-glow: rgba(124,58,237,0.55); --app-spot: rgba(99,102,241,0.5); }
+    .app-mergerise  { background: linear-gradient(135deg, #0E2418 0%, #06140A 60%, #0E2A22 100%); --app-glow: rgba(16,185,129,0.5); --app-spot: rgba(20,184,166,0.45); }
+    .app-fuzzypop   { background: linear-gradient(135deg, #321420 0%, #1A0A10 50%, #2E1E10 100%); --app-glow: rgba(245,158,11,0.5); --app-spot: rgba(236,72,153,0.45); }
+    .app-tzc        { background: linear-gradient(135deg, #102045 0%, #08182A 60%, #142438 100%); --app-glow: rgba(37,99,235,0.55); --app-spot: rgba(99,102,241,0.45); }
+    .app-qito       { background: linear-gradient(135deg, #1F1F26 0%, #0E0E14 60%, #25252C 100%); --app-glow: rgba(161,161,170,0.35); --app-spot: rgba(230,230,240,0.3); }
 
     /* Per-app top stripe — vibrant 4px gradient line */
     .app-utilify::before    { background: linear-gradient(90deg, #FB923C, #EF4444); }
@@ -360,30 +360,14 @@
     .app-tzc::before        { background: linear-gradient(90deg, #2563EB, #6366F1); }
     .app-qito::before       { background: linear-gradient(90deg, #71717A, #A1A1AA); }
 
-    /* Caustic light system — multi-layer with translucent glass feel */
+    /* Caustic light system — pure radial gradients, no blend modes or blur
+       (mix-blend-mode + filter:blur is unreliable on iOS Safari with rounded corners) */
     .app-card-bg {
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
       overflow: hidden; border-radius: inherit;
-    }
-    /* Primary brand glow — large soft halo, top-left, saturated */
-    .app-card-bg::before {
-      content: ''; position: absolute;
-      width: 380px; height: 380px; border-radius: 50%;
-      top: -130px; left: -90px;
-      background: radial-gradient(circle, var(--app-glow) 0%, transparent 70%);
-      filter: blur(35px);
-      opacity: 1;
-      mix-blend-mode: screen;
-    }
-    /* Caustic bright spot — smaller intense highlight, opposite corner */
-    .app-card-bg::after {
-      content: ''; position: absolute;
-      width: 220px; height: 220px; border-radius: 50%;
-      bottom: -70px; right: -50px;
-      background: radial-gradient(circle, var(--app-spot) 0%, transparent 65%);
-      filter: blur(45px);
-      opacity: 0.95;
-      mix-blend-mode: screen;
+      background:
+        radial-gradient(ellipse 70% 50% at 12% 18%, var(--app-glow) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 92% 88%, var(--app-spot) 0%, transparent 65%);
     }
     /* Glassy top-edge specular highlight — thin bright line catching light */
     .app-card {
@@ -406,15 +390,10 @@
       min-height: auto;
       background: linear-gradient(135deg, #3A1F12 0%, #1F0F08 40%, #2E1810 70%, #3A2418 100%);
     }
-    .app-card.featured .app-card-bg::before {
-      width: 600px; height: 600px;
-      top: -250px; left: auto; right: -150px;
-      opacity: 0.9;
-    }
-    .app-card.featured .app-card-bg::after {
-      width: 320px; height: 320px;
-      top: -80px; left: -100px; bottom: auto; right: auto;
-      opacity: 0.75;
+    .app-card.featured .app-card-bg {
+      background:
+        radial-gradient(ellipse 50% 70% at 88% 50%, var(--app-glow) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 55% at 8% 30%, var(--app-spot) 0%, transparent 70%);
     }
     .app-card.featured .app-icon-mega {
       width: 110px; height: 110px; border-radius: 26px;
@@ -657,8 +636,11 @@
         padding: 24px;
         gap: 14px;
       }
-      .app-card.featured .app-card-bg::before { width: 320px; height: 320px; top: -100px; right: auto; left: -80px; }
-      .app-card.featured .app-card-bg::after { width: 200px; height: 200px; top: auto; right: -50px; bottom: -50px; left: auto; }
+      .app-card.featured .app-card-bg {
+        background:
+          radial-gradient(ellipse 70% 50% at 12% 18%, var(--app-glow) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 45% at 92% 88%, var(--app-spot) 0%, transparent 65%);
+      }
       .app-card.featured .app-icon-mega { width: 76px; height: 76px; border-radius: 18px; }
       .app-card.featured .app-name { font-size: 1.6rem; letter-spacing: -1px; }
       .app-card.featured .app-tag-text { font-size: 0.92rem; }
