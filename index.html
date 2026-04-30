@@ -344,17 +344,17 @@
       box-shadow: 0 14px 36px rgba(0,0,0,0.4), 0 0 24px var(--app-glow, rgba(99,102,241,0.4));
     }
 
-    /* Uniform dark base per app — let the radial gradients provide all color variation */
-    .app-utilify    { background: #1A0E08; --app-glow: rgba(251,146,60,0.55); --app-spot: rgba(255,170,90,0.45); }
-    .app-canwasa    { background: #140622; --app-glow: rgba(236,72,153,0.55); --app-spot: rgba(6,182,212,0.4); }
-    .app-nightbloom { background: #0E0826; --app-glow: rgba(99,102,241,0.6); --app-spot: rgba(168,85,247,0.4); }
-    .app-palettely  { background: #18062A; --app-glow: rgba(168,85,247,0.55); --app-spot: rgba(236,72,153,0.4); }
-    .app-paperlens  { background: #08152A; --app-glow: rgba(37,99,235,0.6); --app-spot: rgba(6,182,212,0.4); }
-    .app-astroorbit { background: #100828; --app-glow: rgba(124,58,237,0.6); --app-spot: rgba(99,102,241,0.45); }
-    .app-mergerise  { background: #06180E; --app-glow: rgba(16,185,129,0.55); --app-spot: rgba(20,184,166,0.4); }
-    .app-fuzzypop   { background: #1A0A14; --app-glow: rgba(245,158,11,0.55); --app-spot: rgba(236,72,153,0.4); }
-    .app-tzc        { background: #08182A; --app-glow: rgba(37,99,235,0.6); --app-spot: rgba(99,102,241,0.4); }
-    .app-qito       { background: #14141A; --app-glow: rgba(161,161,170,0.35); --app-spot: rgba(220,220,230,0.25); }
+    /* Smooth 2-stop diagonal gradient per app — guaranteed to render cleanly on every device */
+    .app-utilify    { background: linear-gradient(135deg, #3A1F12 0%, #0E0604 100%); --app-glow: rgba(251,146,60,0.55); }
+    .app-canwasa    { background: linear-gradient(135deg, #401838 0%, #0A0414 100%); --app-glow: rgba(236,72,153,0.55); }
+    .app-nightbloom { background: linear-gradient(135deg, #221450 0%, #06041C 100%); --app-glow: rgba(99,102,241,0.6); }
+    .app-palettely  { background: linear-gradient(135deg, #381038 0%, #08051A 100%); --app-glow: rgba(168,85,247,0.55); }
+    .app-paperlens  { background: linear-gradient(135deg, #122E55 0%, #04081A 100%); --app-glow: rgba(37,99,235,0.6); }
+    .app-astroorbit { background: linear-gradient(135deg, #281450 0%, #08041C 100%); --app-glow: rgba(124,58,237,0.6); }
+    .app-mergerise  { background: linear-gradient(135deg, #0E3826 0%, #03100A 100%); --app-glow: rgba(16,185,129,0.55); }
+    .app-fuzzypop   { background: linear-gradient(135deg, #401820 0%, #110608 100%); --app-glow: rgba(245,158,11,0.55); }
+    .app-tzc        { background: linear-gradient(135deg, #122E50 0%, #06101F 100%); --app-glow: rgba(37,99,235,0.6); }
+    .app-qito       { background: linear-gradient(135deg, #2A2A33 0%, #08080E 100%); --app-glow: rgba(161,161,170,0.4); }
 
     /* Per-app top stripe — vibrant 4px gradient line */
     .app-utilify::before    { background: linear-gradient(90deg, #FB923C, #EF4444); }
@@ -368,14 +368,8 @@
     .app-tzc::before        { background: linear-gradient(90deg, #2563EB, #6366F1); }
     .app-qito::before       { background: linear-gradient(90deg, #71717A, #A1A1AA); }
 
-    /* Caustic light system — large soft radial gradients (no blend modes / blur for iOS safety) */
-    .app-card-bg {
-      position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      overflow: hidden; border-radius: inherit;
-      background:
-        radial-gradient(ellipse 130% 110% at 0% 0%, var(--app-glow) 0%, transparent 95%),
-        radial-gradient(ellipse 110% 100% at 100% 100%, var(--app-spot) 0%, transparent 95%);
-    }
+    /* No more separate gradient layer — backgrounds applied directly to .app-card */
+    .app-card-bg { display: none; }
     /* Glassy top-edge specular highlight — thin bright line catching light */
     .app-card {
       box-shadow:
@@ -395,13 +389,9 @@
       column-gap: 36px;
       padding: 36px 40px;
       min-height: auto;
-      background: #1F0F08;
+      background: linear-gradient(135deg, #4A2615 0%, #1F0F08 60%, #0E0604 100%);
     }
-    .app-card.featured .app-card-bg {
-      background:
-        radial-gradient(ellipse 90% 130% at 100% 0%, var(--app-glow) 0%, transparent 95%),
-        radial-gradient(ellipse 80% 130% at 0% 100%, var(--app-spot) 0%, transparent 95%);
-    }
+    /* (featured uses its own background gradient — no separate bg layer) */
     .app-card.featured .app-icon-mega {
       width: 110px; height: 110px; border-radius: 26px;
       box-shadow:
@@ -671,11 +661,7 @@
         padding: 24px;
         gap: 14px;
       }
-      .app-card.featured .app-card-bg {
-        background:
-          radial-gradient(ellipse 70% 50% at 12% 18%, var(--app-glow) 0%, transparent 60%),
-          radial-gradient(ellipse 60% 45% at 92% 88%, var(--app-spot) 0%, transparent 65%);
-      }
+      /* featured uses its own background gradient on mobile too */
       .app-card.featured .app-icon-mega { width: 76px; height: 76px; border-radius: 18px; }
       .app-card.featured .app-name { font-size: 1.6rem; letter-spacing: -1px; }
       .app-card.featured .app-tag-text { font-size: 0.92rem; }
