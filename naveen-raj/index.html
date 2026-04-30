@@ -120,12 +120,37 @@
     }
     .btn-outline:hover { border-color: var(--indigo); color: var(--indigo); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99,102,241,0.1); }
 
-    /* Stats */
-    .hero-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; margin-top: 36px; background: var(--border); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); }
-    .stat { background: white; padding: 22px 18px; text-align: center; transition: background 0.2s; }
-    .stat:hover { background: var(--surface); }
-    .stat-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -2px; line-height: 1; background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .stat-label { font-size: 0.68rem; color: var(--muted); font-weight: 600; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; }
+    /* Worked-with logo strip — credibility through brand recognition */
+    .worked-with {
+      margin-top: 56px;
+      display: flex; align-items: center; gap: 36px;
+      flex-wrap: wrap;
+    }
+    .worked-with-label {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 2.6px;
+      text-transform: uppercase; color: var(--muted);
+      flex-shrink: 0; position: relative; padding-right: 18px;
+    }
+    .worked-with-label::after {
+      content: ''; position: absolute; right: 0; top: 50%;
+      width: 1px; height: 22px; background: var(--border);
+      transform: translateY(-50%);
+    }
+    .logo-strip {
+      display: flex; align-items: center; gap: 40px;
+      flex-wrap: wrap;
+    }
+    .logo-strip img {
+      height: 26px; width: auto; max-width: 110px;
+      object-fit: contain;
+      filter: grayscale(1);
+      opacity: 0.5;
+      transition: opacity 0.25s, filter 0.25s, transform 0.25s;
+    }
+    .logo-strip img:hover {
+      opacity: 1; filter: grayscale(0);
+      transform: translateY(-1px);
+    }
 
     /* Stylized portrait — large subtle watermark in hero right area */
     .portrait-watermark {
@@ -324,7 +349,11 @@
       .hero-ctas { justify-content: center; }
       .hero-desc { margin: 0 auto 40px; }
       .hero-role { justify-content: center; }
-      .hero-stats { grid-template-columns: repeat(2,1fr); }
+      .worked-with { gap: 20px; margin-top: 40px; }
+      .worked-with-label { padding-right: 0; }
+      .worked-with-label::after { display: none; }
+      .logo-strip { gap: 28px; }
+      .logo-strip img { height: 22px; }
       section { padding: 64px 20px; }
       .about-grid { grid-template-columns: 1fr; }
       .exp-entry { grid-template-columns: 1fr; gap: 24px; padding-bottom: 80px; }
@@ -370,11 +399,14 @@
           LinkedIn
         </a>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years Exp</div></div>
-        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Apps Shipped</div></div>
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Stores</div></div>
-        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Companies</div></div>
+      <div class="worked-with">
+        <span class="worked-with-label">Worked with</span>
+        <div class="logo-strip">
+          <img src="assets/block.png" alt="Block · Cash App">
+          <img src="assets/afterpay.png" alt="Afterpay">
+          <img src="assets/ubank.svg" alt="UBank">
+          <img src="assets/infosys.png" alt="Infosys">
+        </div>
       </div>
     </div>
     <!-- Stylized portrait watermark — subtle background presence -->
