@@ -546,16 +546,15 @@
       box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset, 0 30px 80px rgba(0,0,0,0.4);
       position: relative; overflow: hidden;
     }
-    /* Naveen face watermark — anchored to the right side, vertically centered */
-    .builder-card-portrait {
-      position: absolute; right: -90px; top: 50%;
-      transform: translateY(-50%);
-      width: 320px; height: 320px;
-      opacity: 0.08; pointer-events: none;
+    /* Naveen face watermark — section-level background, anchored bottom-left */
+    .builder-face {
+      position: absolute; left: -60px; bottom: -40px;
+      width: 360px; height: 360px;
+      opacity: 0.06; pointer-events: none;
       filter: brightness(0) invert(1);
       z-index: 0;
     }
-    .builder-card-portrait img { width: 100%; height: 100%; object-fit: contain; }
+    .builder-face img { width: 100%; height: 100%; object-fit: contain; }
     .builder-card > * { position: relative; z-index: 1; }
     .builder-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c6)); }
     .builder-name { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.7px; margin-bottom: 4px; }
@@ -1006,6 +1005,7 @@
 
 <section class="builder-section">
   <div class="builder-watermark"><img src="assets/logo.png" alt=""></div>
+  <div class="builder-face"><img src="assets/naveen-portrait.png" alt=""></div>
   <div class="builder-inner">
     <div class="reveal">
       <div class="eyebrow">The Builder</div>
@@ -1020,7 +1020,6 @@
       </div>
     </div>
     <div class="builder-card reveal" style="transition-delay:.08s;">
-      <div class="builder-card-portrait"><img src="assets/naveen-portrait.png" alt=""></div>
       <div class="builder-name">Naveen Raj</div>
       <div class="builder-role">Senior Quality Engineering Lead<br>Indie App Builder · Sydney<br>Founder, <b class="role-brand">Playpal Apps</b></div>
       <div class="builder-worked-with">
