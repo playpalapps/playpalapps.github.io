@@ -12,24 +12,16 @@
       position: relative;
     }
 
-    /* Dot grid */
-    .dots {
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(99,102,241,0.15) 1.5px, transparent 1.5px);
-      background-size: 36px 36px;
-      mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 100%);
-    }
-
-    /* Gradient orbs */
+    /* Soft gradient orbs */
     .orb1 {
-      position: absolute; width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(99,102,241,0.13) 0%, transparent 65%);
-      top: -200px; right: -100px;
+      position: absolute; width: 720px; height: 720px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 65%);
+      top: -220px; right: -120px;
     }
     .orb2 {
-      position: absolute; width: 500px; height: 500px; border-radius: 50%;
+      position: absolute; width: 520px; height: 520px; border-radius: 50%;
       background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 65%);
-      bottom: -150px; left: -100px;
+      bottom: -160px; left: -120px;
     }
 
     /* Left accent bar */
@@ -42,11 +34,11 @@
     .layout {
       position: relative; z-index: 2;
       display: flex; align-items: center; justify-content: space-between;
-      height: 100%; padding: 60px 80px 60px 86px;
+      height: 100%; padding: 56px 80px 56px 86px;
     }
 
     /* Left side */
-    .left { flex: 1; padding-right: 60px; }
+    .left { flex: 1; padding-right: 60px; max-width: 720px; }
 
     .badge {
       display: inline-flex; align-items: center; gap: 8px;
@@ -54,7 +46,7 @@
       background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,182,212,0.07));
       border: 1px solid rgba(16,185,129,0.25); border-radius: 100px;
       font-size: 13px; font-weight: 700; color: #047857;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
     .badge-dot {
       width: 8px; height: 8px; border-radius: 50%;
@@ -62,9 +54,9 @@
     }
 
     .name {
-      font-size: 88px; font-weight: 900; line-height: 0.92;
+      font-size: 92px; font-weight: 900; line-height: 0.92;
       letter-spacing: -5px; color: #0F172A;
-      margin-bottom: 18px; padding-bottom: 10px;
+      margin-bottom: 18px; padding-bottom: 12px;
     }
     .name .grad {
       display: block;
@@ -74,51 +66,45 @@
     }
 
     .role {
-      font-size: 17px; font-weight: 600; color: #64748B;
+      font-size: 16px; font-weight: 600; color: #64748B;
       display: flex; align-items: center; gap: 10px;
-      margin-bottom: 36px;
+      margin-bottom: 32px; flex-wrap: wrap;
     }
-    .role-sep { width: 4px; height: 4px; border-radius: 50%; background: #CBD5E1; }
-
-    /* Stats row */
-    .stats { display: flex; gap: 0; border-radius: 16px; overflow: hidden; border: 1px solid #E2E8F0; background: #E2E8F0; width: fit-content; }
-    .stat {
-      background: white; padding: 16px 28px; text-align: center;
-      border-right: 1px solid #E2E8F0;
-    }
-    .stat:last-child { border-right: none; }
-    .stat-num {
-      font-size: 30px; font-weight: 900; letter-spacing: -2px; line-height: 1;
-      background: linear-gradient(135deg, #6366F1, #7C3AED);
+    .role-sep { width: 4px; height: 4px; border-radius: 50%; background: #CBD5E1; flex-shrink: 0; }
+    .role b {
+      background: linear-gradient(135deg, #1E40AF, #4F46E5, #7C3AED);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background-clip: text; font-weight: 800;
     }
-    .stat-label { font-size: 10px; color: #94A3B8; font-weight: 700; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* Right — photo */
-    .right { flex-shrink: 0; position: relative; }
-    .photo-wrap { position: relative; width: 260px; height: 260px; }
-    .photo-ring {
-      position: absolute; inset: -7px; border-radius: 50%;
-      background: conic-gradient(from 0deg, #6366F1, #7C3AED, #EC4899, #06B6D4, #10B981, #6366F1);
+    /* Worked-with logos strip */
+    .worked-with {
+      display: flex; align-items: center; gap: 28px;
     }
-    .photo-gap {
-      position: absolute; inset: -2px; border-radius: 50%; background: #FAFBFF;
-      z-index: 1;
+    .ww-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 2.4px;
+      text-transform: uppercase; color: #94A3B8;
+      padding-right: 18px; border-right: 1px solid #E2E8F0;
     }
-    .photo-glow {
-      position: absolute; inset: -30px; border-radius: 50%; z-index: 0;
-      background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+    .logo-row {
+      display: flex; align-items: center; gap: 36px;
     }
-    .photo-wrap img {
-      width: 260px; height: 260px; border-radius: 50%;
-      object-fit: cover; object-position: center top;
-      position: relative; z-index: 2; display: block;
+    .logo-row img {
+      object-fit: contain; filter: grayscale(1); opacity: 0.55;
     }
+    .logo-row img:nth-child(1) { height: 44px; }   /* block */
+    .logo-row img:nth-child(2) { height: 56px; }   /* afterpay */
+    .logo-row img:nth-child(3) { height: 24px; }   /* ubank */
+    .logo-row img:nth-child(4) { height: 24px; }   /* infosys */
+
+    /* Right — stylized portrait */
+    .right { flex-shrink: 0; position: relative; width: 360px; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .portrait { width: 360px; height: 360px; }
+    .portrait img { width: 100%; height: 100%; object-fit: contain; opacity: 0.18; }
 
     /* Bottom URL stamp */
     .url-stamp {
-      position: absolute; bottom: 28px; right: 80px;
+      position: absolute; bottom: 24px; right: 80px;
       font-size: 13px; font-weight: 700; color: #94A3B8;
       letter-spacing: 0.5px; z-index: 3;
     }
@@ -130,29 +116,27 @@
   </style>
 </head>
 <body>
-  <div class="dots"></div>
   <div class="orb1"></div>
   <div class="orb2"></div>
   <div class="accent-bar"></div>
 
   <div class="layout">
     <div class="left">
-      <div class="badge"><span class="badge-dot"></span> Block · Cash App · Sydney</div>
+      <div class="badge"><span class="badge-dot"></span> Sydney, Australia</div>
       <h1 class="name">Naveen<span class="grad">Raj</span></h1>
-      <p class="role">Senior QA Lead <span class="role-sep"></span> Indie App Builder</p>
-      <div class="stats">
-        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years Exp</div></div>
-        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Apps Shipped</div></div>
-        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Companies</div></div>
+      <p class="role">Senior QA Lead <span class="role-sep"></span> Indie App Builder <span class="role-sep"></span> Founder, <b>Playpal Apps</b></p>
+      <div class="worked-with">
+        <span class="ww-label">Worked with</span>
+        <div class="logo-row">
+          <img src="assets/block.png" alt="Block">
+          <img src="assets/afterpay.png" alt="Afterpay">
+          <img src="assets/ubank.svg" alt="UBank">
+          <img src="assets/infosys.png" alt="Infosys">
+        </div>
       </div>
     </div>
     <div class="right">
-      <div class="photo-wrap">
-        <div class="photo-glow"></div>
-        <div class="photo-ring"></div>
-        <div class="photo-gap"></div>
-        <img src="naveen.png" alt="Naveen Raj">
-      </div>
+      <div class="portrait"><img src="assets/naveen-portrait.png" alt=""></div>
     </div>
   </div>
   <div class="url-stamp">playpalapps.github.io/<span>naveen-raj</span></div>
