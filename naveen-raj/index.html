@@ -98,6 +98,9 @@
     .hero-name { font-size: clamp(4.5rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.92; letter-spacing: -5px; color: var(--text); margin-bottom: 10px; padding-bottom: 0.12em; }
     .hero-name .grad { background: linear-gradient(135deg, #6366F1 0%, #7C3AED 45%, #EC4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; padding-bottom: 0.18em; margin-bottom: -0.18em; }
     .hero-role { font-size: 1rem; color: var(--muted); font-weight: 500; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .role-link { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .role-link:hover { color: var(--text); }
+    .role-link b { background: linear-gradient(135deg, #1E40AF, #4F46E5, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
     .role-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--border); }
     .hero-desc { font-size: 1.05rem; color: var(--body); line-height: 1.8; max-width: 500px; margin-bottom: 28px; }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -171,6 +174,21 @@
     section { padding: 96px 48px; }
     .container { max-width: 1200px; margin: 0 auto; }
     .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.68rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--indigo); margin-bottom: 18px; }
+    /* Studio attribution eyebrow — used for "Playpal Apps · my studio" */
+    .studio-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px 8px 8px; border-radius: 100px;
+      background: white; border: 1px solid var(--border);
+      box-shadow: 0 4px 14px rgba(9,9,11,0.04);
+      text-decoration: none;
+      margin-bottom: 18px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .studio-eyebrow:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(9,9,11,0.08); border-color: var(--borderStrong); }
+    .studio-eyebrow img { width: 24px; height: 24px; object-fit: contain; flex-shrink: 0; }
+    .studio-eyebrow span { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3px; color: var(--text); }
+    .studio-eyebrow span b { background: linear-gradient(135deg, #1E40AF, #4F46E5, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
+    .studio-eyebrow svg { color: var(--muted); flex-shrink: 0; }
     .eyebrow::before { content: ''; width: 28px; height: 2px; background: linear-gradient(90deg, #6366F1, #7C3AED); border-radius: 2px; display: block; }
     .section-title { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -2.5px; line-height: 1.05; color: var(--text); margin-bottom: 16px; }
     .section-sub { font-size: 1rem; color: var(--body); max-width: 520px; line-height: 1.8; }
@@ -392,7 +410,7 @@
     <div class="hero-left reveal">
       <div class="hero-badge"><span class="badge-dot"></span> Sydney, Australia</div>
       <h1 class="hero-name">Naveen<span class="grad">Raj</span></h1>
-      <p class="hero-role">Senior Quality Engineering Lead <span class="role-sep"></span> Indie App Builder</p>
+      <p class="hero-role">Senior Quality Engineering Lead <span class="role-sep"></span> Indie App Builder <span class="role-sep"></span> <a href="https://playpalapps.github.io/" target="_blank" class="role-link">Founder, <b>Playpal Apps</b></a></p>
       <p class="hero-desc">10+ years breaking complex systems so users don't have to. After hours, building AI-powered mobile apps that ship to real people.</p>
       <div class="hero-ctas">
         <a href="#apps" class="btn-primary">
@@ -454,7 +472,11 @@
 <section id="apps" class="apps-section">
   <div class="container">
     <div class="reveal">
-      <div class="eyebrow">Apps</div>
+      <a class="studio-eyebrow" href="https://playpalapps.github.io/" target="_blank" aria-label="Visit Playpal Apps">
+        <img src="assets/playpal-logo.png" alt="Playpal Apps logo">
+        <span>Playpal <b>Apps</b> · my studio</span>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
       <h2 class="section-title">Built &amp; shipped solo.</h2>
       <p class="section-sub">Every app designed, developed, and launched independently using AI-assisted engineering.</p>
     </div>
