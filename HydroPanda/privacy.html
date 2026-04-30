@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Privacy Policy — Hydro Panda</title>
+<meta name="description" content="Hydro Panda's privacy policy. All hydration data lives on your device. No accounts, no servers, no third-party analytics — just AdMob and the App Store, both transparently disclosed.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/HydroPanda/privacy.html">
+
+<meta property="og:title" content="Privacy Policy — Hydro Panda">
+<meta property="og:description" content="Hydro Panda's privacy policy. All hydration data lives on your device.">
+<meta property="og:url" content="https://playpalapps.github.io/HydroPanda/privacy.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://playpalapps.github.io/HydroPanda/icon.png">
+
+<meta name="theme-color" content="#060A14">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --aqua-1:#00E5FF; --aqua-3:#0066FF;
+  --brand-gradient: linear-gradient(135deg, #00E5FF 0%, #33C5FF 45%, #0066FF 100%);
+  --bg:#060A14;
+  --surface: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.16);
+  --ink:#FFFFFF;
+  --ink-2: rgba(255,255,255,0.78);
+  --ink-3:#8FA3C9;
+  --ink-4: rgba(143,163,201,0.45);
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --page-max: 860px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(0,229,255,0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 18%, rgba(0,102,255,0.14), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.65  0 0 0 0 0.85  0 0 0 0 1  0 0 0 0.10 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+}
+.container { width: 100%; max-width: var(--page-max); margin-inline: auto; padding-inline: var(--gutter); position: relative; z-index: 1; }
+
+a { color: #9FF1FF; text-decoration: none; border-bottom: 1px solid rgba(159,241,255,0.22); transition: border-color .2s var(--ease), color .2s var(--ease); }
+a:hover { color: var(--ink); border-color: rgba(159,241,255,0.65); }
+
+nav.site {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  background: linear-gradient(to bottom, rgba(6,10,20,0.86), rgba(6,10,20,0.66));
+  border-bottom: 1px solid var(--border);
+}
+nav.site .row { display: flex; align-items: center; gap: 24px; padding: 14px 0; }
+nav.site .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; border: 0; color: var(--ink); }
+nav.site .brand img { width: 30px; height: 30px; border-radius: 8px; box-shadow: 0 4px 18px -6px rgba(0,229,255,0.55); }
+nav.site .brand .name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 17px; }
+nav.site .links { margin-left: auto; display: flex; gap: 22px; }
+nav.site .links a { color: var(--ink-2); border: 0; font-size: 14px; font-weight: 500; }
+nav.site .links a:hover { color: var(--ink); }
+
+header.doc {
+  padding: clamp(56px, 8vw, 100px) 0 clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--border);
+}
+header.doc .eyebrow {
+  display: inline-block;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+header.doc h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+header.doc h1 .accent {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+header.doc p.meta { color: var(--ink-3); font-size: 14px; margin: 0; }
+header.doc p.lead { color: var(--ink-2); font-size: 18px; line-height: 1.55; max-width: 58ch; margin-top: 18px; }
+
+main.doc { padding: clamp(40px, 5vw, 72px) 0 clamp(60px, 8vw, 100px); }
+main.doc h2 {
+  font-size: clamp(1.4rem, 2vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.018em;
+  margin: 48px 0 14px;
+}
+main.doc h3 { font-size: 17px; font-weight: 700; margin: 26px 0 8px; color: var(--ink); }
+main.doc p, main.doc li { color: var(--ink-2); }
+main.doc ul { padding-left: 20px; }
+main.doc li { margin-bottom: 6px; }
+main.doc code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 0.92em;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+main.doc .callout {
+  margin: 32px 0;
+  padding: 22px 26px;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.09), rgba(0,102,255,0.04));
+}
+main.doc .callout strong { color: var(--ink); }
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0 8px;
+}
+@media (max-width: 580px) { .nutrition-grid { grid-template-columns: 1fr; } }
+.nutrition-item {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.nutrition-item .k { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); font-weight: 600; }
+.nutrition-item .v { color: var(--ink); font-weight: 600; margin-top: 4px; }
+.nutrition-item .v.no { color: #FF8FB3; }
+.nutrition-item .v.partial { color: #FFD68A; }
+
+footer.site { padding: 40px 0 56px; border-top: 1px solid var(--border); margin-top: 40px; position: relative; z-index: 1; }
+footer.site .row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+footer.site a { color: var(--ink-3); border: 0; font-size: 13.5px; }
+footer.site a:hover { color: var(--ink); }
+footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand">
+      <img src="icon.png" alt="" width="30" height="30">
+      <span class="name">Hydro Panda</span>
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </div>
+  </div>
+</nav>
+
+<header class="doc">
+  <div class="container">
+    <span class="eyebrow">Legal · Plain English</span>
+    <h1>Privacy <span class="accent">Policy.</span></h1>
+    <p class="meta">Effective date: 28 April 2026 · Last updated: 28 April 2026</p>
+    <p class="lead">Hydro Panda is built around a simple promise: your hydration history is yours, and only yours. This page is the unabbreviated, byte-level version of that promise.</p>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="container">
+
+    <div class="callout">
+      <strong>TL;DR —</strong> Hydro Panda has no accounts, no cloud, no analytics, and no servers. Your sips, streaks, settings, and screen-name (if you set one) live on your phone via <code>SharedPreferences</code>. The only network calls are (1) Google AdMob banner ads on the free tier, (2) the in-app purchase verification with Apple App Store / Google Play if you upgrade to Pro, and (3) Google's User Messaging Platform (UMP) once, to ask for your ad consent in the EEA/UK. Delete the app and every byte is gone.
+    </div>
+
+    <h2>1. What Hydro Panda stores on your device</h2>
+    <p>All of the following lives in the app's sandbox (iOS: the app container; Android: the app's private internal storage). None of it is transmitted off-device by Hydro Panda itself.</p>
+    <ul>
+      <li><strong>Hydration history</strong> — every drink you log: time, amount, and drink type (water, coffee, tea, juice, milk, etc.). Stored via <code>SharedPreferences</code> as a JSON-encoded list.</li>
+      <li><strong>Daily goal &amp; streak data</strong> — your daily target in millilitres / fluid ounces, your current streak count, longest streak, and milestone-unlock state.</li>
+      <li><strong>App settings</strong> — your selected vessel skin, units (mL or fl oz), reminder schedule, quiet hours, theme, haptics toggle, and notification sound.</li>
+      <li><strong>Optional name field</strong> — if you choose to set a name for your panda or yourself, it is stored locally. Nothing is sent off-device.</li>
+      <li><strong>Pro entitlement</strong> — a single boolean indicating whether you've purchased Hydro Panda Pro, plus the platform-specific receipt status. We never store payment information.</li>
+    </ul>
+    <p>You can clear all of this at any time via <em>Settings → Reset all data</em>, or by uninstalling the app — both wipe the entire sandbox.</p>
+
+    <h2>2. What Hydro Panda does not do</h2>
+    <div class="nutrition-grid">
+      <div class="nutrition-item"><div class="k">Cloud sync</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Account sign-up</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Email collection</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Third-party analytics</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Crash reporters</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Firebase / Mixpanel / Amplitude</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Location tracking</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Contacts / camera / microphone</div><div class="v no">Never accessed</div></div>
+      <div class="nutrition-item"><div class="k">Ads (free tier)</div><div class="v partial">AdMob banner only</div></div>
+      <div class="nutrition-item"><div class="k">Ads (Pro tier)</div><div class="v no">None — SDK not initialised</div></div>
+    </div>
+
+    <h2>3. Notifications &amp; reminders</h2>
+    <p>Hydration reminders are scheduled <strong>locally</strong> on your device using the <code>flutter_local_notifications</code> plugin. They never leave your phone. There is no push server, no notification service, no remote notification ID. If notifications stop working, that's almost always a system permission issue — see the <a href="support.html#reminders">support page</a> for fixes.</p>
+
+    <h2>4. Banner ads (free tier only)</h2>
+    <p>The free tier shows a single banner ad at the bottom of the home screen, served by <strong>Google AdMob</strong>. AdMob is the SDK used; the production ad-unit IDs are baked into the app and inspectable.</p>
+    <ul>
+      <li>AdMob may collect a device-level <strong>advertising identifier</strong> — IDFA on iOS (Identifier for Advertisers), AAID on Android (Android Advertising ID) — for ad personalisation, subject to your consent.</li>
+      <li>AdMob's data practices are governed by Google's privacy policy: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">policies.google.com/technologies/ads</a>.</li>
+      <li><strong>Upgrading to Hydro Panda Pro removes all ads</strong>, and the AdMob SDK is no longer initialised on Pro devices — meaning no ad requests are made, period.</li>
+    </ul>
+
+    <h2>5. Consent — GDPR, UK GDPR, and similar</h2>
+    <p>If your device locale or IP indicates you are in the European Economic Area, the United Kingdom, or Switzerland, Hydro Panda uses Google's <strong>User Messaging Platform (UMP)</strong> to show a consent dialog before initialising AdMob. You may:</p>
+    <ul>
+      <li>Accept personalised ads.</li>
+      <li>Decline personalised ads — non-personalised ads will still serve.</li>
+      <li>Manage your choices later via <em>Settings → Manage ad preferences</em>, which re-opens the UMP form.</li>
+    </ul>
+    <p>UMP itself does not transmit hydration data — its only job is to record your ad-consent state and pass it to AdMob.</p>
+
+    <h2>6. App Tracking Transparency (iOS)</h2>
+    <p>On iOS 14.5+, Hydro Panda shows the system-provided <strong>App Tracking Transparency</strong> (ATT) prompt the first time you log a drink — that is, after you've actually started using the app. If you tap <em>Ask App Not to Track</em>, the IDFA is unavailable and ads serve in non-personalised mode. If you tap <em>Allow</em>, AdMob can use the IDFA per Apple's policies. You can change this anytime in iOS <em>Settings → Privacy &amp; Security → Tracking</em>.</p>
+
+    <h2>7. In-app purchases</h2>
+    <p>Hydro Panda Pro is a <strong>one-time, non-consumable</strong> purchase priced at $2.99 USD (or local-currency equivalent). The transaction is handled entirely by Apple StoreKit (iOS) or Google Play Billing (Android) via their native SDKs. We receive only the purchase status — purchased or not — and the platform receipt for restoration. We never see your payment method, billing address, or any card detail.</p>
+    <ul>
+      <li><strong>iOS Family Sharing</strong> is supported. If a family-group member purchases Pro, all family-group members receive Pro on their own Apple IDs.</li>
+      <li><strong>Restorable</strong> across devices linked to the same Apple ID or Google Play account via <em>Settings → Restore purchases</em>.</li>
+      <li>Refunds are handled by Apple or Google per their policies — see the <a href="support.html#pro">support page</a> for the exact links.</li>
+    </ul>
+
+    <h2>8. Your rights (GDPR, CCPA, and equivalents)</h2>
+    <p>Because Hydro Panda doesn't transmit personal data to a server, there is no central database from which to retrieve, correct, or delete your information — there is no such database. Your data lives on your device, under your control. You may at any time:</p>
+    <ul>
+      <li><strong>View</strong> all stored hydration entries via <em>Settings → History</em> inside the app.</li>
+      <li><strong>Delete</strong> individual entries from the History tab.</li>
+      <li><strong>Wipe everything</strong> via <em>Settings → Reset all data</em>.</li>
+      <li><strong>Opt out of personalised ads</strong> any time via <em>Settings → Manage ad preferences</em>.</li>
+      <li><strong>Uninstall the app</strong> — this deletes the entire app sandbox on both iOS and Android, including every saved sip.</li>
+    </ul>
+
+    <h2>9. Children's privacy</h2>
+    <p>Hydro Panda is rated 4+ on the App Store and Everyone on Google Play, but it is not directed at children. We do not knowingly collect personal information from children under 13. If we learn that a child under 13 has used Hydro Panda in a way that produces personal data we hold, we will delete it — though, as noted above, we don't actually hold any personal data to begin with. Ads served to devices flagged as child-directed (via the store's age rating or device-level configuration) are restricted per Google's family-safe ad policies.</p>
+
+    <h2>10. Security</h2>
+    <p>Since no personal data is transmitted by Hydro Panda itself, there is no transport or database security to manage on our end. For the small surfaces that exist:</p>
+    <ul>
+      <li>Locally stored data is placed in the standard iOS / Android app sandbox, which is encrypted at rest by the operating system when a device passcode is set.</li>
+      <li>AdMob and store-billing communications use HTTPS via the platform's native networking stack.</li>
+      <li>We do not roll our own crypto for entitlements — we trust Apple's and Google's signed receipts.</li>
+    </ul>
+
+    <h2>11. International data transfers</h2>
+    <p>Hydro Panda does not transfer your data internationally because Hydro Panda does not transfer your data anywhere. AdMob and store-billing requests are sent to Google and Apple infrastructure, which may operate globally; these are governed by Google's and Apple's own policies, linked above.</p>
+
+    <h2>12. Third-party services in summary</h2>
+    <ul>
+      <li><strong>Google AdMob</strong> — banner ads on the free tier. <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Policy</a>.</li>
+      <li><strong>Google User Messaging Platform (UMP)</strong> — consent collection in EEA/UK. <a href="https://support.google.com/admob/answer/10113207" target="_blank" rel="noopener">Docs</a>.</li>
+      <li><strong>Apple App Store / StoreKit</strong> — purchase processing on iOS. <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Policy</a>.</li>
+      <li><strong>Google Play Billing</strong> — purchase processing on Android. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Policy</a>.</li>
+    </ul>
+
+    <h2>13. Changes to this policy</h2>
+    <p>If this policy changes, the updated version is published at this URL and the "Last updated" date above changes. Material changes — for example, if Hydro Panda were ever to introduce any form of server-backed feature — would be surfaced in-app on the next launch with a changelog entry linking here.</p>
+
+    <h2>14. Contact</h2>
+    <p>Questions, concerns, a privacy complaint, or a request to exercise a data right — email <a href="mailto:support@playpalapps.com?subject=Hydro%20Panda%20privacy%20question">support@playpalapps.com</a>. We reply personally, usually within seven days.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container row">
+    <div class="copy">&copy; 2026 Playpal Apps</div>
+    <div>
+      <a href="index.html">Home</a> · <a href="terms.html">Terms</a> · <a href="support.html">Support</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -235,7 +235,7 @@
     /* Featured Utilify spans full width (hero strip) */
     .app-utilify { grid-column: 1 / -1; }
     /* Other 9 cards = standard 1-col cards in 3x3 grid */
-    .app-canwasa, .app-nightbloom, .app-palettely,
+    .app-canwasa, .app-nightbloom, .app-palettely, .app-hydropanda,
     .app-paperlens, .app-astroorbit, .app-mergerise,
     .app-fuzzypop, .app-tzc, .app-qito { grid-column: span 1; }
     /* DARK premium app cards — vibrant accents, content pops */
@@ -353,6 +353,7 @@
     .app-astroorbit { background: linear-gradient(135deg, #281450 0%, #08041C 100%); --app-glow: rgba(124,58,237,0.6); }
     .app-mergerise  { background: linear-gradient(135deg, #0E3826 0%, #03100A 100%); --app-glow: rgba(16,185,129,0.55); }
     .app-fuzzypop   { background: linear-gradient(135deg, #401820 0%, #110608 100%); --app-glow: rgba(245,158,11,0.55); }
+    .app-hydropanda { background: linear-gradient(135deg, #0A2540 0%, #050D1A 100%); --app-glow: rgba(0,213,255,0.55); }
     .app-tzc        { background: linear-gradient(135deg, #122E50 0%, #06101F 100%); --app-glow: rgba(37,99,235,0.6); }
     .app-qito       { background: linear-gradient(135deg, #2A2A33 0%, #08080E 100%); --app-glow: rgba(161,161,170,0.4); }
 
@@ -365,6 +366,25 @@
     .app-astroorbit::before { background: linear-gradient(90deg, #7C3AED, #6366F1); }
     .app-mergerise::before  { background: linear-gradient(90deg, #10B981, #14B8A6); }
     .app-fuzzypop::before   { background: linear-gradient(90deg, #F59E0B, #EC4899); }
+    .app-hydropanda::before { background: linear-gradient(90deg, #00E5FF, #0066FF); }
+    /* "Coming soon" store-mini variant: visually muted, non-clickable.
+       Inline "· Soon" suffix replaced with an absolutely-positioned corner
+       pill so the button label can keep its native length without wrapping
+       — "Google Play · Soon" was breaking onto two lines otherwise. */
+    .store-mini.soon { opacity: .55; pointer-events: none; cursor: default; position: relative; white-space: nowrap; }
+    .store-mini.soon::after {
+      content: 'SOON';
+      position: absolute;
+      top: 4px; right: 6px;
+      font-size: .54rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      background: rgba(0,213,255,0.16);
+      color: rgba(160,230,255,0.95);
+      padding: 2px 5px;
+      border-radius: 4px;
+      line-height: 1;
+    }
     .app-tzc::before        { background: linear-gradient(90deg, #2563EB, #6366F1); }
     .app-qito::before       { background: linear-gradient(90deg, #71717A, #A1A1AA); }
 
@@ -667,7 +687,8 @@
       .apps-bento { grid-template-columns: 1fr; gap: 14px; }
       .app-utilify { grid-column: 1 / -1; }
       .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
-      .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito { grid-column: span 1; }
+      .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito,
+      .app-hydropanda { grid-column: span 1; }
       .app-card { padding: 22px; border-radius: 18px; min-height: auto; gap: 12px; }
       .app-icon-mega { width: 64px; height: 64px; border-radius: 14px; }
       .app-name { font-size: 1.25rem; }
@@ -830,6 +851,21 @@
         </div>
       </div>
 
+      <!-- Hydro Panda (1x1) — pre-launch; store buttons rendered as "Soon" -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/HydroPanda/'" class="app-card app-hydropanda reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/hydropanda.png" alt="Hydro Panda">
+        <div class="app-meta">
+          <span class="app-cat">Wellness</span>
+          <div class="app-name">Hydro Panda</div>
+          <div class="app-tag-text">Sip happens. The cutest water tracker — panda fills as you drink.</div>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
+        </div>
+      </div>
+
       <!-- Palettely (1x1) -->
       <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Palettely/'" class="app-card app-palettely reveal">
         <div class="app-card-bg"></div>
@@ -956,8 +992,8 @@
         <div class="cat-list"><div class="cat-app">Canwasa</div><div class="cat-app">Palettely</div></div>
       </div>
       <div class="cat-card cat-wellness reveal" style="transition-delay:.1s;">
-        <span class="cat-emoji">🌙</span><div class="cat-name">Wellness</div><div class="cat-count">1 app</div>
-        <div class="cat-list"><div class="cat-app">Night Bloom</div></div>
+        <span class="cat-emoji">🌙</span><div class="cat-name">Wellness</div><div class="cat-count">2 apps</div>
+        <div class="cat-list"><div class="cat-app">Night Bloom</div><div class="cat-app">Hydro Panda</div></div>
       </div>
       <div class="cat-card cat-prod reveal" style="transition-delay:.15s;">
         <span class="cat-emoji">📋</span><div class="cat-name">Productivity</div><div class="cat-count">2 apps</div>

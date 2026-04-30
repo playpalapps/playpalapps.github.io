@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Support — Hydro Panda</title>
+<meta name="description" content="Hydro Panda support. Common questions, troubleshooting tips, and a direct line to a human. We reply personally within seven days.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/HydroPanda/support.html">
+
+<meta property="og:title" content="Support — Hydro Panda">
+<meta property="og:description" content="Hydro Panda support. FAQ, troubleshooting, and a direct line to a human.">
+<meta property="og:url" content="https://playpalapps.github.io/HydroPanda/support.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://playpalapps.github.io/HydroPanda/icon.png">
+
+<meta name="theme-color" content="#060A14">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --aqua-1:#00E5FF; --aqua-3:#0066FF;
+  --brand-gradient: linear-gradient(135deg, #00E5FF 0%, #33C5FF 45%, #0066FF 100%);
+  --bg:#060A14;
+  --surface: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.16);
+  --ink:#FFFFFF;
+  --ink-2: rgba(255,255,255,0.78);
+  --ink-3:#8FA3C9;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --page-max: 980px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(0,229,255,0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 18%, rgba(0,102,255,0.14), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.65  0 0 0 0 0.85  0 0 0 0 1  0 0 0 0.10 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+}
+.container { width: 100%; max-width: var(--page-max); margin-inline: auto; padding-inline: var(--gutter); position: relative; z-index: 1; }
+
+a { color: #9FF1FF; text-decoration: none; border-bottom: 1px solid rgba(159,241,255,0.22); transition: border-color .2s var(--ease), color .2s var(--ease); }
+a:hover { color: var(--ink); border-color: rgba(159,241,255,0.65); }
+
+nav.site {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  background: linear-gradient(to bottom, rgba(6,10,20,0.86), rgba(6,10,20,0.66));
+  border-bottom: 1px solid var(--border);
+}
+nav.site .row { display: flex; align-items: center; gap: 24px; padding: 14px 0; }
+nav.site .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; border: 0; color: var(--ink); }
+nav.site .brand img { width: 30px; height: 30px; border-radius: 8px; box-shadow: 0 4px 18px -6px rgba(0,229,255,0.55); }
+nav.site .brand .name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 17px; }
+nav.site .links { margin-left: auto; display: flex; gap: 22px; }
+nav.site .links a { color: var(--ink-2); border: 0; font-size: 14px; font-weight: 500; }
+nav.site .links a:hover { color: var(--ink); }
+
+header.doc {
+  padding: clamp(56px, 8vw, 100px) 0 clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--border);
+}
+header.doc .eyebrow {
+  display: inline-block;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+header.doc h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+header.doc h1 .accent {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+header.doc p.lead { color: var(--ink-2); font-size: 18px; line-height: 1.55; max-width: 58ch; margin-top: 18px; }
+
+main { padding: clamp(40px, 5vw, 72px) 0 clamp(60px, 8vw, 90px); }
+
+/* Section */
+.section { margin-bottom: clamp(48px, 6vw, 80px); }
+.section-head { margin-bottom: 26px; }
+.section-head h2 {
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.018em;
+  margin: 0 0 8px;
+}
+.section-head p { color: var(--ink-3); margin: 0; max-width: 60ch; font-size: 15.5px; }
+
+/* Quick help cards */
+.quickhelp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 880px) { .quickhelp-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .quickhelp-grid { grid-template-columns: 1fr; } }
+.qh {
+  display: block;
+  padding: 20px 22px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  transition: transform .25s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+}
+.qh:hover { transform: translateY(-2px); background: var(--surface-2); border-color: var(--border-strong); }
+.qh .icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.20), rgba(0,102,255,0.08));
+  border: 1px solid var(--border-strong);
+  display: grid; place-items: center;
+  margin-bottom: 14px;
+  color: var(--aqua-1);
+}
+.qh .icon svg { width: 18px; height: 18px; }
+.qh .title { font-weight: 700; font-size: 15.5px; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 4px; }
+.qh .desc { font-size: 13.5px; color: var(--ink-3); line-height: 1.5; }
+
+/* FAQ accordion */
+.faq-list { display: grid; gap: 10px; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+.faq-item[open] { border-color: var(--border-strong); background: var(--surface-2); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 22px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  font-weight: 600; font-size: 16px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-size: 22px; font-weight: 300; color: var(--ink-3);
+  transition: color .3s var(--ease);
+}
+.faq-item[open] summary::after { content: "−"; color: var(--ink); }
+.faq-item .body {
+  padding: 0 22px 22px;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 76ch;
+}
+.faq-item .body p + p, .faq-item .body p + ul { margin-top: 10px; }
+.faq-item .body ul { margin-top: 8px; padding-left: 20px; }
+.faq-item .body li { margin-bottom: 4px; }
+.faq-item .body code {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+
+/* Contact card */
+.contact-card {
+  padding: clamp(28px, 4vw, 44px);
+  border-radius: 22px;
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(135deg, rgba(0,229,255,0.14), rgba(0,102,255,0.05)),
+    rgba(255,255,255,0.015);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+@media (max-width: 720px) { .contact-card { grid-template-columns: 1fr; text-align: center; } }
+.contact-card h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px; }
+.contact-card p { color: var(--ink-2); margin: 0; max-width: 56ch; }
+.contact-card .btn {
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: var(--brand-gradient);
+  color: #001022;
+  font-weight: 700;
+  font-size: 15px;
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 0;
+  box-shadow: 0 12px 30px -12px rgba(0,229,255,0.6);
+  transition: transform .2s var(--ease), box-shadow .3s var(--ease);
+}
+.contact-card .btn:hover { transform: translateY(-1px); box-shadow: 0 18px 40px -10px rgba(0,229,255,0.65); }
+.contact-card .btn svg { width: 16px; height: 16px; }
+
+/* Troubleshooting strip */
+.tip-list {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+@media (max-width: 880px) { .tip-list { grid-template-columns: 1fr; } }
+.tip {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.tip h4 { margin: 0 0 8px; font-size: 15px; font-weight: 700; color: var(--ink); }
+.tip p { color: var(--ink-3); font-size: 14px; line-height: 1.6; margin: 0; }
+
+footer.site { padding: 40px 0 56px; border-top: 1px solid var(--border); margin-top: 40px; position: relative; z-index: 1; }
+footer.site .row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+footer.site a { color: var(--ink-3); border: 0; font-size: 13.5px; }
+footer.site a:hover { color: var(--ink); }
+footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand">
+      <img src="icon.png" alt="" width="30" height="30">
+      <span class="name">Hydro Panda</span>
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<header class="doc">
+  <div class="container">
+    <span class="eyebrow">Help &amp; Support</span>
+    <h1>Sip happens. <span class="accent">We've got you.</span></h1>
+    <p class="lead">Most questions get answered in the FAQ below. Need a human? Email us — every message reaches the person who built the app, and we reply personally within seven days.</p>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- Contact card up top -->
+    <section class="section" id="contact">
+      <div class="contact-card">
+        <div>
+          <h3>Talk to a real person.</h3>
+          <p>Bug, question, idea, complaint, love letter — all welcome. The email below goes straight to the founder, not a ticket queue.</p>
+        </div>
+        <a class="btn" href="mailto:support@playpalapps.com?subject=Hydro%20Panda%20support">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6 12 13 2 6"/></svg>
+          <span>Email support@playpalapps.com</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Quick help cards -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Quick help</h2>
+        <p>Jump to the section that matches your issue.</p>
+      </div>
+      <div class="quickhelp-grid">
+        <a class="qh" href="#basics">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9 14a3 3 0 0 0 6 0"/></svg></div>
+          <div class="title">App basics</div>
+          <div class="desc">How to log a drink, change your goal, or switch vessel skins.</div>
+        </a>
+        <a class="qh" href="#reminders">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+          <div class="title">Reminders not working</div>
+          <div class="desc">Notifications missing or arriving late? Three quick fixes here.</div>
+        </a>
+        <a class="qh" href="#pro">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div class="title">Pro &amp; purchases</div>
+          <div class="desc">Restore Pro on a new device, ask for a refund, or check what's included.</div>
+        </a>
+        <a class="qh" href="#data">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"/></svg></div>
+          <div class="title">Data &amp; privacy</div>
+          <div class="desc">Where your sips live, and how to wipe them on demand.</div>
+        </a>
+        <a class="qh" href="#devices">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="title">Devices &amp; tablets</div>
+          <div class="desc">iPad and Android-tablet support, and what's coming for watches.</div>
+        </a>
+        <a class="qh" href="#bug">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="6"/><path d="M5 5l3 3M19 5l-3 3M2 13h4M18 13h4M5 21l3-3M19 21l-3-3M12 7V4"/></svg></div>
+          <div class="title">Report a bug</div>
+          <div class="desc">What to include in the email so we can fix it fast.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- App basics -->
+    <section class="section" id="basics">
+      <div class="section-head">
+        <h2>App basics</h2>
+        <p>The three or four things 90% of new users wonder about.</p>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item" open>
+          <summary>How do I add water?</summary>
+          <div class="body">
+            <p>The fastest way is the big tap target on the home screen — one tap logs your default glass size and the panda starts filling immediately. To log a custom amount, long-press the panda or tap the <em>+</em> button in the top right; you'll get a slider with quick-pick presets (250&nbsp;mL, 500&nbsp;mL, 1&nbsp;L) and a manual numeric entry.</p>
+            <p>If you've been drinking and forgot to log, scroll the home screen down to <em>Backlog</em> and add an entry with a back-dated time.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I track other drinks like coffee or tea?</summary>
+          <div class="body">
+            <p>Yes. Hydro Panda tracks <strong>water, coffee, tea, juice, milk, sparkling water, sports drinks, and "other"</strong>. Tap the drink-type chip above the panda to switch, or set a long-press shortcut for your most common non-water drink. The panda's water tint shifts subtly with each drink type — coffee toward warm tones, juice toward sunset orange — so you can see at a glance what you've logged.</p>
+            <p>By default we treat each drink as ~95% water-equivalent (which is in line with current hydration science), but you can override the multiplier per drink type in <em>Settings → Drink types</em>.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I change my daily goal?</summary>
+          <div class="body">
+            <p>Open <em>Settings → Daily goal</em>. You can pick from preset amounts, or enter a custom target in millilitres or fluid ounces. Hydro Panda's first-launch suggestion is based on the weight you (optionally) shared during onboarding — you can always override it. Goals are not medical recommendations; if you have a clinical reason to drink more or less, please see a doctor first.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I switch vessel skins?</summary>
+          <div class="body">
+            <p>Tap the panda on the home screen to open the vessel switcher, then swipe between mason jar, water bottle, glass, cactus, panda, and the classic circle. All six are free, with no unlock requirements. Your selection is saved per-device.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Reminders -->
+    <section class="section" id="reminders">
+      <div class="section-head">
+        <h2>Reminders &amp; notifications</h2>
+        <p>If reminders aren't firing, it's almost always one of these.</p>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item" open>
+          <summary>Why aren't my reminders firing?</summary>
+          <div class="body">
+            <p>In order of likelihood:</p>
+            <ul>
+              <li><strong>Notifications were declined.</strong> Open your phone's Settings → Hydro Panda → Notifications and make sure they're enabled. On iOS, also check that <em>Time Sensitive Notifications</em> is on if you'd like reminders to bypass Focus.</li>
+              <li><strong>Aggressive battery optimisation.</strong> On Android (especially Xiaomi, OnePlus, Huawei, Oppo), the OS frequently pauses background scheduling for apps it considers "inactive." Disable battery optimisation for Hydro Panda in your phone's settings, and grant <em>Auto-start</em> if your manufacturer offers that toggle.</li>
+              <li><strong>Quiet hours are too wide.</strong> Open <em>Settings → Reminders → Quiet hours</em> and check that your awake window covers when you'd actually like nudges.</li>
+              <li><strong>Goal already met.</strong> Hydro Panda doesn't nag once you've hit your goal for the day. By design.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I customise when reminders fire?</summary>
+          <div class="body">
+            <p>Yes. <em>Settings → Reminders</em> lets you set a start hour, an end hour, a frequency (every 30 / 60 / 90 / 120 minutes), and a notification sound. Reminders pause automatically inside iOS Focus modes that block notifications, and resume when Focus ends.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do reminders work without internet?</summary>
+          <div class="body">
+            <p>Yes. Reminders are scheduled <em>locally</em> on your device using <code>flutter_local_notifications</code>. No push servers, no network calls. Even in airplane mode, your reminders fire on time.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Pro -->
+    <section class="section" id="pro">
+      <div class="section-head">
+        <h2>Pro &amp; purchases</h2>
+        <p>Three bucks, once. Here's everything that surrounds that.</p>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>What is Hydro Panda Pro?</summary>
+          <div class="body">
+            <p>A <strong>one-time, $2.99</strong> in-app purchase that removes the banner ad on the home screen — forever. There's no subscription, no second tier, and no feature gated behind it. If you'd like to support a solo dev who replies personally to support emails, Pro is also that. <a href="index.html#pro">More details on the home page.</a></p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I restore my Pro purchase on a new device?</summary>
+          <div class="body">
+            <p>Install Hydro Panda, open <em>Settings → Pro</em>, and tap <strong>Restore purchases</strong>. The app asks Apple or Google for your past purchase history and re-grants the entitlement. You must be signed into the same App Store / Play Store account you used to buy originally.</p>
+            <p>On iOS, Family Sharing also works — if a family-group member purchased Pro, you'll receive Pro automatically the first time you launch on your own Apple ID.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I get a refund?</summary>
+          <div class="body">
+            <p>Refunds are handled by Apple or Google directly under their standard refund policies — Playpal Apps cannot directly issue refunds.</p>
+            <ul>
+              <li><strong>iOS</strong> — request via <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</li>
+              <li><strong>Android</strong> — <em>Play Store → Account icon → Payments &amp; subscriptions → Budget &amp; history → Request a refund</em>.</li>
+            </ul>
+            <p>If a store declines and you feel there's a legitimate issue with the app itself, email <a href="mailto:support@playpalapps.com?subject=Hydro%20Panda%20refund">support@playpalapps.com</a> and we'll advocate for you.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is Pro a subscription?</summary>
+          <div class="body">
+            <p>No. Pro is a one-time, non-consumable purchase. It never expires, never auto-renews, and is restorable on every device tied to your Apple ID or Google Play account.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Data & privacy -->
+    <section class="section" id="data">
+      <div class="section-head">
+        <h2>Data &amp; privacy</h2>
+        <p>Where your sips live, and how to control them.</p>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>How is my data stored — is it private?</summary>
+          <div class="body">
+            <p>All hydration entries, settings, and streaks are stored <em>locally</em> on your device, in Hydro Panda's app sandbox, via <code>SharedPreferences</code>. We do not run servers, run analytics, or include third-party SDKs like Firebase, Mixpanel, or Amplitude. Delete the app and your data is gone — there is no remote copy.</p>
+            <p>For the full byte-level breakdown, including how AdMob and store-purchase verification work, see our <a href="privacy.html">privacy policy</a>.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I export my hydration history?</summary>
+          <div class="body">
+            <p>Not in v1.0. We currently don't ship an export feature, mostly because almost no one has asked — but it's a high-value-low-effort request, so it's on the short-list for v1.1. If you'd like it sooner, email us; an extra voice nudges things up the queue.</p>
+            <p>If you need a snapshot today, the <em>Settings → History</em> screen lets you scroll your full log; you can screenshot it.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I wipe everything?</summary>
+          <div class="body">
+            <p>Two options: <em>Settings → Reset all data</em> wipes the sandbox while keeping the app installed (good if you want a fresh start with the same Pro entitlement). Uninstalling the app removes the sandbox entirely on both iOS and Android, including every saved sip — but you'd need to re-restore Pro on next install.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Why are there ads in a wellness app?</summary>
+          <div class="body">
+            <p>Honest answer: because Hydro Panda is built by one person, and an indie wellness app with zero monetisation has a short half-life. A small banner ad on the free tier means the app stays sustainable, gets updates, and never has to bolt on a subscription. If you'd rather not see ads, $2.99 once removes them forever — and it's the same price for everyone, no upsell tactics.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I manage ad personalisation?</summary>
+          <div class="body">
+            <p>Open <em>Settings → Manage ad preferences</em>. In the EEA / UK / Switzerland, this re-opens Google's UMP consent dialog where you can change your choices. On iOS, you can also revoke App Tracking Transparency at the system level via <em>iOS Settings → Privacy &amp; Security → Tracking → Hydro Panda</em>. On Android, reset the advertising ID via <em>Android Settings → Privacy → Ads</em>.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Devices -->
+    <section class="section" id="devices">
+      <div class="section-head">
+        <h2>Devices &amp; platforms</h2>
+        <p>What runs Hydro Panda today, and what's coming.</p>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>Does Hydro Panda work on iPad and Android tablets?</summary>
+          <div class="body">
+            <p>Yes — Hydro Panda runs on iPadOS and Android tablets at launch, scaling the layout up gracefully. The panda gets bigger; the chrome stays comfortable. There is no separate iPad app — the universal binary is the same one shipped on iPhone, with adaptive layouts for the larger canvas.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Apple Watch / Wear OS support?</summary>
+          <div class="body">
+            <p>Not in v1.0. A wrist-tap to log a drink is genuinely useful, so a watch companion is on the roadmap, probably v1.2. We'd rather ship a careful watch app later than a half-baked one at launch.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Home-screen widgets?</summary>
+          <div class="body">
+            <p>iOS Home Screen and Lock Screen widgets — showing today's progress and a quick-log tap target — are planned for the v1.1 update. Android home-screen widgets follow shortly after.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What are the minimum OS versions?</summary>
+          <div class="body">
+            <p>iOS 15+ and Android 8.0 (API 26) +. We'll keep that floor as long as is practical; raising it gates real users out of updates, so we don't do it casually.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Bug report -->
+    <section class="section" id="bug">
+      <div class="section-head">
+        <h2>Reporting a bug</h2>
+        <p>The fastest path to a fix.</p>
+      </div>
+      <div class="tip-list">
+        <div class="tip">
+          <h4>Tell us what you saw</h4>
+          <p>A one-line description of the bug, plus the screen you were on. Screenshots help — they take five seconds and save us hours.</p>
+        </div>
+        <div class="tip">
+          <h4>Tell us what you expected</h4>
+          <p>This is the part bug reports skip most often, and it's the most useful. "I expected the panda to fill" + "instead it stayed empty" is gold.</p>
+        </div>
+        <div class="tip">
+          <h4>Tell us your device</h4>
+          <p>Phone model, OS version, and Hydro Panda version (Settings → About). Even just "iPhone 14, iOS 17.4, app v1.0.2" cuts diagnosis time in half.</p>
+        </div>
+      </div>
+      <p style="margin-top: 22px; color: var(--ink-3); font-size: 14.5px;">Send the report to <a href="mailto:support@playpalapps.com?subject=Hydro%20Panda%20bug%20report">support@playpalapps.com</a>. We triage within 48 hours and reply personally — no ticket numbers, no canned responses.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container row">
+    <div class="copy">&copy; 2026 Playpal Apps</div>
+    <div>
+      <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
