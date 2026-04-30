@@ -242,14 +242,14 @@
       min-height: 280px;
       isolation: isolate;
     }
-    /* Caustic dot texture + subtle chromatic shimmer line */
+    /* Caustic dot texture + iridescent light bands */
     .app-card::after {
       content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background-image:
-        radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-        linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.06) 50%, transparent 65%);
+        radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
+        linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.09) 48%, transparent 56%, rgba(255,255,255,0.05) 72%, transparent 80%);
       background-size: 22px 22px, 100% 100%;
-      mask-image: radial-gradient(ellipse 90% 90% at 50% 30%, black 30%, transparent 95%);
+      mask-image: radial-gradient(ellipse 95% 95% at 55% 25%, black 30%, transparent 95%);
     }
     /* Vibrant top stripe per app for color identity */
     .app-card::before {
@@ -329,17 +329,17 @@
       box-shadow: 0 14px 36px rgba(0,0,0,0.4), 0 0 24px var(--app-glow, rgba(99,102,241,0.4));
     }
 
-    /* Caustic-lit card backgrounds — lighter dark with vibrant highlights per app */
-    .app-utilify    { background: linear-gradient(135deg, #3A1F12 0%, #1F0F08 60%, #2A1808 100%); --app-glow: rgba(251,146,60,0.6); --app-spot: rgba(255,180,100,0.55); }
-    .app-canwasa    { background: linear-gradient(135deg, #3A1A40 0%, #1A0820 50%, #142840 100%); --app-glow: rgba(236,72,153,0.55); --app-spot: rgba(255,160,220,0.5); }
-    .app-nightbloom { background: linear-gradient(135deg, #1F1245 0%, #100A2A 60%, #2A1545 100%); --app-glow: rgba(99,102,241,0.6); --app-spot: rgba(180,180,255,0.5); }
-    .app-palettely  { background: linear-gradient(135deg, #3A1240 0%, #2A0824 50%, #102438 100%); --app-glow: rgba(168,85,247,0.55); --app-spot: rgba(255,170,200,0.5); }
-    .app-paperlens  { background: linear-gradient(135deg, #122550 0%, #08152A 60%, #0E2E40 100%); --app-glow: rgba(37,99,235,0.6); --app-spot: rgba(140,200,255,0.5); }
-    .app-astroorbit { background: linear-gradient(135deg, #1F1245 0%, #150A2A 50%, #2A1A50 100%); --app-glow: rgba(124,58,237,0.6); --app-spot: rgba(190,160,255,0.55); }
-    .app-mergerise  { background: linear-gradient(135deg, #0E2818 0%, #08180E 60%, #103530 100%); --app-glow: rgba(16,185,129,0.55); --app-spot: rgba(140,255,200,0.5); }
-    .app-fuzzypop   { background: linear-gradient(135deg, #401822 0%, #2A0E12 50%, #3A2410 100%); --app-glow: rgba(245,158,11,0.55); --app-spot: rgba(255,200,140,0.5); }
-    .app-tzc        { background: linear-gradient(135deg, #122550 0%, #0A1F30 60%, #1A2E50 100%); --app-glow: rgba(37,99,235,0.6); --app-spot: rgba(150,200,255,0.5); }
-    .app-qito       { background: linear-gradient(135deg, #25252E 0%, #14141A 60%, #2E2E36 100%); --app-glow: rgba(161,161,170,0.4); --app-spot: rgba(220,220,230,0.4); }
+    /* Translucent glass cards — lighter dark with brighter caustic colors */
+    .app-utilify    { background: linear-gradient(135deg, #2A180E 0%, #1A0E08 60%, #221408 100%); --app-glow: rgba(251,146,60,0.85); --app-spot: rgba(255,200,140,0.8); }
+    .app-canwasa    { background: linear-gradient(135deg, #2A1530 0%, #150620 50%, #121F30 100%); --app-glow: rgba(236,72,153,0.8); --app-spot: rgba(255,180,230,0.75); }
+    .app-nightbloom { background: linear-gradient(135deg, #181038 0%, #0A0824 60%, #221238 100%); --app-glow: rgba(99,102,241,0.85); --app-spot: rgba(190,190,255,0.75); }
+    .app-palettely  { background: linear-gradient(135deg, #2A1232 0%, #1A0820 50%, #0E1F30 100%); --app-glow: rgba(168,85,247,0.8); --app-spot: rgba(255,180,210,0.75); }
+    .app-paperlens  { background: linear-gradient(135deg, #102045 0%, #08152A 60%, #0A2538 100%); --app-glow: rgba(37,99,235,0.85); --app-spot: rgba(160,210,255,0.75); }
+    .app-astroorbit { background: linear-gradient(135deg, #181038 0%, #100820 50%, #221545 100%); --app-glow: rgba(124,58,237,0.85); --app-spot: rgba(200,170,255,0.8); }
+    .app-mergerise  { background: linear-gradient(135deg, #0E2418 0%, #08180E 60%, #0E2A24 100%); --app-glow: rgba(16,185,129,0.8); --app-spot: rgba(160,255,210,0.75); }
+    .app-fuzzypop   { background: linear-gradient(135deg, #321420 0%, #1F0E14 50%, #2E1E10 100%); --app-glow: rgba(245,158,11,0.8); --app-spot: rgba(255,210,160,0.75); }
+    .app-tzc        { background: linear-gradient(135deg, #102045 0%, #0A1A28 60%, #142438 100%); --app-glow: rgba(37,99,235,0.85); --app-spot: rgba(170,210,255,0.75); }
+    .app-qito       { background: linear-gradient(135deg, #1F1F26 0%, #121218 60%, #25252C 100%); --app-glow: rgba(161,161,170,0.55); --app-spot: rgba(230,230,240,0.55); }
 
     /* Per-app top stripe — vibrant 4px gradient line */
     .app-utilify::before    { background: linear-gradient(90deg, #FB923C, #EF4444); }
@@ -353,28 +353,38 @@
     .app-tzc::before        { background: linear-gradient(90deg, #2563EB, #6366F1); }
     .app-qito::before       { background: linear-gradient(90deg, #71717A, #A1A1AA); }
 
-    /* Caustic light system — primary glow + bright accent spot */
+    /* Caustic light system — multi-layer with translucent glass feel */
     .app-card-bg {
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
       overflow: hidden; border-radius: inherit;
     }
-    /* Primary brand glow — large soft halo, top-left */
+    /* Primary brand glow — large soft halo, top-left, saturated */
     .app-card-bg::before {
       content: ''; position: absolute;
-      width: 320px; height: 320px; border-radius: 50%;
-      top: -110px; left: -70px;
-      background: radial-gradient(circle, var(--app-glow) 0%, transparent 65%);
-      filter: blur(40px);
-      opacity: 0.85;
+      width: 380px; height: 380px; border-radius: 50%;
+      top: -130px; left: -90px;
+      background: radial-gradient(circle, var(--app-glow) 0%, transparent 70%);
+      filter: blur(35px);
+      opacity: 1;
+      mix-blend-mode: screen;
     }
     /* Caustic bright spot — smaller intense highlight, opposite corner */
     .app-card-bg::after {
       content: ''; position: absolute;
-      width: 180px; height: 180px; border-radius: 50%;
-      bottom: -50px; right: -40px;
-      background: radial-gradient(circle, var(--app-spot) 0%, transparent 60%);
-      filter: blur(50px);
-      opacity: 0.7;
+      width: 220px; height: 220px; border-radius: 50%;
+      bottom: -70px; right: -50px;
+      background: radial-gradient(circle, var(--app-spot) 0%, transparent 65%);
+      filter: blur(45px);
+      opacity: 0.95;
+      mix-blend-mode: screen;
+    }
+    /* Glassy top-edge specular highlight — thin bright line catching light */
+    .app-card {
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.14) inset,
+        0 0 0 1px rgba(255,255,255,0.05) inset,
+        0 0 0 1px rgba(0,0,0,0.4),
+        0 8px 28px rgba(9,9,11,0.18);
     }
 
     /* (spans defined above with new layout) */
