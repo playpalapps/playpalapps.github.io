@@ -581,11 +581,83 @@ section.slab {
 }
 .panda-svg-wrap {
   position: relative;
-  width: 76%;
+  width: 86%;
   aspect-ratio: 1/1;
   z-index: 1;
+  display: grid;
+  place-items: center;
 }
 .panda-svg-wrap svg { width: 100%; height: 100%; }
+
+/* Use the actual app brand mark (panda + water wave PNG) instead of a
+   sub-standard cartoon SVG. Bobbing animation, layered cyan drop shadows,
+   and concentric ripple rings emanating from the panda. */
+.panda-hero-img {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 24px 48px rgba(0, 102, 255, 0.45))
+    drop-shadow(0 8px 22px rgba(0, 229, 255, 0.32));
+  animation: pandaBob 5.5s ease-in-out infinite;
+}
+@keyframes pandaBob {
+  0%, 100% { transform: translateY(0) rotate(-0.4deg); }
+  50%      { transform: translateY(-10px) rotate(0.4deg); }
+}
+
+/* Concentric water ripples expanding outward from the panda — the
+   "ripple effect" of every sip you log. */
+.panda-ripple {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 229, 255, 0.45);
+  transform: translate(-50%, -50%) scale(0.85);
+  z-index: 1;
+  pointer-events: none;
+  animation: rippleOut 5.2s ease-out infinite;
+}
+.panda-ripple-2 { animation-delay: 1.7s; border-color: rgba(0, 153, 255, 0.4); }
+.panda-ripple-3 { animation-delay: 3.4s; border-color: rgba(122, 200, 255, 0.35); }
+@keyframes rippleOut {
+  0%   { transform: translate(-50%, -50%) scale(0.7);  opacity: 0; }
+  18%  { opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.55); opacity: 0; }
+}
+
+/* Tiny floating bubbles for ambient cuteness. */
+.panda-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(180, 230, 255, 0.55) 60%,
+    rgba(0, 229, 255, 0.0) 100%);
+  pointer-events: none;
+  z-index: 2;
+  animation: bubbleFloat 6s ease-in-out infinite;
+}
+.panda-bubble-1 { width: 14px; height: 14px; left: 14%;  bottom: 18%; animation-delay: 0s;   animation-duration: 5.2s; }
+.panda-bubble-2 { width: 9px;  height: 9px;  left: 78%;  bottom: 28%; animation-delay: 1.4s; animation-duration: 6.4s; }
+.panda-bubble-3 { width: 11px; height: 11px; left: 22%;  bottom: 38%; animation-delay: 2.6s; animation-duration: 5.8s; }
+.panda-bubble-4 { width: 7px;  height: 7px;  left: 84%;  bottom: 14%; animation-delay: 0.6s; animation-duration: 4.6s; }
+@keyframes bubbleFloat {
+  0%   { transform: translateY(0)    scale(0.6); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.9; }
+  100% { transform: translateY(-72px) scale(1);  opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panda-hero-img,
+  .panda-ripple,
+  .panda-bubble { animation: none; }
+}
 .fill-meter {
   position: absolute;
   bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -1076,92 +1148,16 @@ footer.site .links a:hover { color: var(--ink); }
     </div>
 
     <div class="sidekick-grid">
-      <div class="panda-fill-card reveal" aria-label="Animated illustration of a panda head filling with water">
+      <div class="panda-fill-card reveal" aria-label="The Hydro Panda mascot with animated water ripples">
         <div class="panda-svg-wrap">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cartoon panda head with animated water filling from the bottom">
-            <defs>
-              <linearGradient id="waterGrad" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="#33C5FF" stop-opacity=".95"/>
-                <stop offset="100%" stop-color="#0066FF" stop-opacity=".95"/>
-              </linearGradient>
-              <clipPath id="pandaShape">
-                <!-- Two ear circles + face oval -->
-                <circle cx="58" cy="60" r="22"/>
-                <circle cx="142" cy="60" r="22"/>
-                <ellipse cx="100" cy="115" rx="62" ry="60"/>
-              </clipPath>
-            </defs>
-
-            <!-- Outline glow -->
-            <g clip-path="url(#pandaShape)">
-              <rect x="0" y="0" width="200" height="200" fill="rgba(255,255,255,0.94)"/>
-
-              <!-- Animated water wave -->
-              <g>
-                <path id="wave" d="M -20 130 Q 30 118 80 130 T 180 130 T 280 130 V 220 H -20 Z" fill="url(#waterGrad)">
-                  <animate attributeName="d"
-                    dur="4.5s"
-                    repeatCount="indefinite"
-                    values="
-                      M -20 130 Q 30 118 80 130 T 180 130 T 280 130 V 220 H -20 Z;
-                      M -20 130 Q 30 142 80 130 T 180 130 T 280 130 V 220 H -20 Z;
-                      M -20 130 Q 30 118 80 130 T 180 130 T 280 130 V 220 H -20 Z" />
-                </path>
-                <path d="M -20 134 Q 30 122 80 134 T 180 134 T 280 134 V 220 H -20 Z" fill="rgba(0,229,255,0.45)">
-                  <animate attributeName="d"
-                    dur="6s"
-                    repeatCount="indefinite"
-                    values="
-                      M -20 134 Q 30 146 80 134 T 180 134 T 280 134 V 220 H -20 Z;
-                      M -20 134 Q 30 122 80 134 T 180 134 T 280 134 V 220 H -20 Z;
-                      M -20 134 Q 30 146 80 134 T 180 134 T 280 134 V 220 H -20 Z" />
-                </path>
-
-                <!-- Tiny rising bubbles inside -->
-                <circle cx="70" cy="170" r="3" fill="rgba(255,255,255,0.7)">
-                  <animate attributeName="cy" dur="3.5s" repeatCount="indefinite" values="180;120;180"/>
-                  <animate attributeName="opacity" dur="3.5s" repeatCount="indefinite" values="0;1;0"/>
-                </circle>
-                <circle cx="120" cy="180" r="2.4" fill="rgba(255,255,255,0.7)">
-                  <animate attributeName="cy" dur="4.2s" repeatCount="indefinite" values="190;130;190"/>
-                  <animate attributeName="opacity" dur="4.2s" repeatCount="indefinite" values="0;1;0"/>
-                </circle>
-                <circle cx="150" cy="175" r="2" fill="rgba(255,255,255,0.7)">
-                  <animate attributeName="cy" dur="3s" repeatCount="indefinite" values="185;125;185"/>
-                  <animate attributeName="opacity" dur="3s" repeatCount="indefinite" values="0;1;0"/>
-                </circle>
-              </g>
-            </g>
-
-            <!-- Panda outline -->
-            <g fill="none" stroke="#1A2238" stroke-width="2.5">
-              <circle cx="58" cy="60" r="22"/>
-              <circle cx="142" cy="60" r="22"/>
-              <ellipse cx="100" cy="115" rx="62" ry="60"/>
-            </g>
-
-            <!-- Inner ear -->
-            <circle cx="58" cy="60" r="11" fill="#1A2238"/>
-            <circle cx="142" cy="60" r="11" fill="#1A2238"/>
-
-            <!-- Eye patches -->
-            <ellipse cx="78" cy="108" rx="12" ry="15" fill="#1A2238" transform="rotate(-12 78 108)"/>
-            <ellipse cx="122" cy="108" rx="12" ry="15" fill="#1A2238" transform="rotate(12 122 108)"/>
-
-            <!-- Eyes (sparkle) -->
-            <circle cx="78" cy="108" r="4.5" fill="#fff"/>
-            <circle cx="122" cy="108" r="4.5" fill="#fff"/>
-            <circle cx="79" cy="106" r="1.6" fill="#1A2238"/>
-            <circle cx="123" cy="106" r="1.6" fill="#1A2238"/>
-
-            <!-- Blush -->
-            <ellipse cx="68" cy="135" rx="7" ry="4" fill="#FFB3C8" opacity=".85"/>
-            <ellipse cx="132" cy="135" rx="7" ry="4" fill="#FFB3C8" opacity=".85"/>
-
-            <!-- Nose & mouth -->
-            <ellipse cx="100" cy="130" rx="4.5" ry="3" fill="#1A2238"/>
-            <path d="M100 134 v 5 M100 139 q -5 5 -10 0 M100 139 q 5 5 10 0" stroke="#1A2238" stroke-width="2" fill="none" stroke-linecap="round"/>
-          </svg>
+          <span class="panda-ripple panda-ripple-1" aria-hidden="true"></span>
+          <span class="panda-ripple panda-ripple-2" aria-hidden="true"></span>
+          <span class="panda-ripple panda-ripple-3" aria-hidden="true"></span>
+          <img src="panda.png" alt="The Hydro Panda mascot — a friendly panda riding a cyan water wave" class="panda-hero-img" loading="lazy" width="600" height="600">
+          <span class="panda-bubble panda-bubble-1" aria-hidden="true"></span>
+          <span class="panda-bubble panda-bubble-2" aria-hidden="true"></span>
+          <span class="panda-bubble panda-bubble-3" aria-hidden="true"></span>
+          <span class="panda-bubble panda-bubble-4" aria-hidden="true"></span>
         </div>
         <div class="fill-meter" aria-hidden="true">
           <span>Today</span>
