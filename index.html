@@ -549,8 +549,36 @@
       position: relative; overflow: hidden;
     }
     .builder-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c6)); }
-    .builder-name { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.6px; margin-bottom: 4px; }
-    .builder-role { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 20px; }
+    .builder-name { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.7px; margin-bottom: 6px; }
+    .builder-role { color: rgba(255,255,255,0.6); font-size: 0.92rem; margin-bottom: 26px; line-height: 1.5; }
+
+    /* Worked-with logo strip inside dark builder card */
+    .builder-worked-with {
+      padding: 22px 0 4px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; flex-direction: column; gap: 16px;
+      margin-top: 4px;
+    }
+    .bww-label {
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 2.6px;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+    }
+    .bww-logos {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 18px 24px; align-items: center; justify-items: start;
+      max-width: 320px;
+    }
+    .bww-logos img {
+      max-height: 36px; max-width: 100%; width: auto;
+      object-fit: contain; filter: grayscale(1) brightness(2.5) contrast(0.6);
+      opacity: 0.7;
+      transition: opacity 0.25s, filter 0.25s;
+    }
+    .bww-logos img:nth-child(1) { max-height: 42px; }   /* Block */
+    .bww-logos img:nth-child(2) { max-height: 50px; }   /* Afterpay */
+    .bww-logos img:nth-child(3) { max-height: 22px; }   /* UBank */
+    .bww-logos img:nth-child(4) { max-height: 22px; }   /* Infosys */
+    .bww-logos img:hover { opacity: 1; }
     .builder-stats { display: flex; gap: 20px; margin-top: 22px; }
     .builder-stat-num { font-size: 1.6rem; font-weight: 900; letter-spacing: -1.2px; background: linear-gradient(135deg, var(--c2), var(--c1)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .builder-stat-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
@@ -971,7 +999,8 @@
     <div class="reveal">
       <div class="eyebrow">The Builder</div>
       <h2 class="section-title">Built solo. <em>Shipped weekly.</em></h2>
-      <p class="body">Every Playpal app was designed, coded, tested, polished, and shipped by one person. By day a Senior Quality Engineering Lead at Block (Cash App). By night, an indie app builder using the latest AI tooling to ship fast without cutting corners.</p>
+      <p class="body" style="font-style:italic;font-family:'Instrument Serif',serif;font-size:1.5rem;line-height:1.4;color:rgba(255,255,255,0.85);max-width:480px;margin-bottom:14px;">"Pessimist with a launchpad."</p>
+      <p class="body">10+ years breaking complex systems so users don't have to. After hours, building AI-powered mobile apps that ship to real people. Every Playpal app — designed, coded, tested, polished, and shipped solo.</p>
       <div class="builder-cta-row">
         <a href="https://playpalapps.github.io/naveen-raj/" class="builder-cta">Meet Naveen
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -981,11 +1010,15 @@
     </div>
     <div class="builder-card reveal" style="transition-delay:.08s;">
       <div class="builder-name">Naveen Raj</div>
-      <div class="builder-role">Senior QA Lead · Indie App Builder · Sydney</div>
-      <div class="builder-stats">
-        <div><div class="builder-stat-num">10+</div><div class="builder-stat-lbl">Years Exp</div></div>
-        <div><div class="builder-stat-num">2</div><div class="builder-stat-lbl">Platforms</div></div>
-        <div><div class="builder-stat-num">4</div><div class="builder-stat-lbl">Companies</div></div>
+      <div class="builder-role">Senior Quality Engineering Lead<br>Indie App Builder · Sydney</div>
+      <div class="builder-worked-with">
+        <span class="bww-label">Worked with</span>
+        <div class="bww-logos">
+          <img src="assets/block.png" alt="Block">
+          <img src="assets/afterpay.png" alt="Afterpay">
+          <img src="assets/ubank.svg" alt="UBank">
+          <img src="assets/infosys.png" alt="Infosys">
+        </div>
       </div>
       <div class="builder-skills">
         <span class="builder-skill">SwiftUI</span><span class="builder-skill">Flutter</span><span class="builder-skill">React</span>
