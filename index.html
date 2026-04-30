@@ -542,45 +542,46 @@
     .builder-cta.outline:hover { background: rgba(255,255,255,0.13); }
     .builder-card {
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 28px; padding: 36px; backdrop-filter: blur(20px);
+      border-radius: 24px; padding: 28px; backdrop-filter: blur(20px);
       box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset, 0 30px 80px rgba(0,0,0,0.4);
       position: relative; overflow: hidden;
     }
     .builder-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c6)); }
-    .builder-name { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.7px; margin-bottom: 6px; }
-    .builder-role { color: rgba(255,255,255,0.6); font-size: 0.92rem; margin-bottom: 26px; line-height: 1.5; }
+    .builder-name { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.7px; margin-bottom: 4px; }
+    .builder-role { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin-bottom: 18px; line-height: 1.45; }
 
-    /* Worked-with logo strip inside dark builder card */
+    /* Worked-with logo strip inside dark builder card — uniform white silhouettes */
     .builder-worked-with {
-      padding: 22px 0 4px;
+      padding: 16px 0 4px;
       border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex; flex-direction: column; gap: 16px;
-      margin-top: 4px;
+      display: flex; flex-direction: column; gap: 12px;
+      margin-top: 0;
     }
     .bww-label {
-      font-size: 0.62rem; font-weight: 800; letter-spacing: 2.6px;
-      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      font-size: 0.58rem; font-weight: 800; letter-spacing: 2.4px;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
     }
     .bww-logos {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 18px 24px; align-items: center; justify-items: start;
-      max-width: 320px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; align-items: center; justify-items: center;
     }
     .bww-logos img {
-      max-height: 36px; max-width: 100%; width: auto;
-      object-fit: contain; filter: grayscale(1) brightness(2.5) contrast(0.6);
+      max-height: 26px; max-width: 100%; width: auto;
+      object-fit: contain;
+      /* invert dark logos to white silhouettes — uniform on dark */
+      filter: brightness(0) invert(1);
       opacity: 0.7;
-      transition: opacity 0.25s, filter 0.25s;
+      transition: opacity 0.25s;
     }
-    .bww-logos img:nth-child(1) { max-height: 42px; }   /* Block */
-    .bww-logos img:nth-child(2) { max-height: 50px; }   /* Afterpay */
-    .bww-logos img:nth-child(3) { max-height: 22px; }   /* UBank */
-    .bww-logos img:nth-child(4) { max-height: 22px; }   /* Infosys */
+    .bww-logos img:nth-child(1) { max-height: 28px; }   /* Block */
+    .bww-logos img:nth-child(2) { max-height: 32px; }   /* Afterpay */
+    .bww-logos img:nth-child(3) { max-height: 18px; }   /* UBank */
+    .bww-logos img:nth-child(4) { max-height: 18px; }   /* Infosys */
     .bww-logos img:hover { opacity: 1; }
     .builder-stats { display: flex; gap: 20px; margin-top: 22px; }
     .builder-stat-num { font-size: 1.6rem; font-weight: 900; letter-spacing: -1.2px; background: linear-gradient(135deg, var(--c2), var(--c1)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .builder-stat-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-    .builder-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .builder-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
     .builder-skill {
       padding: 5px 12px; border-radius: 100px; background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12); font-size: 0.74rem; font-weight: 600;
