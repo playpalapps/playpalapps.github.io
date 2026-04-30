@@ -11,14 +11,14 @@
   <meta property="og:url"          content="https://playpalapps.github.io/">
   <meta property="og:title"        content="Playpal Apps — Apps you'll actually love">
   <meta property="og:description"  content="Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand.">
-  <meta property="og:image"        content="https://playpalapps.github.io/og-image.jpg">
+  <meta property="og:image"        content="https://playpalapps.github.io/og-image.jpg?v=2">
   <meta property="og:image:type"   content="image/jpeg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Playpal Apps — Apps you'll actually love">
   <meta name="twitter:description" content="Beautifully crafted mobile apps for play, work, and rest.">
-  <meta name="twitter:image"       content="https://playpalapps.github.io/og-image.jpg">
+  <meta name="twitter:image"       content="https://playpalapps.github.io/og-image.jpg?v=2">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -643,21 +643,29 @@
       .hero-stats { gap: 12px; }
       .hero-stat-num { font-size: 1.8rem; }
       .float-icon { width: 44px; height: 44px; opacity: 0.6; }
-      .apps-bento { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .apps-bento { grid-template-columns: 1fr; gap: 14px; }
       .app-utilify { grid-column: 1 / -1; }
       .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
       .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito { grid-column: span 1; }
-      .app-card { padding: 18px; border-radius: 18px; min-height: 240px; }
-      .app-icon-mega { width: 60px; height: 60px; border-radius: 14px; }
-      .app-name { font-size: 1.15rem; }
+      .app-card { padding: 22px; border-radius: 18px; min-height: auto; gap: 12px; }
+      .app-icon-mega { width: 64px; height: 64px; border-radius: 14px; }
+      .app-name { font-size: 1.25rem; }
       .app-card.featured {
         grid-template-columns: 1fr;
+        column-gap: 0;
         text-align: left;
         padding: 24px;
+        gap: 14px;
       }
-      .app-card.featured .app-icon-mega { width: 80px; height: 80px; border-radius: 18px; }
-      .app-card.featured .app-name { font-size: 1.7rem; letter-spacing: -1px; }
-      .app-card.featured .app-stores { flex-direction: row; width: 100%; }
+      .app-card.featured .app-card-bg::before { width: 320px; height: 320px; top: -100px; right: auto; left: -80px; }
+      .app-card.featured .app-card-bg::after { width: 200px; height: 200px; top: auto; right: -50px; bottom: -50px; left: auto; }
+      .app-card.featured .app-icon-mega { width: 76px; height: 76px; border-radius: 18px; }
+      .app-card.featured .app-name { font-size: 1.6rem; letter-spacing: -1px; }
+      .app-card.featured .app-tag-text { font-size: 0.92rem; }
+      .app-card.featured .app-stores { flex-direction: row; width: 100%; gap: 8px; }
+      .app-card.featured .store-mini { padding: 11px 12px; font-size: 0.74rem; }
+      .store-mini { padding: 9px 10px; font-size: 0.7rem; white-space: nowrap; }
+      .store-mini svg { width: 12px; height: 12px; }
       .apps-watermark { width: 380px; height: 380px; right: -60px; top: 40px; opacity: 0.05; }
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
       .story-grid { grid-template-columns: 1fr; gap: 40px; }
