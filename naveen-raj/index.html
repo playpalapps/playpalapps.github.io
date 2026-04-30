@@ -87,8 +87,8 @@
 
     .hero-inner {
       max-width: 1200px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 420px;
-      gap: 80px; align-items: center;
+      display: block;
+      align-items: center;
       padding: 80px 0; position: relative; z-index: 1;
     }
 
@@ -134,19 +134,17 @@
     .stat-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -2px; line-height: 1; background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .stat-label { font-size: 0.68rem; color: var(--muted); font-weight: 600; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* Photo */
-    .hero-right { display: flex; flex-direction: column; align-items: center; gap: 24px; }
-    .photo-wrap { position: relative; }
-    .photo-ring { position: absolute; inset: -7px; border-radius: 50%; background: conic-gradient(from 0deg, #6366F1, #7C3AED, #EC4899, #06B6D4, #10B981, #6366F1); animation: spin 7s linear infinite; z-index: 0; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .photo-glow { position: absolute; inset: -28px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%); z-index: -1; animation: glow-pulse 3.5s ease-in-out infinite; }
-    @keyframes glow-pulse { 0%,100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
-    .photo-gap { position: absolute; inset: -2px; border-radius: 50%; background: #FAFBFF; z-index: 1; }
-    .hero-photo { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; object-position: center top; display: block; position: relative; z-index: 2; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 340px; }
-    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; background: white; border: 1px solid var(--border); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: var(--body); box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
-    .chip:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-    .chip-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    /* Stylized portrait — large subtle watermark in hero right area */
+    .portrait-watermark {
+      position: absolute; right: -40px; top: 50%;
+      transform: translateY(-50%);
+      width: 540px; height: 540px;
+      pointer-events: none; z-index: 1;
+      opacity: 0.06;
+    }
+    .portrait-watermark img {
+      width: 100%; height: 100%; object-fit: contain;
+    }
 
     /* ── SHARED SECTION ── */
     section { padding: 96px 48px; }
@@ -328,8 +326,8 @@
       nav { padding: 0 20px; }
       .nav-links li:not(:last-child) { display: none; }
       .hero { padding: 64px 20px 0; }
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 56px 0; text-align: center; }
-      .hero-right { order: -1; }
+      .hero-inner { padding: 56px 0; text-align: center; }
+      .portrait-watermark { width: 280px; height: 280px; right: -40px; top: 30%; opacity: 0.05; }
       .hero-ctas { justify-content: center; }
       .hero-desc { margin: 0 auto 40px; }
       .hero-role { justify-content: center; }
@@ -342,7 +340,6 @@
       .exp-watermark { width: 160px; height: 52px; right: 12px; bottom: 12px; }
       .exp-left::before { display: none; }
       .exp-left { padding-left: 0; }
-      .hero-photo { width: 240px; height: 240px; }
       footer { padding: 24px 20px; flex-direction: column; text-align: center; }
     }
   </style>
@@ -387,20 +384,8 @@
         <div class="stat"><div class="stat-num">4</div><div class="stat-label">Companies</div></div>
       </div>
     </div>
-    <div class="hero-right reveal" style="transition-delay:0.1s;">
-      <div class="photo-wrap">
-        <div class="photo-glow"></div>
-        <div class="photo-ring"></div>
-        <div class="photo-gap"></div>
-        <img class="hero-photo" src="naveen.png" alt="Naveen Raj">
-      </div>
-      <div class="chips">
-        <div class="chip"><span class="chip-dot" style="background:#6366F1"></span> Cash App · Block</div>
-        <div class="chip"><span class="chip-dot" style="background:#10B981"></span> 10 apps live</div>
-        <div class="chip"><span class="chip-dot" style="background:#7C3AED"></span> AI-Assisted Dev</div>
-        <div class="chip"><span class="chip-dot" style="background:#06B6D4"></span> iOS &amp; Android</div>
-      </div>
-    </div>
+    <!-- Stylized portrait watermark — subtle background presence -->
+    <div class="portrait-watermark"><img src="assets/naveen-portrait.png" alt=""></div>
   </div>
 </section>
 
@@ -634,6 +619,12 @@
       <span class="m-pill green"><span class="m-pill-dot"></span>Risk-Based Testing</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Java</span><span class="m-pill pink"><span class="m-pill-dot"></span>AI-Assisted Dev</span><span class="m-pill violet"><span class="m-pill-dot"></span>Cursor / Claude</span><span class="m-pill amber"><span class="m-pill-dot"></span>LaunchDarkly</span><span class="m-pill cyan"><span class="m-pill-dot"></span>JMeter</span><span class="m-pill green"><span class="m-pill-dot"></span>Compliance QA</span><span class="m-pill indigo"><span class="m-pill-dot"></span>JavaScript</span><span class="m-pill violet"><span class="m-pill-dot"></span>SOAP UI</span><span class="m-pill pink"><span class="m-pill-dot"></span>Sauce Labs</span><span class="m-pill amber"><span class="m-pill-dot"></span>HP QC ALM</span><span class="m-pill cyan"><span class="m-pill-dot"></span>QTest</span>
     </div>
   </div>
+  <div class="marquee-row" style="margin-top:14px;">
+    <div class="marquee-track">
+      <span class="m-pill violet"><span class="m-pill-dot"></span>SwiftUI</span><span class="m-pill cyan"><span class="m-pill-dot"></span>Flutter</span><span class="m-pill indigo"><span class="m-pill-dot"></span>React</span><span class="m-pill amber"><span class="m-pill-dot"></span>Unity</span><span class="m-pill green"><span class="m-pill-dot"></span>App Store Connect</span><span class="m-pill pink"><span class="m-pill-dot"></span>Play Console</span><span class="m-pill violet"><span class="m-pill-dot"></span>TestFlight</span><span class="m-pill cyan"><span class="m-pill-dot"></span>App Signing</span><span class="m-pill amber"><span class="m-pill-dot"></span>ASO</span><span class="m-pill green"><span class="m-pill-dot"></span>Selenium</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Playwright</span><span class="m-pill pink"><span class="m-pill-dot"></span>Custom Reporting</span>
+      <span class="m-pill violet"><span class="m-pill-dot"></span>SwiftUI</span><span class="m-pill cyan"><span class="m-pill-dot"></span>Flutter</span><span class="m-pill indigo"><span class="m-pill-dot"></span>React</span><span class="m-pill amber"><span class="m-pill-dot"></span>Unity</span><span class="m-pill green"><span class="m-pill-dot"></span>App Store Connect</span><span class="m-pill pink"><span class="m-pill-dot"></span>Play Console</span><span class="m-pill violet"><span class="m-pill-dot"></span>TestFlight</span><span class="m-pill cyan"><span class="m-pill-dot"></span>App Signing</span><span class="m-pill amber"><span class="m-pill-dot"></span>ASO</span><span class="m-pill green"><span class="m-pill-dot"></span>Selenium</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Playwright</span><span class="m-pill pink"><span class="m-pill-dot"></span>Custom Reporting</span>
+    </div>
+  </div>
   <div class="container">
     <div class="skills-cards">
       <div class="skill-card reveal"><div class="skill-icon-wrap">📱</div><h4>Mobile Automation</h4><p>XCUITest, Espresso, Appium, Perfecto, BrowserStack, Sauce Labs, Seetest</p></div>
@@ -755,8 +746,9 @@
   }
 
   const rows = document.querySelectorAll('.marquee-row');
-  if (rows[0]) initMarquee(rows[0].querySelector('.marquee-track'), 1.1, false);
-  if (rows[1]) initMarquee(rows[1].querySelector('.marquee-track'), 1.4, true);
+  if (rows[0]) initMarquee(rows[0].querySelector('.marquee-track'), 0.55, false);
+  if (rows[1]) initMarquee(rows[1].querySelector('.marquee-track'), 0.7, true);
+  if (rows[2]) initMarquee(rows[2].querySelector('.marquee-track'), 0.45, false);
 </script>
 </body>
 </html>
