@@ -242,12 +242,14 @@
       min-height: 280px;
       isolation: isolate;
     }
-    /* Subtle dot texture overlay for premium tactile feel */
+    /* Caustic dot texture + subtle chromatic shimmer line */
     .app-card::after {
-      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
-      background-size: 24px 24px;
-      mask-image: radial-gradient(ellipse 80% 80% at 60% 40%, black 30%, transparent 90%);
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.06) 50%, transparent 65%);
+      background-size: 22px 22px, 100% 100%;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 30%, black 30%, transparent 95%);
     }
     /* Vibrant top stripe per app for color identity */
     .app-card::before {
@@ -327,17 +329,17 @@
       box-shadow: 0 14px 36px rgba(0,0,0,0.4), 0 0 24px var(--app-glow, rgba(99,102,241,0.4));
     }
 
-    /* DARK card backgrounds with subtle vibrant tint per app */
-    .app-utilify    { background: linear-gradient(155deg, #1A0F08 0%, #0E0808 100%); --app-glow: rgba(251,146,60,0.4); }
-    .app-canwasa    { background: linear-gradient(155deg, #1A0820 0%, #08151A 100%); --app-glow: rgba(236,72,153,0.4); }
-    .app-nightbloom { background: linear-gradient(155deg, #0C0820 0%, #1A0A2A 100%); --app-glow: rgba(99,102,241,0.45); }
-    .app-palettely  { background: linear-gradient(155deg, #1A0820 0%, #08181E 100%); --app-glow: rgba(168,85,247,0.4); }
-    .app-paperlens  { background: linear-gradient(155deg, #08152A 0%, #08252E 100%); --app-glow: rgba(37,99,235,0.45); }
-    .app-astroorbit { background: linear-gradient(155deg, #0F0820 0%, #1A0A2A 100%); --app-glow: rgba(124,58,237,0.45); }
-    .app-mergerise  { background: linear-gradient(155deg, #08180E 0%, #082822 100%); --app-glow: rgba(16,185,129,0.4); }
-    .app-fuzzypop   { background: linear-gradient(155deg, #2A0E12 0%, #2A1A0A 100%); --app-glow: rgba(245,158,11,0.4); }
-    .app-tzc        { background: linear-gradient(155deg, #08152A 0%, #0A1F2A 100%); --app-glow: rgba(37,99,235,0.45); }
-    .app-qito       { background: linear-gradient(155deg, #0F0F14 0%, #1C1C22 100%); --app-glow: rgba(161,161,170,0.3); }
+    /* Caustic-lit card backgrounds — lighter dark with vibrant highlights per app */
+    .app-utilify    { background: linear-gradient(135deg, #3A1F12 0%, #1F0F08 60%, #2A1808 100%); --app-glow: rgba(251,146,60,0.6); --app-spot: rgba(255,180,100,0.55); }
+    .app-canwasa    { background: linear-gradient(135deg, #3A1A40 0%, #1A0820 50%, #142840 100%); --app-glow: rgba(236,72,153,0.55); --app-spot: rgba(255,160,220,0.5); }
+    .app-nightbloom { background: linear-gradient(135deg, #1F1245 0%, #100A2A 60%, #2A1545 100%); --app-glow: rgba(99,102,241,0.6); --app-spot: rgba(180,180,255,0.5); }
+    .app-palettely  { background: linear-gradient(135deg, #3A1240 0%, #2A0824 50%, #102438 100%); --app-glow: rgba(168,85,247,0.55); --app-spot: rgba(255,170,200,0.5); }
+    .app-paperlens  { background: linear-gradient(135deg, #122550 0%, #08152A 60%, #0E2E40 100%); --app-glow: rgba(37,99,235,0.6); --app-spot: rgba(140,200,255,0.5); }
+    .app-astroorbit { background: linear-gradient(135deg, #1F1245 0%, #150A2A 50%, #2A1A50 100%); --app-glow: rgba(124,58,237,0.6); --app-spot: rgba(190,160,255,0.55); }
+    .app-mergerise  { background: linear-gradient(135deg, #0E2818 0%, #08180E 60%, #103530 100%); --app-glow: rgba(16,185,129,0.55); --app-spot: rgba(140,255,200,0.5); }
+    .app-fuzzypop   { background: linear-gradient(135deg, #401822 0%, #2A0E12 50%, #3A2410 100%); --app-glow: rgba(245,158,11,0.55); --app-spot: rgba(255,200,140,0.5); }
+    .app-tzc        { background: linear-gradient(135deg, #122550 0%, #0A1F30 60%, #1A2E50 100%); --app-glow: rgba(37,99,235,0.6); --app-spot: rgba(150,200,255,0.5); }
+    .app-qito       { background: linear-gradient(135deg, #25252E 0%, #14141A 60%, #2E2E36 100%); --app-glow: rgba(161,161,170,0.4); --app-spot: rgba(220,220,230,0.4); }
 
     /* Per-app top stripe — vibrant 4px gradient line */
     .app-utilify::before    { background: linear-gradient(90deg, #FB923C, #EF4444); }
@@ -351,12 +353,28 @@
     .app-tzc::before        { background: linear-gradient(90deg, #2563EB, #6366F1); }
     .app-qito::before       { background: linear-gradient(90deg, #71717A, #A1A1AA); }
 
-    /* Soft colored halo behind icon — uses --app-glow for cohesion */
+    /* Caustic light system — primary glow + bright accent spot */
     .app-card-bg {
-      position: absolute; width: 280px; height: 280px; border-radius: 50%;
-      top: -100px; left: -60px; z-index: 0;
-      filter: blur(60px); pointer-events: none;
-      background: var(--app-glow); opacity: 0.6;
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      overflow: hidden; border-radius: inherit;
+    }
+    /* Primary brand glow — large soft halo, top-left */
+    .app-card-bg::before {
+      content: ''; position: absolute;
+      width: 320px; height: 320px; border-radius: 50%;
+      top: -110px; left: -70px;
+      background: radial-gradient(circle, var(--app-glow) 0%, transparent 65%);
+      filter: blur(40px);
+      opacity: 0.85;
+    }
+    /* Caustic bright spot — smaller intense highlight, opposite corner */
+    .app-card-bg::after {
+      content: ''; position: absolute;
+      width: 180px; height: 180px; border-radius: 50%;
+      bottom: -50px; right: -40px;
+      background: radial-gradient(circle, var(--app-spot) 0%, transparent 60%);
+      filter: blur(50px);
+      opacity: 0.7;
     }
 
     /* (spans defined above with new layout) */
@@ -369,12 +387,17 @@
       column-gap: 36px;
       padding: 36px 40px;
       min-height: auto;
-      background: linear-gradient(135deg, #1A0F08 0%, #0E0808 50%, #1A0E0A 100%);
+      background: linear-gradient(135deg, #3A1F12 0%, #1F0F08 40%, #2E1810 70%, #3A2418 100%);
     }
-    .app-card.featured .app-card-bg {
-      width: 480px; height: 480px;
-      top: -200px; right: -120px; left: auto;
-      opacity: 0.7;
+    .app-card.featured .app-card-bg::before {
+      width: 600px; height: 600px;
+      top: -250px; left: auto; right: -150px;
+      opacity: 0.9;
+    }
+    .app-card.featured .app-card-bg::after {
+      width: 320px; height: 320px;
+      top: -80px; left: -100px; bottom: auto; right: auto;
+      opacity: 0.75;
     }
     .app-card.featured .app-icon-mega {
       width: 110px; height: 110px; border-radius: 26px;
