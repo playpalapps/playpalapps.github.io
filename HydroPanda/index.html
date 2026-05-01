@@ -195,22 +195,6 @@ h3 { font-size: clamp(1.2rem, 1.6vw, 1.45rem); }
   100% { transform: translateY(105vh) scale(1); opacity: 0; }
 }
 
-/* Floating ambient bubbles */
-.bubble {
-  position: absolute;
-  border-radius: 50%;
-  border: 1.5px solid rgba(0,229,255,0.32);
-  background: radial-gradient(circle at 30% 28%, rgba(255,255,255,0.18) 0%, rgba(0,229,255,0.08) 50%, transparent 100%);
-  box-shadow: inset 0 -3px 8px rgba(0,229,255,0.12);
-  pointer-events: none;
-  animation: bubFloat var(--d, 12s) ease-in-out infinite;
-  animation-delay: var(--dl, 0s);
-}
-@keyframes bubFloat {
-  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-  50%      { transform: translateY(-30px) translateX(12px) scale(1.05); }
-}
-
 /* ---------- Navigation ---------- */
 nav.site {
   position: sticky;
@@ -557,27 +541,16 @@ section.slab {
 }
 @media (max-width: 920px) { .sidekick-grid { grid-template-columns: 1fr; } }
 
+/* The panda vessel is a square screenshot of the actual app render. Its
+   background is the same #060A14 the page uses, so the rectangle blends
+   invisibly into the page — no card frame, no cyan glow that would lighten
+   the surrounding area and expose the screenshot's edges. */
 .panda-fill-card {
   position: relative;
   aspect-ratio: 1 / 1;
-  border-radius: var(--r-2xl);
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
-  border: 1px solid var(--border-strong);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   display: grid; place-items: center;
-  overflow: hidden;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    0 40px 80px -28px rgba(0,229,255,0.22),
-    0 18px 50px -20px rgba(0,0,0,0.6);
-}
-.panda-fill-card::after {
-  content: "";
-  position: absolute; inset: -20%;
-  background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.25), transparent 60%);
-  filter: blur(40px);
-  z-index: 0;
+  background: transparent;
+  border: 0;
 }
 .panda-svg-wrap {
   position: relative;
@@ -598,9 +571,11 @@ section.slab {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter:
-    drop-shadow(0 24px 48px rgba(0, 102, 255, 0.45))
-    drop-shadow(0 8px 22px rgba(0, 229, 255, 0.32));
+  /* CSS-side soft circular mask — fades the screenshot's rectangular
+     edges into transparent at the corners, regardless of what bg pixels
+     the screenshot has. Page bg shows through where the image fades. */
+  -webkit-mask-image: radial-gradient(ellipse 62% 60% at 50% 50%, #000 78%, rgba(0,0,0,0) 100%);
+          mask-image: radial-gradient(ellipse 62% 60% at 50% 50%, #000 78%, rgba(0,0,0,0) 100%);
   animation: pandaBob 5.5s ease-in-out infinite;
 }
 @keyframes pandaBob {
@@ -979,9 +954,6 @@ footer.site .links a:hover { color: var(--ink); }
   <div class="drop" style="left:78%; --d:9.5s; --dl:1s; width:11px; height:16px;"></div>
   <div class="drop" style="left:88%; --d:12s; --dl:2.5s; width:8px; height:12px; opacity:.6;"></div>
   <div class="drop" style="left:96%; --d:10.5s; --dl:.9s; width:6px; height:9px;"></div>
-  <div class="bubble" style="left:8%; top:42%; width:140px; height:140px; --d:14s; --dl:0s; opacity:.6;"></div>
-  <div class="bubble" style="right:6%; top:62%; width:90px; height:90px; --d:11s; --dl:1.5s; opacity:.5;"></div>
-  <div class="bubble" style="left:46%; top:88%; width:60px; height:60px; --d:9s; --dl:3s; opacity:.4;"></div>
 </div>
 
 <!-- NAV -->
@@ -1148,21 +1120,14 @@ footer.site .links a:hover { color: var(--ink); }
     </div>
 
     <div class="sidekick-grid">
-      <div class="panda-fill-card reveal" aria-label="The Hydro Panda mascot with animated water ripples">
+      <div class="panda-fill-card reveal" aria-label="The Hydro Panda vessel — a panda silhouette filled with water">
         <div class="panda-svg-wrap">
-          <span class="panda-ripple panda-ripple-1" aria-hidden="true"></span>
-          <span class="panda-ripple panda-ripple-2" aria-hidden="true"></span>
-          <span class="panda-ripple panda-ripple-3" aria-hidden="true"></span>
-          <img src="panda.png" alt="The Hydro Panda mascot — a friendly panda riding a cyan water wave" class="panda-hero-img" loading="lazy" width="600" height="600">
-          <span class="panda-bubble panda-bubble-1" aria-hidden="true"></span>
-          <span class="panda-bubble panda-bubble-2" aria-hidden="true"></span>
-          <span class="panda-bubble panda-bubble-3" aria-hidden="true"></span>
-          <span class="panda-bubble panda-bubble-4" aria-hidden="true"></span>
+          <img src="panda-vessel.png" alt="A glossy panda head filled with cyan-blue water — the actual vessel rendered live in the Hydro Panda app" class="panda-hero-img" loading="lazy" width="760" height="760">
         </div>
         <div class="fill-meter" aria-hidden="true">
           <span>Today</span>
           <span class="bar"></span>
-          <span>1.6 / 2.5L</span>
+          <span>2.2 / 2.5L</span>
         </div>
       </div>
 
