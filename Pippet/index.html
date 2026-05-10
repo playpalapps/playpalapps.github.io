@@ -842,7 +842,7 @@ section { padding: 100px 0; position: relative; }
     recoil: 0,        // 0..1, decays — squashes pill briefly when firing
     threat: 0,        // 0..1, set by nearest-enemy distance
     bob: 0,           // floating idle bob
-    mouth: 0          // 0..1 — gasp/'O' when threat is high
+    muzzleFlash: 0    // 0..1 — bright glow under the pill on each fire
   };
   const shake = { x: 0, y: 0, mag: 0 };
 
@@ -902,7 +902,7 @@ section { padding: 100px 0; position: relative; }
   function fire(target) {
     const p = pip();
     const mx = p.x + (Math.random() - 0.5) * 4;
-    const my = p.y + p.h / 2 + 2;
+    const my = p.y + p.h / 2 + 10; // clearly below pill, at the muzzle
     const dx = target.x - mx;
     const dy = target.y - my;
     const len = Math.hypot(dx, dy) || 1;
@@ -926,6 +926,7 @@ section { padding: 100px 0; position: relative; }
       });
     }
     pipState.recoil = Math.min(1, pipState.recoil + 0.55);
+    pipState.muzzleFlash = 1;
   }
 
   function nearestEnemy(p) {
@@ -1134,7 +1135,7 @@ section { padding: 100px 0; position: relative; }
       ? Math.max(0, 1 - (nearestDist - 60) / (h * 0.45))
       : 0;
     pipState.threat += (threatTarget - pipState.threat) * Math.min(1, dt * 6);
-    pipState.mouth = Math.min(1, Math.max(0, (pipState.threat - 0.35) / 0.5));
+    pipState.muzzleFlash = Math.max(0, pipState.muzzleFlash - dt * 7);
 
     // Blink scheduling
     if (timeNow > pipState.nextBlink) {
@@ -1591,10 +1592,11 @@ section { padding: 100px 0; position: relative; }
     roundRect(ctx, p.x - p.w/2 + 4, p.y - p.h/2 + 1.5, p.w - 8, p.h/2, p.h/2);
     ctx.fill();
 
-    // -- Face: eyes + brows + mouth --
-    const eyeR = Math.max(4.5, p.h * 0.18);
+    // -- Face: just eyes (with brows when threatened). No mouth — the in-game
+    //    Pip is eyes-only, and a mouth right above the muzzle reads as spitting.
+    const eyeR = Math.max(4.5, p.h * 0.20);
     const eyeOff = p.w * 0.10;
-    const eyeY = p.y - p.h * 0.04;
+    const eyeY = p.y;
     const blinking = timeNow < pipState.blinkUntil;
 
     drawPipEye(p.x - eyeOff, eyeY, eyeR, target, blinking);
@@ -1614,38 +1616,26 @@ section { padding: 100px 0; position: relative; }
       ctx.stroke();
     }
 
-    // Mouth — smile when calm, "O" gasp when threatened
-    const mouthY = p.y + p.h * 0.30;
-    if (pipState.mouth > 0.3) {
-      // Gasp 'O'
-      const oR = 1.5 + pipState.mouth * 2.5;
-      ctx.fillStyle = '#000';
-      ctx.beginPath();
-      ctx.ellipse(p.x, mouthY, oR * 0.85, oR, 0, 0, Math.PI*2);
-      ctx.fill();
-      // Tiny inner highlight
-      ctx.fillStyle = 'rgba(255,255,255,0.3)';
-      ctx.beginPath();
-      ctx.arc(p.x - oR*0.3, mouthY - oR*0.3, oR*0.25, 0, Math.PI*2);
-      ctx.fill();
-    } else {
-      // Smile
-      ctx.strokeStyle = 'rgba(255,255,255,0.85)';
-      ctx.lineWidth = 1.4;
-      ctx.lineCap = 'round';
-      const smileW = p.w * 0.06;
-      ctx.beginPath();
-      ctx.arc(p.x, mouthY - 1, smileW, 0.1 * Math.PI, 0.9 * Math.PI);
-      ctx.stroke();
-    }
-
-    // Tiny chest sparkle (when firing)
-    if (pipState.recoil > 0.1) {
-      ctx.fillStyle = `rgba(255,255,255,${pipState.recoil})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y + p.h/2 - 1, 2 + pipState.recoil * 2, 0, Math.PI*2);
-      ctx.fill();
-    }
+    // -- Muzzle: a clearly-detached glowing weapon point below the pill.
+    //    Reads as a cannon, not a mouth.
+    const muzzleY = p.y + p.h / 2 + 10;
+    const flash = pipState.muzzleFlash;
+    // Charging halo (always faintly visible so it reads as a weapon)
+    const halo = ctx.createRadialGradient(p.x, muzzleY, 0, p.x, muzzleY, 18 + flash * 18);
+    halo.addColorStop(0, `rgba(91,224,255,${0.35 + flash * 0.55})`);
+    halo.addColorStop(1, 'rgba(91,224,255,0)');
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(p.x, muzzleY, 18 + flash * 18, 0, Math.PI*2);
+    ctx.fill();
+    // Core dot
+    ctx.fillStyle = `rgba(255,255,255,${0.55 + flash * 0.45})`;
+    ctx.shadowColor = '#5BE0FF';
+    ctx.shadowBlur = 8 + flash * 10;
+    ctx.beginPath();
+    ctx.arc(p.x, muzzleY, 2.4 + flash * 2.2, 0, Math.PI*2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
   }
 
   function drawPipEye(cx, cy, r, target, blinking) {
