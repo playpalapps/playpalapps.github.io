@@ -169,117 +169,52 @@ body {
   position: relative;
 }
 
-/* The hero Pip — the star of the show */
+/* The hero Pip — live Canvas2D mini-game demo */
 .stage {
   position: relative;
   width: 100%;
-  max-width: 540px;
-  height: 320px;
+  max-width: 620px;
+  aspect-ratio: 7 / 5;
   margin-bottom: 30px;
-}
-@media (max-width: 480px) { .stage { height: 240px; } }
-
-/* Aura glow behind the pill */
-.stage::before {
-  content: "";
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 38% at 50% 38%,
-              rgba(91,224,255,0.7), transparent 70%);
-  filter: blur(40px);
-  animation: aura-pulse 4s ease-in-out infinite;
-}
-@keyframes aura-pulse {
-  0%,100% { opacity: 0.7; transform: scale(1); }
-  50%     { opacity: 1;    transform: scale(1.1); }
-}
-
-/* The pill */
-.stage-pill {
-  position: absolute; left: 50%; top: 38%;
-  transform: translate(-50%, -50%);
-  width: 280px; height: 90px;
-  background: var(--pill);
-  border-radius: 45px;
+  border-radius: 28px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(91,224,255,0.18), transparent 60%),
+    radial-gradient(ellipse at 30% 100%, rgba(180,124,255,0.18), transparent 55%),
+    linear-gradient(180deg, #0A0518 0%, #04020E 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    0 0 90px rgba(91,224,255,0.35);
-  display: flex; align-items: center; justify-content: center;
-  gap: 28px;
-  animation: pill-float 6s ease-in-out infinite;
+    0 30px 80px rgba(91,224,255,0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+.stage canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+}
+.stage-tag {
+  position: absolute; top: 14px; right: 14px;
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 999px;
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  pointer-events: none;
   z-index: 2;
 }
-@keyframes pill-float {
-  0%,100% { transform: translate(-50%, calc(-50% - 0px)); }
-  50%     { transform: translate(-50%, calc(-50% - 8px)); }
+.stage-tag .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #5BFF8C;
+  box-shadow: 0 0 8px #5BFF8C;
+  animation: live-pulse 1.6s ease-in-out infinite;
 }
-@media (max-width: 480px) {
-  .stage-pill { width: 220px; height: 72px; gap: 22px; }
-}
-
-/* Eyes */
-.eye {
-  width: 22px; height: 22px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 18px rgba(91,224,255,0.95);
-  position: relative;
-}
-.eye::after {
-  content: "";
-  position: absolute; inset: 6px;
-  background: #000; border-radius: 50%;
-  animation: eye-track 5s ease-in-out infinite;
-}
-@keyframes eye-track {
-  0%, 100% { transform: translate(0, 0); }
-  20%      { transform: translate(3px, 1px); }
-  40%      { transform: translate(-3px, -1px); }
-  65%      { transform: translate(2px, -2px); }
-  85%      { transform: translate(-2px, 2px); }
-}
-
-/* Beam from the pill bottom */
-.beam {
-  position: absolute;
-  left: 50%; top: 38%;
-  width: 6px; height: 0;
-  background: linear-gradient(180deg, rgba(91,224,255,1), rgba(91,224,255,0));
-  transform: translateX(-50%) translateY(45px);
-  border-radius: 3px;
-  filter: blur(0.5px);
-  animation: beam-fire 1.6s ease-in infinite;
-  z-index: 1;
-}
-.beam.b2 { animation-delay: 0.4s; }
-.beam.b3 { animation-delay: 0.8s; }
-.beam.b4 { animation-delay: 1.2s; }
-@keyframes beam-fire {
-  0%   { height: 0;   transform: translateX(-50%) translateY(45px); opacity: 0; }
-  10%  { opacity: 1; }
-  100% { height: 360px; transform: translateX(-50%) translateY(45px); opacity: 0; }
-}
-
-/* Hero asteroids — drift up past Pip */
-.h-rock {
-  position: absolute; left: 50%; bottom: -10px;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  z-index: 1;
-  animation: rock-rise 3.6s linear infinite;
-}
-.h-rock::after {
-  content: ""; position: absolute; inset: -8px; border-radius: 50%;
-  background: inherit; filter: blur(10px); opacity: 0.7;
-}
-.h-rock.r1 { background: var(--violet); animation-delay: -0.4s; transform: translateX(-180%); }
-.h-rock.r2 { background: var(--cyan);   animation-delay: -1.4s; transform: translateX(-30%); }
-.h-rock.r3 { background: var(--pink);   animation-delay: -2.4s; transform: translateX(120%); }
-.h-rock.r4 { background: var(--violet); animation-delay: -2.0s; transform: translateX(220%); width: 20px; height: 20px; }
-@keyframes rock-rise {
-  0%   { bottom: -20px; opacity: 0; }
-  10%  { opacity: 0.8; }
-  90%  { opacity: 0.8; }
-  100% { bottom: 320px; opacity: 0; }
+@keyframes live-pulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.4; }
 }
 
 /* Title */
@@ -676,18 +611,8 @@ section { padding: 100px 0; position: relative; }
 <div class="wrap">
   <section class="hero">
     <div class="stage" aria-hidden="true">
-      <div class="stage-pill">
-        <div class="eye"></div>
-        <div class="eye"></div>
-      </div>
-      <div class="beam"></div>
-      <div class="beam b2"></div>
-      <div class="beam b3"></div>
-      <div class="beam b4"></div>
-      <div class="h-rock r1"></div>
-      <div class="h-rock r2"></div>
-      <div class="h-rock r3"></div>
-      <div class="h-rock r4"></div>
+      <canvas id="heroCanvas"></canvas>
+      <div class="stage-tag"><span class="dot"></span>Live demo</div>
     </div>
 
     <h1 class="title">PIPPET</h1>
@@ -870,6 +795,965 @@ section { padding: 100px 0; position: relative; }
     </a>
   </section>
 </div>
+
+<script>
+/* ==========================================================================
+   PIPPET — live hero demo
+   ----------------------------------------------------------------------------
+   A Canvas2D mini-version of the actual game running in the page hero.
+   Faithful to the in-game look: gradient-shaded enemies with detail
+   (craters, rivets, cracks, blinking lights, embryos, engine glow),
+   motion trails, HP pips, screen shake, electric beams, and a Pip with
+   personality — blinking eyes, smile, mouth gasp on threat, squash recoil
+   when firing.
+
+   Self-contained, no deps. ~30fps cap. Pauses when off-screen
+   (IntersectionObserver), respects prefers-reduced-motion.
+   ========================================================================== */
+(function () {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // -------------- Sizing --------------
+  let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    w = rect.width; h = rect.height;
+    canvas.width  = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // -------------- World --------------
+  const enemies = [];
+  const beams = [];
+  const particles = [];
+  const stars = [];   // background starfield
+  const sparks = [];  // muzzle sparks at fire origin
+
+  // Live state for Pip personality + screen shake
+  const pipState = {
+    blinkUntil: 0,
+    nextBlink: 1.5,
+    recoil: 0,        // 0..1, decays — squashes pill briefly when firing
+    threat: 0,        // 0..1, set by nearest-enemy distance
+    bob: 0,           // floating idle bob
+    mouth: 0          // 0..1 — gasp/'O' when threat is high
+  };
+  const shake = { x: 0, y: 0, mag: 0 };
+
+  // Pip lives at the top, shaped like the system Dynamic Island.
+  function pip() {
+    const W = Math.min(240, w * 0.58);
+    const H = W * (37.33 / 126);
+    const sq = pipState.recoil; // squash when firing
+    return {
+      x: w / 2,
+      y: 36 + H / 2 + Math.sin(pipState.bob) * 1.5,
+      w: W * (1 + sq * 0.06),
+      h: H * (1 - sq * 0.18)
+    };
+  }
+
+  // -------------- Enemy kinds --------------
+  // Match the in-game palette + shapes — but with full game-quality detail.
+  const KINDS = [
+    { id: 'asteroid', color: '#B47CFF', radius: 18, hp: 1, weight: 5 },
+    { id: 'shard',    color: '#5BE0FF', radius: 12, hp: 1, weight: 4 },
+    { id: 'boulder',  color: '#FF9173', radius: 24, hp: 3, weight: 1 },
+    { id: 'bomb',     color: '#FF5C66', radius: 15, hp: 2, weight: 1 },
+    { id: 'splitter', color: '#D89BFF', radius: 18, hp: 2, weight: 2 },
+    { id: 'zigzag',   color: '#F5FF7C', radius: 13, hp: 1, weight: 2 }
+  ];
+  const POOL = (() => {
+    const a = [];
+    for (const k of KINDS) for (let i = 0; i < k.weight; i++) a.push(k);
+    return a;
+  })();
+
+  // -------------- Spawning --------------
+  let spawnTimer = 0.4;
+  function spawnEnemy() {
+    const kind = POOL[(Math.random() * POOL.length) | 0];
+    const x = 30 + Math.random() * (w - 60);
+    const speed = 38 + Math.random() * 26;
+    enemies.push({
+      kind,
+      x,
+      y: h + kind.radius + 10,
+      vx: (Math.random() - 0.5) * 14,
+      vy: -speed,
+      rot: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 1.5,
+      hp: kind.hp,
+      flash: 0,
+      birth: 0,
+      zigPhase: Math.random() * Math.PI * 2,
+      trail: [] // last positions, for shard/zigzag motion blur
+    });
+  }
+
+  // -------------- Firing --------------
+  let fireCooldown = 0;
+  function fire(target) {
+    const p = pip();
+    const mx = p.x + (Math.random() - 0.5) * 4;
+    const my = p.y + p.h / 2 + 2;
+    const dx = target.x - mx;
+    const dy = target.y - my;
+    const len = Math.hypot(dx, dy) || 1;
+    const speed = 520;
+    beams.push({
+      x: mx, y: my,
+      vx: (dx / len) * speed,
+      vy: (dy / len) * speed,
+      trail: [],
+      life: 1.4
+    });
+    // Muzzle sparks
+    for (let i = 0; i < 5; i++) {
+      const a = Math.atan2(dy, dx) + (Math.random() - 0.5) * 1.0;
+      const sp = 80 + Math.random() * 140;
+      sparks.push({
+        x: mx, y: my,
+        vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+        life: 0.18 + Math.random() * 0.12,
+        size: 1 + Math.random() * 1.5
+      });
+    }
+    pipState.recoil = Math.min(1, pipState.recoil + 0.55);
+  }
+
+  function nearestEnemy(p) {
+    let best = null, bestD = Infinity;
+    for (const e of enemies) {
+      const d = (e.x - p.x) ** 2 + (e.y - p.y) ** 2;
+      if (d < bestD) { bestD = d; best = e; }
+    }
+    return best;
+  }
+
+  // -------------- Particles --------------
+  function explode(x, y, color, count) {
+    for (let i = 0; i < count; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const sp = 70 + Math.random() * 260;
+      particles.push({
+        x, y,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp,
+        color,
+        size: 1.5 + Math.random() * 3.0,
+        life: 0.45 + Math.random() * 0.7,
+        spin: (Math.random() - 0.5) * 8,
+        rot: Math.random() * Math.PI * 2
+      });
+    }
+    // White-hot core flash
+    for (let i = 0; i < Math.min(6, count / 2); i++) {
+      const a = Math.random() * Math.PI * 2;
+      const sp = 30 + Math.random() * 80;
+      particles.push({
+        x, y,
+        vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+        color: '#fff',
+        size: 2 + Math.random() * 2,
+        life: 0.18 + Math.random() * 0.12,
+        spin: 0, rot: 0
+      });
+    }
+  }
+
+  // -------------- Starfield --------------
+  function initStars() {
+    stars.length = 0;
+    const n = 60;
+    for (let i = 0; i < n; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        z: 0.3 + Math.random() * 0.7, // depth
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+  }
+  initStars();
+  window.addEventListener('resize', initStars, { passive: true });
+
+  // -------------- Update --------------
+  let timeNow = 0;
+  function update(dt) {
+    timeNow += dt;
+
+    // Spawn cadence — slightly random but feels alive
+    spawnTimer -= dt;
+    if (spawnTimer <= 0 && enemies.length < 14) {
+      spawnTimer = 0.40 + Math.random() * 0.35;
+      spawnEnemy();
+    }
+
+    const p = pip();
+    const pillTopY = p.y - p.h / 2;
+
+    // Stars (parallax twinkle)
+    for (const s of stars) {
+      s.twinkle += dt * (1 + s.z);
+      s.y -= dt * 4 * s.z; // gentle upward drift
+      if (s.y < -2) { s.y = h + 2; s.x = Math.random() * w; }
+    }
+
+    // Enemies
+    let nearestDist = Infinity;
+    for (let i = enemies.length - 1; i >= 0; i--) {
+      const e = enemies[i];
+      e.birth += dt;
+
+      if (e.kind.id === 'zigzag') {
+        e.zigPhase += dt * 4;
+        e.vx = Math.sin(e.zigPhase) * 60;
+      } else if (e.y < h * 0.55) {
+        // Mild homing toward Pip
+        const dx = p.x - e.x;
+        e.vx += dx * 0.35 * dt;
+        e.vx = Math.max(-50, Math.min(50, e.vx));
+      }
+
+      e.x += e.vx * dt;
+      e.y += e.vy * dt;
+      e.rot += e.spin * dt;
+      e.flash = Math.max(0, e.flash - dt * 5);
+
+      // Trail (for shard/zigzag motion blur)
+      if (e.kind.id === 'shard' || e.kind.id === 'zigzag') {
+        e.trail.unshift({ x: e.x, y: e.y });
+        if (e.trail.length > 4) e.trail.length = 4;
+      }
+
+      // Track nearest enemy distance for Pip's "threat" mood
+      const d = Math.hypot(e.x - p.x, e.y - p.y);
+      if (d < nearestDist) nearestDist = d;
+
+      // Reached Pip — flash + remove (mini "damage" effect, just visual)
+      if (e.y < pillTopY + e.kind.radius + 4) {
+        explode(e.x, e.y, e.kind.color, 10);
+        shake.mag = Math.min(8, shake.mag + 5);
+        enemies.splice(i, 1);
+      }
+    }
+
+    // Beams
+    for (let i = beams.length - 1; i >= 0; i--) {
+      const b = beams[i];
+      b.trail.unshift({ x: b.x, y: b.y });
+      if (b.trail.length > 6) b.trail.length = 6;
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+      b.life -= dt;
+      if (b.life <= 0 || b.x < -40 || b.x > w + 40 || b.y < -40 || b.y > h + 40) {
+        beams.splice(i, 1);
+        continue;
+      }
+      // Collide with enemies
+      for (let j = enemies.length - 1; j >= 0; j--) {
+        const e = enemies[j];
+        const r = e.kind.radius + 5;
+        const dx = b.x - e.x, dy = b.y - e.y;
+        if (dx * dx + dy * dy < r * r) {
+          beams.splice(i, 1);
+          e.hp -= 1;
+          e.flash = 1;
+          if (e.hp <= 0) {
+            const big = e.kind.id === 'boulder';
+            explode(e.x, e.y, e.kind.color, big ? 28 : 16);
+            shake.mag = Math.min(8, shake.mag + (big ? 3.5 : 1.6));
+            enemies.splice(j, 1);
+          } else {
+            // Small spark on non-kill hit
+            for (let k = 0; k < 6; k++) {
+              const a = Math.random() * Math.PI * 2;
+              const sp = 50 + Math.random() * 80;
+              particles.push({
+                x: b.x, y: b.y,
+                vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+                color: '#fff',
+                size: 1 + Math.random() * 1.5,
+                life: 0.15 + Math.random() * 0.1,
+                spin: 0, rot: 0
+              });
+            }
+          }
+          break;
+        }
+      }
+    }
+
+    // Auto-fire
+    fireCooldown -= dt;
+    if (fireCooldown <= 0) {
+      const t = nearestEnemy(p);
+      if (t) {
+        fire(t);
+        fireCooldown = 0.18 + Math.random() * 0.10;
+      } else {
+        fireCooldown = 0.05;
+      }
+    }
+
+    // Particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const pa = particles[i];
+      pa.life -= dt;
+      if (pa.life <= 0) { particles.splice(i, 1); continue; }
+      pa.x += pa.vx * dt;
+      pa.y += pa.vy * dt;
+      pa.rot += pa.spin * dt;
+      const damp = Math.pow(0.96, dt * 60);
+      pa.vx *= damp; pa.vy *= damp;
+    }
+    if (particles.length > 220) particles.splice(0, particles.length - 220);
+
+    // Sparks
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const s = sparks[i];
+      s.life -= dt;
+      if (s.life <= 0) { sparks.splice(i, 1); continue; }
+      s.x += s.vx * dt; s.y += s.vy * dt;
+      const damp = Math.pow(0.92, dt * 60);
+      s.vx *= damp; s.vy *= damp;
+    }
+
+    // Pip personality
+    pipState.bob += dt * 2;
+    pipState.recoil = Math.max(0, pipState.recoil - dt * 4);
+    // Threat ramps up when nearest enemy is close
+    const threatTarget = nearestDist < h * 0.55
+      ? Math.max(0, 1 - (nearestDist - 60) / (h * 0.45))
+      : 0;
+    pipState.threat += (threatTarget - pipState.threat) * Math.min(1, dt * 6);
+    pipState.mouth = Math.min(1, Math.max(0, (pipState.threat - 0.35) / 0.5));
+
+    // Blink scheduling
+    if (timeNow > pipState.nextBlink) {
+      pipState.blinkUntil = timeNow + 0.12;
+      pipState.nextBlink = timeNow + 2.4 + Math.random() * 2.6;
+    }
+
+    // Screen shake decay
+    shake.mag *= Math.pow(0.85, dt * 60);
+    if (shake.mag < 0.05) shake.mag = 0;
+    shake.x = (Math.random() - 0.5) * shake.mag;
+    shake.y = (Math.random() - 0.5) * shake.mag;
+  }
+
+  // -------------- Path helpers --------------
+  function pathHex(c, r) {
+    c.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI / 3 - Math.PI / 2;
+      const x = Math.cos(a) * r, y = Math.sin(a) * r;
+      i === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+    }
+    c.closePath();
+  }
+  function pathDiamond(c, r) {
+    c.beginPath();
+    c.moveTo(0, -r); c.lineTo(r * 0.6, 0); c.lineTo(0, r); c.lineTo(-r * 0.6, 0);
+    c.closePath();
+  }
+  function pathOcta(c, r) {
+    c.beginPath();
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4 - Math.PI / 2;
+      const x = Math.cos(a) * r, y = Math.sin(a) * r;
+      i === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+    }
+    c.closePath();
+  }
+  function pathChevron(c, r) {
+    c.beginPath();
+    c.moveTo(0, -r);
+    c.lineTo(r * 0.85, r * 0.55);
+    c.lineTo(0, r * 0.25);
+    c.lineTo(-r * 0.85, r * 0.55);
+    c.closePath();
+  }
+  function pathSpikeRing(c, oR, iR, points) {
+    c.beginPath();
+    for (let i = 0; i < points * 2; i++) {
+      const a = i * Math.PI / points - Math.PI / 2;
+      const r = i % 2 === 0 ? oR : iR;
+      const x = Math.cos(a) * r, y = Math.sin(a) * r;
+      i === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+    }
+    c.closePath();
+  }
+  function lighten(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.min(255, ((n >> 16) & 255) + amt);
+    const g = Math.min(255, ((n >> 8) & 255) + amt);
+    const b = Math.min(255, (n & 255) + amt);
+    return `rgb(${r},${g},${b})`;
+  }
+  function darken(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.max(0, ((n >> 16) & 255) - amt);
+    const g = Math.max(0, ((n >> 8) & 255) - amt);
+    const b = Math.max(0, (n & 255) - amt);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // -------------- Per-enemy renderers (faithful to in-game look) --------------
+
+  function renderAsteroid(e, r) {
+    const c = ctx, color = e.kind.color;
+    c.save(); c.translate(e.x, e.y); c.rotate(e.rot);
+    pathHex(c, r);
+    const g = c.createLinearGradient(0, -r, 0, r);
+    g.addColorStop(0, color);
+    g.addColorStop(1, darken(color, 80));
+    c.fillStyle = g; c.fill();
+    if (e.flash > 0) { c.fillStyle = `rgba(255,255,255,${e.flash})`; c.fill(); }
+    // Craters
+    c.fillStyle = 'rgba(0,0,0,0.32)';
+    c.beginPath(); c.arc(-r*0.32, -r*0.05, r*0.22, 0, Math.PI*2); c.fill();
+    c.fillStyle = 'rgba(0,0,0,0.28)';
+    c.beginPath(); c.arc(r*0.18, r*0.20, r*0.16, 0, Math.PI*2); c.fill();
+    c.fillStyle = 'rgba(0,0,0,0.25)';
+    c.beginPath(); c.arc(-r*0.05, -r*0.40, r*0.10, 0, Math.PI*2); c.fill();
+    // Rim
+    pathHex(c, r);
+    c.strokeStyle = 'rgba(255,255,255,0.32)'; c.lineWidth = 1; c.stroke();
+    // Specular
+    c.fillStyle = 'rgba(255,255,255,0.20)';
+    c.beginPath(); c.ellipse(-r*0.45, -r*0.50, r*0.22, r*0.14, -0.5, 0, Math.PI*2); c.fill();
+    c.restore();
+  }
+
+  function renderShard(e, r) {
+    const c = ctx, color = e.kind.color;
+    // Motion ghost
+    for (let i = 0; i < e.trail.length; i++) {
+      const t = e.trail[i];
+      const a = (1 - i / e.trail.length) * 0.25;
+      c.save(); c.translate(t.x, t.y); c.rotate(e.rot);
+      pathDiamond(c, r * (1 - i*0.10));
+      c.fillStyle = `rgba(91,224,255,${a})`; c.fill();
+      c.restore();
+    }
+    c.save(); c.translate(e.x, e.y); c.rotate(e.rot);
+    // Outer translucent facet
+    pathDiamond(c, r * 1.08);
+    c.fillStyle = 'rgba(91,224,255,0.35)'; c.fill();
+    // Body with diagonal gradient
+    const g = c.createLinearGradient(-r*0.6, -r, r*0.6, r);
+    g.addColorStop(0, 'rgba(255,255,255,0.95)');
+    g.addColorStop(1, color);
+    pathDiamond(c, r);
+    c.fillStyle = g; c.fill();
+    if (e.flash > 0) { c.fillStyle = `rgba(255,255,255,${e.flash})`; c.fill(); }
+    // Bright stripe
+    c.strokeStyle = 'rgba(255,255,255,0.85)'; c.lineWidth = 1.2;
+    c.beginPath(); c.moveTo(0, -r*0.85); c.lineTo(0, r*0.85); c.stroke();
+    // Outline
+    pathDiamond(c, r);
+    c.strokeStyle = 'rgba(255,255,255,0.6)'; c.lineWidth = 1; c.stroke();
+    // Sparkle
+    c.fillStyle = '#fff';
+    c.beginPath(); c.arc(0, -r - 1, 1.5, 0, Math.PI*2); c.fill();
+    c.restore();
+  }
+
+  function renderBoulder(e, r) {
+    const c = ctx, color = e.kind.color;
+    c.save(); c.translate(e.x, e.y); c.rotate(e.rot);
+    // Body
+    pathOcta(c, r);
+    const g = c.createLinearGradient(-r*0.7, -r*0.7, r*0.7, r*0.7);
+    g.addColorStop(0, lighten(color, 30));
+    g.addColorStop(1, darken(color, 90));
+    c.fillStyle = g; c.fill();
+    if (e.flash > 0) { c.fillStyle = `rgba(255,255,255,${e.flash})`; c.fill(); }
+    // Inner armor recess
+    pathOcta(c, r * 0.65);
+    c.fillStyle = 'rgba(0,0,0,0.22)'; c.fill();
+    // Rivets at 4 cardinals
+    const rivets = [[-r*0.78,0],[r*0.78,0],[0,-r*0.78],[0,r*0.78]];
+    for (const [dx,dy] of rivets) {
+      c.fillStyle = 'rgba(0,0,0,0.6)';
+      c.beginPath(); c.arc(dx, dy, 2.5, 0, Math.PI*2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,0.4)';
+      c.beginPath(); c.arc(dx, dy, 1.3, 0, Math.PI*2); c.fill();
+    }
+    // Cross
+    c.strokeStyle = 'rgba(0,0,0,0.45)'; c.lineWidth = 1.5;
+    c.beginPath();
+    c.moveTo(-r*0.45, 0); c.lineTo(r*0.45, 0);
+    c.moveTo(0, -r*0.45); c.lineTo(0, r*0.45);
+    c.stroke();
+    // Outline
+    pathOcta(c, r);
+    c.strokeStyle = 'rgba(255,255,255,0.35)'; c.lineWidth = 1.5; c.stroke();
+    // Damage cracks at low HP
+    if (e.hp < e.kind.hp) {
+      c.strokeStyle = 'rgba(255,80,80,0.75)'; c.lineWidth = 1.4;
+      c.beginPath();
+      c.moveTo(-r*0.4, -r*0.5);
+      c.lineTo(-r*0.05, -r*0.1);
+      c.lineTo(r*0.2, r*0.2);
+      c.stroke();
+    }
+    c.restore();
+  }
+
+  function renderBomb(e, r) {
+    const c = ctx, dangerness = Math.min(1, Math.max(0, 1 - (e.y - 60) / (h * 0.6)));
+    c.save(); c.translate(e.x, e.y);
+    // Rotating spike ring
+    c.save(); c.rotate(e.rot * 1.5);
+    pathSpikeRing(c, r * 1.18, r * 1.02, 12);
+    c.fillStyle = 'rgba(255,92,102,0.85)'; c.fill();
+    c.strokeStyle = 'rgba(255,255,255,0.4)'; c.lineWidth = 0.8; c.stroke();
+    c.restore();
+    // Body with radial gradient
+    const g = c.createRadialGradient(-r*0.3, -r*0.3, 0, 0, 0, r*1.2);
+    g.addColorStop(0, 'rgb(204,51,77)');
+    g.addColorStop(1, 'rgb(89,13,26)');
+    c.beginPath(); c.arc(0, 0, r, 0, Math.PI*2);
+    c.fillStyle = g; c.fill();
+    if (e.flash > 0) {
+      c.fillStyle = `rgba(255,255,255,${e.flash})`;
+      c.beginPath(); c.arc(0, 0, r, 0, Math.PI*2); c.fill();
+    }
+    // Pulsing core
+    const pulseRate = 4 + dangerness * 12;
+    const pulse = 0.5 + 0.5 * Math.sin(timeNow * pulseRate);
+    const coreR = r * 0.42 * (0.85 + 0.20 * pulse);
+    c.fillStyle = `rgba(255,255,255,${0.6 + 0.4*pulse})`;
+    c.beginPath(); c.arc(0, 0, coreR, 0, Math.PI*2); c.fill();
+    c.fillStyle = 'rgba(245,255,124,0.95)';
+    c.beginPath(); c.arc(0, 0, coreR * 0.4, 0, Math.PI*2); c.fill();
+    // 3 blinking lights
+    for (let i = 0; i < 3; i++) {
+      const a = i * (Math.PI*2/3) + e.rot * 1.5;
+      const lx = Math.cos(a) * r * 0.55;
+      const ly = Math.sin(a) * r * 0.55;
+      const phase = ((timeNow * 5 + i * 0.8) % 1);
+      const on = phase < 0.4;
+      c.fillStyle = on ? '#fff' : 'rgba(255,80,80,0.5)';
+      c.beginPath(); c.arc(lx, ly, 1.6, 0, Math.PI*2); c.fill();
+    }
+    // Outline
+    c.strokeStyle = `rgba(245,255,124,${0.5 + 0.5*pulse})`;
+    c.lineWidth = 1.5;
+    c.beginPath(); c.arc(0, 0, r, 0, Math.PI*2); c.stroke();
+    c.restore();
+  }
+
+  function renderSplitter(e, r) {
+    const c = ctx, color = e.kind.color;
+    c.save(); c.translate(e.x, e.y); c.rotate(e.rot * 0.4);
+    // Membrane wobble
+    const wobble = 1 + 0.05 * Math.sin(timeNow * 3 + e.zigPhase);
+    const mr = r * wobble;
+    const g = c.createRadialGradient(0, 0, r*0.3, 0, 0, mr);
+    g.addColorStop(0, 'rgba(216,155,255,0.45)');
+    g.addColorStop(1, 'rgba(216,155,255,0.15)');
+    c.fillStyle = g;
+    c.beginPath(); c.arc(0, 0, mr, 0, Math.PI*2); c.fill();
+    c.strokeStyle = color; c.lineWidth = 2;
+    c.beginPath(); c.arc(0, 0, mr, 0, Math.PI*2); c.stroke();
+    if (e.flash > 0) {
+      c.fillStyle = `rgba(255,255,255,${e.flash})`;
+      c.beginPath(); c.arc(0, 0, mr, 0, Math.PI*2); c.fill();
+    }
+    // Two oscillating embryos
+    const osc = Math.sin(timeNow * 2) * (r * 0.18);
+    const eR = r * 0.28;
+    c.fillStyle = color;
+    c.beginPath(); c.arc(-r*0.32 + osc, 0, eR, 0, Math.PI*2); c.fill();
+    c.beginPath(); c.arc( r*0.32 - osc, 0, eR, 0, Math.PI*2); c.fill();
+    // Highlights
+    c.fillStyle = 'rgba(255,255,255,0.7)';
+    c.beginPath(); c.arc(-r*0.38 + osc, -eR*0.25, eR*0.32, 0, Math.PI*2); c.fill();
+    c.beginPath(); c.arc( r*0.26 - osc, -eR*0.25, eR*0.32, 0, Math.PI*2); c.fill();
+    c.restore();
+  }
+
+  function renderZigzag(e, r) {
+    const c = ctx, color = e.kind.color;
+    // Trail
+    for (let i = 0; i < e.trail.length; i++) {
+      const t = e.trail[i];
+      const a = (1 - i / e.trail.length) * 0.3;
+      c.save(); c.translate(t.x, t.y);
+      pathChevron(c, r * (1 - i*0.12));
+      c.fillStyle = `rgba(245,255,124,${a})`; c.fill();
+      c.restore();
+    }
+    c.save(); c.translate(e.x, e.y);
+    const bank = Math.atan2(e.vx, -e.vy) * 0.4;
+    c.rotate(bank);
+    // Engine glow (rear)
+    c.save();
+    c.translate(0, r * 0.65);
+    const glowG = c.createRadialGradient(0, 0, 0, 0, 0, r*0.55);
+    glowG.addColorStop(0, 'rgba(255,150,60,0.95)');
+    glowG.addColorStop(1, 'rgba(255,150,60,0)');
+    c.fillStyle = glowG;
+    c.beginPath(); c.ellipse(0, 0, r*0.55, r*0.32, 0, 0, Math.PI*2); c.fill();
+    c.restore();
+    // Body
+    pathChevron(c, r);
+    const bg = c.createLinearGradient(0, -r, 0, r);
+    bg.addColorStop(0, color);
+    bg.addColorStop(1, darken(color, 80));
+    c.fillStyle = bg; c.fill();
+    if (e.flash > 0) { c.fillStyle = `rgba(255,255,255,${e.flash})`; c.fill(); }
+    // Cockpit dot
+    c.fillStyle = 'rgba(255,255,255,0.85)';
+    c.beginPath(); c.arc(0, -r*0.25, r*0.16, 0, Math.PI*2); c.fill();
+    // Wing fins
+    c.strokeStyle = 'rgba(255,255,255,0.55)'; c.lineWidth = 1.2;
+    c.beginPath();
+    c.moveTo(-r*0.85, r*0.55); c.lineTo(-r*0.55, r*0.30);
+    c.moveTo( r*0.85, r*0.55); c.lineTo( r*0.55, r*0.30);
+    c.stroke();
+    // Outline
+    pathChevron(c, r);
+    c.strokeStyle = 'rgba(255,255,255,0.4)'; c.lineWidth = 1; c.stroke();
+    c.restore();
+  }
+
+  const RENDERERS = {
+    asteroid: renderAsteroid,
+    shard:    renderShard,
+    boulder:  renderBoulder,
+    bomb:     renderBomb,
+    splitter: renderSplitter,
+    zigzag:   renderZigzag
+  };
+
+  // HP pip dots above multi-hp enemies
+  function drawHPPips(e, r) {
+    if (e.kind.hp <= 1) return;
+    const total = e.kind.hp;
+    const pipR = 2;
+    const gap = 5;
+    const totalW = total * pipR * 2 + (total - 1) * gap;
+    const startX = e.x - totalW / 2 + pipR;
+    const y = e.y - r - 8;
+    for (let i = 0; i < total; i++) {
+      const on = i < e.hp;
+      ctx.fillStyle = on ? e.kind.color : 'rgba(255,255,255,0.18)';
+      ctx.beginPath();
+      ctx.arc(startX + i * (pipR*2 + gap), y, pipR, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  // -------------- Render --------------
+  function render() {
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.save();
+    ctx.translate(shake.x, shake.y);
+
+    // Starfield
+    for (const s of stars) {
+      const a = (0.35 + 0.5 * Math.sin(s.twinkle)) * s.z;
+      ctx.fillStyle = `rgba(200,220,255,${Math.max(0.1, a)})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 0.6 + s.z * 0.8, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // Center glow vignette
+    const vg = ctx.createRadialGradient(w/2, h*0.32, 20, w/2, h*0.32, w*0.7);
+    vg.addColorStop(0, 'rgba(91,224,255,0.10)');
+    vg.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, w, h);
+
+    // Particles BEHIND enemies (the ash)
+    for (const p of particles) {
+      const a = Math.max(0, p.life);
+      ctx.globalAlpha = Math.min(1, a * 1.5);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // Enemies — glow first, then detailed body, then HP pips
+    for (const e of enemies) {
+      const k = e.kind;
+      const entry = e.birth < 0.25 ? Math.min(1, e.birth / 0.25) : 1;
+      const r = k.radius * entry;
+      // Soft glow
+      const gg = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, r * 1.7);
+      gg.addColorStop(0, k.color);
+      gg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.globalAlpha = 0.5;
+      ctx.fillStyle = gg;
+      ctx.beginPath(); ctx.arc(e.x, e.y, r * 1.7, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+      // Detailed body
+      RENDERERS[k.id](e, r);
+      // HP pips
+      drawHPPips(e, r);
+    }
+
+    // Beams — electric cyan core + soft outer glow + bright head
+    for (const b of beams) {
+      if (b.trail.length > 1) {
+        // Outer glow
+        ctx.strokeStyle = 'rgba(91,224,255,0.30)';
+        ctx.lineWidth = 8;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(b.x, b.y);
+        for (const t of b.trail) ctx.lineTo(t.x, t.y);
+        ctx.stroke();
+        // Core
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.moveTo(b.x, b.y);
+        for (const t of b.trail) ctx.lineTo(t.x, t.y);
+        ctx.stroke();
+      }
+      // Head
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = '#5BE0FF';
+      ctx.shadowBlur = 12;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, 3.2, 0, Math.PI*2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // Muzzle sparks
+    for (const s of sparks) {
+      const a = Math.max(0, s.life / 0.3);
+      ctx.fillStyle = `rgba(255,240,180,${a})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // Pip
+    renderPip();
+
+    ctx.restore();
+  }
+
+  function renderPip() {
+    const p = pip();
+    const target = nearestEnemy(p);
+
+    // Outer aura (color shifts to red when threatened)
+    const auraColor = pipState.threat > 0.5
+      ? `rgba(255,${Math.round(120 - pipState.threat*60)},120,${0.35 + pipState.threat*0.3})`
+      : `rgba(91,224,255,${0.35 + pipState.threat*0.2})`;
+    const aura = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.w * 0.85);
+    aura.addColorStop(0, auraColor);
+    aura.addColorStop(1, 'rgba(91,224,255,0)');
+    ctx.fillStyle = aura;
+    ctx.beginPath();
+    ctx.ellipse(p.x, p.y, p.w * 0.85, p.h * 1.7, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Pill body — slight 3D gradient (top lighter)
+    const bodyG = ctx.createLinearGradient(0, p.y - p.h/2, 0, p.y + p.h/2);
+    bodyG.addColorStop(0, '#1A1530');
+    bodyG.addColorStop(0.5, '#06060F');
+    bodyG.addColorStop(1, '#000');
+    roundRect(ctx, p.x - p.w/2, p.y - p.h/2, p.w, p.h, p.h/2);
+    ctx.fillStyle = bodyG;
+    ctx.fill();
+
+    // Cyan rim glow
+    ctx.strokeStyle = `rgba(91,224,255,${0.35 + 0.25*Math.sin(timeNow*2.3)})`;
+    ctx.lineWidth = 1.2;
+    roundRect(ctx, p.x - p.w/2, p.y - p.h/2, p.w, p.h, p.h/2);
+    ctx.stroke();
+
+    // Top gloss
+    const gloss = ctx.createLinearGradient(0, p.y - p.h/2, 0, p.y);
+    gloss.addColorStop(0, 'rgba(255,255,255,0.16)');
+    gloss.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = gloss;
+    roundRect(ctx, p.x - p.w/2 + 4, p.y - p.h/2 + 1.5, p.w - 8, p.h/2, p.h/2);
+    ctx.fill();
+
+    // -- Face: eyes + brows + mouth --
+    const eyeR = Math.max(4.5, p.h * 0.18);
+    const eyeOff = p.w * 0.10;
+    const eyeY = p.y - p.h * 0.04;
+    const blinking = timeNow < pipState.blinkUntil;
+
+    drawPipEye(p.x - eyeOff, eyeY, eyeR, target, blinking);
+    drawPipEye(p.x + eyeOff, eyeY, eyeR, target, blinking);
+
+    // Eyebrows (appear when threatened)
+    if (pipState.threat > 0.15) {
+      const tilt = pipState.threat * 0.6;
+      ctx.strokeStyle = `rgba(255,200,80,${pipState.threat})`;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(p.x - eyeOff - eyeR*0.9, eyeY - eyeR - 2);
+      ctx.lineTo(p.x - eyeOff + eyeR*0.6, eyeY - eyeR - 2 - tilt*4);
+      ctx.moveTo(p.x + eyeOff + eyeR*0.9, eyeY - eyeR - 2);
+      ctx.lineTo(p.x + eyeOff - eyeR*0.6, eyeY - eyeR - 2 - tilt*4);
+      ctx.stroke();
+    }
+
+    // Mouth — smile when calm, "O" gasp when threatened
+    const mouthY = p.y + p.h * 0.30;
+    if (pipState.mouth > 0.3) {
+      // Gasp 'O'
+      const oR = 1.5 + pipState.mouth * 2.5;
+      ctx.fillStyle = '#000';
+      ctx.beginPath();
+      ctx.ellipse(p.x, mouthY, oR * 0.85, oR, 0, 0, Math.PI*2);
+      ctx.fill();
+      // Tiny inner highlight
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.arc(p.x - oR*0.3, mouthY - oR*0.3, oR*0.25, 0, Math.PI*2);
+      ctx.fill();
+    } else {
+      // Smile
+      ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+      ctx.lineWidth = 1.4;
+      ctx.lineCap = 'round';
+      const smileW = p.w * 0.06;
+      ctx.beginPath();
+      ctx.arc(p.x, mouthY - 1, smileW, 0.1 * Math.PI, 0.9 * Math.PI);
+      ctx.stroke();
+    }
+
+    // Tiny chest sparkle (when firing)
+    if (pipState.recoil > 0.1) {
+      ctx.fillStyle = `rgba(255,255,255,${pipState.recoil})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y + p.h/2 - 1, 2 + pipState.recoil * 2, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function drawPipEye(cx, cy, r, target, blinking) {
+    if (blinking) {
+      // Closed eye — short curved line
+      ctx.strokeStyle = 'rgba(255,255,255,0.95)';
+      ctx.lineWidth = 1.6;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(cx, cy, r * 0.85, 0.15 * Math.PI, 0.85 * Math.PI);
+      ctx.stroke();
+      return;
+    }
+    // White with cyan glow
+    ctx.shadowColor = 'rgba(91,224,255,0.95)';
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Pupil tracks nearest enemy
+    let ox = 0, oy = 0;
+    if (target) {
+      const dx = target.x - cx, dy = target.y - cy;
+      const len = Math.hypot(dx, dy) || 1;
+      ox = (dx / len) * (r * 0.36);
+      oy = (dy / len) * (r * 0.36);
+    }
+    // Iris (cyan ring)
+    ctx.fillStyle = '#5BE0FF';
+    ctx.beginPath();
+    ctx.arc(cx + ox, cy + oy, r * 0.55, 0, Math.PI*2);
+    ctx.fill();
+    // Pupil black
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.arc(cx + ox, cy + oy, r * 0.35, 0, Math.PI*2);
+    ctx.fill();
+    // Catchlight
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(cx + ox - r*0.13, cy + oy - r*0.13, r * 0.10, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  function roundRect(c, x, y, w, h, r) {
+    c.beginPath();
+    c.moveTo(x + r, y);
+    c.lineTo(x + w - r, y);
+    c.arcTo(x + w, y, x + w, y + r, r);
+    c.lineTo(x + w, y + h - r);
+    c.arcTo(x + w, y + h, x + w - r, y + h, r);
+    c.lineTo(x + r, y + h);
+    c.arcTo(x, y + h, x, y + h - r, r);
+    c.lineTo(x, y + r);
+    c.arcTo(x, y, x + r, y, r);
+    c.closePath();
+  }
+
+  // -------------- Loop (capped to ~30fps; pauses off-screen) --------------
+  let last = 0, running = false, paused = !reduced;
+  function loop(t) {
+    if (!running) return;
+    const dt = Math.min(0.05, (t - last) / 1000 || 1 / 30);
+    last = t;
+    if (!paused) {
+      update(dt);
+      render();
+    }
+    setTimeout(() => requestAnimationFrame(loop), 33); // ~30fps cap
+  }
+
+  // Pause when off-screen
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      paused = !entries[0].isIntersecting || reduced;
+    }, { threshold: 0.01 });
+    io.observe(canvas);
+  }
+
+  // Pause when tab hidden
+  document.addEventListener('visibilitychange', () => {
+    paused = document.hidden || reduced;
+  });
+
+  // Boot
+  if (reduced) {
+    // Static frame — render a single tableau and stop.
+    // Spawn a few enemies so the canvas isn't empty.
+    for (let i = 0; i < 3; i++) {
+      const kind = POOL[(Math.random() * POOL.length) | 0];
+      enemies.push({
+        kind,
+        x: 60 + i * 140,
+        y: h * 0.7,
+        vx: 0, vy: 0, rot: 0, spin: 0,
+        hp: kind.hp, flash: 0, birth: 1, zigPhase: 0, trail: []
+      });
+    }
+    render();
+  } else {
+    running = true;
+    requestAnimationFrame((t) => { last = t; loop(t); });
+  }
+})();
+</script>
 
 <!-- =============== FOOTER =============== -->
 <footer class="footer">
