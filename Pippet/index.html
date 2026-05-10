@@ -30,6 +30,11 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="icon.png">
 
+<!-- Display font for the PIPPET title — chunky/playful, gamey vibe. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap">
+
 <style>
 /* ==========================================================================
    PIPPET — game landing page
@@ -217,19 +222,26 @@ body {
   50%     { opacity: 0.4; }
 }
 
-/* Title */
+/* Title — chunky, playful display face for that "fun mobile game" energy. */
 .title {
-  font-size: clamp(72px, 17vw, 180px);
-  font-weight: 900;
-  letter-spacing: -0.045em;
-  line-height: 0.85;
+  font-family: "Bagel Fat One", "Lilita One", "Titan One",
+               -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: clamp(80px, 19vw, 200px);
+  font-weight: 400; /* Bagel Fat One only ships at 400 — already heavy */
+  letter-spacing: 0.005em;
+  line-height: 0.92;
   margin-bottom: 18px;
-  background: linear-gradient(180deg, #FFFFFF 30%, #B7D9FF 70%, #5BE0FF 100%);
+  background: linear-gradient(180deg, #FFFFFF 25%, #B7D9FF 65%, #5BE0FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 80px rgba(91,224,255,0.25);
-  filter: drop-shadow(0 12px 30px rgba(91,224,255,0.15));
+  text-shadow: 0 0 80px rgba(91,224,255,0.30);
+  filter:
+    drop-shadow(0 6px 0 rgba(0,0,0,0.55))
+    drop-shadow(0 14px 30px rgba(91,224,255,0.20));
+  /* slight playful wobble on the baseline */
+  transform: rotate(-1.2deg);
+  transform-origin: center;
 }
 
 .tagline {
