@@ -356,6 +356,7 @@
     .app-hydropanda { background: linear-gradient(135deg, #0A2540 0%, #050D1A 100%); --app-glow: rgba(0,213,255,0.55); }
     .app-tzc        { background: linear-gradient(135deg, #122E50 0%, #06101F 100%); --app-glow: rgba(37,99,235,0.6); }
     .app-qito       { background: linear-gradient(135deg, #2A2A33 0%, #08080E 100%); --app-glow: rgba(161,161,170,0.4); }
+    .app-tooltrunk  { background: linear-gradient(135deg, #1E1252 0%, #05021A 100%); --app-glow: rgba(106,78,224,0.55); }
 
     /* Per-app top stripe — vibrant 4px gradient line */
     .app-utilify::before    { background: linear-gradient(90deg, #FB923C, #EF4444); }
@@ -367,6 +368,7 @@
     .app-mergerise::before  { background: linear-gradient(90deg, #10B981, #14B8A6); }
     .app-fuzzypop::before   { background: linear-gradient(90deg, #F59E0B, #EC4899); }
     .app-hydropanda::before { background: linear-gradient(90deg, #00E5FF, #0066FF); }
+    .app-tooltrunk::before  { background: linear-gradient(90deg, #9C8BFF, #6A4EE0, #3623A0); }
     /* "Coming soon" store-mini variant: visually muted, non-clickable.
        Inline "· Soon" suffix replaced with an absolutely-positioned corner
        pill so the button label can keep its native length without wrapping
@@ -688,7 +690,7 @@
       .app-utilify { grid-column: 1 / -1; }
       .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
       .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito,
-      .app-hydropanda { grid-column: span 1; }
+      .app-hydropanda, .app-tooltrunk { grid-column: span 1; }
       .app-card { padding: 22px; border-radius: 18px; min-height: auto; gap: 12px; }
       .app-icon-mega { width: 64px; height: 64px; border-radius: 14px; }
       .app-name { font-size: 1.25rem; }
@@ -848,6 +850,21 @@
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
           <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
+      </div>
+
+      <!-- ToolTrunk (1x1) — pre-launch; store buttons rendered as "Soon" -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/ToolTrunk/'" class="app-card app-tooltrunk reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/tooltrunk.png" alt="ToolTrunk">
+        <div class="app-meta">
+          <span class="app-cat">Utilities</span>
+          <div class="app-name">ToolTrunk</div>
+          <div class="app-tag-text">Six precision instruments — level, compass, sound meter, flashlight, ruler, protractor. All on-device.</div>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
         </div>
       </div>
 
