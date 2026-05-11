@@ -3,16 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Utilify - Your Everyday Tech Toolkit</title>
+  <title>Utilify — 45 everyday tech tools in one app</title>
+  <meta name="description" content="Utilify is a free toolkit with 45 utilities — unit converter, QR code generator, decibel meter, JSON formatter, BMI, currency, regex, and more. Localized in 19 languages. iOS &amp; Android.">
   <link rel="icon" href="favicon.png" type="image/png">
   <style>
-    :root { --bg: #0B0B18; --surface: rgba(25,25,50,0.50); --border: rgba(130,130,255,0.12); --accent: #8484FF; --text: #EDEDFF; --text2: #B0B0D0; --muted: #6A6A90; }
+    :root {
+      --bg: #0B0B18;
+      --surface: rgba(25,25,50,0.50);
+      --surface-strong: rgba(35,35,70,0.65);
+      --border: rgba(130,130,255,0.12);
+      --border-strong: rgba(130,130,255,0.22);
+      --accent: #8484FF;
+      --accent-bright: #A4A4FF;
+      --text: #EDEDFF;
+      --text2: #B0B0D0;
+      --muted: #6A6A90;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; min-height: 100vh; }
-    body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 20% 0%, rgba(132,132,255,0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(180,100,255,0.06) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 0%, rgba(132,132,255,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(180,100,255,0.07) 0%, transparent 60%); pointer-events: none; z-index: 0; }
 
     nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(11,11,24,0.80); border-bottom: 1px solid var(--border); }
-    .nav-inner { max-width: 800px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-inner { max-width: 960px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo img { width: 32px; height: 32px; border-radius: 8px; }
     .logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; }
@@ -22,48 +34,65 @@
     .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
-    .container { max-width: 800px; margin: 0 auto; padding: 80px 24px 80px; position: relative; z-index: 1; text-align: center; }
+    .container { max-width: 960px; margin: 0 auto; padding: 72px 24px 80px; position: relative; z-index: 1; }
+    .center { text-align: center; }
 
-    .hero-icon { width: 96px; height: 96px; border-radius: 24px; margin: 0 auto 24px; box-shadow: 0 8px 40px rgba(132,132,255,0.25); }
-    .hero h1 { font-size: 44px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; }
+    .hero-icon { width: 96px; height: 96px; border-radius: 24px; margin: 0 auto 24px; box-shadow: 0 8px 40px rgba(132,132,255,0.30); display: block; }
+    .hero h1 { font-size: 48px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 14px; line-height: 1.1; }
     .hero h1 span:first-child { color: var(--accent); }
-    .hero .tagline { font-size: 18px; color: var(--text2); margin-bottom: 40px; }
+    .hero .tagline { font-size: 18px; color: var(--text2); margin-bottom: 8px; max-width: 580px; margin-left: auto; margin-right: auto; }
+    .hero .sub { font-size: 14px; color: var(--muted); }
 
-    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 48px 0; text-align: center; }
-    .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 18px; }
-    .feature .num { font-size: 32px; font-weight: 900; color: var(--accent); margin-bottom: 6px; }
-    .feature .label { font-size: 13px; color: var(--text2); font-weight: 600; }
+    .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 56px 0; }
+    .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 16px; text-align: center; }
+    .feature .num { font-size: 30px; font-weight: 900; color: var(--accent-bright); margin-bottom: 4px; letter-spacing: -0.5px; }
+    .feature .label { font-size: 12px; color: var(--text2); font-weight: 600; line-height: 1.4; }
 
-    .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 48px 0; }
-    .tool-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 12px; font-size: 13px; color: var(--text2); font-weight: 600; }
-
-    .cta { margin-top: 48px; }
-    .store-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; padding: 16px 36px; border-radius: 16px; font-weight: 700; font-size: 16px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .store-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 40px 0 8px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; padding: 15px 30px; border-radius: 14px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .cta-btn:hover { background: #6B6BF0; transform: translateY(-2px); text-decoration: none; }
     .cta-btn svg { width: 20px; height: 20px; fill: currentColor; }
-    .cta-btn.google { background: #1a1a2e; border: 1px solid var(--border); }
+    .cta-btn.google { background: #1a1a2e; border: 1px solid var(--border-strong); }
     .cta-btn.google:hover { background: #2a2a4e; transform: translateY(-2px); }
-    .cta-sub { font-size: 13px; color: var(--muted); margin-top: 16px; }
+    .cta-sub { font-size: 13px; color: var(--muted); text-align: center; }
 
-    .platforms { display: flex; gap: 24px; justify-content: center; margin-top: 12px; }
-    .platforms span { font-size: 13px; color: var(--muted); }
+    .section-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin: 64px 0 8px; text-align: center; }
+    .section-sub { font-size: 14px; color: var(--text2); text-align: center; margin-bottom: 28px; }
+
+    .cat-block { margin-top: 28px; }
+    .cat-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-left: 4px; }
+    .cat-glyph { width: 28px; height: 28px; border-radius: 8px; background: var(--surface-strong); border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--accent-bright); font-weight: 800; }
+    .cat-name { font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text2); }
+    .cat-count { font-size: 11px; color: var(--muted); font-weight: 700; margin-left: auto; }
+
+    .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .tool-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 14px; font-size: 13px; color: var(--text); font-weight: 600; }
+    .tool-pill .tt { display: block; line-height: 1.3; }
+    .tool-pill .td { display: block; font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; line-height: 1.3; }
+
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+    .why-item { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 20px; }
+    .why-item .h { font-size: 15px; font-weight: 800; margin-bottom: 6px; color: var(--text); }
+    .why-item .b { font-size: 13px; color: var(--text2); line-height: 1.55; }
 
     footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; position: relative; z-index: 1; }
     footer p { color: var(--muted); font-size: 13px; }
     footer a { color: var(--text2); text-decoration: none; }
     footer a:hover { color: var(--accent); }
 
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 32px; }
-      .features { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-      .feature { padding: 20px 12px; }
-      .feature .num { font-size: 26px; }
+    @media (max-width: 720px) {
+      .container { padding: 56px 18px 64px; }
+      .hero h1 { font-size: 34px; }
+      .features { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .feature { padding: 18px 12px; }
+      .feature .num { font-size: 24px; }
       .tool-grid { grid-template-columns: repeat(2, 1fr); }
+      .why { grid-template-columns: 1fr; }
       .nav-links { gap: 16px; }
       .nav-links a { font-size: 13px; }
-      .store-buttons { flex-direction: column; align-items: center; }
+      .store-row { flex-direction: column; align-items: center; }
       .cta-btn { width: 280px; justify-content: center; }
+      .section-title { font-size: 22px; }
     }
   </style>
 </head>
@@ -82,60 +111,214 @@
   </nav>
 
   <div class="container">
-    <div class="hero">
+
+    <!-- Hero -->
+    <div class="hero center">
       <img src="icon.png" alt="Utilify" class="hero-icon">
       <h1><span>Util</span>ify</h1>
-      <p class="tagline">Your everyday tech toolkit</p>
+      <p class="tagline">Forty-five everyday tools in one tiny app. Convert, calculate, generate, decode — all in your pocket.</p>
+      <p class="sub">No sign-up. No tracking beyond ads. Works offline.</p>
     </div>
 
+    <!-- Stats -->
     <div class="features">
-      <div class="feature">
-        <div class="num">18</div>
-        <div class="label">Powerful Tools</div>
+      <div class="feature"><div class="num">45</div><div class="label">Tools</div></div>
+      <div class="feature"><div class="num">19</div><div class="label">Languages</div></div>
+      <div class="feature"><div class="num">2</div><div class="label">Platforms</div></div>
+      <div class="feature"><div class="num">Free</div><div class="label">Forever</div></div>
+    </div>
+
+    <!-- Store buttons -->
+    <div class="store-row">
+      <a href="https://apps.apple.com/app/utilify/id6760681801" class="cta-btn">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download for iOS
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" class="cta-btn google">
+        <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+        Get on Google Play
+      </a>
+    </div>
+    <p class="cta-sub">Free on iOS &amp; Android</p>
+
+    <!-- Why -->
+    <h2 class="section-title">Built for everyday use</h2>
+    <p class="section-sub">Small footprint. Big toolbox.</p>
+    <div class="why">
+      <div class="why-item">
+        <div class="h">Localized in 19 languages</div>
+        <div class="b">English, Spanish, Hindi, Portuguese, French, German, Japanese, Indonesian, Italian, Chinese, Arabic, Korean, Russian, Turkish, Vietnamese, Thai, Polish, Bengali, Tamil.</div>
       </div>
-      <div class="feature">
-        <div class="num">2</div>
-        <div class="label">Platforms</div>
+      <div class="why-item">
+        <div class="h">Works offline</div>
+        <div class="b">Almost every tool runs entirely on-device. Only Currency, Crypto Prices, and IP Info need a network — the rest never leave your phone.</div>
       </div>
-      <div class="feature">
-        <div class="num">1</div>
-        <div class="label">Compact App</div>
+      <div class="why-item">
+        <div class="h">Private by default</div>
+        <div class="b">No accounts, no profiles, no analytics on what you type. Calculations and conversions stay local.</div>
       </div>
     </div>
 
-    <div class="tool-grid">
-      <div class="tool-pill">Unit Converter</div>
-      <div class="tool-pill">Currency</div>
-      <div class="tool-pill">Calculator</div>
-      <div class="tool-pill">World Clock</div>
-      <div class="tool-pill">Tip Calculator</div>
-      <div class="tool-pill">Loan Calculator</div>
-      <div class="tool-pill">BMI Calculator</div>
-      <div class="tool-pill">Color Tools</div>
-      <div class="tool-pill">Case Converter</div>
-      <div class="tool-pill">Number Base</div>
-      <div class="tool-pill">Percentage</div>
-      <div class="tool-pill">Word Counter</div>
-      <div class="tool-pill">Aspect Ratio</div>
-      <div class="tool-pill">Time Zone</div>
-      <div class="tool-pill">Age Calculator</div>
-      <div class="tool-pill">Data Storage</div>
-      <div class="tool-pill">Encode / Decode</div>
-      <div class="tool-pill">Speed &amp; Pace</div>
+    <!-- Tool catalog -->
+    <h2 class="section-title">Every tool, organised</h2>
+    <p class="section-sub">Forty-five utilities, sorted by what they do.</p>
+
+    <!-- Convert -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">⇄</div>
+        <div class="cat-name">Convert</div>
+        <div class="cat-count">3 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">Unit Converter</span><span class="td">Length, weight, temp &amp; more</span></div>
+        <div class="tool-pill"><span class="tt">Data Storage</span><span class="td">Bytes, KB, MB, GB, TB</span></div>
+        <div class="tool-pill"><span class="tt">Roman Numerals</span><span class="td">Number ↔ Roman</span></div>
+      </div>
     </div>
 
-    <div class="cta">
-      <div class="store-buttons">
-        <a href="https://apps.apple.com/app/utilify/id6760681801" class="cta-btn">
-          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          App Store
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" class="cta-btn google">
-          <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-          Google Play
-        </a>
+    <!-- Time -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">◷</div>
+        <div class="cat-name">Time</div>
+        <div class="cat-count">5 tools</div>
       </div>
-      <p class="cta-sub">Free on iOS &amp; Android</p>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">Time Zone</span><span class="td">Convert across time zones</span></div>
+        <div class="tool-pill"><span class="tt">World Clock</span><span class="td">Current time anywhere</span></div>
+        <div class="tool-pill"><span class="tt">Age Calculator</span><span class="td">Age, date diff &amp; countdown</span></div>
+        <div class="tool-pill"><span class="tt">Timer</span><span class="td">Stopwatch &amp; pomodoro</span></div>
+        <div class="tool-pill"><span class="tt">Countdown</span><span class="td">Days until your events</span></div>
+      </div>
+    </div>
+
+    <!-- Money -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">$</div>
+        <div class="cat-name">Money</div>
+        <div class="cat-count">4 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">Currency</span><span class="td">Live exchange rates</span></div>
+        <div class="tool-pill"><span class="tt">Tip Calculator</span><span class="td">Split bills easily</span></div>
+        <div class="tool-pill"><span class="tt">Loan Calculator</span><span class="td">Payments &amp; total interest</span></div>
+        <div class="tool-pill"><span class="tt">Crypto Prices</span><span class="td">Live Bitcoin, ETH &amp; more</span></div>
+      </div>
+    </div>
+
+    <!-- Math -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">∑</div>
+        <div class="cat-name">Math</div>
+        <div class="cat-count">4 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">Calculator</span><span class="td">Advanced math &amp; trig</span></div>
+        <div class="tool-pill"><span class="tt">Percentage</span><span class="td">% of, what %, % change</span></div>
+        <div class="tool-pill"><span class="tt">Number Base</span><span class="td">Binary, hex, octal</span></div>
+        <div class="tool-pill"><span class="tt">Periodic Table</span><span class="td">All 118 chemical elements</span></div>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">Aa</div>
+        <div class="cat-name">Text</div>
+        <div class="cat-count">7 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">Word Counter</span><span class="td">Words, chars &amp; reading time</span></div>
+        <div class="tool-pill"><span class="tt">Case Converter</span><span class="td">UPPER, lower, camelCase</span></div>
+        <div class="tool-pill"><span class="tt">Encode / Decode</span><span class="td">Base64, URL, HTML</span></div>
+        <div class="tool-pill"><span class="tt">Text Diff</span><span class="td">Compare two texts</span></div>
+        <div class="tool-pill"><span class="tt">Text Stats</span><span class="td">Readability &amp; analysis</span></div>
+        <div class="tool-pill"><span class="tt">Lorem Ipsum</span><span class="td">Placeholder text generator</span></div>
+        <div class="tool-pill"><span class="tt">Markdown</span><span class="td">Preview markdown text</span></div>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">◈</div>
+        <div class="cat-name">Design</div>
+        <div class="cat-count">2 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">Color Tools</span><span class="td">HEX ↔ RGB ↔ HSL</span></div>
+        <div class="tool-pill"><span class="tt">Aspect Ratio</span><span class="td">Image dimensions &amp; scaling</span></div>
+      </div>
+    </div>
+
+    <!-- Health -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">♥</div>
+        <div class="cat-name">Health</div>
+        <div class="cat-count">2 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">BMI Calculator</span><span class="td">Body mass index &amp; range</span></div>
+        <div class="tool-pill"><span class="tt">Speed &amp; Pace</span><span class="td">Running pace &amp; race times</span></div>
+      </div>
+    </div>
+
+    <!-- Dev -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">{}</div>
+        <div class="cat-name">Developer</div>
+        <div class="cat-count">7 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">JSON</span><span class="td">Format, minify &amp; validate</span></div>
+        <div class="tool-pill"><span class="tt">Regex</span><span class="td">Test regular expressions</span></div>
+        <div class="tool-pill"><span class="tt">JWT</span><span class="td">Decode JSON Web Tokens</span></div>
+        <div class="tool-pill"><span class="tt">Hash</span><span class="td">MD5, SHA-1, SHA-256</span></div>
+        <div class="tool-pill"><span class="tt">UUID</span><span class="td">Generate unique identifiers</span></div>
+        <div class="tool-pill"><span class="tt">Slug</span><span class="td">URL-friendly slugs</span></div>
+        <div class="tool-pill"><span class="tt">HTTP Status</span><span class="td">Status code reference</span></div>
+      </div>
+    </div>
+
+    <!-- Utility -->
+    <div class="cat-block">
+      <div class="cat-head">
+        <div class="cat-glyph">⚙</div>
+        <div class="cat-name">Utility</div>
+        <div class="cat-count">11 tools</div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-pill"><span class="tt">QR Code</span><span class="td">Generate QR from text or URL</span></div>
+        <div class="tool-pill"><span class="tt">WiFi QR</span><span class="td">Share WiFi with a scan</span></div>
+        <div class="tool-pill"><span class="tt">Barcode</span><span class="td">Code 128, EAN, UPC, Code 39</span></div>
+        <div class="tool-pill"><span class="tt">Password</span><span class="td">Generate strong passwords</span></div>
+        <div class="tool-pill"><span class="tt">Flashlight</span><span class="td">Turn your phone into a torch</span></div>
+        <div class="tool-pill"><span class="tt">Compass</span><span class="td">True north direction</span></div>
+        <div class="tool-pill"><span class="tt">Bubble Level</span><span class="td">Check if surfaces are level</span></div>
+        <div class="tool-pill"><span class="tt">Decibel Meter</span><span class="td">Measure sound levels</span></div>
+        <div class="tool-pill"><span class="tt">IP Info</span><span class="td">Your IP, ISP, location</span></div>
+        <div class="tool-pill"><span class="tt">Dice &amp; Coin</span><span class="td">Roll dice, flip coins</span></div>
+        <div class="tool-pill"><span class="tt">Random Picker</span><span class="td">Pick one from a list</span></div>
+      </div>
+    </div>
+
+    <!-- Final CTA -->
+    <h2 class="section-title" style="margin-top:72px">Forty-five tools. One download.</h2>
+    <p class="section-sub">Get Utilify free on the App Store or Google Play.</p>
+    <div class="store-row">
+      <a href="https://apps.apple.com/app/utilify/id6760681801" class="cta-btn">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" class="cta-btn google">
+        <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+        Google Play
+      </a>
     </div>
   </div>
 
