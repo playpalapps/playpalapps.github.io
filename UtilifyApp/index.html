@@ -3,100 +3,304 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Utilify — 45 everyday tech tools in one app</title>
+  <title>Utilify — 45 everyday tools, beautifully crafted</title>
   <meta name="description" content="Utilify is a free toolkit with 45 utilities — unit converter, QR code generator, decibel meter, JSON formatter, BMI, currency, regex, and more. Localized in 19 languages. iOS &amp; Android.">
+  <meta property="og:title" content="Utilify — 45 everyday tools, one beautiful app">
+  <meta property="og:description" content="Convert, calculate, generate, decode — 45 utilities in your pocket. Works offline. 19 languages. Free on iOS &amp; Android.">
+  <meta property="og:type" content="website">
   <link rel="icon" href="favicon.png" type="image/png">
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons (same icons as the app) -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
   <style>
     :root {
-      --bg: #0B0B18;
-      --surface: rgba(25,25,50,0.50);
-      --surface-strong: rgba(35,35,70,0.65);
-      --border: rgba(130,130,255,0.12);
-      --border-strong: rgba(130,130,255,0.22);
-      --accent: #8484FF;
-      --accent-bright: #A4A4FF;
-      --text: #EDEDFF;
-      --text2: #B0B0D0;
-      --muted: #6A6A90;
+      --bg: #07060F;
+      --bg-2: #0B0A18;
+      --surface: rgba(28,28,55,0.55);
+      --surface-2: rgba(40,40,80,0.50);
+      --surface-strong: rgba(45,45,95,0.70);
+      --border: rgba(140,140,255,0.10);
+      --border-strong: rgba(140,140,255,0.22);
+      --accent: #8C8CFF;
+      --accent-bright: #B4B4FF;
+      --accent-deep: #6B6BE8;
+      --text: #F2F2FF;
+      --text2: #B6B6D6;
+      --muted: #6E6E92;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
-    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 0%, rgba(132,132,255,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(180,100,255,0.07) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-    nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(11,11,24,0.80); border-bottom: 1px solid var(--border); }
-    .nav-inner { max-width: 960px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    /* ---------- Aurora background ---------- */
+    .aurora { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      animation: drift 22s ease-in-out infinite;
+    }
+    .blob-1 { width: 560px; height: 560px; top: -180px; left: -120px; background: radial-gradient(circle, #6B5BFF 0%, transparent 70%); }
+    .blob-2 { width: 480px; height: 480px; top: 30%; right: -160px; background: radial-gradient(circle, #C36BFF 0%, transparent 70%); opacity: 0.35; animation-delay: -8s; animation-duration: 28s; }
+    .blob-3 { width: 600px; height: 600px; bottom: -200px; left: 30%; background: radial-gradient(circle, #4DA6FF 0%, transparent 70%); opacity: 0.30; animation-delay: -16s; animation-duration: 34s; }
+    @keyframes drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(60px,-40px) scale(1.08); }
+      66% { transform: translate(-40px,30px) scale(0.95); }
+    }
+    /* Grain overlay */
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+    }
+
+    /* ---------- Nav ---------- */
+    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); background: rgba(7,6,15,0.72); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo img { width: 32px; height: 32px; border-radius: 8px; }
-    .logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; }
-    .logo-text span:first-child { color: var(--accent); }
+    .logo img { width: 32px; height: 32px; border-radius: 9px; box-shadow: 0 0 24px rgba(140,140,255,0.35); }
+    .logo-text { font-size: 19px; font-weight: 800; letter-spacing: -0.4px; }
+    .logo-text span:first-child { color: var(--accent-bright); }
     .logo-text span:last-child { color: var(--text); }
-    .nav-links { display: flex; gap: 24px; }
-    .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links { display: flex; gap: 8px; align-items: center; }
+    .nav-link { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 10px; transition: color 0.2s, background 0.2s; }
+    .nav-link:hover { color: var(--text); background: var(--surface); }
+    .nav-cta { background: var(--accent); color: #fff !important; padding: 8px 16px; font-weight: 700; }
+    .nav-cta:hover { background: var(--accent-deep); }
 
-    .container { max-width: 960px; margin: 0 auto; padding: 72px 24px 80px; position: relative; z-index: 1; }
-    .center { text-align: center; }
+    /* ---------- Container ---------- */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
 
-    .hero-icon { width: 96px; height: 96px; border-radius: 24px; margin: 0 auto 24px; box-shadow: 0 8px 40px rgba(132,132,255,0.30); display: block; }
-    .hero h1 { font-size: 48px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 14px; line-height: 1.1; }
-    .hero h1 span:first-child { color: var(--accent); }
-    .hero .tagline { font-size: 18px; color: var(--text2); margin-bottom: 8px; max-width: 580px; margin-left: auto; margin-right: auto; }
-    .hero .sub { font-size: 14px; color: var(--muted); }
+    /* ---------- Hero ---------- */
+    .hero { padding: 80px 0 60px; text-align: center; position: relative; }
+    .hero-stage { position: relative; width: 220px; height: 220px; margin: 0 auto 36px; }
+    .hero-stage .app-icon { width: 112px; height: 112px; border-radius: 28px; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); box-shadow: 0 16px 60px rgba(140,140,255,0.45), 0 0 0 1px rgba(255,255,255,0.06); animation: bob 5s ease-in-out infinite; z-index: 3; }
+    @keyframes bob { 0%,100% { transform: translate(-50%,calc(-50% - 0px)); } 50% { transform: translate(-50%,calc(-50% - 6px)); } }
 
-    .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 56px 0; }
-    .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 16px; text-align: center; }
-    .feature .num { font-size: 30px; font-weight: 900; color: var(--accent-bright); margin-bottom: 4px; letter-spacing: -0.5px; }
-    .feature .label { font-size: 12px; color: var(--text2); font-weight: 600; line-height: 1.4; }
+    .constellation { position: absolute; inset: 0; }
+    .orb {
+      position: absolute;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: grid; place-items: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--border-strong);
+      color: var(--orb-c, #fff);
+      font-size: 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.04) inset, 0 0 28px var(--orb-glow, transparent);
+      animation: orbFloat 6s ease-in-out infinite;
+      animation-delay: var(--orb-d, 0s);
+      backdrop-filter: blur(10px);
+    }
+    @keyframes orbFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    /* Positions around the central icon */
+    .orb-1 { top: 0;    left: 50%; transform: translateX(-50%); }
+    .orb-2 { top: 30px; right: -8px; }
+    .orb-3 { bottom: 30px; right: -8px; }
+    .orb-4 { bottom: 0;    left: 50%; transform: translateX(-50%); }
+    .orb-5 { bottom: 30px; left: -8px; }
+    .orb-6 { top: 30px; left: -8px; }
+    .orb ion-icon { font-size: 22px; }
 
-    .store-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 40px 0 8px; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; padding: 15px 30px; border-radius: 14px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
-    .cta-btn:hover { background: #6B6BF0; transform: translateY(-2px); text-decoration: none; }
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 900;
+      letter-spacing: -1.8px;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #B4B4FF 0%, #8C8CFF 40%, #C36BFF 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .lead { font-size: clamp(16px,1.4vw,19px); color: var(--text2); max-width: 620px; margin: 0 auto 12px; line-height: 1.55; }
+    .hero .sub  { font-size: 13px; color: var(--muted); margin-bottom: 36px; letter-spacing: 0.3px; }
+
+    /* ---------- Store buttons ---------- */
+    .store-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 0 0 14px; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff;
+      padding: 15px 28px; border-radius: 14px;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(140,140,255,0.35), 0 0 0 1px rgba(255,255,255,0.06) inset;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .cta-btn:hover { transform: translateY(-2px); background: var(--accent-deep); box-shadow: 0 10px 32px rgba(140,140,255,0.5), 0 0 0 1px rgba(255,255,255,0.10) inset; text-decoration: none; }
     .cta-btn svg { width: 20px; height: 20px; fill: currentColor; }
-    .cta-btn.google { background: #1a1a2e; border: 1px solid var(--border-strong); }
-    .cta-btn.google:hover { background: #2a2a4e; transform: translateY(-2px); }
-    .cta-sub { font-size: 13px; color: var(--muted); text-align: center; }
+    .cta-btn.ghost { background: rgba(40,40,80,0.55); border: 1px solid var(--border-strong); box-shadow: none; backdrop-filter: blur(12px); }
+    .cta-btn.ghost:hover { background: rgba(55,55,105,0.70); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+    .cta-sub { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 60px; letter-spacing: 0.4px; }
 
-    .section-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin: 64px 0 8px; text-align: center; }
-    .section-sub { font-size: 14px; color: var(--text2); text-align: center; margin-bottom: 28px; }
+    /* ---------- Stats ---------- */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      margin: 40px auto 100px;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px 18px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+    .stat:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-2); }
+    .stat .num {
+      font-size: 36px; font-weight: 900; letter-spacing: -1.2px;
+      background: linear-gradient(135deg,#FFFFFF 0%,#B4B4FF 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 2px;
+    }
+    .stat .label { font-size: 12px; color: var(--text2); font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
 
-    .cat-block { margin-top: 28px; }
-    .cat-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-left: 4px; }
-    .cat-glyph { width: 28px; height: 28px; border-radius: 8px; background: var(--surface-strong); border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--accent-bright); font-weight: 800; }
-    .cat-name { font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text2); }
-    .cat-count { font-size: 11px; color: var(--muted); font-weight: 700; margin-left: auto; }
+    /* ---------- Section heads ---------- */
+    .section-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 12px; text-align: center; }
+    .section-title { font-size: clamp(26px,3.5vw,38px); font-weight: 900; letter-spacing: -0.8px; text-align: center; margin-bottom: 12px; }
+    .section-sub { font-size: 15px; color: var(--text2); text-align: center; max-width: 580px; margin: 0 auto 44px; }
 
-    .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .tool-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 14px; font-size: 13px; color: var(--text); font-weight: 600; }
-    .tool-pill .tt { display: block; line-height: 1.3; }
-    .tool-pill .td { display: block; font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; line-height: 1.3; }
+    /* ---------- Why cards ---------- */
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 100px; }
+    .why-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+    .why-item:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-2); }
+    .why-icon { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 16px; font-size: 22px; }
+    .why-1 .why-icon { background: rgba(140,140,255,0.16); color: #B4B4FF; box-shadow: 0 0 32px rgba(140,140,255,0.20); }
+    .why-2 .why-icon { background: rgba(86,207,110,0.16); color: #7BE090; box-shadow: 0 0 32px rgba(86,207,110,0.20); }
+    .why-3 .why-icon { background: rgba(255,107,107,0.16); color: #FF8A8A; box-shadow: 0 0 32px rgba(255,107,107,0.20); }
+    .why-item h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; color: var(--text); letter-spacing: -0.2px; }
+    .why-item p { font-size: 14px; color: var(--text2); line-height: 1.6; }
 
-    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
-    .why-item { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 20px; }
-    .why-item .h { font-size: 15px; font-weight: 800; margin-bottom: 6px; color: var(--text); }
-    .why-item .b { font-size: 13px; color: var(--text2); line-height: 1.55; }
+    /* ---------- Tool catalog ---------- */
+    .catalog { margin-bottom: 100px; }
+    .cat-block { margin-top: 44px; }
+    .cat-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 0 2px; }
+    .cat-glyph {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: var(--surface-strong);
+      border: 1px solid var(--border-strong);
+      display: grid; place-items: center;
+      font-size: 14px; color: var(--accent-bright); font-weight: 800;
+    }
+    .cat-name { font-size: 12px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; color: var(--text2); }
+    .cat-count { font-size: 11px; color: var(--muted); font-weight: 700; margin-left: auto; padding: 4px 10px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); }
 
-    footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; position: relative; z-index: 1; }
+    .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .tool {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      backdrop-filter: blur(10px);
+    }
+    .tool:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-2); }
+    .tool-ic {
+      width: 38px; height: 38px; border-radius: 11px;
+      display: grid; place-items: center;
+      font-size: 19px;
+      background: var(--tool-bg, rgba(140,140,255,0.14));
+      color: var(--tool-c, var(--accent-bright));
+      box-shadow: 0 0 24px var(--tool-glow, rgba(140,140,255,0.18));
+    }
+    .tool-name { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.15px; line-height: 1.2; }
+    .tool-desc { font-size: 12px; color: var(--text2); font-weight: 500; line-height: 1.4; }
+
+    /* ---------- Final CTA ---------- */
+    .final {
+      margin: 80px 0;
+      padding: 56px 32px;
+      background: linear-gradient(135deg, rgba(140,140,255,0.12) 0%, rgba(195,107,255,0.10) 100%);
+      border: 1px solid var(--border-strong);
+      border-radius: 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final::before {
+      content: '';
+      position: absolute;
+      width: 320px; height: 320px; top: -100px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(140,140,255,0.25), transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .final h2 { font-size: clamp(24px,3vw,34px); font-weight: 900; letter-spacing: -0.7px; margin-bottom: 10px; position: relative; }
+    .final p { font-size: 14px; color: var(--text2); margin-bottom: 28px; position: relative; }
+    .final .store-row { position: relative; margin-bottom: 0; }
+
+    /* ---------- Footer ---------- */
+    footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; position: relative; z-index: 2; }
     footer p { color: var(--muted); font-size: 13px; }
-    footer a { color: var(--text2); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
+    footer a { color: var(--text2); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent-bright); }
 
-    @media (max-width: 720px) {
-      .container { padding: 56px 18px 64px; }
-      .hero h1 { font-size: 34px; }
-      .features { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .feature { padding: 18px 12px; }
-      .feature .num { font-size: 24px; }
-      .tool-grid { grid-template-columns: repeat(2, 1fr); }
-      .why { grid-template-columns: 1fr; }
-      .nav-links { gap: 16px; }
-      .nav-links a { font-size: 13px; }
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 820px) {
+      .hero { padding: 56px 0 40px; }
+      .hero-stage { width: 200px; height: 200px; margin-bottom: 28px; }
+      .hero-stage .app-icon { width: 96px; height: 96px; }
+      .orb { width: 38px; height: 38px; font-size: 18px; }
+      .orb ion-icon { font-size: 18px; }
+      .stats { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 72px; }
+      .stat { padding: 22px 14px; }
+      .stat .num { font-size: 30px; }
+      .why { grid-template-columns: 1fr; gap: 12px; margin-bottom: 72px; }
+      .tool-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .final { padding: 40px 24px; margin: 60px 0; }
       .store-row { flex-direction: column; align-items: center; }
-      .cta-btn { width: 280px; justify-content: center; }
-      .section-title { font-size: 22px; }
+      .cta-btn { width: 100%; max-width: 320px; justify-content: center; }
+      .nav-link { padding: 8px 10px; font-size: 13px; }
+      .nav-cta { padding: 8px 14px; }
+    }
+    @media (max-width: 420px) {
+      .container { padding: 0 18px; }
+      .orb-2,.orb-3 { right: 0; }
+      .orb-5,.orb-6 { left: 0; }
     }
   </style>
 </head>
 <body>
+  <div class="aurora">
+    <div class="aurora-blob blob-1"></div>
+    <div class="aurora-blob blob-2"></div>
+    <div class="aurora-blob blob-3"></div>
+  </div>
+  <div class="grain"></div>
+
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="logo">
@@ -104,226 +308,234 @@
         <div class="logo-text"><span>Util</span><span>ify</span></div>
       </a>
       <div class="nav-links">
-        <a href="support.html">Support</a>
-        <a href="privacy-policy.html">Privacy</a>
+        <a class="nav-link" href="#tools">Tools</a>
+        <a class="nav-link" href="support.html">Support</a>
+        <a class="nav-link" href="privacy-policy.html">Privacy</a>
+        <a class="nav-link nav-cta" href="#download">Get the app</a>
       </div>
     </div>
   </nav>
 
-  <div class="container">
+  <main class="container">
 
-    <!-- Hero -->
-    <div class="hero center">
-      <img src="icon.png" alt="Utilify" class="hero-icon">
-      <h1><span>Util</span>ify</h1>
-      <p class="tagline">Forty-five everyday tools in one tiny app. Convert, calculate, generate, decode — all in your pocket.</p>
-      <p class="sub">No sign-up. No tracking beyond ads. Works offline.</p>
-    </div>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-stage reveal">
+        <div class="constellation">
+          <span class="orb orb-1" style="--orb-c:#FF6B6B; --orb-glow:rgba(255,107,107,0.30); --orb-d:0s">   <ion-icon name="finger-print-outline"></ion-icon></span>
+          <span class="orb orb-2" style="--orb-c:#4DA6FF; --orb-glow:rgba(77,166,255,0.30);  --orb-d:.6s"> <ion-icon name="qr-code-outline"></ion-icon></span>
+          <span class="orb orb-3" style="--orb-c:#56CF6E; --orb-glow:rgba(86,207,110,0.30); --orb-d:1.2s"><ion-icon name="body-outline"></ion-icon></span>
+          <span class="orb orb-4" style="--orb-c:#FFB347; --orb-glow:rgba(255,179,71,0.30); --orb-d:1.8s"><ion-icon name="calculator-outline"></ion-icon></span>
+          <span class="orb orb-5" style="--orb-c:#9B59B6; --orb-glow:rgba(155,89,182,0.30); --orb-d:2.4s"><ion-icon name="key-outline"></ion-icon></span>
+          <span class="orb orb-6" style="--orb-c:#00C9A7; --orb-glow:rgba(0,201,167,0.30);   --orb-d:3s">  <ion-icon name="color-palette-outline"></ion-icon></span>
+        </div>
+        <img class="app-icon" src="icon.png" alt="Utilify">
+      </div>
 
-    <!-- Stats -->
-    <div class="features">
-      <div class="feature"><div class="num">45</div><div class="label">Tools</div></div>
-      <div class="feature"><div class="num">19</div><div class="label">Languages</div></div>
-      <div class="feature"><div class="num">2</div><div class="label">Platforms</div></div>
-      <div class="feature"><div class="num">Free</div><div class="label">Forever</div></div>
-    </div>
+      <h1 class="reveal">Forty-five everyday tools,<br><span class="grad">beautifully crafted.</span></h1>
+      <p class="lead reveal">Convert, calculate, generate, decode — every utility you reach for, lovingly packed into one tiny app you'll actually want on your home screen.</p>
+      <p class="sub reveal">No sign-up · Works offline · 19 languages</p>
 
-    <!-- Store buttons -->
-    <div class="store-row">
-      <a href="https://apps.apple.com/app/utilify/id6760681801" class="cta-btn">
-        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download for iOS
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" class="cta-btn google">
-        <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-        Get on Google Play
-      </a>
-    </div>
-    <p class="cta-sub">Free on iOS &amp; Android</p>
+      <div id="download" class="store-row reveal">
+        <a href="https://apps.apple.com/app/utilify/id6760681801" class="cta-btn">
+          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download on App Store
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" class="cta-btn ghost">
+          <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+          Get it on Google Play
+        </a>
+      </div>
+      <p class="cta-sub">Free on iOS &amp; Android</p>
+    </section>
 
-    <!-- Why -->
-    <h2 class="section-title">Built for everyday use</h2>
-    <p class="section-sub">Small footprint. Big toolbox.</p>
-    <div class="why">
-      <div class="why-item">
-        <div class="h">Localized in 19 languages</div>
-        <div class="b">English, Spanish, Hindi, Portuguese, French, German, Japanese, Indonesian, Italian, Chinese, Arabic, Korean, Russian, Turkish, Vietnamese, Thai, Polish, Bengali, Tamil.</div>
-      </div>
-      <div class="why-item">
-        <div class="h">Works offline</div>
-        <div class="b">Almost every tool runs entirely on-device. Only Currency, Crypto Prices, and IP Info need a network — the rest never leave your phone.</div>
-      </div>
-      <div class="why-item">
-        <div class="h">Private by default</div>
-        <div class="b">No accounts, no profiles, no analytics on what you type. Calculations and conversions stay local.</div>
-      </div>
-    </div>
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stat reveal"><div class="num">45</div><div class="label">Tools</div></div>
+      <div class="stat reveal"><div class="num">19</div><div class="label">Languages</div></div>
+      <div class="stat reveal"><div class="num">2</div><div class="label">Platforms</div></div>
+      <div class="stat reveal"><div class="num">Free</div><div class="label">Forever</div></div>
+    </section>
 
-    <!-- Tool catalog -->
-    <h2 class="section-title">Every tool, organised</h2>
-    <p class="section-sub">Forty-five utilities, sorted by what they do.</p>
+    <!-- WHY -->
+    <section class="why-section">
+      <div class="section-eyebrow reveal">Why Utilify</div>
+      <h2 class="section-title reveal">Built for everyday use</h2>
+      <p class="section-sub reveal">Small footprint. Big toolbox. Friendly defaults.</p>
+      <div class="why">
+        <div class="why-item why-1 reveal">
+          <div class="why-icon"><ion-icon name="language-outline"></ion-icon></div>
+          <h3>Localized in 19 languages</h3>
+          <p>English, Spanish, Hindi, Portuguese, French, German, Japanese, Indonesian, Italian, Chinese, Arabic, Korean, Russian, Turkish, Vietnamese, Thai, Polish, Bengali, and Tamil.</p>
+        </div>
+        <div class="why-item why-2 reveal">
+          <div class="why-icon"><ion-icon name="cloud-offline-outline"></ion-icon></div>
+          <h3>Works offline</h3>
+          <p>Almost every tool runs on-device. Only Currency, Crypto Prices, and IP&nbsp;Info need a network — the rest never leave your phone.</p>
+        </div>
+        <div class="why-item why-3 reveal">
+          <div class="why-icon"><ion-icon name="shield-checkmark-outline"></ion-icon></div>
+          <h3>Private by default</h3>
+          <p>No accounts. No analytics on what you type. Calculations, conversions, and generated content stay local.</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- Convert -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">⇄</div>
-        <div class="cat-name">Convert</div>
-        <div class="cat-count">3 tools</div>
-      </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">Unit Converter</span><span class="td">Length, weight, temp &amp; more</span></div>
-        <div class="tool-pill"><span class="tt">Data Storage</span><span class="td">Bytes, KB, MB, GB, TB</span></div>
-        <div class="tool-pill"><span class="tt">Roman Numerals</span><span class="td">Number ↔ Roman</span></div>
-      </div>
-    </div>
+    <!-- TOOL CATALOG -->
+    <section id="tools" class="catalog">
+      <div class="section-eyebrow reveal">The toolbox</div>
+      <h2 class="section-title reveal">Every tool, organised</h2>
+      <p class="section-sub reveal">Forty-five utilities, sorted by what they actually do.</p>
 
-    <!-- Time -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">◷</div>
-        <div class="cat-name">Time</div>
-        <div class="cat-count">5 tools</div>
+      <!-- Convert -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">⇄</div><div class="cat-name">Convert</div><div class="cat-count">3 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="resize-outline"></ion-icon></div><div class="tool-name">Unit Converter</div><div class="tool-desc">Length, weight, temp &amp; more</div></div>
+          <div class="tool reveal" style="--tool-c:#FF6B6B; --tool-bg:rgba(255,107,107,0.14); --tool-glow:rgba(255,107,107,0.20)"><div class="tool-ic"><ion-icon name="server-outline"></ion-icon></div><div class="tool-name">Data Storage</div><div class="tool-desc">Bytes, KB, MB, GB, TB</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="reader-outline"></ion-icon></div><div class="tool-name">Roman Numerals</div><div class="tool-desc">Number ↔ Roman</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">Time Zone</span><span class="td">Convert across time zones</span></div>
-        <div class="tool-pill"><span class="tt">World Clock</span><span class="td">Current time anywhere</span></div>
-        <div class="tool-pill"><span class="tt">Age Calculator</span><span class="td">Age, date diff &amp; countdown</span></div>
-        <div class="tool-pill"><span class="tt">Timer</span><span class="td">Stopwatch &amp; pomodoro</span></div>
-        <div class="tool-pill"><span class="tt">Countdown</span><span class="td">Days until your events</span></div>
-      </div>
-    </div>
 
-    <!-- Money -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">$</div>
-        <div class="cat-name">Money</div>
-        <div class="cat-count">4 tools</div>
+      <!-- Time -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">◷</div><div class="cat-name">Time</div><div class="cat-count">5 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="globe-outline"></ion-icon></div><div class="tool-name">Time Zone</div><div class="tool-desc">Convert across time zones</div></div>
+          <div class="tool reveal" style="--tool-c:#FFB347; --tool-bg:rgba(255,179,71,0.14); --tool-glow:rgba(255,179,71,0.20)"><div class="tool-ic"><ion-icon name="time-outline"></ion-icon></div><div class="tool-name">World Clock</div><div class="tool-desc">Current time anywhere</div></div>
+          <div class="tool reveal" style="--tool-c:#FF4F8B; --tool-bg:rgba(255,79,139,0.14); --tool-glow:rgba(255,79,139,0.20)"><div class="tool-ic"><ion-icon name="calendar-outline"></ion-icon></div><div class="tool-name">Age Calculator</div><div class="tool-desc">Age, date diff &amp; countdown</div></div>
+          <div class="tool reveal" style="--tool-c:#FF6B6B; --tool-bg:rgba(255,107,107,0.14); --tool-glow:rgba(255,107,107,0.20)"><div class="tool-ic"><ion-icon name="stopwatch-outline"></ion-icon></div><div class="tool-name">Timer</div><div class="tool-desc">Stopwatch &amp; pomodoro</div></div>
+          <div class="tool reveal" style="--tool-c:#FF4F8B; --tool-bg:rgba(255,79,139,0.14); --tool-glow:rgba(255,79,139,0.20)"><div class="tool-ic"><ion-icon name="hourglass-outline"></ion-icon></div><div class="tool-name">Countdown</div><div class="tool-desc">Days until your events</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">Currency</span><span class="td">Live exchange rates</span></div>
-        <div class="tool-pill"><span class="tt">Tip Calculator</span><span class="td">Split bills easily</span></div>
-        <div class="tool-pill"><span class="tt">Loan Calculator</span><span class="td">Payments &amp; total interest</span></div>
-        <div class="tool-pill"><span class="tt">Crypto Prices</span><span class="td">Live Bitcoin, ETH &amp; more</span></div>
-      </div>
-    </div>
 
-    <!-- Math -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">∑</div>
-        <div class="cat-name">Math</div>
-        <div class="cat-count">4 tools</div>
+      <!-- Money -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">$</div><div class="cat-name">Money</div><div class="cat-count">4 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="cash-outline"></ion-icon></div><div class="tool-name">Currency</div><div class="tool-desc">Live exchange rates</div></div>
+          <div class="tool reveal" style="--tool-c:#56CF6E; --tool-bg:rgba(86,207,110,0.14); --tool-glow:rgba(86,207,110,0.20)"><div class="tool-ic"><ion-icon name="receipt-outline"></ion-icon></div><div class="tool-name">Tip Calculator</div><div class="tool-desc">Split bills easily</div></div>
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="trending-up-outline"></ion-icon></div><div class="tool-name">Loan Calculator</div><div class="tool-desc">Payments &amp; total interest</div></div>
+          <div class="tool reveal" style="--tool-c:#FFB347; --tool-bg:rgba(255,179,71,0.14); --tool-glow:rgba(255,179,71,0.20)"><div class="tool-ic"><ion-icon name="logo-bitcoin"></ion-icon></div><div class="tool-name">Crypto Prices</div><div class="tool-desc">Live Bitcoin, ETH &amp; more</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">Calculator</span><span class="td">Advanced math &amp; trig</span></div>
-        <div class="tool-pill"><span class="tt">Percentage</span><span class="td">% of, what %, % change</span></div>
-        <div class="tool-pill"><span class="tt">Number Base</span><span class="td">Binary, hex, octal</span></div>
-        <div class="tool-pill"><span class="tt">Periodic Table</span><span class="td">All 118 chemical elements</span></div>
-      </div>
-    </div>
 
-    <!-- Text -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">Aa</div>
-        <div class="cat-name">Text</div>
-        <div class="cat-count">7 tools</div>
+      <!-- Math -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">∑</div><div class="cat-name">Math</div><div class="cat-count">4 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#FFB347; --tool-bg:rgba(255,179,71,0.14); --tool-glow:rgba(255,179,71,0.20)"><div class="tool-ic"><ion-icon name="calculator-outline"></ion-icon></div><div class="tool-name">Calculator</div><div class="tool-desc">Advanced math &amp; trig</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="analytics-outline"></ion-icon></div><div class="tool-name">Percentage</div><div class="tool-desc">% of, what %, % change</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="code-slash-outline"></ion-icon></div><div class="tool-name">Number Base</div><div class="tool-desc">Binary, hex, octal</div></div>
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="flask-outline"></ion-icon></div><div class="tool-name">Periodic Table</div><div class="tool-desc">All 118 chemical elements</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">Word Counter</span><span class="td">Words, chars &amp; reading time</span></div>
-        <div class="tool-pill"><span class="tt">Case Converter</span><span class="td">UPPER, lower, camelCase</span></div>
-        <div class="tool-pill"><span class="tt">Encode / Decode</span><span class="td">Base64, URL, HTML</span></div>
-        <div class="tool-pill"><span class="tt">Text Diff</span><span class="td">Compare two texts</span></div>
-        <div class="tool-pill"><span class="tt">Text Stats</span><span class="td">Readability &amp; analysis</span></div>
-        <div class="tool-pill"><span class="tt">Lorem Ipsum</span><span class="td">Placeholder text generator</span></div>
-        <div class="tool-pill"><span class="tt">Markdown</span><span class="td">Preview markdown text</span></div>
-      </div>
-    </div>
 
-    <!-- Design -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">◈</div>
-        <div class="cat-name">Design</div>
-        <div class="cat-count">2 tools</div>
+      <!-- Text -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">Aa</div><div class="cat-name">Text</div><div class="cat-count">7 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="document-text-outline"></ion-icon></div><div class="tool-name">Word Counter</div><div class="tool-desc">Words, chars &amp; reading time</div></div>
+          <div class="tool reveal" style="--tool-c:#FF4F8B; --tool-bg:rgba(255,79,139,0.14); --tool-glow:rgba(255,79,139,0.20)"><div class="tool-ic"><ion-icon name="text-outline"></ion-icon></div><div class="tool-name">Case Converter</div><div class="tool-desc">UPPER, lower, camelCase</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="lock-closed-outline"></ion-icon></div><div class="tool-name">Encode / Decode</div><div class="tool-desc">Base64, URL, HTML</div></div>
+          <div class="tool reveal" style="--tool-c:#FF6B6B; --tool-bg:rgba(255,107,107,0.14); --tool-glow:rgba(255,107,107,0.20)"><div class="tool-ic"><ion-icon name="git-compare-outline"></ion-icon></div><div class="tool-name">Text Diff</div><div class="tool-desc">Compare two texts</div></div>
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="stats-chart-outline"></ion-icon></div><div class="tool-name">Text Stats</div><div class="tool-desc">Readability &amp; analysis</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="document-outline"></ion-icon></div><div class="tool-name">Lorem Ipsum</div><div class="tool-desc">Placeholder text generator</div></div>
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="logo-markdown"></ion-icon></div><div class="tool-name">Markdown</div><div class="tool-desc">Preview markdown text</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">Color Tools</span><span class="td">HEX ↔ RGB ↔ HSL</span></div>
-        <div class="tool-pill"><span class="tt">Aspect Ratio</span><span class="td">Image dimensions &amp; scaling</span></div>
-      </div>
-    </div>
 
-    <!-- Health -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">♥</div>
-        <div class="cat-name">Health</div>
-        <div class="cat-count">2 tools</div>
+      <!-- Design -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">◈</div><div class="cat-name">Design</div><div class="cat-count">2 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#FF6B6B; --tool-bg:rgba(255,107,107,0.14); --tool-glow:rgba(255,107,107,0.20)"><div class="tool-ic"><ion-icon name="color-palette-outline"></ion-icon></div><div class="tool-name">Color Tools</div><div class="tool-desc">HEX ↔ RGB ↔ HSL</div></div>
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="crop-outline"></ion-icon></div><div class="tool-name">Aspect Ratio</div><div class="tool-desc">Image dimensions &amp; scaling</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">BMI Calculator</span><span class="td">Body mass index &amp; range</span></div>
-        <div class="tool-pill"><span class="tt">Speed &amp; Pace</span><span class="td">Running pace &amp; race times</span></div>
-      </div>
-    </div>
 
-    <!-- Dev -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">{}</div>
-        <div class="cat-name">Developer</div>
-        <div class="cat-count">7 tools</div>
+      <!-- Health -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">♥</div><div class="cat-name">Health</div><div class="cat-count">2 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#56CF6E; --tool-bg:rgba(86,207,110,0.14); --tool-glow:rgba(86,207,110,0.20)"><div class="tool-ic"><ion-icon name="body-outline"></ion-icon></div><div class="tool-name">BMI Calculator</div><div class="tool-desc">Body mass index &amp; range</div></div>
+          <div class="tool reveal" style="--tool-c:#FFB347; --tool-bg:rgba(255,179,71,0.14); --tool-glow:rgba(255,179,71,0.20)"><div class="tool-ic"><ion-icon name="speedometer-outline"></ion-icon></div><div class="tool-name">Speed &amp; Pace</div><div class="tool-desc">Running pace &amp; race times</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">JSON</span><span class="td">Format, minify &amp; validate</span></div>
-        <div class="tool-pill"><span class="tt">Regex</span><span class="td">Test regular expressions</span></div>
-        <div class="tool-pill"><span class="tt">JWT</span><span class="td">Decode JSON Web Tokens</span></div>
-        <div class="tool-pill"><span class="tt">Hash</span><span class="td">MD5, SHA-1, SHA-256</span></div>
-        <div class="tool-pill"><span class="tt">UUID</span><span class="td">Generate unique identifiers</span></div>
-        <div class="tool-pill"><span class="tt">Slug</span><span class="td">URL-friendly slugs</span></div>
-        <div class="tool-pill"><span class="tt">HTTP Status</span><span class="td">Status code reference</span></div>
-      </div>
-    </div>
 
-    <!-- Utility -->
-    <div class="cat-block">
-      <div class="cat-head">
-        <div class="cat-glyph">⚙</div>
-        <div class="cat-name">Utility</div>
-        <div class="cat-count">11 tools</div>
+      <!-- Developer -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">{}</div><div class="cat-name">Developer</div><div class="cat-count">7 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="code-working-outline"></ion-icon></div><div class="tool-name">JSON</div><div class="tool-desc">Format, minify &amp; validate</div></div>
+          <div class="tool reveal" style="--tool-c:#FF4F8B; --tool-bg:rgba(255,79,139,0.14); --tool-glow:rgba(255,79,139,0.20)"><div class="tool-ic"><ion-icon name="search-outline"></ion-icon></div><div class="tool-name">Regex</div><div class="tool-desc">Test regular expressions</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="shield-checkmark-outline"></ion-icon></div><div class="tool-name">JWT</div><div class="tool-desc">Decode JSON Web Tokens</div></div>
+          <div class="tool reveal" style="--tool-c:#FF6B6B; --tool-bg:rgba(255,107,107,0.14); --tool-glow:rgba(255,107,107,0.20)"><div class="tool-ic"><ion-icon name="finger-print-outline"></ion-icon></div><div class="tool-name">Hash</div><div class="tool-desc">MD5, SHA-1, SHA-256</div></div>
+          <div class="tool reveal" style="--tool-c:#FFB347; --tool-bg:rgba(255,179,71,0.14); --tool-glow:rgba(255,179,71,0.20)"><div class="tool-ic"><ion-icon name="barcode-outline"></ion-icon></div><div class="tool-name">UUID</div><div class="tool-desc">Generate unique identifiers</div></div>
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="link-outline"></ion-icon></div><div class="tool-name">Slug</div><div class="tool-desc">URL-friendly slugs</div></div>
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="cloud-outline"></ion-icon></div><div class="tool-name">HTTP Status</div><div class="tool-desc">Status code reference</div></div>
+        </div>
       </div>
-      <div class="tool-grid">
-        <div class="tool-pill"><span class="tt">QR Code</span><span class="td">Generate QR from text or URL</span></div>
-        <div class="tool-pill"><span class="tt">WiFi QR</span><span class="td">Share WiFi with a scan</span></div>
-        <div class="tool-pill"><span class="tt">Barcode</span><span class="td">Code 128, EAN, UPC, Code 39</span></div>
-        <div class="tool-pill"><span class="tt">Password</span><span class="td">Generate strong passwords</span></div>
-        <div class="tool-pill"><span class="tt">Flashlight</span><span class="td">Turn your phone into a torch</span></div>
-        <div class="tool-pill"><span class="tt">Compass</span><span class="td">True north direction</span></div>
-        <div class="tool-pill"><span class="tt">Bubble Level</span><span class="td">Check if surfaces are level</span></div>
-        <div class="tool-pill"><span class="tt">Decibel Meter</span><span class="td">Measure sound levels</span></div>
-        <div class="tool-pill"><span class="tt">IP Info</span><span class="td">Your IP, ISP, location</span></div>
-        <div class="tool-pill"><span class="tt">Dice &amp; Coin</span><span class="td">Roll dice, flip coins</span></div>
-        <div class="tool-pill"><span class="tt">Random Picker</span><span class="td">Pick one from a list</span></div>
-      </div>
-    </div>
 
-    <!-- Final CTA -->
-    <h2 class="section-title" style="margin-top:72px">Forty-five tools. One download.</h2>
-    <p class="section-sub">Get Utilify free on the App Store or Google Play.</p>
-    <div class="store-row">
-      <a href="https://apps.apple.com/app/utilify/id6760681801" class="cta-btn">
-        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        App Store
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" class="cta-btn google">
-        <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
-        Google Play
-      </a>
-    </div>
-  </div>
+      <!-- Utility -->
+      <div class="cat-block">
+        <div class="cat-head reveal"><div class="cat-glyph">⚙</div><div class="cat-name">Utility</div><div class="cat-count">11 tools</div></div>
+        <div class="tool-grid">
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="qr-code-outline"></ion-icon></div><div class="tool-name">QR Code</div><div class="tool-desc">Generate QR from text or URL</div></div>
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="wifi-outline"></ion-icon></div><div class="tool-name">WiFi QR</div><div class="tool-desc">Share WiFi with a scan</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="barcode-outline"></ion-icon></div><div class="tool-name">Barcode</div><div class="tool-desc">Code 128, EAN, UPC, Code 39</div></div>
+          <div class="tool reveal" style="--tool-c:#9B59B6; --tool-bg:rgba(155,89,182,0.14); --tool-glow:rgba(155,89,182,0.20)"><div class="tool-ic"><ion-icon name="key-outline"></ion-icon></div><div class="tool-name">Password</div><div class="tool-desc">Generate strong passwords</div></div>
+          <div class="tool reveal" style="--tool-c:#FFB347; --tool-bg:rgba(255,179,71,0.14); --tool-glow:rgba(255,179,71,0.20)"><div class="tool-ic"><ion-icon name="flashlight-outline"></ion-icon></div><div class="tool-name">Flashlight</div><div class="tool-desc">Turn your phone into a torch</div></div>
+          <div class="tool reveal" style="--tool-c:#00C9A7; --tool-bg:rgba(0,201,167,0.14); --tool-glow:rgba(0,201,167,0.20)"><div class="tool-ic"><ion-icon name="compass-outline"></ion-icon></div><div class="tool-name">Compass</div><div class="tool-desc">True north direction</div></div>
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="water-outline"></ion-icon></div><div class="tool-name">Bubble Level</div><div class="tool-desc">Check if surfaces are level</div></div>
+          <div class="tool reveal" style="--tool-c:#FF6B6B; --tool-bg:rgba(255,107,107,0.14); --tool-glow:rgba(255,107,107,0.20)"><div class="tool-ic"><ion-icon name="mic-outline"></ion-icon></div><div class="tool-name">Decibel Meter</div><div class="tool-desc">Measure sound levels</div></div>
+          <div class="tool reveal" style="--tool-c:#4DA6FF; --tool-bg:rgba(77,166,255,0.14); --tool-glow:rgba(77,166,255,0.20)"><div class="tool-ic"><ion-icon name="globe-outline"></ion-icon></div><div class="tool-name">IP Info</div><div class="tool-desc">Your IP, ISP, location</div></div>
+          <div class="tool reveal" style="--tool-c:#FF4F8B; --tool-bg:rgba(255,79,139,0.14); --tool-glow:rgba(255,79,139,0.20)"><div class="tool-ic"><ion-icon name="dice-outline"></ion-icon></div><div class="tool-name">Dice &amp; Coin</div><div class="tool-desc">Roll dice, flip coins</div></div>
+          <div class="tool reveal" style="--tool-c:#56CF6E; --tool-bg:rgba(86,207,110,0.14); --tool-glow:rgba(86,207,110,0.20)"><div class="tool-ic"><ion-icon name="shuffle-outline"></ion-icon></div><div class="tool-name">Random Picker</div><div class="tool-desc">Pick one from a list</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final reveal">
+      <h2>Forty-five tools. One download.</h2>
+      <p>Free on iOS &amp; Android. No sign-up. No tracking on what you type.</p>
+      <div class="store-row">
+        <a href="https://apps.apple.com/app/utilify/id6760681801" class="cta-btn">
+          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" class="cta-btn ghost">
+          <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+          Google Play
+        </a>
+      </div>
+    </section>
+
+  </main>
 
   <footer>
-    <p>&copy; 2026 Utilify by PlayPal Apps &mdash; <a href="privacy-policy.html">Privacy</a> &middot; <a href="support.html">Support</a></p>
+    <p>&copy; 2026 Utilify by <a href="/">PlayPal Apps</a> &mdash; <a href="privacy-policy.html">Privacy</a> &middot; <a href="support.html">Support</a></p>
   </footer>
+
+  <script>
+    // Scroll-reveal: add `.in` once each `.reveal` enters the viewport.
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Tiny stagger for tool cards
+    document.querySelectorAll('.tool-grid').forEach(grid => {
+      grid.querySelectorAll('.tool').forEach((t, i) => {
+        t.style.transitionDelay = (i * 35) + 'ms';
+      });
+    });
+  </script>
 </body>
 </html>
