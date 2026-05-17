@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Inkline app icon.
+  Matches the enso brushmark on the main-menu home screen exactly:
+  three concentric stroked layers (faint halo, mid wash, dark core) tracing
+  the same Bézier path; a small vermillion 墨 seal at the lower-right corner
+  of the ring, rotated slightly. Cream washi paper with subtle vignette
+  and a few mineral specks for depth.
+
+  Path is the main-menu enso path scaled 1:10 from viewBox 0..100 to 0..1024
+  with a small inset, keeping the proportions identical to what the player
+  sees when they open the app.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Washi paper: warm cream center → slightly deeper at the edges -->
+    <radialGradient id="paper" cx="0.5" cy="0.42" r="0.85">
+      <stop offset="0%"   stop-color="#f7eed4"/>
+      <stop offset="55%"  stop-color="#ede0c0"/>
+      <stop offset="100%" stop-color="#d2bd8e"/>
+    </radialGradient>
+
+    <!-- Asymmetric wash bias for painterly depth -->
+    <radialGradient id="washBias" cx="0.32" cy="0.42" r="0.55">
+      <stop offset="0%"   stop-color="rgba(120,80,40,0.06)"/>
+      <stop offset="100%" stop-color="rgba(120,80,40,0)"/>
+    </radialGradient>
+
+    <!-- Inner edge shadow — depth on white home screens -->
+    <radialGradient id="edgeShadow" cx="0.5" cy="0.52" r="0.78">
+      <stop offset="72%"  stop-color="rgba(40,24,12,0)"/>
+      <stop offset="100%" stop-color="rgba(40,24,12,0.26)"/>
+    </radialGradient>
+
+    <!-- Soft top highlight — paper catching light from above -->
+    <linearGradient id="topLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="rgba(255,250,225,0.22)"/>
+      <stop offset="40%"  stop-color="rgba(255,250,225,0)"/>
+    </linearGradient>
+
+    <!-- Seal interior gradient — slight inward darkening for press depth -->
+    <radialGradient id="sealInner" cx="0.5" cy="0.45" r="0.7">
+      <stop offset="0%"   stop-color="rgba(255,200,180,0.08)"/>
+      <stop offset="65%"  stop-color="rgba(120,30,30,0)"/>
+      <stop offset="100%" stop-color="rgba(80,18,18,0.32)"/>
+    </radialGradient>
+
+    <!-- Seal drop shadow -->
+    <filter id="sealShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="0" dy="5" result="off"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.45"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ──────── Paper canvas ──────── -->
+  <rect width="1024" height="1024" fill="url(#paper)"/>
+  <rect width="1024" height="1024" fill="url(#washBias)"/>
+  <rect width="1024" height="1024" fill="url(#topLight)"/>
+
+  <!-- Subtle scroll-paper grain -->
+  <g opacity="0.32" stroke="rgba(120,80,40,0.16)" stroke-width="0.6" fill="none">
+    <line x1="0" y1="200" x2="1024" y2="204"/>
+    <line x1="0" y1="402" x2="1024" y2="400"/>
+    <line x1="0" y1="610" x2="1024" y2="612"/>
+    <line x1="0" y1="820" x2="1024" y2="818"/>
+  </g>
+
+  <!-- Mineral specks — paper texture -->
+  <g>
+    <circle cx="172" cy="248" r="2.0" fill="rgba(255,250,225,0.5)"/>
+    <circle cx="320" cy="172" r="1.6" fill="rgba(255,250,225,0.46)"/>
+    <circle cx="660" cy="220" r="2.0" fill="rgba(255,250,225,0.50)"/>
+    <circle cx="794" cy="320" r="1.4" fill="rgba(255,250,225,0.40)"/>
+    <circle cx="900" cy="510" r="1.8" fill="rgba(255,250,225,0.46)"/>
+    <circle cx="156" cy="640" r="2.0" fill="rgba(255,250,225,0.46)"/>
+    <circle cx="380" cy="788" r="1.4" fill="rgba(255,250,225,0.40)"/>
+    <circle cx="720" cy="876" r="1.8" fill="rgba(255,250,225,0.50)"/>
+    <circle cx="84"  cy="412" r="1.4" fill="rgba(255,250,225,0.40)"/>
+    <circle cx="952" cy="780" r="1.6" fill="rgba(255,250,225,0.42)"/>
+    <!-- Dark mineral specks -->
+    <circle cx="240" cy="380" r="1.8" fill="rgba(60,40,20,0.18)"/>
+    <circle cx="540" cy="156" r="1.4" fill="rgba(60,40,20,0.16)"/>
+    <circle cx="828" cy="430" r="1.6" fill="rgba(60,40,20,0.18)"/>
+    <circle cx="216" cy="824" r="1.4" fill="rgba(60,40,20,0.16)"/>
+    <circle cx="860" cy="704" r="1.6" fill="rgba(60,40,20,0.18)"/>
+    <circle cx="600" cy="900" r="1.4" fill="rgba(60,40,20,0.14)"/>
+  </g>
+
+  <!--
+    ──────── ENSO BRUSHMARK + SEAL ────────
+    Three concentric stroked paths matching the main-menu enso, plus the
+    vermillion 墨 seal. Wrapped in a single transform that scales the
+    composition to 78% of the canvas (a touch larger than the previous 70%,
+    still within Android adaptive-icon and iOS rounded-corner safe zones)
+    and centers it on the bounding box of ring+seal.
+  -->
+  <g transform="translate(77 88) scale(0.78)">
+    <!-- LAYER 1 — outer halo (very faint wet-ink bleed) -->
+    <path d="M 800 184
+             C 512 144, 224 304, 184 575
+             C 164 860, 430 940, 615 940
+             C 860 902, 900 614, 860 430
+             C 820 287, 738 225, 655 225"
+          fill="none"
+          stroke="rgba(28,20,16,0.10)"
+          stroke-width="225"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- LAYER 2 — mid ink wash -->
+    <path d="M 800 184
+             C 512 144, 224 304, 184 575
+             C 164 860, 430 940, 615 940
+             C 860 902, 900 614, 860 430
+             C 820 287, 738 225, 655 225"
+          fill="none"
+          stroke="rgba(28,20,16,0.40)"
+          stroke-width="112"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- LAYER 3 — sharp ink core -->
+    <path d="M 800 184
+             C 512 144, 224 304, 184 575
+             C 164 860, 430 940, 615 940
+             C 860 902, 900 614, 860 430
+             C 820 287, 738 225, 655 225"
+          fill="none"
+          stroke="#1c1410"
+          stroke-width="56"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- LAYER 4 — wet-ink specular highlight along the top edge of the core.
+                  Same path, offset slightly upward with a thin light stroke
+                  using lighter opacity. Imitates ink catching light from above. -->
+    <path d="M 800 178
+             C 512 138, 224 298, 184 569
+             C 164 854, 430 934, 615 934
+             C 860 896, 900 608, 860 424"
+          fill="none"
+          stroke="rgba(247,238,212,0.18)"
+          stroke-width="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- Painter's brush-end ink splatter near the upper-right gap of the ring,
+         where the brush left the paper. Three small droplets — calligraphic
+         signature. -->
+    <g>
+      <circle cx="708" cy="208" r="9" fill="rgba(20,14,10,0.78)"/>
+      <circle cx="688" cy="160" r="6" fill="rgba(20,14,10,0.58)"/>
+      <circle cx="744" cy="244" r="4" fill="rgba(20,14,10,0.48)"/>
+      <circle cx="660" cy="184" r="3" fill="rgba(20,14,10,0.40)"/>
+    </g>
+
+    <!-- Dry-brush highlight slivers — tiny cream patches over the heavy parts
+         where the brush ran low on ink. Subtle, painterly. -->
+    <g fill="rgba(247,238,212,0.55)">
+      <ellipse cx="232" cy="392" rx="11" ry="3" transform="rotate(72 232 392)"/>
+      <ellipse cx="208" cy="616" rx="9"  ry="2.6" transform="rotate(86 208 616)"/>
+      <ellipse cx="284" cy="838" rx="10" ry="3" transform="rotate(48 284 838)"/>
+      <ellipse cx="892" cy="552" rx="9"  ry="2.6" transform="rotate(94 892 552)"/>
+    </g>
+
+    <!--
+      ──────── VERMILLION HANKO SEAL (inside the scale transform) ────────
+      Sits at the natural lower-right break of the ring. Production polish:
+      • Ghost echo — a faint second stamp behind, offset slightly. Hanko
+        stamped on paper twice (a real artifact) gives an authentic mark.
+      • Subtle interior radial gradient simulating the slight 3D press.
+      • Pressed-edge ink-bleed texture marks around the perimeter.
+      • Soft drop shadow lifting the seal off the paper.
+    -->
+
+    <!-- Ghost echo (faint duplicate, offset) — sits BEHIND main seal -->
+    <g transform="translate(852 868) rotate(-7)" opacity="0.32">
+      <rect x="-82" y="-82" width="164" height="164" rx="5"
+            fill="rgba(163,45,45,0.55)"/>
+      <text x="0" y="30"
+            font-family="Hiragino Mincho ProN, Songti SC, Noto Serif JP, serif"
+            font-size="118" fill="rgba(247,238,212,0.55)" text-anchor="middle">墨</text>
+    </g>
+
+    <!-- Main seal -->
+    <g transform="translate(860 860) rotate(-4)" filter="url(#sealShadow)">
+      <!-- Wet ink bleed halo around stamp edge -->
+      <rect x="-94" y="-94" width="188" height="188" rx="7"
+            fill="rgba(163,45,45,0.18)"/>
+      <!-- Body -->
+      <rect x="-84" y="-84" width="168" height="168" rx="5" fill="#a32d2d"/>
+      <!-- Radial interior gradient — subtle 3D press feel -->
+      <rect x="-84" y="-84" width="168" height="168" rx="5"
+            fill="url(#sealInner)"/>
+      <!-- Top-light gradient for material reflection -->
+      <rect x="-84" y="-84" width="168" height="168" rx="5"
+            fill="url(#topLight)"/>
+      <!-- Inner cream frame -->
+      <rect x="-68" y="-68" width="136" height="136" rx="3"
+            fill="none" stroke="rgba(247,238,212,0.62)" stroke-width="4"/>
+      <!-- Glyph 墨 -->
+      <text x="0" y="32"
+            font-family="Hiragino Mincho ProN, Songti SC, Noto Serif JP, serif"
+            font-size="124" fill="#f7eed4" text-anchor="middle"
+            font-weight="400">墨</text>
+      <!-- Pressed-edge texture -->
+      <g stroke="rgba(120,30,30,0.55)" stroke-width="2" fill="none" stroke-linecap="round">
+        <path d="M -80 -66 L -64 -60"/>
+        <path d="M  66  60 L  80  66"/>
+        <path d="M -82  46 L -66  40"/>
+        <path d="M  44 -82 L  60 -74"/>
+        <path d="M -56 -84 L -48 -76"/>
+        <path d="M  72  -8 L  80  -2"/>
+      </g>
+      <!-- Tiny vermillion overspill droplets along the stamp edge — paint
+           pooled and squeezed out -->
+      <g fill="rgba(163,45,45,0.65)">
+        <circle cx="-22" cy="-88" r="2.5"/>
+        <circle cx="36"  cy="-90" r="2.0"/>
+        <circle cx="92"  cy="-12" r="2.2"/>
+        <circle cx="-88" cy="36"  r="1.8"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Inner edge shadow — depth on white home screens -->
+  <rect width="1024" height="1024" fill="url(#edgeShadow)"/>
+</svg>
