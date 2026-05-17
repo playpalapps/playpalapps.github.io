@@ -9,39 +9,64 @@
 <meta name="theme-color" content="#ede0c0">
 <link rel="canonical" href="https://playpalapps.github.io/Inkline/">
 
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Inkline — A meditative knot-untangling puzzle.">
 <meta property="og:description" content="Untangle the strand. The form reveals itself. 648 sumi-e puzzles, painted in ink on paper. Played offline.">
 <meta property="og:url" content="https://playpalapps.github.io/Inkline/">
 <meta property="og:site_name" content="Inkline">
-<meta property="og:image" content="https://playpalapps.github.io/Inkline/icon.png">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:alt" content="Inkline app icon — a sumi-e enso brushmark with a vermillion 墨 seal">
+<meta property="og:image" content="https://playpalapps.github.io/Inkline/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Inkline — a sumi-e enso brushmark with a vermillion seal, on washi paper">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Inkline — A meditative knot-untangling puzzle.">
-<meta name="twitter:description" content="Untangle the strand. The form reveals itself. 648 sumi-e puzzles. Played offline.">
-<meta name="twitter:image" content="https://playpalapps.github.io/Inkline/icon.png">
+<meta name="twitter:description" content="Untangle the strand. The form reveals itself.">
+<meta name="twitter:image" content="https://playpalapps.github.io/Inkline/og-image.png">
 
 <link rel="icon" href="icon.png" type="image/png">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="stylesheet" href="style.css">
-
-<!-- A tiny pre-rendered cherry blossom petal layer; CSS animates the drift -->
 </head>
 <body>
 
-<!-- Drifting cherry blossom petals -->
+<!-- Cherry blossom branch — drifts in from top-left -->
+<div class="atmosphere-branch" aria-hidden="true">
+  <svg viewBox="0 0 320 240">
+    <g fill="none" stroke="rgba(40,24,16,0.65)" stroke-width="2.4" stroke-linecap="round">
+      <path d="M -8 8 Q 60 38 130 50 Q 200 56 270 64 Q 300 66 320 60"/>
+      <path d="M 110 48 Q 130 30 150 22 Q 180 14 210 16"/>
+      <path d="M 220 60 Q 240 78 260 92 Q 280 102 296 102"/>
+      <path d="M 70 36 Q 60 22 50 8"/>
+    </g>
+    <!-- Blossoms -->
+    <g>
+      <g transform="translate(50,8)"><circle r="9" fill="rgba(248,197,211,0.92)"/><circle r="5" fill="rgba(252,218,226,0.94)"/><circle r="1.5" fill="rgba(180,84,110,0.9)"/></g>
+      <g transform="translate(110,48)"><circle r="10" fill="rgba(248,197,211,0.92)"/><circle r="6" fill="rgba(252,218,226,0.94)"/><circle r="1.6" fill="rgba(180,84,110,0.9)"/></g>
+      <g transform="translate(150,22)"><circle r="9" fill="rgba(248,197,211,0.92)"/><circle r="5" fill="rgba(252,218,226,0.94)"/><circle r="1.5" fill="rgba(180,84,110,0.9)"/></g>
+      <g transform="translate(210,16)"><circle r="8" fill="rgba(248,197,211,0.92)"/><circle r="5" fill="rgba(252,218,226,0.94)"/><circle r="1.5" fill="rgba(180,84,110,0.9)"/></g>
+      <g transform="translate(180,55)"><circle r="7" fill="rgba(248,197,211,0.88)"/><circle r="4" fill="rgba(252,218,226,0.92)"/><circle r="1.4" fill="rgba(180,84,110,0.88)"/></g>
+      <g transform="translate(240,60)"><circle r="8" fill="rgba(248,197,211,0.92)"/><circle r="5" fill="rgba(252,218,226,0.94)"/><circle r="1.5" fill="rgba(180,84,110,0.9)"/></g>
+      <g transform="translate(260,92)"><circle r="7" fill="rgba(248,197,211,0.88)"/><circle r="4" fill="rgba(252,218,226,0.92)"/><circle r="1.4" fill="rgba(180,84,110,0.88)"/></g>
+      <g transform="translate(296,102)"><circle r="6" fill="rgba(248,197,211,0.84)"/><circle r="4" fill="rgba(252,218,226,0.90)"/><circle r="1.3" fill="rgba(180,84,110,0.86)"/></g>
+      <g transform="translate(296,60)"><circle r="6" fill="rgba(248,197,211,0.84)"/><circle r="4" fill="rgba(252,218,226,0.9)"/><circle r="1.3" fill="rgba(180,84,110,0.86)"/></g>
+      <g transform="translate(75,30)"><circle r="6" fill="rgba(248,197,211,0.84)"/><circle r="4" fill="rgba(252,218,226,0.9)"/><circle r="1.3" fill="rgba(180,84,110,0.86)"/></g>
+    </g>
+  </svg>
+</div>
+
+<!-- Drifting petals -->
 <div class="petals" aria-hidden="true">
-  <span class="petal" style="left:6%;  animation-duration:22s; animation-delay:-2s;"></span>
-  <span class="petal" style="left:14%; animation-duration:28s; animation-delay:-12s;"></span>
-  <span class="petal" style="left:24%; animation-duration:30s; animation-delay:-18s;"></span>
-  <span class="petal" style="left:38%; animation-duration:24s; animation-delay:-5s;"></span>
-  <span class="petal" style="left:48%; animation-duration:34s; animation-delay:-22s;"></span>
-  <span class="petal" style="left:62%; animation-duration:26s; animation-delay:-9s;"></span>
-  <span class="petal" style="left:74%; animation-duration:32s; animation-delay:-16s;"></span>
-  <span class="petal" style="left:86%; animation-duration:28s; animation-delay:-26s;"></span>
+  <span class="petal" style="left:6%;  animation-duration:24s; animation-delay:-2s;"></span>
+  <span class="petal" style="left:14%; animation-duration:30s; animation-delay:-14s;"></span>
+  <span class="petal" style="left:22%; animation-duration:28s; animation-delay:-20s; width:7px; height:5px;"></span>
+  <span class="petal" style="left:32%; animation-duration:34s; animation-delay:-5s;"></span>
+  <span class="petal" style="left:44%; animation-duration:26s; animation-delay:-22s; width:10px; height:8px;"></span>
+  <span class="petal" style="left:56%; animation-duration:32s; animation-delay:-9s;"></span>
+  <span class="petal" style="left:64%; animation-duration:28s; animation-delay:-16s;"></span>
+  <span class="petal" style="left:76%; animation-duration:36s; animation-delay:-11s; width:7px; height:5px;"></span>
+  <span class="petal" style="left:86%; animation-duration:30s; animation-delay:-26s;"></span>
   <span class="petal" style="left:94%; animation-duration:24s; animation-delay:-3s;"></span>
 </div>
 
@@ -53,6 +78,7 @@
   <div class="nav-links">
     <a href="privacy.html">Privacy</a>
     <a href="support.html">Support</a>
+    <a href="terms.html">Terms</a>
   </div>
 </nav>
 
@@ -62,7 +88,6 @@
   <header class="hero">
     <div class="eyebrow">墨 · 線 · sumi-e knot puzzle</div>
     <div class="enso" aria-hidden="true">
-      <!-- Three-layer enso brushmark, matching the in-app menu -->
       <svg viewBox="0 0 100 100">
         <g fill="none" stroke="rgba(28,20,16,0.10)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
           <path d="M 78 18 C 50 14, 22 30, 18 56 C 16 84, 42 92, 60 92 C 84 88, 88 60, 84 42 C 80 28, 72 22, 64 22"/>
@@ -85,17 +110,23 @@
     </p>
 
     <div class="store-badges">
-      <a class="store-badge" href="#" aria-label="Download on the App Store">
-        <span>Download</span>
-        <span class="platform">on the App Store</span>
-      </a>
-      <a class="store-badge" href="#" aria-label="Get it on Google Play">
-        <span>Get it on</span>
-        <span class="platform">Google Play</span>
-      </a>
+      <span class="store-badge coming" aria-label="Coming soon to the App Store">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.06 17.51c-.34.78-.74 1.5-1.21 2.16-.64.9-1.16 1.52-1.57 1.87-.62.57-1.29.86-2 .88-.51 0-1.12-.15-1.84-.44-.72-.29-1.38-.44-1.99-.44-.64 0-1.32.15-2.04.44-.72.29-1.31.45-1.75.46-.68.03-1.36-.27-2.04-.91-.44-.38-.99-1.02-1.65-1.93C2.27 18.6 1.7 17.51 1.27 16.3.81 15 .58 13.74.58 12.51c0-1.4.3-2.62.91-3.64.48-.83 1.12-1.48 1.93-1.96.81-.48 1.69-.72 2.63-.74.55 0 1.27.17 2.18.5.91.34 1.49.51 1.75.51.19 0 .82-.2 1.89-.59C13.06 6.25 13.93 6.1 14.6 6.16c1.85.15 3.24.88 4.17 2.2-1.66 1.01-2.48 2.42-2.46 4.23.02 1.41.53 2.59 1.52 3.52.45.43.95.76 1.51 1-.12.35-.25.69-.39 1.01zM14.74 0c.05.94-.27 1.82-.96 2.64-.83.97-1.84 1.53-2.94 1.44C10.83 3.32 11.17 2.37 11.78 1.5c.32-.45.72-.83 1.21-1.13.49-.3.95-.46 1.39-.49.04.04.05.08.05.13z"/></svg>
+        <span class="store-badge-text">
+          <span class="store-badge-eyebrow">Coming soon to</span>
+          <span class="store-badge-label">App&nbsp;Store</span>
+        </span>
+      </span>
+      <span class="store-badge coming" aria-label="Coming soon to Google Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="3.5,20.5 14.5,9.5 18,13 6.5,23.5" transform="translate(0,-3)"/><polygon points="3.5,3.5 14.5,14.5 18,11 6.5,0.5" transform="translate(0,-3)"/><polygon points="3.5,3.5 3.5,20.5 12,12" transform="translate(0,-3)"/><polygon points="14.5,9.5 14.5,14.5 19.5,12" transform="translate(0,-3)"/></svg>
+        <span class="store-badge-text">
+          <span class="store-badge-eyebrow">Coming soon to</span>
+          <span class="store-badge-label">Google&nbsp;Play</span>
+        </span>
+      </span>
     </div>
-    <p style="margin-top:14px; font-style:italic; font-size:13px; color:var(--ink-faint); letter-spacing:var(--tr-body);">
-      Coming soon to iPhone, iPad, and Android.
+    <p class="coming-note">
+      iPhone · iPad · Android — designed for portrait, calm in landscape on tablets.
     </p>
   </header>
 
@@ -106,7 +137,7 @@
     <p class="lede">
       Inkline is a meditative knot-untangling puzzle, drawn in ink on washi paper. Drag any point on the tangled strand. Remove every crossing. When the last knot resolves, the rope settles into a sumi-e form — a mountain, a crane, a folded moon — and a vermillion seal is stamped onto your scroll.
     </p>
-    <p class="lede" style="font-size:17px; color:var(--ink-faint);">
+    <p class="lede muted">
       There is no timer. No score. No streak. No ads. Nothing is chasing you.
     </p>
   </section>
@@ -120,31 +151,31 @@
     <ul class="scrolls">
       <li>
         <span class="glyph">山</span>
-        <span class="body"><strong>Mountain.</strong> <em>The first scroll. A gentle introduction.</em></span>
+        <span class="body"><strong>Mountain</strong><em>The first scroll. A gentle introduction.</em></span>
       </li>
       <li>
         <span class="glyph">川</span>
-        <span class="body"><strong>River.</strong> <em>Bending water, returning currents.</em></span>
+        <span class="body"><strong>River</strong><em>Bending water, returning currents.</em></span>
       </li>
       <li>
         <span class="glyph">鶴</span>
-        <span class="body"><strong>Crane.</strong> <em>Folded wings, the bird in flight.</em></span>
+        <span class="body"><strong>Crane</strong><em>Folded wings, the bird in flight.</em></span>
       </li>
       <li>
         <span class="glyph">竹</span>
-        <span class="body"><strong>Bamboo.</strong> <em>Hollow stems and quiet wind.</em></span>
+        <span class="body"><strong>Bamboo</strong><em>Hollow stems and quiet wind.</em></span>
       </li>
       <li>
         <span class="glyph">月</span>
-        <span class="body"><strong>Moon.</strong> <em>The full circle, the crescent, the void.</em></span>
+        <span class="body"><strong>Moon</strong><em>The full circle, the crescent, the void.</em></span>
       </li>
       <li>
         <span class="glyph">静</span>
-        <span class="body"><strong>Stillness.</strong> <em>The final scroll. Calligraphy held in the breath.</em></span>
+        <span class="body"><strong>Stillness</strong><em>The final scroll. Calligraphy held in the breath.</em></span>
       </li>
     </ul>
-    <p style="text-align:center; font-style:italic; color:var(--ink-faint); margin-top:24px; font-size:14px;">
-      108 procedurally generated puzzles in each scroll. Never the same untangling twice.
+    <p class="scrolls-foot">
+      一百八 · 108 procedurally generated puzzles in each scroll
     </p>
   </section>
 
@@ -156,19 +187,19 @@
     <p class="section-sub">painted by hand, frame by frame</p>
     <div class="shots">
       <div class="shot">
-        <div class="shot-frame"><img src="screenshot-menu.png" alt="Inkline main menu with enso brushmark, river-stone buttons, and a calligraphic landscape"></div>
+        <div class="phone-frame"><div class="screen"><img src="screenshot-menu.png" alt="Inkline main menu with enso brushmark, river-stone buttons, and a calligraphic landscape"></div></div>
         <div class="shot-caption">Begin where you left off, or open a new scroll.</div>
       </div>
       <div class="shot">
-        <div class="shot-frame"><img src="screenshot-game.png" alt="A tangled rope in mid-puzzle with red crossing markers"></div>
+        <div class="phone-frame"><div class="screen"><img src="screenshot-game.png" alt="A tangled rope mid-puzzle with red crossing markers pulsing softly"></div></div>
         <div class="shot-caption">Find each crossing. Resolve them one at a time.</div>
       </div>
       <div class="shot">
-        <div class="shot-frame"><img src="screenshot-chapters.png" alt="Hanging scroll cards for the Mountain and River chapters"></div>
+        <div class="phone-frame"><div class="screen"><img src="screenshot-chapters.png" alt="Hanging scroll cards for the Mountain and River chapters"></div></div>
         <div class="shot-caption">Six chapters, each a scroll of forms.</div>
       </div>
       <div class="shot">
-        <div class="shot-frame"><img src="screenshot-garden.png" alt="The hanging scroll garden with a single mountain stroke placed"></div>
+        <div class="phone-frame"><div class="screen"><img src="screenshot-garden.png" alt="The Garden hanging scroll with a single mountain stroke placed"></div></div>
         <div class="shot-caption">Every solve becomes a stroke in your garden.</div>
       </div>
     </div>
@@ -180,14 +211,14 @@
   <section>
     <div class="featurette">
       <div class="featurette-art">
-        <img src="screenshot-garden.png" alt="The Garden hanging scroll, slowly accumulating brush strokes">
+        <div class="phone-frame"><div class="screen"><img src="screenshot-garden.png" alt="The Garden hanging scroll, slowly accumulating brush strokes"></div></div>
       </div>
       <div class="featurette-text">
         <h3>The Garden</h3>
         <p>
           Every form you reveal becomes a brush stroke in a single sumi-e composition — a hanging scroll that grows with you across weeks and months. The mountains rise where you placed them. The crane flies through air you brushed open.
         </p>
-        <p>
+        <p class="featurette-pull">
           By the time the scroll is full, you have painted it.
         </p>
       </div>
@@ -195,30 +226,30 @@
 
     <div class="featurette right">
       <div class="featurette-art">
-        <img src="screenshot-game.png" alt="A complex daily knot puzzle with seven crossings remaining">
+        <div class="phone-frame"><div class="screen"><img src="screenshot-game.png" alt="A complex daily knot puzzle with seven crossings remaining"></div></div>
       </div>
       <div class="featurette-text">
         <h3>The Daily Knot</h3>
         <p>
           One new puzzle each day, the same one for every player worldwide. A small ritual — a haiku, in tangle form. The day's micro-season is whispered above it.
         </p>
-        <p>
-          No streaks to maintain. No popup if you miss one. Just today's strand, waiting for you when you have a moment.
+        <p class="featurette-pull">
+          No streaks to maintain. No popup if you miss one.
         </p>
       </div>
     </div>
 
     <div class="featurette">
       <div class="featurette-art">
-        <img src="screenshot-menu.png" alt="The Inkline main menu with the cherry blossom and pine atmosphere">
+        <div class="phone-frame"><div class="screen"><img src="screenshot-menu.png" alt="The Inkline main menu with the cherry blossom and pine atmosphere"></div></div>
       </div>
       <div class="featurette-text">
         <h3>Drawn, not generated</h3>
         <p>
           Every brush stroke is hand-drawn vector calligraphy. Every sound is procedurally synthesized — a koto-like pluck on every untie, a quiet ambient bed of pentatonic notes if you want it.
         </p>
-        <p>
-          Every shape resolves into a real Japanese kanji or sumi-e motif. No stock images. No generated art. Just ink, on paper.
+        <p class="featurette-pull">
+          No stock images. No generated art. Just ink, on paper.
         </p>
       </div>
     </div>
@@ -267,6 +298,7 @@
   <div class="footer-links">
     <a href="privacy.html">Privacy</a>
     <a href="support.html">Support</a>
+    <a href="terms.html">Terms</a>
     <a href="mailto:playpalapps2024@gmail.com">Contact</a>
     <a href="https://playpalapps.github.io/">All Apps</a>
   </div>

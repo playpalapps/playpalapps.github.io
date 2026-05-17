@@ -13,6 +13,22 @@
 </head>
 <body>
 
+<div class="atmosphere-branch" aria-hidden="true">
+  <svg viewBox="0 0 320 240">
+    <g fill="none" stroke="rgba(40,24,16,0.6)" stroke-width="2.2" stroke-linecap="round">
+      <path d="M -8 8 Q 60 38 130 50 Q 200 56 270 64 Q 300 66 320 60"/>
+      <path d="M 110 48 Q 130 30 150 22 Q 180 14 210 16"/>
+    </g>
+    <g>
+      <g transform="translate(110,48)"><circle r="9" fill="rgba(248,197,211,0.86)"/><circle r="5" fill="rgba(252,218,226,0.9)"/><circle r="1.5" fill="rgba(180,84,110,0.86)"/></g>
+      <g transform="translate(150,22)"><circle r="8" fill="rgba(248,197,211,0.84)"/><circle r="5" fill="rgba(252,218,226,0.88)"/><circle r="1.5" fill="rgba(180,84,110,0.84)"/></g>
+      <g transform="translate(210,16)"><circle r="7" fill="rgba(248,197,211,0.80)"/><circle r="4" fill="rgba(252,218,226,0.86)"/><circle r="1.4" fill="rgba(180,84,110,0.80)"/></g>
+      <g transform="translate(240,60)"><circle r="7" fill="rgba(248,197,211,0.80)"/><circle r="4" fill="rgba(252,218,226,0.86)"/><circle r="1.4" fill="rgba(180,84,110,0.80)"/></g>
+      <g transform="translate(180,55)"><circle r="6" fill="rgba(248,197,211,0.78)"/><circle r="4" fill="rgba(252,218,226,0.82)"/><circle r="1.3" fill="rgba(180,84,110,0.78)"/></g>
+    </g>
+  </svg>
+</div>
+
 <nav class="topbar">
   <a href="/Inkline/" class="brand">
     <span class="brand-mark"><img src="icon.png" alt=""></span>
@@ -21,26 +37,32 @@
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="privacy.html">Privacy</a>
+    <a href="support.html" class="is-active">Support</a>
     <a href="terms.html">Terms</a>
   </div>
 </nav>
 
 <main class="page page-narrow prose">
 
-  <div class="eyebrow">written to a human, read by a human</div>
-  <h1>Support</h1>
+  <header class="page-header">
+    <div class="eyebrow">written to a human, read by a human</div>
+    <h1>Support</h1>
+  </header>
   <div class="brush-rule"></div>
 
-  <p style="text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin: 24px auto 8px; max-width:560px;">
-    The easiest way to reach us is by email. We try to reply within a day or two — sometimes the same hour, sometimes the next morning, but we always do.
-  </p>
-  <p style="text-align:center; font-size:22px; margin: 28px 0 40px;">
-    <a class="email" href="mailto:playpalapps2024@gmail.com?subject=Inkline%20support">
+  <!-- Contact card — the primary affordance, top of the page -->
+  <div class="contact-card">
+    <div class="contact-eyebrow">the easiest way to reach us</div>
+    <a class="email contact-email" href="mailto:playpalapps2024@gmail.com?subject=Inkline%20support">
       playpalapps2024@gmail.com
     </a>
-  </p>
+    <p class="contact-note">
+      We try to reply within a day or two — sometimes the same hour, sometimes the next morning. We don't use ticketing systems or auto-replies. You'll hear back from a person.
+    </p>
+  </div>
 
-  <h2>Frequently asked</h2>
+  <h2 style="text-align:center; padding-left:0; margin-top: 48px;">Frequently asked</h2>
+  <p class="section-sub" style="margin-bottom: 16px;">tap a question to read the answer</p>
 
   <div class="faq">
 
@@ -96,13 +118,10 @@
     <details class="faq-item">
       <summary>I'd like a refund.</summary>
       <div class="answer">
-        Refunds for the in-app purchase are issued by Apple or Google directly — not by us, because we never see your payment. Use the appropriate flow:
-        <br><br>
-        <strong>Apple (iPhone / iPad):</strong> <a class="inline-link" href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a> · Sign in with your Apple ID, find the Inkline purchase, request a refund.
-        <br><br>
-        <strong>Google (Android):</strong> <a class="inline-link" href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener">Play refund flow</a> · Order History → Inkline → Request refund.
-        <br><br>
-        We're happy to help guide you through it if you write to us, but the refund itself is processed on the platform side.
+        <p>Refunds for the in-app purchase are issued by Apple or Google directly — not by us, because we never see your payment. Use the appropriate flow:</p>
+        <p><strong>Apple (iPhone / iPad):</strong> <a class="inline-link" href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a> — sign in with your Apple ID, find the Inkline purchase, request a refund.</p>
+        <p><strong>Google (Android):</strong> <a class="inline-link" href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener">Play refund flow</a> — Order History → Inkline → Request refund.</p>
+        <p>We're happy to help guide you through it if you write to us, but the refund itself is processed on the platform side.</p>
       </div>
     </details>
 
@@ -166,15 +185,14 @@
 
   <div class="brush-rule"></div>
 
-  <h2>Still need help?</h2>
-  <p style="text-align:center; margin-bottom: 12px;">
-    Write to <a class="email" href="mailto:playpalapps2024@gmail.com?subject=Inkline%20support">playpalapps2024@gmail.com</a>.
+  <p style="text-align:center; margin-bottom: 12px; font-size: var(--t-body);">
+    Still need help? Write to <a class="email" href="mailto:playpalapps2024@gmail.com?subject=Inkline%20support">playpalapps2024@gmail.com</a>.
   </p>
-  <p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:14px;">
-    We are a small team. We don't use ticketing systems or auto-replies. You'll hear back from a human.
+  <p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size: var(--t-meta); letter-spacing: var(--tr-body);">
+    We are a small team. We don't use ticketing systems or auto-replies.
   </p>
 
-  <em class="signoff">Thank you for playing Inkline. — Playpal Apps</em>
+  <em class="signoff">Thank you for playing Inkline · Playpal Apps</em>
 
 </main>
 

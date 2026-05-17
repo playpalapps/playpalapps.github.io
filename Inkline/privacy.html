@@ -13,6 +13,22 @@
 </head>
 <body>
 
+<div class="atmosphere-branch" aria-hidden="true">
+  <svg viewBox="0 0 320 240">
+    <g fill="none" stroke="rgba(40,24,16,0.6)" stroke-width="2.2" stroke-linecap="round">
+      <path d="M -8 8 Q 60 38 130 50 Q 200 56 270 64 Q 300 66 320 60"/>
+      <path d="M 110 48 Q 130 30 150 22 Q 180 14 210 16"/>
+    </g>
+    <g>
+      <g transform="translate(110,48)"><circle r="9" fill="rgba(248,197,211,0.86)"/><circle r="5" fill="rgba(252,218,226,0.9)"/><circle r="1.5" fill="rgba(180,84,110,0.86)"/></g>
+      <g transform="translate(150,22)"><circle r="8" fill="rgba(248,197,211,0.84)"/><circle r="5" fill="rgba(252,218,226,0.88)"/><circle r="1.5" fill="rgba(180,84,110,0.84)"/></g>
+      <g transform="translate(210,16)"><circle r="7" fill="rgba(248,197,211,0.80)"/><circle r="4" fill="rgba(252,218,226,0.86)"/><circle r="1.4" fill="rgba(180,84,110,0.80)"/></g>
+      <g transform="translate(240,60)"><circle r="7" fill="rgba(248,197,211,0.80)"/><circle r="4" fill="rgba(252,218,226,0.86)"/><circle r="1.4" fill="rgba(180,84,110,0.80)"/></g>
+      <g transform="translate(180,55)"><circle r="6" fill="rgba(248,197,211,0.78)"/><circle r="4" fill="rgba(252,218,226,0.82)"/><circle r="1.3" fill="rgba(180,84,110,0.78)"/></g>
+    </g>
+  </svg>
+</div>
+
 <nav class="topbar">
   <a href="/Inkline/" class="brand">
     <span class="brand-mark"><img src="icon.png" alt=""></span>
@@ -20,164 +36,162 @@
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
+    <a href="privacy.html" class="is-active">Privacy</a>
     <a href="support.html">Support</a>
     <a href="terms.html">Terms</a>
   </div>
 </nav>
 
-<main class="page page-narrow prose">
+<main class="page page-with-toc prose">
 
-  <div class="eyebrow">a short note, in plain words</div>
-  <h1>Privacy</h1>
-  <div class="brush-rule"></div>
+  <aside class="toc" aria-label="Sections">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#collect">Data we collect</a></li>
+      <li><a href="#share">Data we share</a></li>
+      <li><a href="#local">Stored on your device</a></li>
+      <li><a href="#apple">Apple nutrition label</a></li>
+      <li><a href="#google">Google Data Safety</a></li>
+      <li><a href="#children">Children's privacy</a></li>
+      <li><a href="#iap">In-app purchases</a></li>
+      <li><a href="#tracking">Tracking</a></li>
+      <li><a href="#permissions">Permissions</a></li>
+      <li><a href="#rights">Your rights</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </aside>
 
-  <p style="text-align:center; font-style:italic; font-size:20px; color:var(--ink); margin: 24px auto 32px; max-width:520px;">
-    <strong>Inkline collects nothing.</strong>
-  </p>
+  <div>
 
-  <p>
-    Inkline ("the app", "we") is published by Playpal Apps. We do not collect,
-    transmit to a server, store on a server, share, or sell any personal
-    information about you. The app runs entirely on your device. This page
-    describes the same posture in the formal language Apple's App Store and
-    Google Play's Data Safety section ask for.
-  </p>
+    <header class="page-header">
+      <div class="eyebrow">a short note, in plain words</div>
+      <h1>Privacy</h1>
+    </header>
+    <div class="brush-rule"></div>
 
-  <h2>Data we collect</h2>
-  <p>
-    None. Inkline does not collect, transmit, or store any data about you
-    or your use of the app on any server we control.
-  </p>
+    <p class="lede" style="margin: 16px auto 28px;">
+      <strong>Inkline collects nothing.</strong>
+    </p>
 
-  <h2>Data we share with third parties</h2>
-  <p>
-    None. We have no analytics SDKs, no advertising SDKs, no crash-reporting
-    SDKs, and no third-party services collecting data on our behalf.
-  </p>
+    <p>
+      Inkline ("the app", "we") is published by Playpal Apps. We do not collect, transmit to a server, store on a server, share, or sell any personal information about you. The app runs entirely on your device. This page describes the same posture in the formal language Apple's App Store and Google Play's Data Safety section ask for.
+    </p>
 
-  <h2>Data stored locally on your device</h2>
-  <p>
-    The following is saved on your device only, using your phone's secure
-    preferences storage. None of it is transmitted anywhere:
-  </p>
-  <ul>
-    <li>Which puzzles you've solved, in which chapters.</li>
-    <li>Which sumi-e forms have been revealed and placed in your Garden.</li>
-    <li>Your audio, music, haptics, target-shape, and reduce-motion preferences.</li>
-    <li>The last puzzle you played (for the Continue button).</li>
-    <li>A flag for whether you've completed first-launch onboarding.</li>
-    <li>Whether each chapter's cinematic intro has been seen.</li>
-    <li>The date keys of any Daily Knots you have solved.</li>
-  </ul>
-  <p>
-    If you delete the app, all of the above is deleted with it. There is no
-    cloud backup, no remote save, and no recoverable history. <strong>The
-    trade-off for collecting no data about you is that we can't help recover
-    it later.</strong>
-  </p>
+    <section id="collect">
+      <h2>Data we collect</h2>
+      <p>None. Inkline does not collect, transmit, or store any data about you or your use of the app on any server we control.</p>
+    </section>
 
-  <h2>Apple App Privacy nutrition label</h2>
-  <p>
-    The label that appears on Inkline's App Store listing is, in full:
-  </p>
-  <ul>
-    <li><strong>Data Not Collected.</strong> The developer does not collect any data from this app.</li>
-  </ul>
-  <p>
-    This is true at every privacy category Apple defines — contact info,
-    health and fitness, financial info, location, sensitive info, contacts,
-    user content, search and browsing history, identifiers, purchases, usage
-    data, diagnostics, and "other data". Inkline collects none of them.
-  </p>
+    <section id="share">
+      <h2>Data we share with third parties</h2>
+      <p>None. We have no analytics SDKs, no advertising SDKs, no crash-reporting SDKs, and no third-party services collecting data on our behalf.</p>
+    </section>
 
-  <h2>Google Play Data Safety disclosure</h2>
-  <ul>
-    <li><strong>Does the app collect or share any of the required user data types?</strong> No.</li>
-    <li><strong>Is all of the user data collected by your app encrypted in transit?</strong> No data is collected, so this requirement does not apply. The only network requests Inkline makes are to Google Play Billing, which is governed by Google's own security.</li>
-    <li><strong>Do you provide a way for users to request that their data be deleted?</strong> Locally stored data is removed when the app is uninstalled. No personal data is held on our servers, because we have no servers.</li>
-    <li><strong>Is the app independently validated against a global security standard?</strong> Not applicable — there is no data to secure beyond what the operating system protects.</li>
-  </ul>
+    <section id="local">
+      <h2>Data stored locally on your device</h2>
+      <p>
+        The following is saved on your device only, using your phone's secure preferences storage. None of it is transmitted anywhere:
+      </p>
+      <ul>
+        <li>Which puzzles you've solved, in which chapters.</li>
+        <li>Which sumi-e forms have been revealed and placed in your Garden.</li>
+        <li>Your audio, music, haptics, target-shape, and reduce-motion preferences.</li>
+        <li>The last puzzle you played (for the Continue button).</li>
+        <li>A flag for whether you've completed first-launch onboarding.</li>
+        <li>Whether each chapter's cinematic intro has been seen.</li>
+        <li>The date keys of any Daily Knots you have solved.</li>
+      </ul>
+      <p>
+        If you delete the app, all of the above is deleted with it. There is no cloud backup, no remote save, and no recoverable history. <strong>The trade-off for collecting no data about you is that we can't help recover it later.</strong>
+      </p>
+    </section>
 
-  <h2>Children's privacy</h2>
-  <p>
-    Inkline is suitable for all ages, rated <strong>4+ / Everyone / PEGI 3</strong>,
-    and contains no text input, no chat, no advertising, and no objectionable
-    content. Because the app collects no personal information from any user,
-    no parental consent or age gate is required. We comply with the U.S. COPPA
-    rule and the EU's GDPR-K provisions for children's data by collecting
-    nothing.
-  </p>
+    <section id="apple">
+      <h2>Apple App Privacy nutrition label</h2>
+      <p>The label that appears on Inkline's App Store listing is, in full:</p>
+      <ul>
+        <li><strong>Data Not Collected.</strong> The developer does not collect any data from this app.</li>
+      </ul>
+      <p>
+        This is true at every privacy category Apple defines — contact info, health and fitness, financial info, location, sensitive info, contacts, user content, search and browsing history, identifiers, purchases, usage data, diagnostics, and "other data". Inkline collects none of them.
+      </p>
+    </section>
 
-  <h2>In-app purchases</h2>
-  <p>
-    Inkline includes one optional in-app purchase, processed by Apple's
-    In-App Purchase service on iOS and Google Play Billing on Android.
-    Inkline itself does not see, store, or transmit any of your payment
-    details — those are handled by Apple and Google directly under their
-    privacy policies:
-  </p>
-  <ul>
-    <li>Apple — <a class="inline-link" href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></li>
-    <li>Google — <a class="inline-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
-  </ul>
-  <p>
-    Inkline only receives a yes/no flag from these services indicating whether
-    the unlock has been purchased on your account. That flag is stored locally
-    on your device alongside the rest of your save data, and never leaves it.
-  </p>
-  <p>
-    Refund or cancellation requests for the in-app purchase are handled by
-    Apple or Google, not by us. See
-    <a class="inline-link" href="https://support.apple.com/en-us/HT204084" target="_blank" rel="noopener">Apple's refund flow</a>
-    or
-    <a class="inline-link" href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener">Google Play's refund flow</a>
-    — Inkline has no way to issue, deny, or process refunds directly.
-  </p>
+    <section id="google">
+      <h2>Google Play Data Safety disclosure</h2>
+      <ul>
+        <li><strong>Does the app collect or share any of the required user data types?</strong> No.</li>
+        <li><strong>Is all of the user data collected by your app encrypted in transit?</strong> No data is collected, so this requirement does not apply. The only network requests Inkline makes are to Google Play Billing, which is governed by Google's own security.</li>
+        <li><strong>Do you provide a way for users to request that their data be deleted?</strong> Locally stored data is removed when the app is uninstalled. No personal data is held on our servers, because we have no servers.</li>
+        <li><strong>Is the app independently validated against a global security standard?</strong> Not applicable — there is no data to secure beyond what the operating system protects.</li>
+      </ul>
+    </section>
 
-  <h2>Tracking</h2>
-  <p>
-    Inkline does not track you across apps or websites owned by other
-    companies. It does not request Apple's App Tracking Transparency permission
-    because it does not track. There are no advertising identifiers, no SDK
-    fingerprinting, and no analytics.
-  </p>
+    <section id="children">
+      <h2>Children's privacy</h2>
+      <p>
+        Inkline is suitable for all ages, rated <strong>4+ / Everyone / PEGI 3</strong>, and contains no text input, no chat, no advertising, and no objectionable content. Because the app collects no personal information from any user, no parental consent or age gate is required. We comply with the U.S. COPPA rule and the EU's GDPR-K provisions for children's data by collecting nothing.
+      </p>
+    </section>
 
-  <h2>Permissions Inkline asks for</h2>
-  <p>
-    Only the basic capability to access the internet (so the in-app purchase
-    can be verified) and to vibrate (for the optional haptic feedback you can
-    toggle in Settings). Inkline does not request location, contacts, camera,
-    microphone, photos, calendar, notifications, files, or any other sensitive
-    permission.
-  </p>
+    <section id="iap">
+      <h2>In-app purchases</h2>
+      <p>
+        Inkline includes one optional in-app purchase, processed by Apple's In-App Purchase service on iOS and Google Play Billing on Android. Inkline itself does not see, store, or transmit any of your payment details — those are handled by Apple and Google directly under their privacy policies:
+      </p>
+      <ul>
+        <li>Apple — <a class="inline-link" href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></li>
+        <li>Google — <a class="inline-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+      </ul>
+      <p>
+        Inkline only receives a yes/no flag from these services indicating whether the unlock has been purchased on your account. That flag is stored locally on your device alongside the rest of your save data, and never leaves it.
+      </p>
+      <p>
+        Refund or cancellation requests for the in-app purchase are handled by Apple or Google, not by us. See <a class="inline-link" href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">Apple's refund flow</a> or <a class="inline-link" href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener">Google Play's refund flow</a> — Inkline has no way to issue, deny, or process refunds directly.
+      </p>
+    </section>
 
-  <h2>Your rights under GDPR / CCPA / similar laws</h2>
-  <p>
-    Because Inkline collects no personal information, there is no profile to
-    access, correct, port, delete, or restrict processing of. You exercise the
-    right of deletion at any time by uninstalling the app.
-  </p>
+    <section id="tracking">
+      <h2>Tracking</h2>
+      <p>
+        Inkline does not track you across apps or websites owned by other companies. It does not request Apple's App Tracking Transparency permission because it does not track. There are no advertising identifiers, no SDK fingerprinting, and no analytics.
+      </p>
+    </section>
 
-  <h2>Changes to this policy</h2>
-  <p>
-    If we ever change this policy in a material way, we'll update the "last
-    updated" date at the bottom and note what changed. Inkline's design intent
-    is to never collect your data — we expect this policy to stay essentially
-    the same for as long as the app exists.
-  </p>
+    <section id="permissions">
+      <h2>Permissions Inkline asks for</h2>
+      <p>
+        Only the basic capability to access the internet (so the in-app purchase can be verified) and to vibrate (for the optional haptic feedback you can toggle in Settings). Inkline does not request location, contacts, camera, microphone, photos, calendar, notifications, files, or any other sensitive permission.
+      </p>
+    </section>
 
-  <h2>Contact</h2>
-  <p>
-    Questions or concerns about privacy in Inkline?
-    Write to <a class="email" href="mailto:playpalapps2024@gmail.com">playpalapps2024@gmail.com</a>.
-    We read every email and reply in plain words.
-  </p>
+    <section id="rights">
+      <h2>Your rights under GDPR / CCPA / similar laws</h2>
+      <p>
+        Because Inkline collects no personal information, there is no profile to access, correct, port, delete, or restrict processing of. You exercise the right of deletion at any time by uninstalling the app.
+      </p>
+    </section>
 
-  <em class="signoff">Thank you for reading. — Inkline · Playpal Apps</em>
+    <section id="changes">
+      <h2>Changes to this policy</h2>
+      <p>
+        If we ever change this policy in a material way, we'll update the "last updated" date at the bottom and note what changed. Inkline's design intent is to never collect your data — we expect this policy to stay essentially the same for as long as the app exists.
+      </p>
+    </section>
 
-  <p style="text-align:center; font-size:12px; color:var(--ink-faint); font-style:italic; margin-top:36px; letter-spacing:var(--tr-eyebrow); text-transform:uppercase;">
-    Last updated 17 May 2026 · v1.0
-  </p>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        Questions or concerns about privacy in Inkline? Write to <a class="email" href="mailto:playpalapps2024@gmail.com">playpalapps2024@gmail.com</a>. We read every email and reply in plain words.
+      </p>
+    </section>
+
+    <em class="signoff">Thank you for reading · Inkline · Playpal Apps</em>
+
+    <p class="meta-stamp">Last updated 17 May 2026 · v1.0</p>
+
+  </div>
 
 </main>
 
