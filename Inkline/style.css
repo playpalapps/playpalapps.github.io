@@ -345,18 +345,32 @@ nav.topbar .nav-links a.is-active {
   margin-bottom: 22px;
 }
 .hero .enso {
+  /* The SVG path uses viewBox 0 0 100 100, but the wet-halo stroke (width 22)
+     paints to y≈103 — beyond the viewBox. We do TWO things to keep the bottom
+     of the brush visible: */
+  /* 1. The .enso box is a touch taller than wide, giving the halo room. */
   width: clamp(140px, 22vw, 196px);
-  height: clamp(140px, 22vw, 196px);
+  height: clamp(150px, 24vw, 212px);
   margin: 0 auto 12px;
   position: relative;
   animation: enso-breath 7s ease-in-out infinite;
   filter: drop-shadow(0 6px 18px rgba(60, 40, 20, 0.22));
+  /* 2. Allow the SVG to paint outside the box (some browsers respect this
+        even when overflow is the default 'hidden' for SVG). */
+  overflow: visible;
 }
 @keyframes enso-breath {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.025); }
 }
-.hero .enso svg { width: 100%; height: 100%; display: block; }
+.hero .enso svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Critical: allow the brush-halo stroke to spill out of the SVG's
+     declared viewBox so the bottom of the ring isn't clipped. */
+  overflow: visible;
+}
 .hero h1 {
   font-family: var(--serif);
   font-size: var(--t-display);
