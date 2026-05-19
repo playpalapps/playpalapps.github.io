@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playpal Apps — Apps you'll actually love</title>
-  <meta name="description" content="Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand. Free on iOS and Android.">
+  <meta name="description" content="Beautifully crafted mobile apps and games for play, work, and rest. Built solo with AI, polished by hand. Free on iOS and Android.">
 
   <!-- Open Graph -->
   <meta property="og:type"         content="website">
@@ -234,10 +234,28 @@
     }
     /* Featured Utilify spans full width (hero strip) */
     .app-utilify { grid-column: 1 / -1; }
-    /* Other 9 cards = standard 1-col cards in 3x3 grid */
+    /* All other cards = standard 1-col cards in 3-col grid */
     .app-canwasa, .app-nightbloom, .app-palettely, .app-hydropanda,
-    .app-paperlens, .app-astroorbit, .app-mergerise,
-    .app-fuzzypop, .app-tzc, .app-qito, .app-inkline { grid-column: span 1; }
+    .app-paperlens, .app-astroorbit, .app-mergerise, .app-tooltrunk,
+    .app-fuzzypop, .app-tzc, .app-qito, .app-inkline, .app-pippet { grid-column: span 1; }
+    /* Sub-section eyebrow inside apps section (Apps / Games) */
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.78rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--text); margin-top: 64px; margin-bottom: 28px;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 32px; height: 2px;
+      background: linear-gradient(90deg, var(--c1), var(--c6)); border-radius: 2px;
+    }
+    .section-eyebrow .count {
+      font-size: 0.72rem; font-weight: 600; color: var(--muted); letter-spacing: 2px;
+      margin-left: 4px;
+    }
+    /* "iPhone only" badge for single-store cards (Pippet) */
+    .store-mini.ios-only {
+      opacity: .55; pointer-events: none; cursor: default; white-space: nowrap;
+    }
     /* DARK premium app cards — vibrant accents, content pops */
     .app-card {
       position: relative; border-radius: 24px; overflow: hidden;
@@ -358,6 +376,7 @@
     .app-qito       { background: linear-gradient(135deg, #2A2A33 0%, #08080E 100%); --app-glow: rgba(161,161,170,0.4); }
     .app-tooltrunk  { background: linear-gradient(135deg, #1E1252 0%, #05021A 100%); --app-glow: rgba(106,78,224,0.55); }
     .app-inkline    { background: linear-gradient(135deg, #ede0c0 0%, #cdb785 100%); --app-glow: rgba(163,45,45,0.45); color: #1c1410; }
+    .app-pippet     { background: linear-gradient(135deg, #2A0E3F 0%, #08020F 100%); --app-glow: rgba(217,70,239,0.55); }
     .app-inkline .app-cat { color: rgba(28,20,16,0.55); }
     .app-inkline .app-name { color: #1c1410; }
     .app-inkline .app-tag-text { color: rgba(28,20,16,0.78); }
@@ -376,6 +395,7 @@
     .app-hydropanda::before { background: linear-gradient(90deg, #00E5FF, #0066FF); }
     .app-tooltrunk::before  { background: linear-gradient(90deg, #9C8BFF, #6A4EE0, #3623A0); }
     .app-inkline::before    { background: linear-gradient(90deg, #1c1410, #a32d2d, #1c1410); }
+    .app-pippet::before     { background: linear-gradient(90deg, #D946EF, #7C3AED, #06B6D4); }
     /* "Coming soon" store-mini variant: visually muted, non-clickable.
        Inline "· Soon" suffix replaced with an absolutely-positioned corner
        pill so the button label can keep its native length without wrapping
@@ -739,7 +759,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#apps">Apps</a></li>
-    <li><a href="#categories">Categories</a></li>
+    <li><a href="#games">Games</a></li>
     <li><a href="#story">Story</a></li>
     <li><a href="#contact" class="nav-cta">Get in touch</a></li>
   </ul>
@@ -806,10 +826,13 @@
   <div class="apps-watermark"><img src="assets/logo.png" alt=""></div>
   <div class="container">
     <div class="reveal" style="max-width:660px;">
-      <div class="eyebrow">The Apps</div>
-      <h2 class="section-title">Every app, every store, <em>all yours.</em></h2>
+      <div class="eyebrow">The Studio</div>
+      <h2 class="section-title">Every app, every game, <em>all yours.</em></h2>
       <p class="section-sub">Each one designed, built, and shipped solo. Tap any card to open the app's page, or jump straight to the App Store or Google Play.</p>
     </div>
+
+    <!-- ── APPS ─────────────────────────────────────────────── -->
+    <div class="section-eyebrow reveal">Apps <span class="count">· 9</span></div>
 
     <div class="apps-bento">
 
@@ -827,21 +850,6 @@
             <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
           <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" onclick="event.stopPropagation()">
             <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
-      <!-- Inkline (1x1) — newest launch -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Inkline/'" class="app-card app-inkline reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/inkline.png" alt="Inkline">
-        <div class="app-meta">
-          <span class="app-cat">Puzzle</span>
-          <div class="app-name">Inkline</div>
-          <div class="app-tag-text">A meditative knot-untangling puzzle, drawn in sumi-e ink on washi paper. 648 forms across six scrolls.</div>
-        </div>
-        <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/inkline-sumi-e-knot-puzzle/id6770247544" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=app.naveen.inkline" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
       </div>
 
@@ -875,7 +883,7 @@
         </div>
       </div>
 
-      <!-- ToolTrunk (1x1) — pre-launch; store buttons rendered as "Soon" -->
+      <!-- ToolTrunk (1x1) -->
       <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/ToolTrunk/'" class="app-card app-tooltrunk reveal">
         <div class="app-card-bg"></div>
         <img class="app-icon-mega" src="icons/tooltrunk.png" alt="ToolTrunk">
@@ -885,12 +893,12 @@
           <div class="app-tag-text">Six precision instruments — level, compass, sound meter, flashlight, ruler, protractor. All on-device.</div>
         </div>
         <div class="app-stores">
-          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
+          <a class="store-mini" href="https://apps.apple.com/us/app/tooltrunk/id6770023691" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.tooltrunk.app" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
       </div>
 
-      <!-- Hydro Panda (1x1) — pre-launch; store buttons rendered as "Soon" -->
+      <!-- Hydro Panda (1x1) -->
       <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/HydroPanda/'" class="app-card app-hydropanda reveal">
         <div class="app-card-bg"></div>
         <img class="app-icon-mega" src="icons/hydropanda.png" alt="Hydro Panda">
@@ -900,8 +908,8 @@
           <div class="app-tag-text">Sip happens. The cutest water tracker — panda fills as you drink.</div>
         </div>
         <div class="app-stores">
-          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <span class="store-mini soon" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
+          <a class="store-mini" href="https://apps.apple.com/us/app/hydro-panda-water-tracker/id6767715315" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveenmercedes.hydra" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
       </div>
 
@@ -932,51 +940,6 @@
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
           <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
-      <!-- Astro Orbit (2x1 wide) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/AstroOrbit/'" class="app-card app-astroorbit reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/astroorbit.png" alt="Astro Orbit">
-        <div class="app-meta">
-          <span class="app-cat">Game · Arcade</span>
-          <div class="app-name">Astro Orbit</div>
-          <div class="app-tag-text">Defy gravity. Hop between orbital rings, dodge cosmic obstacles.</div>
-        </div>
-        <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
-      <!-- MergeRise (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/MergeRise/'" class="app-card app-mergerise reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/mergerise.png" alt="MergeRise">
-        <div class="app-meta">
-          <span class="app-cat">Game · Puzzle</span>
-          <div class="app-name">MergeRise</div>
-          <div class="app-tag-text">2048-style merge puzzle with civilisation building.</div>
-        </div>
-        <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
-      <!-- Fuzzy Pop (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/FuzzyPop/'" class="app-card app-fuzzypop reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/fuzzypop.png" alt="Fuzzy Pop">
-        <div class="app-meta">
-          <span class="app-cat">Game · Family</span>
-          <div class="app-name">Fuzzy Pop</div>
-          <div class="app-tag-text">Child-safe colourful bubble-popping. No ads interrupting fun.</div>
-        </div>
-        <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
       </div>
 
@@ -1011,37 +974,87 @@
       </div>
 
     </div>
-  </div>
-</section>
 
-<section id="categories" class="std cat-section">
-  <div class="container">
-    <div class="reveal" style="max-width:600px;">
-      <div class="eyebrow">Categories</div>
-      <h2 class="section-title">Find <em>your kind.</em></h2>
-      <p class="section-sub">Five flavors. One studio. Whether you're winding down, working sharp, or just having a laugh — there's a Playpal for that.</p>
-    </div>
-    <div class="cat-grid">
-      <div class="cat-card cat-games reveal">
-        <span class="cat-emoji">🎮</span><div class="cat-name">Games</div><div class="cat-count">3 apps</div>
-        <div class="cat-list"><div class="cat-app">Astro Orbit</div><div class="cat-app">Fuzzy Pop</div><div class="cat-app">MergeRise</div></div>
+    <!-- ── GAMES ──────────────────────────────────────────────── -->
+    <div class="section-eyebrow reveal" id="games">Games <span class="count">· 5</span></div>
+
+    <div class="apps-bento games-bento">
+
+      <!-- Astro Orbit -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/AstroOrbit/'" class="app-card app-astroorbit reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/astroorbit.png" alt="Astro Orbit">
+        <div class="app-meta">
+          <span class="app-cat">Arcade</span>
+          <div class="app-name">Astro Orbit</div>
+          <div class="app-tag-text">Defy gravity. Hop between orbital rings, dodge cosmic obstacles.</div>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
       </div>
-      <div class="cat-card cat-creative reveal" style="transition-delay:.05s;">
-        <span class="cat-emoji">🎨</span><div class="cat-name">Creativity</div><div class="cat-count">2 apps</div>
-        <div class="cat-list"><div class="cat-app">Canwasa</div><div class="cat-app">Palettely</div></div>
+
+      <!-- MergeRise -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/MergeRise/'" class="app-card app-mergerise reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/mergerise.png" alt="MergeRise">
+        <div class="app-meta">
+          <span class="app-cat">Puzzle</span>
+          <div class="app-name">MergeRise</div>
+          <div class="app-tag-text">2048-style merge puzzle with civilisation building.</div>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
       </div>
-      <div class="cat-card cat-wellness reveal" style="transition-delay:.1s;">
-        <span class="cat-emoji">🌙</span><div class="cat-name">Wellness</div><div class="cat-count">2 apps</div>
-        <div class="cat-list"><div class="cat-app">Night Bloom</div><div class="cat-app">Hydro Panda</div></div>
+
+      <!-- Fuzzy Pop -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/FuzzyPop/'" class="app-card app-fuzzypop reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/fuzzypop.png" alt="Fuzzy Pop">
+        <div class="app-meta">
+          <span class="app-cat">Family</span>
+          <div class="app-name">Fuzzy Pop</div>
+          <div class="app-tag-text">Child-safe colourful bubble-popping. No ads interrupting fun.</div>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
       </div>
-      <div class="cat-card cat-prod reveal" style="transition-delay:.15s;">
-        <span class="cat-emoji">📋</span><div class="cat-name">Productivity</div><div class="cat-count">2 apps</div>
-        <div class="cat-list"><div class="cat-app">PaperLens</div><div class="cat-app">Time Zone Connect</div></div>
+
+      <!-- Inkline -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Inkline/'" class="app-card app-inkline reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/inkline.png" alt="Inkline">
+        <div class="app-meta">
+          <span class="app-cat">Meditative Puzzle</span>
+          <div class="app-name">Inkline</div>
+          <div class="app-tag-text">A meditative knot-untangling puzzle, drawn in sumi-e ink on washi paper. 648 forms across six scrolls.</div>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/inkline-sumi-e-knot-puzzle/id6770247544" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=app.naveen.inkline" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
       </div>
-      <div class="cat-card cat-utils reveal" style="transition-delay:.2s;">
-        <span class="cat-emoji">⚡</span><div class="cat-name">Utilities</div><div class="cat-count">2 apps</div>
-        <div class="cat-list"><div class="cat-app">Utilify</div><div class="cat-app">Qito</div></div>
+
+      <!-- Pippet (iOS only) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Pippet/'" class="app-card app-pippet reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/pippet.png" alt="Pippet">
+        <div class="app-meta">
+          <span class="app-cat">Arcade · iPhone</span>
+          <div class="app-name">Pippet</div>
+          <div class="app-tag-text">A native iPhone arcade game where the Dynamic Island becomes a living creature you defend.</div>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/app/pippet/id6768132230" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <span class="store-mini ios-only" aria-disabled="true">iPhone only</span>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1057,7 +1070,7 @@
         <div class="story-stats">
           <div class="story-stat s1"><div class="story-stat-num">AI</div><div class="story-stat-label">Built with Cursor &amp; Claude</div></div>
           <div class="story-stat s2"><div class="story-stat-num">2</div><div class="story-stat-label">Stores · iOS &amp; Android</div></div>
-          <div class="story-stat s3"><div class="story-stat-num">5</div><div class="story-stat-label">Distinct categories</div></div>
+          <div class="story-stat s3"><div class="story-stat-num">2</div><div class="story-stat-label">Apps &amp; Games</div></div>
           <div class="story-stat s4"><div class="story-stat-num">100%</div><div class="story-stat-label">Solo · indie studio</div></div>
         </div>
       </div>
@@ -1073,6 +1086,10 @@
           <div class="cloud-icon"><img src="icons/fuzzypop.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/timezoneconnect.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/qito.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/hydropanda.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/tooltrunk.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/inkline.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/pippet.png" alt=""></div>
         </div>
       </div>
     </div>
