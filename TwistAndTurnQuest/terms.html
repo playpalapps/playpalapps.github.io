@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Terms of Service — Twist and Turn Quest</title>
+<meta name="description" content="The terms governing your use of Twist and Turn Quest. Plain English: it's a casual game, provided as-is; Remove Ads is $2.99 refundable through Apple or Google; no reverse engineering.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/TwistAndTurnQuest/terms.html">
+
+<meta property="og:title" content="Terms of Service — Twist and Turn Quest">
+<meta property="og:description" content="The terms governing your use of Twist and Turn Quest.">
+<meta property="og:url" content="https://playpalapps.github.io/TwistAndTurnQuest/terms.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://playpalapps.github.io/TwistAndTurnQuest/icon.png">
+
+<meta name="theme-color" content="#150605">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --amber-1:#FFD24A; --amber-3:#E2562B;
+  --brand-gradient: linear-gradient(135deg, #FFD24A 0%, #FF8A3D 45%, #E2562B 100%);
+  --bg:#150605;
+  --surface: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.16);
+  --ink:#FFFFFF;
+  --ink-2: rgba(255,255,255,0.78);
+  --ink-3:#C9A38F;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --page-max: 860px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(255,210,74,0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 18%, rgba(226,86,43,0.14), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.78  0 0 0 0 0.45  0 0 0 0.10 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+}
+.container { width: 100%; max-width: var(--page-max); margin-inline: auto; padding-inline: var(--gutter); position: relative; z-index: 1; }
+
+a { color: #FFD693; text-decoration: none; border-bottom: 1px solid rgba(255,214,147,0.22); transition: border-color .2s var(--ease), color .2s var(--ease); }
+a:hover { color: var(--ink); border-color: rgba(255,214,147,0.65); }
+
+nav.site {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  background: linear-gradient(to bottom, rgba(21,6,5,0.86), rgba(21,6,5,0.66));
+  border-bottom: 1px solid var(--border);
+}
+nav.site .row { display: flex; align-items: center; gap: 24px; padding: 14px 0; }
+nav.site .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; border: 0; color: var(--ink); }
+nav.site .brand img { width: 30px; height: 30px; border-radius: 8px; box-shadow: 0 4px 18px -6px rgba(255,210,74,0.55); }
+nav.site .brand .name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 17px; }
+nav.site .links { margin-left: auto; display: flex; gap: 22px; }
+nav.site .links a { color: var(--ink-2); border: 0; font-size: 14px; font-weight: 500; }
+nav.site .links a:hover { color: var(--ink); }
+
+header.doc {
+  padding: clamp(56px, 8vw, 100px) 0 clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--border);
+}
+header.doc .eyebrow {
+  display: inline-block;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+header.doc h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+header.doc h1 .accent {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+header.doc p.meta { color: var(--ink-3); font-size: 14px; margin: 0; }
+header.doc p.lead { color: var(--ink-2); font-size: 18px; line-height: 1.55; max-width: 58ch; margin-top: 18px; }
+
+main.doc { padding: clamp(40px, 5vw, 72px) 0 clamp(60px, 8vw, 100px); }
+main.doc h2 {
+  font-size: clamp(1.4rem, 2vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.018em;
+  margin: 48px 0 14px;
+}
+main.doc p, main.doc li { color: var(--ink-2); }
+main.doc ul { padding-left: 20px; }
+main.doc li { margin-bottom: 6px; }
+main.doc strong { color: var(--ink); font-weight: 700; }
+main.doc .callout {
+  margin: 32px 0;
+  padding: 22px 26px;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,210,74,0.09), rgba(226,86,43,0.04));
+}
+main.doc .callout strong { color: var(--ink); }
+
+footer.site { padding: 40px 0 56px; border-top: 1px solid var(--border); margin-top: 40px; position: relative; z-index: 1; }
+footer.site .row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+footer.site a { color: var(--ink-3); border: 0; font-size: 13.5px; }
+footer.site a:hover { color: var(--ink); }
+footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand">
+      <img src="icon.png" alt="" width="30" height="30">
+      <span class="name">Twist and Turn Quest</span>
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="support.html">Support</a>
+    </div>
+  </div>
+</nav>
+
+<header class="doc">
+  <div class="container">
+    <span class="eyebrow">Legal</span>
+    <h1>Terms of <span class="accent">Service.</span></h1>
+    <p class="meta">Effective date: 20 May 2026 · Last updated: 20 May 2026</p>
+    <p class="lead">By installing or using Twist and Turn Quest, you agree to the terms below. They're written in plain English on purpose — short, clear, and free of dark patterns.</p>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="container">
+
+    <div class="callout">
+      <strong>The short version —</strong> Twist and Turn Quest is a casual tilt-maze game, provided as-is. Remove Ads is a $2.99 one-time purchase, refundable through Apple or Google per their normal policies. Don't reverse-engineer the app. Don't use it for anything illegal. We may change these terms; we'll surface material changes in-app.
+    </div>
+
+    <h2>1. Who we are</h2>
+    <p>Twist and Turn Quest is published by <strong>Playpal Apps</strong>, a sole-trader indie software business operating out of Victoria, Australia. Where these terms refer to "we," "us," or "Playpal Apps," that's who is meant. Where they refer to "you," that means the person using Twist and Turn Quest.</p>
+
+    <h2>2. The licence we grant you</h2>
+    <p>We grant you a personal, non-exclusive, non-transferable, revocable licence to install and use Twist and Turn Quest on devices you own or control, for your own personal, non-commercial use, subject to these terms and the App Store / Google Play terms applicable to your device.</p>
+
+    <h2>3. The game itself</h2>
+    <p>Twist and Turn Quest is a single-player, offline-first casual maze game. There are no leaderboards beyond your device's local top-10, no multiplayer, no social features, no chat, and no user-to-user communication of any kind. The game tilts a ball through procedurally generated mazes using your device's accelerometer; that is the entire surface area you interact with.</p>
+    <p>The game contains seven modes (Quest, Time Quest, Beacon, Echo, Hunt, Constellation, PRISM) plus a Daily Challenge and a 2D Classic mode preserving the original-release feel. New modes may be added; existing modes may be retuned, renamed, or in rare cases retired if they fundamentally fail to work for most players — your saved progress in retired modes remains visible in High Scores.</p>
+
+    <h2>4. Remove-Ads purchase</h2>
+    <ul>
+      <li><strong>Remove Ads</strong> is a non-consumable, one-time in-app purchase priced at $2.99 USD (or local-currency equivalent set by the App Store / Google Play).</li>
+      <li>Remove Ads is <strong>lifetime</strong> — there is no recurring billing and no expiry.</li>
+      <li>Remove Ads is <strong>restorable</strong> on any device signed into the same Apple ID (iOS) or Google Play account (Android) via <em>Settings → Restore Purchases</em>.</li>
+      <li><strong>iOS Family Sharing</strong> is supported. A Remove-Ads purchase by one family-group member grants Remove Ads to all members in that family group.</li>
+      <li><strong>Refunds</strong> are handled by Apple or Google directly under their respective refund policies — Playpal Apps cannot directly issue refunds. On iOS, request via <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>. On Android, via <em>Play Store → Account → Purchase history → Request a refund</em>.</li>
+      <li>If a store declines your refund and you feel there's a legitimate issue with the app, email <a href="mailto:playpalapps2024@gmail.com?subject=Twist%20and%20Turn%20Quest%20refund">playpalapps2024@gmail.com</a> and we'll advocate for you.</li>
+      <li>Pricing may change for new purchases over time; existing Remove-Ads purchases are unaffected — your lifetime is genuinely lifetime.</li>
+      <li>The "Reset Progress" button in Settings <strong>does not</strong> revoke your Remove-Ads entitlement. This is deliberate — if it did, a stray tap could cost you $2.99 and trigger a refund storm.</li>
+    </ul>
+
+    <h2>5. Your content</h2>
+    <p>Your save game — progress, stars, times, calibration, settings, high-score names — is <strong>yours</strong>. We claim no ownership. Because the app is offline-first and we don't operate any servers, we don't even have access to your data unless you explicitly share it with us (for example, attaching a screenshot to a support email).</p>
+
+    <h2>6. Acceptable use</h2>
+    <ul>
+      <li>Don't use Twist and Turn Quest for any unlawful purpose, or in violation of any laws applicable to you.</li>
+      <li>Don't reverse-engineer, decompile, or disassemble the app, except where the law expressly permits.</li>
+      <li>Don't redistribute the app, its assets, its code, its level layouts, or its procedurally generated content.</li>
+      <li>Don't attempt to interfere with the app's operation, its in-app purchase verification, or to circumvent the Remove-Ads paywall by tampering with local save data.</li>
+      <li>Don't enter offensive, harassing, or illegal text into the high-score name field. While that text never leaves your device, you may still share screenshots; what you type is on you.</li>
+    </ul>
+
+    <h2>7. Intellectual property</h2>
+    <p>All rights in Twist and Turn Quest — including code, audio, visual assets, mode designs, the name "Twist and Turn Quest", and the Playpal Apps brand — are owned by Playpal Apps or licensed in. Audio assets that are CC0-licensed (Kenney Impact Sounds, OpenGameArt loops, freesound.org clips) are credited in the in-app credits screen and in the project's <code>README.md</code>; they are not covered by this clause and remain governed by their respective CC0 dedications. The Godot Engine itself is MIT-licensed and a copy of that licence is shipped inside the app bundle.</p>
+
+    <h2>8. As-is, with no warranty</h2>
+    <p>Twist and Turn Quest is provided <strong>"as is"</strong> and <strong>"as available."</strong> To the fullest extent permitted by law, we disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the app will be uninterrupted, error-free, or that procedurally generated mazes will always be solvable in the exact difficulty curve you expect. We do commit to acting in good faith — shipping bug fixes, being honest about limitations, and not pulling features you paid for without a clear path forward.</p>
+
+    <h2>9. Limitation of liability</h2>
+    <p>To the fullest extent permitted by law, in no event will Playpal Apps be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, revenue, data, or goodwill, arising from or related to your use of Twist and Turn Quest. Our total aggregate liability for any claim relating to Twist and Turn Quest is limited to the greater of (a) the amount you paid us for the app in the twelve months preceding the claim, or (b) AUD $50.</p>
+    <p>Some jurisdictions don't allow certain disclaimers — if yours doesn't, the disclaimed items only apply to the maximum extent permitted where you live. Nothing in these terms excludes any consumer rights you have under non-excludable law (for example, the Australian Consumer Law).</p>
+
+    <h2>10. Motion sickness, accessibility, and physical safety</h2>
+    <p>Twist and Turn Quest is a tilt-controlled game. A small number of players experience motion sickness, eye strain, or headaches from the camera following the rolling ball — especially in 3D modes (Quest, Time Quest, Beacon, Echo, Hunt, Constellation, PRISM). If you experience any discomfort, take a break or switch to the 2D Classic mode, which is camera-fixed.</p>
+    <p>The game requires physical movement of your device. <strong>Please don't play while walking, cycling, driving, or operating any vehicle or machinery</strong>, and please give yourself enough space that swinging the phone around can't damage anything or anyone nearby. Playpal Apps is not responsible for property damage or personal injury arising from gameplay.</p>
+
+    <h2>11. Indemnification</h2>
+    <p>If your use of Twist and Turn Quest violates these terms or applicable law and that causes us (or a third party) legal exposure, you agree to indemnify and hold us harmless from the resulting claims and reasonable costs.</p>
+
+    <h2>12. Termination</h2>
+    <p>You can terminate this agreement at any time by uninstalling Twist and Turn Quest. We may terminate or suspend your licence with reasonable notice if you materially violate these terms. Paid, non-refunded entitlements (Remove Ads) survive such termination only on devices that don't require a fresh restore — practically, this rarely matters because Remove Ads is store-account-bound.</p>
+
+    <h2>13. Changes to these terms</h2>
+    <p>We may update these terms from time to time. Material changes will be surfaced in-app via a changelog entry linking here, and the "Last updated" date above will change. Continued use of Twist and Turn Quest after a change means you accept the updated terms. If you don't accept them, stop using the app.</p>
+
+    <h2>14. Governing law</h2>
+    <p>These terms are governed by the laws of the State of Victoria, Australia, without regard to conflict-of-law rules. Any dispute that can't be resolved amicably is subject to the exclusive jurisdiction of the courts of Victoria, Australia. This does not affect any non-excludable rights you have under the law of the country in which you live.</p>
+
+    <h2>15. Contact</h2>
+    <p>Legal or policy questions: <a href="mailto:playpalapps2024@gmail.com?subject=Twist%20and%20Turn%20Quest%20legal%20question">playpalapps2024@gmail.com</a>. We reply personally — usually within seven days.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container row">
+    <div class="copy">&copy; 2026 Playpal Apps</div>
+    <div>
+      <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

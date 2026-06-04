@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Privacy Policy — Twist and Turn Quest</title>
+<meta name="description" content="Twist and Turn Quest's privacy policy. Your save data lives on your device. The only third parties are Google AdMob (interstitial ads, removable for $2.99), Apple App Store, and Google Play Billing — all transparently disclosed.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/TwistAndTurnQuest/privacy.html">
+
+<meta property="og:title" content="Privacy Policy — Twist and Turn Quest">
+<meta property="og:description" content="Twist and Turn Quest's privacy policy. Your save data lives on your device.">
+<meta property="og:url" content="https://playpalapps.github.io/TwistAndTurnQuest/privacy.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://playpalapps.github.io/TwistAndTurnQuest/icon.png">
+
+<meta name="theme-color" content="#150605">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --amber-1:#FFD24A; --amber-3:#E2562B;
+  --brand-gradient: linear-gradient(135deg, #FFD24A 0%, #FF8A3D 45%, #E2562B 100%);
+  --bg:#150605;
+  --surface: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.16);
+  --ink:#FFFFFF;
+  --ink-2: rgba(255,255,255,0.78);
+  --ink-3:#C9A38F;
+  --ink-4: rgba(201,163,143,0.45);
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --page-max: 860px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(255,210,74,0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 18%, rgba(226,86,43,0.14), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.78  0 0 0 0 0.45  0 0 0 0.10 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+}
+.container { width: 100%; max-width: var(--page-max); margin-inline: auto; padding-inline: var(--gutter); position: relative; z-index: 1; }
+
+a { color: #FFD693; text-decoration: none; border-bottom: 1px solid rgba(255,214,147,0.22); transition: border-color .2s var(--ease), color .2s var(--ease); }
+a:hover { color: var(--ink); border-color: rgba(255,214,147,0.65); }
+
+nav.site {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  background: linear-gradient(to bottom, rgba(21,6,5,0.86), rgba(21,6,5,0.66));
+  border-bottom: 1px solid var(--border);
+}
+nav.site .row { display: flex; align-items: center; gap: 24px; padding: 14px 0; }
+nav.site .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; border: 0; color: var(--ink); }
+nav.site .brand img { width: 30px; height: 30px; border-radius: 8px; box-shadow: 0 4px 18px -6px rgba(255,210,74,0.55); }
+nav.site .brand .name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 17px; }
+nav.site .links { margin-left: auto; display: flex; gap: 22px; }
+nav.site .links a { color: var(--ink-2); border: 0; font-size: 14px; font-weight: 500; }
+nav.site .links a:hover { color: var(--ink); }
+
+header.doc {
+  padding: clamp(56px, 8vw, 100px) 0 clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--border);
+}
+header.doc .eyebrow {
+  display: inline-block;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+header.doc h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+header.doc h1 .accent {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+header.doc p.meta { color: var(--ink-3); font-size: 14px; margin: 0; }
+header.doc p.lead { color: var(--ink-2); font-size: 18px; line-height: 1.55; max-width: 58ch; margin-top: 18px; }
+
+main.doc { padding: clamp(40px, 5vw, 72px) 0 clamp(60px, 8vw, 100px); }
+main.doc h2 {
+  font-size: clamp(1.4rem, 2vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.018em;
+  margin: 48px 0 14px;
+}
+main.doc h3 { font-size: 17px; font-weight: 700; margin: 26px 0 8px; color: var(--ink); }
+main.doc p, main.doc li { color: var(--ink-2); }
+main.doc ul { padding-left: 20px; }
+main.doc li { margin-bottom: 6px; }
+main.doc strong { color: var(--ink); font-weight: 700; }
+main.doc code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 0.92em;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+main.doc .callout {
+  margin: 32px 0;
+  padding: 22px 26px;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,210,74,0.09), rgba(226,86,43,0.04));
+}
+main.doc .callout strong { color: var(--ink); }
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0 8px;
+}
+@media (max-width: 580px) { .nutrition-grid { grid-template-columns: 1fr; } }
+.nutrition-item {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.nutrition-item .k { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); font-weight: 600; }
+.nutrition-item .v { color: var(--ink); font-weight: 600; margin-top: 4px; }
+.nutrition-item .v.no { color: #FF8FB3; }
+.nutrition-item .v.partial { color: #FFD68A; }
+
+footer.site { padding: 40px 0 56px; border-top: 1px solid var(--border); margin-top: 40px; position: relative; z-index: 1; }
+footer.site .row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+footer.site a { color: var(--ink-3); border: 0; font-size: 13.5px; }
+footer.site a:hover { color: var(--ink); }
+footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand">
+      <img src="icon.png" alt="" width="30" height="30">
+      <span class="name">Twist and Turn Quest</span>
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </div>
+  </div>
+</nav>
+
+<header class="doc">
+  <div class="container">
+    <span class="eyebrow">Legal · Plain English</span>
+    <h1>Privacy <span class="accent">Policy.</span></h1>
+    <p class="meta">Effective date: 20 May 2026 · Last updated: 20 May 2026</p>
+    <p class="lead">Twist and Turn Quest is built around a simple promise: your save game is yours, and only yours. This page is the byte-level version of that promise.</p>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="container">
+
+    <div class="callout">
+      <strong>TL;DR —</strong> Twist and Turn Quest has no accounts, no cloud, no analytics, and no servers. Your levels, stars, calibration, settings, and high scores live on your phone in <code>user://save.json</code>. The only network calls are (1) Google AdMob interstitial ads between levels on the free tier, (2) the in-app purchase verification with Apple App Store / Google Play if you tap "Remove Ads", and (3) Google's User Messaging Platform (UMP) once, to ask for your ad consent and to present Apple's App Tracking Transparency prompt on iOS. Delete the app and every byte is gone.
+    </div>
+
+    <h2>1. What Twist and Turn Quest stores on your device</h2>
+    <p>All of the following lives in the app's sandbox (iOS: the app container; Android: the app's private internal storage), inside a single JSON file at <code>user://save.json</code>. None of it is transmitted off-device by Twist and Turn Quest itself.</p>
+    <ul>
+      <li><strong>Progress per mode</strong> — your best level reached in Quest, Time Quest, Beacon, Echo, Constellation, Hunt, PRISM, Daily, and 2D Classic. Tracked per mode, no cross-mode contamination.</li>
+      <li><strong>Per-level stars</strong> — 0, 1, 2, or 3 stars earned on every level you've completed.</li>
+      <li><strong>Best times</strong> — your fastest completion time for each level, used to surface speed-run feel.</li>
+      <li><strong>High scores</strong> — a top-10 list of {name, level, mode, date} entries. The <em>name</em> is whatever 8-character handle you type at the Game Over screen; it never leaves your device.</li>
+      <li><strong>Tilt calibration baseline</strong> — the 3-axis accelerometer offset captured on the calibration screen, so the ball rolls true when you hold the phone naturally.</li>
+      <li><strong>Settings</strong> — master / music / SFX volume, haptics toggle, equipped ball skin.</li>
+      <li><strong>Daily-challenge state</strong> — today's date, best time, completion flag, and stars earned.</li>
+      <li><strong>Remove-Ads entitlement</strong> — a single boolean recording whether you've purchased the IAP. We never store payment information.</li>
+      <li><strong>Counters used for ad pacing</strong> — number of sessions you've launched (so we can suppress ads on session #1) and levels cleared since the last interstitial (capped at 3).</li>
+    </ul>
+    <p>You can clear all of this at any time via <em>Settings → Reset Progress</em>, or by uninstalling the app — both wipe the entire sandbox. The <em>Reset Progress</em> action intentionally <strong>preserves your Remove-Ads purchase</strong>, because revoking a paid entitlement on a button tap would be a refund disaster.</p>
+
+    <h2>2. What Twist and Turn Quest does not do</h2>
+    <div class="nutrition-grid">
+      <div class="nutrition-item"><div class="k">Cloud sync</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Account sign-up</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Email collection</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Third-party analytics</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Crash reporters</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Firebase / Mixpanel / Amplitude</div><div class="v no">None</div></div>
+      <div class="nutrition-item"><div class="k">Location tracking</div><div class="v no">Never</div></div>
+      <div class="nutrition-item"><div class="k">Contacts / camera / mic / photos</div><div class="v no">Never accessed</div></div>
+      <div class="nutrition-item"><div class="k">Ads (free tier)</div><div class="v partial">1 interstitial every 3 levels</div></div>
+      <div class="nutrition-item"><div class="k">Ads after Remove-Ads IAP</div><div class="v no">None — SDK still inits but never loads</div></div>
+    </div>
+
+    <h2>3. The accelerometer</h2>
+    <p>Twist and Turn Quest reads the device accelerometer continuously during gameplay — that's how the ball rolls when you tilt the phone. The raw three-axis values stay <strong>on the device</strong>: they're consumed in real time by the physics engine and never recorded, logged, or transmitted. The only accelerometer artefact saved across sessions is your calibration baseline, captured once on the calibration screen, used to compensate for whatever natural angle you hold the phone at.</p>
+
+    <h2>4. Interstitial ads (free tier only)</h2>
+    <p>The free tier shows a single full-screen interstitial ad <strong>after every third level you complete</strong>, served by <strong>Google AdMob</strong>. The ad never fires on retry, never fires on a failed level, and never fires on your very first session — we use the first session to let you settle in.</p>
+    <ul>
+      <li>AdMob may collect a device-level <strong>advertising identifier</strong> — IDFA on iOS (Identifier for Advertisers), AAID on Android (Android Advertising ID) — for ad personalisation, subject to your consent (see sections 5 and 6).</li>
+      <li>AdMob may collect device information (model, OS version, language, coarse geolocation by IP) for ad-relevance and frequency capping.</li>
+      <li>AdMob's data practices are governed by Google's privacy policy: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">policies.google.com/technologies/ads</a>.</li>
+      <li><strong>Purchasing "Remove Ads" eliminates all interstitials, immediately and permanently across your device</strong>, restorable on any device signed into the same Apple ID / Google Play account.</li>
+    </ul>
+
+    <h2>5. Consent — GDPR, UK GDPR, and similar</h2>
+    <p>If your device locale or IP indicates you are in the European Economic Area, the United Kingdom, or Switzerland, Twist and Turn Quest uses Google's <strong>User Messaging Platform (UMP)</strong> to show a consent dialog before initialising AdMob. You may:</p>
+    <ul>
+      <li>Accept personalised ads.</li>
+      <li>Decline personalised ads — non-personalised ads will still serve.</li>
+      <li>Reset your choice later by uninstalling and reinstalling the app.</li>
+    </ul>
+    <p>UMP itself does not transmit save data — its only job is to record your ad-consent state and pass it to AdMob.</p>
+
+    <h2>6. App Tracking Transparency (iOS)</h2>
+    <p>On iOS 14.5+, Twist and Turn Quest presents Apple's system <strong>App Tracking Transparency</strong> (ATT) prompt on first launch, coordinated by Google's UMP framework. The prompt is Apple's standard system dialog — not a Google-styled imitation — and uses your iOS device's standard rules.</p>
+    <ul>
+      <li>If you tap <em>Allow</em>, AdMob can use the IDFA per Apple's policies and serve personalised ads.</li>
+      <li>If you tap <em>Ask App Not to Track</em>, the IDFA is unavailable and ads serve in non-personalised mode. The game itself is completely unaffected — all features remain available.</li>
+      <li>You can change this anytime in iOS <em>Settings → Privacy &amp; Security → Tracking → Twist and Turn Quest</em>.</li>
+    </ul>
+
+    <h2>7. In-app purchases</h2>
+    <p>"Remove Ads" is a <strong>one-time, non-consumable</strong> in-app purchase priced at $2.99 USD (or local-currency equivalent). The transaction is handled entirely by Apple StoreKit (iOS) or Google Play Billing (Android) via their native SDKs. We receive only the entitlement status — purchased or not — and the platform receipt for restoration. We never see your payment method, billing address, or any card detail.</p>
+    <ul>
+      <li><strong>iOS Family Sharing</strong> is supported. If a family-group member purchases Remove Ads, all family-group members receive Remove Ads on their own Apple IDs.</li>
+      <li><strong>Restorable</strong> across devices linked to the same Apple ID or Google Play account via <em>Settings → Restore Purchases</em>.</li>
+      <li>Refunds are handled by Apple or Google per their policies — see the <a href="support.html#remove-ads">support page</a> for the exact links.</li>
+    </ul>
+
+    <h2>8. Your rights (GDPR, CCPA, and equivalents)</h2>
+    <p>Because Twist and Turn Quest doesn't transmit personal data to a server, there is no central database from which to retrieve, correct, or delete your information — there is no such database. Your data lives on your device, under your control. You may at any time:</p>
+    <ul>
+      <li><strong>View</strong> your stored progress and high scores inside the app (Main Menu → High Scores).</li>
+      <li><strong>Delete a single high score</strong> by completing a new run that pushes the old one off the top-10 list (no UI lever to delete individual entries — sorry, the list is short by design).</li>
+      <li><strong>Wipe everything</strong> via <em>Settings → Reset Progress</em>. This preserves your paid Remove-Ads entitlement intentionally.</li>
+      <li><strong>Opt out of personalised ads</strong> anytime via your device's system settings (iOS: <em>Settings → Privacy &amp; Security → Tracking</em>; Android: <em>Settings → Google → Ads → Opt out of ads personalisation</em>).</li>
+      <li><strong>Uninstall the app</strong> — this deletes the entire app sandbox on both iOS and Android, including every saved star, time, and calibration value.</li>
+    </ul>
+
+    <h2>9. Children's privacy</h2>
+    <p>Twist and Turn Quest is rated 4+ on the App Store and Everyone on Google Play. While the game is suitable for younger players, it is <strong>not directed at children under 13</strong> for the purposes of COPPA. We do not knowingly collect personal information from children under 13. The interstitial ad inventory served by AdMob is rated <em>"Not specifically directed at children"</em> in our AdMob console configuration, which means Google applies the same family-safe content filters used across the AdMob network. If you are a parent or guardian and would prefer an ad-free experience for a child, the Remove-Ads IAP is the cleanest path.</p>
+
+    <h2>10. Security</h2>
+    <p>Since no personal data is transmitted by Twist and Turn Quest itself, there is no transport or database security to manage on our end. For the small surfaces that exist:</p>
+    <ul>
+      <li>Locally stored data sits in the standard iOS / Android app sandbox, which is encrypted at rest by the operating system when a device passcode is set.</li>
+      <li>AdMob and store-billing communications use HTTPS via the platform's native networking stack.</li>
+      <li>We do not roll our own crypto for entitlements — we trust Apple's and Google's signed receipts.</li>
+    </ul>
+
+    <h2>11. International data transfers</h2>
+    <p>Twist and Turn Quest does not transfer your data internationally because Twist and Turn Quest does not transfer your data anywhere. AdMob and store-billing requests are sent to Google and Apple infrastructure, which may operate globally; these are governed by Google's and Apple's own policies, linked below.</p>
+
+    <h2>12. Third-party services in summary</h2>
+    <ul>
+      <li><strong>Google AdMob</strong> — interstitial ads on the free tier. <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Policy</a>.</li>
+      <li><strong>Google User Messaging Platform (UMP)</strong> — consent collection and ATT presentation on iOS. <a href="https://support.google.com/admob/answer/10113207" target="_blank" rel="noopener">Docs</a>.</li>
+      <li><strong>Apple App Store / StoreKit</strong> — purchase processing on iOS. <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Policy</a>.</li>
+      <li><strong>Google Play Billing</strong> — purchase processing on Android. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Policy</a>.</li>
+    </ul>
+
+    <h2>13. A note on the bundle identifier</h2>
+    <p>For historical reasons, the iOS bundle identifier is <code>playpalapps.Shape-Escape</code> — the App Store record predates the "Twist and Turn Quest" rebrand. The bundle ID is a load-bearing identifier on Apple's side and cannot be changed without losing the App Store listing. The user-facing app name, icon, and gameplay are unambiguously "Twist and Turn Quest" — no remnants of any earlier branding remain in the app you install today. If you ever see a string referencing the older name in a billing receipt or system log, it's that bundle ID showing through.</p>
+
+    <h2>14. Changes to this policy</h2>
+    <p>If this policy changes, the updated version is published at this URL and the "Last updated" date above changes. Material changes — for example, if Twist and Turn Quest were ever to introduce any form of server-backed feature — would be surfaced in-app on the next launch with a changelog entry linking here.</p>
+
+    <h2>15. Contact</h2>
+    <p>Questions, concerns, a privacy complaint, or a request to exercise a data right — email <a href="mailto:playpalapps2024@gmail.com?subject=Twist%20and%20Turn%20Quest%20privacy%20question">playpalapps2024@gmail.com</a>. We reply personally, usually within seven days.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container row">
+    <div class="copy">&copy; 2026 Playpal Apps</div>
+    <div>
+      <a href="index.html">Home</a> · <a href="terms.html">Terms</a> · <a href="support.html">Support</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
