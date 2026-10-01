@@ -33,10 +33,17 @@
 section.slab{padding:clamp(34px,5vw,64px) 0}
 section.slab h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;line-height:1.1;margin:0 0 10px}
 section.slab .sub{font-size:19px;color:var(--ink-2);margin:0 0 28px;max-width:60ch}
-.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
-.shot{border-radius:30px;padding:10px;text-align:center}
-.shot img{width:100%;height:auto;display:block;border-radius:22px}
-.shot b{display:block;padding:12px 6px 6px;font-size:16px}
+.swipe-hint{display:none;color:var(--ink-3)}
+@media (max-width:980px){.swipe-hint{display:inline}}
+.shots{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.shot{border-radius:26px;padding:8px;text-align:center}
+.shot img{width:100%;height:auto;display:block;border-radius:20px}
+.shot b{display:block;padding:10px 6px 4px;font-size:15px}
+@media (max-width:980px){
+  .shots{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .shots::-webkit-scrollbar{display:none}
+  .shot{flex:0 0 min(64vw,250px);scroll-snap-align:center}
+}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
 .step{border-radius:30px;padding:26px 24px}
 .step .n{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(#ff97bc,#ff6fa3);color:#fff;font-weight:800;font-size:20px;border:2px solid rgba(255,255,255,.85);box-shadow:0 6px 14px rgba(255,100,150,.3);margin-bottom:12px}
@@ -135,7 +142,7 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0 0 28px;max-width:60
 <section class="slab" id="screens">
   <div class="container">
     <h2>Easy on little eyes</h2>
-    <p class="sub">Soft aqua and peach, gentle water light, a music-box tune and pentatonic pops. Dark mode for bedtime. Nothing flashes, nothing shouts.</p>
+    <p class="sub">Soft aqua and peach, gentle water light, a music-box tune and pentatonic pops. Dark mode for bedtime. Nothing flashes, nothing shouts. <span class="swipe-hint">Swipe to see more.</span></p>
     <div class="shots">
       <div class="shot glass"><img src="shots/home.jpg" alt="Veggie Pop home screen" loading="lazy"><b>Home</b></div>
       <div class="shot glass"><img src="shots/play.jpg" alt="A jar full of veggies mid-game" loading="lazy"><b>Fill the jar</b></div>
