@@ -1,0 +1,69 @@
+@font-face{font-family:"Baloo 2";font-style:normal;font-weight:400 800;font-display:swap;src:url("Baloo2.woff2") format("woff2")}
+:root{
+  --ol:#4a2c2a;--pink:#ff6fa3;--pink-2:#ff97bc;--ink:#3c5158;--ink-2:rgba(60,81,88,.78);--ink-3:rgba(60,81,88,.6);
+  --glass:rgba(255,255,255,.55);--glass-edge:rgba(255,255,255,.9);--shadow:rgba(40,90,100,.14);--cell:rgba(255,255,255,.5);
+  --green:#8fd65a;--yellow:#ffd23f;--aqua:#5fc9c8;
+  --page:1080px;--gutter:clamp(18px,4vw,40px);--ease:cubic-bezier(.3,1.4,.5,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{margin:0;font-family:"Baloo 2",ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,sans-serif;font-weight:600;font-size:18px;line-height:1.55;color:var(--ink);
+  background:#cdeeea linear-gradient(#cdeeea,#fde9e3);background-attachment:fixed;min-height:100dvh}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(circle at 18% 22%,rgba(255,255,255,.55),transparent 28%),radial-gradient(circle at 82% 30%,rgba(255,255,255,.45),transparent 26%),radial-gradient(circle at 60% 85%,rgba(255,255,255,.5),transparent 30%)}
+.container{position:relative;z-index:1;width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gutter)}
+a{color:#0b8dd8;text-decoration:none;border-bottom:2px solid rgba(11,141,216,.25);transition:border-color .2s}
+a:hover{border-color:#0b8dd8}
+.glass{background:var(--glass);border:1.5px solid var(--glass-edge);box-shadow:0 8px 24px var(--shadow),inset 0 1px 0 rgba(255,255,255,.7);
+  -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2)}
+nav.site{position:sticky;top:0;z-index:50;background:rgba(214,240,238,.8);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1.5px solid rgba(255,255,255,.7)}
+nav.site .row{display:flex;align-items:center;gap:20px;padding:12px 0}
+nav.site .brand{display:inline-flex;align-items:center;gap:10px;border:0;color:var(--ink);font-weight:800;font-size:19px;white-space:nowrap}
+nav.site .brand img{width:34px;height:34px;border-radius:9px;box-shadow:0 4px 12px rgba(40,90,100,.2)}
+nav.site .links{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+nav.site .links a{border:0;color:var(--ink-2);font-weight:700;font-size:15px;padding:6px 12px;border-radius:999px}
+nav.site .links a:hover,nav.site .links a[aria-current]{background:rgba(255,255,255,.6);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:999px;font-weight:800;font-size:19px;border:0;cursor:pointer;color:var(--ink);transition:transform .12s}
+.btn:active{transform:scale(.97)}
+.btn.primary{color:#fff;background:linear-gradient(#ff97bc,#ff6fa3);border:2px solid rgba(255,255,255,.85);box-shadow:0 10px 24px rgba(255,100,150,.35),inset 0 2px 0 rgba(255,255,255,.45)}
+.btn.glass{border-width:1.5px}
+.btn svg{width:22px;height:22px;fill:currentColor}
+.btn.soon{opacity:.75;cursor:default}
+.btn.soon small{font-size:12px;font-weight:800;color:var(--pink);background:#fff;border-radius:999px;padding:1px 8px;margin-left:2px}
+.logo{font-weight:800;line-height:1;white-space:nowrap;letter-spacing:.01em}
+.logo span{display:inline-block;color:var(--c);-webkit-text-stroke:.13em var(--ol);paint-order:stroke fill;text-shadow:0 .07em 0 var(--ol)}
+.logo span:nth-child(odd){transform:rotate(-5deg)}
+.logo span:nth-child(even){transform:rotate(4deg) translateY(.06em)}
+.logo .gap{width:.25em}
+header.doc{padding:clamp(44px,7vw,84px) 0 clamp(22px,3vw,36px)}
+header.doc .eyebrow{display:inline-block;font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--pink);background:#fff;border-radius:999px;padding:4px 12px;margin-bottom:16px}
+header.doc h1{font-size:clamp(2.1rem,4.4vw,3.2rem);font-weight:800;line-height:1.05;margin:0 0 12px;letter-spacing:-.01em}
+header.doc .meta{color:var(--ink-3);font-size:15px;margin:0}
+header.doc .lead{font-size:19px;max-width:60ch;margin-top:14px;color:var(--ink-2)}
+main.doc{padding:8px 0 clamp(50px,7vw,90px)}
+main.doc .card{border-radius:30px;padding:clamp(22px,4vw,40px)}
+main.doc h2{font-size:clamp(1.3rem,2vw,1.6rem);font-weight:800;margin:36px 0 10px}
+main.doc h2:first-child{margin-top:0}
+main.doc p,main.doc li{color:var(--ink-2)}
+main.doc ul{padding-left:22px}
+main.doc li{margin-bottom:6px}
+main.doc code{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);padding:1px 7px;border-radius:7px;font-size:.9em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.callout{margin:0 0 26px;padding:18px 22px;border-radius:22px;background:rgba(11,141,216,.1);border:1.5px solid rgba(11,141,216,.18)}
+.callout strong{color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 6px}
+.fact{padding:12px 16px;border-radius:18px;background:var(--cell);border:1.5px solid rgba(255,255,255,.8)}
+.fact .k{font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:800}
+.fact .v{font-weight:800;color:var(--ink);margin-top:2px}
+.fact .v.no{color:#2a9d5c}
+footer.site{position:relative;z-index:1;padding:30px 0 46px;margin-top:20px;border-top:1.5px solid rgba(255,255,255,.7)}
+footer.site .row{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;font-size:15px;color:var(--ink-3)}
+footer.site a{border:0;color:var(--ink-2);font-weight:700}
+footer.site a:hover{color:var(--ink)}
+details.faq{border-radius:20px;background:var(--cell);border:1.5px solid rgba(255,255,255,.85);padding:4px 18px;margin:10px 0}
+details.faq summary{cursor:pointer;font-weight:800;font-size:18px;padding:12px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font-size:24px;color:var(--pink);font-weight:800;transition:transform .2s}
+details.faq[open] summary::after{transform:rotate(45deg)}
+details.faq p{margin:0 0 14px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;scroll-behavior:auto!important;animation:none!important}}
+@media (max-width:560px){nav.site .links{gap:0}nav.site .links a{font-size:14px;padding:5px 8px}nav.site .brand{font-size:17px}nav.site .brand img{width:30px;height:30px}}
