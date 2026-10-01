@@ -66,4 +66,31 @@ details.faq summary::after{content:"+";font-size:24px;color:var(--pink);font-wei
 details.faq[open] summary::after{transform:rotate(45deg)}
 details.faq p{margin:0 0 14px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;scroll-behavior:auto!important;animation:none!important}}
-@media (max-width:560px){nav.site .links{gap:0}nav.site .links a{font-size:14px;padding:5px 8px}nav.site .brand{font-size:17px}nav.site .brand img{width:30px;height:30px}}
+@media (max-width:560px){nav.site .links{gap:0}nav.site .links a{font-size:14px;padding:5px 8px}nav.site .links a.hide-sm{display:none}nav.site .brand{font-size:17px}nav.site .brand img{width:30px;height:30px}}
+
+/* ---- production polish ---- */
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:12px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:#fff;color:var(--ink);padding:8px 14px;border-radius:999px;font-weight:800;border:0}
+.skip:focus{top:12px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--pink);background:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.9);border-radius:999px;padding:5px 14px;margin-bottom:14px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pink)}
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .7s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.js .reveal.d1{transition-delay:.08s}.js .reveal.d2{transition-delay:.16s}.js .reveal.d3{transition-delay:.24s}.js .reveal.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+.lift{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.lift:hover{transform:translateY(-4px);box-shadow:0 16px 34px var(--shadow),inset 0 1px 0 rgba(255,255,255,.7)}
+.btn.primary:hover{filter:brightness(1.04)}
+.btn.glass:hover{background:rgba(255,255,255,.75)}
+nav.site .links a[aria-current="page"]{background:rgba(255,255,255,.7)}
+footer.rich{padding:40px 0 48px;margin-top:10px;border-top:1.5px solid rgba(255,255,255,.7)}
+footer.rich .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;align-items:start}
+footer.rich .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;margin-bottom:8px}
+footer.rich .brand img{width:44px;height:44px;border-radius:12px;box-shadow:0 6px 14px rgba(40,90,100,.2)}
+footer.rich p{margin:0;color:var(--ink-3);font-size:15px;max-width:34ch}
+footer.rich h4{margin:0 0 8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+footer.rich ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+footer.rich a{border:0;color:var(--ink-2);font-weight:700}
+footer.rich a:hover{color:var(--ink)}
+footer.rich .legal{margin-top:26px;padding-top:16px;border-top:1.5px solid rgba(255,255,255,.6);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;color:var(--ink-3);font-size:14px}
+@media (max-width:640px){footer.rich .grid{grid-template-columns:1fr 1fr}footer.rich .grid>:first-child{grid-column:1/-1}}

@@ -8,33 +8,77 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://playpalapps.github.io/VeggiePop/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Playpal Apps">
 <meta property="og:url" content="https://playpalapps.github.io/VeggiePop/">
 <meta property="og:title" content="Veggie Pop — a calm, cuddly merge game for kids">
 <meta property="og:description" content="A calm, cuddly merge game for kids. Drop veggies into a jar, match two the same, grow a pumpkin.">
-<meta property="og:image" content="https://playpalapps.github.io/VeggiePop/icon.png">
+<meta property="og:image" content="https://playpalapps.github.io/VeggiePop/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Veggie Pop — a calm, cuddly merge game for kids">
+<meta name="twitter:description" content="Drop veggies into a jar, match two the same, grow a pumpkin.">
+<meta name="twitter:image" content="https://playpalapps.github.io/VeggiePop/og-image.jpg">
 <meta name="theme-color" content="#cdeeea">
 <meta name="color-scheme" content="light">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preload" href="Baloo2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="_shared.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Veggie Pop","applicationCategory":"GameApplication","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"A calm, cuddly merge game for children aged 4 to 8.","image":"https://playpalapps.github.io/VeggiePop/icon.png","url":"https://playpalapps.github.io/VeggiePop/"}
+</script>
 <style>
-.hero{padding:clamp(40px,7vw,90px) 0 clamp(30px,5vw,60px)}
-.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center}
-.hero .logo{font-size:clamp(3rem,8vw,5.6rem);margin:0 0 14px}
-.hero .tag{font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:700;color:var(--ink-2);max-width:30ch;margin:0 0 26px;line-height:1.35}
-.hero .stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
-.hero .note{font-size:15px;color:var(--ink-3);margin:0}
-.hero .art{position:relative}
-.hero .art img{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 24px rgba(40,90,100,.22))}
-.hero .art .bub{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:rgba(255,255,255,.25)}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;font-weight:800;font-size:15px}
-.chip i{width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block}
-section.slab{padding:clamp(34px,5vw,64px) 0}
-section.slab h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;line-height:1.1;margin:0 0 10px}
-section.slab .sub{font-size:19px;color:var(--ink-2);margin:0 0 28px;max-width:60ch}
+/* hero */
+.hero{padding:clamp(36px,6vw,84px) 0 clamp(26px,4vw,52px);overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,64px);align-items:center}
+.hero .logo{font-size:clamp(3.1rem,8vw,5.8rem);margin:0 0 16px}
+.hero .tag{font-size:clamp(1.2rem,2.1vw,1.5rem);font-weight:700;color:var(--ink-2);max-width:32ch;margin:0 0 24px;line-height:1.4}
+.hero .stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.hero .note{font-size:15px;color:var(--ink-3);margin:0 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:800;font-size:14.5px}
+.chip svg{width:16px;height:16px;fill:none;stroke:#2a9d5c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.hero .art{position:relative;padding:4% 2% 0}
+.hero .art img{width:100%;height:auto;display:block;filter:drop-shadow(0 22px 26px rgba(40,90,100,.22));animation:float 6s ease-in-out infinite}
+.hero .art .bub{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.75);background:rgba(255,255,255,.22);animation:drift 9s ease-in-out infinite}
+.hero .art .bub.b2{animation-duration:11s;animation-delay:-3s}.hero .art .bub.b3{animation-duration:8s;animation-delay:-5s}
+.hero .art .glow{position:absolute;inset:10% 6% 0;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7),rgba(255,255,255,0) 70%);z-index:-1}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-10px) rotate(.6deg)}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media (prefers-reduced-motion:reduce){.hero .art img,.hero .art .bub{animation:none}}
+/* sections */
+section.slab{padding:clamp(40px,6vw,76px) 0}
+section.slab .head{max-width:62ch;margin-bottom:clamp(22px,3vw,34px)}
+section.slab h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;line-height:1.08;margin:0 0 10px;letter-spacing:-.01em}
+section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
 .swipe-hint{display:none;color:var(--ink-3)}
 @media (max-width:980px){.swipe-hint{display:inline}}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{border-radius:30px;padding:26px 24px 24px;position:relative}
+.step .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.step .n{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(#ff97bc,#ff6fa3);color:#fff;font-weight:800;font-size:20px;border:2px solid rgba(255,255,255,.85);box-shadow:0 6px 14px rgba(255,100,150,.3)}
+.step .top img{height:58px;width:auto}
+.step h3{margin:0 0 6px;font-size:21px}
+.step p{margin:0;color:var(--ink-2);font-size:17px}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+/* chain */
+.chain{border-radius:30px;padding:26px 18px 18px}
+.chain .row{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:2px}
+.veg{display:flex;flex-direction:column;align-items:center;width:calc(20% - 2px);min-width:92px;font-size:14px;font-weight:800;color:var(--ink-2);position:relative;padding-bottom:4px}
+.veg img{width:100%;max-width:120px;height:auto;display:block;transition:transform .35s var(--ease)}
+.veg:hover img{transform:translateY(-8px) rotate(-4deg)}
+.veg:nth-child(1) img{max-width:58px}.veg:nth-child(2) img{max-width:66px}.veg:nth-child(3) img{max-width:74px}.veg:nth-child(4) img{max-width:82px}.veg:nth-child(5) img{max-width:90px}
+.veg:nth-child(6) img{max-width:98px}.veg:nth-child(7) img{max-width:106px}.veg:nth-child(8) img{max-width:112px}.veg:nth-child(9) img{max-width:118px}.veg:nth-child(10) img{max-width:124px}
+.veg::after{content:"";position:absolute;right:-9px;bottom:38%;width:12px;height:12px;border-right:3px solid rgba(255,111,163,.6);border-top:3px solid rgba(255,111,163,.6);transform:rotate(45deg)}
+.veg:nth-child(5)::after,.veg:last-child::after{display:none}
+@media (min-width:1000px){.veg:nth-child(5)::after{display:block}}
+.eq{display:flex;justify-content:center;align-items:center;gap:10px;margin:20px auto 0;padding:12px 20px;border-radius:999px;background:rgba(255,255,255,.6);border:1.5px solid rgba(255,255,255,.9);width:max-content;max-width:100%;font-weight:800;font-size:22px;color:var(--pink)}
+.eq img{height:52px;width:auto}
+.eq span{color:var(--ink-2);font-size:16px;margin-left:6px}
+/* shots */
 .shots{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 .shot{border-radius:26px;padding:8px;text-align:center}
 .shot img{width:100%;height:auto;display:block;border-radius:20px}
@@ -44,40 +88,37 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0 0 28px;max-width:60
   .shots::-webkit-scrollbar{display:none}
   .shot{flex:0 0 min(64vw,250px);scroll-snap-align:center}
 }
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.step{border-radius:30px;padding:26px 24px}
-.step .n{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(#ff97bc,#ff6fa3);color:#fff;font-weight:800;font-size:20px;border:2px solid rgba(255,255,255,.85);box-shadow:0 6px 14px rgba(255,100,150,.3);margin-bottom:12px}
-.step h3{margin:0 0 6px;font-size:21px}
-.step p{margin:0;color:var(--ink-2)}
-.veg-row{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;align-items:flex-end;padding:22px 10px 10px;border-radius:30px}
-.veg{display:flex;flex-direction:column;align-items:center;width:calc(20% - 4px);min-width:86px;font-size:14px;font-weight:800;color:var(--ink-2)}
-.veg img{width:100%;max-width:120px;height:auto;display:block;transition:transform .35s var(--ease)}
-.veg:hover img{transform:translateY(-8px) rotate(-4deg)}
-.veg:nth-child(1) img{max-width:60px}.veg:nth-child(2) img{max-width:68px}.veg:nth-child(3) img{max-width:76px}.veg:nth-child(4) img{max-width:84px}.veg:nth-child(5) img{max-width:92px}
-.veg:nth-child(6) img{max-width:100px}.veg:nth-child(7) img{max-width:106px}.veg:nth-child(8) img{max-width:112px}.veg:nth-child(9) img{max-width:118px}.veg:nth-child(10) img{max-width:124px}
-.promise{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.promise .p{border-radius:26px;padding:22px}
-.promise .p .ic{font-size:30px;line-height:1;margin-bottom:8px}
+/* parents */
+.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.promise .p{border-radius:26px;padding:22px 20px}
+.promise .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.9);margin-bottom:12px}
+.promise .ic svg{width:24px;height:24px;fill:none;stroke:var(--pink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .promise .p h3{margin:0 0 4px;font-size:19px}
 .promise .p p{margin:0;color:var(--ink-2);font-size:16px}
-.download{text-align:center;padding:clamp(40px,6vw,80px) 0}
-.download .card{border-radius:36px;padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;align-items:center;gap:16px}
-.download img{width:120px;height:120px;border-radius:28px;box-shadow:0 14px 30px rgba(40,90,100,.25)}
-.download h2{margin:0;font-size:clamp(1.8rem,3vw,2.4rem)}
-.download .stores{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-@media (max-width:760px){.hero .grid{grid-template-columns:1fr}.hero .art{order:-1;max-width:420px;margin:0 auto}}
+@media (max-width:900px){.promise{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.promise{grid-template-columns:1fr}}
+/* download */
+.download{padding:clamp(30px,5vw,60px) 0 clamp(40px,6vw,70px)}
+.download .card{border-radius:36px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center}
+.download img{width:112px;height:112px;border-radius:26px;box-shadow:0 14px 30px rgba(40,90,100,.25)}
+.download h2{margin:0 0 6px;font-size:clamp(1.6rem,2.8vw,2.2rem);line-height:1.1}
+.download p{margin:0;color:var(--ink-2)}
+.download .stores{display:flex;flex-direction:column;gap:10px}
+@media (max-width:760px){.download .card{grid-template-columns:1fr;text-align:center;justify-items:center}.download .stores{flex-direction:row;flex-wrap:wrap;justify-content:center}}
+@media (max-width:760px){.hero .grid{grid-template-columns:1fr}.hero .art{order:-1;max-width:400px;margin:0 auto}.hero .logo{text-align:center}.hero .tag{margin-inline:auto;text-align:center}.hero .stores,.chips{justify-content:center}.hero .note{text-align:center}}
 </style>
 </head>
 <body>
+<a class="skip" href="#how">Skip to content</a>
 
 <nav class="site" aria-label="Primary">
   <div class="container row">
-    <a href="./" class="brand"><img src="icon-192.png" alt="" width="34" height="34"><span>Veggie Pop</span></a>
+    <a href="./" class="brand" aria-current="page"><img src="icon-192.png" alt="" width="34" height="34"><span>Veggie Pop</span></a>
     <div class="links">
       <a href="../">Playpal Apps</a>
       <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="terms.html" class="hide-sm">Terms</a>
     </div>
   </div>
 </nav>
@@ -85,107 +126,147 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0 0 28px;max-width:60
 <header class="hero" id="top">
   <div class="container grid">
     <div>
+      <span class="eyebrow">Made for Kids · Ages 4 to 8</span>
       <h1 class="logo" aria-label="Veggie Pop"><span style="--c:#ff6fa3">V</span><span style="--c:#ffd23f">e</span><span style="--c:#8fd65a">g</span><span style="--c:#ff9a2e">g</span><span style="--c:#b48ae8">i</span><span style="--c:#ff5a47">e</span><span class="gap"></span><span style="--c:#4cb35a">P</span><span style="--c:#ff6fa3">o</span><span style="--c:#ffd23f">p</span></h1>
       <p class="tag">A calm, cuddly merge game for little hands. Drop veggies into a jar, match two the same, and watch them hug into a bigger friend.</p>
-      <div class="chips">
-        <span class="chip glass"><i></i>Ages 4 to 8</span>
-        <span class="chip glass"><i></i>No ads</span>
-        <span class="chip glass"><i></i>Plays offline</span>
-        <span class="chip glass"><i></i>iPhone, iPad, Android</span>
-      </div>
       <div class="stores">
-        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
-        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
       </div>
-      <p class="note">Launching soon on both stores. This page will get the download links the day it goes live.</p>
+      <p class="note">Launching soon on both stores.</p>
+      <div class="chips" aria-label="Highlights">
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>No ads</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>No accounts</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Plays offline</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>iPhone, iPad, Android</span>
+      </div>
     </div>
-    <div class="art">
-      <span class="bub" style="width:90px;height:90px;left:-4%;top:6%"></span>
-      <span class="bub" style="width:48px;height:48px;right:2%;top:14%"></span>
-      <span class="bub" style="width:60px;height:60px;right:12%;bottom:4%"></span>
-      <img src="veg/hero.png" alt="A happy tomato with a radish and a pea" width="900" height="600">
+    <div class="art" aria-hidden="true">
+      <span class="glow"></span>
+      <span class="bub" style="width:90px;height:90px;left:-2%;top:4%"></span>
+      <span class="bub b2" style="width:46px;height:46px;right:4%;top:12%"></span>
+      <span class="bub b3" style="width:62px;height:62px;right:10%;bottom:2%"></span>
+      <img src="veg/hero.png" alt="" width="900" height="600" fetchpriority="high">
     </div>
   </div>
 </header>
 
 <section class="slab" id="how">
   <div class="container">
-    <h2>One tap. That is the whole game.</h2>
-    <p class="sub">Simple enough for a four-year-old, satisfying enough that grown-ups keep stealing the phone.</p>
+    <div class="head reveal">
+      <span class="eyebrow">How to play</span>
+      <h2>One tap. That is the whole game.</h2>
+      <p class="sub">Simple enough for a four-year-old, satisfying enough that grown-ups keep stealing the phone.</p>
+    </div>
     <div class="steps">
-      <div class="step glass"><div class="n">1</div><h3>Tap to drop</h3><p>Slide to aim, tap to drop a veggie into the glass jar. It tumbles, bounces and settles with a soft little squish.</p></div>
-      <div class="step glass"><div class="n">2</div><h3>Match two the same</h3><p>When two matching veggies touch, they hug and pop into the next one up. Two peas make a radish, two radishes make a tomato.</p></div>
-      <div class="step glass"><div class="n">3</div><h3>Grow the big ones</h3><p>Keep merging up the chain toward the broccoli, the cauliflower and the mighty pumpkin. Fill the jar past the rim and the harvest is over. Play again!</p></div>
+      <div class="step glass lift reveal d1"><div class="top"><span class="n">1</span><img src="veg/pea.png" alt="" width="58" height="58"></div><h3>Tap to drop</h3><p>Slide to aim, tap to drop a veggie into the glass jar. It tumbles, bounces and settles with a soft little squish.</p></div>
+      <div class="step glass lift reveal d2"><div class="top"><span class="n">2</span><img src="veg/radish.png" alt="" width="58" height="58"></div><h3>Match two the same</h3><p>When two matching veggies touch, they hug and pop into the next one up. Two peas make a radish, two radishes make a tomato.</p></div>
+      <div class="step glass lift reveal d3"><div class="top"><span class="n">3</span><img src="veg/pumpkin.png" alt="" width="58" height="58"></div><h3>Grow the big ones</h3><p>Keep merging up the chain toward the broccoli, the cauliflower and the mighty pumpkin. Fill the jar past the rim and the harvest is over. Play again!</p></div>
     </div>
   </div>
 </section>
 
 <section class="slab" id="veggies">
   <div class="container">
-    <h2>Meet the ten friends</h2>
-    <p class="sub">Every veggie you discover is added to your Veggie Book. Blinking, blushing, and always happy to see you.</p>
-    <div class="veg-row glass">
-      <div class="veg"><img src="veg/pea.png" alt="Pea"><span>Pea</span></div>
-      <div class="veg"><img src="veg/radish.png" alt="Radish"><span>Radish</span></div>
-      <div class="veg"><img src="veg/tomato.png" alt="Tomato"><span>Tomato</span></div>
-      <div class="veg"><img src="veg/mushroom.png" alt="Mushroom"><span>Mushroom</span></div>
-      <div class="veg"><img src="veg/potato.png" alt="Potato"><span>Potato</span></div>
-      <div class="veg"><img src="veg/bellpepper.png" alt="Bell pepper"><span>Bell pepper</span></div>
-      <div class="veg"><img src="veg/eggplant.png" alt="Eggplant"><span>Eggplant</span></div>
-      <div class="veg"><img src="veg/broccoli.png" alt="Broccoli"><span>Broccoli</span></div>
-      <div class="veg"><img src="veg/cauliflower.png" alt="Cauliflower"><span>Cauliflower</span></div>
-      <div class="veg"><img src="veg/pumpkin.png" alt="Pumpkin"><span>Pumpkin</span></div>
+    <div class="head reveal">
+      <span class="eyebrow">The chain</span>
+      <h2>Meet the ten friends</h2>
+      <p class="sub">Two of a kind make the next one up. Every new veggie you grow joins your Veggie Book, blinking, blushing and always happy to see you.</p>
+    </div>
+    <div class="chain glass reveal">
+      <div class="row">
+        <div class="veg"><img src="veg/pea.png" alt="Pea" width="200" height="200"><span>Pea</span></div>
+        <div class="veg"><img src="veg/radish.png" alt="Radish" width="200" height="200"><span>Radish</span></div>
+        <div class="veg"><img src="veg/tomato.png" alt="Tomato" width="200" height="200"><span>Tomato</span></div>
+        <div class="veg"><img src="veg/mushroom.png" alt="Mushroom" width="200" height="200"><span>Mushroom</span></div>
+        <div class="veg"><img src="veg/potato.png" alt="Potato" width="200" height="200"><span>Potato</span></div>
+        <div class="veg"><img src="veg/bellpepper.png" alt="Bell pepper" width="200" height="200"><span>Bell pepper</span></div>
+        <div class="veg"><img src="veg/eggplant.png" alt="Eggplant" width="200" height="200"><span>Eggplant</span></div>
+        <div class="veg"><img src="veg/broccoli.png" alt="Broccoli" width="200" height="200"><span>Broccoli</span></div>
+        <div class="veg"><img src="veg/cauliflower.png" alt="Cauliflower" width="200" height="200"><span>Cauliflower</span></div>
+        <div class="veg"><img src="veg/pumpkin.png" alt="Pumpkin" width="200" height="200"><span>Pumpkin</span></div>
+      </div>
+      <div class="eq" aria-label="Two peas make a radish"><img src="veg/pea.png" alt="" width="52" height="52">+<img src="veg/pea.png" alt="" width="52" height="52">=<img src="veg/radish.png" alt="" width="52" height="52"><span>and so on, all the way to the pumpkin</span></div>
     </div>
   </div>
 </section>
 
 <section class="slab" id="screens">
   <div class="container">
-    <h2>Easy on little eyes</h2>
-    <p class="sub">Soft aqua and peach, gentle water light, a music-box tune and pentatonic pops. Dark mode for bedtime. Nothing flashes, nothing shouts. <span class="swipe-hint">Swipe to see more.</span></p>
+    <div class="head reveal">
+      <span class="eyebrow">Look and feel</span>
+      <h2>Easy on little eyes</h2>
+      <p class="sub">Soft aqua and peach, gentle water light, a music-box tune and pentatonic pops. Dark mode for bedtime. Nothing flashes, nothing shouts. <span class="swipe-hint">Swipe to see more.</span></p>
+    </div>
     <div class="shots">
-      <div class="shot glass"><img src="shots/home.jpg" alt="Veggie Pop home screen" loading="lazy"><b>Home</b></div>
-      <div class="shot glass"><img src="shots/play.jpg" alt="A jar full of veggies mid-game" loading="lazy"><b>Fill the jar</b></div>
-      <div class="shot glass"><img src="shots/over.jpg" alt="What a harvest! game over screen with three stars" loading="lazy"><b>What a harvest!</b></div>
-      <div class="shot glass"><img src="shots/book.jpg" alt="The Veggie Book collection" loading="lazy"><b>Veggie Book</b></div>
-      <div class="shot glass"><img src="shots/home-dark.jpg" alt="Home screen in dark mode" loading="lazy"><b>Dark mode</b></div>
+      <div class="shot glass lift reveal"><img src="shots/home.jpg" alt="Veggie Pop home screen" width="720" height="1564" loading="lazy"><b>Home</b></div>
+      <div class="shot glass lift reveal d1"><img src="shots/play.jpg" alt="A jar full of veggies mid-game" width="720" height="1564" loading="lazy"><b>Fill the jar</b></div>
+      <div class="shot glass lift reveal d2"><img src="shots/over.jpg" alt="What a harvest! game over screen with three stars" width="720" height="1564" loading="lazy"><b>What a harvest!</b></div>
+      <div class="shot glass lift reveal d3"><img src="shots/book.jpg" alt="The Veggie Book collection" width="720" height="1564" loading="lazy"><b>Veggie Book</b></div>
+      <div class="shot glass lift reveal d4"><img src="shots/home-dark.jpg" alt="The Veggie Book in dark mode" width="720" height="1564" loading="lazy"><b>Dark mode</b></div>
     </div>
   </div>
 </section>
 
 <section class="slab" id="parents">
   <div class="container">
-    <h2>Made for parents to relax about</h2>
-    <p class="sub">We built Veggie Pop the way we would want a game for our own kids. Made for Kids on the App Store, Designed for Families on Google Play.</p>
+    <div class="head reveal">
+      <span class="eyebrow">For grown-ups</span>
+      <h2>Made for parents to relax about</h2>
+      <p class="sub">We built Veggie Pop the way we would want a game for our own kids. Made for Kids on the App Store, Designed for Families on Google Play.</p>
+    </div>
     <div class="promise">
-      <div class="p glass"><div class="ic">🚫</div><h3>No ads, ever</h3><p>Nothing to tap by mistake, nothing to watch, nothing to buy.</p></div>
-      <div class="p glass"><div class="ic">📴</div><h3>Plays offline</h3><p>Everything is on the device, so it works on a plane, in the car, or anywhere else.</p></div>
-      <div class="p glass"><div class="ic">🔒</div><h3>No accounts</h3><p>Nothing to sign up for. Scores and the Veggie Book stay on the device. <a href="privacy.html">Read the privacy policy</a>.</p></div>
-      <div class="p glass"><div class="ic">🌙</div><h3>Calm by design</h3><p>No timers, no lives, no pressure. Reduced-motion and dark mode are respected.</p></div>
+      <div class="p glass lift reveal"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></div><h3>No ads, ever</h3><p>Nothing to tap by mistake, nothing to watch, nothing to buy.</p></div>
+      <div class="p glass lift reveal d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10 18h4"/></svg></div><h3>Plays offline</h3><p>Everything is on the device, so it works on a plane, in the car, or anywhere else.</p></div>
+      <div class="p glass lift reveal d2"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>No accounts</h3><p>Nothing to sign up for. Scores and the Veggie Book stay on the device. <a href="privacy.html">Read the privacy policy</a>.</p></div>
+      <div class="p glass lift reveal d3"><div class="ic"><svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg></div><h3>Calm by design</h3><p>No timers, no lives, no pressure. Reduced motion and dark mode are respected.</p></div>
     </div>
   </div>
 </section>
 
 <section class="download" id="download">
   <div class="container">
-    <div class="card glass">
-      <img src="icon-192.png" alt="" width="120" height="120">
-      <h2>Ready to grow a pumpkin?</h2>
-      <p style="margin:0;color:var(--ink-2)">Veggie Pop is coming to the App Store and Google Play.</p>
+    <div class="card glass reveal">
+      <img src="icon-192.png" alt="" width="112" height="112">
+      <div>
+        <h2>Ready to grow a pumpkin?</h2>
+        <p>Veggie Pop is coming to the App Store and Google Play. This page will carry the links the day it goes live.</p>
+      </div>
       <div class="stores">
-        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
-        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="site">
-  <div class="container row">
-    <div>&copy; 2026 Playpal Apps</div>
-    <div><a href="../">Playpal Apps</a> · <a href="support.html">Support</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+<footer class="rich">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="brand"><img src="icon-192.png" alt="" width="44" height="44">Veggie Pop</div>
+        <p>A calm, cuddly merge game for kids, made by Playpal Apps.</p>
+      </div>
+      <div>
+        <h4>Game</h4>
+        <ul><li><a href="#how">How to play</a></li><li><a href="#veggies">The veggies</a></li><li><a href="#screens">Screens</a></li><li><a href="#parents">For grown-ups</a></li></ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul><li><a href="support.html">Support</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="../">All Playpal apps</a></li></ul>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; 2026 Playpal Apps</span><span>Veggie Pop characters and artwork &copy; Playpal Apps.</span></div>
   </div>
 </footer>
 
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
 </body>
 </html>
