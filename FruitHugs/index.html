@@ -34,8 +34,12 @@ body{background:#a8e4e0 linear-gradient(#a8e4e0 0%,#dff3ef 45%,#ffe3d6 100%)}
 /* illustrated sky: sun, clouds, hills */
 .sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .sky .sun{position:absolute;right:6vw;top:9vh;width:clamp(90px,10vw,150px);height:clamp(90px,10vw,150px);border-radius:50%;background:#ffd84d;box-shadow:0 0 0 14px rgba(255,216,77,.25),0 0 60px rgba(255,216,77,.5);animation:sunbob 7s ease-in-out infinite}
-.sky .sun::before{content:"";position:absolute;left:28%;top:40%;width:12%;height:14%;border-radius:50%;background:#4a2c2a;box-shadow:300% 0 0 0 #4a2c2a}
-.sky .sun::after{content:"";position:absolute;left:38%;top:58%;width:24%;height:12%;border:3px solid #4a2c2a;border-top:0;border-radius:0 0 50% 50%/0 0 100% 100%}
+.sky .sun i{position:absolute;top:40%;width:11%;height:13%;border-radius:50%;background:#4a2c2a}
+.sky .sun i:first-child{left:30%}.sky .sun i:nth-child(2){left:59%}
+.sky .sun i::after{content:"";position:absolute;left:18%;top:14%;width:40%;height:40%;border-radius:50%;background:#fff}
+.sky .sun b{position:absolute;left:39%;top:58%;width:22%;height:11%;border:3px solid #4a2c2a;border-top:0;border-radius:0 0 50% 50%/0 0 100% 100%}
+.sky .sun u{position:absolute;top:60%;width:14%;height:7%;border-radius:50%;background:rgba(255,120,150,.45)}
+.sky .sun u:nth-of-type(1){left:14%}.sky .sun u:nth-of-type(2){left:72%}
 .sky .cloud{position:absolute;width:120px;height:44px;background:#fff;border-radius:999px;opacity:.95;animation:drift 40s linear infinite}
 .sky .cloud::before,.sky .cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
 .sky .cloud::before{width:52px;height:52px;left:22px;top:-26px}.sky .cloud::after{width:40px;height:40px;left:62px;top:-18px}
@@ -144,7 +148,7 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
 <a class="skip" href="#how">Skip to content</a>
 
 <div class="sky" aria-hidden="true">
-  <span class="sun"></span>
+  <span class="sun"><i></i><i></i><b></b><u></u><u></u></span>
   <span class="cloud c1"><i></i><b></b></span><span class="cloud c2"><i></i><b></b></span><span class="cloud c3"></span>
   <div class="hills"><svg viewBox="0 0 1440 300" preserveAspectRatio="none"><path fill="#b9e6a1" d="M0 140C240 90 420 210 720 160s520-80 720-20V300H0z"/><path fill="#8fd65a" d="M0 220c200-60 400 30 720 0s520-90 720-20V300H0z"/><path fill="#6cc24a" d="M0 270c260-40 480 30 720 10s520-50 720 0V300H0z"/></svg></div>
 </div>
