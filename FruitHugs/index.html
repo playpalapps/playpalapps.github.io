@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Fruit Hugs — a calm, cuddly merge game for kids</title>
+<meta name="description" content="Fruit Hugs is a calm, cute merge game for children aged 4 to 8. Drop fruit friends into a bowl, match two the same and watch them hug into a bigger friend. Six friend sets, eight scenes, Zen mode. No ads, plays offline. iPhone, iPad and Android.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/FruitHugs/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Playpal Apps">
+<meta property="og:url" content="https://playpalapps.github.io/FruitHugs/">
+<meta property="og:title" content="Fruit Hugs — a calm, cuddly merge game for kids">
+<meta property="og:description" content="Drop fruit friends into a bowl, match two the same, watch them hug and grow. Six friend sets, eight scenes, Zen mode. No ads, plays offline.">
+<meta property="og:image" content="https://playpalapps.github.io/FruitHugs/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fruit Hugs — a calm, cuddly merge game for kids">
+<meta name="twitter:description" content="Drop fruit friends into a bowl, match two the same, watch them hug and grow.">
+<meta name="twitter:image" content="https://playpalapps.github.io/FruitHugs/og-image.jpg">
+<meta name="theme-color" content="#ffe3d6">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preload" href="Fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="_shared.css?v=1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Fruit Hugs","applicationCategory":"GameApplication","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"A calm, cuddly merge game for children aged 4 to 8.","image":"https://playpalapps.github.io/FruitHugs/icon.png","url":"https://playpalapps.github.io/FruitHugs/"}
+</script>
+<style>
+body{background:#a8e4e0 linear-gradient(#a8e4e0 0%,#dff3ef 45%,#ffe3d6 100%)}
+/* illustrated sky: sun, clouds, hills */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sky .sun{position:absolute;right:6vw;top:9vh;width:clamp(90px,10vw,150px);height:clamp(90px,10vw,150px);border-radius:50%;background:#ffd84d;box-shadow:0 0 0 14px rgba(255,216,77,.25),0 0 60px rgba(255,216,77,.5);animation:sunbob 7s ease-in-out infinite}
+.sky .sun::before{content:"";position:absolute;left:28%;top:40%;width:12%;height:14%;border-radius:50%;background:#4a2c2a;box-shadow:300% 0 0 0 #4a2c2a}
+.sky .sun::after{content:"";position:absolute;left:38%;top:58%;width:24%;height:12%;border:3px solid #4a2c2a;border-top:0;border-radius:0 0 50% 50%/0 0 100% 100%}
+.sky .cloud{position:absolute;width:120px;height:44px;background:#fff;border-radius:999px;opacity:.95;animation:drift 40s linear infinite}
+.sky .cloud::before,.sky .cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.sky .cloud::before{width:52px;height:52px;left:22px;top:-26px}.sky .cloud::after{width:40px;height:40px;left:62px;top:-18px}
+.sky .cloud i{position:absolute;left:50px;top:12px;width:7px;height:9px;border-radius:50%;background:#4a2c2a;box-shadow:16px 0 0 #4a2c2a}
+.sky .cloud b{position:absolute;left:56px;top:24px;width:12px;height:6px;border:2.5px solid #4a2c2a;border-top:0;border-radius:0 0 8px 8px}
+.sky .c1{left:-140px;top:14vh;animation-duration:55s}.sky .c2{left:-140px;top:30vh;transform:scale(.7);animation-duration:75s;animation-delay:-30s}.sky .c3{left:-140px;top:6vh;transform:scale(.55);animation-duration:65s;animation-delay:-50s}
+@keyframes drift{from{translate:0 0}to{translate:calc(100vw + 300px) 0}}
+@keyframes sunbob{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.sky .hills{position:absolute;left:0;right:0;bottom:0;height:30vh}
+.sky .hills svg{position:absolute;left:0;bottom:0;width:100%;height:100%}
+@media (prefers-reduced-motion:reduce){.sky .cloud,.sky .sun{animation:none}}
+/* hero */
+.hero{padding:clamp(36px,6vw,84px) 0 clamp(26px,4vw,52px);overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,64px);align-items:center}
+.hero .logo{font-size:clamp(3.1rem,8vw,5.8rem);margin:0 0 16px}
+.hero .tag{font-size:clamp(1.2rem,2.1vw,1.5rem);font-weight:600;color:var(--ink-2);max-width:34ch;margin:0 0 24px;line-height:1.4}
+.hero .stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.hero .note{font-size:15px;color:var(--ink-3);margin:0 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:14.5px}
+.chip svg{width:16px;height:16px;fill:none;stroke:#2a9d5c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.hero .art{position:relative;padding:4% 2% 0}
+.hero .art img{width:100%;height:auto;display:block;filter:drop-shadow(0 22px 26px rgba(40,90,100,.22));animation:float 6s ease-in-out infinite}
+.hero .art .heart{position:absolute;font-size:28px;animation:drift2 7s ease-in-out infinite;opacity:.9}
+.hero .art .h2{animation-duration:9s;animation-delay:-3s;font-size:20px}.hero .art .h3{animation-duration:8s;animation-delay:-5s;font-size:24px}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-10px) rotate(.6deg)}}
+@keyframes drift2{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-16px) rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){.hero .art img,.hero .art .heart{animation:none}}
+/* sections */
+section.slab{padding:clamp(40px,6vw,76px) 0}
+section.slab .head{max-width:62ch;margin-bottom:clamp(22px,3vw,34px)}
+section.slab h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:700;line-height:1.08;margin:0 0 10px;letter-spacing:-.01em}
+section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
+.swipe-hint{display:none;color:var(--ink-3)}
+@media (max-width:980px){.swipe-hint{display:inline}}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{border-radius:30px;padding:26px 24px 24px;position:relative}
+.step .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.step .n{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(var(--pink-2),var(--pink));color:#fff;font-weight:700;font-size:20px;border:2px solid rgba(255,255,255,.85);box-shadow:0 6px 14px rgba(255,100,150,.3)}
+.step .top img{height:58px;width:auto}
+.step h3{margin:0 0 6px;font-size:21px}
+.step p{margin:0;color:var(--ink-2);font-size:17px}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+/* modes */
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.mode{border-radius:30px;padding:26px 24px 24px;text-align:center}
+.mode .ic{font-size:44px;line-height:1;margin-bottom:10px}
+.mode h3{margin:0 0 6px;font-size:22px}
+.mode p{margin:0;color:var(--ink-2);font-size:17px}
+@media (max-width:760px){.modes{grid-template-columns:1fr}}
+/* chain */
+.chain{border-radius:30px;padding:26px 18px 18px}
+.chain .row{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:2px}
+.fr{display:flex;flex-direction:column;align-items:center;width:calc(100% / 11 - 2px);min-width:84px;font-size:14px;font-weight:700;color:var(--ink-2);position:relative;padding-bottom:4px}
+.fr img{width:100%;max-width:120px;height:auto;display:block;transition:transform .35s var(--ease)}
+.fr:hover img{transform:translateY(-8px) rotate(-4deg)}
+.fr:nth-child(1) img{max-width:50px}.fr:nth-child(2) img{max-width:58px}.fr:nth-child(3) img{max-width:66px}.fr:nth-child(4) img{max-width:74px}.fr:nth-child(5) img{max-width:82px}.fr:nth-child(6) img{max-width:90px}
+.fr:nth-child(7) img{max-width:98px}.fr:nth-child(8) img{max-width:106px}.fr:nth-child(9) img{max-width:112px}.fr:nth-child(10) img{max-width:118px}.fr:nth-child(11) img{max-width:124px}
+.eq{display:flex;justify-content:center;align-items:center;gap:10px;margin:20px auto 0;padding:12px 20px;border-radius:999px;background:rgba(255,255,255,.6);border:1.5px solid rgba(255,255,255,.9);width:max-content;max-width:100%;font-weight:700;font-size:22px;color:var(--pink)}
+.eq img{height:52px;width:auto}
+.eq span{color:var(--ink-2);font-size:16px;margin-left:6px}
+/* sets */
+.sets{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.set{border-radius:24px;padding:16px 10px 12px;text-align:center}
+.set img{width:84px;height:84px;display:block;margin:0 auto 6px;transition:transform .35s var(--ease)}
+.set:hover img{transform:scale(1.08) rotate(-4deg)}
+.set b{display:block;font-size:15px}
+.set small{display:block;color:var(--ink-3);font-size:13px}
+@media (max-width:900px){.sets{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:480px){.sets{grid-template-columns:repeat(2,1fr)}}
+.scenes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.scene{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:999px;font-weight:700;font-size:15px;background:rgba(255,255,255,.6);border:1.5px solid rgba(255,255,255,.9)}
+.scene i{width:26px;height:26px;border-radius:50%;display:inline-block;background:var(--g)}
+/* shots */
+.shots{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.shot{border-radius:26px;padding:8px;text-align:center}
+.shot img{width:100%;height:auto;display:block;border-radius:20px}
+.shot b{display:block;padding:10px 6px 4px;font-size:15px}
+@media (max-width:980px){
+  .shots{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .shots::-webkit-scrollbar{display:none}
+  .shot{flex:0 0 min(64vw,250px);scroll-snap-align:center}
+}
+/* parents */
+.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.promise .p{border-radius:26px;padding:22px 20px}
+.promise .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.9);margin-bottom:12px}
+.promise .ic svg{width:24px;height:24px;fill:none;stroke:var(--pink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.promise .p h3{margin:0 0 4px;font-size:19px}
+.promise .p p{margin:0;color:var(--ink-2);font-size:16px}
+@media (max-width:900px){.promise{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.promise{grid-template-columns:1fr}}
+/* download */
+.download{padding:clamp(30px,5vw,60px) 0 clamp(40px,6vw,70px)}
+.download .card{border-radius:36px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center}
+.download img{width:112px;height:112px;border-radius:26px;box-shadow:0 14px 30px rgba(40,90,100,.25)}
+.download h2{margin:0 0 6px;font-size:clamp(1.6rem,2.8vw,2.2rem);line-height:1.1}
+.download p{margin:0;color:var(--ink-2)}
+.download .stores{display:flex;flex-direction:column;gap:10px}
+@media (max-width:760px){.download .card{grid-template-columns:1fr;text-align:center;justify-items:center}.download .stores{flex-direction:row;flex-wrap:wrap;justify-content:center}}
+@media (max-width:760px){.hero .grid{grid-template-columns:1fr}.hero .art{order:-1;max-width:400px;margin:0 auto}.hero .logo{text-align:center}.hero .tag{margin-inline:auto;text-align:center}.hero .stores,.chips{justify-content:center}.hero .note{text-align:center}}
+</style>
+</head>
+<body>
+<a class="skip" href="#how">Skip to content</a>
+
+<div class="sky" aria-hidden="true">
+  <span class="sun"></span>
+  <span class="cloud c1"><i></i><b></b></span><span class="cloud c2"><i></i><b></b></span><span class="cloud c3"></span>
+  <div class="hills"><svg viewBox="0 0 1440 300" preserveAspectRatio="none"><path fill="#b9e6a1" d="M0 140C240 90 420 210 720 160s520-80 720-20V300H0z"/><path fill="#8fd65a" d="M0 220c200-60 400 30 720 0s520-90 720-20V300H0z"/><path fill="#6cc24a" d="M0 270c260-40 480 30 720 10s520-50 720 0V300H0z"/></svg></div>
+</div>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="./" class="brand" aria-current="page"><img src="icon-192.png" alt="" width="34" height="34"><span>Fruit Hugs</span></a>
+    <div class="links">
+      <a href="../">Playpal Apps</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html" class="hide-sm">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container grid">
+    <div>
+      <span class="eyebrow">Made for Kids · Ages 4 to 8</span>
+      <h1 class="logo" aria-label="Fruit Hugs"><span style="--c:#ff6fa3">F</span><span style="--c:#ffd23f">r</span><span style="--c:#8fd65a">u</span><span style="--c:#ff9a2e">i</span><span style="--c:#b48ae8">t</span><span class="gap"></span><span style="--c:#4cb35a">H</span><span style="--c:#ff6fa3">u</span><span style="--c:#5fc9e8">g</span><span style="--c:#ffd23f">s</span></h1>
+      <p class="tag">A calm, cuddly merge game for little hands. Drop fruit friends into a bowl, match two the same, and watch them hug into a bigger friend.</p>
+      <div class="stores">
+        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+      <p class="note">Launching soon on both stores.</p>
+      <div class="chips" aria-label="Highlights">
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>No ads</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>No accounts</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Plays offline</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>iPhone, iPad, Android</span>
+      </div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <span class="heart" style="left:2%;top:6%">💗</span>
+      <span class="heart h2" style="right:6%;top:10%">💗</span>
+      <span class="heart h3" style="right:12%;bottom:4%">💗</span>
+      <img src="hero.png" alt="" width="900" height="600" fetchpriority="high">
+    </div>
+  </div>
+</header>
+
+<section class="slab" id="how">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">How to play</span>
+      <h2>One tap. That is the whole game.</h2>
+      <p class="sub">Simple enough for a four-year-old, satisfying enough that grown-ups keep stealing the phone.</p>
+    </div>
+    <div class="steps">
+      <div class="step glass lift reveal d1"><div class="top"><span class="n">1</span><img src="friends/fruit-0.png" alt="" width="58" height="58"></div><h3>Tap to drop</h3><p>Slide to aim, tap to drop a friend into the bowl. A soft ghost shows exactly where it will land.</p></div>
+      <div class="step glass lift reveal d2"><div class="top"><span class="n">2</span><img src="friends/fruit-1.png" alt="" width="58" height="58"></div><h3>Match two the same</h3><p>When two matching friends touch, they hug and pop into the next one up. Two blueberries make a cherry, two cherries make a strawberry.</p></div>
+      <div class="step glass lift reveal d3"><div class="top"><span class="n">3</span><img src="friends/fruit-10.png" alt="" width="58" height="58"></div><h3>Grow the big ones</h3><p>Keep merging up the chain toward the pineapple, the melon and the mighty watermelon. Every hug earns hearts to dress the game up.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="modes">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Three ways to play</span>
+      <h2>Pick your pace</h2>
+    </div>
+    <div class="modes">
+      <div class="mode glass lift reveal"><div class="ic">🍓</div><h3>Classic</h3><p>Keep the bowl from overflowing and chase your best score. Three stars for the biggest friends.</p></div>
+      <div class="mode glass lift reveal d1"><div class="ic">🍃</div><h3>Zen</h3><p>No game over, ever. When the bowl fills up, the top friends float gently away to make room. Pure relaxation.</p></div>
+      <div class="mode glass lift reveal d2"><div class="ic">📅</div><h3>Daily Bowl</h3><p>Everyone gets the same bowl each day. Come back tomorrow to keep your streak going.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="friends">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">The chain</span>
+      <h2>Meet the eleven fruit friends</h2>
+      <p class="sub">Two of a kind make the next one up. Every new friend you grow joins your Friend book, blinking, blushing and always happy to see you.</p>
+    </div>
+    <div class="chain glass reveal">
+      <div class="row">
+        <div class="fr"><img src="friends/fruit-0.png" alt="Blueberry" width="240" height="240"><span>Blueberry</span></div>
+        <div class="fr"><img src="friends/fruit-1.png" alt="Cherry" width="240" height="240"><span>Cherry</span></div>
+        <div class="fr"><img src="friends/fruit-2.png" alt="Strawberry" width="240" height="240"><span>Strawberry</span></div>
+        <div class="fr"><img src="friends/fruit-3.png" alt="Lime" width="240" height="240"><span>Lime</span></div>
+        <div class="fr"><img src="friends/fruit-4.png" alt="Plum" width="240" height="240"><span>Plum</span></div>
+        <div class="fr"><img src="friends/fruit-5.png" alt="Orange" width="240" height="240"><span>Orange</span></div>
+        <div class="fr"><img src="friends/fruit-6.png" alt="Apple" width="240" height="240"><span>Apple</span></div>
+        <div class="fr"><img src="friends/fruit-7.png" alt="Peach" width="240" height="240"><span>Peach</span></div>
+        <div class="fr"><img src="friends/fruit-8.png" alt="Pineapple" width="240" height="240"><span>Pineapple</span></div>
+        <div class="fr"><img src="friends/fruit-9.png" alt="Melon" width="240" height="240"><span>Melon</span></div>
+        <div class="fr"><img src="friends/fruit-10.png" alt="Watermelon" width="240" height="240"><span>Watermelon</span></div>
+      </div>
+      <div class="eq" aria-label="Two blueberries make a cherry"><img src="friends/fruit-0.png" alt="" width="52" height="52">+<img src="friends/fruit-0.png" alt="" width="52" height="52">=<img src="friends/fruit-1.png" alt="" width="52" height="52"><span>and so on, all the way to the watermelon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="dressup">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Dress it up</span>
+      <h2>66 friends. 8 scenes. 5 bowls.</h2>
+      <p class="sub">Every round pays hearts. Spend them on new friend sets, illustrated scenes with their own music, and bowls to play in. Everything unlocks with play, never with money.</p>
+    </div>
+    <div class="sets">
+      <div class="set glass lift reveal"><img src="friends/fruit-4.png" alt=""><b>Fruit Friends</b><small>blueberry to watermelon</small></div>
+      <div class="set glass lift reveal d1"><img src="friends/sweets-4.png" alt=""><b>Sweet Treats</b><small>donuts to lollipops</small></div>
+      <div class="set glass lift reveal d2"><img src="friends/ocean-4.png" alt=""><b>Ocean Pals</b><small>bubbles to narwhals</small></div>
+      <div class="set glass lift reveal d3"><img src="friends/cosmic-4.png" alt=""><b>Cosmic Buddies</b><small>sparks to the sun</small></div>
+      <div class="set glass lift reveal d4"><img src="friends/garden-4.png" alt=""><b>Garden Blooms</b><small>sprout to blossom</small></div>
+      <div class="set glass lift reveal d4"><img src="friends/critters-4.png" alt=""><b>Cozy Critters</b><small>chick to lion</small></div>
+    </div>
+    <div class="scenes reveal" aria-label="Scenes">
+      <span class="scene" style="--g:linear-gradient(#9fdcd8,#ffd3c4)"><i></i>Peach Dawn</span>
+      <span class="scene" style="--g:linear-gradient(#dff7ee,#fff3a8)"><i></i>Mint Meadow</span>
+      <span class="scene" style="--g:linear-gradient(#b9a7f0,#ffd6e4)"><i></i>Lavender Dusk</span>
+      <span class="scene" style="--g:linear-gradient(#9fd8ff,#ffd1e8)"><i></i>Candy Sky</span>
+      <span class="scene" style="--g:linear-gradient(#2a8fcf,#0a2a52)"><i></i>Deep Ocean</span>
+      <span class="scene" style="--g:linear-gradient(#14123a,#4a3a78)"><i></i>Starry Night</span>
+      <span class="scene" style="--g:linear-gradient(#1b4a40,#4d7a4a)"><i></i>Forest Glow</span>
+      <span class="scene" style="--g:linear-gradient(#c9dff5,#f5f8ff)"><i></i>Snow Day</span>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="screens">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Look and feel</span>
+      <h2>Easy on little eyes</h2>
+      <p class="sub">A smiling sun, clouds with faces, rolling hills, a music-box tune and gentle pops. Nothing flashes, nothing shouts. <span class="swipe-hint">Swipe to see more.</span></p>
+    </div>
+    <div class="shots">
+      <div class="shot glass lift reveal"><img src="shots/home.jpg" alt="Fruit Hugs home screen" width="720" height="1558" loading="lazy"><b>Home</b></div>
+      <div class="shot glass lift reveal d1"><img src="shots/play.jpg" alt="A bowl full of fruit friends mid-game" width="720" height="1558" loading="lazy"><b>Fill the bowl</b></div>
+      <div class="shot glass lift reveal d2"><img src="shots/zen.jpg" alt="Zen mode with Ocean Pals in a fishbowl" width="720" height="1558" loading="lazy"><b>Zen mode</b></div>
+      <div class="shot glass lift reveal d3"><img src="shots/shop.jpg" alt="The Dress up screen" width="720" height="1558" loading="lazy"><b>Dress up</b></div>
+      <div class="shot glass lift reveal d4"><img src="shots/night.jpg" alt="Cozy Critters under a starry night" width="720" height="1558" loading="lazy"><b>Starry Night</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="parents">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">For grown-ups</span>
+      <h2>Made for parents to relax about</h2>
+      <p class="sub">We built Fruit Hugs the way we would want a game for our own kids. Made for Kids on the App Store, Designed for Families on Google Play.</p>
+    </div>
+    <div class="promise">
+      <div class="p glass lift reveal"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></div><h3>No ads, ever</h3><p>Nothing to tap by mistake, nothing to watch, nothing to buy. Unlocks are earned by playing.</p></div>
+      <div class="p glass lift reveal d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10 18h4"/></svg></div><h3>Plays offline</h3><p>Everything is on the device, so it works on a plane, in the car, or anywhere else.</p></div>
+      <div class="p glass lift reveal d2"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>No accounts</h3><p>Nothing to sign up for. Scores, hearts and stickers stay on the device. <a href="privacy.html">Read the privacy policy</a>.</p></div>
+      <div class="p glass lift reveal d3"><div class="ic"><svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg></div><h3>Calm by design</h3><p>Zen mode has no game over. Calm-motion, bigger text, left-handed layout and reduced motion are all respected.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="download" id="download">
+  <div class="container">
+    <div class="card glass reveal">
+      <img src="icon-192.png" alt="" width="112" height="112">
+      <div>
+        <h2>Ready to grow a watermelon?</h2>
+        <p>Fruit Hugs is coming to the App Store and Google Play. This page will carry the links the day it goes live.</p>
+      </div>
+      <div class="stores">
+        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rich">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="brand"><img src="icon-192.png" alt="" width="44" height="44">Fruit Hugs</div>
+        <p>A calm, cuddly merge game for kids, made by Playpal Apps.</p>
+      </div>
+      <div>
+        <h4>Game</h4>
+        <ul><li><a href="#how">How to play</a></li><li><a href="#modes">Modes</a></li><li><a href="#friends">The friends</a></li><li><a href="#dressup">Dress up</a></li><li><a href="#parents">For grown-ups</a></li></ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul><li><a href="support.html">Support</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="../">All Playpal apps</a></li></ul>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; 2026 Playpal Apps</span><span>Fruit Hugs characters and artwork &copy; Playpal Apps.</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
