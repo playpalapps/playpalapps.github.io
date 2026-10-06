@@ -541,36 +541,34 @@
     .story-stat.s4::before { background: linear-gradient(180deg, var(--c6), var(--c1)); }
     .story-stat-num { font-size: 1.8rem; font-weight: 900; letter-spacing: -1.4px; line-height: 1; color: var(--text); }
     .story-stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 600; margin-top: 8px; }
+    /* Icon cloud sizes itself to its content: square cells in an in-flow grid,
+       so adding an app never overflows the panel or squashes the icons. */
     .story-visual {
-      position: relative; aspect-ratio: 1.05;
+      position: relative;
       background: linear-gradient(135deg, var(--warm), white);
-      border-radius: 32px; padding: 24px;
+      border-radius: 32px; padding: 28px;
       border: 1px solid var(--border);
       overflow: hidden;
     }
     .icon-cloud {
-      position: absolute; inset: 0;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      grid-template-rows: repeat(4, minmax(0, 1fr));
-      gap: 12px; padding: 28px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
     }
     .cloud-icon {
+      aspect-ratio: 1;
       border-radius: 14px; box-shadow: 0 8px 22px rgba(9,9,11,0.1);
       animation: bob 5s ease-in-out infinite;
       min-height: 0; min-width: 0; overflow: hidden;
     }
-    .cloud-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
-    .cloud-icon:nth-child(1) { animation-delay: 0s; }
-    .cloud-icon:nth-child(2) { animation-delay: -0.5s; }
-    .cloud-icon:nth-child(3) { animation-delay: -1s; }
-    .cloud-icon:nth-child(4) { animation-delay: -1.5s; }
-    .cloud-icon:nth-child(5) { animation-delay: -2s; }
-    .cloud-icon:nth-child(6) { animation-delay: -2.5s; }
-    .cloud-icon:nth-child(7) { animation-delay: -3s; }
-    .cloud-icon:nth-child(8) { animation-delay: -3.5s; }
-    .cloud-icon:nth-child(9) { animation-delay: -4s; }
-    .cloud-icon:nth-child(10){ animation-delay: -4.5s; }
+    .cloud-icon img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+    .cloud-icon:nth-child(7n+1) { animation-delay: 0s; }
+    .cloud-icon:nth-child(7n+2) { animation-delay: -0.7s; }
+    .cloud-icon:nth-child(7n+3) { animation-delay: -1.4s; }
+    .cloud-icon:nth-child(7n+4) { animation-delay: -2.1s; }
+    .cloud-icon:nth-child(7n+5) { animation-delay: -2.8s; }
+    .cloud-icon:nth-child(7n+6) { animation-delay: -3.5s; }
+    .cloud-icon:nth-child(7n)   { animation-delay: -4.2s; }
     .story-quote {
       font-family: 'Instrument Serif', serif; font-style: italic;
       font-size: 1.7rem; line-height: 1.4; color: var(--text);
@@ -767,6 +765,8 @@
       .apps-watermark { width: 380px; height: 380px; right: -60px; top: 40px; opacity: 0.05; }
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
       .story-grid { grid-template-columns: 1fr; gap: 40px; }
+      .story-visual { padding: 20px; border-radius: 24px; }
+      .icon-cloud { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
       .builder-inner { grid-template-columns: 1fr; gap: 40px; }
       section.std { padding: 72px 20px; }
       .contact-card { padding: 40px 24px; border-radius: 24px; }
@@ -1189,6 +1189,8 @@
           <div class="cloud-icon"><img src="icons/twistandturnquest.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/veggiepop.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/fruithugs.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/circusarcade.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/pomma.png" alt=""></div>
         </div>
       </div>
     </div>
