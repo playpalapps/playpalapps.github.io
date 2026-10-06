@@ -252,7 +252,7 @@
     /* All other cards = standard 1-col cards in 3-col grid */
     .app-canwasa, .app-nightbloom, .app-palettely, .app-hydropanda,
     .app-paperlens, .app-astroorbit, .app-mergerise, .app-tooltrunk,
-    .app-fuzzypop, .app-tzc, .app-qito, .app-inkline, .app-pippet, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade { grid-column: span 1; }
+    .app-fuzzypop, .app-tzc, .app-qito, .app-inkline, .app-pippet, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma { grid-column: span 1; }
     /* Sub-section eyebrow inside apps section (Apps / Games) */
     .section-eyebrow {
       display: inline-flex; align-items: center; gap: 12px;
@@ -396,6 +396,7 @@
     .app-fruithugs  { background: radial-gradient(ellipse 80% 65% at 10% 0%, rgba(255,122,168,0.38) 0%, rgba(255,88,128,0.14) 42%, transparent 66%), radial-gradient(ellipse 65% 55% at 96% 90%, rgba(95,201,232,0.26) 0%, transparent 60%), linear-gradient(135deg, #4A1E42 0%, #2A1034 55%, #140720 100%); --app-glow: rgba(255,122,168,0.55); }
     .app-ttq        { background: radial-gradient(ellipse 85% 70% at 12% 0%, rgba(255,140,60,0.42) 0%, rgba(226,86,43,0.18) 40%, transparent 68%), radial-gradient(ellipse 70% 60% at 95% 92%, rgba(63,94,235,0.32) 0%, transparent 62%), linear-gradient(135deg, #46200C 0%, #221040 58%, #0E0624 100%); --app-glow: rgba(255,140,60,0.5); }
     .app-circusarcade { background: radial-gradient(ellipse 85% 70% at 12% 0%, rgba(248,184,0,0.40) 0%, rgba(232,69,47,0.16) 40%, transparent 68%), radial-gradient(ellipse 70% 60% at 95% 92%, rgba(79,157,255,0.30) 0%, transparent 62%), linear-gradient(135deg, #3A1250 0%, #24104A 58%, #0E0624 100%); --app-glow: rgba(248,184,0,0.5); }
+    .app-pomma      { background: radial-gradient(ellipse 80% 65% at 12% 0%, rgba(108,99,245,0.42) 0%, rgba(88,86,214,0.16) 44%, transparent 68%), radial-gradient(ellipse 60% 55% at 95% 90%, rgba(48,209,88,0.14) 0%, transparent 60%), linear-gradient(135deg, #1C1848 0%, #100E2A 55%, #06050F 100%); --app-glow: rgba(108,99,245,0.55); }
     .app-inkline .app-cat { color: rgba(28,20,16,0.55); }
     .app-inkline .app-name { color: #1c1410; }
     .app-inkline .app-tag-text { color: rgba(28,20,16,0.78); }
@@ -419,6 +420,7 @@
     .app-fruithugs::before  { background: linear-gradient(90deg, #FF7AA8, #FFD84D, #5FC9E8); }
     .app-ttq::before        { background: linear-gradient(90deg, #FF8C3C, #FFD24A, #4FD8FF); }
     .app-circusarcade::before { background: linear-gradient(90deg, #E8452F, #F8B800, #4F9DFF); }
+    .app-pomma::before      { background: linear-gradient(90deg, #6C63F5, #A9A4FF, #30D158); }
     /* "Coming soon" store-mini variant: visually muted, non-clickable.
        Inline "· Soon" suffix replaced with an absolutely-positioned corner
        pill so the button label can keep its native length without wrapping
@@ -743,7 +745,7 @@
       .app-utilify { grid-column: 1 / -1; }
       .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
       .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito,
-      .app-hydropanda, .app-tooltrunk, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade { grid-column: span 1; }
+      .app-hydropanda, .app-tooltrunk, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma { grid-column: span 1; }
       .app-card { padding: 22px; border-radius: 18px; min-height: auto; gap: 12px; }
       .app-icon-mega { width: 64px; height: 64px; border-radius: 14px; }
       .app-name { font-size: 1.25rem; }
@@ -853,7 +855,7 @@
     </div>
 
     <!-- ── APPS ─────────────────────────────────────────────── -->
-    <div class="section-eyebrow reveal">Apps <span class="count">· 9</span></div>
+    <div class="section-eyebrow reveal">Apps <span class="count">· 10</span></div>
 
     <div class="apps-bento">
 
@@ -991,6 +993,21 @@
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
           <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
+      </div>
+
+      <!-- Pomma (coming soon) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Pomma/'" class="app-card app-pomma reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/pomma.png" alt="Pomma">
+        <div class="app-meta">
+          <span class="app-cat">Productivity · Focus</span>
+          <div class="app-name">Pomma</div>
+          <div class="app-tag-text">A quiet Pomodoro timer for one thing at a time. Tasks, streaks and statistics, all on your device.</div>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
         </div>
       </div>
 
