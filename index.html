@@ -247,12 +247,13 @@
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 16px; margin-top: 56px;
     }
-    /* Featured Utilify spans full width (hero strip) */
-    .app-utilify { grid-column: 1 / -1; }
-    /* All other cards = standard 1-col cards in 3-col grid */
-    .app-canwasa, .app-nightbloom, .app-palettely, .app-hydropanda,
+    /* All cards = standard 1-col cards in 3-col grid … */
+    .app-utilify, .app-canwasa, .app-nightbloom, .app-palettely, .app-hydropanda,
     .app-paperlens, .app-astroorbit, .app-mergerise, .app-tooltrunk,
     .app-fuzzypop, .app-tzc, .app-qito, .app-inkline, .app-pippet, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma { grid-column: span 1; }
+    /* … except whichever card carries .featured, which spans the full width (hero strip).
+       To change the hero app, move the "featured" class to another card and put it first. */
+    .app-card.featured { grid-column: 1 / -1; }
     /* Sub-section eyebrow inside apps section (Apps / Games) */
     .section-eyebrow {
       display: inline-flex; align-items: center; gap: 12px;
@@ -455,7 +456,8 @@
 
     /* (spans defined above with new layout) */
 
-    /* Featured Utilify — horizontal hero strip spanning full grid width */
+    /* Featured card — horizontal hero strip spanning full grid width.
+       Background comes from the app's own .app-<name> gradient. */
     .app-card.featured {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -463,9 +465,7 @@
       column-gap: 36px;
       padding: 36px 40px;
       min-height: auto;
-      background: linear-gradient(135deg, #4A2615 0%, #1F0F08 60%, #0E0604 100%);
     }
-    /* (featured uses its own background gradient — no separate bg layer) */
     .app-card.featured .app-icon-mega {
       width: 110px; height: 110px; border-radius: 26px;
       box-shadow:
@@ -740,8 +740,7 @@
       .hero-mantra { margin-top: 48px; }
       .float-icon { width: 44px; height: 44px; opacity: 0.6; }
       .apps-bento { grid-template-columns: 1fr; gap: 14px; }
-      .app-utilify { grid-column: 1 / -1; }
-      .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
+      .app-utilify, .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
       .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito,
       .app-hydropanda, .app-tooltrunk, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma { grid-column: span 1; }
       .app-card { padding: 22px; border-radius: 18px; min-height: auto; gap: 12px; }
@@ -754,7 +753,6 @@
         padding: 24px;
         gap: 14px;
       }
-      /* featured uses its own background gradient on mobile too */
       .app-card.featured .app-icon-mega { width: 76px; height: 76px; border-radius: 18px; }
       .app-card.featured .app-name { font-size: 1.6rem; letter-spacing: -1px; }
       .app-card.featured .app-tag-text { font-size: 0.92rem; }
@@ -859,8 +857,23 @@
 
     <div class="apps-bento">
 
-      <!-- Featured: Utilify (2x2) — hero with description + stores -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/UtilifyApp/'" class="app-card featured app-utilify reveal">
+      <!-- Featured: Palettely — full-width hero strip with description + stores -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Palettely/'" class="app-card featured app-palettely reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/palettely.png" alt="Palettely">
+        <div class="app-meta">
+          <span class="app-cat">Creativity</span>
+          <div class="app-name">Palettely</div>
+          <div class="app-tag-text">Colours that feel like you. Extract palettes from any photo, build moodboards, and export wallpapers that are unmistakably yours.</div>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
+      </div>
+
+      <!-- Utilify -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/UtilifyApp/'" class="app-card app-utilify reveal">
         <div class="app-card-bg"></div>
         <img class="app-icon-mega" src="icons/utilify.png" alt="Utilify">
         <div class="app-meta">
@@ -933,21 +946,6 @@
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/us/app/hydro-panda-water-tracker/id6767715315" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
           <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveenmercedes.hydra" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
-      <!-- Palettely (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Palettely/'" class="app-card app-palettely reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/palettely.png" alt="Palettely">
-        <div class="app-meta">
-          <span class="app-cat">Creativity</span>
-          <div class="app-name">Palettely</div>
-          <div class="app-tag-text">Extract colour palettes from any photo. Build moodboards.</div>
-        </div>
-        <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
       </div>
 
