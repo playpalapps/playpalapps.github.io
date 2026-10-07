@@ -74,7 +74,7 @@ details.faq p{margin:0 0 14px}
 .js .reveal.d1{transition-delay:.07s}.js .reveal.d2{transition-delay:.14s}.js .reveal.d3{transition-delay:.21s}.js .reveal.d4{transition-delay:.28s}
 /* a phone: thin dark bezel around an app screen */
 .phone{border-radius:13.5% / 6.2%;padding:2.2%;background:#0b0810;border:1px solid rgba(255,255,255,.16);box-shadow:0 30px 60px var(--shadow),0 0 0 1px rgba(0,0,0,.6)}
-.phone img{display:block;width:100%;height:auto;border-radius:11.8% / 5.4%}
+.phone img,.phone video{display:block;width:100%;height:auto;border-radius:11.8% / 5.4%}
 footer.rich{position:relative;z-index:1;padding:40px 0 48px;margin-top:10px;border-top:1px solid var(--line)}
 footer.rich .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;align-items:start}
 footer.rich .brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800;font-size:20px;margin-bottom:8px}
