@@ -250,7 +250,7 @@
     /* All cards = standard 1-col cards in 3-col grid … */
     .app-utilify, .app-canwasa, .app-nightbloom, .app-palettely, .app-hydropanda,
     .app-paperlens, .app-astroorbit, .app-mergerise, .app-tooltrunk,
-    .app-fuzzypop, .app-tzc, .app-qito, .app-inkline, .app-pippet, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma, .app-postela, .app-fidgety { grid-column: span 1; }
+    .app-fuzzypop, .app-tzc, .app-qito, .app-inkline, .app-pippet, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma, .app-postela, .app-fidgety, .app-tinywins { grid-column: span 1; }
     /* … except whichever card carries .featured, which spans the full width (hero strip).
        To change the hero app, move the "featured" class to another card and put it first. */
     .app-card.featured { grid-column: 1 / -1; }
@@ -400,6 +400,7 @@
     .app-pomma      { background: radial-gradient(ellipse 80% 65% at 12% 0%, rgba(108,99,245,0.42) 0%, rgba(88,86,214,0.16) 44%, transparent 68%), radial-gradient(ellipse 60% 55% at 95% 90%, rgba(48,209,88,0.14) 0%, transparent 60%), linear-gradient(135deg, #1C1848 0%, #100E2A 55%, #06050F 100%); --app-glow: rgba(108,99,245,0.55); }
     .app-postela    { background: radial-gradient(ellipse 80% 65% at 12% 0%, rgba(192,38,211,0.46) 0%, rgba(124,58,237,0.18) 44%, transparent 68%), radial-gradient(ellipse 60% 55% at 95% 90%, rgba(251,113,133,0.22) 0%, transparent 60%), linear-gradient(135deg, #2A0F4A 0%, #160828 55%, #0A0413 100%); --app-glow: rgba(192,38,211,0.55); }
     .app-fidgety    { background: radial-gradient(ellipse 80% 65% at 12% 0%, rgba(255,111,174,0.46) 0%, rgba(227,52,141,0.18) 44%, transparent 68%), radial-gradient(ellipse 60% 55% at 95% 90%, rgba(255,192,142,0.24) 0%, transparent 60%), linear-gradient(135deg, #4A0F30 0%, #26091A 55%, #0F0A10 100%); --app-glow: rgba(255,111,174,0.55); }
+    .app-tinywins   { background: radial-gradient(ellipse 80% 65% at 12% 0%, rgba(116,194,153,0.42) 0%, rgba(63,125,98,0.20) 44%, transparent 68%), radial-gradient(ellipse 60% 55% at 95% 90%, rgba(240,178,85,0.16) 0%, transparent 60%), linear-gradient(135deg, #143326 0%, #0D1F17 55%, #0B100D 100%); --app-glow: rgba(116,194,153,0.55); }
     .app-inkline .app-cat { color: rgba(28,20,16,0.55); }
     .app-inkline .app-name { color: #1c1410; }
     .app-inkline .app-tag-text { color: rgba(28,20,16,0.78); }
@@ -426,6 +427,7 @@
     .app-pomma::before      { background: linear-gradient(90deg, #6C63F5, #A9A4FF, #30D158); }
     .app-postela::before    { background: linear-gradient(90deg, #9333EA, #E63A8E, #FB7185); }
     .app-fidgety::before    { background: linear-gradient(90deg, #E3348D, #FF6FAE, #FFC08E); }
+    .app-tinywins::before   { background: linear-gradient(90deg, #3F7D62, #74C299, #F0C97A); }
     /* "Coming soon" store-mini variant: visually muted, non-clickable.
        Inline "· Soon" suffix replaced with an absolutely-positioned corner
        pill so the button label can keep its native length without wrapping
@@ -746,7 +748,7 @@
       .apps-bento { grid-template-columns: 1fr; gap: 14px; }
       .app-utilify, .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
       .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito,
-      .app-hydropanda, .app-tooltrunk, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma, .app-postela, .app-fidgety { grid-column: span 1; }
+      .app-hydropanda, .app-tooltrunk, .app-veggiepop, .app-fruithugs, .app-ttq, .app-circusarcade, .app-pomma, .app-postela, .app-fidgety, .app-tinywins { grid-column: span 1; }
       .app-card { padding: 22px; border-radius: 18px; min-height: auto; gap: 12px; }
       .app-icon-mega { width: 64px; height: 64px; border-radius: 14px; }
       .app-name { font-size: 1.25rem; }
@@ -857,7 +859,7 @@
     </div>
 
     <!-- ── APPS ─────────────────────────────────────────────── -->
-    <div class="section-eyebrow reveal">Apps <span class="count">· 12</span></div>
+    <div class="section-eyebrow reveal">Apps <span class="count">· 13</span></div>
 
     <div class="apps-bento">
 
@@ -1036,6 +1038,21 @@
           <span class="app-cat">Entertainment · Fidget toys</span>
           <div class="app-name">Fidgety</div>
           <div class="app-tag-text">A pocketful of fidget toys with haptics you can feel. Pop, spin, squish and rake. No ads.</div>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
+        </div>
+      </div>
+
+      <!-- Tiny Wins (coming soon) -->
+      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/TinyWins/'" class="app-card app-tinywins reveal">
+        <div class="app-card-bg"></div>
+        <img class="app-icon-mega" src="icons/tinywins.png" alt="Tiny Wins">
+        <div class="app-meta">
+          <span class="app-cat">Wellbeing · Journal</span>
+          <div class="app-name">Tiny Wins</div>
+          <div class="app-tag-text">Notice what went right today. Log small wins in seconds, with streaks that forgive an off day. Free, no ads.</div>
         </div>
         <div class="app-stores">
           <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
@@ -1225,6 +1242,7 @@
           <div class="cloud-icon"><img src="icons/pomma.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/postela.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/fidgety.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/tinywins.png" alt=""></div>
         </div>
       </div>
     </div>

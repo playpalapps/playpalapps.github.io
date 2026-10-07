@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tiny Wins — notice what went right today</title>
+<meta name="description" content="Tiny Wins is a calm, private journal for the small things you did today. Log a win in two seconds, watch a streak that forgives an off day, and check in on your mood. Free, no ads, no account. iPhone, iPad and Android.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/TinyWins/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Playpal Apps">
+<meta property="og:url" content="https://playpalapps.github.io/TinyWins/">
+<meta property="og:title" content="Tiny Wins — notice what went right today">
+<meta property="og:description" content="Log a small win in two seconds. Gentle streaks that forgive an off day, a journal of every win, and mood check-ins. Free, with no ads and no account.">
+<meta property="og:image" content="https://playpalapps.github.io/TinyWins/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tiny Wins — notice what went right today">
+<meta name="twitter:description" content="Log a small win in two seconds. Gentle streaks, a journal of every win, mood check-ins. Free, no ads.">
+<meta name="twitter:image" content="https://playpalapps.github.io/TinyWins/og-image.jpg">
+<meta name="theme-color" content="#0b100d">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="stylesheet" href="_shared.css?v=1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Tiny Wins","applicationCategory":"HealthApplication","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"A calm, private journal for the small things you did today.","image":"https://playpalapps.github.io/TinyWins/icon.png","url":"https://playpalapps.github.io/TinyWins/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+/* hero */
+.hero{padding:clamp(34px,6vw,80px) 0 clamp(30px,5vw,60px)}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(2.7rem,6.4vw,4.9rem);line-height:.98;margin:0 0 22px}
+.hero .tag{font-size:clamp(1.1rem,1.9vw,1.3rem);color:var(--ink-2);max-width:40ch;margin:0 0 28px;line-height:1.5}
+.hero .stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.hero .note{font-size:15px;color:var(--ink-3);margin:0 0 26px;max-width:46ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0;padding:0;list-style:none}
+.chips li{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ink-2)}
+.chips svg{width:15px;height:15px;fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.hero .art{position:relative;display:grid;place-items:center;min-height:clamp(420px,52vw,640px)}
+.hero .art::before{content:"";position:absolute;width:118%;aspect-ratio:1;border-radius:50%;background:conic-gradient(from 200deg,#3f7d62,#5c9f80,#74c299,#f0c97a,#3f7d62);filter:blur(70px);opacity:.42;pointer-events:none}
+.hero .art .phone{position:absolute;width:min(58%,290px)}
+.hero .art .phone.back{transform:translate(34%,-4%) rotate(8deg);opacity:.96}
+.hero .art .phone.front{transform:translate(-22%,4%) rotate(-5deg)}
+@media (max-width:860px){.hero .grid{grid-template-columns:1fr}.hero .art{min-height:min(118vw,560px)}.hero .art .phone{width:min(54vw,270px)}}
+/* sections */
+section.slab{padding:clamp(44px,7vw,88px) 0}
+section.slab .head{max-width:62ch;margin-bottom:clamp(24px,3.5vw,40px)}
+section.slab h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.04;margin:0 0 12px}
+section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
+.swipe-hint{display:none;color:var(--ink-3)}
+@media (max-width:980px){.swipe-hint{display:inline}}
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{border-radius:24px;padding:26px 24px}
+.step .n{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:18px;color:#0e1f17;background:var(--grad);margin-bottom:16px}
+.step h3{margin:0 0 6px;font-size:20px;letter-spacing:-.02em}
+.step p{margin:0;color:var(--ink-2);font-size:16.5px}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+/* streak explainer */
+.streak{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,48px);align-items:center}
+.streak .panel{border-radius:28px;padding:clamp(22px,3.4vw,34px);background:linear-gradient(135deg,#5c9f80,#35715a);color:#fff;box-shadow:0 24px 50px var(--shadow)}
+.streak .count{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.streak .count b{font-family:var(--display);font-size:clamp(3.2rem,7vw,4.6rem);line-height:1;letter-spacing:-.04em}
+.streak .count span{font-weight:700;font-size:19px;line-height:1.25}
+.streak .count small{display:block;font-weight:500;font-size:15px;opacity:.85}
+.week{display:flex;justify-content:space-between;gap:6px;margin-bottom:20px}
+.week div{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:12.5px;font-weight:700;opacity:.9}
+.week i{width:clamp(30px,4.6vw,40px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#fff;font-style:normal}
+.week i svg{width:55%;height:55%;fill:none;stroke:#35715a;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.week i.rest{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.7)}
+.week i.rest svg{stroke:#fff;stroke-width:2.2}
+.streak .panel p{margin:0;font-weight:600;font-size:16px}
+.streak ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:10px;color:var(--ink-2)}
+.streak li{display:flex;gap:10px;align-items:flex-start}
+.streak li svg{flex:0 0 18px;height:18px;margin-top:5px;fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:860px){.streak{grid-template-columns:1fr}}
+/* screens */
+.shots{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.shot h3{margin:16px 0 4px;font-size:17px;letter-spacing:-.01em}
+.shot p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.45}
+@media (max-width:980px){.shots{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none}.shots::-webkit-scrollbar{display:none}.shot{flex:0 0 min(62vw,250px);scroll-snap-align:center}}
+/* details */
+.details{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.detail{border-radius:22px;padding:24px 22px}
+.detail .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(92,159,128,.4),rgba(240,178,85,.16));margin-bottom:14px}
+.detail .ic svg{width:22px;height:22px;fill:none;stroke:#d6f3e3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.detail h3{margin:0 0 6px;font-size:18px;letter-spacing:-.02em}
+.detail p{margin:0;color:var(--ink-2);font-size:16px}
+@media (max-width:900px){.details{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.details{grid-template-columns:1fr}}
+/* download */
+.download{padding:clamp(30px,5vw,60px) 0 clamp(40px,6vw,70px)}
+.download .card{border-radius:30px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center;background:linear-gradient(120deg,rgba(63,125,98,.42),rgba(92,159,128,.2) 60%,rgba(240,178,85,.1));border-color:var(--panel-edge)}
+.download img{width:104px;height:104px;border-radius:24px;box-shadow:0 14px 30px var(--shadow)}
+.download h2{margin:0 0 6px;font-size:clamp(1.5rem,2.8vw,2.1rem);line-height:1.1}
+.download p{margin:0;color:var(--ink-2)}
+.download .stores{display:flex;flex-direction:column;gap:10px}
+@media (max-width:760px){.download .card{grid-template-columns:1fr;text-align:center;justify-items:center}.download .stores{flex-direction:row;flex-wrap:wrap;justify-content:center}}
+</style>
+</head>
+<body>
+<a class="skip" href="#how">Skip to content</a>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="./" class="brand" aria-current="page"><img src="icon-192.png" alt="" width="32" height="32"><span>Tiny Wins</span></a>
+    <div class="links">
+      <a href="../">Playpal Apps</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html" class="hide-sm">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container grid">
+    <div>
+      <span class="eyebrow">A two-second win journal</span>
+      <h1>Notice what went <span class="gt">right today.</span></h1>
+      <p class="tag">Made the bed. Sent the email you were avoiding. Went for a walk. Log it in two seconds and move on. No goals to hit and no guilt, just a growing record of the small things you did.</p>
+      <div class="stores">
+        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+      <p class="note">Launching soon on iPhone, iPad and Android. Tiny Wins is free, with nothing to buy inside it.</p>
+      <ul class="chips" aria-label="Highlights">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Free</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>No ads</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>No account</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Works offline</li>
+      </ul>
+    </div>
+    <div class="art">
+      <div class="phone back"><img src="shots/insights.jpg" alt="The Insights screen: 13 wins, a 22-day streak, and a bar chart of wins over the last seven days" width="720" height="1565"></div>
+      <div class="phone front"><img src="shots/today.jpg" alt="The Today screen: a green card showing a 22-day streak and this week's days ticked off, above two wins logged today" width="720" height="1565"></div>
+    </div>
+  </div>
+</header>
+
+<section class="slab" id="how">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Small on purpose</h2>
+      <p class="sub">It is not a to-do list. Nothing here is waiting to be done. You only ever write down what already went well.</p>
+    </div>
+    <div class="steps">
+      <div class="step glass reveal"><div class="n">1</div><h3>Tap and type</h3><p>Open the app, tap Log a win and write a few words. Suggestions learn the wins you log most, so the usual ones are one tap away.</p></div>
+      <div class="step glass reveal d1"><div class="n">2</div><h3>Watch it add up</h3><p>Each day you log a win adds to your streak. The week fills in, dot by dot, on the card at the top of the screen.</p></div>
+      <div class="step glass reveal d2"><div class="n">3</div><h3>Look back</h3><p>Every win is kept in your journal, day by day. On a flat day, scroll back and see how much you actually did.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="streaks">
+  <div class="container streak">
+    <div class="reveal">
+      <span class="eyebrow">Streaks that forgive</span>
+      <h2>One off day does not undo the rest</h2>
+      <p class="sub">Most streaks punish you for being human. This one banks a rest day every time you log seven days in a row, and spends it for you if you miss a day.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Up to two rest days kept in reserve</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>A missed day uses one, and your streak carries on</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Forgot last night? Add a win to yesterday</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>If a streak does end, the app says "a fresh start", not "you failed"</li>
+      </ul>
+    </div>
+    <div class="panel reveal d1" role="img" aria-label="A streak card showing 12 days in a row. Monday to Wednesday are ticked, Thursday is marked as a rest day, and Friday to Sunday are ticked.">
+      <div class="count"><b>12</b><span>days<small>in a row</small></span></div>
+      <div class="week">
+        <div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></i>M</div><div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></i>T</div><div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></i>W</div>
+        <div><i class="rest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.500-3 8-7 10-4-2-7-5.500-7-10V6z"/></svg></i>T</div>
+        <div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></i>F</div><div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></i>S</div><div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></i>S</div>
+      </div>
+      <p>Thursday was a rest day. The streak kept going.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="screens">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Inside the app</span>
+      <h2>See it before you download it</h2>
+      <p class="sub">Real screens from Tiny Wins. <span class="swipe-hint">Swipe to see them all.</span></p>
+    </div>
+    <div class="shots">
+      <div class="shot reveal"><div class="phone"><img src="shots/today.jpg" alt="The Today screen with a streak card, a mood chip reading Feeling good, and two wins" width="720" height="1565" loading="lazy"></div><h3>Today</h3><p>Your streak, your week and what you have logged so far.</p></div>
+      <div class="shot reveal d1"><div class="phone"><img src="shots/add.jpg" alt="A sheet titled What went right, with a text field, quick-add suggestions and category chips" width="720" height="1565" loading="lazy"></div><h3>Log a win</h3><p>A few words is enough. Categories are optional.</p></div>
+      <div class="shot reveal d2"><div class="phone"><img src="shots/journal.jpg" alt="The Journal: wins grouped under Today, Yesterday and earlier days, each with a small mood face" width="720" height="1565" loading="lazy"></div><h3>Journal</h3><p>Every win, grouped by day, with search.</p></div>
+      <div class="shot reveal d3"><div class="phone"><img src="shots/mood.jpg" alt="A check-in sheet with five mood faces from Rough to Great, an energy row and a note field" width="720" height="1565" loading="lazy"></div><h3>Check-in</h3><p>A quick mood and energy check, with room for a note.</p></div>
+      <div class="shot reveal d4"><div class="phone"><img src="shots/milestones.jpg" alt="Insights scrolled to Patterns and a grid of fifteen milestones, six of them unlocked" width="720" height="1565" loading="lazy"></div><h3>Milestones</h3><p>Fifteen to unlock, from your first win to your thousandth.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="details">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">The details</span>
+      <h2>Quiet, and on your side</h2>
+      <p class="sub">The parts that make it something you come back to, without it nagging you to.</p>
+    </div>
+    <div class="details">
+      <div class="detail glass reveal"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Insights</h3><p>Wins over the last 7 days, 30 days and 12 weeks, where they come from, and gentle patterns such as your strongest day of the week.</p></div>
+      <div class="detail glass reveal d1"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16V11a6 6 0 0 0-12 0v5l-2 2h16z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><h3>One gentle reminder</h3><p>Optional, at a time you choose. It is skipped once you have logged a win, and it goes quiet after a week away instead of piling up.</p></div>
+      <div class="detail glass reveal d2"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 13v6h14v-6"/></svg></div><h3>Share the good stuff</h3><p>Turn your day or a milestone into a clean image card and send it wherever you like.</p></div>
+      <div class="detail glass reveal"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.500 14.500c1 1.200 2.100 1.800 3.500 1.800s2.500-.600 3.500-1.800"/><path d="M9 10h.010M15 10h.010"/></svg></div><h3>Mood alongside wins</h3><p>See your check-ins next to each day in the journal, and whether you tend to feel better on days with more wins.</p></div>
+      <div class="detail glass reveal d1"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.400 1.400M17.600 17.600L19 19M5 19l1.400-1.400M17.600 6.400L19 5"/></svg></div><h3>Light and dark</h3><p>Follows your device, or pick one. Haptic feedback can be switched off.</p></div>
+      <div class="detail glass reveal d2"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M8 11l4 4 4-4"/><path d="M5 17v3h14v-3"/></svg></div><h3>Your data is yours</h3><p>Export everything as CSV or JSON whenever you like, or erase it all from Settings.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="private">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Private by default</span>
+      <h2>No account. No tracking. No ads.</h2>
+      <p class="sub">Your wins, check-ins and notes are stored on your device and nowhere else. Tiny Wins has no sign-up, no analytics and no advertising, and it has no server to send anything to. <a href="privacy.html">Read the privacy policy</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="download" id="download">
+  <div class="container">
+    <div class="card glass reveal">
+      <img src="icon-192.png" alt="" width="104" height="104">
+      <div>
+        <h2>Coming soon</h2>
+        <p>Tiny Wins is on its way to the App Store and Google Play. This page will carry the links the day it goes live.</p>
+      </div>
+      <div class="stores">
+        <span class="btn glass soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rich">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="brand"><img src="icon-192.png" alt="" width="44" height="44">Tiny Wins</div>
+        <p>Small things done. Big difference. By Playpal Apps.</p>
+      </div>
+      <div>
+        <h4>App</h4>
+        <ul><li><a href="#how">How it works</a></li><li><a href="#streaks">Streaks</a></li><li><a href="#screens">Screens</a></li><li><a href="#details">Details</a></li></ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul><li><a href="support.html">Support</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="../">All Playpal apps</a></li></ul>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; 2026 Playpal Apps</span><span>Tiny Wins name, icon and design &copy; Playpal Apps.</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
