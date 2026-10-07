@@ -135,8 +135,8 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
       </ul>
     </div>
     <div class="art">
-      <div class="phone back"><img src="shots/insights.jpg" alt="The Insights screen: 13 wins, a 22-day streak, and a bar chart of wins over the last seven days" width="720" height="1565"></div>
-      <div class="phone front"><img src="shots/today.jpg" alt="The Today screen: a green card showing a 22-day streak and this week's days ticked off, above two wins logged today" width="720" height="1565"></div>
+      <div class="phone back"><img src="shots/insights.jpg" alt="The Insights screen: 19 wins, a 22-day streak, and a bar chart of wins over the last seven days" width="720" height="1565"></div>
+      <div class="phone front"><video src="preview.mp4" poster="preview-poster.jpg" width="444" height="962" autoplay muted loop playsinline preload="metadata" aria-label="A short recording of Tiny Wins in use: logging a win, reaching the 50 wins milestone, checking in on mood, then browsing the journal and insights"></video></div>
     </div>
   </div>
 </header>
@@ -189,7 +189,7 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
       <p class="sub">Real screens from Tiny Wins. <span class="swipe-hint">Swipe to see them all.</span></p>
     </div>
     <div class="shots">
-      <div class="shot reveal"><div class="phone"><img src="shots/today.jpg" alt="The Today screen with a streak card, a mood chip reading Feeling good, and two wins" width="720" height="1565" loading="lazy"></div><h3>Today</h3><p>Your streak, your week and what you have logged so far.</p></div>
+      <div class="shot reveal"><div class="phone"><img src="shots/today.jpg" alt="The Today screen with a streak card, a mood chip reading Feeling good, and today's wins" width="720" height="1565" loading="lazy"></div><h3>Today</h3><p>Your streak, your week and what you have logged so far.</p></div>
       <div class="shot reveal d1"><div class="phone"><img src="shots/add.jpg" alt="A sheet titled What went right, with a text field, quick-add suggestions and category chips" width="720" height="1565" loading="lazy"></div><h3>Log a win</h3><p>A few words is enough. Categories are optional.</p></div>
       <div class="shot reveal d2"><div class="phone"><img src="shots/journal.jpg" alt="The Journal: wins grouped under Today, Yesterday and earlier days, each with a small mood face" width="720" height="1565" loading="lazy"></div><h3>Journal</h3><p>Every win, grouped by day, with search.</p></div>
       <div class="shot reveal d3"><div class="phone"><img src="shots/mood.jpg" alt="A check-in sheet with five mood faces from Rough to Great, an energy row and a note field" width="720" height="1565" loading="lazy"></div><h3>Check-in</h3><p>A quick mood and energy check, with room for a note.</p></div>
@@ -263,6 +263,11 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
 </footer>
 
 <script>
+(function(){
+  // People who ask for less motion get the still frame and a play button.
+  var v=document.querySelector('.hero video');
+  if(v&&matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();v.controls=true}
+})();
 (function(){
   var els=document.querySelectorAll('.reveal');
   if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
