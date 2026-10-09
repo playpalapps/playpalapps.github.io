@@ -1,0 +1,95 @@
+/* DailyStreak: near-black, cream type, one green accent. Fonts are served from this folder (SIL Open Font Licence, see fonts/OFL.txt). */
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:700;font-display:swap;src:url("fonts/Fraunces-Bold.woff2") format("woff2")}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/DMSans-Regular.woff2") format("woff2")}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/DMSans-SemiBold.woff2") format("woff2")}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:700;font-display:swap;src:url("fonts/DMSans-Bold.woff2") format("woff2")}
+:root{
+  --bg:#0F0F0E;--bg-2:#1A1A18;--bg-3:#232320;--green:#52B788;--mint:#74D6A6;--deep:#2D6A4F;--amber:#F4A261;
+  --ink:#F0EDE4;--ink-2:#C9C6BD;--ink-3:#9A9892;
+  --cell:#232320;--line:rgba(240,237,228,.08);--shadow:rgba(0,0,0,.55);
+  --page:1120px;--gutter:clamp(18px,4vw,40px);--ease:cubic-bezier(.2,.8,.2,1);
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{margin:0;font-family:var(--body);font-size:17.5px;line-height:1.62;color:var(--ink);background:var(--bg);min-height:100dvh;overflow-x:hidden}
+.container{position:relative;z-index:1;width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gutter)}
+a{color:var(--mint);text-decoration:none;border-bottom:1.5px solid rgba(116,214,166,.32);transition:border-color .2s,color .2s}
+a:hover{border-color:var(--mint);color:var(--ink)}
+/* a surface: one step lighter than the page, no border */
+.surface{background:var(--bg-2)}
+.gt{color:var(--green)}
+nav.site{position:sticky;top:0;z-index:50;background:rgba(15,15,14,.86);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+nav.site .row{display:flex;align-items:center;gap:20px;padding-block:12px}
+nav.site .brand{display:inline-flex;align-items:center;gap:10px;border:0;color:var(--ink);font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em;white-space:nowrap}
+nav.site .brand img{width:32px;height:32px;border-radius:8px}
+nav.site .links{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+nav.site .links a{border:0;color:var(--ink-3);font-weight:600;font-size:15px;padding:6px 12px;border-radius:999px}
+nav.site .links a:hover,nav.site .links a[aria-current]{background:var(--bg-2);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;font-weight:700;font-size:17px;border:0;cursor:pointer;color:var(--ink);transition:transform .12s,filter .2s}
+.btn:active{transform:scale(.97)}
+.btn.primary{color:var(--bg);background:var(--green)}
+.btn.primary:hover{filter:brightness(1.08);color:var(--bg)}
+.btn svg{width:21px;height:21px;fill:currentColor}
+.btn.soon{cursor:default;color:var(--ink-2)}
+.btn.soon small{font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--bg);background:var(--green);border-radius:999px;padding:3px 8px;margin-left:2px}
+.eyebrow{display:inline-block;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:14px;color:var(--green)}
+h1,h2{font-family:var(--display);font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+h3{font-family:var(--body);font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+header.doc{padding:clamp(44px,7vw,84px) 0 clamp(22px,3vw,36px)}
+header.doc h1{font-size:clamp(2.2rem,4.8vw,3.4rem);line-height:1.06;margin:0 0 14px}
+header.doc .meta{color:var(--ink-3);font-size:15px;margin:0}
+header.doc .lead{font-size:19px;max-width:60ch;margin-top:14px;color:var(--ink-2)}
+main.doc{padding:8px 0 clamp(50px,7vw,90px)}
+main.doc .card{border-radius:24px;padding:clamp(22px,4vw,40px)}
+main.doc h2{font-size:clamp(1.3rem,2.1vw,1.55rem);margin:36px 0 10px;letter-spacing:-.01em}
+main.doc h2:first-child{margin-top:0}
+main.doc p,main.doc li{color:var(--ink-2)}
+main.doc strong{color:var(--ink)}
+main.doc ul,main.doc ol{padding-left:22px}
+main.doc li{margin-bottom:6px}
+main.doc code{background:var(--bg-3);padding:2px 7px;border-radius:6px;font-size:.86em;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+header.doc code{background:var(--bg-2);padding:2px 7px;border-radius:6px;font-size:.86em;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.callout{margin:0 0 26px;padding:18px 22px;border-radius:20px;background:rgba(82,183,136,.12);color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 6px}
+.fact{padding:14px 18px;border-radius:16px;background:var(--cell)}
+.fact .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3);font-weight:700}
+.fact .v{font-weight:700;color:var(--ink);margin-top:2px}
+.fact .v.no{color:var(--green)}
+footer.site{position:relative;z-index:1;padding:30px 0 46px;margin-top:20px}
+footer.site .row{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;font-size:15px;color:var(--ink-3)}
+footer.site a{border:0;color:var(--ink-2);font-weight:600}
+footer.site a:hover{color:var(--ink)}
+details.faq{border-radius:16px;background:var(--cell);padding:4px 20px;margin:10px 0}
+details.faq summary{cursor:pointer;font-weight:600;font-size:17.5px;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink)}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font-size:24px;line-height:1;color:var(--green);font-weight:400;transition:transform .2s}
+details.faq[open] summary::after{transform:rotate(45deg)}
+details.faq p{margin:0 0 14px}
+.contact{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:18px}
+@media (max-width:560px){nav.site .row{gap:10px}nav.site .links{gap:0;flex-wrap:nowrap}nav.site .links a{font-size:13.5px;padding:5px 8px;white-space:nowrap}nav.site .links a.hide-sm{display:none}nav.site .brand{font-size:18px;gap:8px}nav.site .brand img{width:28px;height:28px}}
+@media (max-width:400px){nav.site .brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+
+:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--green);color:var(--bg);padding:8px 14px;border-radius:8px;font-weight:700;border:0}
+.skip:focus{top:12px;color:var(--bg)}
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .8s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.js .reveal.d1{transition-delay:.07s}.js .reveal.d2{transition-delay:.14s}.js .reveal.d3{transition-delay:.21s}.js .reveal.d4{transition-delay:.28s}
+/* a phone: thin bezel around an app screen */
+.phone{border-radius:13.5% / 6.2%;padding:2.2%;background:#050505;box-shadow:0 30px 60px var(--shadow),0 0 0 1px rgba(240,237,228,.12)}
+.phone img{display:block;width:100%;height:auto;border-radius:11.8% / 5.4%}
+footer.rich{position:relative;z-index:1;padding:44px 0 48px;margin-top:10px;background:var(--bg-2)}
+footer.rich .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;align-items:start}
+footer.rich .brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;font-size:21px;margin-bottom:8px}
+footer.rich .brand img{width:44px;height:44px;border-radius:11px}
+footer.rich p{margin:0;color:var(--ink-3);font-size:15px;max-width:34ch}
+footer.rich h4{margin:0 0 8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+footer.rich ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+footer.rich a{border:0;color:var(--ink-2);font-weight:600}
+footer.rich a:hover{color:var(--ink)}
+footer.rich .legal{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;color:var(--ink-3);font-size:14px}
+@media (max-width:640px){footer.rich .grid{grid-template-columns:1fr 1fr}footer.rich .grid>:first-child{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;scroll-behavior:auto!important;animation:none!important}.js .reveal{opacity:1;transform:none;transition:none}}

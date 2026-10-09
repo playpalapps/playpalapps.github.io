@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DailyStreak: build habits that stick</title>
+<meta name="description" content="DailyStreak is a clean, private habit tracker built around streaks. One tap a day to check in, with a heatmap of your progress on every habit. Free for up to 3 habits, no ads, no account. iPhone, iPad and Android.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/DailyStreak/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Playpal Apps">
+<meta property="og:url" content="https://playpalapps.github.io/DailyStreak/">
+<meta property="og:title" content="DailyStreak: build habits that stick">
+<meta property="og:description" content="A clean, private habit tracker built around streaks. One tap a day to check in, and a heatmap that shows your progress at a glance. No ads and no account.">
+<meta property="og:image" content="https://playpalapps.github.io/DailyStreak/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DailyStreak: build habits that stick">
+<meta name="twitter:description" content="A clean, private habit tracker built around streaks. One tap a day to check in. No ads, no account.">
+<meta name="twitter:image" content="https://playpalapps.github.io/DailyStreak/og-image.jpg">
+<meta name="theme-color" content="#0F0F0E">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/Fraunces-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="_shared.css?v=1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"DailyStreak","alternateName":"DailyStreak: Habit Tracker","applicationCategory":"HealthApplication","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"A clean, private habit tracker built around streaks.","image":"https://playpalapps.github.io/DailyStreak/icon.png","url":"https://playpalapps.github.io/DailyStreak/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+/* hero */
+.hero{padding:clamp(40px,7vw,96px) 0 clamp(34px,6vw,72px)}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(3rem,7vw,5.4rem);line-height:.98;margin:0 0 24px}
+.hero .tag{font-size:clamp(1.1rem,1.9vw,1.3rem);color:var(--ink-2);max-width:40ch;margin:0 0 30px;line-height:1.5}
+.hero .stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+.hero .note{font-size:15px;color:var(--ink-3);margin:0 0 28px;max-width:46ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0;padding:0;list-style:none}
+.chips li{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ink-2)}
+.chips svg{width:15px;height:15px;fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.hero .art{position:relative;display:grid;place-items:center;min-height:clamp(420px,52vw,640px)}
+.hero .art::before{content:"";position:absolute;width:96%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(82,183,136,.2),transparent);pointer-events:none}
+.hero .art .phone{position:absolute;width:min(58%,290px)}
+.hero .art .phone.back{transform:translate(34%,-4%) rotate(6deg)}
+.hero .art .phone.front{transform:translate(-22%,4%) rotate(-4deg)}
+@media (max-width:860px){.hero .grid{grid-template-columns:1fr}.hero .art{min-height:min(118vw,560px)}.hero .art .phone{width:min(54vw,270px)}}
+/* sections */
+section.slab{padding:clamp(48px,8vw,104px) 0}
+section.slab .head{max-width:62ch;margin-bottom:clamp(26px,4vw,44px)}
+section.slab h2{font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.05;margin:0 0 14px}
+section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
+.swipe-hint{display:none;color:var(--ink-3)}
+@media (max-width:980px){.swipe-hint{display:inline}}
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{border-radius:24px;padding:28px 26px}
+.step .n{font-family:var(--display);font-weight:700;font-size:44px;line-height:1;color:var(--green);margin-bottom:18px}
+.step h3{margin:0 0 6px;font-size:20px}
+.step p{margin:0;color:var(--ink-2);font-size:16.5px}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+/* streak explainer */
+.streak{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.streak dl{margin:22px 0 0;display:grid;gap:16px}
+.streak dt{font-weight:700;color:var(--ink);display:flex;align-items:center;gap:10px}
+.streak dt small{font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--bg);background:var(--amber);border-radius:999px;padding:2px 8px}
+.streak dd{margin:2px 0 0;color:var(--ink-2);font-size:16.5px}
+.habit{border-radius:24px;padding:clamp(20px,3vw,28px);box-shadow:0 24px 50px var(--shadow)}
+.habit .top{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.habit .ic{flex:0 0 48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(82,183,136,.14)}
+.habit .ic svg{width:24px;height:24px;fill:none;stroke:var(--green);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.habit .name{font-weight:600;font-size:18px;line-height:1.25}
+.habit .name small{display:block;font-weight:400;font-size:14.5px;color:var(--ink-3)}
+.habit .num{margin-left:auto;text-align:right;font-family:var(--display);font-weight:700;font-size:34px;line-height:1;color:var(--green)}
+.habit .num small{display:block;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.habit .check{flex:0 0 52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--green)}
+.habit .check svg{width:24px;height:24px;fill:none;stroke:var(--bg);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.heat{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:clamp(2px,.45vw,4px)}
+.heat i{aspect-ratio:1;border-radius:28%;background:var(--bg-3)}
+.heat i.on{background:var(--green)}
+.heat i.fz{background:var(--amber)}
+.heat i.no{background:transparent}
+.habit .cap{margin:18px 0 0;font-size:14.5px;color:var(--ink-3)}
+.habit .cap b{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--amber);margin-right:6px}
+@media (max-width:860px){.streak{grid-template-columns:1fr}}
+@media (max-width:420px){.habit .num{font-size:28px}.habit .check{flex-basis:44px;height:44px;border-radius:14px}.habit .ic{flex-basis:42px;height:42px}}
+/* screens */
+.shots{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.shot h3{margin:16px 0 4px;font-size:17px}
+.shot p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.45}
+@media (max-width:980px){.shots{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none}.shots::-webkit-scrollbar{display:none}.shot{flex:0 0 min(62vw,250px);scroll-snap-align:center}}
+/* details */
+.details{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.detail{border-radius:24px;padding:26px 24px}
+.detail .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:rgba(82,183,136,.14);margin-bottom:16px}
+.detail .ic svg{width:22px;height:22px;fill:none;stroke:var(--green);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.detail h3{margin:0 0 6px;font-size:18px}
+.detail p{margin:0;color:var(--ink-2);font-size:16px}
+@media (max-width:900px){.details{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.details{grid-template-columns:1fr}}
+/* pricing */
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tier{border-radius:24px;padding:clamp(24px,3.6vw,38px)}
+.tier.pro{background:rgba(82,183,136,.12)}
+.tier .k{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
+.tier .k.gt{color:var(--green)}
+.tier .price{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,4.6vw,3.4rem);letter-spacing:-.02em;line-height:1;margin:12px 0 6px}
+.tier .price small{font-family:var(--body);font-size:17px;font-weight:600;letter-spacing:0;color:var(--ink-2)}
+.tier .terms{margin:0 0 20px;color:var(--ink-2);font-size:16px}
+.tier ul{margin:0;padding:0;list-style:none;display:grid;gap:9px;color:var(--ink-2);font-size:16.5px}
+.tier li{display:flex;gap:10px;align-items:flex-start}
+.tier li svg{flex:0 0 18px;height:18px;margin-top:5px;fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.tier .fine{margin:20px 0 0;font-size:14px;color:var(--ink-3)}
+@media (max-width:760px){.tiers{grid-template-columns:1fr}}
+/* download */
+.download{padding:clamp(30px,5vw,60px) 0 clamp(48px,7vw,84px)}
+.download .card{border-radius:24px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center}
+.download img{width:104px;height:104px;border-radius:24px}
+.download h2{margin:0 0 6px;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1}
+.download p{margin:0;color:var(--ink-2)}
+.download .stores{display:flex;flex-direction:column;gap:10px}
+.download .btn{background:var(--bg-3)}
+.hero .btn.soon{background:var(--bg-2)}
+@media (max-width:760px){.download .card{grid-template-columns:1fr;text-align:center;justify-items:center}.download .stores{flex-direction:row;flex-wrap:wrap;justify-content:center}}
+</style>
+</head>
+<body>
+<a class="skip" href="#how">Skip to content</a>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="./" class="brand" aria-current="page"><img src="icon-192.png" alt="" width="32" height="32"><span>DailyStreak</span></a>
+    <div class="links">
+      <a href="../">Playpal Apps</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html" class="hide-sm">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container grid">
+    <div>
+      <span class="eyebrow">A habit tracker built around streaks</span>
+      <h1>Build habits <span class="gt">that stick.</span></h1>
+      <p class="tag">One tap a day to check in. Every habit gets its own card, its own colour and a grid of the last six months, so you can see how you are doing at a glance.</p>
+      <div class="stores">
+        <span class="btn soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+      <p class="note">Launching soon on iPhone, iPad and Android. DailyStreak is free to use with up to 3 habits. DailyStreak Pro removes the limit and adds a few extras with a single purchase of $4.99, with no subscription.</p>
+      <ul class="chips" aria-label="Highlights">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Free to start</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>No ads</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>No account</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Works offline</li>
+      </ul>
+    </div>
+    <div class="art">
+      <div class="phone back"><img src="shots/detail.jpg" alt="A habit's detail screen: Read 30 minutes, a 112 day streak, buttons for Calendar, Freeze and Share, four stats and a heatmap of the past year" width="720" height="1564"></div>
+      <div class="phone front"><img src="shots/home.jpg" alt="The Today screen: a ring showing 3 of 6 habits done, and cards for Morning run, Read 30 minutes, Meditate and Gym, each with a streak number, a check-in button and a heatmap" width="720" height="1564"></div>
+    </div>
+  </div>
+</header>
+
+<section class="slab" id="how">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>One tap, once a day</h2>
+      <p class="sub">There is nothing to fill in and nothing to rate. You did the thing or you did not, and the grid keeps count.</p>
+    </div>
+    <div class="steps">
+      <div class="step surface reveal"><div class="n">1</div><h3>Add a habit</h3><p>Pick one of 25 ready-made templates or write your own. Give it a name, one of 60 icons and one of 8 colours.</p></div>
+      <div class="step surface reveal d1"><div class="n">2</div><h3>Check in</h3><p>Tap the button on the habit's card when you have done it. A ring at the top of the screen shows how many habits are done today.</p></div>
+      <div class="step surface reveal d2"><div class="n">3</div><h3>Watch the grid fill in</h3><p>Each check-in colours a square and adds to the streak. Open a habit to see your best streak, completion rates and a month calendar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="streaks">
+  <div class="container streak">
+    <div class="reveal">
+      <span class="eyebrow">Streaks and schedules</span>
+      <h2>A streak that fits your week</h2>
+      <p class="sub">Not every habit is a daily one. Choose how often each habit is due, and the streak counts only what you asked of yourself.</p>
+      <dl>
+        <div><dt>Every day</dt><dd>The classic. Check in each day and the streak grows by one.</dd></div>
+        <div><dt>Times a week</dt><dd>Set a target from 1 to 6 times a week, on any days you like. The streak then counts weeks instead of days.</dd></div>
+        <div><dt>Set days <small>PRO</small></dt><dd>Choose specific days of the week. Days you did not pick are skipped and never break the streak.</dd></div>
+        <div><dt>Streak freeze <small>PRO</small></dt><dd>Two a month. Use one to protect a streak across a missed day.</dd></div>
+      </dl>
+    </div>
+    <div class="habit surface reveal d1" role="img" aria-label="A habit card for Morning run, set to every day, showing a 47 day streak, a ticked check-in button and a grid of squares that fills in from left to right. One square is amber, marking a day protected by a streak freeze.">
+      <div class="top">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h15a3 3 0 0 0 3-3c0-1.500-2-2-4-3s-3-3-3-5H9v3H5c0 2-2 3-2 5z"/><path d="M3 17v2h18v-2"/></svg></div>
+        <div class="name">Morning run<small>Every day</small></div>
+        <div class="num">47<small>day streak</small></div>
+        <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+      </div>
+      <div class="heat" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="fz"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="no"></i><i class="no"></i><i class="no"></i></div>
+      <p class="cap"><b></b>An amber square is a day covered by a streak freeze.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="screens">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Inside the app</span>
+      <h2>See it before you download it</h2>
+      <p class="sub">Real screens from DailyStreak. <span class="swipe-hint">Swipe to see them all.</span></p>
+    </div>
+    <div class="shots">
+      <div class="shot reveal"><div class="phone"><img src="shots/detail.jpg" alt="The detail screen for Read 30 minutes: a 112 day streak, best streak 112, 181 check-ins, 100% over 30 days and 99% all time, above a heatmap of the past year" width="720" height="1564" loading="lazy"></div><h3>Habit detail</h3><p>Current and best streak, total check-ins, completion rates and your history.</p></div>
+      <div class="shot reveal d1"><div class="phone"><img src="shots/editor.jpg" alt="The Edit Habit screen for a habit named Gym, with a row of eight colours and a grid of icons to choose from" width="720" height="1564" loading="lazy"></div><h3>Make it yours</h3><p>A name, a colour and an icon for every habit.</p></div>
+      <div class="shot reveal d2"><div class="phone"><img src="shots/achievements.jpg" alt="The Achievements screen showing 9 of 11 unlocked, including First Step, One Week, Monthly Master and Centurion, each marked bronze, silver or gold" width="720" height="1564" loading="lazy"></div><h3>Achievements</h3><p>Eleven to earn, from your first check-in to a full year.</p></div>
+      <div class="shot reveal d3"><div class="phone"><img src="shots/light.jpg" alt="The Today screen in the light theme, with the same habit cards on a pale background" width="720" height="1564" loading="lazy"></div><h3>Light theme</h3><p>Dark by default, with a light theme if you prefer it.</p></div>
+      <div class="shot reveal d4"><div class="phone"><img src="shots/pro.jpg" alt="The DailyStreak Pro screen, headed Pay once, own forever, listing unlimited habits, full-year history, 2 streak freezes per month, share cards with no watermark, CSV export and habits on set days of the week" width="720" height="1564" loading="lazy"></div><h3>Pro</h3><p>Optional extras with one purchase. No subscription.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="details">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">The details</span>
+      <h2>Small things, done properly</h2>
+      <p class="sub">The parts that help you keep going, without the app getting in the way.</p>
+    </div>
+    <div class="details">
+      <div class="detail surface reveal"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16V11a6 6 0 0 0-12 0v5l-2 2h16z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><h3>Reminders that know when to stop</h3><p>An optional reminder for each habit at a time you choose, plus one evening nudge at 9 pm only if habits are still unchecked. It stops by itself after a week away.</p></div>
+      <div class="detail surface reveal d1"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/></svg></div><h3>Home screen widgets</h3><p>Keep the streak for your first habit on your home screen. Small and medium widgets on iPhone and iPad, and a small widget on Android.</p></div>
+      <div class="detail surface reveal d2"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 13v6h14v-6"/></svg></div><h3>Share a streak</h3><p>Turn a streak into an image card, in square or story format, or share a year-in-review card. Milestones get a short celebration along the way.</p></div>
+      <div class="detail surface reveal"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.400-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 10c0 5.600-7 10-7 10z"/></svg></div><h3>Gentle mode</h3><p>If streak numbers feel like pressure, switch to gentle mode and see a completion percentage instead. You can also add a short note to a check-in.</p></div>
+      <div class="detail surface reveal d1"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M8 11l4 4 4-4"/><path d="M5 17v3h14v-3"/></svg></div><h3>Back up and restore</h3><p>Save everything to a file you keep, and restore it on a new phone. Both are free. Pro adds CSV export for spreadsheets.</p></div>
+      <div class="detail surface reveal d2"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.400 1.400M17.600 17.600L19 19M5 19l1.400-1.400M17.600 6.400L19 5"/></svg></div><h3>Light and dark</h3><p>Dark by default, with a light theme too. Sounds and haptics can each be switched off.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="pricing">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Free and Pro</span>
+      <h2>Free to use. One purchase for more.</h2>
+      <p class="sub">DailyStreak is free with up to 3 habits and has no ads. Pro is bought once and can be restored on your other devices with the same store account. There is no subscription.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier surface reveal">
+        <div class="k">Free</div>
+        <div class="price">$0</div>
+        <p class="terms">Up to 3 habits, for as long as you like.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Daily and times-a-week schedules</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Streaks, stats and six months of history for each habit</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Reminders, widgets, achievements and gentle mode</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Share cards, with a small "built with DailyStreak" mark</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Backup and restore, light and dark themes, no ads, no account</li>
+        </ul>
+      </div>
+      <div class="tier pro reveal d1">
+        <div class="k gt">DailyStreak Pro</div>
+        <div class="price">$4.99 <small>once</small></div>
+        <p class="terms">A one-time purchase. Nothing renews.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Unlimited habits</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Full-year history for every habit</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Two streak freezes a month</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Share cards without the watermark</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>CSV export</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Habits on set days of the week</li>
+        </ul>
+        <p class="fine">Bought through the App Store or Google Play. The price is in US dollars and may differ by country; the app shows the price in your currency before you buy. See the <a href="terms.html">terms</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="private">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Private by default</span>
+      <h2>No account. No tracking. No ads.</h2>
+      <p class="sub">Your habits, check-ins and notes are stored on your device and nowhere else. DailyStreak has no sign-up, no analytics and no advertising, and it has no server to send anything to. It only goes online for the optional Pro purchase, which Apple or Google handles. <a href="privacy.html">Read the privacy policy</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="download" id="download">
+  <div class="container">
+    <div class="card surface reveal">
+      <img src="icon-192.png" alt="" width="104" height="104">
+      <div>
+        <h2>Coming soon</h2>
+        <p>DailyStreak is on its way to the App Store and Google Play. This page will carry the links the day it goes live.</p>
+      </div>
+      <div class="stores">
+        <span class="btn soon" data-store="apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store <small>SOON</small></span>
+        <span class="btn soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rich">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="brand"><img src="icon-192.png" alt="" width="44" height="44">DailyStreak</div>
+        <p>Build habits that stick. By Playpal Apps.</p>
+      </div>
+      <div>
+        <h4>App</h4>
+        <ul><li><a href="#how">How it works</a></li><li><a href="#streaks">Streaks</a></li><li><a href="#screens">Screens</a></li><li><a href="#details">Details</a></li><li><a href="#pricing">Free and Pro</a></li></ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul><li><a href="support.html">Support</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="../">All Playpal apps</a></li></ul>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; 2026 Playpal Apps</span><span>DailyStreak name, icon and design &copy; Playpal Apps.</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
