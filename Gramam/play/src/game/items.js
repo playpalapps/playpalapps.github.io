@@ -1,9 +1,0 @@
-// House objects you can bring home from the kada. They appear in rooms once bought.
-export const HOUSE_ITEMS = [
-  { id: 'clock', name: 'Ansonia wall clock', ml: 'ചുമർ ഘടികാരം', where: 'nadumuttam', line: 'An Ansonia pendulum clock, second-hand from a Thrissur house. Kunjappan wraps it in newspaper.', diary: 'Brought home a wall clock for the nadumuttam. It ticks like the one Achan sold in the bad year. Maybe it is the same one.' },
-  { id: 'gramophone', name: 'HMV gramophone', ml: 'ഗ്രാമഫോൺ', where: 'nadumuttam', line: 'An HMV gramophone with a brass horn and three records: Saigal, Kamukara, and one unlabelled.', diary: 'A gramophone, with the dog on the label. The unlabelled record is a Thiruvathira song. Played it four times.' },
-  { id: 'petromax', name: 'Petromax lamp', ml: 'പെട്രോമാക്സ്', where: 'poomukham', line: 'A Petromax pressure lamp. Pump it, prime it, and the verandah turns to daylight.', diary: 'Petromax for the poomukham. The hiss of it is the sound of every wedding and every power cut of my childhood.' },
-  { id: 'chembu', name: 'New chembu', ml: 'പുതിയ ചെമ്പ്', where: 'adukkala', line: 'A new brass chembu, so bright it is almost rude next to the old one.', diary: 'Bought the new chembu Ravi sent money for. The old one is now for water. Nobody is replacing anything.' },
-  { id: 'print', name: 'Ravi Varma print', ml: 'രവിവർമ്മ ചിത്രം', where: 'ara', line: 'A framed Ravi Varma print, Saraswati with the veena, from the press at Lonavla.', diary: 'A Ravi Varma print for the ara wall. Ammamma had the same one; it went with the aunt in Ernakulam.' },
-  { id: 'calendar', name: 'Mathrubhumi calendar', ml: 'കലണ്ടർ', where: 'adukkala', line: 'This year’s Mathrubhumi calendar, with the stars and the rahukalam for every day.', diary: 'A new calendar for the kitchen wall. Marked Thiruvonam, Vishu, and the day Ravi’s letters are due.' }
-];
