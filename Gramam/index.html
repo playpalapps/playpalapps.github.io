@@ -42,7 +42,9 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6;position:relative}
 body{background-image:url(grain.png);background-attachment:fixed}
 a{color:var(--lat);text-decoration:none}a:hover{text-decoration:underline}
-img{display:block;max-width:100%}
+img{display:block;max-width:100%;height:auto}
+.day figure,.fest figure,.verb,.slip,.month,.two>*{min-width:0}
+.day img,.fest img,.verb img,.map{width:100%}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
 h1,h2,h3{font-weight:400;letter-spacing:-.01em}
 .ml{font-family:var(--ml)}
@@ -60,6 +62,7 @@ nav .in{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:flex;align-items:center;gap:10px;color:#fff4de;font-size:15px;letter-spacing:.02em}
 .brand img{width:34px;height:34px;border-radius:9px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
 nav .links a{margin-left:22px;color:rgba(255,244,222,.9);font-size:15px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+@media (max-width:640px){nav .links a{margin-left:14px;font-size:14px}nav .links a:nth-child(-n+3){display:none}.brand span{display:none}.cta{font-size:1rem;padding:12px 22px}.title .tag{font-size:1rem}}
 .title{padding:clamp(160px,30vh,340px) 0 clamp(36px,6vh,64px);text-align:center}
 .title h1{font-size:clamp(4rem,11vw,8.5rem);line-height:.95;text-shadow:0 2px 24px rgba(0,0,0,.35);font-weight:400}
 .title .mlname{font-family:var(--ml);font-size:clamp(1.5rem,3.2vw,2.3rem);margin-top:8px;opacity:.95;text-shadow:0 1px 10px rgba(0,0,0,.4)}
@@ -76,7 +79,7 @@ section{padding:clamp(56px,8vw,112px) 0}
 .lede{font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.55;color:var(--ink);max-width:62ch}
 .lede em{color:var(--lat)}
 .two{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
-@media (max-width:860px){.two{grid-template-columns:1fr}.two>img.phone,.two>.map{max-width:300px;margin:0 auto}.two>div[style*='grid']{max-width:420px;margin:0 auto}}
+@media (max-width:860px){.two{grid-template-columns:1fr}.two>img.phone,.two>.map{max-width:300px;margin:0 auto}.two>div[style*='grid']{max-width:min(420px,100%);margin:0 auto}.two>div[style*='grid'] .phone{width:100%}}
 /* the day: five phone screens on a shelf */
 .day{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;align-items:end}
 @media (max-width:980px){.day{grid-template-columns:repeat(3,1fr)}}
@@ -149,7 +152,7 @@ footer a{color:rgba(255,244,222,.85)}
 <body>
 
 <header class="hero">
-  <nav><div class="wrap in"><a class="brand" href="https://playpalapps.github.io/"><img src="icon.png" alt="">Playpal Apps</a><div class="links"><a href="#day">The day</a><a href="#year">The year</a><a href="#village">The village</a><a href="press/">Press</a><a href="support.html">Support</a></div></div></nav>
+  <nav><div class="wrap in"><a class="brand" href="https://playpalapps.github.io/"><img src="icon.png" alt=""><span>Playpal Apps</span></a><div class="links"><a href="#day">The day</a><a href="#year">The year</a><a href="#village">The village</a><a href="press/">Press</a><a href="support.html">Support</a></div></div></nav>
   <div class="title wrap">
     <h1>Gramam</h1>
     <div class="mlname">ഗ്രാമം</div>
@@ -165,7 +168,7 @@ footer a{color:rgba(255,244,222,.85)}
     <p class="lede">Gramam is a cozy life game set in a Kerala village between 1950 and 1980. <em>The village keeps real time.</em> Dusk in the game is dusk outside your window; Onam is Onam. While you are away the village goes on, and when you come back the milk is at the step and a letter is under the stone on the charupadi.</p>
     <p class="lede" style="margin-top:18px">Nothing is scored. Nothing decays. There are no menus: you tap the kettle, the pulley, the lamp, the person. Everything you see and hear was drawn and composed in code by one person who grew up with these things.</p>
   </div>
-  <img class="phone" src="web/dawn.jpg" alt="The first morning: the poomukham at dawn, mist on the lane" width="360">
+  <img class="phone" src="web/dawn.jpg" alt="The first morning: the poomukham at dawn, mist on the lane" style="width:min(360px,100%)">
 </div></section>
 
 <section id="day"><div class="wrap">
