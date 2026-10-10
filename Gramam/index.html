@@ -3,168 +3,291 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Gramam: a slow life in old Kerala</title>
-<meta name="description" content="Gramam is a cozy life game set in a Kerala village between 1950 and 1980. Twenty-one places, from the tharavad to the talkies, the sacred grove and the sea. Light the lamp at dusk, make kaapi on the hearth, keep the house through Onam, Vishu and the monsoon. No ads, no account, fully offline.">
+<title>Gramam · ഗ്രാമം · a slow life in old Kerala</title>
+<meta name="description" content="Gramam is a cozy life game set in a Kerala village between 1950 and 1980. You come home to the family tharavad. The village keeps real time and the real Malayalam calendar: light the lamp at dusk, draw water, make kaapi, lay the pookalam, sit on the station bench and the train comes. No ads, no account, fully offline.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://playpalapps.github.io/Gramam/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Playpal Apps">
 <meta property="og:url" content="https://playpalapps.github.io/Gramam/">
-<meta property="og:title" content="Gramam: a slow life in old Kerala">
-<meta property="og:description" content="A cozy life game set in a Kerala village between 1950 and 1980. Light the lamp, make kaapi, keep a tharavad through Onam and the monsoon. No ads, no account.">
+<meta property="og:title" content="Gramam · a slow life in old Kerala">
+<meta property="og:description" content="A cozy life game set in a Kerala village, 1950 to 1980. The village keeps real time. No ads, no account, fully offline.">
 <meta property="og:image" content="https://playpalapps.github.io/Gramam/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gramam: a slow life in old Kerala">
-<meta name="twitter:description" content="A cozy life game set in a Kerala village between 1950 and 1980. No ads, no account, fully offline.">
+<meta name="twitter:title" content="Gramam · a slow life in old Kerala">
+<meta name="twitter:description" content="A cozy life game set in a Kerala village, 1950 to 1980. The village keeps real time. No ads, no account, fully offline.">
 <meta name="twitter:image" content="https://playpalapps.github.io/Gramam/og-image.jpg">
-<meta name="theme-color" content="#1c2b45">
+<meta name="theme-color" content="#2d4a4a">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@400;500&family=Noto+Sans+Malayalam:wght@400&display=swap">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"MobileApplication","name":"Gramam","alternateName":"Gramam: a slow life in old Kerala","applicationCategory":"GameApplication","applicationSubCategory":"Simulation","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"A cozy life game set in a Kerala village between 1950 and 1980.","image":"https://playpalapps.github.io/Gramam/icon.png","url":"https://playpalapps.github.io/Gramam/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Gramam","alternateName":"ഗ്രാമം","applicationCategory":"GameApplication","applicationSubCategory":"Simulation","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"A cozy life game set in a Kerala village between 1950 and 1980. The village keeps real time and the Malayalam calendar.","image":"https://playpalapps.github.io/Gramam/icon.png","url":"https://playpalapps.github.io/Gramam/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <style>
-:root{--bg:#f6efe1;--bg2:#efe3c8;--paper:#fbf6ea;--ink:#2b2118;--ink2:#5a4a3a;--ink3:#8a7a66;--lat:#a3522f;--lat2:#8f4128;--teak:#6b4226;--brass:#c9962e;--night:#1c2b45;--hair:rgba(43,33,24,.12);--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,system-ui,sans-serif}
+:root{
+  --paper:#efe4cc;--paper2:#f6eedb;--paper3:#e6d8b8;--ink:#2b2118;--ink2:#54433a;--ink3:#857462;
+  --lat:#a3522f;--lat2:#7f3a20;--teak:#5a3a24;--brass:#c9962e;--brass2:#e6c15a;--palm:#2f5230;--palm2:#5f8a33;--night:#1c2b45;--kayal:#2d4a4a;
+  --hair:rgba(43,33,24,.14);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --ml:"Noto Serif Malayalam","Noto Sans Malayalam","Malayalam Sangam MN",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6;position:relative}
+body{background-image:url(grain.png);background-attachment:fixed}
 a{color:var(--lat);text-decoration:none}a:hover{text-decoration:underline}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-h1,h2,h3,.display{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
-nav{padding:22px 0;border-bottom:1px solid var(--hair)}
+img{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+h1,h2,h3{font-weight:400;letter-spacing:-.01em}
+.ml{font-family:var(--ml)}
+/* kasavu: the gold border of a mundu, used as a rule */
+.kasavu{height:10px;background:
+  linear-gradient(90deg,transparent 0 20%,rgba(255,255,255,.25) 20% 21%,transparent 21%) ,
+  repeating-linear-gradient(90deg,var(--brass) 0 14px,var(--brass2) 14px 18px);
+  border-top:2px solid #f3e5c0;border-bottom:2px solid #f3e5c0;box-shadow:0 1px 0 var(--teak)}
+/* hero: the opening scene */
+.hero{position:relative;min-height:min(94vh,920px);background:#2d4a4a url(hero.jpg) center 30%/cover no-repeat;color:#fff4de;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,30,40,.35) 0,rgba(20,30,40,0) 22%,rgba(14,22,28,0) 48%,rgba(14,22,28,.72) 100%)}
+.hero>*{position:relative;z-index:1}
+nav{padding:18px 0}
 nav .in{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:600}
-.brand img{width:30px;height:30px;border-radius:8px}
-nav .links a{margin-left:18px;color:var(--ink2);font-size:15px}
-.hero{padding:clamp(40px,7vw,96px) 0 clamp(30px,5vw,60px)}
-.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,5vw,64px);align-items:center}
-.hero h1{font-size:clamp(3rem,7.5vw,5.6rem);line-height:.98;margin:0 0 10px}
-.hero .ml{font-family:var(--serif);font-size:clamp(1.4rem,2.6vw,2rem);color:var(--lat);margin:0 0 18px}
-.hero .tag{font-size:clamp(1.05rem,1.8vw,1.25rem);color:var(--ink2);max-width:44ch;margin:0 0 26px;line-height:1.55}
-.stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
-.store{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:12px;padding:10px 16px;font-weight:600;font-size:15px;opacity:.5;cursor:default}
-.store small{display:block;font-weight:400;font-size:11px;opacity:.8;line-height:1}
-.store svg{width:20px;height:20px;fill:#fff}
-.note{font-size:14px;color:var(--ink3);margin:0 0 26px}
-.chips{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none}
-.chips li{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ink2)}
-.chips svg{width:15px;height:15px;fill:none;stroke:var(--lat);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.art{position:relative;display:grid;place-items:center;min-height:clamp(420px,52vw,640px)}
-.art::before{content:"";position:absolute;width:92%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(201,150,46,.22),transparent);pointer-events:none}
-.phone{position:absolute;width:min(56%,280px);border-radius:28px;box-shadow:0 30px 60px rgba(43,33,24,.28);border:6px solid #1a1510}
-.phone.back{transform:translate(34%,-4%) rotate(6deg)}
-.phone.front{transform:translate(-22%,4%) rotate(-4deg)}
-@media (max-width:860px){.hero .grid{grid-template-columns:1fr}.art{min-height:min(118vw,560px)}.phone{width:min(54vw,270px)}}
-section{padding:clamp(44px,7vw,96px) 0;border-top:1px solid var(--hair)}
-section .head{max-width:64ch;margin-bottom:clamp(24px,4vw,40px)}
-section h2{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.05;margin:0 0 12px}
-section .sub{font-size:18px;color:var(--ink2)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:var(--paper);border:1px solid var(--hair);border-radius:20px;padding:24px 22px}
-.card .k{font-family:var(--serif);font-size:30px;color:var(--lat);line-height:1;margin-bottom:12px}
-.card h3{font-size:19px;margin:0 0 6px}
-.card p{color:var(--ink2);font-size:15.5px;margin:0}
-@media (max-width:820px){.cards{grid-template-columns:1fr}}
-.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.shot img{width:100%;border-radius:18px;border:4px solid #1a1510;box-shadow:0 14px 30px rgba(43,33,24,.2);display:block}
-.shot h3{margin:14px 0 2px;font-size:16.5px}
-.shot p{color:var(--ink2);font-size:14.5px;margin:0}
-@media (max-width:980px){.shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none}.shots::-webkit-scrollbar{display:none}.shot{flex:0 0 min(62vw,250px);scroll-snap-align:center}}
-.places{columns:3;column-gap:28px;list-style:none}
-.places li{break-inside:avoid;padding:8px 0;border-bottom:1px solid var(--hair);font-size:15.5px;color:var(--ink2)}
-.places b{color:var(--ink);font-weight:600}.places i{color:var(--ink3);font-style:normal;font-size:13px;margin-left:6px}
-@media (max-width:860px){.places{columns:2}}@media (max-width:520px){.places{columns:1}}
-.quote{background:var(--night);color:#efe3c6;border-radius:24px;padding:clamp(28px,5vw,56px);font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,1.8rem);line-height:1.45}
-.quote small{display:block;margin-top:18px;font-family:var(--sans);font-size:14px;opacity:.7}
-.download .cardb{background:var(--paper);border:1px solid var(--hair);border-radius:24px;padding:clamp(26px,5vw,52px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,36px);align-items:center}
-.download img{width:104px;height:104px;border-radius:24px}
-.download h2{margin:0 0 6px;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1}
-.download p{color:var(--ink2);margin:0 0 16px}
-@media (max-width:620px){.download .cardb{grid-template-columns:1fr}}
-footer{padding:36px 0 60px;color:var(--ink3);font-size:14px;border-top:1px solid var(--hair)}
-footer a{margin-right:18px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff4de;font-size:15px;letter-spacing:.02em}
+.brand img{width:34px;height:34px;border-radius:9px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+nav .links a{margin-left:22px;color:rgba(255,244,222,.9);font-size:15px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.title{padding:clamp(160px,30vh,340px) 0 clamp(36px,6vh,64px);text-align:center}
+.title h1{font-size:clamp(4rem,11vw,8.5rem);line-height:.95;text-shadow:0 2px 24px rgba(0,0,0,.35);font-weight:400}
+.title .mlname{font-family:var(--ml);font-size:clamp(1.5rem,3.2vw,2.3rem);margin-top:8px;opacity:.95;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+.title .tag{font-style:italic;font-size:clamp(1.05rem,2vw,1.35rem);margin:14px auto 28px;max-width:34ch;opacity:.95;text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.cta{display:inline-flex;align-items:center;gap:10px;border:1.5px solid rgba(255,244,222,.85);border-radius:999px;padding:14px 30px;color:#fff4de;font-size:1.15rem;background:rgba(20,34,38,.45);backdrop-filter:blur(6px);transition:background .2s}
+.cta:hover{background:rgba(20,34,38,.7);text-decoration:none}
+.stores{display:flex;justify-content:center;gap:18px;margin-top:18px;font-size:14px;opacity:.85;font-style:italic}
+/* sections */
+section{padding:clamp(56px,8vw,112px) 0}
+.head{max-width:62ch;margin-bottom:clamp(28px,4vw,48px)}
+.head .k{font-family:var(--ml);color:var(--lat);font-size:1.15rem;letter-spacing:.02em}
+.head h2{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.1;margin:4px 0 12px}
+.head p{font-size:1.1rem;color:var(--ink2);max-width:58ch}
+.lede{font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.55;color:var(--ink);max-width:62ch}
+.lede em{color:var(--lat)}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media (max-width:860px){.two{grid-template-columns:1fr}.two>img.phone,.two>.map{max-width:300px;margin:0 auto}.two>div[style*='grid']{max-width:420px;margin:0 auto}}
+/* the day: five phone screens on a shelf */
+.day{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;align-items:end}
+@media (max-width:980px){.day{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.day{grid-template-columns:repeat(2,1fr)}}
+.day figure{text-align:center}
+.day img,.phone{border-radius:22px;border:5px solid #1a1510;box-shadow:0 20px 40px rgba(43,33,24,.28);max-width:360px;justify-self:center}
+.day figcaption{margin-top:12px;font-style:italic;color:var(--ink2);font-size:.98rem}
+.day figcaption b{display:block;font-style:normal;font-family:var(--ml);color:var(--lat);font-size:1rem;margin-bottom:2px}
+/* slips of paper, as in the game */
+.slips{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:860px){.slips{grid-template-columns:1fr}}
+.slip{background:var(--paper2);border-left:5px solid var(--lat);padding:22px 24px 24px;box-shadow:0 8px 24px rgba(43,33,24,.14);position:relative;font-style:italic;font-size:1.05rem;line-height:1.55}
+.slip::after{content:"";position:absolute;right:0;bottom:0;border-style:solid;border-width:0 0 18px 18px;border-color:transparent transparent var(--paper3) transparent}
+.slip b{display:block;font-style:normal;font-family:var(--ml);color:var(--lat);font-size:1rem;margin-bottom:8px}
+.slip img{border-radius:14px;margin:0 0 16px;border:4px solid #1a1510}
+/* the hands: three verbs */
+.verbs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media (max-width:860px){.verbs{grid-template-columns:1fr}}
+.verb img{border-radius:22px;border:5px solid #1a1510;box-shadow:0 16px 36px rgba(43,33,24,.25)}
+.verb h3{font-size:1.4rem;margin:16px 0 6px}
+.verb h3 span{font-family:var(--ml);color:var(--lat);font-size:1.05rem;margin-left:8px}
+.verb p{color:var(--ink2)}
+/* the year: twelve months */
+.months{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+@media (max-width:980px){.months{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:560px){.months{grid-template-columns:repeat(2,1fr)}}
+.month{border:1px solid var(--hair);background:rgba(255,255,255,.28);padding:14px 14px 16px;border-radius:6px;min-height:118px}
+.month b{display:block;font-weight:400;font-size:1.15rem}
+.month i{display:block;font-style:normal;font-family:var(--ml);color:var(--lat);font-size:.95rem;margin-bottom:8px}
+.month small{display:block;color:var(--ink2);font-size:.92rem;line-height:1.4}
+.fest{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:34px}
+@media (max-width:980px){.fest{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.fest{grid-template-columns:repeat(2,1fr)}}
+.fest figure img{border-radius:14px;border:4px solid #1a1510}
+.fest figcaption{margin-top:8px;font-size:.95rem;color:var(--ink2);text-align:center;font-style:italic}
+/* map and places */
+.map{border-radius:18px;box-shadow:0 20px 50px rgba(43,33,24,.25);border:5px solid #1a1510}
+.places{columns:2;column-gap:40px;list-style:none;font-size:1.02rem}
+@media (max-width:560px){.places{columns:1}}
+.places li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--hair)}
+.places b{font-weight:400}
+.places i{font-style:normal;font-family:var(--ml);color:var(--lat);margin-left:8px;font-size:.95rem}
+.places span{color:var(--ink3);display:block;font-size:.92rem}
+/* language */
+.lang{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media (max-width:860px){.lang{grid-template-columns:1fr}}
+.lang div{border:1px solid var(--hair);padding:16px 18px;border-radius:6px;background:rgba(255,255,255,.3)}
+.lang div b{display:block;font-weight:400;font-size:1.1rem;margin-bottom:4px}
+.lang div small{color:var(--ink2)}
+blockquote{font-size:clamp(1.3rem,2.6vw,1.9rem);line-height:1.4;font-style:italic;max-width:30ch;color:var(--ink)}
+blockquote small{display:block;font-style:normal;font-size:.95rem;color:var(--ink3);margin-top:14px;font-family:var(--sans)}
+/* never */
+.never{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 40px;list-style:none;font-size:1.1rem}
+@media (max-width:860px){.never{grid-template-columns:1fr}}
+.never li{padding:10px 0;border-bottom:1px solid var(--hair)}
+.never li b{font-weight:400;display:block}
+.never li small{color:var(--ink2)}
+/* night end */
+.end{background:var(--night);color:#fff4de;text-align:center;padding:clamp(60px,9vw,120px) 0}
+.end img{width:132px;height:132px;border-radius:30px;margin:0 auto 22px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.end h2{font-size:clamp(2.2rem,5vw,3.4rem)}
+.end p{opacity:.85;margin:10px auto 26px;max-width:46ch;font-style:italic}
+.end .cta{border-color:rgba(255,244,222,.6)}
+footer{background:#141c2c;color:rgba(255,244,222,.7);padding:26px 0;font-family:var(--sans);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+footer a{color:rgba(255,244,222,.85)}
+.sr{position:absolute;left:-9999px}
 </style>
 </head>
 <body>
-<nav><div class="wrap in"><a class="brand" href="https://playpalapps.github.io/"><img src="icon.png" alt="">Playpal Apps</a><div class="links"><a href="#places">Places</a><a href="#screens">Screens</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a></div></div></nav>
 
-<header class="hero"><div class="wrap grid">
-  <div>
+<header class="hero">
+  <nav><div class="wrap in"><a class="brand" href="https://playpalapps.github.io/"><img src="icon.png" alt="">Playpal Apps</a><div class="links"><a href="#day">The day</a><a href="#year">The year</a><a href="#village">The village</a><a href="press/">Press</a><a href="support.html">Support</a></div></div></nav>
+  <div class="title wrap">
     <h1>Gramam</h1>
-    <p class="ml">ഗ്രാമം · a slow life in old Kerala</p>
-    <p class="tag">You have come home to the family tharavad after years away. Light the nilavilakku at dusk, draw water from the kinar, boil kaapi on the aduppu, walk the lane to the chayakkada for the day’s gossip. Nothing is scored. Nothing can be lost. The Malayalam calendar turns, and the house remembers.</p>
-    <div class="stores">
-      <span class="store" title="Coming soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg><span><small>Coming soon on the</small>App Store</span></span>
-      <span class="store" title="Coming soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg><span><small>Coming soon on</small>Google Play</span></span>
-    </div>
-    <p class="note">Free. No ads, no purchases, no account, no tracking. Works offline. Headphones recommended.</p>
-    <ul class="chips">
-      <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>21 places</li>
-      <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>16 period recipes</li>
-      <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Onam · Vishu · Thiruvathira</li>
-      <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Everything drawn in code</li>
+    <div class="mlname">ഗ്രാമം</div>
+    <p class="tag">You have come home to the tharavad after years away. The village has kept your place.</p>
+    <a class="cta" href="play/?demo=1">Play the first morning in your browser</a>
+    <div class="stores"><span>iPhone and iPad · Onam 2027</span><span>Android · Onam 2027</span></div>
+  </div>
+</header>
+<div class="kasavu" role="presentation"></div>
+
+<section id="about"><div class="wrap two">
+  <div>
+    <p class="lede">Gramam is a cozy life game set in a Kerala village between 1950 and 1980. <em>The village keeps real time.</em> Dusk in the game is dusk outside your window; Onam is Onam. While you are away the village goes on, and when you come back the milk is at the step and a letter is under the stone on the charupadi.</p>
+    <p class="lede" style="margin-top:18px">Nothing is scored. Nothing decays. There are no menus: you tap the kettle, the pulley, the lamp, the person. Everything you see and hear was drawn and composed in code by one person who grew up with these things.</p>
+  </div>
+  <img class="phone" src="web/dawn.jpg" alt="The first morning: the poomukham at dawn, mist on the lane" width="360">
+</div></section>
+
+<section id="day"><div class="wrap">
+  <div class="head"><div class="k">ഒരു ദിവസം</div><h2>One day, in its five parts</h2><p>Velupp, ravile, uchha, sandhya, rathri. Light, weather, sound and who is about all follow the hour, and the hour is yours.</p></div>
+  <div class="day">
+    <figure><img src="web/dawn.jpg" alt="Dawn on the verandah"><figcaption><b>വെളുപ്പ്</b>velupp · the lamp still lit, the milk at the step</figcaption></figure>
+    <figure><img src="web/kuttan.jpg" alt="Kuttan the milkman at the gate"><figcaption><b>രാവിലെ</b>ravile · Kuttan with the milk, the crows</figcaption></figure>
+    <figure><img src="web/well.jpg" alt="Drawing water from the well"><figcaption><b>ഉച്ച</b>uchha · water from the kinar, hand over hand</figcaption></figure>
+    <figure><img src="shots/2.jpg" alt="The poomukham at dusk with the lamp lit"><figcaption><b>സന്ധ്യ</b>sandhya · the nilavilakku, the temple bell across the paddy</figcaption></figure>
+    <figure><img src="shots/4.jpg" alt="The kitchen at night"><figcaption><b>രാത്രി</b>rathri · the hearth, kanji, crickets</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="hands" style="background:rgba(230,216,184,.45)"><div class="wrap">
+  <div class="head"><div class="k">കൈകൊണ്ട്</div><h2>Done with the hand, not a menu</h2><p>Every big slow thing in the village starts when you start it. Sit on the station bench and the train comes. That is the only rule the station has.</p></div>
+  <div class="verbs">
+    <div class="verb"><img src="web/grind.jpg" alt="Grinding chammanthi on the stone"><h3>Grind <span>അരയ്ക്കുക</span></h3><p>Coconut, green chilli, shallot and tamarind on the ammikkallu, side to side, until it is chammanthi. Cooking is step by step at the real places in the kitchen, with the ingredients on the ledge.</p></div>
+    <div class="verb"><img src="web/pookalam.jpg" alt="Laying the pookalam with a finger"><h3>Lay the flowers <span>പൂക്കളം</span></h3><p>Ten mornings to Thiruvonam, one ring a day, with your finger round the muttam. Thetti, chembarathi, thumba, konna.</p></div>
+    <div class="verb"><img src="web/train.jpg" alt="The train arriving at the station"><h3>Call it in <span>വിളിക്കുക</span></h3><p>Wave the anavandi down at the kavala, call Pappan’s thoni across the river, pull the pally bell rope, light the deepastambham tier by tier, haul the shore net with the men.</p></div>
+  </div>
+</div></section>
+
+<section id="year"><div class="wrap">
+  <div class="head"><div class="k">കൊല്ലവർഷം</div><h2>The year turns on the Malayalam calendar</h2><p>Real dates. The pookalam begins on Atham, the kani is set on Vishu eve, the Ramayanam is read in Karkidakam, and the art forms come on their own days.</p></div>
+  <div class="months">
+    <div class="month"><b>Chingam</b><i>ചിങ്ങം</i><small>Onam: ten days of pookalam, the sadya, Kummattikali and the Onappottan at the gate, Pulikali on the fourth day</small></div>
+    <div class="month"><b>Kanni</b><i>കന്നി</i><small>The rains thin; a wedding at the ambalam; Vidyarambham at the school on Vijayadashami</small></div>
+    <div class="month"><b>Thulam</b><i>തുലാം</i><small>Afternoon thunder and quick rain</small></div>
+    <div class="month"><b>Vrischikam</b><i>വൃശ്ചികം</i><small>Cool mornings; pilgrims in black on the road</small></div>
+    <div class="month"><b>Dhanu</b><i>ധനു</i><small>Thiruvathira night; paper stars and carols; Margamkali round the lamp at the pally on Christmas night</small></div>
+    <div class="month"><b>Makaram</b><i>മകരം</i><small>Harvest; Theyyam at the kaavu</small></div>
+    <div class="month"><b>Kumbham</b><i>കുംഭം</i><small>The utsavam: elephants, kudamattom, fireworks, Ottamthullal in the afternoon, Kathakali all night</small></div>
+    <div class="month"><b>Meenam</b><i>മീനം</i><small>Heat; mangoes; the pond lower every day</small></div>
+    <div class="month"><b>Medam</b><i>മേടം</i><small>Vishu: the kani at dawn, the konna in gold, sparklers at the gate</small></div>
+    <div class="month"><b>Edavam</b><i>ഇടവം</i><small>The first rain breaks the heat; ploughing</small></div>
+    <div class="month"><b>Mithunam</b><i>മിഥുനം</i><small>Monsoon; women singing in the flooded field</small></div>
+    <div class="month"><b>Karkidakam</b><i>കർക്കിടകം</i><small>The lean month; Ramayanam in the evenings, kanji at night</small></div>
+  </div>
+  <div class="fest">
+    <figure><img src="web/kathakali.jpg" alt="Kathakali at the temple at night"><figcaption>Kathakali · കഥകളി</figcaption></figure>
+    <figure><img src="web/theyyam.jpg" alt="Theyyam in the sacred grove"><figcaption>Theyyam · തെയ്യം</figcaption></figure>
+    <figure><img src="web/pulikali.jpg" alt="Pulikali tigers at the junction"><figcaption>Pulikali · പുലികളി</figcaption></figure>
+    <figure><img src="web/margamkali.jpg" alt="Margamkali at the church"><figcaption>Margamkali · മാർഗ്ഗംകളി</figcaption></figure>
+    <figure><img src="web/duff.jpg" alt="Duffmuttu at the mosque"><figcaption>Duffmuttu · ദഫ്മുട്ട്</figcaption></figure>
+    <figure><img src="web/vidyarambham.jpg" alt="Vidyarambham at the school"><figcaption>Vidyarambham · വിദ്യാരംഭം</figcaption></figure>
+  </div>
+  <p style="margin-top:22px;color:var(--ink2);font-style:italic">Ramzan, Eid and Bakrid at the masjid; Christmas and perunnal at the pally; the utsavam and Theyyam at the ambalam and the kaavu. One village, all of it.</p>
+</div></section>
+
+<section id="village" style="background:rgba(230,216,184,.45)"><div class="wrap">
+  <div class="head"><div class="k">ഗ്രാമം</div><h2>Twenty-two places, as I remember them</h2><p>A folded hand-drawn map. Seven places in the tharavad, the rest down the lane and across the river.</p></div>
+  <div class="two">
+    <img class="map" src="web/map.jpg" alt="The folded hand-drawn map of the village" width="420">
+    <ul class="places">
+      <li><b>Poomukham</b><i>പൂമുഖം</i><span>the front verandah, charupadi and nilavilakku</span></li>
+      <li><b>Nadumuttam</b><i>നടുമുറ്റം</i><span>the courtyard open to the sky, the Murphy radio</span></li>
+      <li><b>Adukkala</b><i>അടുക്കള</i><span>the smoky kitchen, aduppu and ammikkallu</span></li>
+      <li><b>Ara</b><i>അറ</i><span>the inner room, the pathayam, the Vishukkani</span></li>
+      <li><b>Thodi</b><i>തൊടി</i><span>cowshed, hens, plavu, the fallen coconut</span></li>
+      <li><b>Thattinpuram</b><i>തട്ടിൻപുറം</i><span>the attic, Achan’s trunk and harmonium</span></li>
+      <li><b>Kulam</b><i>കുളം</i><span>the pond with laterite steps</span></li>
+      <li><b>Ambalam</b><i>അമ്പലം</i><span>the temple; the utsavam in Kumbham</span></li>
+      <li><b>Sarpakkavu</b><i>സർപ്പക്കാവ്</i><span>the sacred grove; Theyyam in Makaram</span></li>
+      <li><b>Chayakkada</b><i>ചായക്കട</i><span>Velayudhan’s tea stall and the day’s news</span></li>
+      <li><b>Kada</b><i>പലചരക്കുകട</i><span>Kunjappan’s shop and his credit book</span></li>
+      <li><b>Vayanasala</b><i>വായനശാല</i><span>the reading room, carrom, Thakazhi</span></li>
+      <li><b>Kavala</b><i>കവല</i><span>bus stop, post office, the talkies wall</span></li>
+      <li><b>Angadi</b><i>അങ്ങാടി</i><span>tailor, barber, the Wednesday chanta</span></li>
+      <li><b>Pallikkoodam</b><i>പള്ളിക്കൂടം</i><span>the L.P. school, its bell and uppumavu</span></li>
+      <li><b>Paradise Talkies</b><i>ടാക്കീസ്</i><span>Chemmeen on a bench ticket</span></li>
+      <li><b>Vayal</b><i>വയൽ</i><span>the paddy, planting to harvest, the kite</span></li>
+      <li><b>Kadavu</b><i>കടവ്</i><span>the river landing and Pappan’s thoni</span></li>
+      <li><b>Pally</b><i>പള്ളി</i><span>the church, the bell rope, Christmas</span></li>
+      <li><b>Masjid</b><i>മസ്ജിദ്</i><span>the mosque by the river road, the bang, iftar</span></li>
+      <li><b>Station</b><i>സ്റ്റേഷൻ</i><span>sit on the bench and the train comes</span></li>
+      <li><b>Kadappuram</b><i>കടപ്പുറം</i><span>the shore net, the kattamaram, the sunset</span></li>
     </ul>
   </div>
-  <div class="art"><img class="phone back" src="shots/2.jpg" alt="The poomukham at sandhya, the lamp lit and the pookalam laid"><img class="phone front" src="shots/3.jpg" alt="Thiruvathira night in the nadumuttam"></div>
-</div></header>
+</div></section>
 
-<section><div class="wrap">
-  <div class="head"><h2>The world is the interface</h2><p class="sub">There are no menus. You tap the kettle, the pulley, the lamp. Wait a moment and the house shows you where.</p></div>
-  <div class="cards">
-    <div class="card"><div class="k">1</div><h3>Keep the house</h3><p>Light the lamp at sandhya, sweep the nadumuttam, feed the cow, hang the mundus, pound rice in the ural, make kaapi with jaggery.</p></div>
-    <div class="card"><div class="k">2</div><h3>Walk the village</h3><p>The chayakkada, the kada where everything is written in the credit book, the vayanasala, the temple, the paddy, the river ferry.</p></div>
-    <div class="card"><div class="k">3</div><h3>Let the year turn</h3><p>Pookalam for ten days to Thiruvonam, the kani at dawn on Vishu, women dancing on Thiruvathira night, the Ramayanam read in the rain month.</p></div>
+<section id="people"><div class="wrap">
+  <div class="head"><div class="k">ആളുകൾ</div><h2>People who remember you</h2><p>Five villagers carry a year of small conversations, and the house shows what each one leaves behind. Letters come from a brother in Madras and then the Gulf, and you write back.</p></div>
+  <div class="slips">
+    <div class="slip"><b>അമ്മിണി ചേച്ചി</b>Ammini chechi next door, who brings a jackfruit when the tree is heavy and plants a chembarathi by your step, and will tell you when it flowers.</div>
+    <div class="slip"><b>കുഞ്ഞപ്പൻ</b>Kunjappan at the kada, who writes everything in the book and never adds it up in front of you. The list for his shop writes itself from Amma’s notebook.</div>
+    <div class="slip"><b>രവി</b>Ravi, who writes from Madras about the sea and the office, and comes home one day by the morning train if you have kept the station bench warm.</div>
   </div>
 </div></section>
 
-<section id="screens"><div class="wrap">
-  <div class="head"><h2>Dawn to night, Chingam to Karkidakam</h2><p class="sub">Light, weather, sound and visitors all follow the Malayalam calendar and the hour.</p></div>
-  <div class="shots">
-    <div class="shot"><img src="shots/4.jpg" alt="The adukkala at night with the hearth lit"><h3>Adukkala</h3><p>Sixteen recipes from Amma’s notebook, cooked on the clay hearth.</p></div>
-    <div class="shot"><img src="shots/5.jpg" alt="The temple utsavam at night with elephants and fireworks"><h3>Utsavam</h3><p>Three elephants in gold, chenda, fireworks over the paddy.</p></div>
-    <div class="shot"><img src="shots/6.jpg" alt="The river kadavu with the ferry"><h3>Kadavu</h3><p>Pappan’s ferry, the fisherman, the snake boat on Uthrattathi.</p></div>
-    <div class="shot"><img src="shots/7.jpg" alt="The thodi at dawn with the cow and the konna in bloom"><h3>Thodi</h3><p>Lakshmi the cow, the hens, the konna gold for Vishu.</p></div>
+<section id="language" style="background:rgba(230,216,184,.45)"><div class="wrap">
+  <div class="two">
+    <div>
+      <div class="head" style="margin-bottom:18px"><div class="k">മലയാളം</div><h2>Written in Malayalam, not translated</h2><p>Every caption, letter and diary line exists in a village Malayalam of the period, in the register of the Malayalam novel. Choose how much of it you want.</p></div>
+      <div class="lang">
+        <div><b>Kada · shop</b><small>Kerala words in Latin letters with an English gloss. The default.</small></div>
+        <div><b>Kada · കട</b><small>The same, with the Malayalam word beneath.</small></div>
+        <div><b>കട</b><small>Everything in Malayalam: the whole village.</small></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><img class="phone" src="web/malayalam.jpg" alt="The game in Malayalam"><img class="phone" src="web/diary.jpg" alt="The diary in Malayalam"></div>
   </div>
 </div></section>
 
-<section id="places"><div class="wrap">
-  <div class="head"><h2>Twenty-one places</h2><p class="sub">Seven in the tharavad, eleven in the village, three across the river. Every object is period-correct, 1950 to 1980.</p></div>
-  <ul class="places">
-    <li><b>Poomukham</b><i>പൂമുഖം</i> — the front verandah, charupadi and nilavilakku</li>
-    <li><b>Nadumuttam</b><i>നടുമുറ്റം</i> — the courtyard open to the sky, the Murphy radio</li>
-    <li><b>Adukkala</b><i>അടുക്കള</i> — the smoky kitchen, aduppu and ammikkallu</li>
-    <li><b>Ara</b><i>അറ</i> — the inner room, the pathayam, Amma’s photograph</li>
-    <li><b>Thodi</b><i>തൊടി</i> — cowshed, hens, plavu, laundry line</li>
-    <li><b>Kulam</b><i>കുളം</i> — the pond with laterite steps</li>
-    <li><b>Ambalam</b><i>അമ്പലം</i> — the temple at sandhya</li>
-    <li><b>Chayakkada</b><i>ചായക്കട</i> — Velayudhan’s tea stall</li>
-    <li><b>Kada</b><i>പലചരക്കുകട</i> — Kunjappan’s provision store</li>
-    <li><b>Vayanasala</b><i>വായനശാല</i> — the reading room, carrom, Thakazhi</li>
-    <li><b>Kavala</b><i>കവല</i> — bus stop, post office, the talkies wall</li>
-    <li><b>Vayal</b><i>വയൽ</i> — the paddy through planting and harvest</li>
-    <li><b>Kadavu</b><i>കടവ്</i> — the river landing and ferry</li>
-    <li><b>Thattinpuram</b><i>തട്ടിൻപുറം</i> — the attic, Achan’s trunk, the bioscope</li>
-    <li><b>Sarpakkavu</b><i>സർപ്പക്കാവ്</i> — the sacred grove; Theyyam in Makaram</li>
-    <li><b>Angadi</b><i>അങ്ങാടി</i> — tailor, barber, pettikkada, the Wednesday chanta</li>
-    <li><b>Pallikkoodam</b><i>പള്ളിക്കൂടം</i> — the L.P. school, its bell and its uppumavu</li>
-    <li><b>Paradise Talkies</b><i>ടാക്കീസ്</i> — Chemmeen on a bench ticket</li>
-    <li><b>Pally</b><i>പള്ളി</i> — the church, Christmas stars, perunnal</li>
-    <li><b>Station</b><i>സ്റ്റേഷൻ</i> — the Jayanthi Janata, and Ravi’s homecoming</li>
-    <li><b>Kadappuram</b><i>കടപ്പുറം</i> — the shore net, the kattamaram, the sunset</li>
+<section id="quiet"><div class="wrap two">
+  <blockquote>“At sandhya the bell from the ambalam carries all the way across the paddy. Amma used to light the lamp at the first ring.”<small>From the diary. Four Carnatic ragas tied to the hour, Mohanam at dawn, Kalyani at dusk, Neelambari at night, and a soundscape synthesized note by note: wind in the palms, the chenda across the field, rain on tiles.</small></blockquote>
+  <ul class="never">
+    <li><b>No ads, no purchases</b><small>Pay once, or try the first morning free in the browser.</small></li>
+    <li><b>No account, no tracking</b><small>Nothing leaves the device. Works fully offline.</small></li>
+    <li><b>No streaks, no decay</b><small>Miss a month and the village only has more to tell you.</small></li>
+    <li><b>Real time, or story time</b><small>A day in twenty-four minutes if you prefer. Both keep the calendar.</small></li>
+    <li><b>Made to be read aloud</b><small>Text size, reduced motion, high-contrast slips, a screen-reader layer that names every touchable thing.</small></li>
+    <li><b>For children too</b><small>A quiet pointer shows the next thing the first time; every chore is one gesture.</small></li>
   </ul>
 </div></section>
 
-<section><div class="wrap"><div class="quote">“At sandhya the bell from the ambalam carries all the way across the paddy. Amma used to light the lamp at the first ring.”<small>From the diary. Every tree, lamp, boat and sound in Gramam was drawn and composed in code, by hand. There is no music track, only the place.</small></div></div></section>
-
-<section class="download"><div class="wrap"><div class="cardb">
+<section class="end"><div class="wrap">
   <img src="icon.png" alt="Gramam icon">
-  <div><h2>Gramam</h2><p>Free on iPhone and Android, soon. No ads, no account, no data collected.</p>
-    <div class="stores"><span class="store"><span><small>Coming soon on the</small>App Store</span></span><span class="store"><span><small>Coming soon on</small>Google Play</span></span></div>
-  </div>
-</div></div></section>
-
-<footer><div class="wrap"><a href="https://playpalapps.github.io/">Playpal Apps</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><span>© Playpal Apps</span></div></footer>
+  <h2>Gramam · ഗ്രാമം</h2>
+  <p>iPhone, iPad and Android, Onam 2027. TestFlight from Vishu. Until then, the first morning is yours in the browser.</p>
+  <a class="cta" href="play/?demo=1">Play the first morning</a>
+</div></section>
+<div class="kasavu" role="presentation"></div>
+<footer><div class="wrap"><a href="https://playpalapps.github.io/">Playpal Apps</a><a href="press/">Press kit</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><span>© Playpal Apps</span></div></footer>
 </body>
 </html>
