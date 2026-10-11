@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Colour Wise — colour games for toddlers and little kids</title>
+<meta name="description" content="Colour Wise teaches colours through ten gentle mini-games for toddlers and young children. Every question is spoken aloud, there are no wrong answers that end a game, and Pip the chameleon cheers along. No ads. iPhone, iPad and Android.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://playpalapps.github.io/ColourWise/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Playpal Apps">
+<meta property="og:url" content="https://playpalapps.github.io/ColourWise/">
+<meta property="og:title" content="Colour Wise — colour games for toddlers and little kids">
+<meta property="og:description" content="Ten gentle colour games with Pip the chameleon. Every question is spoken aloud. No ads.">
+<meta property="og:image" content="https://playpalapps.github.io/ColourWise/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Colour Wise — colour games for toddlers and little kids">
+<meta name="twitter:description" content="Ten gentle colour games with Pip the chameleon. Every question is spoken aloud. No ads.">
+<meta name="twitter:image" content="https://playpalapps.github.io/ColourWise/og-image.jpg">
+<meta name="theme-color" content="#6cccf5">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preload" href="Baloo2-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="_shared.css?v=1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Colour Wise","applicationCategory":"GameApplication","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"Ten gentle colour games for toddlers and young children.","image":"https://playpalapps.github.io/ColourWise/icon.png","url":"https://playpalapps.github.io/ColourWise/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+/* sky scene, the same one the game is set in */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sky .sun{position:absolute;right:-50px;top:-50px;width:clamp(180px,22vw,300px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff6b0 0 34%,#ffe45c 35% 52%,rgba(255,228,92,.35) 53% 68%,transparent 70%);animation:sun 6s ease-in-out infinite}
+.sky .cloud{position:absolute;left:-200px;width:150px;height:48px;background:#fff;border-radius:999px;opacity:.85;animation:drift 70s linear infinite}
+.sky .cloud::before,.sky .cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.sky .cloud::before{width:58px;height:58px;left:24px;top:-28px}.sky .cloud::after{width:44px;height:44px;left:74px;top:-16px}
+.sky .c1{top:16vh}.sky .c2{top:38vh;scale:.7;animation-duration:95s;animation-delay:-40s}.sky .c3{top:60vh;scale:.55;animation-duration:120s;animation-delay:-85s}
+.sky .hills{position:absolute;left:0;right:0;bottom:0;height:24vh}
+.sky .hills svg{position:absolute;left:0;bottom:0;width:100%;height:100%}
+@keyframes drift{to{translate:calc(100vw + 400px) 0}}
+@keyframes sun{50%{scale:1.06}}
+
+/* hero */
+.hero{padding:clamp(34px,6vw,80px) 0 clamp(26px,4vw,52px)}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,64px);align-items:center}
+.hero .logo{font-size:clamp(3.1rem,8.2vw,6rem);font-weight:800;margin:0 0 14px}
+.hero .logo span{animation:wave 2.4s ease-in-out infinite;animation-delay:calc(var(--i) * 90ms)}
+@keyframes wave{0%,60%,100%{transform:none}30%{transform:translateY(-12%) rotate(-4deg)}}
+.hero .tag{font-size:clamp(1.2rem,2.1vw,1.5rem);font-weight:600;color:var(--ink);max-width:34ch;margin:0 0 24px;line-height:1.35}
+.hero .stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.hero .stores a.btn{border:1.5px solid rgba(255,255,255,.9)}
+.hero .note{font-size:15.5px;color:var(--ink-2);margin:0 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-weight:800;font-size:15px}
+.chip svg{width:16px;height:16px;fill:none;stroke:#1e9a40;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* Pip and friends */
+.stagebox{position:relative;aspect-ratio:1;max-width:460px;margin-inline:auto;width:100%}
+.pip{position:absolute;left:17%;top:20%;width:66%;border:0;background:none;padding:0;cursor:pointer;animation:bob 2.6s ease-in-out infinite;transform-origin:50% 100%;-webkit-tap-highlight-color:transparent}
+.pip svg{display:block;width:100%;overflow:visible;filter:drop-shadow(0 18px 18px rgba(40,60,110,.22))}
+.pip svg *{transition:fill .35s,stroke .35s}
+.pip.cheer{animation:cheer .6s cubic-bezier(.3,1.6,.5,1)}
+.pip-eye{transform-box:fill-box;transform-origin:center;animation:blink 4.2s infinite}
+@keyframes bob{50%{transform:translateY(-3%) scale(1.02,.98)}}
+@keyframes cheer{0%{transform:scale(1.1,.85)}40%{transform:translateY(-20%) scale(.94,1.1) rotate(-6deg)}70%{transform:translateY(0) scale(1.08,.9) rotate(4deg)}100%{transform:none}}
+@keyframes blink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.jelly{position:absolute;width:var(--s);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 32% 26%,var(--l) 0 10%,var(--c) 46%,var(--d) 120%);box-shadow:0 5px 0 var(--d),0 12px 12px rgba(40,60,110,.25);animation:floaty 5s ease-in-out infinite;animation-delay:var(--t,0s)}
+.jelly::before,.jelly::after{content:"";position:absolute;top:40%;width:9%;height:12%;border-radius:50%;background:#2b2540}
+.jelly::before{left:31%}.jelly::after{right:31%}
+.jelly i{position:absolute;left:39%;top:55%;width:22%;height:11%;border-bottom:3px solid #2b2540;border-radius:0 0 50% 50%/0 0 100% 100%}
+@keyframes floaty{50%{transform:translateY(-12px) rotate(4deg)}}
+.says{position:absolute;left:50%;bottom:-2%;translate:-50% 0;white-space:nowrap;padding:8px 20px;border-radius:999px;background:#fff;box-shadow:0 5px 0 #c9d6e8;font-weight:800;font-size:clamp(17px,2vw,21px)}
+.says b{color:var(--c)}
+
+/* sections */
+section.slab{padding:clamp(40px,6vw,76px) 0}
+section.slab .head{max-width:62ch;margin-bottom:clamp(22px,3vw,34px)}
+section.slab h2{font-size:clamp(2rem,3.8vw,2.9rem);font-weight:800;line-height:1.05;margin:0 0 10px}
+section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
+.swipe-hint{display:none}
+@media (max-width:980px){.swipe-hint{display:inline}}
+
+/* game cards, coloured like the buttons in the app */
+.games{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.game{position:relative;border-radius:28px;padding:20px 20px 22px;color:#fff;background:linear-gradient(180deg,var(--l) -40%,var(--c) 55%);box-shadow:0 7px 0 var(--d),0 18px 26px rgba(40,60,110,.22),inset 0 3px 0 rgba(255,255,255,.45);transition:transform .3s var(--ease)}
+.game:hover{transform:translateY(-5px) rotate(-1deg)}
+.game .ic{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.93);display:grid;place-items:center;margin-bottom:12px}
+.game .ic img{width:40px;height:40px}
+.game h3{margin:0 0 4px;font-size:23px;font-weight:800;line-height:1.05;text-shadow:0 2px 0 var(--d)}
+.game p{margin:0;font-size:16.5px;line-height:1.35;font-weight:600}
+.game .tagline{position:absolute;top:14px;right:14px;font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:#fff;color:var(--d);border-radius:999px;padding:2px 10px}
+.group{display:flex;align-items:center;gap:12px;margin:34px 0 16px;font-size:22px;font-weight:800}
+.group:first-of-type{margin-top:0}
+.group small{font-size:15px;font-weight:800;background:#fff;border-radius:999px;padding:3px 12px;color:var(--ink-2)}
+@media (max-width:980px){.games{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.games{gap:12px}.game{padding:16px 14px 18px;border-radius:22px}.game h3{font-size:19px}.game p{font-size:15px}.game .ic{width:54px;height:54px}.game .ic img{width:32px;height:32px}.game .tagline{font-size:11px;top:10px;right:10px}}
+
+/* how it teaches */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{border-radius:30px;padding:26px 24px 24px}
+.step .n{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--c);color:#fff;font-weight:800;font-size:23px;box-shadow:0 4px 0 var(--d);margin-bottom:14px}
+.step h3{margin:0 0 6px;font-size:22px;font-weight:800}
+.step p{margin:0;color:var(--ink-2);font-size:17px}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+/* screenshots */
+.shots{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.shot{border-radius:24px;padding:7px;text-align:center}
+.shot img{width:100%;height:auto;display:block;border-radius:18px}
+.shot b{display:block;padding:9px 4px 3px;font-size:15px;font-weight:800}
+@media (max-width:980px){
+  .shots{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .shots::-webkit-scrollbar{display:none}
+  .shot{flex:0 0 min(62vw,240px);scroll-snap-align:center}
+}
+
+/* price */
+.price{border-radius:36px;padding:clamp(24px,4vw,44px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,40px)}
+.price h3{margin:0 0 8px;font-size:26px;font-weight:800}
+.price .big{font-size:clamp(2.6rem,5vw,3.6rem);font-weight:800;line-height:1;margin-bottom:8px}
+.price .free .big{color:#1e9a40}.price .paid .big{color:#d06f00}
+.price p{margin:0 0 10px;color:var(--ink-2)}
+.price ul{margin:0;padding-left:20px;color:var(--ink-2)}
+.price .paid{border-left:2px dashed rgba(58,53,72,.18);padding-left:clamp(18px,3vw,40px)}
+@media (max-width:760px){.price{grid-template-columns:1fr}.price .paid{border-left:0;border-top:2px dashed rgba(58,53,72,.18);padding:22px 0 0}}
+
+/* parents */
+.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.promise .p{border-radius:26px;padding:22px 20px}
+.promise .ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--c);box-shadow:0 4px 0 var(--d);margin-bottom:12px}
+.promise .ic svg{width:25px;height:25px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.promise .p h3{margin:0 0 4px;font-size:20px;font-weight:800}
+.promise .p p{margin:0;color:var(--ink-2);font-size:16.5px}
+@media (max-width:900px){.promise{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.promise{grid-template-columns:1fr}}
+
+/* download */
+.download{padding:clamp(30px,5vw,60px) 0 clamp(40px,6vw,70px)}
+.download .card{border-radius:36px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center}
+.download img{width:112px;height:112px;border-radius:26px;box-shadow:0 14px 30px rgba(40,60,110,.25)}
+.download h2{margin:0 0 6px;font-size:clamp(1.7rem,2.8vw,2.3rem);font-weight:800;line-height:1.1}
+.download p{margin:0;color:var(--ink-2)}
+.download .stores{display:flex;flex-direction:column;gap:10px}
+.download .stores a.btn{border:1.5px solid rgba(255,255,255,.9)}
+@media (max-width:760px){
+  .download .card{grid-template-columns:1fr;text-align:center;justify-items:center}.download .stores{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .hero .grid{grid-template-columns:1fr}.hero .art{order:-1}.stagebox{max-width:320px}.hero .logo,.hero .tag,.hero .note{text-align:center}.hero .tag{margin-inline:auto}.hero .stores,.chips{justify-content:center}.hero .eyebrow-row{text-align:center}
+}
+@media (prefers-reduced-motion:reduce){.sky .cloud,.sky .sun,.hero .logo span,.pip,.jelly{animation:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#games">Skip to content</a>
+
+<div class="sky" aria-hidden="true">
+  <span class="sun"></span>
+  <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span>
+  <div class="hills"><svg viewBox="0 0 400 120" preserveAspectRatio="none"><path d="M0 62 Q70 14 150 54 T300 44 T400 58 V120 H0 Z" fill="#8FE08A"/><path d="M0 86 Q90 44 190 80 T400 70 V120 H0 Z" fill="#6DD070"/></svg></div>
+</div>
+
+<nav class="site" aria-label="Primary">
+  <div class="container row">
+    <a href="./" class="brand" aria-current="page"><img src="icon-192.png" alt="" width="34" height="34"><span>Colour Wise</span></a>
+    <div class="links">
+      <a href="../">Playpal Apps</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html" class="hide-sm">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container grid">
+    <div>
+      <div class="eyebrow-row"><span class="eyebrow">Made for Kids · Ages 2 to 5</span></div>
+      <h1 class="logo" aria-label="Colour Wise"><span style="--i:0;--c:#ff4d4d;--d:#c92a3a">C</span><span style="--i:1;--c:#ff9a1f;--d:#d06f00">o</span><span style="--i:2;--c:#ffd43b;--d:#d9a200">l</span><span style="--i:3;--c:#3dcc5e;--d:#1e9a40">o</span><span style="--i:4;--c:#3d9bff;--d:#1b6fd0">u</span><span style="--i:5;--c:#9b5de5;--d:#6d34b5">r</span><span class="gap"></span><span style="--i:6;--c:#ff7ac6;--d:#d94c9b">W</span><span style="--i:7;--c:#ff4d4d;--d:#c92a3a">i</span><span style="--i:8;--c:#ff9a1f;--d:#d06f00">s</span><span style="--i:9;--c:#ffd43b;--d:#d9a200">e</span></h1>
+      <p class="tag">Ten gentle colour games for toddlers and little kids. Pip the chameleon asks every question out loud, so children can play before they can read.</p>
+      <div class="stores">
+        <a class="btn glass" href="https://apps.apple.com/app/colour-wise/id6736894056" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store</a>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+      <p class="note">Free to download. Four games are free to keep; one small purchase unlocks six more.</p>
+      <div class="chips" aria-label="Highlights">
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>No ads</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Spoken questions</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>No accounts</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Plays offline</span>
+        <span class="chip glass"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>iPhone, iPad, Android</span>
+      </div>
+    </div>
+    <div class="art">
+      <div class="stagebox">
+        <span class="jelly" style="--s:23%;left:0;top:8%;--c:#ff4d4d;--d:#c92a3a;--l:#ff9c9c" aria-hidden="true"><i></i></span>
+        <span class="jelly" style="--s:18%;right:2%;top:2%;--c:#ffd43b;--d:#d9a200;--l:#ffec9e;--t:-1.5s" aria-hidden="true"><i></i></span>
+        <span class="jelly" style="--s:20%;right:0;top:52%;--c:#3d9bff;--d:#1b6fd0;--l:#9ccbff;--t:-3s" aria-hidden="true"><i></i></span>
+        <span class="jelly" style="--s:16%;left:3%;top:62%;--c:#9b5de5;--d:#6d34b5;--l:#cba9f3;--t:-2.2s" aria-hidden="true"><i></i></span>
+        <button class="pip" id="pip" aria-label="Pip the chameleon. Tap to change colour">
+          <svg viewBox="0 0 230 210" aria-hidden="true">
+            <path d="M146 178 C196 196 232 160 218 128 C206 102 170 110 174 136 C177 154 200 152 200 138" fill="none" stroke="var(--p)" stroke-width="15" stroke-linecap="round"/>
+            <ellipse cx="74" cy="190" rx="24" ry="11" fill="var(--pd)"/><ellipse cx="132" cy="190" rx="24" ry="11" fill="var(--pd)"/>
+            <circle cx="78" cy="72" r="13" fill="var(--pd)"/><circle cx="103" cy="64" r="15" fill="var(--pd)"/><circle cx="128" cy="72" r="13" fill="var(--pd)"/>
+            <ellipse cx="103" cy="132" rx="66" ry="62" fill="var(--p)"/>
+            <ellipse cx="103" cy="150" rx="40" ry="36" fill="var(--pl)" opacity=".75"/>
+            <ellipse cx="80" cy="92" rx="30" ry="14" fill="#fff" opacity=".22"/>
+            <g class="pip-eye"><circle cx="62" cy="98" r="29" fill="var(--pd)"/><circle cx="62" cy="98" r="22" fill="#fff"/><circle cx="67" cy="99" r="11" fill="#2B2540"/><circle cx="71" cy="94" r="4" fill="#fff"/></g>
+            <g class="pip-eye"><circle cx="144" cy="98" r="29" fill="var(--pd)"/><circle cx="144" cy="98" r="22" fill="#fff"/><circle cx="139" cy="99" r="11" fill="#2B2540"/><circle cx="143" cy="94" r="4" fill="#fff"/></g>
+            <circle cx="58" cy="140" r="9" fill="#FF8FB0" opacity=".65"/><circle cx="148" cy="140" r="9" fill="#FF8FB0" opacity=".65"/>
+            <path d="M82 142 Q103 164 124 142" fill="none" stroke="#2B2540" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <span class="says" aria-live="polite">Tap Pip! He is <b id="pipword">green</b></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="slab" id="games">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">The games</span>
+      <h2>Ten little games, one big rainbow</h2>
+      <p class="sub">Each game looks at colours a different way: finding, popping, sorting, mixing, matching and making. They start very easy and grow with the child.</p>
+    </div>
+
+    <div class="group reveal">Free to keep <small>4 games</small></div>
+    <div class="games">
+      <div class="game reveal" style="--c:#3d9bff;--d:#1b6fd0;--l:#9ccbff"><div class="ic"><img src="art/1f446.svg" alt=""></div><h3>Tap the Colour</h3><p>"Tap red!" Find the right jelly blob. Older kids can race the clock on three levels.</p></div>
+      <div class="game reveal d1" style="--c:#ff4d4d;--d:#c92a3a;--l:#ff9c9c"><div class="ic"><img src="art/1f388.svg" alt=""></div><h3>Balloon Pop</h3><p>Balloons float up the sky. Pop the ones in the colour Pip asks for.</p></div>
+      <div class="game reveal d2" style="--c:#ff9a1f;--d:#d06f00;--l:#ffc680"><div class="ic"><img src="art/1f9fa.svg" alt=""></div><h3>Sort It</h3><p>A yellow banana, a green frog. Drag each one into the basket of its colour.</p></div>
+      <div class="game reveal d3" style="--c:#3dcc5e;--d:#1e9a40;--l:#9beaad"><div class="ic"><img src="art/1f41e.svg" alt=""></div><h3>Hungry Pip</h3><p>Pip wants a blue bug. Zap! He eats it and turns blue himself.</p></div>
+    </div>
+
+    <div class="group reveal">Unlock six more <small>one purchase</small></div>
+    <div class="games">
+      <div class="game reveal" style="--c:#3dcc5e;--d:#1e9a40;--l:#9beaad"><div class="ic"><img src="art/1f9e9.svg" alt=""></div><h3>Match It</h3><p>Turn the cards and find two the same. From two pairs up to six.</p></div>
+      <div class="game reveal d1" style="--c:#9b5de5;--d:#6d34b5;--l:#cba9f3"><div class="ic"><img src="art/1f3a8.svg" alt=""></div><h3>Mix It</h3><p>Red and yellow make…? Pour the paints together and see.</p></div>
+      <div class="game reveal d2" style="--c:#ff4d4d;--d:#c92a3a;--l:#ff9c9c"><div class="ic"><img src="art/1f682.svg" alt=""></div><h3>Pattern Train</h3><p>Red, blue, red, blue… which carriage comes next? First steps in maths.</p></div>
+      <div class="game reveal d3" style="--c:#3d9bff;--d:#1b6fd0;--l:#9ccbff"><div class="ic"><img src="art/1f50d.svg" alt=""></div><h3>Find Pip</h3><p>Hide and seek. Pip turns the colour of a bush. Can you spot his eyes?</p></div>
+      <div class="game reveal" style="--c:#f2b705;--d:#c48f00;--l:#ffec9e"><div class="ic"><img src="art/1f58c.svg" alt=""></div><h3>Paint It</h3><p>Colour a fish, a rocket, a butterfly. No lines to stay inside, no wrong answers.</p></div>
+      <div class="game reveal d1" style="--c:#ff7ac6;--d:#d94c9b;--l:#ffb8e0"><div class="ic"><img src="art/1f3b5.svg" alt=""></div><h3>Rainbow Music</h3><p>A xylophone where every colour sings. Slide a finger for a whole rainbow of notes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="how">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">How it teaches</span>
+      <h2>Built for children who cannot read yet</h2>
+      <p class="sub">A two-year-old should be able to pick it up and play alone. Everything in Colour Wise is designed around that.</p>
+    </div>
+    <div class="steps">
+      <div class="step glass lift reveal" style="--c:#3d9bff;--d:#1b6fd0"><span class="n">1</span><h3>Hear it</h3><p>Pip says every question aloud, and names each colour as it is found. Tap Pip to hear it again, as many times as you like.</p></div>
+      <div class="step glass lift reveal d1" style="--c:#ff9a1f;--d:#d06f00"><span class="n">2</span><h3>Try it</h3><p>A wrong tap never ends a game. The blob just wobbles, Pip says which colour it was, and after two tries the right one gives a little glow.</p></div>
+      <div class="step glass lift reveal d2" style="--c:#3dcc5e;--d:#1e9a40"><span class="n">3</span><h3>Celebrate it</h3><p>Five stars finish a round with confetti and a new sticker for the sticker book. There are forty to collect.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="screens">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Look and feel</span>
+      <h2>Bright, soft and friendly</h2>
+      <p class="sub">Big targets for little fingers, a sunny sky, and nothing that flashes or shouts. <span class="swipe-hint">Swipe to see more.</span></p>
+    </div>
+    <div class="shots">
+      <div class="shot glass lift reveal"><img src="shots/home.jpg" alt="The Colour Wise home screen with Pip and ten games" width="720" height="1558" loading="lazy"><b>Home</b></div>
+      <div class="shot glass lift reveal d1"><img src="shots/tap.jpg" alt="Tap the Colour: six jelly blobs" width="720" height="1558" loading="lazy"><b>Tap the Colour</b></div>
+      <div class="shot glass lift reveal d2"><img src="shots/balloons.jpg" alt="Balloon Pop" width="720" height="1558" loading="lazy"><b>Balloon Pop</b></div>
+      <div class="shot glass lift reveal d3"><img src="shots/hungry.jpg" alt="Hungry Pip catching bugs" width="720" height="1558" loading="lazy"><b>Hungry Pip</b></div>
+      <div class="shot glass lift reveal d4"><img src="shots/paint.jpg" alt="Paint It: colouring a fish" width="720" height="1558" loading="lazy"><b>Paint It</b></div>
+      <div class="shot glass lift reveal d4"><img src="shots/stickers.jpg" alt="The sticker book" width="720" height="1558" loading="lazy"><b>Sticker book</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="price">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">What it costs</span>
+      <h2>Free to start. One small unlock.</h2>
+    </div>
+    <div class="price glass reveal">
+      <div class="free">
+        <h3>Four games</h3>
+        <div class="big">Free</div>
+        <p>Tap the Colour, Balloon Pop, Sort It and Hungry Pip are yours to keep, with every level, the sticker book and the spoken questions.</p>
+      </div>
+      <div class="paid">
+        <h3>Six more games</h3>
+        <div class="big">US$1.49</div>
+        <p>One payment, once. Match It, Mix It, Pattern Train, Find Pip, Paint It and Rainbow Music.</p>
+        <ul><li>No subscription and nothing else to buy</li><li>The buy button sits behind a grown-ups question</li><li>Restore it on any device with the same store account</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="parents">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">For grown-ups</span>
+      <h2>Safe to hand over</h2>
+      <p class="sub">Made for Kids on the App Store and built for the Families programme on Google Play.</p>
+    </div>
+    <div class="promise">
+      <div class="p glass lift reveal" style="--c:#ff4d4d;--d:#c92a3a"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></div><h3>No ads, ever</h3><p>No adverts and no advertising software inside the app.</p></div>
+      <div class="p glass lift reveal d1" style="--c:#3d9bff;--d:#1b6fd0"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>Nothing collected</h3><p>No accounts, no tracking, no analytics. Stars and stickers stay on the device. <a href="privacy.html">Privacy policy</a>.</p></div>
+      <div class="p glass lift reveal d2" style="--c:#3dcc5e;--d:#1e9a40"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.800-1.2-8-4.500-8-9V6z"/><path d="M9 12l2.200 2.200L15.500 10"/></svg></div><h3>A gate for grown-ups</h3><p>Settings and the one purchase sit behind a sum a small child cannot answer.</p></div>
+      <div class="p glass lift reveal d3" style="--c:#9b5de5;--d:#6d34b5"><div class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.500" width="12" height="19" rx="2.500"/><path d="M10 18h4"/></svg></div><h3>Plays offline</h3><p>Everything is inside the app, so it works in the car, on a plane or anywhere else.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="download" id="download">
+  <div class="container">
+    <div class="card glass reveal">
+      <img src="icon-192.png" alt="" width="112" height="112">
+      <div>
+        <h2>Ready to meet Pip?</h2>
+        <p>Colour Wise is on the App Store for iPhone and iPad, and is coming to Google Play.</p>
+      </div>
+      <div class="stores">
+        <a class="btn glass" href="https://apps.apple.com/app/colour-wise/id6736894056" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store</a>
+        <span class="btn glass soon" data-store="google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg> Google Play <small>SOON</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rich">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="brand"><img src="icon-192.png" alt="" width="44" height="44">Colour Wise</div>
+        <p>Gentle colour games for toddlers and little kids, made by Playpal Apps.</p>
+      </div>
+      <div>
+        <h4>Game</h4>
+        <ul><li><a href="#games">The games</a></li><li><a href="#how">How it teaches</a></li><li><a href="#screens">Screenshots</a></li><li><a href="#price">What it costs</a></li><li><a href="#parents">For grown-ups</a></li></ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul><li><a href="support.html">Support</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="../">All Playpal apps</a></li></ul>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; 2026 Playpal Apps</span><span>Picture artwork: Twemoji, CC-BY 4.0. Pip the chameleon &copy; Playpal Apps.</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')})}
+  else{var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});els.forEach(function(e){io.observe(e)})}
+
+  // Pip changes colour when tapped, just as he does in the game.
+  var colours=[['green','#3DCC5E','#1E9A40','#9BEAAD'],['red','#FF4D4D','#C92A3A','#FF9C9C'],['blue','#3D9BFF','#1B6FD0','#9CCBFF'],['yellow','#FFD43B','#D9A200','#FFEC9E'],['purple','#9B5DE5','#6D34B5','#CBA9F3'],['orange','#FF9A1F','#D06F00','#FFC680'],['pink','#FF7AC6','#D94C9B','#FFB8E0']];
+  var pip=document.getElementById('pip'),word=document.getElementById('pipword'),i=0;
+  function paint(){var c=colours[i];pip.style.setProperty('--p',c[1]);pip.style.setProperty('--pd',c[2]);pip.style.setProperty('--pl',c[3]);word.textContent=c[0];word.style.setProperty('--c',c[0]==='yellow'?c[2]:c[1])}
+  pip.addEventListener('click',function(){i=(i+1)%colours.length;paint();pip.classList.remove('cheer');void pip.offsetWidth;pip.classList.add('cheer')});
+  paint();
+})();
+</script>
+</body>
+</html>
