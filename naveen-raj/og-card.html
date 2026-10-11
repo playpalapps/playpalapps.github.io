@@ -79,23 +79,25 @@
 
     /* Worked-with logos strip */
     .worked-with {
-      display: flex; align-items: center; gap: 28px;
+      display: flex; align-items: center; gap: 22px;
     }
     .ww-label {
       font-size: 10px; font-weight: 800; letter-spacing: 2.4px;
       text-transform: uppercase; color: #94A3B8;
       padding-right: 18px; border-right: 1px solid #E2E8F0;
+      white-space: nowrap; flex-shrink: 0;
     }
     .logo-row {
-      display: flex; align-items: center; gap: 36px;
+      display: flex; align-items: center; gap: 26px;
     }
     .logo-row img {
-      object-fit: contain; filter: grayscale(1); opacity: 0.55;
+      object-fit: contain; filter: grayscale(1); opacity: 0.55; flex-shrink: 0;
     }
-    .logo-row img:nth-child(1) { height: 44px; }   /* block */
-    .logo-row img:nth-child(2) { height: 56px; }   /* afterpay */
-    .logo-row img:nth-child(3) { height: 24px; }   /* ubank */
-    .logo-row img:nth-child(4) { height: 24px; }   /* infosys */
+    .logo-row img[alt="Savvy Loans"] { height: 18px; filter: grayscale(1) brightness(0.55); }   /* light brand colours: darken to match the others */
+    .logo-row img[alt="Block"]       { height: 40px; }
+    .logo-row img[alt="Afterpay"]    { height: 50px; }
+    .logo-row img[alt="UBank"]       { height: 22px; }
+    .logo-row img[alt="Infosys"]     { height: 22px; }
 
     /* Right — stylized portrait */
     .right { flex-shrink: 0; position: relative; width: 360px; height: 100%; display: flex; align-items: center; justify-content: center; }
@@ -124,10 +126,11 @@
     <div class="left">
       <div class="badge"><span class="badge-dot"></span> Sydney, Australia</div>
       <h1 class="name">Naveen<span class="grad">Raj</span></h1>
-      <p class="role">Senior QA Lead <span class="role-sep"></span> Indie App Builder <span class="role-sep"></span> Founder, <b>Playpal Apps</b></p>
+      <p class="role">Head of Quality Assurance <span class="role-sep"></span> Indie App Builder <span class="role-sep"></span> Founder, <b>Playpal Apps</b></p>
       <div class="worked-with">
         <span class="ww-label">Worked with</span>
         <div class="logo-row">
+          <img src="assets/savvyloans.png" alt="Savvy Loans">
           <img src="assets/block.png" alt="Block">
           <img src="assets/afterpay.png" alt="Afterpay">
           <img src="assets/ubank.svg" alt="UBank">

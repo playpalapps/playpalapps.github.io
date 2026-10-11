@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playpal Apps — Apps you'll actually love</title>
-  <meta name="description" content="Beautifully crafted mobile apps and games for play, work, and rest. Built solo with AI, polished by hand. Free on iOS and Android.">
+  <meta name="description" content="Beautifully crafted mobile apps and games for play, work, and rest. Built solo with AI, polished by hand. Live on the App Store and Google Play.">
 
   <!-- Open Graph -->
   <meta property="og:type"         content="website">
@@ -669,21 +669,23 @@
       text-transform: uppercase; color: rgba(255,255,255,0.4);
     }
     .bww-logos {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px; align-items: center; justify-items: center;
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 12px 26px;
     }
     .bww-logos img {
-      max-height: 26px; max-width: 100%; width: auto;
+      height: 26px; width: auto; max-width: 100%;
       object-fit: contain;
       /* invert dark logos to white silhouettes — uniform on dark */
       filter: brightness(0) invert(1);
       opacity: 0.7;
       transition: opacity 0.25s;
     }
-    .bww-logos img:nth-child(1) { max-height: 28px; }   /* Block */
-    .bww-logos img:nth-child(2) { max-height: 32px; }   /* Afterpay */
-    .bww-logos img:nth-child(3) { max-height: 18px; }   /* UBank */
-    .bww-logos img:nth-child(4) { max-height: 18px; }   /* Infosys */
+    /* Sized per logo (by alt, so the order can change): wordmarks sit lower, padded marks need more height */
+    .bww-logos img[alt="Savvy Loans"] { height: 17px; }
+    .bww-logos img[alt="Block"]       { height: 28px; }
+    .bww-logos img[alt="Afterpay"]    { height: 32px; }
+    .bww-logos img[alt="UBank"]       { height: 18px; }
+    .bww-logos img[alt="Infosys"]     { height: 18px; }
     .bww-logos img:hover { opacity: 1; }
     .builder-stats { display: flex; gap: 20px; margin-top: 22px; }
     .builder-stat-num { font-size: 1.6rem; font-weight: 900; letter-spacing: -1.2px; background: linear-gradient(135deg, var(--c2), var(--c1)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -869,7 +871,7 @@
     </div>
 
     <!-- ── APPS ─────────────────────────────────────────────── -->
-    <div class="section-eyebrow reveal">Apps <span class="count">· 14</span></div>
+    <div class="section-eyebrow reveal">Apps <span class="count">· 15</span></div>
 
     <div class="apps-bento">
 
@@ -1103,7 +1105,7 @@
     </div>
 
     <!-- ── GAMES ──────────────────────────────────────────────── -->
-    <div class="section-eyebrow reveal" id="games">Games <span class="count">· 11</span></div>
+    <div class="section-eyebrow reveal" id="games">Games <span class="count">· 12</span></div>
 
     <div class="apps-bento games-bento">
 
@@ -1329,6 +1331,10 @@
           <div class="cloud-icon"><img src="icons/fidgety.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/tinywins.png" alt=""></div>
           <div class="cloud-icon"><img src="icons/colourwise.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/nota.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/dailystreak.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/gramam.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/bloomblocks.png" alt=""></div>
         </div>
       </div>
     </div>
@@ -1353,10 +1359,11 @@
     </div>
     <div class="builder-card reveal" style="transition-delay:.08s;">
       <div class="builder-name">Naveen Raj</div>
-      <div class="builder-role">Senior Quality Engineering Lead<br>Indie App Builder · Sydney<br>Founder, <b class="role-brand">Playpal Apps</b></div>
+      <div class="builder-role">Head of Quality Assurance<br>Indie App Builder · Sydney<br>Founder, <b class="role-brand">Playpal Apps</b></div>
       <div class="builder-worked-with">
         <span class="bww-label">Worked with</span>
         <div class="bww-logos">
+          <img src="assets/savvyloans.png" alt="Savvy Loans">
           <img src="assets/block.png" alt="Block">
           <img src="assets/afterpay.png" alt="Afterpay">
           <img src="assets/ubank.svg" alt="UBank">
@@ -1439,6 +1446,25 @@
     requestAnimationFrame(() => requestAnimationFrame(step));
   }
   initStrip(document.getElementById('stripTrack'), 0.6);
+
+  // Section counts and the story icon panel follow the cards, so adding a card is the only step
+  document.querySelectorAll('.section-eyebrow .count').forEach(el => {
+    const grid = el.parentElement.nextElementSibling;
+    if (grid) el.textContent = '· ' + grid.querySelectorAll('.app-card').length;
+  });
+  const cloud = document.querySelector('.icon-cloud');
+  if (cloud) {
+    const shown = new Set([...cloud.querySelectorAll('img')].map(i => i.getAttribute('src')));
+    document.querySelectorAll('.app-card .app-icon-mega').forEach(icon => {
+      const src = icon.getAttribute('src');
+      if (shown.has(src)) return;
+      shown.add(src);
+      const cell = document.createElement('div');
+      cell.className = 'cloud-icon';
+      cell.innerHTML = '<img src="' + src + '" alt="">';
+      cloud.appendChild(cell);
+    });
+  }
 </script>
 </body>
 </html>
