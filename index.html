@@ -786,6 +786,37 @@
       background: none; color: rgba(255,255,255,0.52); padding: 0; border-radius: 0;
     }
 
+    /* IN ACTION: a phone that plays real screens from the apps with data-shots on their card */
+    .showcase-section { background: var(--bg); padding: 96px 24px 8px; position: relative; overflow: hidden; }
+    .showcase { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 64px; align-items: center; margin-top: 44px; }
+    .sc-stage { position: relative; display: grid; justify-items: center; }
+    .sc-stage::before { content: ''; position: absolute; width: 130%; aspect-ratio: 1; top: 46%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--sc-glow, rgba(132,94,194,0.35)) 0%, transparent 62%); filter: blur(30px); opacity: 0.8; pointer-events: none; transition: background 0.6s; }
+    .sc-phone { position: relative; width: min(300px, 68vw); padding: 10px; border-radius: 46px; background: #0b0b10; box-shadow: 0 40px 80px rgba(9,9,11,0.28), 0 0 0 1px rgba(9,9,11,0.6), inset 0 0 0 1px rgba(255,255,255,0.08); }
+    .sc-screen { position: relative; aspect-ratio: 540 / 1173; border-radius: 36px; overflow: hidden; background: #15151c; }
+    .sc-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity 0.6s ease; }
+    .sc-screen img.on { opacity: 1; }
+    .sc-dots { display: flex; gap: 8px; justify-content: center; margin-top: 20px; min-height: 10px; position: relative; }
+    .sc-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px; background: rgba(9,9,11,0.22); cursor: pointer; transition: width 0.3s, background 0.3s; }
+    .sc-dots button[aria-current="true"] { width: 24px; background: var(--text); }
+    .sc-info, .sc-stage { min-width: 0; }
+    .sc-app { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px 18px; align-items: center; }
+    .sc-icon { width: 64px; height: 64px; border-radius: 16px; box-shadow: 0 10px 24px rgba(9,9,11,0.18); }
+    .sc-cat { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.1rem; color: var(--muted); }
+    .sc-name { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; letter-spacing: -1.2px; line-height: 1.05; color: var(--text); }
+    .sc-desc { grid-column: 1 / -1; font-size: 1.05rem; color: var(--body); line-height: 1.65; margin-top: 10px; max-width: 520px; }
+    .sc-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+    .sc-store { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 12px; background: var(--text); color: #fff; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+    .sc-store svg { width: 15px; height: 15px; fill: currentColor; }
+    .sc-store:hover { transform: translateY(-1px); }
+    .sc-store.soon { background: transparent; color: var(--muted); border: 1px dashed var(--borderStrong); }
+    .sc-store.soon small { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .sc-page { font-weight: 700; color: var(--text); text-decoration: none; border-bottom: 2px solid var(--c1); margin-left: 6px; }
+    .sc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+    .sc-chips button { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 100px; border: 1px solid var(--border); background: white; font: 600 0.82rem 'Inter', system-ui, sans-serif; color: var(--body); cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .sc-chips button img { width: 26px; height: 26px; border-radius: 8px; }
+    .sc-chips button:hover { border-color: var(--borderStrong); color: var(--text); }
+    .sc-chips button[aria-pressed="true"] { background: var(--text); color: white; border-color: var(--text); }
+
     /* Fills the last row of a grid when the cards do not; shown and sized by the script */
     .grid-filler {
       grid-column: span var(--span, 1);
@@ -852,6 +883,13 @@
       .hero-title { letter-spacing: -3px; }
     }
     @media (max-width: 760px) {
+      .showcase-section { padding: 72px 20px 0; }
+      .showcase { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 32px; }
+      .sc-phone { width: min(250px, 66vw); border-radius: 40px; padding: 8px; }
+      .sc-screen { border-radius: 32px; }
+      .sc-chips { flex-wrap: nowrap; overflow-x: auto; margin: 24px -20px 0; padding: 2px 20px 8px; scrollbar-width: none; }
+      .sc-chips::-webkit-scrollbar { display: none; }
+      .sc-chips button { flex-shrink: 0; }
       .constellation { display: none; }
 
       /* Cards: icon beside the name, description and stores full width (about a third shorter) */
@@ -990,6 +1028,31 @@
     <span class="strip-item"><img src="icons/fruithugs.webp" alt="" width="30" height="30" draggable="false">Fruit Hugs</span>
     <span class="strip-item"><img src="icons/veggiepop.webp" alt="" width="30" height="30" draggable="false">Veggie Pop</span>
     <span class="strip-item"><img src="icons/gramam.webp" alt="" width="30" height="30" draggable="false">Gramam</span>
+  </div>
+</section>
+
+<section class="showcase-section" id="in-action" aria-labelledby="sc-title">
+  <div class="container">
+    <div class="reveal" style="max-width:660px;">
+      <div class="eyebrow">In action</div>
+      <h2 class="section-title" id="sc-title">See them <em>in action.</em></h2>
+      <p class="section-sub">Real screens from the apps. Pick one to look closer, or let them play.</p>
+    </div>
+    <div class="showcase">
+      <div class="sc-stage">
+        <div class="sc-phone"><div class="sc-screen" id="scScreen"><img class="on" src="showcase/pomma-1.webp" alt="Pomma: the focus timer" width="540" height="1173" loading="lazy" decoding="async"></div></div>
+        <div class="sc-dots" id="scDots"></div>
+      </div>
+      <div class="sc-info">
+        <div class="sc-app" aria-live="polite">
+          <img class="sc-icon" id="scIcon" src="icons/pomma.webp" alt="" width="64" height="64" loading="lazy">
+          <div><span class="sc-cat" id="scCat">Productivity · Focus</span><div class="sc-name" id="scName">Pomma</div></div>
+          <p class="sc-desc" id="scDesc">A quiet Pomodoro timer for deep work. Short sprints, real breaks, tasks and streaks, all kept on your device.</p>
+          <div class="sc-actions" id="scActions"><a class="sc-page" href="https://playpalapps.github.io/Pomma/">Open the app page →</a></div>
+        </div>
+        <div class="sc-chips" id="scChips" role="group" aria-label="Choose an app"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1139,7 +1202,7 @@
       </article>
 
       <!-- Pomma (Google Play live; App Store coming soon) -->
-      <article class="app-card app-pomma reveal">
+      <article class="app-card app-pomma reveal" data-shots="showcase/pomma-1.webp showcase/pomma-2.webp showcase/pomma-3.webp">
         <img class="app-icon-mega" src="icons/pomma.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Productivity · Focus</span>
@@ -1153,7 +1216,7 @@
       </article>
 
       <!-- Postela (Google Play live; App Store coming soon) -->
-      <article class="app-card app-postela reveal">
+      <article class="app-card app-postela reveal" data-shots="showcase/postela-1.webp showcase/postela-2.webp showcase/postela-3.webp">
         <img class="app-icon-mega" src="icons/postela.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Creativity · Marketing</span>
@@ -1167,7 +1230,7 @@
       </article>
 
       <!-- Nota (Google Play live; App Store coming soon) -->
-      <article class="app-card app-nota reveal">
+      <article class="app-card app-nota reveal" data-shots="showcase/nota-1.webp showcase/nota-2.webp showcase/nota-3.webp">
         <img class="app-icon-mega" src="icons/nota.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Productivity · Notes</span>
@@ -1181,7 +1244,7 @@
       </article>
 
       <!-- Fidgety (Google Play live; App Store coming soon) -->
-      <article class="app-card app-fidgety reveal">
+      <article class="app-card app-fidgety reveal" data-shots="showcase/fidgety-1.webp showcase/fidgety-2.webp showcase/fidgety-3.webp">
         <img class="app-icon-mega" src="icons/fidgety.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Entertainment · Fidget toys</span>
@@ -1195,7 +1258,7 @@
       </article>
 
       <!-- Tiny Wins (Google Play live; App Store coming soon) -->
-      <article class="app-card app-tinywins reveal">
+      <article class="app-card app-tinywins reveal" data-shots="showcase/tinywins-1.webp showcase/tinywins-2.webp showcase/tinywins-3.webp">
         <img class="app-icon-mega" src="icons/tinywins.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Wellness · Journal</span>
@@ -1209,7 +1272,7 @@
       </article>
 
       <!-- DailyStreak (Google Play live; App Store coming soon) -->
-      <article class="app-card app-dailystreak reveal">
+      <article class="app-card app-dailystreak reveal" data-shots="showcase/dailystreak-1.webp showcase/dailystreak-2.webp showcase/dailystreak-3.webp">
         <img class="app-icon-mega" src="icons/dailystreak.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Productivity · Habits</span>
@@ -1238,7 +1301,7 @@
     <div class="apps-bento games-bento">
 
       <!-- Twist and Turn Quest -->
-      <article class="app-card app-ttq reveal">
+      <article class="app-card app-ttq reveal" data-shots="showcase/twistandturnquest-1.webp showcase/twistandturnquest-2.webp showcase/twistandturnquest-3.webp">
         <img class="app-icon-mega" src="icons/twistandturnquest.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Arcade · Tilt maze</span>
@@ -1266,7 +1329,7 @@
       </article>
 
       <!-- MergeRise -->
-      <article class="app-card app-mergerise reveal">
+      <article class="app-card app-mergerise reveal" data-shots="showcase/mergerise-1.webp showcase/mergerise-2.webp showcase/mergerise-3.webp">
         <img class="app-icon-mega" src="icons/mergerise.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Puzzle · Merge</span>
@@ -1322,7 +1385,7 @@
       </article>
 
       <!-- Bloom Blocks (Google Play live; App Store coming soon) -->
-      <article class="app-card app-bloomblocks reveal">
+      <article class="app-card app-bloomblocks reveal" data-shots="showcase/bloomblocks-1.webp showcase/bloomblocks-2.webp showcase/bloomblocks-3.webp">
         <img class="app-icon-mega" src="icons/bloomblocks.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Puzzle · Blocks</span>
@@ -1350,7 +1413,7 @@
       </article>
 
       <!-- Colour Wise (App Store live; Google Play coming soon) -->
-      <article class="app-card app-colourwise reveal">
+      <article class="app-card app-colourwise reveal" data-shots="showcase/colourwise-1.webp showcase/colourwise-2.webp showcase/colourwise-3.webp">
         <img class="app-icon-mega" src="icons/colourwise.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Kids · Colours</span>
@@ -1364,7 +1427,7 @@
       </article>
 
       <!-- Fruit Hugs (Google Play live; App Store coming soon) -->
-      <article class="app-card app-fruithugs reveal">
+      <article class="app-card app-fruithugs reveal" data-shots="showcase/fruithugs-1.webp showcase/fruithugs-2.webp showcase/fruithugs-3.webp">
         <img class="app-icon-mega" src="icons/fruithugs.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Kids · Merge</span>
@@ -1378,7 +1441,7 @@
       </article>
 
       <!-- Veggie Pop (App Store live; Google Play coming soon) -->
-      <article class="app-card app-veggiepop reveal">
+      <article class="app-card app-veggiepop reveal" data-shots="showcase/veggiepop-1.webp showcase/veggiepop-2.webp showcase/veggiepop-3.webp">
         <img class="app-icon-mega" src="icons/veggiepop.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Kids · Merge</span>
@@ -1392,7 +1455,7 @@
       </article>
 
       <!-- Gramam (coming soon) -->
-      <article class="app-card app-gramam reveal">
+      <article class="app-card app-gramam reveal" data-shots="showcase/gramam-1.webp showcase/gramam-2.webp showcase/gramam-3.webp">
         <img class="app-icon-mega" src="icons/gramam.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Simulation · Cozy life</span>
@@ -1701,6 +1764,98 @@
     resize();
     for (const it of items) { const [px, py] = at(it.phase); it.x = px; it.y = py; }
     if (still) draw(); else start();
+  })();
+
+  // In action: plays each app's real screens; picking an app stops the tour on that app
+  (function () {
+    const sec = document.getElementById('in-action');
+    const apps = [...document.querySelectorAll('.app-card[data-shots]')];
+    if (!sec) return;
+    if (!apps.length) { sec.hidden = true; return; }
+    const $ = id => document.getElementById(id);
+    const screen = $('scScreen'), dots = $('scDots'), chips = $('scChips'), actions = $('scActions');
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const data = apps.map(card => {
+      const link = card.querySelector('.app-link');
+      return {
+        card, name: link.textContent, href: link.getAttribute('href'),
+        icon: card.querySelector('.app-icon-mega').getAttribute('src'),
+        cat: card.querySelector('.app-cat').textContent,
+        desc: card.querySelector('.app-tag-text').textContent,
+        shots: card.dataset.shots.trim().split(/\s+/),
+        stores: [...card.querySelectorAll('.store-mini')],
+        imgs: null
+      };
+    });
+    let ai = 0, si = 0, tour = true, hovering = false, visible = false, timer = null;
+    function images(d) {
+      if (!d.imgs) d.imgs = d.shots.map((src, n) => {
+        const im = new Image(); im.decoding = 'async'; im.src = src; im.width = 540; im.height = 1173;
+        im.alt = d.name + ', screen ' + (n + 1) + ' of ' + d.shots.length; return im;
+      });
+      return d.imgs;
+    }
+    data.forEach((d, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+      const im = document.createElement('img'); im.src = d.icon; im.alt = ''; im.width = 26; im.height = 26; im.loading = 'lazy';
+      b.append(im, d.name);
+      b.addEventListener('click', () => { tour = false; show(i); restart(); });
+      chips.appendChild(b);
+    });
+    function storeLink(el) {
+      const label = el.textContent.trim();
+      if (el.tagName === 'A') {
+        const a = document.createElement('a');
+        a.className = 'sc-store'; a.href = el.href; a.target = '_blank'; a.rel = 'noopener';
+        a.setAttribute('aria-label', el.getAttribute('aria-label') || label);
+        a.innerHTML = (el.querySelector('svg') ? el.querySelector('svg').outerHTML : '') + label;
+        return a;
+      }
+      const s = document.createElement('span');
+      s.className = 'sc-store soon';
+      s.innerHTML = (el.querySelector('svg') ? el.querySelector('svg').outerHTML : '') + label + (el.classList.contains('soon') ? ' <small>· soon</small>' : '');
+      return s;
+    }
+    function show(i) {
+      ai = i; si = 0;
+      const d = data[ai];
+      screen.replaceChildren(...images(d));
+      images(data[(ai + 1) % data.length]);           // warm up the next app
+      $('scIcon').src = d.icon; $('scCat').textContent = d.cat; $('scName').textContent = d.name; $('scDesc').textContent = d.desc;
+      const page = document.createElement('a'); page.className = 'sc-page'; page.href = d.href; page.textContent = 'Open the app page →';
+      actions.replaceChildren(...d.stores.map(storeLink), page);
+      sec.style.setProperty('--sc-glow', getComputedStyle(d.card).getPropertyValue('--app-glow') || 'rgba(132,94,194,0.35)');
+      [...chips.children].forEach((b, n) => b.setAttribute('aria-pressed', String(n === ai)));
+      dots.replaceChildren(...d.shots.map((_, n) => {
+        const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Screen ' + (n + 1));
+        b.addEventListener('click', () => { shot(n); restart(); }); return b;
+      }));
+      shot(0);
+    }
+    function shot(n) {
+      si = n;
+      images(data[ai]).forEach((im, k) => im.classList.toggle('on', k === n));
+      [...dots.children].forEach((b, k) => b.setAttribute('aria-current', String(k === n)));
+    }
+    function tick() {
+      if (hovering || !visible || document.hidden) return;
+      const d = data[ai];
+      if (si < d.shots.length - 1) shot(si + 1);
+      else if (tour) show((ai + 1) % data.length);
+      else shot(0);
+    }
+    function restart() { clearInterval(timer); if (!still) timer = setInterval(tick, 2800); }
+    const box = sec.querySelector('.showcase');
+    box.addEventListener('pointerenter', () => hovering = true);
+    box.addEventListener('pointerleave', () => hovering = false);
+    box.addEventListener('focusin', () => hovering = true);
+    box.addEventListener('focusout', () => hovering = false);
+    let started = false;
+    new IntersectionObserver(es => {
+      visible = es[0].isIntersecting;
+      if (visible && !started) { started = true; show(0); restart(); }
+    }, { rootMargin: '300px 0px' }).observe(sec);
   })();
 
   // The filler tile takes whatever is left of the last row, at the current column count
