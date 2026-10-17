@@ -103,6 +103,14 @@ footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
   *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 
@@ -185,7 +193,7 @@ footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
     <p>These terms are governed by the laws of the state of Karnataka, India, without regard to conflict-of-law rules. Any dispute that can't be resolved amicably is subject to the exclusive jurisdiction of the courts of Bengaluru, India.</p>
 
     <h2>11. Contact</h2>
-    <p>Legal or policy questions: <a href="mailto:playpalapps2024@gmail.com?subject=Qito%20legal%20question">playpalapps2024@gmail.com</a>.</p>
+    <p>Legal or policy questions: <a href="mailto:playpalapps2024@gmail.com?subject=Qito%20legal%20question">playpalapps2024@<wbr>gmail.com</a>.</p>
 
   </div>
 </main>

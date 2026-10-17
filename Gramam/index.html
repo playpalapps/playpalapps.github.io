@@ -154,6 +154,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
 footer a{color:rgba(255,244,222,.85)}
 .sr{position:absolute;left:-9999px}
 </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 

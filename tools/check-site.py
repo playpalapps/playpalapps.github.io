@@ -74,6 +74,17 @@ for card in cards:
     if not icon or not icon.group(1).endswith('.webp'):
         errors.append(f'index.html: {label} card should load its icon as icons/<slug>.webp')
 
+# Every page must scale to the phone and carry the fit-the-screen rules
+import subprocess
+for page in subprocess.run(['git', 'ls-files', '*.html'], cwd=ROOT, capture_output=True, text=True).stdout.split():
+    if re.match(r'(thumbnails|assets-pic)/', page) or page.endswith('og-card.html'):
+        continue
+    text = (ROOT / page).read_text(encoding='utf-8')
+    if not re.search(r'<meta name="viewport" content="[^"]*width=device-width', text):
+        errors.append(f'{page}: missing <meta name="viewport" content="width=device-width, ...">')
+    if 'id="fit-screen"' not in text:
+        errors.append(f'{page}: missing the <style id="fit-screen"> block (copy it from any other page)')
+
 for page, anchors in STORE_LINKED.items():
     f = ROOT / page
     if not f.exists() or not exact(f):

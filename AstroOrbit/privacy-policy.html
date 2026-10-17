@@ -114,6 +114,14 @@
       .policy { padding: 28px 20px; }
     }
   </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 
@@ -173,7 +181,7 @@
 
     <h2>Contact Us</h2>
     <p>If you have questions or concerns about this Privacy Policy, please contact us at:</p>
-    <p><a href="mailto:playpalapps2024@gmail.com">playpalapps2024@gmail.com</a></p>
+    <p><a href="mailto:playpalapps2024@gmail.com">playpalapps2024@<wbr>gmail.com</a></p>
 
   </div>
 </div>

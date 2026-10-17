@@ -172,6 +172,14 @@ footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
   *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 
@@ -310,7 +318,7 @@ footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
     <p>If this policy changes, the updated version is published at this URL and the "Last updated" date above changes. Material changes — for example, if Twist and Turn Quest were ever to introduce any form of server-backed feature — would be surfaced in-app on the next launch with a changelog entry linking here.</p>
 
     <h2>15. Contact</h2>
-    <p>Questions, concerns, a privacy complaint, or a request to exercise a data right — email <a href="mailto:playpalapps2024@gmail.com?subject=Twist%20and%20Turn%20Quest%20privacy%20question">playpalapps2024@gmail.com</a>. We reply personally, usually within seven days.</p>
+    <p>Questions, concerns, a privacy complaint, or a request to exercise a data right — email <a href="mailto:playpalapps2024@gmail.com?subject=Twist%20and%20Turn%20Quest%20privacy%20question">playpalapps2024@<wbr>gmail.com</a>. We reply personally, usually within seven days.</p>
 
   </div>
 </main>

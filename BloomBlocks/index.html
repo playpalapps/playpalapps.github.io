@@ -49,6 +49,19 @@
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .phones { height: 470px; max-width: 420px; margin: 0 auto; width: 100%; } .phone { width: 205px; } .themes { grid-template-columns: repeat(3, 1fr); } .split { grid-template-columns: 1fr; } }
 </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+@media (max-width: 380px) {
+  .brand { font-size: 14px; gap: 8px; }
+  .brand img { width: 28px; height: 28px; }
+  .nav-links a { font-size: 13px; padding: 7px 6px; }
+}
+</style>
 </head>
 <body>
 <header class="wrap nav">
@@ -117,7 +130,7 @@
     <div class="card"><h3>Free to play</h3><p style="margin-top:10px">Bloom Blocks is free and supported by ads. Reward videos are always your choice: watch one for a revive, a free undo or bonus petals. A short ad may appear between games, never during one.</p></div>
     <div class="card"><h3>Remove Ads</h3><p style="margin-top:10px">A single one-time purchase removes the ads between games for good. Reward videos stay available for when you want a bonus. Your purchase can be restored on a new device.</p></div>
   </div>
-  <p style="margin-top:26px">Questions or feedback? Visit <a href="support.html">Support</a> or email <a href="mailto:playpalapps2024@gmail.com">playpalapps2024@gmail.com</a>.</p>
+  <p style="margin-top:26px">Questions or feedback? Visit <a href="support.html">Support</a> or email <a href="mailto:playpalapps2024@gmail.com">playpalapps2024@<wbr>gmail.com</a>.</p>
 </section>
 </main>
 <footer><div class="wrap">

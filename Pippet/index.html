@@ -603,6 +603,14 @@ section { padding: 100px 0; position: relative; }
 .footer-links a:hover { color: #fff; }
 .footer p { line-height: 1.6; }
 </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 

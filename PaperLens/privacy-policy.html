@@ -30,6 +30,14 @@
     .highlight p{margin:0;color:var(--text)}
     hr{border:none;border-top:1px solid var(--border);margin:40px 0}
   </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 <nav>
@@ -108,7 +116,7 @@
 
   <h2>Contact</h2>
   <p>Questions or concerns about this privacy policy? Contact us at:<br>
-  <a href="mailto:playpalapps2024@gmail.com">playpalapps2024@gmail.com</a></p>
+  <a href="mailto:playpalapps2024@gmail.com">playpalapps2024@<wbr>gmail.com</a></p>
 </div>
 </body>
 </html>

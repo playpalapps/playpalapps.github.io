@@ -169,6 +169,14 @@ footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
   *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 
@@ -261,7 +269,7 @@ footer.site .copy { color: var(--ink-3); font-size: 13.5px; }
     <p>If this policy changes, the updated version will be published at this URL and the "Last updated" date above will change. Material changes (for example, if Qito ever introduced any form of server-backed feature) would be surfaced in-app as a nutrition-label update the next time you open the app, with a changelog entry linking to this page.</p>
 
     <h2>Contact</h2>
-    <p>Questions, concerns, or a privacy complaint? Email <a href="mailto:playpalapps2024@gmail.com?subject=Qito%20privacy%20question">playpalapps2024@gmail.com</a> and we'll reply personally. We answer all privacy-tagged messages within seven calendar days.</p>
+    <p>Questions, concerns, or a privacy complaint? Email <a href="mailto:playpalapps2024@gmail.com?subject=Qito%20privacy%20question">playpalapps2024@<wbr>gmail.com</a> and we'll reply personally. We answer all privacy-tagged messages within seven calendar days.</p>
 
   </div>
 </main>

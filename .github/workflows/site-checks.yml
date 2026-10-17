@@ -2,7 +2,8 @@
 #  1. Makes any missing WebP copies (tools/web-images.py) and commits them to main.
 #  2. Runs tools/check-site.py: missing or mis-cased files, heavy images, cards without a link
 #     or WebP icon, and pages the App Store / Google Play listings link to.
-#  3. Runs Lighthouse on the homepage and the Naveen Raj page and fails on a real drop.
+#  3. Loads every page at 320-414 px and fails if anything is wider than the screen.
+#  4. Runs Lighthouse on the homepage and the Naveen Raj page and fails on a real drop.
 name: Site checks
 
 on:
@@ -41,6 +42,21 @@ jobs:
           git push origin HEAD:main
       - name: Check pages
         run: python3 tools/check-site.py
+
+  phone-widths:
+    needs: images-and-links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install --no-save puppeteer-core@23.11.1
+      - name: Pages fit phone screens
+        run: |
+          python3 -m http.server 8765 > /dev/null 2>&1 &
+          sleep 2
+          BASE=http://localhost:8765 CHROME_PATH=$(which google-chrome) node tools/check-overflow.js
 
   lighthouse:
     needs: images-and-links

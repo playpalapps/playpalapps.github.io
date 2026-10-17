@@ -150,6 +150,14 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
 }
 @media (prefers-reduced-motion:reduce){.sky .cloud,.sky .sun,.hero .logo span,.pip,.jelly{animation:none}}
 </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 <a class="skip" href="#games">Skip to content</a>

@@ -24,6 +24,19 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="stylesheet" href="_shared.css?v=3">
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+@media (max-width: 380px) {
+  .brand { font-size: 14px; gap: 8px; }
+  .brand img { width: 28px; height: 28px; }
+  .nav-links a { font-size: 13px; padding: 7px 6px; }
+}
+</style>
 </head>
 <body>
 <header class="wrap nav">
@@ -36,7 +49,7 @@
   <p class="meta">Bloom Blocks is made by one person, and that person answers the email.</p>
 
   <div class="card tldr">
-    <p><strong>Talk to a real person.</strong> Email <a href="mailto:playpalapps2024@gmail.com?subject=Bloom%20Blocks%20support">playpalapps2024@gmail.com</a> and you will get a personal reply, usually within seven days. Mention your device, for example "iPhone 17" or "Pixel 9", so we can help faster.</p>
+    <p><strong>Talk to a real person.</strong> Email <a href="mailto:playpalapps2024@gmail.com?subject=Bloom%20Blocks%20support">playpalapps2024@<wbr>gmail.com</a> and you will get a personal reply, usually within seven days. Mention your device, for example "iPhone 17" or "Pixel 9", so we can help faster.</p>
   </div>
 
   <h2>Playing the game</h2>

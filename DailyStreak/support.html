@@ -17,6 +17,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="stylesheet" href="_shared.css?v=1">
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 <nav class="site" aria-label="Primary">
@@ -44,7 +52,7 @@
       <p>Email us and we will reply personally, usually within seven days. Please mention your device (for example "iPhone 17" or "Pixel 9") so we can help faster.</p>
       <div class="contact">
         <a class="btn primary" href="mailto:playpalapps2024@gmail.com?subject=DailyStreak%20support">Email support</a>
-        <span style="color:var(--ink-3)">playpalapps2024@gmail.com</span>
+        <span style="color:var(--ink-3)">playpalapps2024@<wbr>gmail.com</span>
       </div>
     </div>
 

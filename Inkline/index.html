@@ -28,6 +28,24 @@
 <link rel="icon" href="icon.png" type="image/png">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="stylesheet" href="style.css?v=6">
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+@media (max-width: 480px) {
+  nav.topbar { padding: 12px 16px; }
+  nav.topbar .nav-links { gap: 12px; letter-spacing: 0; }
+  .brand { gap: 9px; }
+  .brand-name { font-size: 18px; }
+}
+@media (max-width: 380px) {
+  nav.topbar .nav-links { gap: 10px; }
+  nav.topbar .nav-links a[href="index.html"] { display: none; }
+}
+</style>
 </head>
 <body>
 

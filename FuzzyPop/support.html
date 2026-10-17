@@ -68,6 +68,14 @@
     .foot-links a:hover{color:var(--sun)}
     .foot-copy{color:rgba(255,255,255,.4);font-size:.85rem;font-weight:600}
   </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 <nav>

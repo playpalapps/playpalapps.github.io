@@ -49,6 +49,14 @@
     .foot-links a:hover{color:var(--sun)}
     .foot-copy{color:rgba(255,255,255,.4);font-size:.85rem;font-weight:600}
   </style>
+<style id="fit-screen">
+/* Fit the screen: nothing may push the page sideways on a phone */
+html, body { overflow-x: clip; }
+body { overflow-wrap: break-word; }
+p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
+a[href^="mailto:"] { max-width: 100%; min-width: 0; }
+header.hero { overflow-x: clip; }
+</style>
 </head>
 <body>
 <nav>
@@ -121,7 +129,7 @@
 
   <hr class="sec-divider">
   <h2>11. Contact</h2>
-  <p>Questions about these terms? Reach us at <a href="mailto:playpalapps2024@gmail.com">playpalapps2024@gmail.com</a>.</p>
+  <p>Questions about these terms? Reach us at <a href="mailto:playpalapps2024@gmail.com">playpalapps2024@<wbr>gmail.com</a>.</p>
 </div>
 <footer>
   <div class="foot-logo"><img src="icon.png" alt="Fuzzy Pop!"><span>Fuzzy Pop!</span></div>
