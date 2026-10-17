@@ -24,7 +24,9 @@
   <meta name="twitter:description" content="10+ years in fintech quality engineering. 20+ apps and games shipped to iOS & Android. Currently Head of QA at Savvy Loans.">
   <meta name="twitter:image"       content="https://playpalapps.github.io/naveen-raj/og-image.jpg?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Fonts load without blocking the first paint; text shows in the fallback face for a moment -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
