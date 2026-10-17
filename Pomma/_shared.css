@@ -1,10 +1,10 @@
-@font-face{font-family:"Space Grotesk";src:url("SpaceGrotesk-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
+@font-face{font-family:"Fredoka";src:url("Fredoka-SemiBold.ttf") format("truetype");font-weight:600 700;font-display:swap}
 :root{
-  --bg:#07070d;--bg-2:#0e0d1a;--indigo:#6c63f5;--indigo-2:#a9a4ff;--green:#30d158;--blue:#409cff;
-  --ink:#f4f3ff;--ink-2:rgba(244,243,255,.78);--ink-3:rgba(244,243,255,.54);
-  --panel:rgba(255,255,255,.04);--panel-edge:rgba(150,142,255,.2);--cell:rgba(255,255,255,.035);--line:rgba(255,255,255,.09);--shadow:rgba(0,0,0,.5);
+  --bg:#1a1426;--bg-2:#221a33;--indigo:#8a5bc4;--indigo-2:#c9a7f0;--green:#5cc385;--blue:#f0a35c;
+  --ink:#f4ece0;--ink-2:rgba(244,236,224,.78);--ink-3:rgba(244,236,224,.54);
+  --panel:rgba(255,255,255,.04);--panel-edge:rgba(201,167,240,.22);--cell:rgba(255,255,255,.035);--line:rgba(255,255,255,.09);--shadow:rgba(0,0,0,.5);
   --page:1080px;--gutter:clamp(18px,4vw,40px);--ease:cubic-bezier(.2,.8,.2,1);
-  --display:"Space Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"Fredoka",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
