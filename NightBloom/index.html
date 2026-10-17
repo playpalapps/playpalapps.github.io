@@ -12,13 +12,13 @@
 <meta property="og:url" content="https://playpalapps.github.io/NightBloom/">
 <meta property="og:title" content="Night Bloom: sleep sounds, breathing and bedtime stories">
 <meta property="og:description" content="Soundscapes you can mix, guided breathing and bedtime stories to help you wind down and sleep deeper. No ads, no tracking.">
-<meta property="og:image" content="https://playpalapps.github.io/NightBloom/icon.png">
+<meta property="og:image" content="https://playpalapps.github.io/NightBloom/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Night Bloom: sleep sounds, breathing and bedtime stories">
 <meta name="twitter:description" content="Soundscapes, guided breathing and bedtime stories to help you sleep deeper.">
-<meta name="twitter:image" content="https://playpalapps.github.io/NightBloom/icon.png">
+<meta name="twitter:image" content="https://playpalapps.github.io/NightBloom/og-image.jpg">
 <meta name="theme-color" content="#070a17">
 <meta name="color-scheme" content="dark">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -29,6 +29,7 @@
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Night Bloom","applicationCategory":"HealthApplication","operatingSystem":"iOS 16+, Android 6+","author":{"@type":"Organization","name":"Playpal Apps"},"description":"Sleep sounds, guided breathing and bedtime stories to help you wind down and sleep deeper.","image":"https://playpalapps.github.io/NightBloom/icon.png","url":"https://playpalapps.github.io/NightBloom/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <style>
+section[id],header[id],div[id]{scroll-margin-top:76px}
 /* hero */
 .hero{padding:clamp(34px,6vw,80px) 0 clamp(30px,5vw,60px)}
 .hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
@@ -345,7 +346,7 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
     var el=document.getElementById(id);
     if(!el) return;
     if(el.tagName==='DETAILS') el.open=true;
-    if(id!=='home') el.scrollIntoView({block:'start'});
+    if(id!=='home') el.scrollIntoView({block:'start',behavior:'instant'});
   }
   openFromHash(); window.addEventListener('hashchange',openFromHash);
 })();
