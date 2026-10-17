@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://playpalapps.github.io/">
+  <meta name="theme-color" content="#FFFCF5">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <title>Playpal Apps — Apps you'll actually love</title>
   <meta name="description" content="Beautifully crafted mobile apps and games for play, work, and rest. Built solo with AI, polished by hand. Live on the App Store and Google Play.">
 
@@ -11,14 +15,18 @@
   <meta property="og:url"          content="https://playpalapps.github.io/">
   <meta property="og:title"        content="Playpal Apps — Apps you'll actually love">
   <meta property="og:description"  content="Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand.">
-  <meta property="og:image"        content="https://playpalapps.github.io/og-image.jpg?v=2">
+  <meta property="og:image"        content="https://playpalapps.github.io/og-image.jpg?v=3">
   <meta property="og:image:type"   content="image/jpeg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Playpal Apps — Apps you'll actually love">
   <meta name="twitter:description" content="Beautifully crafted mobile apps for play, work, and rest.">
-  <meta name="twitter:image"       content="https://playpalapps.github.io/og-image.jpg?v=2">
+  <meta name="twitter:image"       content="https://playpalapps.github.io/og-image.jpg?v=3">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Playpal Apps","url":"https://playpalapps.github.io/","logo":"https://playpalapps.github.io/assets/logo.png","email":"playpalapps2024@gmail.com","founder":{"@type":"Person","name":"Naveen Raj","url":"https://playpalapps.github.io/naveen-raj/"},"address":{"@type":"PostalAddress","addressLocality":"Sydney","addressCountry":"AU"}}
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,6 +93,8 @@
     .nav-links a:hover { color: var(--text); background: rgba(9,9,11,0.05); }
     .nav-cta { background: var(--text) !important; color: #fff !important; font-weight: 700 !important; box-shadow: 0 4px 12px rgba(9,9,11,0.18); }
     .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(9,9,11,0.25); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 8px; }
+    .nav-cta-icon { display: none; width: 16px; height: 16px; }
 
     /* HERO */
     .hero {
@@ -204,9 +214,10 @@
       background: var(--text); color: white;
       overflow: hidden;
     }
-    .strip-track { display: flex; gap: 56px; width: max-content; align-items: center; user-select: none; cursor: grab; }
+    .strip-track { display: flex; gap: 44px; width: max-content; align-items: center; user-select: none; cursor: grab; }
     .strip-track:active { cursor: grabbing; }
-    .strip-item { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.3px; white-space: nowrap; display: inline-flex; align-items: center; gap: 16px; }
+    .strip-item { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.3px; white-space: nowrap; display: inline-flex; align-items: center; gap: 12px; }
+    .strip-item img { width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(255,255,255,0.14); pointer-events: none; -webkit-user-drag: none; }
     .strip-item .star {
       width: 24px; height: 24px; flex-shrink: 0;
       background: linear-gradient(135deg, var(--c2), var(--c1));
@@ -567,8 +578,7 @@
       overflow: hidden;
     }
     .icon-cloud {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      display: flex; flex-wrap: wrap; justify-content: center;
       gap: 12px;
     }
     .cloud-icon {
@@ -576,6 +586,7 @@
       border-radius: 14px; box-shadow: 0 8px 22px rgba(9,9,11,0.1);
       animation: bob 5s ease-in-out infinite;
       min-height: 0; min-width: 0; overflow: hidden;
+      flex: 0 0 calc((100% - 4 * 12px) / 5);
     }
     .cloud-icon img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
     .cloud-icon:nth-child(7n+1) { animation-delay: 0s; }
@@ -748,16 +759,59 @@
     .footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
 
+    /* Each card is an <article>. The app name's link stretches over the whole card;
+       the store pills sit above that layer so they stay separately clickable. */
+    .app-card > .app-meta { position: static; }
+    .app-link { color: inherit; text-decoration: none; }
+    .app-link::after { content: ''; position: absolute; inset: 0; z-index: 4; border-radius: inherit; }
+    .app-card .app-stores { position: relative; z-index: 5; }
+    .app-link:focus-visible { outline: none; }
+    .app-card:has(.app-link:focus-visible) { outline: 3px solid var(--c5); outline-offset: 4px; }
+
+    /* Store pills: equal height; a store that is not live yet is a dashed outline with
+       "Coming soon" underneath (no overlapping corner tag), and is not clickable. */
+    .app-card .store-mini { min-height: 44px; }
+    .store-mini.soon, .store-mini.ios-only {
+      opacity: 1; pointer-events: none; cursor: default;
+      background: transparent; backdrop-filter: none;
+      border: 1px dashed rgba(255,255,255,0.24);
+      color: rgba(255,255,255,0.66);
+      flex-wrap: wrap; align-content: center; row-gap: 2px; line-height: 1.15;
+    }
+    .store-mini.soon::after {
+      content: 'Coming soon'; position: static; flex-basis: 100%; text-align: center;
+      font-size: 0.64rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      background: none; color: rgba(255,255,255,0.52); padding: 0; border-radius: 0;
+    }
+
+    /* Fills the last row of a grid when the cards do not; shown and sized by the script */
+    .grid-filler {
+      grid-column: span var(--span, 1);
+      border: 1.5px dashed rgba(9,9,11,0.16); border-radius: 24px;
+      padding: 28px 26px; min-height: 220px;
+      display: flex; flex-direction: column; justify-content: center; gap: 8px;
+      color: var(--body); font-size: 0.95rem;
+    }
+    .grid-filler[hidden] { display: none; }
+    .gf-eyebrow { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.05rem; color: var(--muted); line-height: 1; }
+    .gf-title { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.6px; color: var(--text); line-height: 1.15; }
+    .grid-filler a { color: var(--text); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--c1); }
+
+    /* Phone hero: a row of real icons replaces the floating ones, which would cover the text */
+    .hero-dock { display: none; }
+
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--c5); outline-offset: 3px; border-radius: 6px; }
+
     /* RESPONSIVE */
     @media (max-width: 980px) {
       nav { padding: 10px 12px 10px 18px; }
-      .nav-links li:not(:last-child) { display: none; }
+      .nav-links .nav-story { display: none; }
       .nav-brand-name { font-size: 0.92rem; }
       .hero { padding: 120px 20px 60px; }
       .hero-mantra-glyph { font-size: 3.4rem; }
       .hero-mantra { margin-top: 48px; }
       .float-icon { width: 44px; height: 44px; opacity: 0.6; }
-      .apps-bento { grid-template-columns: 1fr; gap: 14px; }
+      .apps-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
       .app-utilify, .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
       .app-astroorbit, .app-mergerise, .app-fuzzypop, .app-tzc, .app-qito,
       .app-hydropanda, .app-tooltrunk, .app-veggiepop, .app-fruithugs, .app-colourwise, .app-ttq, .app-circusarcade, .app-pomma, .app-postela, .app-nota, .app-fidgety, .app-tinywins, .app-bloomblocks, .app-dailystreak { grid-column: span 1; }
@@ -782,7 +836,8 @@
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
       .story-grid { grid-template-columns: 1fr; gap: 40px; }
       .story-visual { padding: 20px; border-radius: 24px; }
-      .icon-cloud { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+      .icon-cloud { gap: 10px; }
+      .cloud-icon { flex-basis: calc((100% - 3 * 10px) / 4); }
       .builder-inner { grid-template-columns: 1fr; gap: 40px; }
       section.std { padding: 72px 20px; }
       .contact-card { padding: 40px 24px; border-radius: 24px; }
@@ -791,24 +846,57 @@
       .cat-grid { grid-template-columns: 1fr; }
       .hero-title { letter-spacing: -3px; }
     }
+    @media (max-width: 760px) {
+      .constellation { display: none; }
+      .hero-dock { display: flex; justify-content: center; margin-top: 32px; }
+      .hero-dock img { width: 46px; height: 46px; border-radius: 13px; margin-left: -9px; box-shadow: 0 0 0 3px #FFFCF5, 0 8px 18px rgba(9,9,11,0.14); }
+      .hero-dock img:first-child { margin-left: 0; }
+
+      /* Cards: icon beside the name, description and stores full width (about a third shorter) */
+      .app-card, .app-card.featured {
+        display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 14px; row-gap: 0;
+        grid-template-areas: "icon cat" "icon name" "desc desc" "stores stores";
+        grid-template-rows: auto auto 1fr auto;
+        align-items: end; padding: 20px;
+      }
+      .app-card > .app-meta { display: contents; }
+      .app-card .app-icon-mega, .app-card.featured .app-icon-mega { grid-area: icon; width: 56px; height: 56px; border-radius: 14px; align-self: center; }
+      .app-card .app-cat { grid-area: cat; align-self: end; }
+      .app-card .app-name, .app-card.featured .app-name { grid-area: name; align-self: start; margin-top: 4px; font-size: 1.3rem; letter-spacing: -0.6px; }
+      .app-card .app-tag-text, .app-card.featured .app-tag-text { grid-area: desc; align-self: start; margin-top: 12px; font-size: 0.9rem; }
+      .app-card .app-stores, .app-card.featured .app-stores { grid-area: stores; margin-top: 16px; }
+    }
+    @media (max-width: 600px) {
+      .apps-bento { grid-template-columns: 1fr; }
+      nav { padding: 8px 8px 8px 14px; }
+      .nav-links a { padding: 8px 10px; font-size: 0.82rem; }
+      .nav-cta { padding: 10px !important; }
+      .nav-cta-text { display: none; }
+      .nav-cta-icon { display: block; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+      body.js-ready .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
 
 <nav id="nav">
-  <a href="#" class="nav-brand">
-    <div class="nav-mark"><img src="assets/logo.png" alt="Playpal Apps logo"></div>
+  <a href="#top" class="nav-brand">
+    <div class="nav-mark"><img src="assets/logo-192.webp" alt="Playpal Apps logo" width="36" height="36"></div>
     <span class="nav-brand-name">Playpal <b>Apps</b></span>
   </a>
   <ul class="nav-links">
     <li><a href="#apps">Apps</a></li>
     <li><a href="#games">Games</a></li>
-    <li><a href="#story">Story</a></li>
-    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+    <li class="nav-story"><a href="#story">Story</a></li>
+    <li><a href="#contact" class="nav-cta" aria-label="Get in touch"><svg class="nav-cta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span class="nav-cta-text">Get in touch</span></a></li>
   </ul>
 </nav>
 
-<section class="hero">
+<section class="hero" id="top">
   <div class="mesh">
     <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
     <div class="blob b4"></div><div class="blob b5"></div>
@@ -816,291 +904,338 @@
   <div class="grain"></div>
 
   <div class="constellation">
-    <div class="float-icon" style="top:18%;left:6%;animation-delay:-0.8s;"><img src="icons/astroorbit.png" alt=""></div>
-    <div class="float-icon" style="top:14%;right:9%;animation-delay:-2.4s;"><img src="icons/canwasa.png" alt=""></div>
-    <div class="float-icon" style="top:62%;left:4%;animation-delay:-1.5s;width:52px;height:52px;"><img src="icons/fuzzypop.png" alt=""></div>
-    <div class="float-icon" style="top:68%;right:6%;animation-delay:-3.1s;"><img src="icons/mergerise.png" alt=""></div>
-    <div class="float-icon" style="top:78%;left:24%;animation-delay:-2.7s;width:48px;height:48px;"><img src="icons/nightbloom.png" alt=""></div>
-    <div class="float-icon" style="top:84%;right:22%;animation-delay:-0.5s;width:48px;height:48px;"><img src="icons/palettely.png" alt=""></div>
-    <div class="float-icon" style="top:36%;left:12%;animation-delay:-4.2s;width:44px;height:44px;opacity:0.7;"><img src="icons/paperlens.png" alt=""></div>
-    <div class="float-icon" style="top:38%;right:14%;animation-delay:-1.8s;width:44px;height:44px;opacity:0.7;"><img src="icons/timezoneconnect.png" alt=""></div>
+    <div class="float-icon" style="top:18%;left:6%;animation-delay:-0.8s;"><img src="icons/astroorbit.webp" alt="" width="64" height="64"></div>
+    <div class="float-icon" style="top:14%;right:9%;animation-delay:-2.4s;"><img src="icons/canwasa.webp" alt="" width="64" height="64"></div>
+    <div class="float-icon" style="top:62%;left:4%;animation-delay:-1.5s;width:52px;height:52px;"><img src="icons/fuzzypop.webp" alt="" width="64" height="64"></div>
+    <div class="float-icon" style="top:68%;right:6%;animation-delay:-3.1s;"><img src="icons/mergerise.webp" alt="" width="64" height="64"></div>
+    <div class="float-icon" style="top:78%;left:24%;animation-delay:-2.7s;width:48px;height:48px;"><img src="icons/nightbloom.webp" alt="" width="64" height="64"></div>
+    <div class="float-icon" style="top:84%;right:22%;animation-delay:-0.5s;width:48px;height:48px;"><img src="icons/palettely.webp" alt="" width="64" height="64"></div>
+    <div class="float-icon" style="top:36%;left:12%;animation-delay:-4.2s;width:44px;height:44px;opacity:0.7;"><img src="icons/paperlens.webp" alt="" width="64" height="64"></div>
+    <div class="float-icon" style="top:38%;right:14%;animation-delay:-1.8s;width:44px;height:44px;opacity:0.7;"><img src="icons/timezoneconnect.webp" alt="" width="64" height="64"></div>
   </div>
 
-  <div class="hero-inner reveal">
+  <div class="hero-inner">
     <div class="hero-eyebrow"><span class="dot"></span>Live on iOS &amp; Android · Made solo</div>
     <h1 class="hero-title">Apps you'll<br><span class="joy">actually love.</span></h1>
-    <p class="hero-sub">Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand. Live on the App Store and Google Play.</p>
+    <p class="hero-sub">Beautifully crafted mobile apps and games for play, work, and rest. Designed and built with AI, polished by hand.</p>
     <div class="hero-ctas">
       <a href="#apps" class="btn btn-dark">Explore apps
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
       <a href="#story" class="btn btn-light">Our story</a>
     </div>
+    <div class="hero-dock" aria-hidden="true">
+      <img src="icons/palettely.webp" alt="" width="46" height="46">
+      <img src="icons/utilify.webp" alt="" width="46" height="46">
+      <img src="icons/canwasa.webp" alt="" width="46" height="46">
+      <img src="icons/nightbloom.webp" alt="" width="46" height="46">
+      <img src="icons/astroorbit.webp" alt="" width="46" height="46">
+      <img src="icons/fuzzypop.webp" alt="" width="46" height="46">
+      <img src="icons/inkline.webp" alt="" width="46" height="46">
+    </div>
     <div class="hero-mantra">
       <div class="hero-mantra-glyph"><span class="accent">∞</span></div>
       <div class="hero-mantra-title">Always shipping.</div>
-      <div class="hero-mantra-sub">New apps and games — live on App Store and Google Play.</div>
+      <div class="hero-mantra-sub">New apps and games land here first.</div>
     </div>
   </div>
 </section>
 
-<section class="strip-section">
+<section class="strip-section" aria-hidden="true">
   <div class="strip-track" id="stripTrack">
-    <span class="strip-item"><span class="star"></span>Made in Sydney</span>
-    <span class="strip-item"><span class="star"></span>Crafted with AI</span>
-    <span class="strip-item"><span class="star"></span>Polished by hand</span>
-    <span class="strip-item"><span class="star"></span>iOS &amp; Android</span>
-    <span class="strip-item"><span class="star"></span>Built solo</span>
-    <span class="strip-item"><span class="star"></span>Always shipping</span>
-    <span class="strip-item"><span class="star"></span>Made in Sydney</span>
-    <span class="strip-item"><span class="star"></span>Crafted with AI</span>
-    <span class="strip-item"><span class="star"></span>Polished by hand</span>
-    <span class="strip-item"><span class="star"></span>iOS &amp; Android</span>
-    <span class="strip-item"><span class="star"></span>Built solo</span>
-    <span class="strip-item"><span class="star"></span>Always shipping</span>
+    <span class="strip-item"><img src="icons/palettely.webp" alt="" width="30" height="30" draggable="false">Palettely</span>
+    <span class="strip-item"><img src="icons/utilify.webp" alt="" width="30" height="30" draggable="false">Utilify</span>
+    <span class="strip-item"><img src="icons/canwasa.webp" alt="" width="30" height="30" draggable="false">Canwasa</span>
+    <span class="strip-item"><img src="icons/nightbloom.webp" alt="" width="30" height="30" draggable="false">Night Bloom</span>
+    <span class="strip-item"><img src="icons/tooltrunk.webp" alt="" width="30" height="30" draggable="false">ToolTrunk</span>
+    <span class="strip-item"><img src="icons/hydropanda.webp" alt="" width="30" height="30" draggable="false">Hydro Panda</span>
+    <span class="strip-item"><img src="icons/paperlens.webp" alt="" width="30" height="30" draggable="false">PaperLens</span>
+    <span class="strip-item"><img src="icons/timezoneconnect.webp" alt="" width="30" height="30" draggable="false">Time Zone Connect</span>
+    <span class="strip-item"><img src="icons/qito.webp" alt="" width="30" height="30" draggable="false">Qito</span>
+    <span class="strip-item"><img src="icons/pomma.webp" alt="" width="30" height="30" draggable="false">Pomma</span>
+    <span class="strip-item"><img src="icons/postela.webp" alt="" width="30" height="30" draggable="false">Postela</span>
+    <span class="strip-item"><img src="icons/nota.webp" alt="" width="30" height="30" draggable="false">Nota</span>
+    <span class="strip-item"><img src="icons/fidgety.webp" alt="" width="30" height="30" draggable="false">Fidgety</span>
+    <span class="strip-item"><img src="icons/tinywins.webp" alt="" width="30" height="30" draggable="false">Tiny Wins</span>
+    <span class="strip-item"><img src="icons/dailystreak.webp" alt="" width="30" height="30" draggable="false">DailyStreak</span>
+    <span class="strip-item"><img src="icons/twistandturnquest.webp" alt="" width="30" height="30" draggable="false">Twist and Turn Quest</span>
+    <span class="strip-item"><img src="icons/astroorbit.webp" alt="" width="30" height="30" draggable="false">Astro Orbit</span>
+    <span class="strip-item"><img src="icons/mergerise.webp" alt="" width="30" height="30" draggable="false">MergeRise</span>
+    <span class="strip-item"><img src="icons/fuzzypop.webp" alt="" width="30" height="30" draggable="false">Fuzzy Pop</span>
+    <span class="strip-item"><img src="icons/inkline.webp" alt="" width="30" height="30" draggable="false">Inkline</span>
+    <span class="strip-item"><img src="icons/pippet.webp" alt="" width="30" height="30" draggable="false">Pippet</span>
+    <span class="strip-item"><img src="icons/bloomblocks.webp" alt="" width="30" height="30" draggable="false">Bloom Blocks</span>
+    <span class="strip-item"><img src="icons/circusarcade.webp" alt="" width="30" height="30" draggable="false">Circus Arcade</span>
+    <span class="strip-item"><img src="icons/colourwise.webp" alt="" width="30" height="30" draggable="false">Colour Wise</span>
+    <span class="strip-item"><img src="icons/fruithugs.webp" alt="" width="30" height="30" draggable="false">Fruit Hugs</span>
+    <span class="strip-item"><img src="icons/veggiepop.webp" alt="" width="30" height="30" draggable="false">Veggie Pop</span>
+    <span class="strip-item"><img src="icons/gramam.webp" alt="" width="30" height="30" draggable="false">Gramam</span>
+    <span class="strip-item"><img src="icons/palettely.webp" alt="" width="30" height="30" draggable="false">Palettely</span>
+    <span class="strip-item"><img src="icons/utilify.webp" alt="" width="30" height="30" draggable="false">Utilify</span>
+    <span class="strip-item"><img src="icons/canwasa.webp" alt="" width="30" height="30" draggable="false">Canwasa</span>
+    <span class="strip-item"><img src="icons/nightbloom.webp" alt="" width="30" height="30" draggable="false">Night Bloom</span>
+    <span class="strip-item"><img src="icons/tooltrunk.webp" alt="" width="30" height="30" draggable="false">ToolTrunk</span>
+    <span class="strip-item"><img src="icons/hydropanda.webp" alt="" width="30" height="30" draggable="false">Hydro Panda</span>
+    <span class="strip-item"><img src="icons/paperlens.webp" alt="" width="30" height="30" draggable="false">PaperLens</span>
+    <span class="strip-item"><img src="icons/timezoneconnect.webp" alt="" width="30" height="30" draggable="false">Time Zone Connect</span>
+    <span class="strip-item"><img src="icons/qito.webp" alt="" width="30" height="30" draggable="false">Qito</span>
+    <span class="strip-item"><img src="icons/pomma.webp" alt="" width="30" height="30" draggable="false">Pomma</span>
+    <span class="strip-item"><img src="icons/postela.webp" alt="" width="30" height="30" draggable="false">Postela</span>
+    <span class="strip-item"><img src="icons/nota.webp" alt="" width="30" height="30" draggable="false">Nota</span>
+    <span class="strip-item"><img src="icons/fidgety.webp" alt="" width="30" height="30" draggable="false">Fidgety</span>
+    <span class="strip-item"><img src="icons/tinywins.webp" alt="" width="30" height="30" draggable="false">Tiny Wins</span>
+    <span class="strip-item"><img src="icons/dailystreak.webp" alt="" width="30" height="30" draggable="false">DailyStreak</span>
+    <span class="strip-item"><img src="icons/twistandturnquest.webp" alt="" width="30" height="30" draggable="false">Twist and Turn Quest</span>
+    <span class="strip-item"><img src="icons/astroorbit.webp" alt="" width="30" height="30" draggable="false">Astro Orbit</span>
+    <span class="strip-item"><img src="icons/mergerise.webp" alt="" width="30" height="30" draggable="false">MergeRise</span>
+    <span class="strip-item"><img src="icons/fuzzypop.webp" alt="" width="30" height="30" draggable="false">Fuzzy Pop</span>
+    <span class="strip-item"><img src="icons/inkline.webp" alt="" width="30" height="30" draggable="false">Inkline</span>
+    <span class="strip-item"><img src="icons/pippet.webp" alt="" width="30" height="30" draggable="false">Pippet</span>
+    <span class="strip-item"><img src="icons/bloomblocks.webp" alt="" width="30" height="30" draggable="false">Bloom Blocks</span>
+    <span class="strip-item"><img src="icons/circusarcade.webp" alt="" width="30" height="30" draggable="false">Circus Arcade</span>
+    <span class="strip-item"><img src="icons/colourwise.webp" alt="" width="30" height="30" draggable="false">Colour Wise</span>
+    <span class="strip-item"><img src="icons/fruithugs.webp" alt="" width="30" height="30" draggable="false">Fruit Hugs</span>
+    <span class="strip-item"><img src="icons/veggiepop.webp" alt="" width="30" height="30" draggable="false">Veggie Pop</span>
+    <span class="strip-item"><img src="icons/gramam.webp" alt="" width="30" height="30" draggable="false">Gramam</span>
   </div>
 </section>
 
 <section id="apps" class="std apps-section">
-  <div class="apps-watermark"><img src="assets/logo.png" alt=""></div>
+  <div class="apps-watermark"><img src="assets/logo-640.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></div>
   <div class="container">
     <div class="reveal" style="max-width:660px;">
       <div class="eyebrow">The Studio</div>
       <h2 class="section-title">Every app, every game, <em>all yours.</em></h2>
-      <p class="section-sub">Each one designed, built, and shipped solo. Tap any card to open the app's page, or jump straight to the App Store or Google Play.</p>
+      <p class="section-sub">Tap any card to open the app's page, or jump straight to its store listing.</p>
     </div>
 
     <!-- ── APPS ─────────────────────────────────────────────── -->
+    <!-- Adding an app or game: copy any card below into the right grid. Icons load from icons/<slug>.webp
+         (256 px). Drop the full-size PNG into icons/ and run `python3 tools/web-images.py` to make it.
+         The section counts, live-first order, story icon panel, strip and filler tile all follow the cards. -->
     <div class="section-eyebrow reveal">Apps <span class="count">· 15</span></div>
 
     <div class="apps-bento">
 
       <!-- Featured: Palettely — full-width hero strip with description + stores -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Palettely/'" class="app-card featured app-palettely reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/palettely.png" alt="Palettely">
+      <article class="app-card featured app-palettely reveal">
+        <img class="app-icon-mega" src="icons/palettely.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Creativity</span>
-          <div class="app-name">Palettely</div>
-          <div class="app-tag-text">Colours that feel like you. Extract palettes from any photo, build moodboards, and export wallpapers that are unmistakably yours.</div>
+          <span class="app-cat">Creativity · Colour</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Palettely/">Palettely</a></h3>
+          <p class="app-tag-text">Pull a colour palette from any photo, build moodboards, and export wallpapers that feel unmistakably yours.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" rel="noopener" aria-label="Palettely on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" rel="noopener" aria-label="Palettely on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Utilify -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/UtilifyApp/'" class="app-card app-utilify reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/utilify.png" alt="Utilify">
+      <article class="app-card app-utilify reveal">
+        <img class="app-icon-mega" src="icons/utilify.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Utilities</span>
-          <div class="app-name">Utilify</div>
-          <div class="app-tag-text">Your everyday tech toolkit. 45 tools, 19 languages, 2 platforms, 1 app — everything you need in one clean interface.</div>
+          <span class="app-cat">Utilities · Toolkit</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/UtilifyApp/">Utilify</a></h3>
+          <p class="app-tag-text">45 everyday tools in one clean app: unit converter, QR generator, decibel meter, JSON formatter and more, in 19 languages.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" onclick="event.stopPropagation()">
+          <a class="store-mini" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" rel="noopener" aria-label="Utilify on the App Store">
             <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" onclick="event.stopPropagation()">
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" rel="noopener" aria-label="Utilify on Google Play">
             <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Canwasa (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/canwasa/'" class="app-card app-canwasa reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/canwasa.png" alt="Canwasa">
+      <article class="app-card app-canwasa reveal">
+        <img class="app-icon-mega" src="icons/canwasa.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Creativity</span>
-          <div class="app-name">Canwasa</div>
-          <div class="app-tag-text">4K abstract wallpapers, generated on your device. No cloud, no tracking.</div>
+          <span class="app-cat">Creativity · Wallpapers</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/canwasa/">Canwasa</a></h3>
+          <p class="app-tag-text">Generate striking 4K abstract wallpapers in a tap, made right on your device. No cloud, no tracking.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" onclick="event.stopPropagation()" aria-label="App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.canwasa.canwasa" target="_blank" onclick="event.stopPropagation()" aria-label="Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" rel="noopener" aria-label="Canwasa on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.canwasa.canwasa" target="_blank" rel="noopener" aria-label="Canwasa on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Night Bloom (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/NightBloom/'" class="app-card app-nightbloom reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/nightbloom.png" alt="Night Bloom">
+      <article class="app-card app-nightbloom reveal">
+        <img class="app-icon-mega" src="icons/nightbloom.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Wellness</span>
-          <div class="app-name">Night Bloom</div>
-          <div class="app-tag-text">Sleep sounds, breathing exercises, and tools for restful nights.</div>
+          <span class="app-cat">Wellness · Sleep</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/NightBloom/">Night Bloom</a></h3>
+          <p class="app-tag-text">Sleep sounds you can mix, guided breathing and bedtime stories to help you wind down, sleep deeper and wake up restored.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" rel="noopener" aria-label="Night Bloom on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" rel="noopener" aria-label="Night Bloom on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- ToolTrunk (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/ToolTrunk/'" class="app-card app-tooltrunk reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/tooltrunk.png" alt="ToolTrunk">
+      <article class="app-card app-tooltrunk reveal">
+        <img class="app-icon-mega" src="icons/tooltrunk.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Utilities</span>
-          <div class="app-name">ToolTrunk</div>
-          <div class="app-tag-text">Six precision instruments — level, compass, sound meter, flashlight, ruler, protractor. All on-device.</div>
+          <span class="app-cat">Utilities · Instruments</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/ToolTrunk/">ToolTrunk</a></h3>
+          <p class="app-tag-text">A spirit level, compass, sound meter, flashlight, ruler and protractor in one crafted app. On-device, no logins.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/us/app/tooltrunk/id6770023691" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.tooltrunk.app" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/us/app/tooltrunk/id6770023691" target="_blank" rel="noopener" aria-label="ToolTrunk on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.tooltrunk.app" target="_blank" rel="noopener" aria-label="ToolTrunk on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Hydro Panda (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/HydroPanda/'" class="app-card app-hydropanda reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/hydropanda.png" alt="Hydro Panda">
+      <article class="app-card app-hydropanda reveal">
+        <img class="app-icon-mega" src="icons/hydropanda.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Wellness</span>
-          <div class="app-name">Hydro Panda</div>
-          <div class="app-tag-text">Sip happens. The cutest water tracker — panda fills as you drink.</div>
+          <span class="app-cat">Wellness · Hydration</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/HydroPanda/">Hydro Panda</a></h3>
+          <p class="app-tag-text">The cutest water tracker. A panda-shaped glass fills as you drink, with gentle reminders, streaks and milestones.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/us/app/hydro-panda-water-tracker/id6767715315" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveenmercedes.hydra" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/us/app/hydro-panda-water-tracker/id6767715315" target="_blank" rel="noopener" aria-label="Hydro Panda on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveenmercedes.hydra" target="_blank" rel="noopener" aria-label="Hydro Panda on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- PaperLens (1x1) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/PaperLens/'" class="app-card app-paperlens reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/paperlens.png" alt="PaperLens">
+      <article class="app-card app-paperlens reveal">
+        <img class="app-icon-mega" src="icons/paperlens.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Productivity</span>
-          <div class="app-name">PaperLens</div>
-          <div class="app-tag-text">Scan, sign, and protect documents — powered by on-device AI.</div>
+          <span class="app-cat">Productivity · Documents</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/PaperLens/">PaperLens</a></h3>
+          <p class="app-tag-text">Scan documents, pull out text, translate, sign and redact PDFs, all on your device. Nothing goes to the cloud.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" rel="noopener" aria-label="PaperLens on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" rel="noopener" aria-label="PaperLens on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Time Zone Connect (2x1 wide) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/TimezoneConnect/'" class="app-card app-tzc reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/timezoneconnect.png" alt="Time Zone Connect">
+      <article class="app-card app-tzc reveal">
+        <img class="app-icon-mega" src="icons/timezoneconnect.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Productivity</span>
-          <div class="app-name">Time Zone Connect</div>
-          <div class="app-tag-text">Find overlapping work hours and plan meetings across zones.</div>
+          <span class="app-cat">Productivity · Time zones</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/TimezoneConnect/">Time Zone Connect</a></h3>
+          <p class="app-tag-text">See every city's time live, spot who is in work hours, and get meeting slots ranked by overlap across your team.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.timezoneconnect" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" rel="noopener" aria-label="Time Zone Connect on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.timezoneconnect" target="_blank" rel="noopener" aria-label="Time Zone Connect on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Qito (2x1 wide) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Qito/'" class="app-card app-qito reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/qito.png" alt="Qito">
+      <article class="app-card app-qito reveal">
+        <img class="app-icon-mega" src="icons/qito.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Utilities · QR</span>
-          <div class="app-name">Qito</div>
-          <div class="app-tag-text">Fast QR &amp; barcode scanner. Clean interface, no bloat.</div>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Qito/">Qito</a></h3>
+          <p class="app-tag-text">A QR studio for codes worth keeping: 25+ hand-crafted styles, art QR, wallpaper export and batch generation. Works offline.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" rel="noopener" aria-label="Qito on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" rel="noopener" aria-label="Qito on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Pomma (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Pomma/'" class="app-card app-pomma reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/pomma.png" alt="Pomma">
+      <article class="app-card app-pomma reveal">
+        <img class="app-icon-mega" src="icons/pomma.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Productivity · Focus</span>
-          <div class="app-name">Pomma</div>
-          <div class="app-tag-text">A quiet Pomodoro timer for one thing at a time. Tasks, streaks and statistics, all on your device.</div>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Pomma/">Pomma</a></h3>
+          <p class="app-tag-text">A quiet Pomodoro timer for deep work. Short sprints, real breaks, tasks and streaks, all kept on your device.</p>
         </div>
         <div class="app-stores">
           <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.pomma.app" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.pomma.app" target="_blank" rel="noopener" aria-label="Pomma on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Postela (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Postela/'" class="app-card app-postela reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/postela.png" alt="Postela">
+      <article class="app-card app-postela reveal">
+        <img class="app-icon-mega" src="icons/postela.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Design · Marketing</span>
-          <div class="app-name">Postela</div>
-          <div class="app-tag-text">Turn a product photo into a polished post, and build App Store and Google Play screenshots. Free, no ads.</div>
+          <span class="app-cat">Creativity · Marketing</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Postela/">Postela</a></h3>
+          <p class="app-tag-text">Turn a product photo into a polished post, story or flyer, and build App Store and Google Play screenshot sets.</p>
         </div>
         <div class="app-stores">
           <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.postela.app" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.postela.app" target="_blank" rel="noopener" aria-label="Postela on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Nota (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Nota/'" class="app-card app-nota reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/nota.png" alt="Nota">
+      <article class="app-card app-nota reveal">
+        <img class="app-icon-mega" src="icons/nota.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Productivity · Notes</span>
-          <div class="app-name">Nota</div>
-          <div class="app-tag-text">Notes, checklists and sketches that stay on your phone. No account, no cloud. Free, no ads.</div>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Nota/">Nota</a></h3>
+          <p class="app-tag-text">Notes, checklists, sketches and photos with folders, tags, reminders and locked notes. Everything stays on your phone.</p>
         </div>
         <div class="app-stores">
           <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.nota" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.nota" target="_blank" rel="noopener" aria-label="Nota on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Fidgety (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Fidgety/'" class="app-card app-fidgety reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/fidgety.png" alt="Fidgety">
+      <article class="app-card app-fidgety reveal">
+        <img class="app-icon-mega" src="icons/fidgety.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Entertainment · Fidget toys</span>
-          <div class="app-name">Fidgety</div>
-          <div class="app-tag-text">A pocketful of fidget toys with haptics you can feel. Pop, spin, squish and rake. No ads.</div>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Fidgety/">Fidgety</a></h3>
+          <p class="app-tag-text">Twelve tactile fidget toys with haptics you can feel: bubble wrap, a spinner, a stress blob, a zen sand garden and more.</p>
         </div>
         <div class="app-stores">
           <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.fidgety" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.fidgety" target="_blank" rel="noopener" aria-label="Fidgety on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Tiny Wins (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/TinyWins/'" class="app-card app-tinywins reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/tinywins.png" alt="Tiny Wins">
+      <article class="app-card app-tinywins reveal">
+        <img class="app-icon-mega" src="icons/tinywins.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Wellbeing · Journal</span>
-          <div class="app-name">Tiny Wins</div>
-          <div class="app-tag-text">Notice what went right today. Log small wins in seconds, with streaks that forgive an off day. Free, no ads.</div>
+          <span class="app-cat">Wellness · Journal</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/TinyWins/">Tiny Wins</a></h3>
+          <p class="app-tag-text">A calm, private journal for the small things that went right. Log a win in two seconds, with streaks that forgive an off day.</p>
         </div>
         <div class="app-stores">
           <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.tinywins" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.tinywins" target="_blank" rel="noopener" aria-label="Tiny Wins on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- DailyStreak (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/DailyStreak/'" class="app-card app-dailystreak reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/dailystreak.png" alt="DailyStreak">
+      <article class="app-card app-dailystreak reveal">
+        <img class="app-icon-mega" src="icons/dailystreak.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Habit tracker</span>
-          <div class="app-name">DailyStreak</div>
-          <div class="app-tag-text">Build habits that stick. One tap a day to check in, with a heatmap of your progress on every habit. No ads, no account.</div>
+          <span class="app-cat">Productivity · Habits</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/DailyStreak/">DailyStreak</a></h3>
+          <p class="app-tag-text">A clean, private habit tracker. One tap a day to check in, with a six-month heatmap for every habit.</p>
         </div>
         <div class="app-stores">
           <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.dailystreak" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.dailystreak" target="_blank" rel="noopener" aria-label="DailyStreak on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
+
+
+
+      <aside class="grid-filler" hidden>
+        <span class="gf-eyebrow">On the workbench</span>
+        <p class="gf-title">More apps are on the way.</p>
+        <p>Have an idea for one? <a href="#contact">Say hi</a></p>
+      </aside>
 
     </div>
 
@@ -1109,185 +1244,181 @@
 
     <div class="apps-bento games-bento">
 
-      <!-- Gramam (coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Gramam/'" class="app-card app-gramam reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/gramam.png" alt="Gramam">
-        <div class="app-meta">
-          <span class="app-cat">Cozy · Life sim</span>
-          <div class="app-name">Gramam</div>
-          <div class="app-tag-text">A slow life in old Kerala, 1950 to 1980. You come home to the tharavad; the village keeps real time and the Malayalam calendar. Onam 2027. No ads, no account.</div>
-        </div>
-        <div class="app-stores">
-          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
-        </div>
-      </div>
-
-      <!-- Bloom Blocks (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/BloomBlocks/'" class="app-card app-bloomblocks reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/bloomblocks.png" alt="Bloom Blocks">
-        <div class="app-meta">
-          <span class="app-cat">Puzzle</span>
-          <div class="app-name">Bloom Blocks</div>
-          <div class="app-tag-text">A calm puzzle that grows in circles. Place curved petals on a flower of rings, twist the rings and grow your bloom.</div>
-        </div>
-        <div class="app-stores">
-          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.bloomblocks.puzzle" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
-      <!-- Circus Arcade (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/CircusArcade/'" class="app-card app-circusarcade reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/circusarcade.png" alt="Circus Arcade">
-        <div class="app-meta">
-          <span class="app-cat">Retro · Arcade</span>
-          <div class="app-name">Circus Arcade</div>
-          <div class="app-tag-text">A retro pixel-art big-top show in five acts: flaming hoops on a lion, the tightrope, trampolines, horseback and the trapeze. Chiptune music, Easy, Normal and Hard levels, four modes. No ads, plays offline.</div>
-        </div>
-        <div class="app-stores">
-          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.circusarcade" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
       <!-- Twist and Turn Quest -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/TwistAndTurnQuest/'" class="app-card app-ttq reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/twistandturnquest.png" alt="Twist and Turn Quest">
+      <article class="app-card app-ttq reveal">
+        <img class="app-icon-mega" src="icons/twistandturnquest.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Tilt · Maze</span>
-          <div class="app-name">Twist and Turn Quest</div>
-          <div class="app-tag-text">Tilt your phone, roll the marble, escape the maze. Eight quests across atmospheric 3D worlds — endless Quest, Survival, Beacon, Hunt, Constellation, PRISM and a Daily Challenge. Plays offline.</div>
+          <span class="app-cat">Arcade · Tilt maze</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/TwistAndTurnQuest/">Twist and Turn Quest</a></h3>
+          <p class="app-tag-text">Tilt your phone to roll a ball through 3D mazes. Eight modes, from endless Quest and Survival to PRISM round mazes and a Daily Challenge.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/twist-and-turn-quest/id6738853553" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.twistandturnquest" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/twist-and-turn-quest/id6738853553" target="_blank" rel="noopener" aria-label="Twist and Turn Quest on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.twistandturnquest" target="_blank" rel="noopener" aria-label="Twist and Turn Quest on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
-
-      <!-- Colour Wise (App Store live; Google Play coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/ColourWise/'" class="app-card app-colourwise reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/colourwise.png" alt="Colour Wise">
-        <div class="app-meta">
-          <span class="app-cat">Kids · Colours</span>
-          <div class="app-name">Colour Wise</div>
-          <div class="app-tag-text">Ten gentle colour games for toddlers and little kids. Pip the chameleon asks every question out loud: tap, pop, sort, match, mix and paint. No ads, plays offline.</div>
-        </div>
-        <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/app/colour-wise/id6736894056" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
-        </div>
-      </div>
-
-      <!-- Fruit Hugs (Google Play live; App Store coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/FruitHugs/'" class="app-card app-fruithugs reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/fruithugs.png" alt="Fruit Hugs">
-        <div class="app-meta">
-          <span class="app-cat">Kids · Merge</span>
-          <div class="app-name">Fruit Hugs</div>
-          <div class="app-tag-text">A calm, cuddly merge game for ages 4 to 8. Drop fruit friends into a bowl, match two the same, watch them hug and grow. Six friend sets, eight scenes, Zen mode. No ads, plays offline.</div>
-        </div>
-        <div class="app-stores">
-          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.fruithugs" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
-        </div>
-      </div>
-
-      <!-- Veggie Pop (App Store live; Google Play coming soon) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/VeggiePop/'" class="app-card app-veggiepop reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/veggiepop.png" alt="Veggie Pop">
-        <div class="app-meta">
-          <span class="app-cat">Kids · Merge</span>
-          <div class="app-name">Veggie Pop</div>
-          <div class="app-tag-text">A calm, cuddly merge game for ages 4 to 8. Drop veggies into a jar, match two the same, watch them hug into a bigger friend. No ads, plays offline.</div>
-        </div>
-        <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/veggie-pop/id6818113833" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
-        </div>
-      </div>
+      </article>
 
       <!-- Astro Orbit -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/AstroOrbit/'" class="app-card app-astroorbit reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/astroorbit.png" alt="Astro Orbit">
+      <article class="app-card app-astroorbit reveal">
+        <img class="app-icon-mega" src="icons/astroorbit.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Arcade</span>
-          <div class="app-name">Astro Orbit</div>
-          <div class="app-tag-text">Defy gravity. Hop between orbital rings, dodge cosmic obstacles.</div>
+          <span class="app-cat">Arcade · Space</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/AstroOrbit/">Astro Orbit</a></h3>
+          <p class="app-tag-text">Tap to hop between orbital rings, dodge obstacles and chase your best score across the cosmos. Quick, gravity-defying runs.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" rel="noopener" aria-label="Astro Orbit on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" rel="noopener" aria-label="Astro Orbit on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- MergeRise -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/MergeRise/'" class="app-card app-mergerise reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/mergerise.png" alt="MergeRise">
+      <article class="app-card app-mergerise reveal">
+        <img class="app-icon-mega" src="icons/mergerise.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Puzzle</span>
-          <div class="app-name">MergeRise</div>
-          <div class="app-tag-text">2048-style merge puzzle with civilisation building.</div>
+          <span class="app-cat">Puzzle · Merge</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/MergeRise/">MergeRise</a></h3>
+          <p class="app-tag-text">A number-merge puzzle with soul. Combine tiles, set off chain reactions and rise from settlement to skyline across four worlds.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" rel="noopener" aria-label="MergeRise on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" rel="noopener" aria-label="MergeRise on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Fuzzy Pop -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/FuzzyPop/'" class="app-card app-fuzzypop reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/fuzzypop.png" alt="Fuzzy Pop">
+      <article class="app-card app-fuzzypop reveal">
+        <img class="app-icon-mega" src="icons/fuzzypop.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Family</span>
-          <div class="app-name">Fuzzy Pop</div>
-          <div class="app-tag-text">Child-safe colourful bubble-popping. No ads interrupting fun.</div>
+          <span class="app-cat">Kids · Mini-games</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/FuzzyPop/">Fuzzy Pop</a></h3>
+          <p class="app-tag-text">Seven bright, gentle mini-games for kids and families in one app. No sign-up needed, and every game plays offline.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" rel="noopener" aria-label="Fuzzy Pop on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" rel="noopener" aria-label="Fuzzy Pop on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Inkline -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Inkline/'" class="app-card app-inkline reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/inkline.png" alt="Inkline">
+      <article class="app-card app-inkline reveal">
+        <img class="app-icon-mega" src="icons/inkline.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Meditative Puzzle</span>
-          <div class="app-name">Inkline</div>
-          <div class="app-tag-text">A meditative knot-untangling puzzle, drawn in sumi-e ink on washi paper. 648 forms across six scrolls.</div>
+          <span class="app-cat">Puzzle · Meditative</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Inkline/">Inkline</a></h3>
+          <p class="app-tag-text">Untangle knots drawn in sumi-e ink on washi paper. 648 forms across six scrolls, with no timer, no score and no ads.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/au/app/inkline-sumi-e-knot-puzzle/id6770247544" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-mini" href="https://play.google.com/store/apps/details?id=app.naveen.inkline" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+          <a class="store-mini" href="https://apps.apple.com/au/app/inkline-sumi-e-knot-puzzle/id6770247544" target="_blank" rel="noopener" aria-label="Inkline on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=app.naveen.inkline" target="_blank" rel="noopener" aria-label="Inkline on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
         </div>
-      </div>
+      </article>
 
       <!-- Pippet (iOS only) -->
-      <div role="link" tabindex="0" onclick="location.href='https://playpalapps.github.io/Pippet/'" class="app-card app-pippet reveal">
-        <div class="app-card-bg"></div>
-        <img class="app-icon-mega" src="icons/pippet.png" alt="Pippet">
+      <article class="app-card app-pippet reveal">
+        <img class="app-icon-mega" src="icons/pippet.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
-          <span class="app-cat">Arcade · iPhone</span>
-          <div class="app-name">Pippet</div>
-          <div class="app-tag-text">A native iPhone arcade game where the Dynamic Island becomes a living creature you defend.</div>
+          <span class="app-cat">Arcade · Dynamic Island</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Pippet/">Pippet</a></h3>
+          <p class="app-tag-text">An iPhone arcade game where the Dynamic Island becomes a living creature you defend from a cosmic invasion. Fully offline.</p>
         </div>
         <div class="app-stores">
-          <a class="store-mini" href="https://apps.apple.com/app/pippet/id6768132230" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <a class="store-mini" href="https://apps.apple.com/app/pippet/id6768132230" target="_blank" rel="noopener" aria-label="Pippet on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
           <span class="store-mini ios-only" aria-disabled="true">iPhone only</span>
         </div>
-      </div>
+      </article>
+
+      <!-- Bloom Blocks (Google Play live; App Store coming soon) -->
+      <article class="app-card app-bloomblocks reveal">
+        <img class="app-icon-mega" src="icons/bloomblocks.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
+        <div class="app-meta">
+          <span class="app-cat">Puzzle · Blocks</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/BloomBlocks/">Bloom Blocks</a></h3>
+          <p class="app-tag-text">Place curved petals on a flower of five rings, twist the rings to line them up, and grow your bloom. A new Daily Bloom every day.</p>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.bloomblocks.puzzle" target="_blank" rel="noopener" aria-label="Bloom Blocks on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
+      </article>
+
+      <!-- Circus Arcade (Google Play live; App Store coming soon) -->
+      <article class="app-card app-circusarcade reveal">
+        <img class="app-icon-mega" src="icons/circusarcade.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
+        <div class="app-meta">
+          <span class="app-cat">Arcade · Retro</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/CircusArcade/">Circus Arcade</a></h3>
+          <p class="app-tag-text">Pixel-art circus action: a lion through flaming hoops, the tightrope, trampolines and trapeze. Five acts, four modes, plays offline.</p>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.circusarcade" target="_blank" rel="noopener" aria-label="Circus Arcade on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
+      </article>
+
+      <!-- Colour Wise (App Store live; Google Play coming soon) -->
+      <article class="app-card app-colourwise reveal">
+        <img class="app-icon-mega" src="icons/colourwise.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
+        <div class="app-meta">
+          <span class="app-cat">Kids · Colours</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/ColourWise/">Colour Wise</a></h3>
+          <p class="app-tag-text">Ten gentle colour games for toddlers, with every question spoken aloud and Pip the chameleon cheering along. No ads.</p>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/app/colour-wise/id6736894056" target="_blank" rel="noopener" aria-label="Colour Wise on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
+        </div>
+      </article>
+
+      <!-- Fruit Hugs (Google Play live; App Store coming soon) -->
+      <article class="app-card app-fruithugs reveal">
+        <img class="app-icon-mega" src="icons/fruithugs.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
+        <div class="app-meta">
+          <span class="app-cat">Kids · Merge</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/FruitHugs/">Fruit Hugs</a></h3>
+          <p class="app-tag-text">A calm merge game for ages 4 to 8: drop fruit friends in a bowl and watch matching pairs hug. Six friend sets, eight scenes, Zen mode.</p>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <a class="store-mini" href="https://play.google.com/store/apps/details?id=com.playpalapps.fruithugs" target="_blank" rel="noopener" aria-label="Fruit Hugs on Google Play"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</a>
+        </div>
+      </article>
+
+      <!-- Veggie Pop (App Store live; Google Play coming soon) -->
+      <article class="app-card app-veggiepop reveal">
+        <img class="app-icon-mega" src="icons/veggiepop.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
+        <div class="app-meta">
+          <span class="app-cat">Kids · Merge</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/VeggiePop/">Veggie Pop</a></h3>
+          <p class="app-tag-text">Veggie friends for ages 4 to 8. Drop them into a glass jar, match two the same and watch them hug into a bigger friend. No ads.</p>
+        </div>
+        <div class="app-stores">
+          <a class="store-mini" href="https://apps.apple.com/au/app/veggie-pop/id6818113833" target="_blank" rel="noopener" aria-label="Veggie Pop on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
+        </div>
+      </article>
+
+      <!-- Gramam (coming soon) -->
+      <article class="app-card app-gramam reveal">
+        <img class="app-icon-mega" src="icons/gramam.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
+        <div class="app-meta">
+          <span class="app-cat">Simulation · Cozy life</span>
+          <h3 class="app-name"><a class="app-link" href="https://playpalapps.github.io/Gramam/">Gramam</a></h3>
+          <p class="app-tag-text">A cozy life in an old Kerala village. Come home to the tharavad as the village keeps real time and the Malayalam calendar. Onam 2027.</p>
+        </div>
+        <div class="app-stores">
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</span>
+          <span class="store-mini soon"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635z"/></svg>Google Play</span>
+        </div>
+      </article>
+
+
+
+      <aside class="grid-filler" hidden>
+        <span class="gf-eyebrow">On the workbench</span>
+        <p class="gf-title">More games are on the way.</p>
+        <p>Have an idea for one? <a href="#contact">Say hi</a></p>
+      </aside>
 
     </div>
   </div>
@@ -1298,43 +1429,39 @@
     <div class="story-grid">
       <div class="reveal">
         <div class="eyebrow">The Story</div>
-        <h2 class="section-title">Big ideas.<br><em>Small studio.</em><br>Always shipping.</h2>
+        <h2 class="section-title">Big ideas.<br><em>Small studio.</em></h2>
         <p class="section-sub">Playpal Apps is a tiny one-person studio in Sydney. Each app started as a small itch — a thing the world should have but didn't. AI tools turned ideas into builds; care and patience turned builds into something worth shipping.</p>
         <blockquote class="story-quote">"Make stuff that's small, useful, and joyful — then ship it."</blockquote>
-        <div class="story-stats">
-          <div class="story-stat s2"><div class="story-stat-num">Live</div><div class="story-stat-label">on App Store &amp; Google Play</div></div>
-          <div class="story-stat s4"><div class="story-stat-num">100%</div><div class="story-stat-label">Solo · indie studio</div></div>
-        </div>
       </div>
       <div class="story-visual reveal" style="transition-delay:.1s;">
         <div class="icon-cloud">
-          <div class="cloud-icon"><img src="icons/utilify.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/canwasa.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/nightbloom.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/palettely.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/paperlens.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/astroorbit.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/mergerise.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/fuzzypop.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/timezoneconnect.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/qito.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/hydropanda.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/tooltrunk.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/inkline.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/pippet.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/twistandturnquest.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/veggiepop.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/fruithugs.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/circusarcade.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/pomma.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/postela.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/fidgety.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/tinywins.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/colourwise.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/nota.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/dailystreak.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/gramam.png" alt=""></div>
-          <div class="cloud-icon"><img src="icons/bloomblocks.png" alt=""></div>
+          <div class="cloud-icon"><img src="icons/utilify.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/canwasa.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/nightbloom.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/palettely.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/paperlens.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/astroorbit.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/mergerise.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/fuzzypop.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/timezoneconnect.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/qito.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/hydropanda.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/tooltrunk.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/inkline.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/pippet.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/twistandturnquest.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/veggiepop.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/fruithugs.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/circusarcade.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/pomma.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/postela.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/fidgety.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/tinywins.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/colourwise.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/nota.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/dailystreak.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/gramam.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+          <div class="cloud-icon"><img src="icons/bloomblocks.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
         </div>
       </div>
     </div>
@@ -1342,8 +1469,8 @@
 </section>
 
 <section class="builder-section">
-  <div class="builder-watermark"><img src="assets/logo.png" alt=""></div>
-  <div class="builder-face"><img src="assets/naveen-portrait.png" alt=""></div>
+  <div class="builder-watermark"><img src="assets/logo-640.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></div>
+  <div class="builder-face"><img src="assets/naveen-portrait-560.webp" alt="" width="560" height="560" loading="lazy" decoding="async"></div>
   <div class="builder-inner">
     <div class="reveal">
       <div class="eyebrow">The Builder</div>
@@ -1354,7 +1481,7 @@
         <a href="https://playpalapps.github.io/naveen-raj/" class="builder-cta">Meet Naveen
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" class="builder-cta outline">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" rel="noopener" class="builder-cta outline">LinkedIn</a>
       </div>
     </div>
     <div class="builder-card reveal" style="transition-delay:.08s;">
@@ -1363,11 +1490,11 @@
       <div class="builder-worked-with">
         <span class="bww-label">Worked with</span>
         <div class="bww-logos">
-          <img src="assets/savvyloans.png" alt="Savvy Loans">
-          <img src="assets/block.png" alt="Block">
-          <img src="assets/afterpay.png" alt="Afterpay">
-          <img src="assets/ubank.svg" alt="UBank">
-          <img src="assets/infosys.png" alt="Infosys">
+          <img src="assets/savvyloans.png" alt="Savvy Loans" width="849" height="150" loading="lazy" decoding="async">
+          <img src="assets/block.png" alt="Block" width="1462" height="660" loading="lazy" decoding="async">
+          <img src="assets/afterpay-480.webp" alt="Afterpay" width="480" height="270" loading="lazy" decoding="async">
+          <img src="assets/ubank.svg" alt="UBank" width="373" height="99" loading="lazy" decoding="async">
+          <img src="assets/infosys-480.webp" alt="Infosys" width="480" height="192" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="builder-skills">
@@ -1381,11 +1508,11 @@
 
 <section id="contact" class="contact-section">
   <div class="contact-card reveal">
-    <div class="contact-logo"><img src="assets/logo.png" alt="Playpal"></div>
+    <div class="contact-logo"><img src="assets/logo-192.webp" alt="" width="72" height="72" loading="lazy" decoding="async"></div>
     <h2>Got an idea? <em>Say hi.</em></h2>
     <p>Feedback, ideas, partnerships, or just a friendly hello — all welcome. Quickest way is email.</p>
     <div class="contact-btns">
-      <a href="mailto:naveenmercedes@gmail.com" class="btn btn-dark">
+      <a href="mailto:playpalapps2024@gmail.com" class="btn btn-dark">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         Email
       </a>
@@ -1396,12 +1523,12 @@
 
 <footer>
   <div class="footer-inner">
-    <p style="display:flex;align-items:center;gap:10px;"><img src="assets/logo.png" alt="" style="width:22px;height:22px;object-fit:contain;">© 2026 Playpal Apps · Made in Sydney with care.</p>
+    <p style="display:flex;align-items:center;gap:10px;"><img src="assets/logo-192.webp" alt="" width="22" height="22" loading="lazy" decoding="async" style="width:22px;height:22px;object-fit:contain;">© 2026 Playpal Apps · Made in Sydney with care.</p>
     <div class="footer-links">
       <a href="#apps">Apps</a>
       <a href="#story">Story</a>
       <a href="https://playpalapps.github.io/naveen-raj/">Founder</a>
-      <a href="mailto:naveenmercedes@gmail.com">Email</a>
+      <a href="mailto:playpalapps2024@gmail.com">Email</a>
     </div>
   </div>
 </footer>
@@ -1445,7 +1572,50 @@
     window.addEventListener('touchend', () => dragging = false);
     requestAnimationFrame(() => requestAnimationFrame(step));
   }
-  initStrip(document.getElementById('stripTrack'), 0.6);
+  // Cards sort by availability: out on every store they target, then one store, then coming soon.
+  // Sort is stable, so cards keep their written order within each group.
+  const tierOf = card => {
+    const live = card.querySelectorAll('a.store-mini').length;
+    if (live && card.querySelector('.ios-only')) return 0;
+    return live >= 2 ? 0 : live === 1 ? 1 : 2;
+  };
+  document.querySelectorAll('.apps-bento').forEach(grid => {
+    const cards = [...grid.querySelectorAll(':scope > .app-card')];
+    const sorted = [...cards].sort((a, b) => (b.classList.contains('featured') - a.classList.contains('featured')) || (tierOf(a) - tierOf(b)));
+    if (sorted.some((c, i) => c !== cards[i])) {
+      const filler = grid.querySelector(':scope > .grid-filler');
+      sorted.forEach(c => grid.insertBefore(c, filler));
+    }
+  });
+
+  // The filler tile takes whatever is left of the last row, at the current column count
+  function fillGrids() {
+    document.querySelectorAll('.apps-bento').forEach(grid => {
+      const filler = grid.querySelector(':scope > .grid-filler');
+      if (!filler) return;
+      const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      const left = (cols - grid.querySelectorAll(':scope > .app-card:not(.featured)').length % cols) % cols;
+      filler.hidden = left === 0;
+      filler.style.setProperty('--span', left || 1);
+    });
+  }
+  fillGrids();
+  window.addEventListener('resize', fillGrids, { passive: true });
+
+  // The strip under the hero lists every app, in card order
+  const track = document.getElementById('stripTrack');
+  const stripItems = [...document.querySelectorAll('.app-card')].map(card => {
+    const item = document.createElement('span');
+    item.className = 'strip-item';
+    const img = document.createElement('img');
+    img.src = card.querySelector('.app-icon-mega').getAttribute('src');
+    img.alt = ''; img.width = 30; img.height = 30; img.draggable = false;
+    item.append(img, card.querySelector('.app-link').textContent);
+    return item;
+  });
+  if (stripItems.length) track.replaceChildren(...stripItems, ...stripItems.map(i => i.cloneNode(true)));
+  const stillMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  initStrip(track, stillMotion ? 0 : 0.6);
 
   // Section counts and the story icon panel follow the cards, so adding a card is the only step
   document.querySelectorAll('.section-eyebrow .count').forEach(el => {
