@@ -182,7 +182,7 @@
 
     /* Hero mantra — single bold "∞ Always shipping" callout */
     .hero-mantra {
-      margin-top: 72px; text-align: center;
+      margin-top: 40px; text-align: center;
       display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
     .hero-mantra-glyph {
@@ -799,8 +799,11 @@
     .gf-title { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.6px; color: var(--text); line-height: 1.15; }
     .grid-filler a { color: var(--text); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--c1); }
 
-    /* Phone hero: a row of real icons replaces the floating ones, which would cover the text */
-    .hero-dock { display: none; }
+    /* Hero ∞: every app's icon travels a loop that reacts to the pointer (drawn by the script) */
+    .orbit-wrap { position: relative; width: min(600px, 92vw); height: clamp(160px, 22vw, 230px); margin: 0 auto 4px; display: grid; place-items: center; }
+    .orbit { position: absolute; inset: 0; width: 100%; height: 100%; display: none; touch-action: pan-y; }
+    .orbit-on .orbit { display: block; }
+    .orbit-on .orbit-fallback { display: none; }
 
     a:focus-visible, button:focus-visible { outline: 3px solid var(--c5); outline-offset: 3px; border-radius: 6px; }
 
@@ -811,7 +814,7 @@
       .nav-brand-name { font-size: 0.92rem; }
       .hero { padding: 120px 20px 60px; }
       .hero-mantra-glyph { font-size: 3.4rem; }
-      .hero-mantra { margin-top: 48px; }
+      .hero-mantra { margin-top: 28px; }
       .float-icon { width: 44px; height: 44px; opacity: 0.6; }
       .apps-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
       .app-utilify, .app-canwasa, .app-nightbloom, .app-palettely, .app-paperlens,
@@ -850,9 +853,6 @@
     }
     @media (max-width: 760px) {
       .constellation { display: none; }
-      .hero-dock { display: flex; justify-content: center; margin-top: 32px; }
-      .hero-dock img { width: 46px; height: 46px; border-radius: 13px; margin-left: -9px; box-shadow: 0 0 0 3px #FFFCF5, 0 8px 18px rgba(9,9,11,0.14); }
-      .hero-dock img:first-child { margin-left: 0; }
 
       /* Cards: icon beside the name, description and stores full width (about a third shorter) */
       .app-card, .app-card.featured {
@@ -926,17 +926,8 @@
       </a>
       <a href="#story" class="btn btn-light">Our story</a>
     </div>
-    <div class="hero-dock" aria-hidden="true">
-      <img src="icons/palettely.webp" alt="" width="46" height="46">
-      <img src="icons/utilify.webp" alt="" width="46" height="46">
-      <img src="icons/canwasa.webp" alt="" width="46" height="46">
-      <img src="icons/nightbloom.webp" alt="" width="46" height="46">
-      <img src="icons/astroorbit.webp" alt="" width="46" height="46">
-      <img src="icons/fuzzypop.webp" alt="" width="46" height="46">
-      <img src="icons/inkline.webp" alt="" width="46" height="46">
-    </div>
     <div class="hero-mantra">
-      <div class="hero-mantra-glyph"><span class="accent">∞</span></div>
+      <div class="orbit-wrap"><canvas class="orbit" id="orbit" aria-hidden="true"></canvas><div class="hero-mantra-glyph orbit-fallback"><span class="accent">∞</span></div></div>
       <div class="hero-mantra-title">Always shipping.</div>
       <div class="hero-mantra-sub">New apps and games land here first.</div>
     </div>
@@ -1589,6 +1580,128 @@
       sorted.forEach(c => grid.insertBefore(c, filler));
     }
   });
+
+  // Hero ∞: the apps travel a lemniscate; the pointer pushes them aside, hovering names one, tapping opens it
+  (function () {
+    const wrap = document.querySelector('.orbit-wrap');
+    const cv = document.getElementById('orbit');
+    if (!wrap || !cv || !cv.getContext) return;
+    const ctx = cv.getContext('2d');
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = [...document.querySelectorAll('.app-card')].map((card, i, all) => {
+      const link = card.querySelector('.app-link');
+      const img = new Image();
+      img.src = card.querySelector('.app-icon-mega').getAttribute('src');
+      img.onload = () => { if (!running) draw(); };
+      return { img, name: link.textContent, href: link.href, phase: i / all.length, ox: 0, oy: 0, vx: 0, vy: 0, s: 1, x: 0, y: 0 };
+    });
+    if (!items.length) return;
+    wrap.classList.add('orbit-on');
+    let W = 0, H = 0, size = 30, ay = 1, t = 0, last = 0, running = false, visible = true;
+    let pointer = null, hover = null, down = null;
+    function resize() {
+      const r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      size = Math.max(24, Math.min(40, W / 15));
+      ay = Math.min(1.35, (H / 2 - size * 0.75) / (W * 0.42 * 0.354));
+      measure();
+      draw();
+    }
+    function raw(u) {
+      const th = u * Math.PI * 2, d = 1 + Math.sin(th) ** 2, a = W * 0.42;
+      return [W / 2 + a * Math.cos(th) / d, H / 2 + ay * a * Math.sin(th) * Math.cos(th) / d];
+    }
+    // Positions by distance along the curve, so icons are evenly spaced and move at a steady speed
+    let table = [];
+    function measure() {
+      table = [[0, 0, ...raw(0)]];
+      let len = 0, prev = raw(0);
+      for (let k = 1; k <= 480; k++) { const u = k / 480, pt = raw(u); len += Math.hypot(pt[0] - prev[0], pt[1] - prev[1]); table.push([len, u, ...pt]); prev = pt; }
+      for (const row of table) row[0] /= len;
+    }
+    function at(f) {
+      f = ((f % 1) + 1) % 1;
+      let lo = 0, hi = table.length - 1;
+      while (hi - lo > 1) { const mid = (lo + hi) >> 1; table[mid][0] < f ? lo = mid : hi = mid; }
+      const a = table[lo], b = table[hi], k = (f - a[0]) / ((b[0] - a[0]) || 1);
+      return [a[2] + (b[2] - a[2]) * k, a[3] + (b[3] - a[3]) * k];
+    }
+    function rounded(x, y, w, h, r) {
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      // the loop itself, faint, in the brand gradient
+      const g = ctx.createLinearGradient(0, 0, W, 0);
+      g.addColorStop(0, '#FF5F8A'); g.addColorStop(0.5, '#FF8E3C'); g.addColorStop(1, '#845EC2');
+      ctx.beginPath();
+      for (let k = 0; k <= 160; k++) { const [px, py] = raw(k / 160); k ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+      ctx.strokeStyle = g; ctx.globalAlpha = 0.3; ctx.lineWidth = 2; ctx.stroke(); ctx.globalAlpha = 1;
+      const order = [...items].sort((a, b) => (a === hover) - (b === hover));
+      for (const it of order) {
+        const sz = size * it.s, x = it.x - sz / 2, y = it.y - sz / 2;
+        ctx.save();
+        ctx.shadowColor = 'rgba(9,9,11,0.22)'; ctx.shadowBlur = it === hover ? 18 : 10; ctx.shadowOffsetY = 4;
+        rounded(x, y, sz, sz, sz * 0.24); ctx.fillStyle = '#fff'; ctx.fill();
+        ctx.shadowColor = 'transparent';
+        rounded(x, y, sz, sz, sz * 0.24); ctx.clip();
+        if (it.img.complete && it.img.naturalWidth) ctx.drawImage(it.img, x, y, sz, sz);
+        ctx.restore();
+      }
+      if (hover) {
+        ctx.font = '700 13px Inter, -apple-system, system-ui, sans-serif';
+        const w = ctx.measureText(hover.name).width + 20, lx = Math.min(W - w - 2, Math.max(2, hover.x - w / 2)), ly = hover.y - size * hover.s / 2 - 32;
+        rounded(lx, Math.max(2, ly), w, 24, 12); ctx.fillStyle = '#09090B'; ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.textBaseline = 'middle'; ctx.fillText(hover.name, lx + 10, Math.max(2, ly) + 12.5);
+      }
+    }
+    function step(now) {
+      const dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
+      if (!still) t += dt / 48;                       // one lap every 48 seconds
+      for (const it of items) {
+        const [px, py] = at((it.phase + t) % 1);
+        if (pointer && !still) {
+          const dx = it.x - pointer.x, dy = it.y - pointer.y, dist = Math.hypot(dx, dy) || 1, R = size * 2.6;
+          if (dist < R) { const f = (1 - dist / R) * 900 * dt; it.vx += dx / dist * f; it.vy += dy / dist * f; }
+        }
+        it.vx += -it.ox * 40 * dt; it.vy += -it.oy * 40 * dt;   // spring back to the loop
+        it.vx *= 0.86; it.vy *= 0.86;
+        it.ox += it.vx * dt * 10; it.oy += it.vy * dt * 10;
+        it.x = px + it.ox; it.y = py + it.oy;
+        it.s += ((it === hover ? 1.45 : 1) - it.s) * Math.min(1, dt * 12);
+      }
+      draw();
+      if (running) requestAnimationFrame(step);
+    }
+    function start() { if (running || !visible || document.hidden) return; running = true; last = performance.now(); requestAnimationFrame(step); }
+    function stop() { running = false; }
+    function pick(x, y) {
+      let best = null, bd = size * 0.75;
+      for (const it of items) { const d = Math.hypot(it.x - x, it.y - y); if (d < bd) { bd = d; best = it; } }
+      return best;
+    }
+    function local(e) { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    cv.addEventListener('pointermove', e => { pointer = local(e); hover = pick(pointer.x, pointer.y); cv.style.cursor = hover ? 'pointer' : 'default'; if (still) draw(); });
+    cv.addEventListener('pointerleave', () => { pointer = null; hover = null; if (still) draw(); });
+    cv.addEventListener('pointerdown', e => { down = { ...local(e), time: performance.now() }; pointer = local(e); hover = pick(pointer.x, pointer.y); });
+    cv.addEventListener('pointerup', e => {
+      const p = local(e);
+      if (down && Math.hypot(p.x - down.x, p.y - down.y) < 10 && performance.now() - down.time < 500) {
+        const it = pick(p.x, p.y);
+        if (it) location.href = it.href;
+      }
+      down = null;
+      if (e.pointerType !== 'mouse') { pointer = null; hover = null; }
+    });
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; visible ? start() : stop(); }).observe(cv);
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    for (const it of items) { const [px, py] = at(it.phase); it.x = px; it.y = py; }
+    if (still) draw(); else start();
+  })();
 
   // The filler tile takes whatever is left of the last row, at the current column count
   function fillGrids() {
