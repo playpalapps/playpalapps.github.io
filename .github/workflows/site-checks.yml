@@ -1,0 +1,55 @@
+# Keeps the listing pages light and the store-linked pages alive.
+#  1. Makes any missing WebP copies (tools/web-images.py) and commits them to main.
+#  2. Runs tools/check-site.py: missing or mis-cased files, heavy images, cards without a link
+#     or WebP icon, and pages the App Store / Google Play listings link to.
+#  3. Runs Lighthouse on the homepage and the Naveen Raj page and fails on a real drop.
+name: Site checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  images-and-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow==11.3.0
+      - name: Make missing web copies
+        run: python3 tools/web-images.py --missing-only
+      - name: Commit new copies
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git add -A icons assets showcase naveen-raj/assets
+          if git diff --cached --quiet; then echo "Nothing to add"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Make light web copies of new images"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Check pages
+        run: python3 tools/check-site.py
+
+  lighthouse:
+    needs: images-and-links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: false

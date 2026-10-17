@@ -6,16 +6,20 @@ icons/<slug>.webp at 256 px, plus a few resized brand assets. Run it after addin
 
     python3 tools/web-images.py
 
-Only files that are missing or older than their source are rewritten.
+Only files that are missing or older than their source are rewritten. With --missing-only
+(used by the GitHub check, where checkout times say nothing about which file is newer)
+only missing copies are made.
 """
+import sys
 from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
+MISSING_ONLY = '--missing-only' in sys.argv
 
 def make(src, dst, max_px, quality=86, by='longest'):
     src, dst = ROOT / src, ROOT / dst
-    if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
+    if dst.exists() and (MISSING_ONLY or dst.stat().st_mtime >= src.stat().st_mtime):
         return False
     im = Image.open(src)
     im = im.convert('RGBA') if im.mode in ('P', 'LA', 'RGBA', 'PA') or 'transparency' in im.info else im.convert('RGB')
@@ -34,6 +38,7 @@ jobs += [
     ('assets/naveen-portrait.png', 'assets/naveen-portrait-560.webp', 560),
     ('assets/infosys.png', 'assets/infosys-480.webp', 480),
     ('assets/afterpay.png', 'assets/afterpay-480.webp', 480),
+    ('naveen-raj/assets/playpal-logo.png', 'naveen-raj/assets/playpal-logo-192.webp', 192),
 ]
 # Real screens for the homepage "In action" showcase: showcase/<slug>-<n>.webp, 540 px wide.
 # To add an app, list its screenshots here and add data-shots="..." to its card in index.html.
