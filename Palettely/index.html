@@ -55,6 +55,12 @@ section[id],header[id],div[id]{scroll-margin-top:76px}
 .demo .btn{min-height:44px;font-size:15px;padding:0 18px}
 @media (max-width:860px){.hero .grid{grid-template-columns:1fr}}
 @media (max-width:420px){.swatch{min-height:76px;font-size:10.5px}}
+/* real screens */
+.shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 18px}
+.shot h3{margin:16px 0 4px;font-size:17px;letter-spacing:-.01em}
+.shot p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.45}
+.swipe-hint{display:none;color:var(--ink-3)}
+@media (max-width:980px){.swipe-hint{display:inline}.shots{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none}.shots::-webkit-scrollbar{display:none}.shot{flex:0 0 min(62vw,250px);scroll-snap-align:center}}
 /* sections */
 section.slab{padding:clamp(44px,7vw,88px) 0}
 section.slab .head{max-width:62ch;margin-bottom:clamp(24px,3.5vw,40px)}
@@ -146,6 +152,22 @@ blockquote.q cite{display:block;margin-top:12px;font-style:normal;font-size:15px
       <div class="step glass reveal"><h3>Choose a photo</h3><p>Use the camera, your gallery or a screenshot.</p></div>
       <div class="step glass reveal d1"><h3>Get the palette</h3><p>Palettely pulls out the key colours, with HEX, RGB and HSL codes ready to copy.</p></div>
       <div class="step glass reveal d2"><h3>Make something</h3><p>Build a moodboard, export a wallpaper, or send the swatches to Procreate.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="screens">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Inside the app</span>
+      <h2>See it before you download it</h2>
+      <p class="sub">Real screens from Palettely. <span class="swipe-hint">Swipe to see them all.</span></p>
+    </div>
+    <div class="shots">
+      <div class="shot reveal"><div class="phone"><img src="shots/home.jpg" alt="The Palettely home screen with Gallery and Take a photo, Generate and Match tools, and palettes named Pacific Calm, Berry Fields and Nordic Winter" width="720" height="1565" loading="lazy"></div><h3>Home</h3><p>Start from a photo, or generate and match palettes.</p></div>
+      <div class="shot reveal d1"><div class="phone"><img src="shots/extract.jpg" alt="A photo of magenta flowers with six colours picked from it and their hex codes listed below" width="720" height="1565" loading="lazy"></div><h3>From a photo</h3><p>Pick a photo and get its colours, with codes ready to copy.</p></div>
+      <div class="shot reveal d2"><div class="phone"><img src="shots/generate.jpg" alt="The Generate screen showing a palette named Silk and Stone with five colours, Copy buttons and a Generate button" width="720" height="1565" loading="lazy"></div><h3>Generate</h3><p>Fresh palettes by mood: warm, calm, vibrant, earthy.</p></div>
+      <div class="shot reveal d3"><div class="phone"><img src="shots/welcome.jpg" alt="The Palettely welcome screen with the petal logo and the line Colours that feel like you" width="720" height="1565" loading="lazy"></div><h3>Colours that feel like you</h3><p>The welcome screen, with the petal mark.</p></div>
     </div>
   </div>
 </section>

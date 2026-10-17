@@ -56,6 +56,12 @@ section[id],header[id],div[id]{scroll-margin-top:76px}
 .breath .label small{display:block;font-family:inherit;font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
 .breath .bloom{position:absolute;width:15%;border-radius:22%;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 @media (max-width:860px){.hero .grid{grid-template-columns:1fr}}
+/* real screens */
+.shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 18px}
+.shot h3{margin:16px 0 4px;font-size:17px;letter-spacing:-.01em}
+.shot p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.45}
+.swipe-hint{display:none;color:var(--ink-3)}
+@media (max-width:980px){.swipe-hint{display:inline}.shots{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none}.shots::-webkit-scrollbar{display:none}.shot{flex:0 0 min(62vw,250px);scroll-snap-align:center}}
 /* sections */
 section.slab{padding:clamp(44px,7vw,88px) 0}
 section.slab .head{max-width:62ch;margin-bottom:clamp(24px,3.5vw,40px)}
@@ -145,6 +151,22 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
       <div class="feature t-gold reveal"><h3>AI bedtime stories</h3><p>Pick a theme and Night Bloom tells a new, calming story. Up to 10 stories a day.</p></div>
       <div class="feature t-night reveal d1"><h3>Pre-written stories</h3><p>A library of bedtime stories to drift off to, available offline.</p></div>
       <div class="feature t-violet reveal d2"><h3>Calming mini-games</h3><p>Gentle games designed for relaxation, including one where you hold still and stay quiet.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="screens">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Inside the app</span>
+      <h2>See it before you download it</h2>
+      <p class="sub">Real screens from Night Bloom. <span class="swipe-hint">Swipe to see them all.</span></p>
+    </div>
+    <div class="shots">
+      <div class="shot reveal"><div class="phone"><img src="shots/welcome.jpg" alt="The Night Bloom welcome screen with a sleepy purple mushroom in a starry night forest" width="720" height="1565" loading="lazy"></div><h3>Your Night Bloom</h3><p>A gentle start: a sanctuary of ambient sounds.</p></div>
+      <div class="shot reveal d1"><div class="phone"><img src="shots/home.jpg" alt="The Night Bloom home screen with Begin Bedtime, Mixer, Breathe, Games, Scenes, Stories and quick sounds for rain, thunder, ocean and forest" width="720" height="1565" loading="lazy"></div><h3>Home</h3><p>Bedtime, mixer, breathing, games, scenes and stories in one place.</p></div>
+      <div class="shot reveal d2"><div class="phone"><img src="shots/breathe.jpg" alt="The Breathing Buddy screen with a glowing mushroom, Inhale 4 seconds, Hold 2 seconds, Exhale 6 seconds, and a Begin Breathing button" width="720" height="1565" loading="lazy"></div><h3>Breathing Buddy</h3><p>Follow the mushroom: in for 4, hold for 2, out for 6.</p></div>
+      <div class="shot reveal d3"><div class="phone"><img src="shots/mixer.jpg" alt="The Your Mix screen with a Play button and sound tiles for rain, thunder, ocean, forest, fireplace and wind" width="720" height="1565" loading="lazy"></div><h3>Sound mixer</h3><p>Layer rain, thunder, ocean, forest, fireplace, wind and more.</p></div>
     </div>
   </div>
 </section>

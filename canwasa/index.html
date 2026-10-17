@@ -50,6 +50,12 @@ section[id],header[id],div[id]{scroll-margin-top:76px}
 .maker .btn{min-height:48px;font-size:16px}
 .maker p{margin:0;font-size:14px;color:var(--ink-3);text-align:center;max-width:34ch}
 @media (max-width:860px){.hero .grid{grid-template-columns:1fr}}
+/* real screens */
+.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 18px}
+.shot h3{margin:16px 0 4px;font-size:17px;letter-spacing:-.01em}
+.shot p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.45}
+.swipe-hint{display:none;color:var(--ink-3)}
+@media (max-width:980px){.swipe-hint{display:inline}.shots{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;scrollbar-width:none}.shots::-webkit-scrollbar{display:none}.shot{flex:0 0 min(62vw,250px);scroll-snap-align:center}}
 /* sections */
 section.slab{padding:clamp(44px,7vw,88px) 0}
 section.slab .head{max-width:62ch;margin-bottom:clamp(24px,3.5vw,40px)}
@@ -141,6 +147,21 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
       <div class="feature t-ink reveal"><h3>No account</h3><p>No sign-up and no personal details. Your wallpaper choices stay yours.</p></div>
       <div class="feature t-violet reveal d1"><h3>Save and export</h3><p>Keep favourites in the app and export them in full 4K, ready to set as your wallpaper or share.</p></div>
       <div class="feature t-pink reveal d2"><h3>Curated palettes</h3><p>Hand-picked colour combinations, designed to give harmonious results every time.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slab" id="screens">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Inside the app</span>
+      <h2>See it before you download it</h2>
+      <p class="sub">Real screens from Canwasa. <span class="swipe-hint">Swipe to see them all.</span></p>
+    </div>
+    <div class="shots">
+      <div class="shot reveal"><div class="phone"><img src="shots/home.jpg" alt="The Canwasa home screen with a daily Flowing Shapes wallpaper, Random, Custom and AMOLED buttons, and featured wallpapers named Liquid Gold, Aurora Mist and Neon Silence" width="720" height="1565" loading="lazy"></div><h3>Explore</h3><p>A daily wallpaper, quick Random, Custom and AMOLED, and featured creations.</p></div>
+      <div class="shot reveal d1"><div class="phone"><img src="shots/editor.jpg" alt="The Canwasa editor showing an Aurora Glow wallpaper, with Random, Remix, Save and Export buttons and a grid of styles" width="720" height="1565" loading="lazy"></div><h3>Make your own</h3><p>Pick a style, remix it, save it, or export it.</p></div>
+      <div class="shot reveal d2"><div class="phone"><img src="shots/export.jpg" alt="The export screen for a teal Liquid Gradients wallpaper, with Portrait and Landscape, 4K 2160 by 3840, PNG and JPEG, and a Save to Photos button" width="720" height="1565" loading="lazy"></div><h3>Export in 4K</h3><p>Portrait or landscape, PNG or JPEG, straight to Photos.</p></div>
     </div>
   </div>
 </section>

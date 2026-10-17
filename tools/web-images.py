@@ -43,6 +43,17 @@ jobs += [
 # Real screens for the homepage "In action" showcase: showcase/<slug>-<n>.webp, 540 px wide.
 # To add an app, list its screenshots here and add data-shots="..." to its card in index.html.
 SHOWCASE = {
+    'palettely': ['Palettely/shots/home.jpg', 'Palettely/shots/extract.jpg', 'Palettely/shots/generate.jpg'],
+    'canwasa': ['canwasa/shots/home.jpg', 'canwasa/shots/editor.jpg', 'canwasa/shots/export.jpg'],
+    'nightbloom': ['NightBloom/shots/home.jpg', 'NightBloom/shots/breathe.jpg', 'NightBloom/shots/mixer.jpg'],
+    'tooltrunk': ['ToolTrunk/shots/home.jpg', 'ToolTrunk/shots/compass.jpg', 'ToolTrunk/shots/sound-meter.jpg'],
+    'hydropanda': ['HydroPanda/shots/home.jpg', 'HydroPanda/shots/containers.jpg', 'HydroPanda/shots/history.jpg'],
+    'paperlens': ['PaperLens/shots/library.jpg', 'PaperLens/shots/tools.jpg', 'PaperLens/shots/templates.jpg'],
+    'qito': ['Qito/shots/home.jpg', 'Qito/shots/templates.jpg', 'Qito/shots/styles.jpg'],
+    'astroorbit': ['AstroOrbit/shots/title.jpg', 'AstroOrbit/shots/combo.jpg', 'AstroOrbit/shots/play.jpg'],
+    'fuzzypop': ['FuzzyPop/shots/menu.jpg', 'FuzzyPop/shots/animal-match.jpg', 'FuzzyPop/shots/count-pop.jpg'],
+    'inkline': ['Inkline/shots/menu.jpg', 'Inkline/shots/play.jpg', 'Inkline/shots/strand.jpg'],
+    'pippet': ['Pippet/shots/title.jpg', 'Pippet/shots/play.jpg', 'Pippet/shots/choose-pip.jpg'],
     'pomma': ['Pomma/shots/timer.jpg', 'Pomma/shots/tasks.jpg', 'Pomma/shots/stats.jpg'],
     'postela': ['Postela/shots/home.jpg', 'Postela/shots/post.jpg', 'Postela/shots/flyer.jpg'],
     'nota': ['Nota/shots/note.jpg', 'Nota/shots/sketch-note.jpg', 'Nota/shots/checklist.jpg'],
