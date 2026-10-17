@@ -40,7 +40,8 @@ jobs += [
     ('assets/afterpay.png', 'assets/afterpay-480.webp', 480),
     ('naveen-raj/assets/playpal-logo.png', 'naveen-raj/assets/playpal-logo-192.webp', 192),
 ]
-# Real screens for the homepage "In action" showcase: showcase/<slug>-<n>.webp, 540 px wide.
+# Real screens for the homepage "In action" showcase: showcase/<slug>-<n>.webp, 540 px wide
+# (960 px for the landscape games in LANDSCAPE, whose cards also carry data-orient="landscape").
 # To add an app, list its screenshots here and add data-shots="..." to its card in index.html.
 SHOWCASE = {
     'palettely': ['Palettely/shots/home.jpg', 'Palettely/shots/extract.jpg', 'Palettely/shots/generate.jpg'],
@@ -68,11 +69,14 @@ SHOWCASE = {
     'fruithugs': ['FruitHugs/shots/home.jpg', 'FruitHugs/shots/play.jpg', 'FruitHugs/shots/zen.jpg'],
     'veggiepop': ['VeggiePop/shots/home.jpg', 'VeggiePop/shots/play.jpg', 'VeggiePop/shots/book.jpg'],
     'gramam': ['Gramam/shots/1.jpg', 'Gramam/shots/2.jpg', 'Gramam/shots/3.jpg'],
+    'timezoneconnect': ['TimezoneConnect/shots/world-clock.jpg', 'TimezoneConnect/shots/find-a-time.jpg', 'TimezoneConnect/shots/convert-time.jpg'],
+    'circusarcade': ['CircusArcade/shots/phone-cannonball.jpg', 'CircusArcade/shots/phone-high-dive.jpg', 'CircusArcade/shots/phone-grand-tour.jpg'],
 }
+LANDSCAPE = {'circusarcade'}
 (ROOT / 'showcase').mkdir(exist_ok=True)
 for slug, shots in SHOWCASE.items():
     for n, src in enumerate(shots, 1):
-        jobs.append((src, f'showcase/{slug}-{n}.webp', 540, 'width'))
+        jobs.append((src, f'showcase/{slug}-{n}.webp', 960 if slug in LANDSCAPE else 540, 'width'))
 
 for job in jobs:
     src, dst, px = job[:3]

@@ -789,12 +789,16 @@
     /* IN ACTION: a phone that plays real screens from the apps with data-shots on their card */
     .showcase-section { background: var(--bg); padding: 96px 24px 8px; position: relative; overflow: hidden; }
     .showcase { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 64px; align-items: center; margin-top: 44px; }
-    .sc-stage { position: relative; display: grid; justify-items: center; }
+    .sc-stage { position: relative; display: grid; justify-items: center; align-content: center; min-height: calc((min(300px, 68vw) - 20px) * 2.1722 + 50px); }
     .sc-stage::before { content: ''; position: absolute; width: 130%; aspect-ratio: 1; top: 46%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--sc-glow, rgba(132,94,194,0.35)) 0%, transparent 62%); filter: blur(30px); opacity: 0.8; pointer-events: none; transition: background 0.6s; }
     .sc-phone { position: relative; width: min(300px, 68vw); padding: 10px; border-radius: 46px; background: #0b0b10; box-shadow: 0 40px 80px rgba(9,9,11,0.28), 0 0 0 1px rgba(9,9,11,0.6), inset 0 0 0 1px rgba(255,255,255,0.08); }
     .sc-screen { position: relative; aspect-ratio: 540 / 1173; border-radius: 36px; overflow: hidden; background: #15151c; }
     .sc-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity 0.6s ease; }
     .sc-screen img.on { opacity: 1; }
+    /* Landscape games turn the phone on its side; the stage keeps its height so nothing below moves */
+    .sc-phone.landscape { width: min(440px, 100%); border-radius: 34px; }
+    .sc-phone.landscape .sc-screen { aspect-ratio: 1173 / 540; border-radius: 25px; }
+    .sc-phone.landscape .sc-screen img { object-position: center; }
     .sc-dots { display: flex; gap: 8px; justify-content: center; margin-top: 20px; min-height: 10px; position: relative; }
     .sc-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px; background: rgba(9,9,11,0.22); cursor: pointer; transition: width 0.3s, background 0.3s; }
     .sc-dots button[aria-current="true"] { width: 24px; background: var(--text); }
@@ -885,7 +889,10 @@
     @media (max-width: 760px) {
       .showcase-section { padding: 72px 20px 0; }
       .showcase { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 32px; }
+      .sc-stage { min-height: calc((min(250px, 66vw) - 16px) * 2.1722 + 46px); }
       .sc-phone { width: min(250px, 66vw); border-radius: 40px; padding: 8px; }
+      .sc-phone.landscape { width: 100%; border-radius: 28px; }
+      .sc-phone.landscape .sc-screen { border-radius: 21px; }
       .sc-screen { border-radius: 32px; }
       .sc-chips { flex-wrap: nowrap; overflow-x: auto; margin: 24px -20px 0; padding: 2px 20px 8px; scrollbar-width: none; }
       .sc-chips::-webkit-scrollbar { display: none; }
@@ -1182,7 +1189,7 @@ header.hero { overflow-x: clip; }
       </article>
 
       <!-- Time Zone Connect (2x1 wide) -->
-      <article class="app-card app-tzc reveal">
+      <article class="app-card app-tzc reveal" data-shots="showcase/timezoneconnect-1.webp showcase/timezoneconnect-2.webp showcase/timezoneconnect-3.webp">
         <img class="app-icon-mega" src="icons/timezoneconnect.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Productivity · Time zones</span>
@@ -1407,7 +1414,7 @@ header.hero { overflow-x: clip; }
       </article>
 
       <!-- Circus Arcade (Google Play live; App Store coming soon) -->
-      <article class="app-card app-circusarcade reveal">
+      <article class="app-card app-circusarcade reveal" data-orient="landscape" data-shots="showcase/circusarcade-1.webp showcase/circusarcade-2.webp showcase/circusarcade-3.webp">
         <img class="app-icon-mega" src="icons/circusarcade.webp" alt="" width="76" height="76" loading="lazy" decoding="async">
         <div class="app-meta">
           <span class="app-cat">Arcade · Retro</span>
@@ -1781,7 +1788,7 @@ header.hero { overflow-x: clip; }
     if (!sec) return;
     if (!apps.length) { sec.hidden = true; return; }
     const $ = id => document.getElementById(id);
-    const screen = $('scScreen'), dots = $('scDots'), chips = $('scChips'), actions = $('scActions');
+    const screen = $('scScreen'), phone = screen.parentElement, dots = $('scDots'), chips = $('scChips'), actions = $('scActions');
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const data = apps.map(card => {
       const link = card.querySelector('.app-link');
@@ -1791,6 +1798,7 @@ header.hero { overflow-x: clip; }
         cat: card.querySelector('.app-cat').textContent,
         desc: card.querySelector('.app-tag-text').textContent,
         shots: card.dataset.shots.trim().split(/\s+/),
+        wide: card.dataset.orient === 'landscape',
         stores: [...card.querySelectorAll('.store-mini')],
         imgs: null
       };
@@ -1798,7 +1806,7 @@ header.hero { overflow-x: clip; }
     let ai = 0, si = 0, tour = true, hovering = false, visible = false, timer = null;
     function images(d) {
       if (!d.imgs) d.imgs = d.shots.map((src, n) => {
-        const im = new Image(); im.decoding = 'async'; im.src = src; im.width = 540; im.height = 1173;
+        const im = new Image(); im.decoding = 'async'; im.src = src; im.width = d.wide ? 960 : 540; im.height = d.wide ? 442 : 1173;
         im.alt = d.name + ', screen ' + (n + 1) + ' of ' + d.shots.length; return im;
       });
       return d.imgs;
@@ -1828,6 +1836,7 @@ header.hero { overflow-x: clip; }
     function show(i) {
       ai = i; si = 0;
       const d = data[ai];
+      phone.classList.toggle('landscape', d.wide);
       screen.replaceChildren(...images(d));
       images(data[(ai + 1) % data.length]);           // warm up the next app
       $('scIcon').src = d.icon; $('scCat').textContent = d.cat; $('scName').textContent = d.name; $('scDesc').textContent = d.desc;
