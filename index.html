@@ -556,7 +556,7 @@
 
     /* STORY */
     .story-section { background: var(--bg); position: relative; }
-    .story-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 64px; align-items: center; margin-top: 24px; }
+    .story-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; margin-top: 24px; }
     .story-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 32px; }
     .story-stat {
       padding: 22px 20px; border-radius: 18px;
@@ -570,34 +570,33 @@
     .story-stat.s4::before { background: linear-gradient(180deg, var(--c6), var(--c1)); }
     .story-stat-num { font-size: 1.8rem; font-weight: 900; letter-spacing: -1.4px; line-height: 1; color: var(--text); }
     .story-stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 600; margin-top: 8px; }
-    /* Icon cloud sizes itself to its content: square cells in an in-flow grid,
-       so adding an app never overflows the panel or squashes the icons. */
-    .story-visual {
-      position: relative;
-      background: linear-gradient(135deg, var(--warm), white);
-      border-radius: 32px; padding: 28px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .icon-cloud {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 12px;
-    }
-    .cloud-icon {
-      aspect-ratio: 1;
-      border-radius: 14px; box-shadow: 0 8px 22px rgba(9,9,11,0.1);
-      animation: bob 5s ease-in-out infinite;
-      min-height: 0; min-width: 0; overflow: hidden;
-      flex: 0 0 calc((100% - 4 * 12px) / 5);
-    }
-    .cloud-icon img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
-    .cloud-icon:nth-child(7n+1) { animation-delay: 0s; }
-    .cloud-icon:nth-child(7n+2) { animation-delay: -0.7s; }
-    .cloud-icon:nth-child(7n+3) { animation-delay: -1.4s; }
-    .cloud-icon:nth-child(7n+4) { animation-delay: -2.1s; }
-    .cloud-icon:nth-child(7n+5) { animation-delay: -2.8s; }
-    .cloud-icon:nth-child(7n+6) { animation-delay: -3.5s; }
-    .cloud-icon:nth-child(7n)   { animation-delay: -4.2s; }
+    /* Play one: Circus Arcade in a little arcade cabinet; the game loads only on "Insert coin" */
+    .cabinet { position: relative; padding: 16px 16px 14px; border-radius: 30px; background: linear-gradient(180deg, #2B1240 0%, #170A28 100%); box-shadow: 0 40px 90px rgba(23,10,40,0.3), inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(0,0,0,0.4); }
+    .cab-top { display: flex; align-items: center; justify-content: center; gap: 14px; height: 34px; margin-bottom: 12px; }
+    .bulbs { display: flex; gap: 9px; }
+    .bulbs i { width: 7px; height: 7px; border-radius: 50%; background: #F8B800; box-shadow: 0 0 8px #F8B800; animation: bulb 1.2s steps(1) infinite; }
+    .bulbs i:nth-child(even) { animation-delay: 0.6s; }
+    @keyframes bulb { 50% { opacity: 0.25; box-shadow: none; } }
+    .cab-title { font: 700 0.78rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.3em; color: #FFE08A; text-shadow: 0 0 12px rgba(248,184,0,0.6); white-space: nowrap; }
+    .cab-screen { position: relative; aspect-ratio: 2868 / 1320; border-radius: 14px; overflow: hidden; background: #000; }
+    .cab-screen img, .cab-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+    .cab-screen img { object-fit: cover; filter: brightness(0.62) saturate(1.05); }
+    .cab-start { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 14px; border: 2px solid #FFE08A; background: rgba(23,10,40,0.78); color: #FFE08A; font: 700 0.9rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; box-shadow: 0 0 30px rgba(248,184,0,0.35); white-space: nowrap; }
+    .cab-start:hover { background: #FFE08A; color: #170A28; }
+    .cab-start svg { width: 16px; height: 16px; fill: currentColor; }
+    .cab-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 0 4px; }
+    .cab-bar span { font-size: 0.74rem; color: rgba(255,240,200,0.65); }
+    .cab-bar a { color: #FFE08A; font-weight: 700; text-decoration: none; }
+    .cab-fs { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(255,224,138,0.35); background: transparent; color: #FFE08A; font: 600 0.78rem 'Inter', system-ui, sans-serif; cursor: pointer; flex-shrink: 0; }
+    .cab-fs:hover { background: rgba(255,224,138,0.12); }
+    .cab-fs[hidden] { display: none; }
+    @media (hover: none) { .cab-keys .kb { display: none; } }
+    @media (hover: hover) { .cab-keys .touch { display: none; } }
+    .cab-fs svg { width: 14px; height: 14px; }
+    .cab-screen:fullscreen { border-radius: 0; aspect-ratio: auto; }
+    .cab-keys { margin-top: 14px; font-size: 0.82rem; color: var(--muted); text-align: center; }
+    .cab-keys kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 6px; background: white; border: 1px solid var(--border); border-bottom-width: 3px; font: 700 0.7rem ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text); }
+    @media (prefers-reduced-motion: reduce) { .bulbs i { animation: none; } }
     .story-quote {
       font-family: 'Instrument Serif', serif; font-style: italic;
       font-size: 1.7rem; line-height: 1.4; color: var(--text);
@@ -875,9 +874,6 @@
       .apps-watermark { width: 380px; height: 380px; right: -60px; top: 40px; opacity: 0.05; }
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
       .story-grid { grid-template-columns: 1fr; gap: 40px; }
-      .story-visual { padding: 20px; border-radius: 24px; }
-      .icon-cloud { gap: 10px; }
-      .cloud-icon { flex-basis: calc((100% - 3 * 10px) / 4); }
       .builder-inner { grid-template-columns: 1fr; gap: 40px; }
       section.std { padding: 72px 20px; }
       .contact-card { padding: 40px 24px; border-radius: 24px; }
@@ -1504,36 +1500,19 @@ header.hero { overflow-x: clip; }
         <p class="section-sub">Playpal Apps is a tiny one-person studio in Sydney. Each app started as a small itch — a thing the world should have but didn't. AI tools turned ideas into builds; care and patience turned builds into something worth shipping.</p>
         <blockquote class="story-quote">"Make stuff that's small, useful, and joyful — then ship it."</blockquote>
       </div>
-      <div class="story-visual reveal" style="transition-delay:.1s;">
-        <div class="icon-cloud">
-          <div class="cloud-icon"><img src="icons/utilify.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/canwasa.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/nightbloom.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/palettely.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/paperlens.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/astroorbit.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/mergerise.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/fuzzypop.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/timezoneconnect.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/qito.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/hydropanda.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/tooltrunk.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/inkline.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/pippet.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/twistandturnquest.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/veggiepop.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/fruithugs.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/circusarcade.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/pomma.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/postela.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/fidgety.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/tinywins.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/colourwise.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/nota.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/dailystreak.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/gramam.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
-          <div class="cloud-icon"><img src="icons/bloomblocks.webp" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+      <div class="story-play reveal" style="transition-delay:.1s;">
+        <div class="cabinet">
+          <div class="cab-top"><span class="bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="cab-title">CIRCUS ARCADE</span><span class="bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="cab-screen" id="cabScreen">
+            <img src="showcase/circusarcade-1.webp" alt="Circus Arcade: Pip is fired from a cannon over the big top" width="960" height="442" loading="lazy" decoding="async">
+            <button type="button" class="cab-start" id="cabStart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Insert coin</button>
+          </div>
+          <div class="cab-bar">
+            <span>One of our games, right here. <a href="https://playpalapps.github.io/CircusArcade/">About the game</a></span>
+            <button type="button" class="cab-fs" id="cabFs" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>Full screen</button>
+          </div>
         </div>
+        <p class="cab-keys"><span class="kb"><kbd>Space</kbd> jump · <kbd>←</kbd> stop · <kbd>→</kbd> + <kbd>Shift</kbd> sprint · <kbd>Esc</kbd> pause</span><span class="touch">Tap the right half of the screen to jump, hold for a higher jump</span></p>
       </div>
     </div>
   </div>
@@ -1904,24 +1883,36 @@ header.hero { overflow-x: clip; }
   const stillMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   initStrip(track, stillMotion ? 0 : 0.6);
 
-  // Section counts and the story icon panel follow the cards, so adding a card is the only step
+  // Section counts follow the cards, so adding a card is the only step
   document.querySelectorAll('.section-eyebrow .count').forEach(el => {
     const grid = el.parentElement.nextElementSibling;
     if (grid) el.textContent = '· ' + grid.querySelectorAll('.app-card').length;
   });
-  const cloud = document.querySelector('.icon-cloud');
-  if (cloud) {
-    const shown = new Set([...cloud.querySelectorAll('img')].map(i => i.getAttribute('src')));
-    document.querySelectorAll('.app-card .app-icon-mega').forEach(icon => {
-      const src = icon.getAttribute('src');
-      if (shown.has(src)) return;
-      shown.add(src);
-      const cell = document.createElement('div');
-      cell.className = 'cloud-icon';
-      cell.innerHTML = '<img src="' + src + '" alt="">';
-      cloud.appendChild(cell);
+
+  // Circus Arcade: the game loads only when someone presses Insert coin
+  (function () {
+    const screen = document.getElementById('cabScreen'), start = document.getElementById('cabStart'), fs = document.getElementById('cabFs');
+    if (!screen) return;
+    const canFull = !!(screen.requestFullscreen || screen.webkitRequestFullscreen);
+    start.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = 'CircusArcade/play/';
+      f.title = 'Circus Arcade, playable';
+      f.allow = 'autoplay; fullscreen; gamepad';
+      f.setAttribute('allowfullscreen', '');
+      screen.replaceChildren(f);
+      f.addEventListener('load', () => f.focus());
+      f.focus();
+      if (canFull) fs.hidden = false;
     });
-  }
+    fs.addEventListener('click', () => {
+      const go = screen.requestFullscreen || screen.webkitRequestFullscreen;
+      Promise.resolve(go.call(screen)).then(() => {
+        const o = window.screen.orientation; if (o && o.lock) o.lock('landscape').catch(() => {});
+        const f = screen.querySelector('iframe'); if (f) f.focus();
+      }).catch(() => {});
+    });
+  })();
 </script>
 </body>
 </html>
