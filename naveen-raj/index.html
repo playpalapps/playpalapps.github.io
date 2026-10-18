@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-mode="day">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
   <title>Naveen Raj — Head of QA & App Builder</title>
-  <meta name="description" content="Head of Quality Assurance at Savvy Loans & indie app builder. 20+ apps and games live on iOS & Android.">
+  <meta name="description" content="Head of Quality Assurance at Savvy Loans by day, indie app builder by night. 25+ apps and games for iOS and Android, built solo.">
+  <link rel="canonical" href="https://playpalapps.github.io/naveen-raj/">
+  <meta name="theme-color" content="#FFFFFF">
 
   <!-- Open Graph / WhatsApp / iMessage / LinkedIn -->
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://playpalapps.github.io/naveen-raj/">
   <meta property="og:title"       content="Naveen Raj — Head of QA & App Builder">
-  <meta property="og:description" content="10+ years in fintech quality engineering. 20+ apps and games shipped to iOS & Android. Currently Head of QA at Savvy Loans.">
+  <meta property="og:description" content="10+ years in fintech quality engineering. 25+ apps and games built solo for iOS and Android. Currently Head of QA at Savvy Loans.">
   <meta property="og:image"        content="https://playpalapps.github.io/naveen-raj/og-image.jpg?v=3">
   <meta property="og:image:type"   content="image/jpeg">
   <meta property="og:image:width"  content="1200">
@@ -21,387 +23,417 @@
   <!-- Twitter / X -->
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Naveen Raj — Head of QA & App Builder">
-  <meta name="twitter:description" content="10+ years in fintech quality engineering. 20+ apps and games shipped to iOS & Android. Currently Head of QA at Savvy Loans.">
+  <meta name="twitter:description" content="10+ years in fintech quality engineering. 25+ apps and games built solo for iOS and Android. Currently Head of QA at Savvy Loans.">
   <meta name="twitter:image"       content="https://playpalapps.github.io/naveen-raj/og-image.jpg?v=3">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Naveen Raj","url":"https://playpalapps.github.io/naveen-raj/","image":"https://playpalapps.github.io/naveen-raj/og-image.jpg","jobTitle":"Head of Quality Assurance","worksFor":{"@type":"Organization","name":"Savvy Loans"},"address":{"@type":"PostalAddress","addressLocality":"Sydney","addressCountry":"AU"},"sameAs":["https://www.linkedin.com/in/naveenraj-qa-syd","https://playpalapps.github.io/"]}
+  </script>
+
+  <!-- Day job or night shift: follows the time in Sydney unless the visitor has picked one (or ?mode= says so). Runs before the first paint. -->
+  <script>
+    (function () {
+      var root = document.documentElement, m = null;
+      root.classList.add('js');
+      try { m = new URLSearchParams(location.search).get('mode'); } catch (e) {}
+      if (m !== 'day' && m !== 'night') { try { m = sessionStorage.getItem('nr-mode'); } catch (e) {} }
+      if (m !== 'day' && m !== 'night') {
+        try {
+          var h = +new Intl.DateTimeFormat('en-AU', { hour: 'numeric', hourCycle: 'h23', timeZone: 'Australia/Sydney' }).format(new Date());
+          m = h >= 7 && h < 19 ? 'day' : 'night';
+        } catch (e) { m = 'day'; }
+      }
+      root.dataset.mode = m;
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <!-- Fonts load without blocking the first paint; text shows in the fallback face for a moment -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap"></noscript>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    :root {
-      --indigo: #6366F1;
-      --violet: #7C3AED;
-      --emerald: #10B981;
-      --cyan: #06B6D4;
-      --pink: #EC4899;
-      --text: #0F172A;
+    /* ── TWO SHIFTS: every colour on the page comes from these tokens ── */
+    :root, html[data-mode="day"] {
+      --bg: #FFFFFF;
+      --bg-alt: #F6F7FB;
+      --ink: #0F172A;
       --body: #334155;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --surface: #F8FAFC;
+      --muted: #5B6578;
+      --line: #E2E8F0;
+      --card: #FFFFFF;
+      --card-line: rgba(226,232,240,0.9);
+      --chip: #F8FAFC;
+      --accent: #4F46E5;
+      --accent-ink: #4338CA;
+      --accent-soft: rgba(79,70,229,0.08);
+      --accent-line: rgba(79,70,229,0.22);
+      --grad: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #DB2777 100%);
+      --btn: linear-gradient(135deg, #4F46E5, #7C3AED);
+      --btn-ink: #FFFFFF;
+      --btn-glow: rgba(79,70,229,0.34);
+      --shadow-hover: 0 20px 50px rgba(79,70,229,0.12);
+      --nav-bg: rgba(255,255,255,0.84);
+      --knob: #FFFFFF;
+      --switch-bg: rgba(15,23,42,0.06);
+      --hero-bg: radial-gradient(circle 650px at 88% 8%, rgba(99,102,241,0.09) 0%, transparent 70%), radial-gradient(circle 520px at 4% 100%, rgba(16,185,129,0.06) 0%, transparent 70%), #FAFBFF;
+      --portrait-filter: none;
+      --portrait-opacity: 0.06;
+      --logo-filter: grayscale(1);
+      --contact-bg: #0B0B12;
+      color-scheme: light;
     }
+    html[data-mode="night"] {
+      --bg: #0A0A16;
+      --bg-alt: #11101F;
+      --ink: #F4F3FF;
+      --body: #C9C7DF;
+      --muted: #9794B5;
+      --line: rgba(255,255,255,0.09);
+      --card: rgba(255,255,255,0.035);
+      --card-line: rgba(255,255,255,0.08);
+      --chip: rgba(255,255,255,0.05);
+      --accent: #F5B94A;
+      --accent-ink: #FCD34D;
+      --accent-soft: rgba(245,185,74,0.1);
+      --accent-line: rgba(245,185,74,0.3);
+      --grad: linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #A78BFA 100%);
+      --btn: linear-gradient(135deg, #FCD34D, #F59E0B);
+      --btn-ink: #1C1305;
+      --btn-glow: rgba(245,158,11,0.3);
+      --shadow-hover: 0 20px 50px rgba(0,0,0,0.45);
+      --nav-bg: rgba(10,10,22,0.78);
+      --knob: #2A2747;
+      --switch-bg: rgba(255,255,255,0.07);
+      --hero-bg: radial-gradient(circle 650px at 88% 8%, rgba(167,139,250,0.12) 0%, transparent 70%), radial-gradient(circle 520px at 4% 100%, rgba(245,185,74,0.06) 0%, transparent 70%), linear-gradient(180deg, #05050D 0%, #0A0A16 100%);
+      --portrait-filter: invert(1);
+      --portrait-opacity: 0.07;
+      --logo-filter: grayscale(1) invert(1);
+      --contact-bg: #07070F;
+      color-scheme: dark;
+    }
+    html[data-mode="night"] .d-only, html[data-mode="day"] .n-only { display: none !important; }
 
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #fff; color: var(--text);
+      background: var(--bg); color: var(--ink);
       line-height: 1.6; overflow-x: hidden;
     }
+    body, nav, section, footer, .about-card, .tile, .kit, .exp-entry, .pill, .tag, .btn-outline, .mode {
+      transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
+    }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
 
     /* ── SCROLL REVEAL ── */
     body.js-ready .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1); }
     body.js-ready .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── THE SWITCH ── */
+    .mode { position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 3px; border-radius: 100px; background: var(--switch-bg); }
+    .mode::before { content: ''; position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 100px; background: var(--knob); box-shadow: 0 2px 8px rgba(15,23,42,0.14); transition: transform 0.5s cubic-bezier(.65,0,.35,1), background-color 0.6s; }
+    html[data-mode="night"] .mode::before { transform: translateX(100%); }
+    .mode button { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 32px; padding: 0 12px; border: 0; background: none; border-radius: 100px; font: 600 0.8rem 'Inter', system-ui, sans-serif; color: var(--muted); cursor: pointer; transition: color 0.4s; }
+    .mode button[aria-pressed="true"] { color: var(--ink); }
+    .mode svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .mode button[data-set="day"][aria-pressed="true"] svg { color: #F59E0B; }
+    .mode button[data-set="night"][aria-pressed="true"] svg { color: #A78BFA; }
+    .mode.big button { min-height: 46px; padding: 0 22px; font-size: 0.92rem; gap: 9px; }
+    .mode.big svg { width: 18px; height: 18px; }
+
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: 64px; padding: 0 48px;
+      height: 64px; padding: 0 40px; gap: 16px;
       display: flex; justify-content: space-between; align-items: center;
-      background: rgba(255,255,255,0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(226,232,240,0.7);
-      transition: box-shadow 0.3s;
+      border-bottom: 1px solid var(--line);
     }
-    nav.scrolled { box-shadow: 0 2px 20px rgba(99,102,241,0.08); }
-    .nav-logo { font-weight: 900; font-size: 1.05rem; letter-spacing: -0.5px; background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
-    .nav-links { display: flex; gap: 2px; list-style: none; align-items: center; }
-    .nav-links a { padding: 7px 14px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: all 0.18s; }
-    .nav-links a:hover { color: var(--text); background: var(--surface); }
-    .nav-cta { background: linear-gradient(135deg, #6366F1, #7C3AED) !important; color: #fff !important; font-weight: 700 !important; border-radius: 10px !important; box-shadow: 0 4px 14px rgba(99,102,241,0.3); }
-    .nav-cta:hover { box-shadow: 0 6px 20px rgba(99,102,241,0.44) !important; transform: translateY(-1px); }
+    .nav-logo { font-weight: 900; font-size: 1.05rem; letter-spacing: -0.5px; color: var(--ink); text-decoration: none; white-space: nowrap; }
+    .nav-logo span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .nav-links { display: flex; gap: 2px; list-style: none; align-items: center; margin-left: auto; }
+    .nav-links a { display: block; padding: 7px 13px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.18s, background-color 0.18s; }
+    .nav-links a:hover { color: var(--ink); background: var(--switch-bg); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-cta { display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 10px; background: var(--btn); color: var(--btn-ink); font-weight: 700; font-size: 0.85rem; text-decoration: none; box-shadow: 0 4px 14px var(--btn-glow); }
+    .nav-cta:hover { transform: translateY(-1px); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 64px 48px 0; position: relative; overflow: hidden;
-      background: #FAFBFF;
-    }
-    .hero-orb { position: absolute; border-radius: 50%; pointer-events: none; }
-    .orb-1 { width: 900px; height: 900px; background: radial-gradient(circle, rgba(99,102,241,0.09) 0%, transparent 65%); top: -250px; right: -220px; }
-    .orb-2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 65%); bottom: -200px; left: -150px; }
-
-    .hero-inner {
-      max-width: 1200px; margin: 0 auto; width: 100%;
-      display: block;
-      align-items: center;
-      padding: 80px 0; position: relative; z-index: 1;
-    }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 16px 6px 10px;
-      background: linear-gradient(135deg, rgba(16,185,129,0.09), rgba(6,182,212,0.06));
-      border: 1px solid rgba(16,185,129,0.22); border-radius: 100px;
-      font-size: 0.75rem; font-weight: 700; color: #047857; margin-bottom: 20px;
-    }
-    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.2); } 50% { box-shadow: 0 0 0 7px rgba(16,185,129,0.07); } }
-
-    .hero-name { font-size: clamp(4.5rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.92; letter-spacing: -5px; color: var(--text); margin-bottom: 10px; padding-bottom: 0.12em; }
-    .hero-name .grad { background: linear-gradient(135deg, #6366F1 0%, #7C3AED 45%, #EC4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; padding-bottom: 0.18em; margin-bottom: -0.18em; }
-    .hero-role { font-size: 1rem; color: var(--muted); font-weight: 500; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .role-link { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .role-link:hover { color: var(--text); }
-    .role-link b { background: linear-gradient(135deg, #1E40AF, #4F46E5, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
-    .role-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--border); }
-    .hero-desc { font-size: 1.05rem; color: var(--body); line-height: 1.8; max-width: 500px; margin-bottom: 28px; }
+    /* ── HERO: the sky over Sydney, a sun by day and a moon by night ── */
+    .hero { position: relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 104px 48px 40px; background: var(--hero-bg); }
+    .stars { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1s ease; }
+    html[data-mode="night"] .stars { opacity: 1; }
+    .stars i { position: absolute; width: var(--s, 2px); height: var(--s, 2px); border-radius: 50%; background: #fff; opacity: var(--o, 0.6); animation: twinkle var(--t, 3s) ease-in-out var(--d, 0s) infinite alternate; }
+    @keyframes twinkle { to { opacity: 0.12; } }
+    .hero-inner { position: relative; z-index: 1; max-width: 1200px; width: 100%; margin: 0 auto; }
+    .now { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 12px; border-radius: 100px; background: var(--card); border: 1px solid var(--card-line); font-size: 0.74rem; font-weight: 500; color: var(--body); margin-bottom: 22px; max-width: 100%; }
+    .now-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); animation: pulse 2s infinite; }
+    html[data-mode="night"] .now-dot { background: #F5B94A; box-shadow: 0 0 0 3px rgba(245,185,74,0.2); }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(16,185,129,0); } }
+    .hero-name { font-size: clamp(4.2rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.92; letter-spacing: -0.045em; color: var(--ink); margin-bottom: 18px; }
+    .hero-name .grad { display: block; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+    .hero-role { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+    .hero-role b, .hero-role a { font-weight: 800; color: var(--accent-ink); text-decoration: none; }
+    .hero-role a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .hero-desc { font-size: 1.05rem; color: var(--body); line-height: 1.75; max-width: 520px; margin-bottom: 28px; }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary, .btn-outline { display: inline-flex; align-items: center; gap: 9px; min-height: 52px; padding: 0 26px; border-radius: 14px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: transform 0.22s, box-shadow 0.22s, background-color 0.6s, color 0.6s, border-color 0.6s; }
+    .btn-primary { background: var(--btn); color: var(--btn-ink); box-shadow: 0 8px 26px var(--btn-glow); }
+    .btn-primary:hover { transform: translateY(-3px); }
+    .btn-outline { background: var(--card); color: var(--ink); border: 1.5px solid var(--line); }
+    .btn-outline:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .btn-primary svg, .btn-outline svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .hero-switch { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+    .hero-switch p { font-size: 0.85rem; color: var(--muted); }
 
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 15px 30px; border-radius: 14px;
-      background: linear-gradient(135deg, #6366F1, #7C3AED);
-      color: #fff; font-weight: 700; font-size: 0.95rem;
-      text-decoration: none; border: none; cursor: pointer;
-      box-shadow: 0 6px 24px rgba(99,102,241,0.36);
-      transition: all 0.22s;
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(99,102,241,0.48); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 15px 30px; border-radius: 14px;
-      background: white; color: var(--text); font-weight: 600; font-size: 0.95rem;
-      text-decoration: none; border: 1.5px solid var(--border); transition: all 0.22s;
-    }
-    .btn-outline:hover { border-color: var(--indigo); color: var(--indigo); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99,102,241,0.1); }
+    /* Stylized portrait: a large, muted watermark on the right (inked by day, chalk by night) */
+    .portrait-watermark { position: absolute; right: -40px; top: 50%; transform: translateY(-50%); width: 540px; height: 540px; pointer-events: none; z-index: 0; opacity: var(--portrait-opacity); transition: opacity 0.6s; }
+    .portrait-watermark img { width: 100%; height: 100%; object-fit: contain; filter: var(--portrait-filter); }
 
-    /* Worked-with logo strip — credibility through brand recognition */
-    .worked-with {
-      margin-top: 56px;
-      display: flex; align-items: center; gap: 36px;
-      flex-wrap: wrap;
-    }
-    .worked-with-label {
-      font-size: 0.68rem; font-weight: 800; letter-spacing: 2.6px;
-      text-transform: uppercase; color: var(--muted);
-      flex-shrink: 0; position: relative; padding-right: 18px;
-    }
-    .worked-with-label::after {
-      content: ''; position: absolute; right: 0; top: 50%;
-      width: 1px; height: 22px; background: var(--border);
-      transform: translateY(-50%);
-    }
-    .logo-strip {
-      display: flex; align-items: center; gap: 40px;
-      flex-wrap: wrap;
-    }
-    .logo-strip img {
-      height: 26px; width: auto; max-width: 110px;
-      object-fit: contain;
-      filter: grayscale(1);
-      opacity: 0.5;
-      transition: opacity 0.25s, filter 0.25s, transform 0.25s;
-    }
+    .worked-with { position: relative; z-index: 1; max-width: 1200px; width: 100%; margin: 64px auto 0; display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
+    .worked-with-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 2.4px; text-transform: uppercase; color: var(--muted); flex-shrink: 0; position: relative; padding-right: 18px; }
+    .worked-with-label::after { content: ''; position: absolute; right: 0; top: 50%; width: 1px; height: 22px; background: var(--line); transform: translateY(-50%); }
+    .logo-strip { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .logo-strip img { height: 26px; width: auto; max-width: 110px; object-fit: contain; filter: var(--logo-filter); opacity: 0.55; transition: opacity 0.25s, filter 0.6s; }
     /* Savvy (1st) is a wide wordmark; Block (2nd) and Afterpay (3rd) need slightly more height to read */
     .logo-strip img:nth-child(1) { height: 22px; max-width: 150px; }
     .logo-strip img:nth-child(2) { height: 50px; max-width: 180px; }
     .logo-strip img:nth-child(3) { height: 66px; max-width: 240px; }
-    .logo-strip img:hover {
-      opacity: 1; filter: grayscale(0);
-      transform: translateY(-1px);
-    }
+    .logo-strip img:hover { opacity: 0.95; }
 
-    /* Stylized portrait — large subtle watermark in hero right area */
-    .portrait-watermark {
-      position: absolute; right: -40px; top: 50%;
-      transform: translateY(-50%);
-      width: 540px; height: 540px;
-      pointer-events: none; z-index: 1;
-      opacity: 0.06;
-    }
-    .portrait-watermark img {
-      width: 100%; height: 100%; object-fit: contain;
-    }
+    /* ── SECTIONS: the order follows the shift (day job first, or the apps first) ── */
+    main { display: flex; flex-direction: column; }
+    section { padding: 104px 48px; background: var(--bg); }
+    #about { order: 1; }
+    html[data-mode="day"] #experience { order: 2; background: var(--bg-alt); }
+    html[data-mode="day"] #skills { order: 3; }
+    html[data-mode="day"] #apps { order: 4; background: var(--bg-alt); }
+    html[data-mode="day"] #play { order: 5; }
+    html[data-mode="night"] #apps { order: 2; background: var(--bg-alt); }
+    html[data-mode="night"] #play { order: 3; }
+    html[data-mode="night"] #skills { order: 4; background: var(--bg-alt); }
+    html[data-mode="night"] #experience { order: 5; }
+    #contact { order: 6; }
+    html[data-mode="day"] .nav-links .nl-exp { order: 2; } html[data-mode="day"] .nav-links .nl-skills { order: 3; } html[data-mode="day"] .nav-links .nl-apps { order: 4; } html[data-mode="day"] .nav-links .nl-play { order: 5; }
+    html[data-mode="night"] .nav-links .nl-apps { order: 2; } html[data-mode="night"] .nav-links .nl-play { order: 3; } html[data-mode="night"] .nav-links .nl-skills { order: 4; } html[data-mode="night"] .nav-links .nl-exp { order: 5; }
 
-    /* ── SHARED SECTION ── */
-    section { padding: 96px 48px; }
     .container { max-width: 1200px; margin: 0 auto; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.68rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--indigo); margin-bottom: 18px; }
-    /* Studio attribution eyebrow — used for "Playpal Apps · my studio" */
-    .studio-eyebrow {
-      display: inline-flex; align-items: center; gap: 12px;
-      padding: 10px 18px 10px 10px; border-radius: 100px;
-      background: white; border: 1px solid var(--border);
-      box-shadow: 0 4px 14px rgba(9,9,11,0.04);
-      text-decoration: none;
-      margin-bottom: 18px;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    }
-    .studio-eyebrow:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(9,9,11,0.08); border-color: var(--borderStrong); }
-    .studio-eyebrow img { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
-    .studio-eyebrow span { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.2px; color: var(--text); }
-    .studio-eyebrow span b { background: linear-gradient(135deg, #1E40AF, #4F46E5, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
-    .studio-eyebrow svg { color: var(--muted); flex-shrink: 0; width: 13px; height: 13px; }
-    .eyebrow::before { content: ''; width: 28px; height: 2px; background: linear-gradient(90deg, #6366F1, #7C3AED); border-radius: 2px; display: block; }
-    .section-title { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -2.5px; line-height: 1.05; color: var(--text); margin-bottom: 16px; }
-    .section-sub { font-size: 1rem; color: var(--body); max-width: 520px; line-height: 1.8; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 18px; }
+    .eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--grad); border-radius: 2px; display: block; }
+    .section-title { font-size: clamp(2.3rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -0.045em; line-height: 1.05; color: var(--ink); margin-bottom: 16px; }
+    .section-sub { font-size: 1rem; color: var(--body); max-width: 540px; line-height: 1.8; }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag { padding: 5px 14px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; }
-    .tag-indigo { background: rgba(99,102,241,0.08); color: #4338CA; border: 1px solid rgba(99,102,241,0.18); }
-    .tag-green  { background: rgba(16,185,129,0.08); color: #047857; border: 1px solid rgba(16,185,129,0.18); }
-    .tag-plain  { background: var(--surface); color: var(--body); border: 1px solid var(--border); }
+    .tag { padding: 5px 13px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; background: var(--chip); color: var(--body); border: 1px solid var(--line); }
+    .tag.accent { background: var(--accent-soft); color: var(--accent-ink); border-color: var(--accent-line); }
 
     /* ── ABOUT ── */
-    .about-section { background: white; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 44px; }
-    .about-card { border-radius: 28px; padding: 44px; position: relative; overflow: hidden; border: 1px solid rgba(226,232,240,0.8); transition: transform 0.28s cubic-bezier(.22,1,.36,1), box-shadow 0.28s; background: white; }
-    .about-card:hover { transform: translateY(-8px); box-shadow: 0 32px 72px rgba(99,102,241,0.1); }
-    .about-card.qa::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #6366F1, #7C3AED, #EC4899); }
-    .about-card.builder::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #10B981, #06B6D4, #6366F1); }
-    .about-card-bg { position: absolute; inset: 0; pointer-events: none; }
-    .about-card.qa .about-card-bg { background: radial-gradient(ellipse at top right, rgba(99,102,241,0.05) 0%, transparent 60%); }
-    .about-card.builder .about-card-bg { background: radial-gradient(ellipse at top right, rgba(16,185,129,0.05) 0%, transparent 60%); }
-    .about-icon { width: 60px; height: 60px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 20px; }
-    .about-card.qa .about-icon { background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(124,58,237,0.07)); }
-    .about-card.builder .about-icon { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,182,212,0.07)); }
-    .about-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .about-card p { font-size: 0.92rem; color: var(--body); line-height: 1.82; margin-bottom: 20px; }
+    .about-card { position: relative; overflow: hidden; display: flex; flex-direction: column; border-radius: 28px; padding: 40px; background: var(--card); border: 1px solid var(--card-line); transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s, background-color 0.6s, border-color 0.6s; }
+    .about-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .about-card.qa::before { background: linear-gradient(90deg, #6366F1, #7C3AED, #EC4899); }
+    .about-card.builder::before { background: linear-gradient(90deg, #F59E0B, #A78BFA, #6366F1); }
+    .about-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .about-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+    .about-icon { width: 56px; height: 56px; border-radius: 17px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); }
+    .about-card.qa .about-icon { background: rgba(99,102,241,0.1); color: #6366F1; }
+    .about-card.builder .about-icon { background: rgba(245,158,11,0.12); color: #D97706; }
+    html[data-mode="night"] .about-card.builder .about-icon { color: #FCD34D; }
+    html[data-mode="night"] .about-card.qa .about-icon { color: #A5B4FC; }
+    .about-icon svg { width: 26px; height: 26px; }
+    .on-shift { display: none; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 100px; font-size: 0.66rem; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; background: var(--accent-soft); color: var(--accent-ink); border: 1px solid var(--accent-line); }
+    .on-shift::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+    html[data-mode="day"] .about-card.qa .on-shift, html[data-mode="night"] .about-card.builder .on-shift { display: inline-flex; }
+    .about-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 14px; letter-spacing: -0.4px; color: var(--ink); }
+    .about-card p { font-size: 0.93rem; color: var(--body); line-height: 1.8; margin-bottom: 20px; }
+    .card-switch { align-self: flex-start; margin-top: 22px; display: inline-flex; align-items: center; gap: 8px; padding: 0; border: 0; background: none; font: 700 0.88rem 'Inter', system-ui, sans-serif; color: var(--accent-ink); cursor: pointer; }
+    .card-switch svg { width: 16px; height: 16px; transition: transform 0.2s; }
+    .card-switch:hover svg { transform: translateX(3px); }
 
     /* ── APPS ── */
-    .apps-section { background: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 50%, #EFF6FF 100%); }
-    .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 14px; margin-top: 44px; }
-    .app-card {
-      background: white; border: 1px solid rgba(226,232,240,0.8);
-      border-radius: 22px; padding: 28px; cursor: pointer;
-      display: flex; flex-direction: column; gap: 16px;
-      transition: transform 0.26s cubic-bezier(.22,1,.36,1), box-shadow 0.26s, border-color 0.26s;
-      position: relative; overflow: hidden;
-    }
-    .app-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #6366F1, #7C3AED, #EC4899); opacity: 0; transition: opacity 0.26s; }
-    .app-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(99,102,241,0.13); border-color: rgba(99,102,241,0.25); }
-    .app-card:hover::after { opacity: 1; }
-    .app-head { display: flex; align-items: center; gap: 14px; }
-    .app-icon-img { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 14px rgba(0,0,0,0.1); transition: transform 0.26s; }
-    .app-card:hover .app-icon-img { transform: scale(1.06); }
-    .app-name { font-weight: 800; font-size: 1rem; color: var(--text); margin-bottom: 2px; }
-    .app-cat { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
-    .app-desc { font-size: 0.875rem; color: var(--body); line-height: 1.7; flex: 1; }
-    .app-foot { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
-    .store-pill { display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 100px; font-size: 0.71rem; font-weight: 700; border: 1px solid var(--border); background: var(--surface); color: var(--body); text-decoration: none; transition: all 0.2s; }
-    .store-pill:hover { background: linear-gradient(135deg, #6366F1, #7C3AED); border-color: transparent; color: white; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
-    .store-pill svg { width: 10px; height: 10px; fill: currentColor; }
-    .store-pill.ios-only { opacity: 0.55; pointer-events: none; cursor: default; }
+    .studio-eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 9px 18px 9px 9px; border-radius: 100px; background: var(--card); border: 1px solid var(--card-line); text-decoration: none; margin-bottom: 18px; transition: transform 0.2s, border-color 0.2s; }
+    .studio-eyebrow:hover { transform: translateY(-1px); border-color: var(--accent-line); }
+    .studio-eyebrow img { width: 30px; height: 30px; object-fit: contain; flex-shrink: 0; }
+    .studio-eyebrow span { font-size: 0.92rem; font-weight: 700; color: var(--ink); }
+    .studio-eyebrow svg { color: var(--muted); width: 13px; height: 13px; }
+    .apps-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+    .js .apps-grid:not(.open) .tile.more { display: none; }
+    .tile { position: relative; display: flex; flex-direction: column; padding: 22px; border-radius: 20px; background: var(--card); border: 1px solid var(--card-line); transition: transform 0.26s cubic-bezier(.22,1,.36,1), box-shadow 0.26s, border-color 0.26s, background-color 0.6s; }
+    .tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--accent-line); }
+    .tile-head { display: flex; align-items: center; gap: 14px; }
+    .tile-icon { width: 54px; height: 54px; border-radius: 14px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .tile-name { font-size: 1rem; font-weight: 800; line-height: 1.25; color: var(--ink); }
+    .tile-name a { color: inherit; text-decoration: none; }
+    .tile-name a::after { content: ''; position: absolute; inset: 0; border-radius: 20px; }
+    .tile-name a:focus-visible { outline: none; }
+    .tile-name a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .tile-cat { font-size: 0.74rem; color: var(--muted); font-weight: 500; }
+    .tile-desc { font-size: 0.86rem; color: var(--body); line-height: 1.62; margin: 14px 0 16px; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .tile-stores { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill { display: inline-flex; align-items: center; gap: 5px; min-height: 30px; padding: 0 12px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; border: 1px solid var(--line); background: var(--chip); color: var(--body); text-decoration: none; }
+    a.pill:hover { background: var(--btn); color: var(--btn-ink); border-color: transparent; }
+    .pill svg { width: 11px; height: 11px; fill: currentColor; }
+    .pill.soon { border-style: dashed; color: var(--muted); background: transparent; }
+    .pill small { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .show-all { display: flex; align-items: center; gap: 8px; margin: 28px auto 0; min-height: 48px; padding: 0 24px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); font: 700 0.92rem 'Inter', system-ui, sans-serif; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
+    .show-all:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .show-all svg { width: 16px; height: 16px; transition: transform 0.3s; }
+    .show-all[aria-expanded="true"] svg { transform: rotate(180deg); }
+    html:not(.js) .show-all { display: none; }
 
-    /* ── EXPERIENCE — editorial ── */
-    .exp-section { background: #FAFAFA; }
-    .exp-entries { margin-top: 52px; }
-    .exp-entry {
-      display: grid; grid-template-columns: 200px 1fr;
-      gap: 56px; padding: 52px 0;
-      border-bottom: 1px solid rgba(226,232,240,0.8);
-      position: relative; overflow: hidden;
-    }
+    /* ── PLAY: one of the games, running right here ── */
+    .play-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 56px; align-items: center; }
+    .play-copy .section-sub { margin-bottom: 22px; }
+    .keys { display: grid; gap: 10px; margin-bottom: 24px; font-size: 0.86rem; color: var(--body); }
+    .keys div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .keys b { font-weight: 700; color: var(--ink); min-width: 92px; }
+    kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 7px; border-radius: 7px; background: var(--chip); border: 1px solid var(--line); border-bottom-width: 3px; font: 700 0.72rem 'JetBrains Mono', ui-monospace, monospace; color: var(--ink); }
+    .play-stores { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cabinet { position: relative; padding: 16px 16px 14px; border-radius: 30px; background: linear-gradient(180deg, #2B1240 0%, #170A28 100%); box-shadow: 0 40px 90px rgba(23,10,40,0.35), inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(0,0,0,0.4); }
+    html[data-mode="night"] .cabinet { box-shadow: 0 40px 120px rgba(248,184,0,0.12), inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.06); }
+    .cab-top { display: flex; align-items: center; justify-content: center; gap: 14px; height: 34px; margin-bottom: 12px; }
+    .bulbs { display: flex; gap: 9px; }
+    .bulbs i { width: 7px; height: 7px; border-radius: 50%; background: #F8B800; box-shadow: 0 0 8px #F8B800; animation: bulb 1.2s steps(1) infinite; }
+    .bulbs i:nth-child(even) { animation-delay: 0.6s; }
+    @keyframes bulb { 50% { opacity: 0.25; box-shadow: none; } }
+    .cab-title { font: 700 0.78rem 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.3em; color: #FFE08A; text-shadow: 0 0 12px rgba(248,184,0,0.6); white-space: nowrap; }
+    .cab-screen { position: relative; aspect-ratio: 2868 / 1320; border-radius: 14px; overflow: hidden; background: #000; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.6); }
+    .cab-screen img, .cab-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+    .cab-screen img { object-fit: cover; filter: brightness(0.62) saturate(1.05); }
+    .cab-start { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 14px; border: 2px solid #FFE08A; background: rgba(23,10,40,0.78); color: #FFE08A; font: 700 0.9rem 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; box-shadow: 0 0 30px rgba(248,184,0,0.35); white-space: nowrap; }
+    .cab-start:hover { background: #FFE08A; color: #170A28; }
+    .cab-start svg { width: 16px; height: 16px; fill: currentColor; }
+    .cab-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 0 4px; }
+    .cab-bar span { font-size: 0.74rem; color: rgba(255,240,200,0.6); }
+    .cab-fs { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(255,224,138,0.35); background: transparent; color: #FFE08A; font: 600 0.78rem 'Inter', system-ui, sans-serif; cursor: pointer; }
+    .cab-fs:hover { background: rgba(255,224,138,0.12); }
+    .cab-fs svg { width: 14px; height: 14px; }
+    .cab-screen:fullscreen { border-radius: 0; aspect-ratio: auto; }
+
+    /* ── EXPERIENCE ── */
+    .exp-entries { margin-top: 48px; }
+    .exp-entry { display: grid; grid-template-columns: 200px 1fr; gap: 56px; padding: 48px 0 96px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
     .exp-entry:first-child { padding-top: 4px; }
-    .exp-entry:last-child { border-bottom: none; padding-bottom: 52px; }
-
-    /* Logo watermark */
-    .exp-watermark {
-      position: absolute; right: 24px; bottom: 24px;
-      width: 180px; height: 60px;
-      overflow: hidden;
-      opacity: 0.09;
-      pointer-events: none; user-select: none;
-    }
-    .exp-watermark img {
-      display: block;
-      width: 100%; height: 100%;
-      object-fit: contain; object-position: right bottom;
-      filter: grayscale(1);
-    }
-
-    /* Left meta column */
+    .exp-entry:last-child { border-bottom: none; }
+    .exp-watermark { position: absolute; right: 24px; bottom: 24px; width: 220px; height: 64px; opacity: 0.1; pointer-events: none; user-select: none; }
+    .exp-watermark img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: right bottom; filter: var(--logo-filter); }
     .exp-left { position: relative; padding-left: 20px; }
-    .exp-left::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 2px; }
-    .exp-e1 .exp-left::before { background: linear-gradient(180deg, #6366F1, #7C3AED); }
-    .exp-e1 .exp-watermark { width: 220px; height: 52px; }
-    .exp-e1 { padding-bottom: 110px; }
-    .exp-e2 .exp-left::before { background: linear-gradient(180deg, #7C3AED, #EC4899); }
-    .exp-e2 .exp-watermark { width: 300px; height: 100px; }
-    .exp-e2 { padding-bottom: 120px; }
-    .exp-e3 .exp-left::before { background: linear-gradient(180deg, #06B6D4, #3B82F6); }
-    .exp-e3 .exp-watermark { width: 300px; height: 100px; }
-    .exp-e3 { padding-bottom: 120px; }
-    .exp-e4 .exp-left::before { background: linear-gradient(180deg, #F59E0B, #EF4444); }
-    .exp-e5 .exp-left::before { background: linear-gradient(180deg, #64748B, #334155); }
+    .exp-left::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 2px; background: var(--e, var(--line)); }
+    .exp-e1 { --e: linear-gradient(180deg, #6366F1, #7C3AED); }
+    .exp-e2 { --e: linear-gradient(180deg, #7C3AED, #EC4899); }
+    .exp-e3 { --e: linear-gradient(180deg, #06B6D4, #3B82F6); }
+    .exp-e4 { --e: linear-gradient(180deg, #F59E0B, #EF4444); }
+    .exp-e5 { --e: linear-gradient(180deg, #94A3B8, #475569); }
+    .exp-num { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 18px; }
+    .exp-period { display: block; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+    .exp-co { display: block; font-size: 1.02rem; font-weight: 900; letter-spacing: -0.3px; color: var(--ink); }
+    .exp-current { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 12px; padding: 4px 12px; border-radius: 100px; font-size: 0.64rem; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; background: var(--accent-soft); color: var(--accent-ink); border: 1px solid var(--accent-line); }
+    .exp-current::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+    .exp-role { font-size: 1.5rem; font-weight: 900; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 12px; line-height: 1.2; }
+    .exp-desc { font-size: 0.93rem; color: var(--body); line-height: 1.82; max-width: 640px; margin-bottom: 16px; }
+    .exp-award { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; padding: 5px 13px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; background: rgba(16,185,129,0.08); color: #047857; border: 1px solid rgba(16,185,129,0.22); }
+    html[data-mode="night"] .exp-award { color: #6EE7B7; background: rgba(16,185,129,0.1); }
+    .exp-award svg { width: 14px; height: 14px; }
 
-    .exp-num { display: block; font-size: 0.62rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
-    .exp-period { display: block; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 10px; }
-    .exp-co { display: block; font-size: 1rem; font-weight: 900; letter-spacing: -0.3px; }
-    .exp-e1 .exp-co { background: linear-gradient(135deg, #6366F1, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .exp-e2 .exp-co { background: linear-gradient(135deg, #7C3AED, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .exp-e3 .exp-co { background: linear-gradient(135deg, #06B6D4, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .exp-e4 .exp-co { color: #92400E; }
-    .exp-e5 .exp-co { color: #334155; }
+    /* ── SKILLS: two toolkits, each tool listed once ── */
+    .kits { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 44px; }
+    html[data-mode="night"] .kit-day { order: 2; }
+    .kit { border-radius: 28px; padding: 36px; background: var(--card); border: 1px solid var(--card-line); }
+    .kit-head { display: flex; align-items: center; gap: 14px; padding-bottom: 22px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+    .kit-head .about-icon { width: 46px; height: 46px; border-radius: 14px; }
+    .kit-head .about-icon svg { width: 22px; height: 22px; }
+    .kit-day .about-icon { background: rgba(245,158,11,0.12); color: #D97706; }
+    .kit-night .about-icon { background: rgba(167,139,250,0.14); color: #7C3AED; }
+    html[data-mode="night"] .kit-night .about-icon { color: #C4B5FD; }
+    html[data-mode="night"] .kit-day .about-icon { color: #FCD34D; }
+    .kit-head h3 { font-size: 1.15rem; font-weight: 800; color: var(--ink); line-height: 1.2; }
+    .kit-head p { font-size: 0.8rem; color: var(--muted); }
+    .kit dl div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .kit dl div:last-child { border-bottom: 0; padding-bottom: 0; }
+    .kit dt { font-size: 0.84rem; font-weight: 700; color: var(--ink); }
+    .kit dd { font-size: 0.86rem; color: var(--body); line-height: 1.65; }
 
-    /* Right content column */
-    .exp-current {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-bottom: 10px; padding: 4px 12px;
-      background: rgba(99,102,241,0.07); border: 1px solid rgba(99,102,241,0.2);
-      border-radius: 100px; font-size: 0.62rem; font-weight: 900;
-      color: #4338CA; letter-spacing: 2px; text-transform: uppercase;
-    }
-    .exp-current-dot { width: 5px; height: 5px; border-radius: 50%; background: #6366F1; animation: pulse 2s infinite; }
-    .exp-role { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: -0.8px; margin-bottom: 12px; line-height: 1.2; }
-    .exp-desc { font-size: 0.92rem; color: var(--body); line-height: 1.84; max-width: 640px; margin-bottom: 16px; }
-    .exp-award { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; padding: 4px 12px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; background: rgba(16,185,129,0.07); color: #047857; border: 1px solid rgba(16,185,129,0.18); }
-
-    /* ── SKILLS marquee ── */
-    .skills-section { background: white; overflow: hidden; }
-    .skills-header { margin-bottom: 48px; }
-    .marquee-row { margin-bottom: 14px; position: relative; }
-    .marquee-track { display: flex; gap: 12px; width: max-content; user-select: none; cursor: grab; }
-    .marquee-track.dragging { cursor: grabbing; }
-    .m-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 100px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; border: 1.5px solid; }
-    .m-pill.indigo { background: rgba(99,102,241,0.06); border-color: rgba(99,102,241,0.2); color: #4338CA; }
-    .m-pill.violet { background: rgba(124,58,237,0.06); border-color: rgba(124,58,237,0.2); color: #6D28D9; }
-    .m-pill.green  { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.2); color: #047857; }
-    .m-pill.cyan   { background: rgba(6,182,212,0.06); border-color: rgba(6,182,212,0.2); color: #0E7490; }
-    .m-pill.amber  { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.2); color: #B45309; }
-    .m-pill.pink   { background: rgba(236,72,153,0.06); border-color: rgba(236,72,153,0.2); color: #9D174D; }
-    .m-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.6; }
-    .skills-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 16px; margin-top: 40px; }
-    .skill-card { border-radius: 22px; padding: 32px; border: 1px solid var(--border); background: white; transition: transform 0.24s cubic-bezier(.22,1,.36,1), box-shadow 0.24s, border-color 0.24s; }
-    .skill-card:hover { transform: translateY(-5px); box-shadow: 0 18px 52px rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.22); }
-    .skill-icon-wrap { width: 52px; height: 52px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 18px; }
-    .skill-card:nth-child(1) .skill-icon-wrap { background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(124,58,237,0.06)); }
-    .skill-card:nth-child(2) .skill-icon-wrap { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,182,212,0.06)); }
-    .skill-card:nth-child(3) .skill-icon-wrap { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(239,68,68,0.06)); }
-    .skill-card:nth-child(4) .skill-icon-wrap { background: linear-gradient(135deg, rgba(6,182,212,0.1), rgba(99,102,241,0.06)); }
-    .skill-card:nth-child(5) .skill-icon-wrap { background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(124,58,237,0.06)); }
-    .skill-card:nth-child(6) .skill-icon-wrap { background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.06)); }
-    .skill-card:nth-child(7) .skill-icon-wrap { background: linear-gradient(135deg, rgba(6,182,212,0.1), rgba(16,185,129,0.06)); }
-    .skill-card:nth-child(8) .skill-icon-wrap { background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.06)); }
-    .skill-card:nth-child(9) .skill-icon-wrap { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,182,212,0.06)); }
-    .skill-card:nth-child(10) .skill-icon-wrap { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(239,68,68,0.06)); }
-    .skill-card h4 { font-weight: 800; font-size: 0.95rem; margin-bottom: 10px; color: var(--text); }
-    .skill-card p { font-size: 0.84rem; color: var(--body); line-height: 1.7; }
-
-    /* ── CONTACT — intentionally dark, the only dark section ── */
-    .contact-section { background: #09090B; text-align: center; position: relative; overflow: hidden; }
-    .contact-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 70% 70% at 30% 30%, rgba(99,102,241,0.16) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 80%, rgba(236,72,153,0.09) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 80% 20%, rgba(16,185,129,0.07) 0%, transparent 60%); }
-    .contact-section .eyebrow { color: #818CF8; justify-content: center; }
-    .contact-section .eyebrow::before { background: linear-gradient(90deg, #818CF8, #A78BFA); }
+    /* ── CONTACT ── */
+    .contact-section { background: var(--contact-bg) !important; text-align: center; position: relative; overflow: hidden; padding-top: 96px; padding-bottom: 96px; }
+    .contact-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 30% 20%, rgba(99,102,241,0.18) 0%, transparent 60%), radial-gradient(ellipse 55% 60% at 75% 85%, rgba(236,72,153,0.1) 0%, transparent 60%); }
+    html[data-mode="night"] .contact-section::before { background: radial-gradient(ellipse 60% 70% at 30% 20%, rgba(245,185,74,0.12) 0%, transparent 60%), radial-gradient(ellipse 55% 60% at 75% 85%, rgba(167,139,250,0.12) 0%, transparent 60%); }
+    .contact-section .container { position: relative; }
+    .contact-section .eyebrow { color: #A5B4FC; justify-content: center; }
+    html[data-mode="night"] .contact-section .eyebrow { color: #FCD34D; }
     .contact-section .section-title { color: #F8FAFC; }
-    .contact-section .section-sub { color: rgba(248,250,252,0.55); margin: 0 auto; }
-    .contact-card {
-      max-width: 580px; margin: 40px auto 0;
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 32px; padding: 44px 40px;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
-      position: relative; overflow: hidden;
-      backdrop-filter: blur(20px);
-    }
-    .contact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #6366F1, #7C3AED, #EC4899, #10B981); }
-    .contact-card p { font-size: 1rem; color: rgba(248,250,252,0.62); line-height: 1.85; margin-bottom: 28px; }
-    .contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .contact-btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 0; width: 160px; border-radius: 14px; font-size: 0.9rem; font-weight: 700; text-decoration: none; transition: all 0.22s; border: 1px solid rgba(255,255,255,0.12); color: rgba(248,250,252,0.8); background: rgba(255,255,255,0.07); }
-    .contact-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); color: white; }
-    .contact-btn svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.8; }
-    .contact-btn.primary { background: linear-gradient(135deg, #6366F1, #7C3AED); border-color: transparent; color: white; box-shadow: 0 8px 24px rgba(99,102,241,0.4); }
-    .contact-btn.primary svg { opacity: 1; }
-    .contact-btn.primary:hover { box-shadow: 0 12px 36px rgba(99,102,241,0.55); transform: translateY(-3px); }
+    .contact-section .section-sub { color: rgba(248,250,252,0.68); margin: 0 auto; }
+    .contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+    .contact-btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 52px; width: 170px; border-radius: 14px; font-size: 0.92rem; font-weight: 700; text-decoration: none; transition: transform 0.22s, background-color 0.2s; border: 1px solid rgba(255,255,255,0.14); color: #F1F5F9; background: rgba(255,255,255,0.06); }
+    .contact-btn:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+    .contact-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .contact-btn.primary { background: var(--btn); color: var(--btn-ink); border-color: transparent; box-shadow: 0 8px 24px var(--btn-glow); }
+    .contact-note { margin-top: 26px; font-size: 0.82rem; color: rgba(248,250,252,0.5); }
 
     /* ── FOOTER ── */
-    footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; background: white; }
+    footer { border-top: 1px solid var(--line); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; background: var(--bg); }
     footer p { font-size: 0.82rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--indigo); }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent-ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .stars i, .bulbs i, .now-dot, .on-shift::before, .exp-current::before { animation: none; }
+      body.js-ready .reveal { transition: none; }
+    }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1080px) {
+      .nav-links .nl-about, .nav-links .nl-skills { display: none; }
+    }
     @media (max-width: 960px) {
-      nav { padding: 0 20px; }
-      .nav-links li:not(:last-child) { display: none; }
-      .hero { padding: 64px 20px 0; }
-      .hero-inner { padding: 56px 0; text-align: center; }
-      .portrait-watermark { width: 280px; height: 280px; right: -40px; top: 30%; opacity: 0.05; }
-      .hero-ctas { justify-content: center; }
-      .hero-desc { margin: 0 auto 40px; }
-      .hero-role { justify-content: center; }
-      .worked-with { gap: 20px; margin-top: 40px; flex-direction: column; align-items: flex-start; }
+      nav { padding: 0 16px; gap: 10px; }
+      .nav-links { display: none; }
+      .nav-right { margin-left: auto; gap: 8px; }
+      .mode button { padding: 0 10px; }
+      .hero { padding: 92px 20px 40px; min-height: 0; }
+      .hero-inner { text-align: center; }
+      .portrait-watermark { width: 280px; height: 280px; right: -40px; top: 30%; }
+      .hero-desc { margin: 0 auto 28px; }
+      .hero-ctas, .hero-switch { justify-content: center; }
+      .hero-switch { flex-direction: column; gap: 10px; }
+      .worked-with { gap: 20px; margin-top: 48px; flex-direction: column; align-items: center; }
       .worked-with-label { padding-right: 0; }
       .worked-with-label::after { display: none; }
-      .logo-strip {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 28px 36px;
-        align-items: center; justify-items: center;
-        width: 100%; max-width: 360px;
-      }
+      .logo-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 36px; align-items: center; justify-items: center; width: 100%; max-width: 360px; }
       .logo-strip img { height: 24px; max-width: 100%; }
-      .logo-strip img:nth-child(1) { height: 18px; max-width: 100%; }
-      .logo-strip img:nth-child(2) { height: 36px; max-width: 100%; }
-      .logo-strip img:nth-child(3) { height: 48px; max-width: 100%; }
-      section { padding: 64px 20px; }
-      .about-grid { grid-template-columns: 1fr; }
-      .exp-entry { grid-template-columns: 1fr; gap: 24px; padding-bottom: 80px; }
-      .exp-entry:last-child { padding-bottom: 80px; }
-      .exp-e2 { padding-bottom: 105px; }
-      .exp-watermark { width: 160px; height: 52px; right: 12px; bottom: 12px; }
+      .logo-strip img:nth-child(1) { height: 18px; }
+      .logo-strip img:nth-child(2) { height: 36px; }
+      .logo-strip img:nth-child(3) { height: 48px; }
+      section { padding: 72px 20px; }
+      .about-grid, .kits { grid-template-columns: 1fr; }
+      .about-card, .kit { padding: 28px 24px; }
+      .apps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .play-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+      .exp-entry { grid-template-columns: 1fr; gap: 18px; padding-bottom: 88px; }
+      .exp-watermark { width: 160px; height: 52px; right: 8px; bottom: 16px; }
       .exp-left::before { display: none; }
       .exp-left { padding-left: 0; }
       footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .nav-logo { font-size: 0.98rem; }
+      .mode button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .mode.big button span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+      .nav-cta { padding: 0 13px; }
+      .hero-name { font-size: clamp(3.4rem, 17vw, 4.4rem); }
+      .hero-role { font-size: 1rem; }
+      .btn-primary, .btn-outline { flex: 1 1 100%; justify-content: center; }
+      .apps-grid { grid-template-columns: minmax(0, 1fr); }
+      .tile { padding: 18px; }
+      .tile-desc { -webkit-line-clamp: 2; margin: 12px 0 14px; }
+      .kit dl div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+      .cabinet { padding: 10px 10px 10px; border-radius: 22px; }
+      .cab-top { height: 26px; margin-bottom: 8px; }
+      .bulbs { display: none; }
+      .cab-start { min-height: 44px; padding: 0 18px; font-size: 0.78rem; }
+      .cab-bar span { display: none; }
+      .cab-bar { justify-content: center; }
     }
   </style>
 <style id="fit-screen">
@@ -415,55 +447,65 @@ header.hero { overflow-x: clip; }
 </head>
 <body>
 
-<nav id="nav">
-  <a href="#" class="nav-logo">Naveen Raj</a>
+<nav id="nav" aria-label="Primary">
+  <a href="#top" class="nav-logo">Naveen <span>Raj</span></a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#apps">Apps</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+    <li class="nl-about" style="order:1"><a href="#about">About</a></li>
+    <li class="nl-exp"><a href="#experience">Experience</a></li>
+    <li class="nl-skills"><a href="#skills">Skills</a></li>
+    <li class="nl-apps"><a href="#apps">Apps</a></li>
+    <li class="nl-play"><a href="#play">Play</a></li>
   </ul>
+  <div class="nav-right">
+    <div class="mode" role="group" aria-label="Show the day job or the night shift"><button type="button" data-set="day" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><span>Day</span></button><button type="button" data-set="night" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg><span>Night</span></button></div>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-orb orb-1"></div>
-  <div class="hero-orb orb-2"></div>
+<header class="hero" id="top">
+  <div class="stars" aria-hidden="true"></div>
   <div class="hero-inner">
-    <div class="hero-left reveal">
-      <div class="hero-badge"><span class="badge-dot"></span> Sydney, Australia</div>
+    <div class="hero-text reveal">
+      <p class="now mono" aria-live="polite"><span class="now-dot"></span><span id="nowText">Sydney, Australia</span></p>
       <h1 class="hero-name">Naveen<span class="grad">Raj</span></h1>
-      <p class="hero-role">Head of Quality Assurance <span class="role-sep"></span> Indie App Builder <span class="role-sep"></span> <a href="https://playpalapps.github.io/" target="_blank" class="role-link">Founder, <b>Playpal Apps</b></a></p>
-      <p class="hero-desc">10+ years breaking complex systems so users don't have to. After hours, building AI-powered mobile apps that ship to real people.</p>
+      <p class="hero-role">
+        <span class="d-only">Head of Quality Assurance at <b>Savvy Loans</b></span>
+        <span class="n-only">Indie app builder · Founder of <a href="https://playpalapps.github.io/">Playpal Apps</a></span>
+      </p>
+      <p class="hero-desc">
+        <span class="d-only">10+ years breaking complex systems so users don't have to, across banking, payments, identity and lending at UBank, Afterpay, Cash App and now Savvy Loans.</span>
+        <span class="n-only">After hours I design, build and ship iOS and Android apps on my own, with AI tools at my side. <span data-count>27</span> apps and games so far, <span data-live>26</span> of them live in the stores.</span>
+      </p>
       <div class="hero-ctas">
-        <a href="#apps" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-          View My Apps
-        </a>
-        <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
+        <a href="#experience" class="btn-primary d-only"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>See my experience</a>
+        <a href="#apps" class="btn-primary n-only"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>See the apps</a>
+        <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" rel="noopener" class="btn-outline d-only"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a href="#play" class="btn-outline n-only"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play Circus Arcade</a>
       </div>
-      <div class="worked-with">
-        <span class="worked-with-label">Worked with</span>
-        <div class="logo-strip">
-          <img src="assets/savvyloans.png" alt="Savvy Loans">
-          <img src="assets/block.png" alt="Block · Cash App">
-          <img src="assets/afterpay.png" alt="Afterpay">
-          <img src="assets/ubank.svg" alt="UBank">
-          <img src="../assets/infosys-480.webp" alt="Infosys">
-        </div>
+      <div class="hero-switch">
+        <div class="mode big" role="group" aria-label="Show the day job or the night shift"><button type="button" data-set="day" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><span>Day job</span></button><button type="button" data-set="night" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg><span>Night shift</span></button></div>
+        <p>Same person, two shifts. Flip it.</p>
       </div>
     </div>
-    <!-- Stylized portrait watermark — subtle background presence -->
-    <div class="portrait-watermark"><img src="assets/naveen-portrait.png" alt=""></div>
   </div>
-</section>
+  <div class="portrait-watermark" aria-hidden="true"><img src="assets/naveen-portrait-640.webp" alt="" width="640" height="640" decoding="async"></div>
+  <div class="worked-with reveal">
+    <span class="worked-with-label">Worked with</span>
+    <div class="logo-strip">
+      <img src="assets/savvyloans.png" alt="Savvy Loans">
+      <img src="assets/block.png" alt="Block · Cash App">
+      <img src="assets/afterpay.png" alt="Afterpay">
+      <img src="assets/ubank.svg" alt="UBank">
+      <img src="../assets/infosys-480.webp" alt="Infosys">
+    </div>
+  </div>
+</header>
+
+<main>
 
 <!-- ABOUT -->
-<section id="about" class="about-section">
+<section id="about">
   <div class="container">
     <div class="reveal">
       <div class="eyebrow">About</div>
@@ -471,356 +513,294 @@ header.hero { overflow-x: clip; }
       <p class="section-sub">Pessimist with a launchpad.</p>
     </div>
     <div class="about-grid">
-      <div class="about-card qa reveal" style="transition-delay:0.06s;">
-        <div class="about-card-bg"></div>
-        <div class="about-icon">🛡️</div>
+      <div class="about-card qa reveal">
+        <div class="about-top">
+          <div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8l7.5 3v5.6c0 4.6-3.1 8.4-7.5 9.8-4.4-1.4-7.5-5.2-7.5-9.8V5.8z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></svg></div>
+          <span class="on-shift">On shift</span>
+        </div>
         <h3>Head of QA</h3>
-        <p>Head of Quality Assurance at Savvy Loans, leading quality across the lending platform. Previously Lead Quality Engineer at Block (Cash App), owning end-to-end quality strategy for the Trust &amp; Risk domain.</p>
+        <p>Head of Quality Assurance at Savvy Loans, leading quality across the lending platform. Previously Senior QA Automation Lead at Block (Cash App), owning end-to-end quality strategy for the Trust &amp; Risk domain.</p>
         <div class="tags">
-          <span class="tag tag-indigo">Savvy Loans</span><span class="tag tag-indigo">Cash App</span><span class="tag tag-indigo">Afterpay</span><span class="tag tag-indigo">UBank</span><span class="tag tag-indigo">Infosys</span>
+          <span class="tag accent">Savvy Loans</span><span class="tag accent">Cash App</span><span class="tag accent">Afterpay</span><span class="tag accent">UBank</span><span class="tag accent">Infosys</span>
         </div>
+        <button type="button" class="card-switch n-only" data-set="day">See the day job <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
-      <div class="about-card builder reveal" style="transition-delay:0.12s;">
-        <div class="about-card-bg"></div>
-        <div class="about-icon">🚀</div>
-        <h3>Indie App Builder</h3>
-        <p>Using AI tools — Cursor, Claude — to design, build, and ship iOS & Android apps completely solo. 20+ apps and games live across the App Store and Google Play, spanning utilities, wellness, productivity, and play.</p>
-        <div class="tags">
-          <span class="tag tag-green">SwiftUI</span><span class="tag tag-green">Flutter</span><span class="tag tag-green">React</span><span class="tag tag-green">Unity</span><span class="tag tag-green">AI-Assisted</span>
+      <div class="about-card builder reveal" style="transition-delay:0.08s;">
+        <div class="about-top">
+          <div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></div>
+          <span class="on-shift">On shift</span>
         </div>
+        <h3>Indie App Builder</h3>
+        <p>Designing, building and shipping iOS and Android apps completely solo, with AI tools like Cursor and Claude. <span data-count>27</span> apps and games so far, across utilities, wellness, productivity and play.</p>
+        <div class="tags">
+          <span class="tag accent">SwiftUI</span><span class="tag accent">Flutter</span><span class="tag accent">React</span><span class="tag accent">Unity</span><span class="tag accent">AI-assisted</span>
+        </div>
+        <button type="button" class="card-switch d-only" data-set="night">See the night shift <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
   </div>
 </section>
 
 <!-- APPS -->
-<section id="apps" class="apps-section">
+<section id="apps">
   <div class="container">
     <div class="reveal">
-      <a class="studio-eyebrow" href="https://playpalapps.github.io/" target="_blank" aria-label="Visit Playpal Apps">
-        <img src="assets/playpal-logo-192.webp" alt="Playpal Apps logo" width="28" height="28">
-        <span>Playpal <b>Apps</b> · my studio</span>
+      <a class="studio-eyebrow" href="https://playpalapps.github.io/" target="_blank" rel="noopener" aria-label="Visit Playpal Apps">
+        <img src="assets/playpal-logo-192.webp" alt="" width="30" height="30">
+        <span>Playpal Apps · my studio</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
       </a>
       <h2 class="section-title">Built &amp; shipped solo.</h2>
-      <p class="section-sub">Every app designed, developed, and launched independently using AI-assisted engineering.</p>
+      <p class="section-sub">Every app designed, developed and launched on my own, using AI-assisted engineering.</p>
     </div>
-    <div class="apps-grid">
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/AstroOrbit/'">
-        <div class="app-head"><img class="app-icon-img" src="../icons/astroorbit.webp" alt="Astro Orbit" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Astro Orbit</div><div class="app-cat">Game · Arcade</div></div></div>
-        <p class="app-desc">Defy gravity. Hop between orbital rings and dodge cosmic obstacles in this fast-paced space arcade game.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
+    <div class="apps-grid" id="appsGrid">
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/palettely.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Palettely/">Palettely</a></h3><p class="tile-cat">Creativity · Colour</p></div></div>
+        <p class="tile-desc">Pull a colour palette from any photo, build moodboards, and export wallpapers that feel unmistakably yours.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" rel="noopener" aria-label="Palettely on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" rel="noopener" aria-label="Palettely on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/utilify.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/UtilifyApp/">Utilify</a></h3><p class="tile-cat">Utilities · Toolkit</p></div></div>
+        <p class="tile-desc">45 everyday tools in one clean app: unit converter, QR generator, decibel meter, JSON formatter and more, in 19 languages.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" rel="noopener" aria-label="Utilify on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" rel="noopener" aria-label="Utilify on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/canwasa.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/canwasa/">Canwasa</a></h3><p class="tile-cat">Creativity · Wallpapers</p></div></div>
+        <p class="tile-desc">Generate striking 4K abstract wallpapers in a tap, made right on your device. No account, no uploads.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" rel="noopener" aria-label="Canwasa on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.canwasa.canwasa" target="_blank" rel="noopener" aria-label="Canwasa on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/nightbloom.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/NightBloom/">Night Bloom</a></h3><p class="tile-cat">Wellness · Sleep</p></div></div>
+        <p class="tile-desc">Sleep sounds you can mix, guided breathing and bedtime stories to help you wind down, sleep deeper and wake up restored.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" rel="noopener" aria-label="Night Bloom on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" rel="noopener" aria-label="Night Bloom on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/tooltrunk.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/ToolTrunk/">ToolTrunk</a></h3><p class="tile-cat">Utilities · Instruments</p></div></div>
+        <p class="tile-desc">A spirit level, compass, sound meter, flashlight, ruler and protractor in one crafted app. On-device, no logins.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/us/app/tooltrunk/id6770023691" target="_blank" rel="noopener" aria-label="ToolTrunk on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.tooltrunk.app" target="_blank" rel="noopener" aria-label="ToolTrunk on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/hydropanda.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/HydroPanda/">Hydro Panda</a></h3><p class="tile-cat">Wellness · Hydration</p></div></div>
+        <p class="tile-desc">The cutest water tracker. A panda-shaped glass fills as you drink, with gentle reminders, streaks and milestones.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/us/app/hydro-panda-water-tracker/id6767715315" target="_blank" rel="noopener" aria-label="Hydro Panda on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.naveenmercedes.hydra" target="_blank" rel="noopener" aria-label="Hydro Panda on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/paperlens.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/PaperLens/">PaperLens</a></h3><p class="tile-cat">Productivity · Documents</p></div></div>
+        <p class="tile-desc">Scan documents, pull out text, translate, sign and redact PDFs, all on your device. Nothing goes to the cloud.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" rel="noopener" aria-label="PaperLens on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" rel="noopener" aria-label="PaperLens on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/timezoneconnect.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/TimezoneConnect/">Time Zone Connect</a></h3><p class="tile-cat">Productivity · Time zones</p></div></div>
+        <p class="tile-desc">See every city's time live, spot who is in work hours, and get meeting slots ranked by overlap across your team.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" rel="noopener" aria-label="Time Zone Connect on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.timezoneconnect" target="_blank" rel="noopener" aria-label="Time Zone Connect on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal">
+        <div class="tile-head"><img class="tile-icon" src="../icons/qito.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Qito/">Qito</a></h3><p class="tile-cat">Utilities · QR</p></div></div>
+        <p class="tile-desc">A QR studio for codes worth keeping: 25+ hand-crafted styles, art QR, wallpaper export and batch generation. Works offline.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" rel="noopener" aria-label="Qito on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" rel="noopener" aria-label="Qito on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/twistandturnquest.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/TwistAndTurnQuest/">Twist and Turn Quest</a></h3><p class="tile-cat">Arcade · Tilt maze</p></div></div>
+        <p class="tile-desc">Tilt your phone to roll a ball through 3D mazes. Eight modes, from endless Quest and Survival to PRISM round mazes and a Daily Challenge.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/twist-and-turn-quest/id6738853553" target="_blank" rel="noopener" aria-label="Twist and Turn Quest on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.twistandturnquest" target="_blank" rel="noopener" aria-label="Twist and Turn Quest on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/astroorbit.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/AstroOrbit/">Astro Orbit</a></h3><p class="tile-cat">Arcade · Space</p></div></div>
+        <p class="tile-desc">Tap to hop between orbital rings, dodge obstacles and chase your best score across the cosmos. Quick, gravity-defying runs.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" rel="noopener" aria-label="Astro Orbit on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.astroorbit" target="_blank" rel="noopener" aria-label="Astro Orbit on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/mergerise.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/MergeRise/">MergeRise</a></h3><p class="tile-cat">Puzzle · Merge</p></div></div>
+        <p class="tile-desc">A number-merge puzzle with soul. Combine tiles, set off chain reactions and rise from settlement to skyline across four worlds.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" rel="noopener" aria-label="MergeRise on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" rel="noopener" aria-label="MergeRise on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/fuzzypop.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/FuzzyPop/">Fuzzy Pop</a></h3><p class="tile-cat">Kids · Mini-games</p></div></div>
+        <p class="tile-desc">Seven bright, gentle mini-games for kids and families in one app. No sign-up needed, and every game plays offline.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" rel="noopener" aria-label="Fuzzy Pop on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" rel="noopener" aria-label="Fuzzy Pop on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/inkline.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Inkline/">Inkline</a></h3><p class="tile-cat">Puzzle · Meditative</p></div></div>
+        <p class="tile-desc">Untangle knots drawn in sumi-e ink on washi paper. 648 forms across six scrolls, with no timer, no score and no ads.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/inkline-sumi-e-knot-puzzle/id6770247544" target="_blank" rel="noopener" aria-label="Inkline on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><a class="pill" href="https://play.google.com/store/apps/details?id=app.naveen.inkline" target="_blank" rel="noopener" aria-label="Inkline on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/pomma.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Pomma/">Pomma</a></h3><p class="tile-cat">Productivity · Focus</p></div></div>
+        <p class="tile-desc">A quiet Pomodoro timer for deep work. Short sprints, real breaks, tasks and streaks, all kept on your device.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.pomma.app" target="_blank" rel="noopener" aria-label="Pomma on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/postela.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Postela/">Postela</a></h3><p class="tile-cat">Creativity · Marketing</p></div></div>
+        <p class="tile-desc">Turn a product photo into a polished post, story or flyer, and build App Store and Google Play screenshot sets.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.postela.app" target="_blank" rel="noopener" aria-label="Postela on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/nota.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Nota/">Nota</a></h3><p class="tile-cat">Productivity · Notes</p></div></div>
+        <p class="tile-desc">Notes, checklists, sketches and photos with folders, tags, reminders and locked notes. Everything stays on your phone.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.nota" target="_blank" rel="noopener" aria-label="Nota on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/fidgety.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Fidgety/">Fidgety</a></h3><p class="tile-cat">Entertainment · Fidget toys</p></div></div>
+        <p class="tile-desc">Twelve tactile fidget toys with haptics you can feel: bubble wrap, a spinner, a stress blob, a zen sand garden and more.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.fidgety" target="_blank" rel="noopener" aria-label="Fidgety on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/tinywins.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/TinyWins/">Tiny Wins</a></h3><p class="tile-cat">Wellness · Journal</p></div></div>
+        <p class="tile-desc">A calm, private journal for the small things that went right. Log a win in two seconds, with streaks that forgive an off day.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.tinywins" target="_blank" rel="noopener" aria-label="Tiny Wins on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/dailystreak.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/DailyStreak/">DailyStreak</a></h3><p class="tile-cat">Productivity · Habits</p></div></div>
+        <p class="tile-desc">A clean, private habit tracker. One tap a day to check in, with a six-month heatmap for every habit.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.dailystreak" target="_blank" rel="noopener" aria-label="DailyStreak on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/pippet.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Pippet/">Pippet</a></h3><p class="tile-cat">Arcade · Dynamic Island</p></div></div>
+        <p class="tile-desc">An iPhone arcade game where the Dynamic Island becomes a living creature you defend from a cosmic invasion. Fully offline.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/app/pippet/id6768132230" target="_blank" rel="noopener" aria-label="Pippet on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><span class="pill soon">iPhone only</span></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/bloomblocks.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/BloomBlocks/">Bloom Blocks</a></h3><p class="tile-cat">Puzzle · Blocks</p></div></div>
+        <p class="tile-desc">Place curved petals on a flower of five rings, twist the rings to line them up, and grow your bloom. A new Daily Bloom every day.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.bloomblocks.puzzle" target="_blank" rel="noopener" aria-label="Bloom Blocks on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/circusarcade.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/CircusArcade/">Circus Arcade</a></h3><p class="tile-cat">Arcade · Retro</p></div></div>
+        <p class="tile-desc">Pixel-art circus action: a lion through flaming hoops, the tightrope, trampolines and trapeze. Five acts, four modes, plays offline.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.circusarcade" target="_blank" rel="noopener" aria-label="Circus Arcade on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/colourwise.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/ColourWise/">Colour Wise</a></h3><p class="tile-cat">Kids · Colours</p></div></div>
+        <p class="tile-desc">Ten gentle colour games for toddlers, with every question spoken aloud and Pip the chameleon cheering along. No ads.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/app/colour-wise/id6736894056" target="_blank" rel="noopener" aria-label="Colour Wise on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play <small>soon</small></span></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/fruithugs.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/FruitHugs/">Fruit Hugs</a></h3><p class="tile-cat">Kids · Merge</p></div></div>
+        <p class="tile-desc">A calm merge game for ages 4 to 8: drop fruit friends in a bowl and watch matching pairs hug. Six friend sets, eight scenes, Zen mode.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.fruithugs" target="_blank" rel="noopener" aria-label="Fruit Hugs on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/veggiepop.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/VeggiePop/">Veggie Pop</a></h3><p class="tile-cat">Kids · Merge</p></div></div>
+        <p class="tile-desc">Veggie friends for ages 4 to 8. Drop them into a glass jar, match two the same and watch them hug into a bigger friend. No ads.</p>
+        <div class="tile-stores"><a class="pill" href="https://apps.apple.com/au/app/veggie-pop/id6818113833" target="_blank" rel="noopener" aria-label="Veggie Pop on the App Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play <small>soon</small></span></div>
+      </article>
+      <article class="tile reveal more">
+        <div class="tile-head"><img class="tile-icon" src="../icons/gramam.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><div><h3 class="tile-name"><a href="https://playpalapps.github.io/Gramam/">Gramam</a></h3><p class="tile-cat">Simulation · Cozy life</p></div></div>
+        <p class="tile-desc">A cozy life in an old Kerala village. Come home to the tharavad as the village keeps real time and the Malayalam calendar. Onam 2027.</p>
+        <div class="tile-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play <small>soon</small></span></div>
+      </article>
+    </div>
+    <button type="button" class="show-all" id="showAll" aria-expanded="false" aria-controls="appsGrid"><span>Show all <span data-count>27</span> apps and games</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+  </div>
+</section>
+
+<!-- PLAY -->
+<section id="play">
+  <div class="container play-grid">
+    <div class="play-copy reveal">
+      <div class="eyebrow">Play</div>
+      <h2 class="section-title">Play Circus Arcade right here.</h2>
+      <p class="section-sub">One of my games, running in your browser on the same code that ships in the app. Life under the big top, from the human cannonball and the high dive to a lion through flaming hoops and the trapeze.</p>
+      <div class="keys">
+        <div><b>Keyboard</b><kbd>Space</kbd><kbd>↑</kbd> jump · <kbd>←</kbd> stop · <kbd>→</kbd> + <kbd>Shift</kbd> sprint · <kbd>Esc</kbd> pause</div>
+        <div><b>Touch</b>Tap the right half to jump, hold for a higher jump</div>
       </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/canwasa/'" style="transition-delay:0.04s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/canwasa.webp" alt="Canwasa" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Canwasa</div><div class="app-cat">Creativity · Wallpapers</div></div></div>
-        <p class="app-desc">Generate stunning 4K abstract wallpapers instantly on your device. No cloud, no uploads, no tracking.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.canwasa.canwasa" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
+      <div class="play-stores"><span class="pill soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store <small>soon</small></span><a class="pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.circusarcade" target="_blank" rel="noopener" aria-label="Circus Arcade on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a></div>
+    </div>
+    <div class="cabinet reveal">
+      <div class="cab-top"><span class="bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="cab-title">CIRCUS ARCADE</span><span class="bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="cab-screen" id="cabScreen">
+        <img src="../showcase/circusarcade-1.webp" alt="Circus Arcade: Pip is fired from a cannon over the big top" width="960" height="442" loading="lazy" decoding="async">
+        <button type="button" class="cab-start" id="cabStart"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Insert coin</button>
       </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/FuzzyPop/'" style="transition-delay:0.08s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/fuzzypop.webp" alt="Fuzzy Pop" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Fuzzy Pop</div><div class="app-cat">Game · Family</div></div></div>
-        <p class="app-desc">A child-safe, colourful bubble-popping game. Simple mechanics, satisfying to play — no ads interrupting the fun.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.fuzzypop.game" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/MergeRise/'" style="transition-delay:0.12s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/mergerise.webp" alt="MergeRise" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">MergeRise</div><div class="app-cat">Game · Puzzle</div></div></div>
-        <p class="app-desc">A 2048-style merge puzzle with civilisation building. Merge tiles to raise cities, unlock skins, and conquer missions.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.naveen.merge_rise" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/NightBloom/'" style="transition-delay:0.16s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/nightbloom.webp" alt="Night Bloom" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Night Bloom</div><div class="app-cat">Health &amp; Wellness</div></div></div>
-        <p class="app-desc">Sleep sounds, breathing exercises, and relaxation tools to help you wind down, sleep deeper, and wake up restored.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.nightbloom.night_bloom" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Palettely/'" style="transition-delay:0.2s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/palettely.webp" alt="Palettely" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Palettely</div><div class="app-cat">Creativity · Design</div></div></div>
-        <p class="app-desc">Extract colour palettes from any photo. Build moodboards. Export art that's unmistakably yours.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.colourlens.colour_mood_lens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/PaperLens/'" style="transition-delay:0.24s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/paperlens.webp" alt="PaperLens" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">PaperLens</div><div class="app-cat">Productivity · Documents</div></div></div>
-        <p class="app-desc">Scan, extract, translate, sign, and protect your documents — powered by on-device AI. Zero cloud. Zero tracking.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.paperlens" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Qito/'" style="transition-delay:0.28s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/qito.webp" alt="Qito" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Qito</div><div class="app-cat">Utilities · QR &amp; Barcode</div></div></div>
-        <p class="app-desc">Fast QR code and barcode scanner. Generate, scan, and manage codes — clean interface, no bloat.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.qito" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/TimezoneConnect/'" style="transition-delay:0.32s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/timezoneconnect.webp" alt="Time Zone Connect" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Time Zone Connect</div><div class="app-cat">Productivity</div></div></div>
-        <p class="app-desc">Compare global times, find overlapping work hours, and plan the perfect meeting across any time zone.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.timezoneconnect" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/UtilifyApp/'" style="transition-delay:0.36s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/utilify.webp" alt="Utilify" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Utilify</div><div class="app-cat">Utilities</div></div></div>
-        <p class="app-desc">Your everyday tech toolkit. 18 tools, 2 platforms, 1 app — everything you need in one clean interface.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.utilify" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/HydroPanda/'" style="transition-delay:0.40s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/hydropanda.webp" alt="Hydro Panda" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Hydro Panda</div><div class="app-cat">Health &amp; Wellness</div></div></div>
-        <p class="app-desc">The cutest water tracker. Gentle reminders, a panda-shaped vessel that fills as you drink, streaks &amp; milestones.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/us/app/hydro-panda-water-tracker/id6767715315" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.naveenmercedes.hydra" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/ToolTrunk/'" style="transition-delay:0.44s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/tooltrunk.webp" alt="ToolTrunk" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">ToolTrunk</div><div class="app-cat">Utilities · Instruments</div></div></div>
-        <p class="app-desc">Six precision instruments — spirit level, compass, sound meter, flashlight, on-screen ruler, protractor — all on-device.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/us/app/tooltrunk/id6770023691" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.tooltrunk.app" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Inkline/'" style="transition-delay:0.48s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/inkline.webp" alt="Inkline" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Inkline</div><div class="app-cat">Game · Meditative Puzzle</div></div></div>
-        <p class="app-desc">A meditative knot-untangling puzzle, drawn in sumi-e ink on washi paper. 648 procedurally generated forms across six scrolls.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/inkline-sumi-e-knot-puzzle/id6770247544" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=app.naveen.inkline" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Pippet/'" style="transition-delay:0.52s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/pippet.webp" alt="Pippet" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Pippet</div><div class="app-cat">Game · iPhone Arcade</div></div></div>
-        <p class="app-desc">A native iPhone arcade game where the Dynamic Island becomes a living creature you defend from cosmic invasion.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/app/pippet/id6768132230" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <span class="store-pill ios-only" aria-disabled="true">iPhone only</span>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/TwistAndTurnQuest/'" style="transition-delay:0.56s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/twistandturnquest.webp" alt="Twist and Turn Quest" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Twist and Turn Quest</div><div class="app-cat">Game · Tilt Maze</div></div></div>
-        <p class="app-desc">A tilt-controlled 3D maze game. Roll a marble through eight quest modes across atmospheric worlds — including PRISM round mazes and a worldwide Daily Challenge.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/twist-and-turn-quest/id6738853553" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.twistandturnquest" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/ColourWise/'" style="transition-delay:0.60s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/colourwise.webp" alt="Colour Wise" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Colour Wise</div><div class="app-cat">Game · Kids Colours</div></div></div>
-        <p class="app-desc">Ten gentle colour games for toddlers and little kids, with every question spoken aloud by Pip the chameleon. No ads, plays offline.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/app/colour-wise/id6736894056" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play · soon</span>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/FruitHugs/'" style="transition-delay:0.60s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/fruithugs.webp" alt="Fruit Hugs" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Fruit Hugs</div><div class="app-cat">Game · Kids Merge</div></div></div>
-        <p class="app-desc">A calm, cuddly merge game for ages 4 to 8. Drop fruit friends into a bowl, match two the same, watch them hug and grow. No ads, plays offline.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.fruithugs" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/VeggiePop/'" style="transition-delay:0.64s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/veggiepop.webp" alt="Veggie Pop" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Veggie Pop</div><div class="app-cat">Game · Kids Merge</div></div></div>
-        <p class="app-desc">A calm, cuddly merge game for ages 4 to 8. Drop veggies into a jar, match two the same, watch them hug into a bigger friend. No ads, plays offline.</p>
-        <div class="app-foot">
-          <a class="store-pill" href="https://apps.apple.com/au/app/veggie-pop/id6818113833" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play · soon</span>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/CircusArcade/'" style="transition-delay:0.68s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/circusarcade.webp" alt="Circus Arcade" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Circus Arcade</div><div class="app-cat">Game · Retro Arcade</div></div></div>
-        <p class="app-desc">A retro pixel-art big-top show in five acts: flaming hoops on a lion, the tightrope, trampolines, horseback and the trapeze. Chiptune music, three difficulty levels, four modes. No ads, plays offline.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.circusarcade" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Pomma/'" style="transition-delay:0.72s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/pomma.webp" alt="Pomma" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Pomma</div><div class="app-cat">Productivity · Focus</div></div></div>
-        <p class="app-desc">A quiet Pomodoro timer for one thing at a time. Focus in short sprints, plan tasks, watch your streak grow. No accounts; everything stays on your device.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.pomma.app" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Postela/'" style="transition-delay:0.78s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/postela.webp" alt="Postela" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Postela</div><div class="app-cat">Design · Marketing</div></div></div>
-        <p class="app-desc">Turn a product photo into a polished Instagram post, story, flyer or slide, and build App Store and Google Play screenshot sets. Free to use, no ads, no account.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.postela.app" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Fidgety/'" style="transition-delay:0.82s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/fidgety.webp" alt="Fidgety" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Fidgety</div><div class="app-cat">Entertainment · Fidget Toys</div></div></div>
-        <p class="app-desc">Twelve tactile fidget toys with haptics you can feel: bubble wrap, a spinner, a stress blob, a zen sand garden and more. No ads, no account.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.fidgety" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/TinyWins/'" style="transition-delay:0.86s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/tinywins.webp" alt="Tiny Wins" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Tiny Wins</div><div class="app-cat">Wellbeing · Journal</div></div></div>
-        <p class="app-desc">A calm, private journal for the small things you did today. Log a win in seconds, keep a streak that forgives an off day, and check in on your mood. Free, no ads, no account.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.tinywins" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/BloomBlocks/'" style="transition-delay:0.90s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/bloomblocks.webp" alt="Bloom Blocks" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Bloom Blocks</div><div class="app-cat">Game · Puzzle</div></div></div>
-        <p class="app-desc">A calm puzzle that grows in circles. Place curved petals on a flower of rings, twist the rings and grow your bloom. A new Daily Bloom arrives every day.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.bloomblocks.puzzle" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/DailyStreak/'" style="transition-delay:0.94s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/dailystreak.webp" alt="DailyStreak" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">DailyStreak</div><div class="app-cat">App · Habit tracker</div></div></div>
-        <p class="app-desc">A clean, private habit tracker built around streaks. One tap a day to check in, with a heatmap of your progress on every habit. No ads, no account.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.dailystreak" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Nota/'" style="transition-delay:0.98s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/nota.webp" alt="Nota" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Nota</div><div class="app-cat">App · Notes</div></div></div>
-        <p class="app-desc">Notes, checklists and sketches that stay on your phone, with folders, tags, search, reminders and locked notes. No account, no cloud. Free, no ads.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <a class="store-pill" href="https://play.google.com/store/apps/details?id=com.playpalapps.nota" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play</a>
-        </div>
-      </div>
-      <div class="app-card reveal" onclick="location.href='https://playpalapps.github.io/Gramam/'" style="transition-delay:1.02s;">
-        <div class="app-head"><img class="app-icon-img" src="../icons/gramam.webp" alt="Gramam" width="48" height="48" loading="lazy" decoding="async"><div><div class="app-name">Gramam</div><div class="app-cat">Game · Cozy life sim</div></div></div>
-        <p class="app-desc">A cozy life game set in a Kerala village between 1950 and 1980. You come home to the family tharavad, and the village keeps real time and the Malayalam calendar. No ads, no account, fully offline.</p>
-        <div class="app-foot">
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store · soon</span>
-          <span class="store-pill ios-only" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.724l-2.302 1.33-2.544-2.544 2.544-2.544zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>Google Play · soon</span>
-        </div>
+      <div class="cab-bar">
+        <span>Loads only when you press play · about 200 KB</span>
+        <button type="button" class="cab-fs" id="cabFs" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>Full screen</button>
       </div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience" class="exp-section">
+<section id="experience">
   <div class="container">
     <div class="reveal">
       <div class="eyebrow">Experience</div>
       <h2 class="section-title">10+ years in fintech quality.</h2>
-      <p class="section-sub">From Infosys to Savvy Loans — building quality frameworks that protect millions of users.</p>
+      <p class="section-sub">From Infosys to Savvy Loans, building quality frameworks for apps that millions of people trust with their money.</p>
     </div>
     <div class="exp-entries">
 
-      <!-- Savvy Loans — current, newest first -->
       <div class="exp-entry exp-e1 reveal">
-        <div class="exp-watermark"><img src="assets/savvyloans.png" alt="Savvy Loans"></div>
+        <div class="exp-watermark"><img src="assets/savvyloans.png" alt=""></div>
         <div class="exp-left">
-          <span class="exp-num">01</span>
-          <span class="exp-period">2026 – Present</span>
+          <span class="exp-num mono">01</span>
+          <span class="exp-period mono">2026 – Present</span>
           <span class="exp-co">Savvy Loans</span>
         </div>
         <div class="exp-right">
-          <div class="exp-current"><span class="exp-current-dot"></span>Current Role</div>
+          <div class="exp-current">Current role</div>
           <h3 class="exp-role">Head of Quality Assurance</h3>
-          <p class="exp-desc">Leading quality assurance across the lending platform — owning quality strategy, test automation, and release confidence for compliance-sensitive loan origination and servicing flows, and building the QA function as the platform scales.</p>
-          <div class="tags">
-            <span class="tag tag-indigo">Quality Strategy</span><span class="tag tag-indigo">Team Leadership</span><span class="tag tag-indigo">Lending</span><span class="tag tag-indigo">Automation</span><span class="tag tag-indigo">AI-Assisted</span>
-          </div>
+          <p class="exp-desc">Leading quality assurance across the lending platform: owning quality strategy, test automation and release confidence for compliance-sensitive loan origination and servicing flows, and building the QA function as the platform scales.</p>
+          <div class="tags"><span class="tag">Quality Strategy</span><span class="tag">Team Leadership</span><span class="tag">Lending</span><span class="tag">Automation</span><span class="tag">AI-Assisted</span></div>
         </div>
       </div>
 
-      <!-- Block -->
       <div class="exp-entry exp-e2 reveal">
-        <div class="exp-watermark"><img src="assets/block.png" alt="Block"></div>
+        <div class="exp-watermark"><img src="assets/block.png" alt=""></div>
         <div class="exp-left">
-          <span class="exp-num">02</span>
-          <span class="exp-period">2022 – 2026</span>
+          <span class="exp-num mono">02</span>
+          <span class="exp-period mono">2022 – 2026</span>
           <span class="exp-co">Block · Cash App</span>
         </div>
         <div class="exp-right">
           <h3 class="exp-role">Senior QA Automation Lead</h3>
-          <p class="exp-desc">Lead QA for the Trust & Risk domain. Owned end-to-end quality strategy across identity verification, login migration, disputes, Borrow Loans, and account recovery. QA DRI for compliance-sensitive launches. Used AI tools to scale automation coverage across critical financial flows.</p>
-          <div class="tags">
-            <span class="tag tag-plain">XCUITest</span><span class="tag tag-plain">Espresso</span><span class="tag tag-plain">IDV</span><span class="tag tag-plain">Compliance</span><span class="tag tag-plain">AI-Assisted</span>
-          </div>
+          <p class="exp-desc">Lead QA for the Trust &amp; Risk domain. Owned end-to-end quality strategy across identity verification, login migration, disputes, Borrow Loans and account recovery. QA DRI for compliance-sensitive launches. Used AI tools to scale automation coverage across critical financial flows.</p>
+          <div class="tags"><span class="tag">XCUITest</span><span class="tag">Espresso</span><span class="tag">IDV</span><span class="tag">Compliance</span><span class="tag">AI-Assisted</span></div>
         </div>
       </div>
 
-      <!-- Afterpay -->
       <div class="exp-entry exp-e3 reveal">
-        <div class="exp-watermark"><img src="assets/afterpay.png" alt="Afterpay"></div>
+        <div class="exp-watermark"><img src="assets/afterpay.png" alt=""></div>
         <div class="exp-left">
-          <span class="exp-num">03</span>
-          <span class="exp-period">2021 – 2022</span>
+          <span class="exp-num mono">03</span>
+          <span class="exp-period mono">2021 – 2022</span>
           <span class="exp-co">Afterpay · Block</span>
         </div>
         <div class="exp-right">
           <h3 class="exp-role">Senior Quality Engineer</h3>
           <p class="exp-desc">Built the mobile automation framework from scratch for Money by Afterpay. Led quality initiatives across payments and risk systems during the Block acquisition transition.</p>
-          <div class="tags">
-            <span class="tag tag-plain">Mobile Automation</span><span class="tag tag-plain">Payments</span><span class="tag tag-plain">Framework Design</span>
-          </div>
+          <div class="tags"><span class="tag">Mobile Automation</span><span class="tag">Payments</span><span class="tag">Framework Design</span></div>
         </div>
       </div>
 
-      <!-- UBank -->
       <div class="exp-entry exp-e4 reveal">
-        <div class="exp-watermark"><img src="assets/ubank.svg" alt="UBank"></div>
+        <div class="exp-watermark"><img src="assets/ubank.svg" alt=""></div>
         <div class="exp-left">
-          <span class="exp-num">04</span>
-          <span class="exp-period">2017 – 2021</span>
+          <span class="exp-num mono">04</span>
+          <span class="exp-period mono">2017 – 2021</span>
           <span class="exp-co">UBank</span>
         </div>
         <div class="exp-right">
           <h3 class="exp-role">Senior Automation Engineer</h3>
-          <p class="exp-desc">Primary automation owner for iOS and Android native banking apps. Designed mobile automation framework using Appium. Led strategic transition to Perfecto. Received Individual Achievement Award for Automation Excellence.</p>
-          <div class="tags">
-            <span class="tag tag-plain">Appium</span><span class="tag tag-plain">Perfecto</span><span class="tag tag-plain">iOS &amp; Android</span>
-          </div>
-          <div class="exp-award">🏆 Individual Achievement Award for Automation Excellence</div>
+          <p class="exp-desc">Primary automation owner for the iOS and Android native banking apps. Designed the mobile automation framework using Appium and led the strategic move to Perfecto.</p>
+          <div class="tags"><span class="tag">Appium</span><span class="tag">Perfecto</span><span class="tag">iOS &amp; Android</span></div>
+          <div class="exp-award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.6 13.4L7.5 21l4.5-2.5 4.5 2.5-1.1-7.6"/></svg>Individual Achievement Award for Automation Excellence</div>
         </div>
       </div>
 
-      <!-- Infosys -->
       <div class="exp-entry exp-e5 reveal">
-        <div class="exp-watermark"><img src="../assets/infosys-480.webp" alt="Infosys"></div>
+        <div class="exp-watermark"><img src="../assets/infosys-480.webp" alt=""></div>
         <div class="exp-left">
-          <span class="exp-num">05</span>
-          <span class="exp-period">2015 – 2017</span>
+          <span class="exp-num mono">05</span>
+          <span class="exp-period mono">2015 – 2017</span>
           <span class="exp-co">Infosys</span>
         </div>
         <div class="exp-right">
           <h3 class="exp-role">Systems Engineer</h3>
-          <p class="exp-desc">Built automation frameworks for enterprise digital platforms. Led the first-ever automation testing POC in the department, winning Abstraction's first Automation Project.</p>
-          <div class="tags">
-            <span class="tag tag-plain">Selenium</span><span class="tag tag-plain">Enterprise</span>
-          </div>
-          <div class="exp-award">🏆 Abstraction's First Automation Project</div>
+          <p class="exp-desc">Built automation frameworks for enterprise digital platforms. Led the department's first automation testing proof of concept.</p>
+          <div class="tags"><span class="tag">Selenium</span><span class="tag">Enterprise</span></div>
+          <div class="exp-award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.6 13.4L7.5 21l4.5-2.5 4.5 2.5-1.1-7.6"/></svg>Abstraction's First Automation Project</div>
         </div>
       </div>
 
@@ -829,85 +809,66 @@ header.hero { overflow-x: clip; }
 </section>
 
 <!-- SKILLS -->
-<section id="skills" class="skills-section">
-  <div class="container">
-    <div class="skills-header reveal">
-      <div class="eyebrow">Skills</div>
-      <h2 class="section-title">What I bring.</h2>
-      <p class="section-sub">A decade of quality engineering expertise across mobile, API, and cloud platforms.</p>
-    </div>
-  </div>
-  <div class="marquee-row">
-    <div class="marquee-track">
-      <span class="m-pill indigo"><span class="m-pill-dot"></span>XCUITest</span><span class="m-pill violet"><span class="m-pill-dot"></span>Espresso</span><span class="m-pill green"><span class="m-pill-dot"></span>Appium</span><span class="m-pill cyan"><span class="m-pill-dot"></span>REST Assured</span><span class="m-pill amber"><span class="m-pill-dot"></span>Jenkins</span><span class="m-pill pink"><span class="m-pill-dot"></span>SwiftUI</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Perfecto</span><span class="m-pill violet"><span class="m-pill-dot"></span>BrowserStack</span><span class="m-pill green"><span class="m-pill-dot"></span>TestRail</span><span class="m-pill cyan"><span class="m-pill-dot"></span>Postman</span><span class="m-pill amber"><span class="m-pill-dot"></span>JIRA</span><span class="m-pill pink"><span class="m-pill-dot"></span>Flutter</span>
-      <span class="m-pill indigo"><span class="m-pill-dot"></span>XCUITest</span><span class="m-pill violet"><span class="m-pill-dot"></span>Espresso</span><span class="m-pill green"><span class="m-pill-dot"></span>Appium</span><span class="m-pill cyan"><span class="m-pill-dot"></span>REST Assured</span><span class="m-pill amber"><span class="m-pill-dot"></span>Jenkins</span><span class="m-pill pink"><span class="m-pill-dot"></span>SwiftUI</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Perfecto</span><span class="m-pill violet"><span class="m-pill-dot"></span>BrowserStack</span><span class="m-pill green"><span class="m-pill-dot"></span>TestRail</span><span class="m-pill cyan"><span class="m-pill-dot"></span>Postman</span><span class="m-pill amber"><span class="m-pill-dot"></span>JIRA</span><span class="m-pill pink"><span class="m-pill-dot"></span>Flutter</span>
-    </div>
-  </div>
-  <div class="marquee-row" style="margin-top:14px;">
-    <div class="marquee-track">
-      <span class="m-pill green"><span class="m-pill-dot"></span>Risk-Based Testing</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Java</span><span class="m-pill pink"><span class="m-pill-dot"></span>AI-Assisted Dev</span><span class="m-pill violet"><span class="m-pill-dot"></span>Cursor / Claude</span><span class="m-pill amber"><span class="m-pill-dot"></span>LaunchDarkly</span><span class="m-pill cyan"><span class="m-pill-dot"></span>JMeter</span><span class="m-pill green"><span class="m-pill-dot"></span>Compliance QA</span><span class="m-pill indigo"><span class="m-pill-dot"></span>JavaScript</span><span class="m-pill violet"><span class="m-pill-dot"></span>SOAP UI</span><span class="m-pill pink"><span class="m-pill-dot"></span>Sauce Labs</span><span class="m-pill amber"><span class="m-pill-dot"></span>HP QC ALM</span><span class="m-pill cyan"><span class="m-pill-dot"></span>QTest</span>
-      <span class="m-pill green"><span class="m-pill-dot"></span>Risk-Based Testing</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Java</span><span class="m-pill pink"><span class="m-pill-dot"></span>AI-Assisted Dev</span><span class="m-pill violet"><span class="m-pill-dot"></span>Cursor / Claude</span><span class="m-pill amber"><span class="m-pill-dot"></span>LaunchDarkly</span><span class="m-pill cyan"><span class="m-pill-dot"></span>JMeter</span><span class="m-pill green"><span class="m-pill-dot"></span>Compliance QA</span><span class="m-pill indigo"><span class="m-pill-dot"></span>JavaScript</span><span class="m-pill violet"><span class="m-pill-dot"></span>SOAP UI</span><span class="m-pill pink"><span class="m-pill-dot"></span>Sauce Labs</span><span class="m-pill amber"><span class="m-pill-dot"></span>HP QC ALM</span><span class="m-pill cyan"><span class="m-pill-dot"></span>QTest</span>
-    </div>
-  </div>
-  <div class="marquee-row" style="margin-top:14px;">
-    <div class="marquee-track">
-      <span class="m-pill violet"><span class="m-pill-dot"></span>SwiftUI</span><span class="m-pill cyan"><span class="m-pill-dot"></span>Flutter</span><span class="m-pill indigo"><span class="m-pill-dot"></span>React</span><span class="m-pill amber"><span class="m-pill-dot"></span>Unity</span><span class="m-pill green"><span class="m-pill-dot"></span>App Store Connect</span><span class="m-pill pink"><span class="m-pill-dot"></span>Play Console</span><span class="m-pill violet"><span class="m-pill-dot"></span>TestFlight</span><span class="m-pill cyan"><span class="m-pill-dot"></span>App Signing</span><span class="m-pill amber"><span class="m-pill-dot"></span>ASO</span><span class="m-pill green"><span class="m-pill-dot"></span>Selenium</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Playwright</span><span class="m-pill pink"><span class="m-pill-dot"></span>Custom Reporting</span>
-      <span class="m-pill violet"><span class="m-pill-dot"></span>SwiftUI</span><span class="m-pill cyan"><span class="m-pill-dot"></span>Flutter</span><span class="m-pill indigo"><span class="m-pill-dot"></span>React</span><span class="m-pill amber"><span class="m-pill-dot"></span>Unity</span><span class="m-pill green"><span class="m-pill-dot"></span>App Store Connect</span><span class="m-pill pink"><span class="m-pill-dot"></span>Play Console</span><span class="m-pill violet"><span class="m-pill-dot"></span>TestFlight</span><span class="m-pill cyan"><span class="m-pill-dot"></span>App Signing</span><span class="m-pill amber"><span class="m-pill-dot"></span>ASO</span><span class="m-pill green"><span class="m-pill-dot"></span>Selenium</span><span class="m-pill indigo"><span class="m-pill-dot"></span>Playwright</span><span class="m-pill pink"><span class="m-pill-dot"></span>Custom Reporting</span>
-    </div>
-  </div>
-  <div class="container">
-    <div class="skills-cards">
-      <div class="skill-card reveal"><div class="skill-icon-wrap">📱</div><h4>Mobile Automation</h4><p>XCUITest, Espresso, Appium, Perfecto, BrowserStack, Sauce Labs, Seetest</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.05s;"><div class="skill-icon-wrap">🤖</div><h4>AI-Assisted Engineering</h4><p>Cursor, Claude — automation scripting, framework acceleration, debugging, test generation</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.1s;"><div class="skill-icon-wrap">🔗</div><h4>API &amp; Backend Testing</h4><p>REST Assured, Postman, SOAP UI, JMeter — API validation across critical financial flows</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.15s;"><div class="skill-icon-wrap">🚀</div><h4>CI/CD &amp; Tooling</h4><p>Jenkins, TestRail, JIRA, QTest, HP QC ALM, LaunchDarkly</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.2s;"><div class="skill-icon-wrap">🛡️</div><h4>Quality Strategy</h4><p>Risk-based testing, release governance, compliance validation, regression optimisation</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.25s;"><div class="skill-icon-wrap">💻</div><h4>Programming</h4><p>Java, JavaScript, SwiftUI — test frameworks and production-grade mobile apps</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.3s;"><div class="skill-icon-wrap">🌐</div><h4>Web Automation</h4><p>Selenium, Playwright, custom reporting frameworks for end-to-end web test coverage</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.35s;"><div class="skill-icon-wrap">📱</div><h4>App Development</h4><p>SwiftUI, Flutter, React, Unity, Godot, HTML5 &amp; Capacitor — building and shipping production apps to App Store &amp; Google Play solo</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.4s;"><div class="skill-icon-wrap">🚀</div><h4>App Publishing &amp; ASO</h4><p>App Store Connect, Google Play Console, TestFlight, release tracks, app signing, metadata &amp; keyword optimisation</p></div>
-      <div class="skill-card reveal" style="transition-delay:0.45s;"><div class="skill-icon-wrap">🤖</div><h4>AI-Accelerated Dev</h4><p>Cursor, Claude — prompt engineering for code generation, solo full-stack delivery from idea to shipped product</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT — intentionally the only dark section -->
-<section id="contact" class="contact-section">
+<section id="skills">
   <div class="container">
     <div class="reveal">
-      <div class="eyebrow" style="justify-content:center;">Contact</div>
-      <h2 class="section-title">Let's connect.</h2>
-      <p class="section-sub">Open to senior QA, quality engineering leadership, and AI-assisted engineering conversations.</p>
+      <div class="eyebrow">Skills</div>
+      <h2 class="section-title">Two toolkits.</h2>
+      <p class="section-sub">One for testing software, one for shipping it.</p>
     </div>
-    <div class="contact-card reveal">
-      <p>Based in Sydney, Australia. 10+ years in fintech quality engineering. Currently building AI-powered apps and always open to meaningful conversations.</p>
-      <div class="contact-btns">
-        <a href="mailto:naveenmercedes@gmail.com" class="contact-btn primary">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          Email
-        </a>
-        <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" class="contact-btn">
-          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
+    <div class="kits">
+      <div class="kit kit-day reveal">
+        <div class="kit-head"><div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg></div><div><h3>Day job</h3><p>Quality engineering</p></div></div>
+        <dl>
+          <div><dt>Mobile automation</dt><dd>XCUITest, Espresso, Appium, Perfecto, BrowserStack, Sauce Labs, SeeTest</dd></div>
+          <div><dt>Web &amp; API testing</dt><dd>Selenium, Playwright, REST Assured, Postman, SOAP UI, JMeter</dd></div>
+          <div><dt>Quality strategy</dt><dd>Risk-based testing, release governance, compliance validation, regression optimisation</dd></div>
+          <div><dt>Tooling &amp; CI</dt><dd>Jenkins, LaunchDarkly, TestRail, JIRA, qTest, HP QC ALM, custom reporting</dd></div>
+          <div><dt>AI in testing</dt><dd>Cursor and Claude for automation scripts, test generation, framework work and debugging</dd></div>
+          <div><dt>Languages</dt><dd>Java, JavaScript</dd></div>
+        </dl>
+      </div>
+      <div class="kit kit-night reveal" style="transition-delay:0.08s;">
+        <div class="kit-head"><div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg></div><div><h3>Night shift</h3><p>Building apps</p></div></div>
+        <dl>
+          <div><dt>App development</dt><dd>SwiftUI, Flutter, React, Unity, Godot, HTML5 and Capacitor</dd></div>
+          <div><dt>Publishing</dt><dd>App Store Connect, Google Play Console, TestFlight, release tracks, app signing</dd></div>
+          <div><dt>Store growth</dt><dd>Store listings, screenshots, keyword optimisation (ASO)</dd></div>
+          <div><dt>AI-assisted building</dt><dd>Cursor and Claude, from the first idea to a shipped app, solo</dd></div>
+          <div><dt>Languages</dt><dd>Swift, Dart, TypeScript, JavaScript</dd></div>
+        </dl>
       </div>
     </div>
   </div>
 </section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container reveal">
+    <div class="eyebrow">Contact</div>
+    <h2 class="section-title">Let's connect.</h2>
+    <p class="section-sub">Open to senior QA, quality engineering leadership and AI-assisted engineering conversations. Based in Sydney, Australia.</p>
+    <div class="contact-btns">
+      <a href="mailto:naveenmercedes@gmail.com" class="contact-btn primary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+      <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" rel="noopener" class="contact-btn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer>
   <p>© 2026 Naveen Raj · Sydney, Australia</p>
   <div class="footer-links">
     <a href="https://playpalapps.github.io/">Playpal Apps</a>
     <a href="mailto:naveenmercedes@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" rel="noopener">LinkedIn</a>
   </div>
 </footer>
 
 <script>
-  // Nav scroll shadow
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+  const root = document.documentElement, $ = id => document.getElementById(id);
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Scroll reveal
   document.body.classList.add('js-ready');
@@ -921,64 +882,97 @@ header.hero { overflow-x: clip; }
   checkReveal();
   setTimeout(checkReveal, 80);
 
-  // Interactive marquee — JS-driven so drag/touch works while auto-flow continues
-  function initMarquee(track, speed, reverse) {
-    let pos = 0;
-    let dragging = false, startX = 0, startPos = 0;
+  // Counts come from the tiles, so they stay right as apps are added
+  const tiles = document.querySelectorAll('#appsGrid .tile');
+  const live = [...tiles].filter(t => t.querySelector('a.pill')).length;
+  document.querySelectorAll('[data-count]').forEach(el => el.textContent = tiles.length);
+  document.querySelectorAll('[data-live]').forEach(el => el.textContent = live);
 
-    function step() {
-      const half = track.scrollWidth / 2;
-      // Guard: wait until track is rendered and has real width
-      if (half < 10) { requestAnimationFrame(step); return; }
+  // Show all apps
+  $('showAll').addEventListener('click', e => {
+    const btn = e.currentTarget, grid = $('appsGrid'), open = !grid.classList.contains('open');
+    grid.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.firstElementChild.innerHTML = open ? 'Show fewer' : 'Show all <span data-count>' + tiles.length + '</span> apps and games';
+    if (!open) grid.scrollIntoView({ block: 'start' });
+    checkReveal();
+  });
 
-      if (!dragging) {
-        pos += reverse ? speed : -speed;
-        // Seamless loop: shift by half-width instead of jumping to 0/-half
-        // This avoids the double-trigger bug when pos lands exactly on boundary
-        if (pos <= -half) pos += half;
-        if (pos > 0)      pos -= half;
-      }
-      track.style.transform = 'translateX(' + pos + 'px)';
-      requestAnimationFrame(step);
-    }
-
-    // Set initial position after first layout paint so scrollWidth is accurate
-    requestAnimationFrame(() => {
-      pos = reverse ? -(track.scrollWidth / 2) : 0;
-      requestAnimationFrame(step);
-    });
-
-    function getX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
-
-    function onStart(e) {
-      dragging = true;
-      startX = getX(e);
-      startPos = pos;
-      track.classList.add('dragging');
-    }
-    function onMove(e) {
-      if (!dragging) return;
-      pos = startPos + (getX(e) - startX);
-    }
-    function onEnd() {
-      dragging = false;
-      track.classList.remove('dragging');
-    }
-
-    track.addEventListener('mousedown', onStart);
-    track.addEventListener('touchstart', onStart, { passive: true });
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('touchmove', onMove, { passive: true });
-    window.addEventListener('mouseup', onEnd);
-    window.addEventListener('touchend', onEnd);
-
-    requestAnimationFrame(step);
+  // The time in Sydney, and what that probably means
+  const fmt = new Intl.DateTimeFormat('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Australia/Sydney' });
+  const parts = new Intl.DateTimeFormat('en-AU', { hour: 'numeric', hourCycle: 'h23', weekday: 'long', timeZone: 'Australia/Sydney' });
+  function tellTime() {
+    const now = new Date();
+    const p = Object.fromEntries(parts.formatToParts(now).map(x => [x.type, x.value]));
+    const h = +p.hour, weekend = p.weekday === 'Saturday' || p.weekday === 'Sunday';
+    const t = fmt.format(now).replace(/\s?([ap])\.?m\.?/i, ' $1m');
+    let line;
+    if (h < 6) line = `${t} in Sydney. Naveen's probably asleep. Probably.`;
+    else if (h < 19 && !weekend) line = `${t} in Sydney. Naveen's probably at the day job.`;
+    else if (h < 19) line = `${t} on a ${p.weekday} in Sydney. Naveen's probably building something.`;
+    else line = `${t} in Sydney. Naveen's probably building an app.`;
+    $('nowText').textContent = line;
   }
+  tellTime();
+  setInterval(tellTime, 20000);
 
-  const rows = document.querySelectorAll('.marquee-row');
-  if (rows[0]) initMarquee(rows[0].querySelector('.marquee-track'), 0.22, false);
-  if (rows[1]) initMarquee(rows[1].querySelector('.marquee-track'), 0.28, true);
-  if (rows[2]) initMarquee(rows[2].querySelector('.marquee-track'), 0.18, false);
+  // Stars for the night sky
+  (function () {
+    const sky = document.querySelector('.stars'), n = window.innerWidth < 700 ? 45 : 90;
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement('i'), size = Math.random() < 0.15 ? 3 : Math.random() < 0.5 ? 2 : 1;
+      s.style.cssText = `left:${(Math.random() * 100).toFixed(2)}%;top:${(Math.random() * 100).toFixed(2)}%;--s:${size}px;--o:${(0.35 + Math.random() * 0.6).toFixed(2)};--t:${(2 + Math.random() * 3).toFixed(1)}s;--d:${(-Math.random() * 5).toFixed(1)}s`;
+      sky.appendChild(s);
+    }
+  })();
+
+  // The switch: flips the theme and the running order, and keeps your place on the page
+  const switches = document.querySelectorAll('[data-set]');
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  function sync() {
+    const m = root.dataset.mode;
+    document.querySelectorAll('.mode button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.set === m)));
+    themeColor.content = m === 'night' ? '#0A0A16' : '#FFFFFF';
+  }
+  function setMode(m) {
+    if (m === root.dataset.mode) return;
+    const navH = 64, blocks = [...document.querySelectorAll('header.hero, main > section')];
+    // the block under the nav right now (the sections are reordered visually, so not the first in the source)
+    const anchor = blocks.find(b => { const r = b.getBoundingClientRect(); return r.top <= navH + 8 && r.bottom > navH + 8; });
+    const before = anchor ? anchor.getBoundingClientRect().top : 0;
+    root.dataset.mode = m;
+    try { sessionStorage.setItem('nr-mode', m); } catch (e) {}
+    sync();
+    if (anchor && window.scrollY > 0) window.scrollTo({ top: window.scrollY + anchor.getBoundingClientRect().top - before, behavior: 'instant' });
+    if (!still) { root.classList.remove('swapping'); void root.offsetWidth; root.classList.add('swapping'); setTimeout(() => root.classList.remove('swapping'), 1000); }
+    checkReveal();
+  }
+  switches.forEach(b => b.addEventListener('click', () => setMode(b.dataset.set)));
+  sync();
+
+  // Circus Arcade: the game loads only when someone presses play
+  (function () {
+    const screen = $('cabScreen'), start = $('cabStart'), fs = $('cabFs');
+    const canFull = !!(screen.requestFullscreen || screen.webkitRequestFullscreen);
+    start.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = '../CircusArcade/play/';
+      f.title = 'Circus Arcade, playable';
+      f.allow = 'autoplay; fullscreen; gamepad';
+      f.setAttribute('allowfullscreen', '');
+      screen.replaceChildren(f);
+      f.addEventListener('load', () => f.focus());
+      f.focus();
+      if (canFull) fs.hidden = false;
+    });
+    fs.addEventListener('click', () => {
+      const go = screen.requestFullscreen || screen.webkitRequestFullscreen;
+      Promise.resolve(go.call(screen)).then(() => {
+        if (screen.ownerDocument.defaultView.screen.orientation && screen.ownerDocument.defaultView.screen.orientation.lock) screen.ownerDocument.defaultView.screen.orientation.lock('landscape').catch(() => {});
+        const f = screen.querySelector('iframe'); if (f) f.focus();
+      }).catch(() => {});
+    });
+  })();
 </script>
 </body>
 </html>

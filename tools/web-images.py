@@ -39,6 +39,7 @@ jobs += [
     ('assets/infosys.png', 'assets/infosys-480.webp', 480),
     ('assets/afterpay.png', 'assets/afterpay-480.webp', 480),
     ('naveen-raj/assets/playpal-logo.png', 'naveen-raj/assets/playpal-logo-192.webp', 192),
+    ('naveen-raj/assets/naveen-portrait.png', 'naveen-raj/assets/naveen-portrait-640.webp', 640),  # the silhouette in the sun and moon
 ]
 # Real screens for the homepage "In action" showcase: showcase/<slug>-<n>.webp, 540 px wide
 # (960 px for the landscape games in LANDSCAPE, whose cards also carry data-orient="landscape").
