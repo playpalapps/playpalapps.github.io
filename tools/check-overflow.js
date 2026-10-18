@@ -3,6 +3,8 @@
 //   BASE=http://localhost:8765 CHROME_PATH=/path/to/chrome node tools/check-overflow.js
 // Measures against the device width, not window.innerWidth: mobile Chrome zooms out to fit
 // overflowing content (so innerWidth grows), while iPhone Safari keeps zoom 1 and lets the page pan.
+// Every font is swapped for Verdana, which is wider than the fonts on any phone: a Mac's narrow
+// fonts let tight menus pass here and then fail on Linux (and Android). WIDE_FONTS=0 turns this off.
 const { execSync } = require('child_process');
 const puppeteer = require('puppeteer-core');
 const BASE = process.env.BASE || 'http://localhost:8765';
@@ -15,6 +17,13 @@ const DECOR = /^(canvas|div\.(stars|stars2|stars3|asteroid-bg|atmosphere-branch|
 (async () => {
   const browser = await puppeteer.launch({ executablePath: process.env.CHROME_PATH, headless: 'new', args: ['--no-sandbox', '--hide-scrollbars'] });
   const page = await browser.newPage();
+  if (process.env.WIDE_FONTS !== '0') {
+    await page.evaluateOnNewDocument(() => document.addEventListener('DOMContentLoaded', () => {
+      const s = document.createElement('style');
+      s.textContent = '*{font-family:Verdana,"DejaVu Sans",sans-serif !important}';
+      document.head.appendChild(s);
+    }));
+  }
   const failures = [];
   for (const path of pages) {
     for (const w of WIDTHS) {
