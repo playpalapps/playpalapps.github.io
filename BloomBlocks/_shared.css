@@ -85,4 +85,9 @@ footer a:hover { color: var(--text); }
   .brand img { width: 32px; height: 32px; border-radius: 8px; }
   .nav-links { gap: 0; }
   .nav-links a { font-size: 13.5px; padding: 7px 8px; }
+  /* wider phone fonts: the links scroll inside the bar instead of widening the page */
+  .brand { flex-shrink: 0; }
+  .nav-links { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
 }
+@media (max-width: 380px) { .brand span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } }

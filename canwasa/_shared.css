@@ -92,3 +92,6 @@ footer.site{position:relative;z-index:1;padding:30px 0 46px;margin-top:20px;bord
 footer.site .row{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;font-size:15px;color:var(--ink-3)}
 footer.site a{border:0;color:var(--ink-2);font-weight:600}
 footer.site a:hover{color:var(--ink)}
+/* Phones with wider fonts (Android): the brand name steps aside and the links scroll inside the bar instead of widening the page */
+@media (max-width:560px){nav.site .brand{flex-shrink:0}nav.site .links{min-width:0;overflow-x:auto;scrollbar-width:none}nav.site .links::-webkit-scrollbar{display:none}}
+@media (max-width:440px){nav.site .brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}

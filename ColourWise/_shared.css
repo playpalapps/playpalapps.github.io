@@ -97,3 +97,6 @@ footer.rich .legal{margin-top:26px;padding-top:16px;border-top:1.5px solid rgba(
 @media (max-width:640px){footer.rich .grid{grid-template-columns:1fr 1fr}footer.rich .grid>:first-child{grid-column:1/-1}}
 
 .contact{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:10px}
+/* Phones with wider fonts (Android): the brand name steps aside and the links scroll inside the bar instead of widening the page */
+@media (max-width:560px){nav.site .brand{flex-shrink:0}nav.site .links{min-width:0;overflow-x:auto;scrollbar-width:none}nav.site .links::-webkit-scrollbar{display:none}}
+@media (max-width:440px){nav.site .brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}

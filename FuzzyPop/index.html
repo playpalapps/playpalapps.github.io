@@ -218,8 +218,8 @@
        STATS — cheerful yellow
     ══════════════════════════════════════════ */
     .stats { background: #FFD93D; padding: 52px 5%; position: relative; }
-    .stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); text-align: center; gap: 10px; }
-    @media (max-width:580px) { .stats-inner{grid-template-columns:repeat(2,1fr)} }
+    .stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); text-align: center; gap: 10px; }
+    @media (max-width:580px) { .stats-inner{grid-template-columns:repeat(2,minmax(0,1fr))} }
     .stat { padding: 10px; }
     .stat-icon { font-size: 2rem; margin-bottom: 6px; display: block; }
     .stat-n { font-family: 'Fredoka One', cursive; font-size: 3.2rem; line-height: 1; color: #1E2A5E; display: block; margin-bottom: 4px; }

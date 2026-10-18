@@ -47,7 +47,7 @@
 .sw { display: flex; height: 22px; border-radius: 8px; overflow: hidden; }
 .sw i { flex: 1; }
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .phones { height: 470px; max-width: 420px; margin: 0 auto; width: 100%; } .phone { width: 205px; } .themes { grid-template-columns: repeat(3, 1fr); } .split { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .phones { height: 470px; max-width: 420px; margin: 0 auto; width: 100%; } .phone { width: 205px; } .themes { grid-template-columns: repeat(3, minmax(0, 1fr)); } .split { grid-template-columns: 1fr; } }
 </style>
 <style id="fit-screen">
 /* Fit the screen: nothing may push the page sideways on a phone */
@@ -56,6 +56,7 @@ body { overflow-wrap: break-word; }
 p a, li a, dd a, td a, address a, a[href^="mailto:"] { overflow-wrap: anywhere; }
 a[href^="mailto:"] { max-width: 100%; min-width: 0; }
 header.hero { overflow-x: clip; }
+@media (max-width: 420px) { .themes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 380px) {
   .brand { font-size: 14px; gap: 8px; }
   .brand img { width: 28px; height: 28px; }
@@ -65,7 +66,7 @@ header.hero { overflow-x: clip; }
 </head>
 <body>
 <header class="wrap nav">
-  <a class="brand" href="./"><img src="icon-192.png" alt="" width="40" height="40">Bloom Blocks</a>
+  <a class="brand" href="./"><img src="icon-192.png" alt="" width="40" height="40"><span>Bloom Blocks</span></a>
   <nav class="nav-links" aria-label="Pages"><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
 </header>
 <main>
