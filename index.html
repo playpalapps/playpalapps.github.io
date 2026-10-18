@@ -590,6 +590,7 @@
     .cab-fs { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(255,224,138,0.35); background: transparent; color: #FFE08A; font: 600 0.78rem 'Inter', system-ui, sans-serif; cursor: pointer; flex-shrink: 0; }
     .cab-fs:hover { background: rgba(255,224,138,0.12); }
     .cab-fs[hidden] { display: none; }
+    @media (max-width: 400px) { .bulbs { display: none; } .cabinet { padding: 10px; border-radius: 22px; } .cab-top { height: 26px; margin-bottom: 8px; } .cab-start { min-height: 44px; padding: 0 18px; font-size: 0.78rem; } }
     @media (hover: none) { .cab-keys .kb { display: none; } }
     @media (hover: hover) { .cab-keys .touch { display: none; } }
     .cab-fs svg { width: 14px; height: 14px; }
@@ -873,7 +874,7 @@
       .store-mini svg { width: 12px; height: 12px; }
       .apps-watermark { width: 380px; height: 380px; right: -60px; top: 40px; opacity: 0.05; }
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
-      .story-grid { grid-template-columns: 1fr; gap: 40px; }
+      .story-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
       .builder-inner { grid-template-columns: 1fr; gap: 40px; }
       section.std { padding: 72px 20px; }
       .contact-card { padding: 40px 24px; border-radius: 24px; }
