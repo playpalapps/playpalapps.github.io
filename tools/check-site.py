@@ -8,7 +8,8 @@ Fails (exit 1) when:
     differs in letter case from the file (GitHub Pages is case-sensitive, macOS is not);
   - an image those pages load is heavier than MAX_IMAGE_KB;
   - a homepage card has no link, no WebP icon, or a missing showcase screen;
-  - a page or anchor that an App Store or Google Play listing points to has gone.
+  - a page or anchor that an App Store or Google Play listing points to has gone;
+  - sitemap.xml misses an indexable page (python3 tools/make-sitemap.py rewrites it).
 """
 import re
 import sys
@@ -84,6 +85,16 @@ for page in subprocess.run(['git', 'ls-files', '*.html'], cwd=ROOT, capture_outp
         errors.append(f'{page}: missing <meta name="viewport" content="width=device-width, ...">')
     if 'id="fit-screen"' not in text:
         errors.append(f'{page}: missing the <style id="fit-screen"> block (copy it from any other page)')
+
+# Every indexable page is in sitemap.xml, so search engines find it (tools/make-sitemap.py writes it)
+import importlib.util
+_spec = importlib.util.spec_from_file_location('make_sitemap', ROOT / 'tools' / 'make-sitemap.py')
+make_sitemap = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(make_sitemap)
+listed = set(re.findall(r'<loc>([^<]+)</loc>', (ROOT / 'sitemap.xml').read_text())) if (ROOT / 'sitemap.xml').exists() else set()
+missing = [page for page, url in make_sitemap.indexable_pages() if url not in listed]
+if missing:
+    errors.append(f'sitemap.xml is missing {len(missing)} page(s), e.g. {missing[0]}: run python3 tools/make-sitemap.py')
 
 for page, anchors in STORE_LINKED.items():
     f = ROOT / page
