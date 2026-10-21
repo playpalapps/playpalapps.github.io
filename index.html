@@ -9,20 +9,20 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <title>Playpal Apps — Apps you'll actually love</title>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Playpal Apps", "url": "https://playpal.au/"}</script>
-  <meta name="description" content="Beautifully crafted mobile apps and games for play, work, and rest. Built solo with AI, polished by hand. Live on the App Store and Google Play.">
+  <meta name="description" content="Small, thoughtful apps and games for play, work and rest. Made in Sydney and polished until they feel right. Live on the App Store and Google Play.">
 
   <!-- Open Graph -->
   <meta property="og:type"         content="website">
   <meta property="og:url"          content="https://playpal.au/">
   <meta property="og:title"        content="Playpal Apps — Apps you'll actually love">
-  <meta property="og:description"  content="Beautifully crafted mobile apps for play, work, and rest. Built solo with AI, polished by hand.">
+  <meta property="og:description"  content="Small, thoughtful apps and games for play, work and rest. Made in Sydney and polished until they feel right.">
   <meta property="og:image"        content="https://playpal.au/og-image.jpg?v=3">
   <meta property="og:image:type"   content="image/jpeg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Playpal Apps — Apps you'll actually love">
-  <meta name="twitter:description" content="Beautifully crafted mobile apps for play, work, and rest.">
+  <meta name="twitter:description" content="Small, thoughtful apps and games for play, work and rest.">
   <meta name="twitter:image"       content="https://playpal.au/og-image.jpg?v=3">
 
   <script type="application/ld+json">
@@ -705,6 +705,16 @@
     .builder-stat-num { font-size: 1.6rem; font-weight: 900; letter-spacing: -1.2px; background: linear-gradient(135deg, var(--c2), var(--c1)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .builder-stat-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
     .builder-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+    .builder-side { display: grid; gap: 14px; min-width: 0; }
+    /* Design credit: a smaller card under the founder card */
+    .design-card { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2px 16px; padding: 18px 22px; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); color: white; text-decoration: none; transition: background-color 0.2s, border-color 0.2s, transform 0.2s; }
+    .design-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.18); transform: translateY(-2px); }
+    .design-card-label { grid-column: 1 / -1; font-size: 0.58rem; font-weight: 800; letter-spacing: 2.4px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+    .design-card-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.3px; }
+    .design-card-role { grid-column: 1; font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .design-card-link { grid-column: 2; grid-row: 2 / span 2; align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.8); white-space: nowrap; }
+    .app-card .app-credit { display: block; margin-top: 8px; font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+    footer p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     .builder-skill {
       padding: 5px 12px; border-radius: 100px; background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12); font-size: 0.74rem; font-weight: 600;
@@ -900,8 +910,8 @@
       /* Cards: icon beside the name, description and stores full width (about a third shorter) */
       .app-card, .app-card.featured {
         display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 14px; row-gap: 0;
-        grid-template-areas: "icon cat" "icon name" "desc desc" "stores stores";
-        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas: "icon cat" "icon name" "desc desc" "credit credit" "stores stores";
+        grid-template-rows: auto auto 1fr auto auto;
         align-items: end; padding: 20px;
       }
       .app-card > .app-meta { display: contents; }
@@ -910,6 +920,7 @@
       .app-card .app-name, .app-card.featured .app-name { grid-area: name; align-self: start; margin-top: 4px; font-size: 1.3rem; letter-spacing: -0.6px; }
       .app-card .app-tag-text, .app-card.featured .app-tag-text { grid-area: desc; align-self: start; margin-top: 12px; font-size: 0.9rem; }
       .app-card .app-stores, .app-card.featured .app-stores { grid-area: stores; margin-top: 16px; }
+      .app-card .app-credit { grid-area: credit; }
     }
     @media (max-width: 600px) {
       .apps-bento { grid-template-columns: 1fr; }
@@ -968,9 +979,9 @@ header.hero { overflow-x: clip; }
   </div>
 
   <div class="hero-inner">
-    <div class="hero-eyebrow"><span class="dot"></span>Live on iOS &amp; Android · Made solo</div>
+    <div class="hero-eyebrow"><span class="dot"></span>Live on iOS &amp; Android</div>
     <h1 class="hero-title">Apps you'll<br><span class="joy">actually love.</span></h1>
-    <p class="hero-sub">Beautifully crafted mobile apps and games for play, work, and rest. Designed and built with AI, polished by hand.</p>
+    <p class="hero-sub">Small, thoughtful apps and games for play, work and rest. Made in Sydney and polished until they feel right.</p>
     <div class="hero-ctas">
       <a href="#apps" class="btn btn-dark">Explore apps
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1093,6 +1104,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Creativity · Colour</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/Palettely/">Palettely</a></h3>
           <p class="app-tag-text">Pull a colour palette from any photo, build moodboards, and export wallpapers that feel unmistakably yours.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" rel="noopener" aria-label="Palettely on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1107,6 +1119,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Utilities · Toolkit</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/UtilifyApp/">Utilify</a></h3>
           <p class="app-tag-text">45 everyday tools in one clean app: unit converter, QR generator, decibel meter, JSON formatter and more, in 19 languages.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" rel="noopener" aria-label="Utilify on the App Store">
@@ -1123,6 +1136,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Creativity · Wallpapers</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/canwasa/">Canwasa</a></h3>
           <p class="app-tag-text">Generate striking 4K abstract wallpapers in a tap, made right on your device. No account, no uploads.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" rel="noopener" aria-label="Canwasa on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1137,6 +1151,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Wellness · Sleep</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/NightBloom/">Night Bloom</a></h3>
           <p class="app-tag-text">Sleep sounds you can mix, guided breathing and bedtime stories to help you wind down, sleep deeper and wake up restored.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" rel="noopener" aria-label="Night Bloom on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1179,6 +1194,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Productivity · Documents</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/PaperLens/">PaperLens</a></h3>
           <p class="app-tag-text">Scan documents, pull out text, translate, sign and redact PDFs, all on your device. Nothing goes to the cloud.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" rel="noopener" aria-label="PaperLens on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1193,6 +1209,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Productivity · Time zones</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/TimezoneConnect/">Time Zone Connect</a></h3>
           <p class="app-tag-text">See every city's time live, spot who is in work hours, and get meeting slots ranked by overlap across your team.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" rel="noopener" aria-label="Time Zone Connect on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1207,6 +1224,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Utilities · QR</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/Qito/">Qito</a></h3>
           <p class="app-tag-text">A QR studio for codes worth keeping: 25+ hand-crafted styles, art QR, wallpaper export and batch generation. Works offline.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" rel="noopener" aria-label="Qito on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1334,6 +1352,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Arcade · Space</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/AstroOrbit/">Astro Orbit</a></h3>
           <p class="app-tag-text">Tap to hop between orbital rings, dodge obstacles and chase your best score across the cosmos. Quick, gravity-defying runs.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" rel="noopener" aria-label="Astro Orbit on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1348,6 +1367,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Puzzle · Merge</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/MergeRise/">MergeRise</a></h3>
           <p class="app-tag-text">A number-merge puzzle with soul. Combine tiles, set off chain reactions and rise from settlement to skyline across four worlds.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" rel="noopener" aria-label="MergeRise on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1362,6 +1382,7 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Kids · Mini-games</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/FuzzyPop/">Fuzzy Pop</a></h3>
           <p class="app-tag-text">Seven bright, gentle mini-games for kids and families in one app. No sign-up needed, and every game plays offline.</p>
+          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" rel="noopener" aria-label="Fuzzy Pop on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1499,7 +1520,7 @@ header.hero { overflow-x: clip; }
       <div class="reveal">
         <div class="eyebrow">The Story</div>
         <h2 class="section-title">Big ideas.<br><em>Small studio.</em></h2>
-        <p class="section-sub">Playpal Apps is a tiny one-person studio in Sydney. Each app started as a small itch — a thing the world should have but didn't. AI tools turned ideas into builds; care and patience turned builds into something worth shipping.</p>
+        <p class="section-sub">Playpal Apps is a small studio in Sydney. Each app started as a small itch: a thing the world should have but didn't. Care and patience turned each one into something worth shipping.</p>
         <blockquote class="story-quote">"Make stuff that's small, useful, and joyful — then ship it."</blockquote>
       </div>
       <div class="story-play reveal" style="transition-delay:.1s;">
@@ -1526,9 +1547,9 @@ header.hero { overflow-x: clip; }
   <div class="builder-inner">
     <div class="reveal">
       <div class="eyebrow">The Builder</div>
-      <h2 class="section-title">Built solo. <em>Shipped weekly.</em></h2>
+      <h2 class="section-title">Built with care. <em>Shipped weekly.</em></h2>
       <p class="body" style="font-style:italic;font-family:'Instrument Serif',serif;font-size:1.5rem;line-height:1.4;color:rgba(255,255,255,0.85);max-width:480px;margin-bottom:14px;">"Pessimist with a launchpad."</p>
-      <p class="body">10+ years breaking complex systems so users don't have to. After hours, building AI-powered mobile apps that ship to real people. Every Playpal app — designed, coded, tested, polished, and shipped solo.</p>
+      <p class="body">10+ years breaking complex systems so users don't have to. After hours, building mobile apps that ship to real people. Every Playpal app is coded, tested and polished before it ships.</p>
       <div class="builder-cta-row">
         <a href="https://playpal.au/naveen-raj/" class="builder-cta">Meet Naveen
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1536,6 +1557,7 @@ header.hero { overflow-x: clip; }
         <a href="https://www.linkedin.com/in/naveenraj-qa-syd" target="_blank" rel="noopener" class="builder-cta outline">LinkedIn</a>
       </div>
     </div>
+    <div class="builder-side">
     <div class="builder-card reveal" style="transition-delay:.08s;">
       <div class="builder-name">Naveen Raj</div>
       <div class="builder-role">Head of Quality Assurance<br>Indie App Builder · Sydney<br>Founder, <b class="role-brand">Playpal Apps</b></div>
@@ -1551,9 +1573,16 @@ header.hero { overflow-x: clip; }
       </div>
       <div class="builder-skills">
         <span class="builder-skill">SwiftUI</span><span class="builder-skill">Flutter</span><span class="builder-skill">React</span>
-        <span class="builder-skill">Unity</span><span class="builder-skill">Cursor</span><span class="builder-skill">Claude</span>
+        <span class="builder-skill">Unity</span>
         <span class="builder-skill">QA Strategy</span><span class="builder-skill">App Store</span><span class="builder-skill">Google Play</span>
       </div>
+    </div>
+    <a class="design-card reveal" href="https://design.shivanisudhir.xyz/" target="_blank" rel="noopener" style="transition-delay:.14s;">
+      <span class="design-card-label">Design</span>
+      <span class="design-card-name">Shivani Sudhir</span>
+      <span class="design-card-role">UI/UX designer on Utilify, Night Bloom, Palettely and more</span>
+      <span class="design-card-link">Portfolio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+    </a>
     </div>
   </div>
 </section>
@@ -1575,7 +1604,7 @@ header.hero { overflow-x: clip; }
 
 <footer>
   <div class="footer-inner">
-    <p style="display:flex;align-items:center;gap:10px;"><img src="assets/logo-192.webp" alt="" width="22" height="22" loading="lazy" decoding="async" style="width:22px;height:22px;object-fit:contain;">© 2026 Playpal Apps · Made in Sydney with care.</p>
+    <p style="display:flex;align-items:center;gap:10px;"><img src="assets/logo-192.webp" alt="" width="22" height="22" loading="lazy" decoding="async" style="width:22px;height:22px;object-fit:contain;"><span>© 2026 Playpal Apps · Made in Sydney with care · Design: <a href="https://design.shivanisudhir.xyz/" target="_blank" rel="noopener">Shivani Sudhir</a></span></p>
     <div class="footer-links">
       <a href="#apps">Apps</a>
       <a href="#story">Story</a>
