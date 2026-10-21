@@ -713,7 +713,6 @@
     .design-card-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.3px; }
     .design-card-role { grid-column: 1; font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
     .design-card-link { grid-column: 2; grid-row: 2 / span 2; align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.8); white-space: nowrap; }
-    .app-card .app-credit { display: block; margin-top: 8px; font-size: 0.72rem; color: rgba(255,255,255,0.5); }
     footer p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     .builder-skill {
       padding: 5px 12px; border-radius: 100px; background: rgba(255,255,255,0.08);
@@ -910,8 +909,8 @@
       /* Cards: icon beside the name, description and stores full width (about a third shorter) */
       .app-card, .app-card.featured {
         display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 14px; row-gap: 0;
-        grid-template-areas: "icon cat" "icon name" "desc desc" "credit credit" "stores stores";
-        grid-template-rows: auto auto 1fr auto auto;
+        grid-template-areas: "icon cat" "icon name" "desc desc" "stores stores";
+        grid-template-rows: auto auto 1fr auto;
         align-items: end; padding: 20px;
       }
       .app-card > .app-meta { display: contents; }
@@ -920,7 +919,6 @@
       .app-card .app-name, .app-card.featured .app-name { grid-area: name; align-self: start; margin-top: 4px; font-size: 1.3rem; letter-spacing: -0.6px; }
       .app-card .app-tag-text, .app-card.featured .app-tag-text { grid-area: desc; align-self: start; margin-top: 12px; font-size: 0.9rem; }
       .app-card .app-stores, .app-card.featured .app-stores { grid-area: stores; margin-top: 16px; }
-      .app-card .app-credit { grid-area: credit; }
     }
     @media (max-width: 600px) {
       .apps-bento { grid-template-columns: 1fr; }
@@ -1104,7 +1102,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Creativity · Colour</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/Palettely/">Palettely</a></h3>
           <p class="app-tag-text">Pull a colour palette from any photo, build moodboards, and export wallpapers that feel unmistakably yours.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/us/app/palettely-colour-palettes/id6761299690" target="_blank" rel="noopener" aria-label="Palettely on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1119,7 +1116,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Utilities · Toolkit</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/UtilifyApp/">Utilify</a></h3>
           <p class="app-tag-text">45 everyday tools in one clean app: unit converter, QR generator, decibel meter, JSON formatter and more, in 19 languages.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/app/utilify/id6760681801" target="_blank" rel="noopener" aria-label="Utilify on the App Store">
@@ -1136,7 +1132,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Creativity · Wallpapers</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/canwasa/">Canwasa</a></h3>
           <p class="app-tag-text">Generate striking 4K abstract wallpapers in a tap, made right on your device. No account, no uploads.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/canwasa-wallpaper-art/id6761281882" target="_blank" rel="noopener" aria-label="Canwasa on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1151,7 +1146,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Wellness · Sleep</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/NightBloom/">Night Bloom</a></h3>
           <p class="app-tag-text">Sleep sounds you can mix, guided breathing and bedtime stories to help you wind down, sleep deeper and wake up restored.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/night-bloom/id6760921921" target="_blank" rel="noopener" aria-label="Night Bloom on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1194,7 +1188,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Productivity · Documents</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/PaperLens/">PaperLens</a></h3>
           <p class="app-tag-text">Scan documents, pull out text, translate, sign and redact PDFs, all on your device. Nothing goes to the cloud.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/paperlens-pdf-scanner-ocr/id6762161072" target="_blank" rel="noopener" aria-label="PaperLens on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1209,7 +1202,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Productivity · Time zones</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/TimezoneConnect/">Time Zone Connect</a></h3>
           <p class="app-tag-text">See every city's time live, spot who is in work hours, and get meeting slots ranked by overlap across your team.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/time-zone-connect/id6738577654" target="_blank" rel="noopener" aria-label="Time Zone Connect on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1224,7 +1216,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Utilities · QR</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/Qito/">Qito</a></h3>
           <p class="app-tag-text">A QR studio for codes worth keeping: 25+ hand-crafted styles, art QR, wallpaper export and batch generation. Works offline.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/qito-qr-code-barcode/id6763031180" target="_blank" rel="noopener" aria-label="Qito on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1352,7 +1343,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Arcade · Space</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/AstroOrbit/">Astro Orbit</a></h3>
           <p class="app-tag-text">Tap to hop between orbital rings, dodge obstacles and chase your best score across the cosmos. Quick, gravity-defying runs.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/astro-orbit-gravity-hop/id6761644358" target="_blank" rel="noopener" aria-label="Astro Orbit on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1367,7 +1357,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Puzzle · Merge</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/MergeRise/">MergeRise</a></h3>
           <p class="app-tag-text">A number-merge puzzle with soul. Combine tiles, set off chain reactions and rise from settlement to skyline across four worlds.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/us/app/merge-rise-2048-merge-game/id6762747919" target="_blank" rel="noopener" aria-label="MergeRise on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
@@ -1382,7 +1371,6 @@ header.hero { overflow-x: clip; }
           <span class="app-cat">Kids · Mini-games</span>
           <h3 class="app-name"><a class="app-link" href="https://playpal.au/FuzzyPop/">Fuzzy Pop</a></h3>
           <p class="app-tag-text">Seven bright, gentle mini-games for kids and families in one app. No sign-up needed, and every game plays offline.</p>
-          <p class="app-credit">Design by Shivani Sudhir</p>
         </div>
         <div class="app-stores">
           <a class="store-mini" href="https://apps.apple.com/au/app/fuzzy-pop/id6762495601" target="_blank" rel="noopener" aria-label="Fuzzy Pop on the App Store"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
