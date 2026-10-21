@@ -707,12 +707,43 @@
     .builder-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
     .builder-side { display: grid; gap: 14px; min-width: 0; }
     /* Design credit: a smaller card under the founder card */
-    .design-card { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2px 16px; padding: 18px 22px; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); color: white; text-decoration: none; transition: background-color 0.2s, border-color 0.2s, transform 0.2s; }
-    .design-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.18); transform: translateY(-2px); }
-    .design-card-label { grid-column: 1 / -1; font-size: 0.58rem; font-weight: 800; letter-spacing: 2.4px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
-    .design-card-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.3px; }
-    .design-card-role { grid-column: 1; font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
-    .design-card-link { grid-column: 2; grid-row: 2 / span 2; align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.8); white-space: nowrap; }
+    .design-card {
+      position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 18px;
+      padding: 20px 22px; border-radius: 20px; color: white; text-decoration: none;
+      background: radial-gradient(ellipse 70% 120% at 100% 50%, rgba(242,92,59,0.16), transparent 60%), rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+      transition: border-color 0.3s, transform 0.3s cubic-bezier(.22,1,.36,1);
+    }
+    .design-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #F25C3B, #FB8266, #B6917F); }
+    .design-card:hover { border-color: rgba(242,92,59,0.4); transform: translateY(-2px); }
+    .design-card-label { display: block; font-size: 0.58rem; font-weight: 800; letter-spacing: 2.4px; text-transform: uppercase; color: rgba(255,255,255,0.42); margin-bottom: 6px; }
+    .design-card-name { display: block; font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 1.9rem; line-height: 1; letter-spacing: -0.5px; color: white; }
+    .design-card-role { display: block; margin-top: 8px; font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+    .design-card-role svg { width: 12px; height: 12px; margin-left: 4px; vertical-align: -1px; color: #FB8266; transition: transform 0.3s; }
+    .design-card:hover .design-card-role svg { transform: translate(2px, -2px); }
+    /* her work, fanned like cards in a hand; it opens on hover */
+    .design-fan { position: relative; width: 170px; height: 78px; flex-shrink: 0; }
+    .design-fan img { position: absolute; top: 10px; left: 57px; width: 56px; height: 56px; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08); transform-origin: 50% 130%; transition: transform 0.45s cubic-bezier(.22,1,.36,1); }
+    .design-fan img:nth-child(1) { transform: translateX(-42px) rotate(-14deg); }
+    .design-fan img:nth-child(2) { transform: translateX(-14px) rotate(-5deg); }
+    .design-fan img:nth-child(3) { transform: translateX(14px) rotate(5deg); }
+    .design-fan img:nth-child(4) { transform: translateX(42px) rotate(14deg); }
+    .design-card:hover .design-fan img:nth-child(1), .design-card:focus-visible .design-fan img:nth-child(1) { transform: translate(-54px, -2px) rotate(-18deg); }
+    .design-card:hover .design-fan img:nth-child(2), .design-card:focus-visible .design-fan img:nth-child(2) { transform: translate(-19px, -8px) rotate(-6deg); }
+    .design-card:hover .design-fan img:nth-child(3), .design-card:focus-visible .design-fan img:nth-child(3) { transform: translate(19px, -8px) rotate(6deg); }
+    .design-card:hover .design-fan img:nth-child(4), .design-card:focus-visible .design-fan img:nth-child(4) { transform: translate(54px, -2px) rotate(18deg); }
+    @media (max-width: 600px) {
+      .design-card { gap: 10px; padding: 18px; }
+      .design-card-name { font-size: 1.6rem; white-space: nowrap; }
+      .design-card .more { display: none; }
+      .design-fan { width: 112px; height: 60px; }
+      .design-fan img { width: 42px; height: 42px; border-radius: 11px; left: 35px; top: 9px; }
+      .design-fan img:nth-child(1) { transform: translateX(-30px) rotate(-14deg); }
+      .design-fan img:nth-child(2) { transform: translateX(-10px) rotate(-5deg); }
+      .design-fan img:nth-child(3) { transform: translateX(10px) rotate(5deg); }
+      .design-fan img:nth-child(4) { transform: translateX(30px) rotate(14deg); }
+    }
+    @media (prefers-reduced-motion: reduce) { .design-fan img { transition: none; } }
     footer p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
     .builder-skill {
       padding: 5px 12px; border-radius: 100px; background: rgba(255,255,255,0.08);
@@ -1537,7 +1568,7 @@ header.hero { overflow-x: clip; }
       <div class="eyebrow">The Builder</div>
       <h2 class="section-title">Built with care. <em>Shipped weekly.</em></h2>
       <p class="body" style="font-style:italic;font-family:'Instrument Serif',serif;font-size:1.5rem;line-height:1.4;color:rgba(255,255,255,0.85);max-width:480px;margin-bottom:14px;">"Pessimist with a launchpad."</p>
-      <p class="body">10+ years breaking complex systems so users don't have to. After hours, building mobile apps that ship to real people. Every Playpal app is coded, tested and polished before it ships.</p>
+      <p class="body">10+ years breaking complex systems so users don't have to. After hours, building mobile apps that ship to real people.</p>
       <div class="builder-cta-row">
         <a href="https://playpal.au/naveen-raj/" class="builder-cta">Meet Naveen
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1565,11 +1596,13 @@ header.hero { overflow-x: clip; }
         <span class="builder-skill">QA Strategy</span><span class="builder-skill">App Store</span><span class="builder-skill">Google Play</span>
       </div>
     </div>
-    <a class="design-card reveal" href="https://design.shivanisudhir.xyz/" target="_blank" rel="noopener" style="transition-delay:.14s;">
-      <span class="design-card-label">Design</span>
-      <span class="design-card-name">Shivani Sudhir</span>
-      <span class="design-card-role">UI/UX designer on Utilify, Night Bloom, Palettely and more</span>
-      <span class="design-card-link">Portfolio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+    <a class="design-card reveal" href="https://design.shivanisudhir.xyz/" target="_blank" rel="noopener" style="transition-delay:.14s;" aria-label="Design by Shivani Sudhir: see her portfolio">
+      <span>
+        <span class="design-card-label">Design by</span>
+        <span class="design-card-name">Shivani Sudhir</span>
+        <span class="design-card-role">UI/UX designer<span class="more"> · see her portfolio</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </span>
+      <span class="design-fan" aria-hidden="true"><img src="icons/utilify.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><img src="icons/nightbloom.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><img src="icons/palettely.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><img src="icons/canwasa.webp" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
     </a>
     </div>
   </div>
@@ -1592,7 +1625,7 @@ header.hero { overflow-x: clip; }
 
 <footer>
   <div class="footer-inner">
-    <p style="display:flex;align-items:center;gap:10px;"><img src="assets/logo-192.webp" alt="" width="22" height="22" loading="lazy" decoding="async" style="width:22px;height:22px;object-fit:contain;"><span>© 2026 Playpal Apps · Made in Sydney with care · Design: <a href="https://design.shivanisudhir.xyz/" target="_blank" rel="noopener">Shivani Sudhir</a></span></p>
+    <p style="display:flex;align-items:center;gap:10px;"><img src="assets/logo-192.webp" alt="" width="22" height="22" loading="lazy" decoding="async" style="width:22px;height:22px;object-fit:contain;"><span>© 2026 Playpal Apps · Made in Sydney with care</span></p>
     <div class="footer-links">
       <a href="#apps">Apps</a>
       <a href="#story">Story</a>
