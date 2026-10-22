@@ -1005,21 +1005,23 @@
 
     /* store buttons: solid white with the store's own logo and name, so they read as links;
        a store that is not live yet is a dashed outline that says "Soon" */
-    .apps-bento .app-card:not(.featured) .app-stores { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .apps-bento .store-mini { flex: 0 0 auto; width: auto; height: 40px; min-height: 40px; padding: 0 15px 0 12px; border-radius: 11px; gap: 8px;
-      background: #fff; color: #0B0B12; border: 0; backdrop-filter: none; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.01em;
+    /* the buttons in a card share one width, the widest of them */
+    .apps-bento .app-card .app-stores { display: inline-grid; grid-auto-flow: row; width: max-content; gap: 7px; }
+    .apps-bento .app-card.featured .app-stores { grid-auto-flow: column; grid-auto-columns: 1fr; }
+    .apps-bento .store-mini { flex: 0 0 auto; width: auto; height: 34px; min-height: 34px; padding: 0 13px 0 11px; border-radius: 9px; gap: 7px; justify-content: center;
+      background: #fff; color: #0B0B12; border: 0; backdrop-filter: none; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.01em;
       box-shadow: 0 6px 18px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.6) inset; }
     .apps-bento .store-mini:hover { background: #fff; color: #0B0B12; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,0.36), 0 0 0 3px rgba(255,255,255,0.22); }
-    .apps-bento .store-mini svg { width: 17px; height: 17px; }
+    .apps-bento .store-mini svg { width: 15px; height: 15px; }
     .apps-bento .store-mini .sm-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
     .apps-bento .store-mini.soon, .apps-bento .store-mini.ios-only { background: transparent; box-shadow: none; border: 1px dashed rgba(255,255,255,0.34); color: rgba(255,255,255,0.72); flex-wrap: nowrap; }
     .apps-bento .store-mini.soon svg { opacity: .6; }
-    .apps-bento .store-mini.soon::after { content: '· Soon'; flex-basis: auto; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-    .apps-bento .store-mini.ios-only { font-size: 0.72rem; padding: 0 14px; }
+    .apps-bento .store-mini.soon::after { content: '· Soon'; flex-basis: auto; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .apps-bento .store-mini.ios-only { font-size: 0.68rem; padding: 0 12px; }
     .apps-bento .app-inkline .store-mini { background: #1c1410; color: #f7eed4; box-shadow: 0 6px 18px rgba(60,40,10,0.3); }
     .apps-bento .app-inkline .store-mini svg { fill: #f7eed4; }
     .apps-bento .app-inkline .store-mini.soon { background: transparent; border-color: rgba(28,20,16,0.35); color: rgba(28,20,16,0.72); }
-    .play-chip { display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 16px 0 13px; border-radius: 12px; background: #FFE08A; color: #2B1240; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.02em; text-decoration: none; box-shadow: 0 0 24px rgba(248,184,0,.35); transition: transform .2s; }
+    .play-chip { display: inline-flex; align-items: center; justify-content: center; gap: 7px; height: 38px; padding: 0 15px 0 12px; border-radius: 9px; background: #FFE08A; color: #2B1240; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.02em; text-decoration: none; box-shadow: 0 0 24px rgba(248,184,0,.35); transition: transform .2s; }
     .play-chip:hover { transform: translateY(-1px); }
     .play-chip svg { width: 14px; height: 14px; fill: currentColor; }
 
@@ -1033,8 +1035,8 @@
     .apps-bento .app-card.featured .app-name { font-size: 2.3rem; letter-spacing: -1.6px; }
     .apps-bento .app-card.featured .app-cat { font-size: 1.08rem; }
     .apps-bento .app-card.featured .app-tag-text { font-size: 0.98rem; -webkit-line-clamp: 4; max-width: 470px; margin-top: 14px; }
-    .apps-bento .app-card.featured .app-stores { margin: 22px 0 40px; flex-direction: row; width: auto; }
-    .apps-bento .app-card.featured .store-mini { height: 44px; min-height: 44px; padding: 0 17px 0 14px; font-size: 0.8rem; }
+    .apps-bento .app-card.featured .app-stores { margin: 22px 0 40px; width: max-content; justify-self: start; }
+    .apps-bento .app-card.featured .store-mini { height: 38px; min-height: 38px; padding: 0 15px 0 13px; font-size: 0.74rem; }
     .app-fan { grid-area: fan; position: relative; align-self: stretch; min-height: 232px; pointer-events: none; }
     .app-fan::before { content: ''; position: absolute; inset: 10% 0 -30% 0; border-radius: 50%; background: radial-gradient(closest-side, var(--app-glow, rgba(255,255,255,.2)), transparent); opacity: .6; filter: blur(20px); }
     .app-fan .ph { position: absolute; bottom: -140px; width: 158px; aspect-ratio: 540 / 1173; padding: 5px; border-radius: 26px; background: #0B0B10; box-shadow: 0 24px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.12); transform-origin: 50% 100%; transition: transform .6s cubic-bezier(.22,1,.36,1); }
@@ -1072,12 +1074,12 @@
       .apps-bento .app-card .app-name { font-size: 1.12rem; letter-spacing: -0.4px; margin-top: 2px; }
       .apps-bento .app-card:not(.featured) .app-tag-text { -webkit-line-clamp: 1; margin-top: 3px; font-size: 0.8rem; }
       .apps-bento .app-card:not(.featured) .app-stores { margin: 9px 0 14px; gap: 6px; }
-      .apps-bento .app-card:not(.featured) .app-stores { flex-direction: row; align-items: center; }
-      .apps-bento .store-mini { width: 38px; height: 38px; min-height: 38px; padding: 0; border-radius: 11px; }
+      .apps-bento .app-card:not(.featured) .app-stores { display: flex; flex-direction: row; align-items: center; width: auto; }
+      .apps-bento .store-mini { width: 34px; height: 34px; min-height: 34px; padding: 0; border-radius: 9px; }
       .apps-bento .store-mini .sm-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
       .apps-bento .store-mini.soon, .apps-bento .store-mini.ios-only { width: auto; padding: 0 10px 0 9px; gap: 5px; }
       .apps-bento .store-mini.soon::after { content: 'Soon'; font-size: 0.6rem; }
-      .apps-bento .store-mini svg { width: 17px; height: 17px; }
+      .apps-bento .store-mini svg { width: 15px; height: 15px; }
       .app-peek { align-self: stretch; height: auto; max-width: none; margin: 0; }
       .app-peek::before { display: none; }
       .app-peek .ph { left: 2px; top: 12px; width: 70px; padding: 3px; border-radius: 13px; transform: rotate(-7deg); }
@@ -1090,7 +1092,7 @@
       .app-fan .ph img { border-radius: 14px; }
       .app-fan .ph:nth-child(2) { left: calc(50% - 52px); bottom: -84px; }
       .app-fan.landscape .ph { bottom: 20px; }
-      .play-chip { height: 36px; padding: 0 12px 0 10px; font-size: 0.72rem; }
+      .play-chip { height: 34px; padding: 0 12px 0 10px; font-size: 0.7rem; }
     }
     @media (prefers-reduced-motion: reduce) { .app-peek .ph, .app-fan .ph { transition: none; } }
   </style>
