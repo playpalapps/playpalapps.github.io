@@ -45,7 +45,7 @@ jobs += [
 # (960 px for the landscape games in LANDSCAPE, whose cards also carry data-orient="landscape").
 # To add an app, list its screenshots here and add data-shots="..." to its card in index.html.
 SHOWCASE = {
-    'palettely': ['Palettely/shots/home.jpg', 'Palettely/shots/extract.jpg', 'Palettely/shots/generate.jpg'],
+    'palettely': ['Palettely/shots/generate.jpg', 'Palettely/shots/palette.jpg', 'Palettely/shots/library.jpg'],
     'canwasa': ['canwasa/shots/home.jpg', 'canwasa/shots/editor.jpg', 'canwasa/shots/export.jpg'],
     'nightbloom': ['NightBloom/shots/home.jpg', 'NightBloom/shots/breathe.jpg', 'NightBloom/shots/mixer.jpg'],
     'tooltrunk': ['ToolTrunk/shots/home.jpg', 'ToolTrunk/shots/compass.jpg', 'ToolTrunk/shots/sound-meter.jpg'],
