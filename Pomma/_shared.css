@@ -1,32 +1,47 @@
 @font-face{font-family:"Fredoka";src:url("Fredoka-SemiBold.ttf") format("truetype");font-weight:600 700;font-display:swap}
 :root{
-  --bg:#1a1426;--bg-2:#221a33;--indigo:#8a5bc4;--indigo-2:#c9a7f0;--green:#5cc385;--blue:#f0a35c;
-  --ink:#f4ece0;--ink-2:rgba(244,236,224,.78);--ink-3:rgba(244,236,224,.54);
-  --panel:rgba(255,255,255,.04);--panel-edge:rgba(201,167,240,.22);--cell:rgba(255,255,255,.035);--line:rgba(255,255,255,.09);--shadow:rgba(0,0,0,.5);
+  /* plum ink: the app's dark surfaces */
+  --bg:#1a1426;--bg-2:#221a33;--indigo:#8a5bc4;--indigo-2:#c9a7f0;--green:#5cc385;--blue:#f0a35c;--gold:#e8b860;
+  --ink:#f4ece0;--ink-2:rgba(244,236,224,.78);--ink-3:rgba(244,236,224,.56);
+  --panel:rgba(255,255,255,.045);--panel-edge:rgba(201,167,240,.22);--cell:rgba(255,255,255,.04);--line:rgba(255,255,255,.09);--shadow:rgba(0,0,0,.5);
+  --hi:rgba(255,255,255,.07);--nav:rgba(26,20,38,.8);--tint:rgba(160,102,240,.16);--tint-edge:rgba(201,167,240,.3);--underline:rgba(201,167,240,.32);
+  /* the icon's focus ring */
+  --ring-a:#FFB45E;--ring-b:#FF6F9E;--ring-c:#A066F0;
+  --glow-1:rgba(160,102,240,.24);--glow-2:rgba(255,111,158,.11);--glow-3:rgba(255,180,94,.08);
   --page:1080px;--gutter:clamp(18px,4vw,40px);--ease:cubic-bezier(.2,.8,.2,1);
   --display:"Fredoka",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
 }
+/* cream paper: the app's light surfaces */
+@media (prefers-color-scheme:light){:root{
+  --bg:#fbf3e6;--bg-2:#f3eadb;--indigo:#5b2a86;--indigo-2:#5b2a86;--green:#3e9b5e;--blue:#e08e45;--gold:#94671c;
+  --ink:#1e1a2b;--ink-2:rgba(30,26,43,.78);--ink-3:rgba(30,26,43,.62);
+  --panel:rgba(255,253,248,.62);--panel-edge:rgba(91,42,134,.2);--cell:rgba(255,253,248,.72);--line:rgba(63,28,99,.11);--shadow:rgba(63,28,99,.2);
+  --hi:rgba(255,255,255,.85);--nav:rgba(251,243,230,.8);--tint:rgba(91,42,134,.09);--tint-edge:rgba(91,42,134,.22);--underline:rgba(91,42,134,.3);
+  --glow-1:rgba(160,102,240,.2);--glow-2:rgba(255,111,158,.13);--glow-3:rgba(255,180,94,.16);
+  color-scheme:light;
+}}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17.5px;line-height:1.62;color:var(--ink);background:var(--bg);min-height:100dvh}
 /* the app's aurora: two slow, soft glows behind everything */
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 55% at 78% -5%,rgba(108,99,245,.26) 0%,transparent 62%),radial-gradient(ellipse 60% 50% at 0% 100%,rgba(40,90,200,.16) 0%,transparent 60%)}
+  background:radial-gradient(ellipse 70% 55% at 78% -5%,var(--glow-1) 0%,transparent 62%),radial-gradient(ellipse 55% 45% at 100% 55%,var(--glow-2) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 0% 100%,var(--glow-3) 0%,transparent 60%)}
 .container{position:relative;z-index:1;width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gutter)}
-a{color:var(--indigo-2);text-decoration:none;border-bottom:1.5px solid rgba(169,164,255,.3);transition:border-color .2s,color .2s}
+a{color:var(--indigo-2);text-decoration:none;border-bottom:1.5px solid var(--underline);transition:border-color .2s,color .2s}
 a:hover{border-color:var(--indigo-2);color:var(--ink)}
-.glass{background:var(--panel);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
-nav.site{position:sticky;top:0;z-index:50;background:rgba(7,7,13,.78);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.glass{background:var(--panel);border:1px solid var(--line);box-shadow:inset 0 1px 0 var(--hi),0 10px 30px -18px var(--shadow);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3)}
+nav.site{position:sticky;top:0;z-index:50;background:var(--nav);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 nav.site .row{display:flex;align-items:center;gap:20px;padding-block:12px}
 nav.site .brand{display:inline-flex;align-items:center;gap:10px;border:0;color:var(--ink);font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em;white-space:nowrap}
 nav.site .brand img{width:32px;height:32px;border-radius:8px}
 nav.site .links{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
 nav.site .links a{border:0;color:var(--ink-2);font-weight:600;font-size:15px;padding:6px 12px;border-radius:999px}
-nav.site .links a:hover,nav.site .links a[aria-current]{background:rgba(108,99,245,.18);color:var(--ink)}
+nav.site .links a:hover,nav.site .links a[aria-current]{background:var(--tint);color:var(--ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;font-weight:700;font-size:17px;border:0;cursor:pointer;color:var(--ink);transition:transform .12s,background .2s}
 .btn:active{transform:scale(.97)}
-.btn.primary{color:#fff;background:var(--indigo);box-shadow:0 10px 30px rgba(108,99,245,.35)}
-.btn.primary:hover{background:#7d75ff;color:#fff}
+.btn.primary{color:#fff;background:var(--indigo);box-shadow:0 10px 30px rgba(91,42,134,.35),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn.primary:hover{background:#6b3a99;color:#fff}
 .btn svg{width:21px;height:21px;fill:currentColor}
 .btn.soon{cursor:default;color:var(--ink-2)}
 .btn.soon small{font-size:10.5px;font-weight:800;letter-spacing:.12em;color:#fff;background:var(--indigo);border-radius:999px;padding:3px 8px;margin-left:2px}
@@ -43,8 +58,8 @@ main.doc h2:first-child{margin-top:0}
 main.doc p,main.doc li{color:var(--ink-2)}
 main.doc ul{padding-left:22px}
 main.doc li{margin-bottom:6px}
-main.doc code{background:rgba(255,255,255,.07);border:1px solid var(--line);padding:1px 7px;border-radius:6px;font-size:.86em;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
-.callout{margin:0 0 26px;padding:18px 22px;border-radius:16px;background:rgba(108,99,245,.12);border:1px solid rgba(150,142,255,.32)}
+main.doc code{background:var(--cell);border:1px solid var(--line);padding:1px 7px;border-radius:6px;font-size:.86em;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.callout{margin:0 0 26px;padding:18px 22px;border-radius:16px;background:var(--tint);border:1px solid var(--tint-edge)}
 .callout strong{color:var(--ink)}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 6px}
 .fact{padding:12px 16px;border-radius:14px;background:var(--cell);border:1px solid var(--line)}

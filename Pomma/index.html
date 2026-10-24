@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pomma — the focus timer that learns how you work</title>
-<meta name="description" content="Pomma is a Pomodoro timer that learns how you work. Set an intent, check in with one tap after each session, and see when and how you focus best. No accounts and no ads; everything stays on your device. iPhone, iPad and Android.">
+<meta name="description" content="Pomma is a Pomodoro timer that learns how you work. A glass plum fills as you focus; set an intent, check in with one tap after each session, and see when and how you focus best. No accounts and no ads; everything stays on your device. iPhone, iPad and Android.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://playpal.au/Pomma/">
 <meta property="og:type" content="website">
@@ -12,19 +12,20 @@
 <meta property="og:url" content="https://playpal.au/Pomma/">
 <meta property="og:title" content="Pomma — the focus timer that learns how you work">
 <meta property="og:description" content="Set an intent, check in with one tap, and see when and how you focus best. No accounts, no ads, all on your device.">
-<meta property="og:image" content="https://playpal.au/Pomma/og-image.jpg">
+<meta property="og:image" content="https://playpal.au/Pomma/og-image.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Pomma — the focus timer that learns how you work">
 <meta name="twitter:description" content="A Pomodoro timer that learns when and how you focus best. No accounts, no ads.">
-<meta name="twitter:image" content="https://playpal.au/Pomma/og-image.jpg">
-<meta name="theme-color" content="#1a1426">
-<meta name="color-scheme" content="dark">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="twitter:image" content="https://playpal.au/Pomma/og-image.jpg?v=2">
+<meta name="theme-color" content="#fbf3e6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1426" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
 <link rel="preload" href="Fredoka-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="_shared.css?v=2">
+<link rel="stylesheet" href="_shared.css?v=3">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Pomma","applicationCategory":"ProductivityApplication","operatingSystem":"iOS, Android","author":{"@type":"Organization","name":"Playpal Apps"},"description":"A Pomodoro timer that learns how you work: intents, one-tap check-ins and on-device insights.","image":"https://playpal.au/Pomma/icon.png","url":"https://playpal.au/Pomma/"}
@@ -34,7 +35,7 @@
 .hero{padding:clamp(34px,6vw,84px) 0 clamp(30px,5vw,60px)}
 .hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:center}
 .hero h1{font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:1;margin:0 0 20px}
-.hero h1 em{font-style:normal;color:var(--indigo-2)}
+.hero h1 em{font-style:normal;color:var(--indigo-2);background:linear-gradient(90deg,var(--ring-a),var(--ring-b),var(--ring-c)) no-repeat 0 96%/100% .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding-bottom:.04em}
 .hero .tag{font-size:clamp(1.1rem,1.9vw,1.3rem);color:var(--ink-2);max-width:38ch;margin:0 0 28px;line-height:1.5}
 .hero .stores{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
 .hero .note{font-size:15px;color:var(--ink-3);margin:0 0 26px}
@@ -42,9 +43,11 @@
 .chips li{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ink-2)}
 .chips svg{width:15px;height:15px;fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .hero .art{display:grid;place-items:center;position:relative}
-.hero .art::before{content:"";position:absolute;width:120%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(138,91,196,.32) 0%,transparent 62%);pointer-events:none}
-.hero .art .phone{position:relative;width:min(100%,330px)}
-@media (max-width:820px){.hero .grid{grid-template-columns:1fr}.hero .art .phone{width:min(72vw,300px)}}
+.hero .art::before{content:"";position:absolute;width:120%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--glow-1) 0%,transparent 62%);pointer-events:none}
+/* the icon's focus ring, drawn large behind the phone */
+.hero .art::after{content:"";position:absolute;width:min(124%,460px);aspect-ratio:1;border-radius:50%;background:conic-gradient(from 210deg,transparent 0 6%,var(--ring-a) 10%,var(--ring-b) 38%,var(--ring-c) 68%,transparent 74%);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 9px),#000 calc(100% - 8px));mask:radial-gradient(farthest-side,transparent calc(100% - 9px),#000 calc(100% - 8px));opacity:.85;pointer-events:none}
+.hero .art .phone{position:relative;z-index:1;width:min(100%,330px)}
+@media (max-width:820px){.hero .grid{grid-template-columns:1fr}.hero .art .phone{width:min(72vw,300px)}.hero .art::after{width:min(98%,380px)}}
 /* sections */
 section.slab{padding:clamp(44px,7vw,88px) 0}
 section.slab .head{max-width:60ch;margin-bottom:clamp(24px,3.5vw,40px)}
@@ -90,17 +93,22 @@ section.slab .sub{font-size:19px;color:var(--ink-2);margin:0}
 /* palettes + premium */
 .tiers{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .tier{border-radius:24px;padding:clamp(22px,3.5vw,34px)}
-.tier.premium{border-color:rgba(224,169,61,.4);background:linear-gradient(160deg,rgba(224,169,61,.1),rgba(255,255,255,.03) 55%)}
+.tier.premium{border-color:rgba(224,169,61,.4);background:linear-gradient(160deg,rgba(224,169,61,.12),var(--panel) 55%)}
 .tier .k{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
-.tier.premium .k{color:#e8b860}
+.tier.premium .k{color:var(--gold)}
 .tier h3{margin:6px 0 10px;font-size:clamp(1.3rem,2.4vw,1.7rem)}
 .tier p{margin:0 0 18px;color:var(--ink-2);font-size:16.5px}
 .tier ul{margin:0 0 20px;padding-left:20px;color:var(--ink-2);font-size:16.5px}
 .tier li{margin-bottom:4px}
-.swatches{display:flex;flex-wrap:wrap;gap:14px 18px;margin:0;padding:0;list-style:none}
-.swatches li{display:grid;justify-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink-2);margin:0}
-.swatches i{width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,.16)}
+.tier .swatches{display:flex;flex-wrap:wrap;gap:16px 14px;margin:0;padding:0;list-style:none}
+.swatches li{display:grid;justify-items:center;gap:8px;width:66px;font-size:13.5px;font-weight:600;color:var(--ink-2);margin:0;text-align:center;line-height:1.2}
+/* a palette as a glass orb, as in the app: focus, short-break and long-break colours in three bands, lit from the top left */
+.swatches i{--a:var(--dw);--b:var(--ds);--c:var(--dl);width:52px;height:52px;border-radius:50%;
+  background:radial-gradient(ellipse 30% 20% at 33% 22%,rgba(255,255,255,.9),rgba(255,255,255,0) 72%),radial-gradient(circle at 32% 28%,rgba(0,0,0,0) 45%,rgba(0,0,0,.34) 100%),linear-gradient(90deg,transparent calc(33.3% - 1px),rgba(255,255,255,.22) 33.3%,transparent calc(33.3% + 1px) calc(66.6% - 1px),rgba(255,255,255,.22) 66.6%,transparent calc(66.6% + 1px)),linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0) 55%,rgba(0,0,0,.18)),linear-gradient(90deg,var(--a) 0 33.3%,var(--b) 0 66.6%,var(--c) 0);
+  box-shadow:inset 0 -5px 7px -3px rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.28),0 9px 9px -6px rgba(0,0,0,.45)}
+@media (prefers-color-scheme:light){.swatches i{--a:var(--w);--b:var(--s);--c:var(--l);box-shadow:inset 0 -5px 7px -3px rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.4),0 9px 9px -6px rgba(63,28,99,.35)}}
 @media (max-width:760px){.tiers{grid-template-columns:1fr}}
+@media (max-width:560px){.tier .swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px 4px}.swatches li{width:auto;font-size:12.5px}.swatches i{width:46px;height:46px}}
 /* download */
 .download{padding:clamp(30px,5vw,60px) 0 clamp(40px,6vw,70px)}
 .download .card{border-radius:28px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center;background:linear-gradient(140deg,rgba(138,91,196,.2),rgba(255,255,255,.03) 60%);border-color:var(--panel-edge)}
@@ -153,7 +161,7 @@ header.hero { overflow-x: clip; }
       </ul>
     </div>
     <div class="art">
-      <div class="phone"><img src="shots/timer.jpg" alt="Pomma's plum timer filling with juice partway through a focus session" width="660" height="1435" fetchpriority="high"></div>
+      <div class="phone"><picture><source srcset="shots/timer-dark.jpg" media="(prefers-color-scheme: dark)"><img src="shots/timer.jpg" alt="Pomma's glass plum timer, half full of juice partway through a focus session" width="660" height="1435" fetchpriority="high"></picture></div>
     </div>
   </div>
 </header>
@@ -183,7 +191,7 @@ header.hero { overflow-x: clip; }
     </div>
     <div class="steps">
       <div class="step glass reveal"><h3>Begin with intent</h3><p>Before a session starts, pick the one task and how you will approach it: Deep, Quick, Easy, Goal or Calm.</p></div>
-      <div class="step glass reveal d1"><h3>Focus until the bell</h3><p>The plum fills as the minutes pass and the screen stays awake. If you leave the app, a notification tells you when the session ends.</p></div>
+      <div class="step glass reveal d1"><h3>Focus until the bell</h3><p>A glass plum fills with juice as the minutes pass, and the screen stays awake. If you leave the app, a notification tells you when the session ends.</p></div>
       <div class="step glass reveal d2"><h3>Check in, then rest</h3><p>Scattered, Steady or Flow: one tap. Then five minutes away from the work, and Pomma asks whether you really stepped away.</p></div>
     </div>
   </div>
@@ -193,17 +201,18 @@ header.hero { overflow-x: clip; }
   <div class="container">
     <div class="head reveal">
       <span class="eyebrow">Inside the app</span>
-      <h2>Seven screens. Nothing extra.</h2>
-      <p class="sub">A timer, a check-in, a task list, your insights and your settings. <span class="swipe-hint">Swipe to see them all.</span></p>
+      <h2>Four tabs. Nothing extra.</h2>
+      <p class="sub">A timer, your tasks, your insights and your settings, with a one-tap question at each end of a session. <span class="swipe-hint">Swipe to see them all.</span></p>
     </div>
     <div class="shots">
-      <div class="shot reveal"><div class="phone"><img src="shots/timer.jpg" alt="The plum timer partway through a focus session, session 3 of 4" width="660" height="1435" loading="lazy"></div><h3>Focus</h3><p>The plum fills with juice as the session runs.</p></div>
-      <div class="shot reveal d1"><div class="phone"><img src="shots/checkin.jpg" alt="The check-in after a session: Scattered, Steady or Flow" width="660" height="1435" loading="lazy"></div><h3>Check-in</h3><p>One tap when the session ends: how was your focus?</p></div>
-      <div class="shot reveal d2"><div class="phone"><img src="shots/insights.jpg" alt="Insights showing the best time of day to focus and a breakdown by intent" width="660" height="1435" loading="lazy"></div><h3>Insights</h3><p>What Pomma has learned: your best time, intent and length.</p></div>
-      <div class="shot reveal d3"><div class="phone"><img src="shots/break.jpg" alt="A short break: the fruit turns leaf green" width="660" height="1435" loading="lazy"></div><h3>Breaks</h3><p>On a break the plum turns leaf green, so a glance says which you are in.</p></div>
-      <div class="shot reveal d4"><div class="phone"><img src="shots/tasks.jpg" alt="A task list with progress bars showing sessions done against sessions planned" width="660" height="1435" loading="lazy"></div><h3>Tasks</h3><p>Estimate each task in sessions and watch the bar fill.</p></div>
-      <div class="shot reveal"><div class="phone"><img src="shots/stats.jpg" alt="Twelve weeks of history as a heatmap, and the last seven days" width="660" height="1435" loading="lazy"></div><h3>History</h3><p>Your streak and twelve weeks at a glance.</p></div>
-      <div class="shot reveal d1"><div class="phone"><img src="shots/settings.jpg" alt="Settings with sliders for focus, short break and long break lengths" width="660" height="1435" loading="lazy"></div><h3>Settings</h3><p>Focus from 5 to 90 minutes. Breaks to match.</p></div>
+      <div class="shot reveal"><div class="phone"><img src="shots/timer.jpg" alt="The glass plum timer partway through a focus session, session 3 of 4" width="660" height="1435" loading="lazy"></div><h3>Focus</h3><p>A glass plum fills with juice as the session runs.</p></div>
+      <div class="shot reveal d1"><div class="phone"><img src="shots/intent.jpg" alt="The Ready to focus sheet: a task and an intent, Deep, Quick, Easy, Goal or Calm" width="660" height="1435" loading="lazy"></div><h3>Intent</h3><p>One task and one way to approach it, before you start.</p></div>
+      <div class="shot reveal d2"><div class="phone"><img src="shots/checkin.jpg" alt="The check-in after a session: Scattered, Steady or Flow" width="660" height="1435" loading="lazy"></div><h3>Check-in</h3><p>One tap when the session ends: how was your focus?</p></div>
+      <div class="shot reveal d3"><div class="phone"><img src="shots/insights.jpg" alt="Insights showing the best time of day to focus and a breakdown by intent" width="660" height="1435" loading="lazy"></div><h3>Insights</h3><p>What Pomma has learned: your best time, intent and length.</p></div>
+      <div class="shot reveal"><div class="phone"><img src="shots/length.jpg" alt="Insights comparing 25- and 40-minute sessions, with a button to use 40 minutes" width="660" height="1435" loading="lazy"></div><h3>Your length</h3><p>If longer or shorter sessions go better, one tap switches.</p></div>
+      <div class="shot reveal d1"><div class="phone"><img src="shots/tasks.jpg" alt="A task list with progress bars showing sessions done against sessions planned" width="660" height="1435" loading="lazy"></div><h3>Tasks</h3><p>Estimate each task in sessions and watch the bar fill.</p></div>
+      <div class="shot reveal d2"><div class="phone"><img src="shots/stats.jpg" alt="Twelve weeks of history as a heatmap, and the last seven days" width="660" height="1435" loading="lazy"></div><h3>History</h3><p>Your streak and twelve weeks at a glance.</p></div>
+      <div class="shot reveal d3"><div class="phone"><img src="shots/mango.jpg" alt="The timer in the Mango palette in dark mode, the plum filled with golden juice" width="660" height="1435" loading="lazy"></div><h3>Make it yours</h3><p>Thirteen palettes, light and dark. This is Mango.</p></div>
     </div>
   </div>
 </section>
@@ -220,7 +229,7 @@ header.hero { overflow-x: clip; }
       <div class="detail glass reveal d2"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 20a2 2 0 0 0 4 0"/></svg></div><h3>Sounds you choose</h3><p>Four alarms: Bell, Chime, Digital and Gentle. A soft or classic tick if you like one, silence if you do not. Haptics and volume are yours too.</p></div>
       <div class="detail glass reveal"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10 6h4"/></svg></div><h3>On your Lock Screen <span class="os">iOS</span></h3><p>A Live Activity shows the running session on the Lock Screen and in the Dynamic Island, so you never unlock just to check the time.</p></div>
       <div class="detail glass reveal d1"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></div><h3>Widgets <span class="os">iOS</span></h3><p>Home Screen widgets in two sizes, and Lock Screen widgets, show today's sessions against your goal.</p></div>
-      <div class="detail glass reveal d2"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></div><h3>Paper and ink</h3><p>Cream paper by day, plum ink by night. Follow the system or choose for yourself; every palette is tuned for both.</p></div>
+      <div class="detail glass reveal d2"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></div><h3>Paper, ink and glass</h3><p>Cream paper by day, plum ink by night, with real liquid glass on the buttons, chips and tab bar. Follow the system or choose for yourself; every palette is tuned for both.</p></div>
     </div>
   </div>
 </section>
@@ -230,7 +239,7 @@ header.hero { overflow-x: clip; }
     <div class="head reveal">
       <span class="eyebrow">Free and Premium</span>
       <h2>The whole timer is free</h2>
-      <p class="sub">Premium adds colour and supports the one person who makes Pomma. You pay once. There is no subscription.</p>
+      <p class="sub">Premium adds ten more palettes and supports the one person who makes Pomma. You pay once. There is no subscription.</p>
     </div>
     <div class="tiers">
       <div class="tier glass reveal">
@@ -241,22 +250,29 @@ header.hero { overflow-x: clip; }
           <li>Unlimited tasks</li>
           <li>Every check-in and insight, plus history</li>
           <li>Live Activity and widgets on iOS</li>
-          <li>Three palettes</li>
+          <li>Three palettes, in light and dark</li>
         </ul>
         <ul class="swatches" aria-label="Free palettes">
-          <li><i style="background:conic-gradient(#5B2A86 0 33.4%,#3E9B5E 0 66.7%,#E08E45 0)"></i>Plum</li>
-          <li><i style="background:conic-gradient(#C62E4A 0 33.4%,#3E9B5E 0 66.7%,#E0A23A 0)"></i>Cherry</li>
-          <li><i style="background:conic-gradient(#4F7A2D 0 33.4%,#2E8F8A 0 66.7%,#E08E45 0)"></i>Olive</li>
+          <li><i style="--w:#5B2A86;--s:#3E9B5E;--l:#E08E45;--dw:#8966A8;--ds:#74B78B;--dl:#E9AE79"></i>Plum</li>
+          <li><i style="--w:#C62E4A;--s:#3E9B5E;--l:#E0A23A;--dw:#D6697D;--ds:#74B78B;--dl:#E9BC71"></i>Cherry</li>
+          <li><i style="--w:#4F7A2D;--s:#2E8F8A;--l:#E08E45;--dw:#809F68;--ds:#69AEAB;--dl:#E9AE79"></i>Olive</li>
         </ul>
       </div>
       <div class="tier premium glass reveal d1">
         <div class="k">Premium · one-time</div>
-        <h3>Three more palettes</h3>
-        <p>Blueberry, Grape and Ink, yours on every device signed in to the same store account. Restore the purchase from Settings at any time.</p>
+        <h3>Ten more palettes</h3>
+        <p>From Sakura to Ink, each tuned by hand for light and dark, and yours on every device signed in to the same store account. Restore the purchase from Settings at any time.</p>
         <ul class="swatches" aria-label="Premium palettes">
-          <li><i style="background:conic-gradient(#2F4FA8 0 33.4%,#3E9B5E 0 66.7%,#E08E45 0)"></i>Blueberry</li>
-          <li><i style="background:conic-gradient(#7B2CBF 0 33.4%,#3E9B5E 0 66.7%,#E05A8A 0)"></i>Grape</li>
-          <li><i style="background:conic-gradient(#1E1A2B 0 33.4%,#6B6672 0 66.7%,#9A95A3 0)"></i>Ink</li>
+          <li><i style="--w:#EE9DBA;--s:#3A816F;--l:#8266BC;--dw:#F5B3CB;--ds:#A9DCC9;--dl:#C8B5F0"></i>Sakura</li>
+          <li><i style="--w:#F2B33A;--s:#3E9B5E;--l:#E26849;--dw:#FFC145;--ds:#7FD39C;--dl:#FF9A80"></i>Mango</li>
+          <li><i style="--w:#B9A0E6;--s:#3A816F;--l:#D9668E;--dw:#C9B6F2;--ds:#A9DCC9;--dl:#F5B3CB"></i>Lavender</li>
+          <li><i style="--w:#F09A7A;--s:#2C817F;--l:#B58437;--dw:#FFA587;--ds:#7ED3CE;--dl:#F5C36B"></i>Peach</li>
+          <li><i style="--w:#8CCFC0;--s:#8266BC;--l:#C37D41;--dw:#A6DED0;--ds:#C8B5F0;--dl:#F7C29A"></i>Sea Glass</li>
+          <li><i style="--w:#8C2F5F;--s:#3E9B5E;--l:#C37D41;--dw:#E58AB8;--ds:#86D3A0;--dl:#F5B37A"></i>Fig</li>
+          <li><i style="--w:#2B6F8E;--s:#3E9B5E;--l:#B58437;--dw:#7FC4E3;--ds:#86D3A0;--dl:#F5C36B"></i>Juniper</li>
+          <li><i style="--w:#2F4FA8;--s:#3E9B5E;--l:#C37D41;--dw:#6C83C1;--ds:#74B78B;--dl:#E9AE79"></i>Blueberry</li>
+          <li><i style="--w:#7B2CBF;--s:#3E9B5E;--l:#E05A8A;--dw:#A36CD2;--ds:#74B78B;--dl:#E988AB"></i>Grape</li>
+          <li><i style="--w:#1E1A2B;--s:#6B6672;--l:#908B99;--dw:#F4ECE0;--ds:#B8AFC4;--dl:#9A95A3"></i>Ink</li>
         </ul>
       </div>
     </div>

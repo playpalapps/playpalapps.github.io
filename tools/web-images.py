@@ -57,7 +57,7 @@ SHOWCASE = {
     'inkline': ['Inkline/shots/menu.jpg', 'Inkline/shots/play.jpg', 'Inkline/shots/strand.jpg'],
     'pippet': ['Pippet/shots/title.jpg', 'Pippet/shots/play.jpg', 'Pippet/shots/choose-pip.jpg'],
     'utilify': ['UtilifyApp/shots/home.jpg', 'UtilifyApp/shots/categories.jpg', 'UtilifyApp/shots/dark.jpg'],
-    'pomma': ['Pomma/shots/timer.jpg', 'Pomma/shots/tasks.jpg', 'Pomma/shots/stats.jpg'],
+    'pomma': ['Pomma/shots/timer.jpg', 'Pomma/shots/checkin.jpg', 'Pomma/shots/insights.jpg'],
     'postela': ['Postela/shots/home.jpg', 'Postela/shots/post.jpg', 'Postela/shots/flyer.jpg'],
     'nota': ['Nota/shots/note.jpg', 'Nota/shots/sketch-note.jpg', 'Nota/shots/checklist.jpg'],
     'fidgety': ['Fidgety/shots/home.jpg', 'Fidgety/shots/pop.jpg', 'Fidgety/shots/sand.jpg'],

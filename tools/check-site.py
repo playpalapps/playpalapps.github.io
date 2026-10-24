@@ -29,6 +29,7 @@ STORE_LINKED = {
     'Qito/privacy-policy.html': [], 'Qito/support.html': [],
     'FuzzyPop/support.html': [], 'Inkline/support.html': [], 'Pippet/support.html': [], 'HydroPanda/support.html': [],
     'DailyStreak/privacy.html': [], 'DailyStreak/terms.html': [],
+    'Pomma/index.html': [], 'Pomma/support.html': [], 'Pomma/privacy.html': [],
 }
 
 errors = []
