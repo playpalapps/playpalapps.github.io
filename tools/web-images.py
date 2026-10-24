@@ -61,6 +61,7 @@ SHOWCASE = {
     'postela': ['Postela/shots/home.jpg', 'Postela/shots/post.jpg', 'Postela/shots/flyer.jpg'],
     'nota': ['Nota/shots/note.jpg', 'Nota/shots/sketch-note.jpg', 'Nota/shots/checklist.jpg'],
     'fidgety': ['Fidgety/shots/home.jpg', 'Fidgety/shots/pop.jpg', 'Fidgety/shots/sand.jpg'],
+    'fidgety-ios': ['Fidgety-iOS/shots/switch.jpg', 'Fidgety-iOS/shots/keys.jpg', 'Fidgety-iOS/shots/cradle.jpg'],
     'tinywins': ['TinyWins/shots/today.jpg', 'TinyWins/shots/add.jpg', 'TinyWins/shots/insights.jpg'],
     'dailystreak': ['DailyStreak/shots/home.jpg', 'DailyStreak/shots/detail.jpg', 'DailyStreak/shots/achievements.jpg'],
     'twistandturnquest': ['TwistAndTurnQuest/shots/quest.png', 'TwistAndTurnQuest/shots/prism.png', 'TwistAndTurnQuest/shots/modes.png'],

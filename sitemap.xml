@@ -2,33 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://playpal.au/</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://playpal.au/naveen-raj/</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://playpal.au/AstroOrbit/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/AstroOrbit/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://playpal.au/BloomBlocks/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/canwasa/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/canwasa/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://playpal.au/CircusArcade/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/ColourWise/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/DailyStreak/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/DailyStreak/</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://playpal.au/Fidgety-iOS/</loc></url>
   <url><loc>https://playpal.au/Fidgety/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/FruitHugs/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/FuzzyPop/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/FuzzyPop/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://playpal.au/Gramam/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/Gramam/press/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/HydroPanda/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/Inkline/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/MergeRise/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/NightBloom/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/Nota/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/MergeRise/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://playpal.au/NightBloom/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://playpal.au/Nota/</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://playpal.au/Palettely/</loc><lastmod>2026-10-23</lastmod></url>
-  <url><loc>https://playpal.au/PaperLens/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/PaperLens/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://playpal.au/Pippet/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/Pomma/</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://playpal.au/Postela/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/Qito/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/TimezoneConnect/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/Qito/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://playpal.au/TimezoneConnect/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://playpal.au/TinyWins/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/ToolTrunk/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/TwistAndTurnQuest/</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://playpal.au/UtilifyApp/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/UtilifyApp/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://playpal.au/VeggiePop/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/AstroOrbit/privacy-policy.html</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/AstroOrbit/support.html</loc><lastmod>2026-10-19</lastmod></url>
@@ -44,6 +45,9 @@
   <url><loc>https://playpal.au/DailyStreak/privacy.html</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/DailyStreak/support.html</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/DailyStreak/terms.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://playpal.au/Fidgety-iOS/privacy.html</loc></url>
+  <url><loc>https://playpal.au/Fidgety-iOS/support.html</loc></url>
+  <url><loc>https://playpal.au/Fidgety-iOS/terms.html</loc></url>
   <url><loc>https://playpal.au/Fidgety/privacy.html</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/Fidgety/support.html</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://playpal.au/Fidgety/terms.html</loc><lastmod>2026-10-19</lastmod></url>
