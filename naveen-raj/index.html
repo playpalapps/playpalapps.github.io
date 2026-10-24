@@ -403,11 +403,9 @@
     :root, html[data-mode="day"] {
       --sf: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
       --bg: #EEF1FA;
-      --wb1: #F1F3F6; --wb2: #E9ECF1;
-      --w1: #CFDBEB; --w2: #AFC1DA; --w3: #DCE2EA; --w4: #BCC8D8; --w5: #E8ECF1; --w6: #D2DAE5;
+      --wb1: #F3F5F8; --wb2: #E9ECF2;
+      --glow1: rgba(59,130,246,0.13); --glow2: rgba(99,102,241,0.07);
       --grad: linear-gradient(135deg, #1D4ED8 0%, #4F46E5 100%);
-      --w7: #fff; --w8: #fff; --w9: #fff; --w10: #fff;
-      --wall-opacity: 1;
       --pane: rgba(255,255,255,0.3);
       --pane-blur: blur(20px) saturate(190%);
       --pane-light: inset 0 1px 0 rgba(255,255,255,0.95), inset 1px 0 0 rgba(255,255,255,0.45), inset -1px 0 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(255,255,255,0.35), inset 0 0 26px rgba(255,255,255,0.28);
@@ -430,9 +428,7 @@
     html[data-mode="night"] {
       --bg: #06071A;
       --wb1: #06070F; --wb2: #0A0912;
-      --w1: #1B2550; --w2: #232A5E; --w3: #2E2516; --w4: #1D2246; --w5: #0F1124; --w6: #171A33;
-      --w7: #000; --w8: #000; --w9: #000; --w10: #000;
-      --wall-opacity: 1;
+      --glow1: rgba(79,96,229,0.22); --glow2: rgba(245,170,50,0.06);
       --pane: rgba(14,14,34,0.34);
       --pane-blur: blur(22px) saturate(170%);
       --pane-light: inset 0 1px 0 rgba(255,255,255,0.28), inset 1px 0 0 rgba(255,255,255,0.12), inset -1px 0 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(255,255,255,0.08), inset 0 0 26px rgba(255,255,255,0.05);
@@ -452,14 +448,9 @@
     }
     body, .mode button, .show-all, .cab-fs { font-family: var(--sf); }
 
-    /* The wallpaper: crisp shapes of colour that stay put while the glass scrolls over them */
-    .wall { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1; pointer-events: none; opacity: var(--wall-opacity); transition: opacity 0.6s; }
-    .wall svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-    .wall stop { transition: stop-color 0.6s; }
-    html[data-mode="day"] .wall circle, html[data-mode="day"] .wall path { opacity: 0.8; }
-    html[data-mode="night"] .wall [fill="url(#wwg)"], html[data-mode="night"] .wall [fill="url(#wtg)"] { opacity: 0.3; }
-    .wall .wall-tall { display: none; }
-    @media (max-aspect-ratio: 4/5) { .wall .wall-wide { display: none; } .wall .wall-tall { display: block; } }
+    /* The wallpaper: a quiet gradient and one soft glow; the glass shows through its own light and what scrolls beneath it */
+    .wall { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1; pointer-events: none;
+      background: radial-gradient(1100px 700px at 78% -12%, var(--glow1), transparent 70%), radial-gradient(900px 600px at 0% 110%, var(--glow2), transparent 70%), linear-gradient(180deg, var(--wb1), var(--wb2)); }
     .hero, section, html[data-mode] main section, footer { background: transparent !important; }
 
     /* Panes (what you read): frosted glass with light caught along the rim */
@@ -496,7 +487,7 @@
     .btn-primary::after, .nav-cta::after, .contact-btn.primary::after { opacity: 0.7; }
     @media (hover: hover) and (pointer: fine) {
       .about-card:hover, .tile:hover, .kit:hover { box-shadow: var(--pane-light), var(--shadow-hover); }
-      .btn-outline:hover, .show-all:hover, .studio-eyebrow:hover { box-shadow: var(--ctrl-light), 0 16px 36px -12px rgba(20,24,60,0.35); }
+      .studio-eyebrow:hover { box-shadow: var(--ctrl-light), 0 16px 36px -12px rgba(20,24,60,0.35); }
     }
 
     /* Top: three floating capsules (name, switch, contact) instead of a bar */
@@ -562,6 +553,35 @@
     .contact-btn { position: relative; border: 0; background-color: rgba(255,255,255,0.08); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: inset 0 1px 0.5px rgba(255,255,255,0.3); }
     .contact-btn::after { --rim: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0) 45%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.25)); }
 
+    /* Buttons: thick glass. A curved reflection across the top, light pooling at the bottom edge,
+       a highlight that follows the pointer, and a reflection that sweeps across on hover */
+    .btn-primary, .nav-cta, .contact-btn, .btn-outline, .show-all { isolation: isolate; overflow: hidden; border-radius: 100px; transition: transform 0.25s cubic-bezier(.3,1.4,.5,1), box-shadow 0.25s, background-color 0.3s, color 0.3s; }
+    .btn-primary::before, .nav-cta::before, .contact-btn::before, .btn-outline::before, .show-all::before {
+      content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+      background:
+        linear-gradient(105deg, transparent 38%, rgba(255,255,255,var(--refl-sweep)) 48%, rgba(255,255,255,0) 58%) 130% 0 / 260% 100% no-repeat,
+        radial-gradient(150px circle at var(--mx, 50%) var(--my, -120%), rgba(255,255,255,var(--refl-spot)), transparent 60%),
+        radial-gradient(95% 62% at 50% -6%, rgba(255,255,255,var(--refl-top)), rgba(255,255,255,0) 72%),
+        radial-gradient(70% 55% at 50% 118%, rgba(255,255,255,var(--refl-pool)), rgba(255,255,255,0) 70%);
+      transition: background-position 0.9s cubic-bezier(.3,.7,.3,1);
+    }
+    .btn-primary:hover::before, .nav-cta:hover::before, .contact-btn:hover::before, .btn-outline:hover::before, .show-all:hover::before { background-position: -30% 0, 0 0, 0 0, 0 0; }
+    .btn-primary:hover, .nav-cta:hover, .contact-btn:hover, .btn-outline:hover, .show-all:hover { transform: translateY(-2px); }
+    .btn-primary:active, .nav-cta:active, .contact-btn:active, .btn-outline:active, .show-all:active { transform: scale(0.97); transition-duration: 0.1s; }
+    :root, html[data-mode="day"] { --refl-top: 0.75; --refl-pool: 0.55; --refl-spot: 0.6; --refl-sweep: 0.75; }
+    html[data-mode="night"] { --refl-top: 0.2; --refl-pool: 0.12; --refl-spot: 0.18; --refl-sweep: 0.22; }
+    .btn-primary, .nav-cta, .contact-btn.primary { --refl-top: 0.5; --refl-pool: 0.3; --refl-spot: 0.45; --refl-sweep: 0.5;
+      box-shadow: inset 0 1px 0.5px rgba(255,255,255,0.85), inset 0 -1px 0.5px rgba(255,255,255,0.4), inset 0 0 0 0.5px rgba(255,255,255,0.2), inset 0 -12px 20px -12px rgba(0,0,0,0.28), 0 2px 4px rgba(0,0,0,0.08), 0 12px 30px -8px var(--btn-glow); }
+    html[data-mode="night"] .btn-primary, html[data-mode="night"] .nav-cta, html[data-mode="night"] .contact-btn.primary { --refl-top: 0.55; --refl-pool: 0.3; --refl-spot: 0.4; --refl-sweep: 0.5; }
+    .btn-outline, .show-all { background-color: rgba(255,255,255,0.22); background-image: linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(110,128,170,0.13) 78%, rgba(110,128,170,0.06) 100%);
+      box-shadow: inset 0 1px 0.5px #fff, inset 0 -1px 0.5px rgba(255,255,255,0.9), inset 0 0 0 0.5px rgba(255,255,255,0.5), inset 0 -10px 18px -12px rgba(255,255,255,0.9), 0 0 0 0.5px rgba(20,24,60,0.07), 0 2px 4px rgba(20,24,60,0.05), 0 12px 28px -10px rgba(20,24,60,0.3); }
+    html[data-mode="night"] .btn-outline, html[data-mode="night"] .show-all { background-color: var(--ctrl); background-image: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(0,0,0,0.18) 100%); }
+    html[data-mode="night"] .btn-outline, html[data-mode="night"] .show-all { box-shadow: var(--ctrl-light), inset 0 -10px 18px -12px rgba(255,255,255,0.18); }
+    .contact-btn:not(.primary) { --refl-top: 0.22; --refl-pool: 0.14; --refl-spot: 0.2; --refl-sweep: 0.25; }
+    .btn-primary::after, .nav-cta::after, .contact-btn.primary::after { opacity: 0.9; }
+    @media (hover: none) { .btn-primary:hover, .nav-cta:hover, .contact-btn:hover, .btn-outline:hover, .show-all:hover { transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .btn-primary::before, .nav-cta::before, .contact-btn::before, .btn-outline::before, .show-all::before { transition: none; } }
+
     /* Where glass can't be drawn, or the reader asked for less of it, the panes turn solid */
     @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
       :root, html[data-mode="day"] { --pane: rgba(255,255,255,0.88); --ctrl: rgba(255,255,255,0.9); }
@@ -617,7 +637,7 @@ header.hero { overflow-x: clip; }
 </style>
 </head>
 <body>
-<div class="wall" aria-hidden="true"><svg class="wall-wide" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="wwb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--wb1)"/><stop offset="1" style="stop-color:var(--wb2)"/></linearGradient><linearGradient id="ww1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--w1)"/><stop offset="1" style="stop-color:var(--w2)"/></linearGradient><linearGradient id="ww2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--w3)"/><stop offset="1" style="stop-color:var(--w4)"/></linearGradient><linearGradient id="ww3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--w5)"/><stop offset="1" style="stop-color:var(--w6)"/></linearGradient><linearGradient id="ww4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--w7)"/><stop offset="1" style="stop-color:var(--w8)"/></linearGradient><linearGradient id="ww5" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--w9)"/><stop offset="1" style="stop-color:var(--w10)"/></linearGradient><linearGradient id="wwg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="1440" height="900" fill="url(#wwb)"/><circle cx="1170" cy="150" r="320" fill="url(#ww1)"/><circle cx="1170" cy="150" r="320" fill="url(#wwg)"/><path d="M-60 690 C 220 560 470 810 790 690 C 1060 590 1240 480 1500 560 L1500 960 L-60 960 Z" fill="url(#ww2)"/><path d="M-60 690 C 220 560 470 810 790 690 C 1060 590 1240 480 1500 560 L1500 960 L-60 960 Z" fill="url(#wwg)"/><path d="M-60 800 C 260 705 520 890 860 800 C 1120 730 1300 695 1500 745 L1500 960 L-60 960 Z" fill="url(#ww3)"/><path d="M-60 800 C 260 705 520 890 860 800 C 1120 730 1300 695 1500 745 L1500 960 L-60 960 Z" fill="url(#wwg)"/></svg><svg class="wall-tall" viewBox="0 0 400 860" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="wtb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--wb1)"/><stop offset="1" style="stop-color:var(--wb2)"/></linearGradient><linearGradient id="wt1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--w1)"/><stop offset="1" style="stop-color:var(--w2)"/></linearGradient><linearGradient id="wt2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--w3)"/><stop offset="1" style="stop-color:var(--w4)"/></linearGradient><linearGradient id="wt3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--w5)"/><stop offset="1" style="stop-color:var(--w6)"/></linearGradient><linearGradient id="wt4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--w7)"/><stop offset="1" style="stop-color:var(--w8)"/></linearGradient><linearGradient id="wt5" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--w9)"/><stop offset="1" style="stop-color:var(--w10)"/></linearGradient><linearGradient id="wtg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="400" height="860" fill="url(#wtb)"/><circle cx="360" cy="110" r="190" fill="url(#wt1)"/><circle cx="360" cy="110" r="190" fill="url(#wtg)"/><path d="M-40 650 C 80 590 200 710 320 640 C 370 612 400 604 440 612 L440 900 L-40 900 Z" fill="url(#wt2)"/><path d="M-40 650 C 80 590 200 710 320 640 C 370 612 400 604 440 612 L440 900 L-40 900 Z" fill="url(#wtg)"/><path d="M-40 755 C 100 705 220 795 330 745 C 380 724 410 720 440 726 L440 900 L-40 900 Z" fill="url(#wt3)"/><path d="M-40 755 C 100 705 220 795 330 745 C 380 724 410 720 440 726 L440 900 L-40 900 Z" fill="url(#wtg)"/></svg></div>
+<div class="wall" aria-hidden="true"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs id="lensDefs"></defs></svg>
 
 <nav id="nav" aria-label="Primary">
@@ -1116,9 +1136,9 @@ header.hero { overflow-x: clip; }
     place();
   })();
 
-  // Part 2: the highlight on a pane follows the pointer, like light on real glass
+  // Part 2: the highlight on a pane or button follows the pointer, like light on real glass
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const PANES = '.about-card, .tile, .kit';
+    const PANES = '.about-card, .tile, .kit, .btn-primary, .nav-cta, .contact-btn, .btn-outline, .show-all';
     document.addEventListener('pointermove', e => {
       const pane = e.target.closest && e.target.closest(PANES); if (!pane) return;
       const r = pane.getBoundingClientRect();
