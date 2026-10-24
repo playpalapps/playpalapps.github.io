@@ -582,6 +582,59 @@
     @media (hover: none) { .btn-primary:hover, .nav-cta:hover, .contact-btn:hover, .btn-outline:hover, .show-all:hover { transform: none; } }
     @media (prefers-reduced-motion: reduce) { .btn-primary::before, .nav-cta::before, .contact-btn::before, .btn-outline::before, .show-all::before { transition: none; } }
 
+    /* Depth: what makes it read as real, thick glass. A defined specular arc at the top, light bending
+       inside the rim (bright on one edge, faintly tinted on the other), a little dispersion along the rim
+       (cool blue on one side, warm amber on the other) and soft colour diffusing inside the glass */
+    :root, html[data-mode="day"] {
+      --rim: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 12%, rgba(147,197,253,0.6) 24%, rgba(255,255,255,0) 42%, rgba(255,255,255,0) 60%, rgba(253,186,116,0.5) 80%, #fff 100%);
+      --depth: inset 1.5px 1.5px 3px -1px rgba(255,255,255,0.95), inset -2px -2px 7px -2px rgba(96,140,230,0.3), inset 0 -16px 24px -18px rgba(96,140,230,0.28), inset 0 0 0 0.5px rgba(255,255,255,0.5);
+      --spec: radial-gradient(120% 46% at 32% -6%, rgba(255,255,255,0.72), rgba(255,255,255,0.18) 48%, rgba(255,255,255,0) 72%);
+      --diffuse: radial-gradient(70% 90% at 0% 100%, rgba(96,165,250,0.15), transparent 65%), radial-gradient(60% 80% at 100% 0%, rgba(251,191,36,0.09), transparent 65%);
+      --ctrl-drop: 0 0 0 0.5px rgba(20,24,60,0.07), 0 2px 4px rgba(20,24,60,0.05), 0 12px 28px -10px rgba(20,24,60,0.32);
+      --caustic: rgba(125,190,255,0.55);
+    }
+    html[data-mode="night"] {
+      --rim: linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.22) 12%, rgba(147,197,253,0.45) 24%, rgba(255,255,255,0) 42%, rgba(255,255,255,0) 60%, rgba(251,191,36,0.38) 80%, rgba(255,255,255,0.5) 100%);
+      --depth: inset 1.5px 1.5px 3px -1px rgba(255,255,255,0.32), inset -2px -2px 7px -2px rgba(120,160,255,0.26), inset 0 -16px 24px -18px rgba(120,160,255,0.22), inset 0 0 0 0.5px rgba(255,255,255,0.09);
+      --spec: radial-gradient(120% 46% at 32% -6%, rgba(255,255,255,0.14), rgba(255,255,255,0.03) 48%, rgba(255,255,255,0) 72%);
+      --diffuse: radial-gradient(70% 90% at 0% 100%, rgba(96,130,250,0.17), transparent 65%), radial-gradient(60% 80% at 100% 0%, rgba(251,191,36,0.07), transparent 65%);
+      --ctrl-drop: 0 0 0 0.5px rgba(0,0,0,0.45), 0 2px 4px rgba(0,0,0,0.25), 0 12px 28px -10px rgba(0,0,0,0.6);
+      --caustic: rgba(140,170,255,0.35);
+    }
+    .about-card, .tile, .kit, .exp-entries, .worked-with {
+      background-image: radial-gradient(520px circle at var(--mx, 50%) var(--my, -60%), var(--sheen), transparent 55%), var(--spec), var(--diffuse);
+      box-shadow: var(--depth), var(--pane-drop);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .about-card:hover, .tile:hover, .kit:hover { box-shadow: var(--depth), var(--shadow-hover); }
+    }
+    .nav-logo, nav .mode, .nav-links, .now, .studio-eyebrow {
+      background-image: var(--spec), var(--diffuse); background-repeat: no-repeat;
+      box-shadow: var(--depth), var(--ctrl-drop);
+    }
+    .about-card::after, .tile::after, .kit::after, .exp-entries::after, .worked-with::after,
+    .nav-logo::after, nav .mode::after, .nav-links::after, .now::after, .btn-outline::after, .studio-eyebrow::after, .show-all::after { padding: 1.75px; }
+
+    /* Buttons: a sharper specular arc, a coloured caustic where light leaves the glass, more thickness */
+    .btn-primary::before, .nav-cta::before, .contact-btn::before, .btn-outline::before, .show-all::before {
+      background:
+        linear-gradient(105deg, transparent 38%, rgba(255,255,255,var(--refl-sweep)) 48%, rgba(255,255,255,0) 58%) 130% 0 / 260% 100% no-repeat,
+        radial-gradient(150px circle at var(--mx, 50%) var(--my, -120%), rgba(255,255,255,var(--refl-spot)), transparent 60%),
+        radial-gradient(88% 58% at 50% -4%, rgba(255,255,255,var(--refl-top)) 0%, rgba(255,255,255,calc(var(--refl-top) * 0.5)) 46%, rgba(255,255,255,0) 74%),
+        radial-gradient(55% 60% at 22% 118%, var(--caustic), transparent 70%),
+        radial-gradient(70% 55% at 50% 118%, rgba(255,255,255,var(--refl-pool)), rgba(255,255,255,0) 70%);
+    }
+    :root, html[data-mode="day"] { --refl-top: 0.95; --refl-pool: 0.7; --refl-spot: 0.7; --refl-sweep: 0.85; }
+    html[data-mode="night"] { --refl-top: 0.3; --refl-pool: 0.18; --refl-spot: 0.22; --refl-sweep: 0.28; }
+    .btn-primary, .nav-cta, .contact-btn.primary { --refl-top: 0.68; --refl-pool: 0.42; --refl-spot: 0.5; --refl-sweep: 0.6; --caustic: rgba(165,215,255,0.6);
+      box-shadow: inset 1.5px 1.5px 3px -1px rgba(255,255,255,0.9), inset -2px -2px 6px -2px rgba(0,0,40,0.25), inset 0 -12px 20px -12px rgba(0,0,30,0.3), inset 0 0 0 0.5px rgba(255,255,255,0.25), 0 2px 4px rgba(0,0,0,0.08), 0 12px 30px -8px var(--btn-glow); }
+    html[data-mode="night"] .btn-primary, html[data-mode="night"] .nav-cta, html[data-mode="night"] .contact-btn.primary { --refl-top: 0.72; --refl-pool: 0.4; --refl-spot: 0.45; --refl-sweep: 0.55; --caustic: rgba(255,245,215,0.55); }
+    .btn-outline, .show-all { box-shadow: var(--depth), inset 0 -10px 18px -12px rgba(255,255,255,0.9), var(--ctrl-drop); }
+    html[data-mode="night"] .btn-outline, html[data-mode="night"] .show-all { box-shadow: var(--depth), var(--ctrl-drop); }
+    .contact-btn:not(.primary) { --refl-top: 0.32; --refl-pool: 0.18; --refl-spot: 0.22; --refl-sweep: 0.3; --caustic: rgba(140,170,255,0.3); }
+    .mode::before, .nav-links::before { background-image: radial-gradient(90% 60% at 50% -5%, rgba(255,255,255,0.7), rgba(255,255,255,0) 70%), radial-gradient(60% 60% at 25% 120%, var(--caustic), transparent 70%); background-color: rgba(255,255,255,0.55); }
+    html[data-mode="night"] .mode::before, html[data-mode="night"] .nav-links::before { background-color: rgba(255,255,255,0.1); background-image: radial-gradient(90% 60% at 50% -5%, rgba(255,255,255,0.25), rgba(255,255,255,0) 70%), radial-gradient(60% 60% at 25% 120%, var(--caustic), transparent 70%); }
+
     /* Where glass can't be drawn, or the reader asked for less of it, the panes turn solid */
     @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
       :root, html[data-mode="day"] { --pane: rgba(255,255,255,0.88); --ctrl: rgba(255,255,255,0.9); }
